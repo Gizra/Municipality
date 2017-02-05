@@ -1,0 +1,10 @@
+elm-stuff
+node_modules
+serve
+dist
+bower_components
+
+# WebDriverIO
+*.jar
+geckodriver
+errorShots/
