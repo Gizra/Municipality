@@ -1,0 +1,233 @@
+---
+layout: default
+label : Protocols_and_Reports
+---
+
+<html>
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.rtl.css"
+      integrity="sha384-h/tGiTStmgbDQyTAdp2s5BfyXn7wmnFsn3vDaCPYck9YKkOuLAdjHi6y154TBVJ4"
+      crossorigin="anonymous" />
+      <!-- Jquery -->
+      <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+      src="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.min.js"
+      integrity="sha384-kZT+CItOKWHYL+Rz37W2NEz60Pu2JJJ8wgzq+82VWsi3QM53eNFzQJZqzhPuyo63"
+      crossorigin="anonymous"></script>
+
+      <!-- Include Required Prerequisites -->
+      <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+
+      <!-- Include Date Range Picker -->
+      <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+    </head>
+
+  <body lang="heb" dir="rtl">
+    <div class= "ui padded grid container">
+
+      <div class = "three column row">
+        <div class = "column">
+          <h4 class="ui horizontal divider header">נושאים, מונחים או שמות</h4>
+
+          <div class="ui category search">
+            <div class="ui icon input">
+              <input class="prompt" placeholder="חיפוש נושא, שם, מחלקה או תאריך" type="text">
+              <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+          </div>
+          <h4 class="ui horizontal divider header"> מקורות המידע</h4>
+
+
+            <select name="doc_types" multiple="" class="ui dropdown">
+              <option value="">מקורות המידע</option>
+              <option value="all">הכל</option>
+              <option value="protocols">פרוטוקולים</option>
+              <option value="protocols">מכרזים</option>
+              <option value="regulations">חוקי עזר</option>
+              <option value="local_regulations">תקנות עירוניות</option>
+              <option value="reports">דו״חות הרשות המקומית</option>
+              <option value="constructions_pres">פרסומי בניה</option>
+            </select>
+            <h4 class="ui horizontal divider header"> תאריכי פרסום </h4>
+            <div class="ui calendar">
+              <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input type="text" placeholder="תאריכים" name="date1" id="date1">
+              </div>
+            </div>
+            <br>
+
+            <div class = "ui horizontal divider">קבלת התראות</div>
+            <div class = "ui input">
+              <input placeholder="דואר אלקטרוני" type="email">
+              <button class = "ui active button">
+                <i class = "alarm outline icon"></i>
+                עדכנו אותי
+              </button>
+          </div>
+          </div>
+
+      <div class="column">
+        <div class = "ui list">
+        <div class = "item">
+          <i class ="folder icon"></i>
+          <div class ="content">
+            <div class = "header">מכרזים</div>
+            <div class = "description">פרסומי מכרזים של הרשות המקומית</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="folder open icon"></i>
+          <div class="content">
+            <div class="header">פרוטוקולים</div>
+              <div class="description">תמלולי והקלטות ישיבות</div>
+                <div class="list">
+                  <div class="item">
+                    <i class="folder open icon"></i>
+                    <div class="content">
+                      <div class="header">ישיבות מליאת מועצת העיר</div>
+                        <div class="description">תמלולי הישיבות והקלטותיהן</div>
+                        <div class="item">
+                          <div class="content">
+                            <div class="header">1.1.16</div>
+                            <a class="description">
+                              <i class="file icon"></i>
+                              פרוטוקול הישיבה
+                            </a>
+                            <a class="description">
+                              <i class="sound icon"></i>
+                              הקלטת הישיבה
+                            </a>
+                          </div>
+                        </div>
+                        <div class="item">
+                          <div class="content">
+                            <div class="header">7.1.16</div>
+                            <a class="description">
+                              <i class="file icon"></i>
+                              פרוטוקול הישיבה
+                            </a>
+                            <a class="description">
+                              <i class="sound icon"></i>
+                              הקלטת הישיבה
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="item">
+                      <i class="folder open icon"></i>
+                      <div class="content">
+                        <div class="header">הועדה העירונית לתכנון ובניה</div>
+                        <div class="description">תמלולי הישיבות</div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="content">
+                              <div class="header">1.1.16</div>
+                              <a class="description">
+                                <i class="file icon"></i>
+                                פרוטוקול הישיבה
+                              </a>
+                              <a class="description">
+                                <i class="sound icon"></i>
+                                הקלטת הישיבה
+                              </a>
+                            </div>
+                          </div>
+                          <div class="item">
+                            <div class="content">
+                              <div class="header">7.1.16</div>
+                              <a class="description">
+                                <i class="file icon"></i>
+                                פרוטוקול הישיבה
+                              </a>
+                              <a class="description">
+                                <i class="sound icon"></i>
+                                הקלטת הישיבה
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class = "ui divider"></div>
+              <div class="item">
+                <i class="folder icon"></i>
+                <div class="content">
+                  <div class="header">דו״חות ופרסומים</div>
+                  <div class="description">פרסומי דו״חות הרשות המקומית</div>
+                </div>
+              </div>
+              <div class = "ui divider"></div>
+              <div class="item">
+                <i class="folder open icon"></i>
+                <div class="content">
+                  <div class="header">חוקי עזר ותקנות עירוניות</div>
+                  <div class="description">נוסחי חוקי העזר והתקנות המקומיות</div>
+                  <div class="list">
+                    <div class="item">
+                      <i class="folder icon"></i>
+                      <div class="content">
+                        <div class="header">מסחר ותעשיה</div>
+                        <div class="description">חוקי העזר בנושאי מסחר ותעשיה</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class = "ui divider"></div>
+              <div class="item">
+                <i class="folder icon"></i>
+                <div class="content">
+                  <div class="header">פרסומי בניה</div>
+                  <div class="description">פרסומים על אישורים וקולות קוראים לציבור</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      <div class = "ui divided items column">
+        <div class = "item">
+          <div class = "content">
+            <a class = "header">מתוך פרוטוקול ישיבת המליאה 1.1.16</a>
+            <div class = "description">
+              <p>חיים: וברור שאין שום צדק בלהמשיך להאכיל את הינשופים שסובבים כאן כאילו היו חלק מאיתנו. עלינו להפסיק את התופעה מיד. התושבים סומכים עלינו</p>
+              <p>מנדלוביץ: איפה היית כשהתקיימה הישיבה על התקציב? איזה אומץ יש לך לבוא עכשיו ולדרוש לטפל בתופעה כשכל הכסף כבר הושקע בדוביהנמלים?</p>
+            </div>
+          </div>
+        </div>
+
+        <div class = "item">
+          <div class = "content">
+            <a class = "header">מתוך פרוטוקול ישיבת המליאה 1.1.16</a>
+            <div class = "description">
+              <p>חיים: וברור שאין שום צדק בלהמשיך להאכיל את הינשופים שסובבים כאן כאילו היו חלק מאיתנו. עלינו להפסיק את התופעה מיד. התושבים סומכים עלינו</p>
+              <p>מנדלוביץ: איפה היית כשהתקיימה הישיבה על התקציב? איזה אומץ יש לך לבוא עכשיו ולדרוש לטפל בתופעה כשכל הכסף כבר הושקע בדוביהנמלים?</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  </body>
+  </html>
