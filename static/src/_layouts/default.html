@@ -4,24 +4,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css" integrity="sha256-wT6CFc7EKRuf7uyVfi+MQNHUzojuHN2pSw0YWFt2K5E=" crossorigin="anonymous" />
     <link rel="stylesheet" href="/assets/stylesheets/style.css" />
   </head>
-  <body>
-
-      {% include sidebar.html top=true %}
+  <body dir="rtl">
 
       <div class="pusher">
         <div class="ui grid container">
 
-        {% include sidebar.html top=false %}
-
           <div class="ui main grid">
             <!-- Responsive top menu -->
-            <div class="ui fixed inverted main menu">
-              <div class="ui container">
-                <a class="launch icon item sidebar-toggle">
-                  <i class="sidebar icon"></i>
-                </a>
-              </div>
-            </div>
 
             {{ content }}
 

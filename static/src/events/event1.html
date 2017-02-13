@@ -1,0 +1,235 @@
+---
+layout: default
+label : events
+---
+
+<html>
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.rtl.css"
+      integrity="sha384-h/tGiTStmgbDQyTAdp2s5BfyXn7wmnFsn3vDaCPYck9YKkOuLAdjHi6y154TBVJ4"
+      crossorigin="anonymous">
+      <!-- Jquery -->
+      <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+      src="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.min.js"
+      integrity="sha384-kZT+CItOKWHYL+Rz37W2NEz60Pu2JJJ8wgzq+82VWsi3QM53eNFzQJZqzhPuyo63"
+      crossorigin="anonymous"></script>
+
+    </head>
+  <body lang="he" dir="rtl">
+    <div class = "ui container">
+      <div class="ui sixteen stackable grid">
+        <div class = "ui segment row">
+          <div class = "ui two wide column">
+            <img class = "ui circular fluid image middle aligned" src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Yardena_Arazi.jpg">
+          </div>
+          <div class = "ui fourteen wide column middle aligned">
+            <div class="ui large header">ירדנה ארזי והגבעטרון </div>
+              <div class="content">
+                השירים האהובים והמרגשים בעיבודים מחודשים בערב שכולו נוסטלגיה וחדשנות
+              </div>
+              <div class = "ui divider"></div>
+              <div class ="ui stackable grid container content">
+                <div class = "ui row">
+                  <div class="ui four wide column"><a><i class = "calendar icon"></i>מתי:  	&nbsp; 	12.12.17</a></div>
+                  <div class="ui four wide column"><a><i class = "map icon"></i>איפה:  	&nbsp;אמפיתיאטרון</a></div>
+                  <div class="ui four wide column"><a><i class = "shekel icon"></i>מחיר:  	&nbsp; 120</a></div>
+                  <div class = "ui four wide column">
+                    <span class="ui button middle aligned">
+                      <i class="add icon"></i>לפרטים נוספים
+                    </span>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class = "ui grid container center aligned segment">
+    <h3 class = "center aligned"><b>אירועים ברשות</b></h3>
+
+      <div class = "ui row">
+        <div class="ui multiple dropdown filter">
+          <input name="filters" type="hidden">
+          <i class="filter icon"></i>
+          <span class="text">לפי סוג אירוע</span>
+          <div class="menu">
+            <div class="ui icon search input">
+              <i class="search icon"></i>
+                <input placeholder="סוג אירוע..." type="text">
+            </div>
+            <div class="divider"></div>
+            <div class="header">
+              <i class="tags icon"></i>
+              אירועים מאורגנים
+            </div>
+            <div class="scrolling menu">
+              <div class="item" data-value="music">
+                <i class = "music icon"></i>
+                  תרבות ופנאי
+              </div>
+              <div class="item" data-value="sport">
+                <i class = "soccer icon"></i>
+                ספורט
+              </div>
+              <div class="item" data-value="lecture">
+                <i class = "talk icon"></i>
+                חוגים והעשרה
+              </div>
+              <div class="item" data-value="religion">
+                <i class = "user icon"></i>
+                דת ומסורת
+              </div>
+              <div class="item" data-value="nature">
+                <i class = "leaf icon"></i>
+                טבע וסביבה
+              </div>
+              <div class="item" data-value="happening">
+                <i class = "birthday icon"></i>
+                הפנינג
+              </div>
+              <div class="item" data-value="art">
+                <i class = "paint brush icon"></i>
+                אומנות
+              </div>
+
+              <div class="header">
+                <i class="tags icon"></i>
+                תאריכים ומועדי שירות
+              </div>
+              <div class = "divider"></div>
+                <div class="item" data-value="art">
+                  <i class = "flag outline icon"></i>
+                  חופשה ברשות המקומית
+                </div>
+                <div class = "item" data-value="service=citizen">
+                  <i class = "user icon"></i>
+                  שירות לתושב/ת
+                </div>
+                <div class = "item" data-value="service=citizen">
+                  <i class = "suitcase icon"></i>
+                  שירות לעסקים
+                </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="ui multiple dropdown filter">
+          <input name="filters" type="hidden">
+            <i class="filter icon"></i>
+              <span class="text">מתאים ל...</span>
+                <div class="menu">
+                  <div class="ui icon search input">
+                    <i class="search icon"></i>
+                    <input placeholder="מתאים ל.." type="text">
+                  </div>
+                  <div class="divider"></div>
+                </div>
+
+                <div class="scrolling menu">
+                  <div class="item" data-value="all">
+                    <div class="ui purple empty circular label"></div>
+                      כל המשפחה
+                  </div>
+                    <div class="item" data-value="kids">
+                      <div class="ui red empty circular label"></div>
+                      ילדים
+                    </div>
+                    <div class="item" data-value="youth">
+                      <div class="ui blue empty circular label"></div>
+                      נוער
+                    </div>
+                    <div class="item" data-value="mature">
+                      <div class="ui green empty circular label"></div>
+                      מבוגרים
+                    </div>
+                  </div>
+                </div>
+
+
+              <div class = "ui button inverted active">
+                  <i class = "mail icon"></i>
+                    עדכנו אותי על עוד:
+                  <input class = "ui input" type="text" placeholder="כתובת מייל"></input>
+              </div>
+            </div>
+          </div>
+
+          <h3 class = "ui container divider center aligned"><b></b></h3>
+
+            <div class = "ui one columns stackable grid container cards">
+              <div class = "column">
+
+                {% for event in site.data.events %}
+                <div class="ui card row">
+                  <div class="ui top left attached {{ event.color }} label">
+                    <i class="{{event.type_icon_name}} icon"></i>
+                    {{ event.type }}
+                    {%if event.audience %}
+                      ל{{ event.audience }}
+                    {% endif %}
+                </div>
+
+                  <div class = "fluid image">
+                    <img src = "{{ event.image_link }}">
+                  </div>
+                  <div class="content">
+                      <div class="header">
+                        {{event.title}}
+                      </div>
+                      <div class="description">
+                        <p> {{event.description}}</p>
+                      </div>
+                        <div class = "divider"></div>
+                        <div class = "ui row">
+                          <div class="ui four wide column">
+                            {%if event.time %}
+                              <span><i class = "calendar icon"></i>{{ event.time }}</span>
+                                {% if event.time_end !=null %}
+                                  <span> - {{event.time_end}}</span>
+                                  {% endif %}
+                                  {% if event.recurring %}
+                                  (<span><i class="refresh icon"></i>אירוע שבועי</span>)
+                                  {% endif %}
+                                {% endif %}
+                          </div>
+                          {%if event.location %}
+                          <div class="ui four wide column">
+                            <a href = "{{event.location_map_link}}" target="_blank">
+                              <i class = "map icon"></i>איפה:
+                              {{ event.location}}
+                            </a>
+                          </div>
+                          {% endif %}
+
+
+
+                          {% if event.price %}
+                            <div class="ui four wide column"><i class = "shekel icon"></i>מחיר: {{event.price}}</div>
+                          {% endif %}
+                            <div class = "ui four wide column center aligned">
+                            <a class="ui button primary basic middle aligned" target="_blank" href="{{event.details_link}}">
+                              <i class="add icon"></i>לפרטים נוספים
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  {% endfor %}
+
+          </div>
+        </div>
+  </body>
+</html>
