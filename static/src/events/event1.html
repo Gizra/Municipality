@@ -196,8 +196,8 @@ label : events
                           <div class="ui four wide column">
                             {%if event.time %}
                               <span><i class = "calendar icon"></i>{{ event.time }}</span>
-                                {% if event.time_end %}
-                                  <span> ועד {{time_end}}</span>
+                                {% if event.time_end !=null %}
+                                  <span> - {{event.time_end}}</span>
                                   {% endif %}
                                   {% if event.recurring %}
                                   (<span><i class="refresh icon"></i>אירוע שבועי</span>)
