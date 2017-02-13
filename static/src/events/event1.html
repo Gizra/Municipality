@@ -1,222 +1,306 @@
 ---
 layout: default
-label : event page example
+label : events2
 ---
 
-<!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-  <!-- Standard Meta -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<html>
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.rtl.css"
+      integrity="sha384-h/tGiTStmgbDQyTAdp2s5BfyXn7wmnFsn3vDaCPYck9YKkOuLAdjHi6y154TBVJ4"
+      crossorigin="anonymous">
+      <!-- Jquery -->
+      <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
 
-  <!-- Site Properties -->
-  <title>הופעה: ירדנה ארזי והגבעתרון</title>
-  <link
-    rel="stylesheet"
-    href="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.rtl.css"
-    integrity="sha384-h/tGiTStmgbDQyTAdp2s5BfyXn7wmnFsn3vDaCPYck9YKkOuLAdjHi6y154TBVJ4"
-    crossorigin="anonymous">
-    <!-- Jquery -->
+    <!-- Latest compiled and minified JavaScript -->
     <script
-      src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      src="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.min.js"
+      integrity="sha384-kZT+CItOKWHYL+Rz37W2NEz60Pu2JJJ8wgzq+82VWsi3QM53eNFzQJZqzhPuyo63"
       crossorigin="anonymous"></script>
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script
-    src="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.min.js"
-    integrity="sha384-kZT+CItOKWHYL+Rz37W2NEz60Pu2JJJ8wgzq+82VWsi3QM53eNFzQJZqzhPuyo63"
-    crossorigin="anonymous"></script>
-
-  <script>
-  $(document)
-    .ready(function() {
-      // fix main menu to page on passing
-      $('.main.menu').visibility({
-        type: 'fixed'
-      });
-      $('.overlay').visibility({
-        type: 'fixed',
-        offset: 80
-      });
-      // lazy load images
-      $('.image').visibility({
-        type: 'image',
-        transition: 'vertical flip in',
-        duration: 500
-      });
-      // show dropdown on hover
-      $('.main.menu  .ui.dropdown').dropdown({
-        on: 'hover'
-      });
-    })
-  ;
-  </script>
-
-  <style type="text/css">
-  body {
-    background-color: #FFFFFF;
-  }
-  .main.container {
-    margin-top: 2em;
-  }
-  .main.menu {
-    margin-top: 4em;
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
-    transition:
-      box-shadow 0.5s ease,
-      padding 0.5s ease
-    ;
-  }
-  .main.menu .item img.logo {
-    margin-right: 1.5em;
-  }
-  .overlay {
-    float: left;
-    margin: 0em 3em 1em 0em;
-  }
-  .overlay .menu {
-    position: relative;
-    left: 0;
-    transition: left 0.5s ease;
-  }
-  .main.menu.fixed {
-    background-color: #FFFFFF;
-    border: 1px solid #DDD;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
-  }
-  .overlay.fixed .menu {
-    left: 800px;
-  }
-  .text.container .left.floated.image {
-    margin: 2em 2em 2em -4em;
-  }
-  .text.container .right.floated.image {
-     margin: 2em -4em 2em 2em;
-  }
-  .ui.footer.segment {
-    margin: 5em 0em 0em;
-    padding: 5em 0em;
-  }
-  </style>
-
-</head>
-<body>
-
-  <div class="ui main text container">
-    <h1 class="ui header">ירדנה ארזי והגבעתרון</h1>
-    <p>.מופע השירים האהובים בהפקה מחודשת ומרגשת</p>
-  </div>
-
-
-  <div class="ui borderless main menu">
-    <div class="ui text container">
-      <div href="#" class="header item">
-        <img class="logo" src="assets/images/logo.png">
-        Project Name
-      </div>
-      <a href="#" class="item">Blog</a>
-      <a href="#" class="item">Articles</a>
-      <a href="#" class="ui right floated dropdown item">
-        Dropdown <i class="dropdown icon"></i>
-        <div class="menu">
-          <div class="item">Link Item</div>
-          <div class="item">Link Item</div>
-          <div class="divider"></div>
-          <div class="header">Header Item</div>
-          <div class="item">
-            <i class="dropdown icon"></i>
-            Sub Menu
-            <div class="menu">
-              <div class="item">Link Item</div>
-              <div class="item">Link Item</div>
+    </head>
+  <body lang="he" dir="rtl">
+    <div class = "ui container">
+      <div class="ui sixteen stackable grid">
+        <div class = "ui segment row">
+          <div class = "ui two wide column">
+            <img class = "ui circular fluid image middle aligned" src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Yardena_Arazi.jpg">
+          </div>
+          <div class = "ui fourteen wide column middle aligned">
+            <div class="ui large header">ירדנה ארזי והגבעטרון </div>
+              <div class="content">
+                השירים האהובים והמרגשים בעיבודים מחודשים בערב שכולו נוסטלגיה וחדשנות
+              </div>
+              <div class = "ui divider"></div>
+              <div class ="ui stackable grid container content">
+                <div class = "ui row">
+                  <div class="ui four wide column"><a><i class = "calendar icon"></i>מתי:  	&nbsp; 	12.12.17</a></div>
+                  <div class="ui four wide column"><a><i class = "map icon"></i>איפה:  	&nbsp;אמפיתיאטרון</a></div>
+                  <div class="ui four wide column"><a><i class = "shekel icon"></i>מחיר:  	&nbsp; 120</a></div>
+                  <div class = "ui four wide column">
+                    <span class="ui button middle aligned">
+                      <i class="add icon"></i>לפרטים נוספים
+                    </span>
+                  </div>
+              </div>
             </div>
           </div>
-          <div class="item">Link Item</div>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <div class="ui text container">
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <div class="overlay">
-      <div class="ui labeled icon vertical menu">
-        <a class="item"><i class="twitter icon"></i> Tweet</a>
-        <a class="item"><i class="facebook icon"></i> Share</a>
-        <a class="item"><i class="mail icon"></i> E-mail</a>
-      </div>
-    </div>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <img class="ui medium left floated image" data-src="assets/images/wireframe/square-image.png">
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
-    <img class="ui medium right floated image" data-src="assets/images/wireframe/square-image.png">
-    Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <img class="ui medium left floated image" data-src="assets/images/wireframe/square-image.png">
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
-    <img class="ui medium right floated image" data-src="assets/images/wireframe/square-image.png">
-    Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-  </div>
-
-  <div class="ui inverted vertical footer segment">
-    <div class="ui center aligned container">
-      <div class="ui stackable inverted divided grid">
-        <div class="three wide column">
-          <h4 class="ui inverted header">Group 1</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Link One</a>
-            <a href="#" class="item">Link Two</a>
-            <a href="#" class="item">Link Three</a>
-            <a href="#" class="item">Link Four</a>
-          </div>
-        </div>
-        <div class="three wide column">
-          <h4 class="ui inverted header">Group 2</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Link One</a>
-            <a href="#" class="item">Link Two</a>
-            <a href="#" class="item">Link Three</a>
-            <a href="#" class="item">Link Four</a>
-          </div>
-        </div>
-        <div class="three wide column">
-          <h4 class="ui inverted header">Group 3</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Link One</a>
-            <a href="#" class="item">Link Two</a>
-            <a href="#" class="item">Link Three</a>
-            <a href="#" class="item">Link Four</a>
-          </div>
-        </div>
-        <div class="seven wide column">
-          <h4 class="ui inverted header">Footer Header</h4>
-          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
         </div>
       </div>
-      <div class="ui inverted section divider"></div>
-      <img src="assets/images/logo.png" class="ui centered mini image">
-      <div class="ui horizontal inverted small divided link list">
-        <a class="item" href="#">Site Map</a>
-        <a class="item" href="#">Contact Us</a>
-        <a class="item" href="#">Terms and Conditions</a>
-        <a class="item" href="#">Privacy Policy</a>
-      </div>
     </div>
-  </div>
-</body>
 
+
+    <div class = "ui grid container center aligned segment">
+    <h3 class = "center aligned"><b>אירועים ברשות</b></h3>
+
+      <div class = "ui row">
+        <div class="ui multiple dropdown filter">
+          <input name="filters" type="hidden">
+          <i class="filter icon"></i>
+          <span class="text">לפי סוג אירוע</span>
+          <div class="menu">
+            <div class="ui icon search input">
+              <i class="search icon"></i>
+                <input placeholder="סוג אירוע..." type="text">
+            </div>
+            <div class="divider"></div>
+            <div class="header">
+              <i class="tags icon"></i>
+              אירועים מאורגנים
+            </div>
+            <div class="scrolling menu">
+              <div class="item" data-value="music">
+                <i class = "music icon"></i>
+                  תרבות ופנאי
+              </div>
+              <div class="item" data-value="sport">
+                <i class = "soccer icon"></i>
+                ספורט
+              </div>
+              <div class="item" data-value="lecture">
+                <i class = "talk icon"></i>
+                חוגים והעשרה
+              </div>
+              <div class="item" data-value="religion">
+                <i class = "user icon"></i>
+                דת ומסורת
+              </div>
+              <div class="item" data-value="nature">
+                <i class = "leaf icon"></i>
+                טבע וסביבה
+              </div>
+              <div class="item" data-value="happening">
+                <i class = "birthday icon"></i>
+                הפנינג
+              </div>
+              <div class="item" data-value="art">
+                <i class = "paint brush icon"></i>
+                אומנות
+              </div>
+
+              <div class="header">
+                <i class="tags icon"></i>
+                תאריכים ומועדי שירות
+              </div>
+              <div class = "divider"></div>
+                <div class="item" data-value="art">
+                  <i class = "flag outline icon"></i>
+                  חופשה ברשות המקומית
+                </div>
+                <div class = "item" data-value="service=citizen">
+                  <i class = "user icon"></i>
+                  שירות לתושב/ת
+                </div>
+                <div class = "item" data-value="service=citizen">
+                  <i class = "suitcase icon"></i>
+                  שירות לעסקים
+                </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="ui multiple dropdown filter">
+          <input name="filters" type="hidden">
+            <i class="filter icon"></i>
+              <span class="text">מתאים ל...</span>
+                <div class="menu">
+                  <div class="ui icon search input">
+                    <i class="search icon"></i>
+                    <input placeholder="מתאים ל.." type="text">
+                  </div>
+                  <div class="divider"></div>
+                </div>
+
+                <div class="scrolling menu">
+                  <div class="item" data-value="citizen">
+                  תושב/ת
+                  </div>
+                  <div class="item" data-value="business">
+                  עסקים
+                  </div>
+
+                  <div class = "ui divider">גילאים</div>
+
+                  <div class="item" data-value="all">
+                    <div class="ui purple empty circular label"></div>
+                      כל המשפחה
+                  </div>
+                    <div class="item" data-value="kids">
+                      <div class="ui red empty circular label"></div>
+                      ילדים
+                    </div>
+                    <div class="item" data-value="youth">
+                      <div class="ui blue empty circular label"></div>
+                      נוער
+                    </div>
+                    <div class="item" data-value="mature">
+                      <div class="ui green empty circular label"></div>
+                      מבוגרים
+                    </div>
+                  </div>
+                </div>
+
+
+              <div class = "ui button inverted active">
+                  <i class = "mail icon"></i>
+                    עדכנו אותי על עוד:
+                  <input class = "ui input" type="text" placeholder="כתובת מייל"></input>
+              </div>
+            </div>
+          </div>
+
+          <h3 class = "ui container divider center aligned"><b></b></h3>
+
+            <div class = "ui one columns stackable grid container cards">
+              <div class = "column">
+                <div class="ui card row">
+                  <div class="ui top left attached purple label">
+                    <i class="talk icon"></i>
+                    חוגים והעשרה לכל המשפחה
+                  </div>
+
+                  <div class = "fluid image">
+                    <img src = "http://www.mhatzor.org.il/productImages2/44/2017/01/17/image1484650150.jpg">
+                  </div>
+                  <div class="content">
+                      <a class="header"></a>
+                      <div class="description">
+                        <h4 class = "center aligned">כל מוצ"ש ריקודי עם עם שמעון ורד</h4>
+                        <div class = "divider"></div>
+
+                        <div class = "ui row">
+                          <div class="ui four wide column">
+                            <a><i class = "calendar icon"></i>מתי:  	&nbsp; 	4.2.17, 19:45</a>
+                             	(<span><i class="refresh icon"></i>אירוע שבועי</span>)
+                          </div>
+                          <div class="ui four wide column">
+                            <a href = "https://goo.gl/maps/KCDWo5Zm8Jk" target="_blank">
+                              <i class = "map icon"></i>איפה:  	&nbsp;
+                              מתנ״ס
+                            </a>
+                          </div>
+
+                          <div class="ui four wide column"><i class = "shekel icon"></i>מחיר:  	&nbsp;ש״ח 30</div>
+                          <div class = "ui four wide column center aligned">
+                            <a class="ui button primary basic middle aligned" target="_blank" href="http://www.mhatzor.org.il/page.php?type=event&id=6997&ht=%D7%A8%D7%99%D7%A7%D7%95%D7%93%D7%99%20%D7%A2%D7%9D%20-%20%D7%A9%D7%9E%D7%A2%D7%95%D7%9F%20%D7%95%D7%A8%D7%93#navbar">
+                              <i class="add icon"></i>לפרטים נוספים
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="ui card row">
+                      <div class="ui top left attached red label">
+                          <i class="music icon"></i>
+                           תרבות ופנאי לילדים
+                      </div>
+
+                      <div class = "fluid image">
+                          <img src = "http://www.mhatzor.org.il/productImages2/44/2016/07/19/image1468915939.jpg">
+                      </div>
+
+                      <div class="content">
+                          <a class="header"></a>
+                          <div class="description">
+                            <h4 class = "center aligned">הצגה לגיל הרך: מי אכל את הדייסה שלי</h4>
+                            <p>תיאטרון המטמון. בסוף כל הצגה מחכה לכם הפתעה</p>
+                            <div class = "divider"></div>
+
+                            <div class = "ui row">
+                            <div class="ui four wide column">
+                                                <span><i class = "calendar icon"></i>מתי:  	&nbsp; 	6.2.17, 17:00</span>
+                                              </div>
+                                              <div class="ui four wide column">
+                                                <a href = "https://goo.gl/maps/KCDWo5Zm8Jk" target="_blank">
+                                                  <i class = "map icon"></i>איפה:  	&nbsp;
+                                                  אולם ספיר
+                                                </a>
+                                              </div>
+
+                                              <div class="ui four wide column"><i class = "shekel icon"></i>מחיר:  	&nbsp; 100 ש״ח</div>
+                                              <div class = "ui four wide column center aligned">
+                                                <a class="ui button primary basic middle aligned" target="_blank" href="http://www.mhatzor.org.il/page.php?type=event&id=6329&ht=%D7%94%D7%A6%D7%92%D7%94%20%D7%9C%D7%92%D7%99%D7%9C%20%D7%94%D7%A8%D7%9A:%20%D7%9E%D7%99%20%D7%90%D7%9B%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%93%D7%99%D7%99%D7%A1%D7%94%20%D7%A9%D7%9C%D7%99#navbar">
+                                                  <i class="add icon"></i>לפרטים נוספים
+                                                </a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+
+
+                <div class="ui card row">
+                    <div class="ui top left attached green label">
+                        <i class="music icon"></i>
+                        תרבות ופנאי למבוגרים
+                    </div>
+
+                    <div class = "fluid image">
+                        <img src = "http://www.mhatzor.org.il/productImages2/44/2016/07/19/image1468915939.jpg">
+                    </div>
+
+                    <div class="content">
+                        <a class="header"></a>
+                        <div class="description">
+                          <h4 class = "center aligned">הצגת מנוי: האורחת</h4>
+                          <p> דרמה קומית של תיאטרון בית לסין.</p>
+                          <div class = "divider"></div>
+
+                          <div class = "ui row">
+                          <div class="ui four wide column">
+                                              <span><i class = "calendar icon"></i>מתי:  	&nbsp; 	14.2.17, 20:30</span>
+                                            </div>
+                                            <div class="ui four wide column">
+                                              <a href = "https://goo.gl/maps/KCDWo5Zm8Jk" target="_blank">
+                                                <i class = "map icon"></i>איפה:  	&nbsp;
+                                                מתנ״ס
+                                              </a>
+                                            </div>
+
+                                            <div class="ui four wide column"><i class = "shekel icon"></i>מחיר:  	&nbsp; 100 ש״ח</div>
+                                            <div class = "ui four wide column center aligned">
+                                              <a class="ui button primary basic middle aligned" target="_blank" href="http://www.mhatzor.org.il/page.php?type=event&id=4626&ht=%D7%94%D7%A6%D7%92%D7%AA%20%D7%9E%D7%A0%D7%95%D7%99:%20%D7%94%D7%90%D7%95%D7%A8%D7%97%D7%AA#navbar">
+                                                <i class="add icon"></i>לפרטים נוספים
+                                              </a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+
+
+          </div>
+        </div>
+  </body>
 </html>
