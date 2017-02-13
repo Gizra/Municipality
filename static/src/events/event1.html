@@ -138,15 +138,6 @@ label : events2
                 </div>
 
                 <div class="scrolling menu">
-                  <div class="item" data-value="citizen">
-                  תושב/ת
-                  </div>
-                  <div class="item" data-value="business">
-                  עסקים
-                  </div>
-
-                  <div class = "ui divider">גילאים</div>
-
                   <div class="item" data-value="all">
                     <div class="ui purple empty circular label"></div>
                       כל המשפחה
@@ -179,126 +170,64 @@ label : events2
 
             <div class = "ui one columns stackable grid container cards">
               <div class = "column">
+
+                {% for event in site.data.events %}
                 <div class="ui card row">
-                  <div class="ui top left attached purple label">
-                    <i class="talk icon"></i>
-                    חוגים והעשרה לכל המשפחה
-                  </div>
+                  <div class="ui top left attached {{ event.color }} label">
+                    <i class="{{event.type_icon_name}} icon"></i>
+                    {{ event.type }}
+                    {%if event.audience %}
+                      ל{{ event.audience }}
+                    {% endif %}
+                </div>
 
                   <div class = "fluid image">
-                    <img src = "http://www.mhatzor.org.il/productImages2/44/2017/01/17/image1484650150.jpg">
+                    <img src = "{{ event.image_link }}">
                   </div>
                   <div class="content">
-                      <a class="header"></a>
+                      <div class="header">
+                        {{event.title}}
+                      </div>
                       <div class="description">
-                        <h4 class = "center aligned">כל מוצ"ש ריקודי עם עם שמעון ורד</h4>
+                        <p> {{event.description}}</p>
+                      </div>
                         <div class = "divider"></div>
-
                         <div class = "ui row">
                           <div class="ui four wide column">
-                            <a><i class = "calendar icon"></i>מתי:  	&nbsp; 	4.2.17, 19:45</a>
-                             	(<span><i class="refresh icon"></i>אירוע שבועי</span>)
+                            {%if event.time %}
+                              <span><i class = "calendar icon"></i>{{ event.time }}</span>
+                                {% if event.time_end %}
+                                  <span> ועד {{time_end}}</span>
+                                  {% endif %}
+                                  {% if event.recurring %}
+                                  (<span><i class="refresh icon"></i>אירוע שבועי</span>)
+                                  {% endif %}
+                                {% endif %}
                           </div>
+                          {%if event.location %}
                           <div class="ui four wide column">
-                            <a href = "https://goo.gl/maps/KCDWo5Zm8Jk" target="_blank">
-                              <i class = "map icon"></i>איפה:  	&nbsp;
-                              מתנ״ס
+                            <a href = "{{event.location_map_link}}" target="_blank">
+                              <i class = "map icon"></i>איפה:
+                              {{ event.location}}
                             </a>
                           </div>
+                          {% endif %}
 
-                          <div class="ui four wide column"><i class = "shekel icon"></i>מחיר:  	&nbsp;ש״ח 30</div>
-                          <div class = "ui four wide column center aligned">
-                            <a class="ui button primary basic middle aligned" target="_blank" href="http://www.mhatzor.org.il/page.php?type=event&id=6997&ht=%D7%A8%D7%99%D7%A7%D7%95%D7%93%D7%99%20%D7%A2%D7%9D%20-%20%D7%A9%D7%9E%D7%A2%D7%95%D7%9F%20%D7%95%D7%A8%D7%93#navbar">
+
+
+                          {% if event.price %}
+                            <div class="ui four wide column"><i class = "shekel icon"></i>מחיר: {{event.price}}</div>
+                          {% endif %}
+                            <div class = "ui four wide column center aligned">
+                            <a class="ui button primary basic middle aligned" target="_blank" href="{{event.details_link}}">
                               <i class="add icon"></i>לפרטים נוספים
                             </a>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-
-                  <div class="ui card row">
-                      <div class="ui top left attached red label">
-                          <i class="music icon"></i>
-                           תרבות ופנאי לילדים
-                      </div>
-
-                      <div class = "fluid image">
-                          <img src = "http://www.mhatzor.org.il/productImages2/44/2016/07/19/image1468915939.jpg">
-                      </div>
-
-                      <div class="content">
-                          <a class="header"></a>
-                          <div class="description">
-                            <h4 class = "center aligned">הצגה לגיל הרך: מי אכל את הדייסה שלי</h4>
-                            <p>תיאטרון המטמון. בסוף כל הצגה מחכה לכם הפתעה</p>
-                            <div class = "divider"></div>
-
-                            <div class = "ui row">
-                            <div class="ui four wide column">
-                                                <span><i class = "calendar icon"></i>מתי:  	&nbsp; 	6.2.17, 17:00</span>
-                                              </div>
-                                              <div class="ui four wide column">
-                                                <a href = "https://goo.gl/maps/KCDWo5Zm8Jk" target="_blank">
-                                                  <i class = "map icon"></i>איפה:  	&nbsp;
-                                                  אולם ספיר
-                                                </a>
-                                              </div>
-
-                                              <div class="ui four wide column"><i class = "shekel icon"></i>מחיר:  	&nbsp; 100 ש״ח</div>
-                                              <div class = "ui four wide column center aligned">
-                                                <a class="ui button primary basic middle aligned" target="_blank" href="http://www.mhatzor.org.il/page.php?type=event&id=6329&ht=%D7%94%D7%A6%D7%92%D7%94%20%D7%9C%D7%92%D7%99%D7%9C%20%D7%94%D7%A8%D7%9A:%20%D7%9E%D7%99%20%D7%90%D7%9B%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%93%D7%99%D7%99%D7%A1%D7%94%20%D7%A9%D7%9C%D7%99#navbar">
-                                                  <i class="add icon"></i>לפרטים נוספים
-                                                </a>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-
-
-
-                <div class="ui card row">
-                    <div class="ui top left attached green label">
-                        <i class="music icon"></i>
-                        תרבות ופנאי למבוגרים
-                    </div>
-
-                    <div class = "fluid image">
-                        <img src = "http://www.mhatzor.org.il/productImages2/44/2016/07/19/image1468915939.jpg">
-                    </div>
-
-                    <div class="content">
-                        <a class="header"></a>
-                        <div class="description">
-                          <h4 class = "center aligned">הצגת מנוי: האורחת</h4>
-                          <p> דרמה קומית של תיאטרון בית לסין.</p>
-                          <div class = "divider"></div>
-
-                          <div class = "ui row">
-                          <div class="ui four wide column">
-                                              <span><i class = "calendar icon"></i>מתי:  	&nbsp; 	14.2.17, 20:30</span>
-                                            </div>
-                                            <div class="ui four wide column">
-                                              <a href = "https://goo.gl/maps/KCDWo5Zm8Jk" target="_blank">
-                                                <i class = "map icon"></i>איפה:  	&nbsp;
-                                                מתנ״ס
-                                              </a>
-                                            </div>
-
-                                            <div class="ui four wide column"><i class = "shekel icon"></i>מחיר:  	&nbsp; 100 ש״ח</div>
-                                            <div class = "ui four wide column center aligned">
-                                              <a class="ui button primary basic middle aligned" target="_blank" href="http://www.mhatzor.org.il/page.php?type=event&id=4626&ht=%D7%94%D7%A6%D7%92%D7%AA%20%D7%9E%D7%A0%D7%95%D7%99:%20%D7%94%D7%90%D7%95%D7%A8%D7%97%D7%AA#navbar">
-                                                <i class="add icon"></i>לפרטים נוספים
-                                              </a>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-
-
+                  {% endfor %}
 
           </div>
         </div>
