@@ -1,0 +1,19 @@
+- title: תשלום ארנונה
+  description: הסדירו את חובות תשלומי המסים המקומיים
+  url: "#"
+  icon: shekel
+
+- title: הרשמה למוסדות החינוך
+  description: רישמו את ילדכם לגנים ולבתי הספר
+  url: "#"
+  icon: student
+
+- title: מוקד הפניות
+  description: הפניית שאלה או תלונה
+  url: "#"
+  icon: question
+
+- title: אנשי קשר ובעלי תפקידים
+  description: בירור פרטי קשר ושעות קבלת קהל
+  icon: phone
+  url: "#"
