@@ -1,6 +1,6 @@
 ---
 layout: default
-label : Mrkazia - citizen
+label : Mrkazia - business
 ---
 
       <div class = "ui eight wide column">
@@ -13,7 +13,7 @@ label : Mrkazia - citizen
 
               <div class = "ui medium header"> העמודים הפופולאריים </div>
               <div class="ui selection list">
-                {% for popular_page in site.data.merkazia.citizen.popular_pages %}
+                {% for popular_page in site.data.merkazia.business.popular_pages %}
                   <div class="item">
                     <a href = "{{ popular_page.link }}" class = "content">
                       <i class="ui {{ popular_page.icon }} icon"></i>
@@ -28,7 +28,7 @@ label : Mrkazia - citizen
               <h4 class = "ui header">עשו עכשיו!  </h4>
               <div class="ui relaxed divided list">
 
-                {% for action_item in site.data.merkazia.citizen.action_items %}
+                {% for action_item in site.data.merkazia.business.action_items %}
                 <div class="item">
                     <a class="header" href="{{ action_item.link }}">
                       <i class="large {{ action_item.icon }} middle aligned icon"></i>
@@ -40,6 +40,6 @@ label : Mrkazia - citizen
 
               </div>
             </div>
-        
+
       <!-- local funcitnalities -->
         <script type='text/javascript' src="merkazia-poc.js"> </script>
