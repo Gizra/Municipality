@@ -3,28 +3,6 @@ layout: default
 label : events
 ---
 
-<html>
-  <head>
-    <!-- Latest compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.rtl.css"
-      integrity="sha384-h/tGiTStmgbDQyTAdp2s5BfyXn7wmnFsn3vDaCPYck9YKkOuLAdjHi6y154TBVJ4"
-      crossorigin="anonymous">
-      <!-- Jquery -->
-      <script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script
-      src="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.min.js"
-      integrity="sha384-kZT+CItOKWHYL+Rz37W2NEz60Pu2JJJ8wgzq+82VWsi3QM53eNFzQJZqzhPuyo63"
-      crossorigin="anonymous"></script>
-
-    </head>
-  <body lang="he" dir="rtl">
     <div class = "ui container">
       <div class="ui sixteen stackable grid">
         <div class = "ui segment row">
@@ -173,7 +151,7 @@ label : events
 
                 {% for event in site.data.events %}
                 <div class="ui card row">
-                  <div class="ui top left attached {{ event.color }} label">
+                  <div class="ui top left attached {{ event.color }} fluid label">
                     <i class="{{event.type_icon_name}} icon"></i>
                     {{ event.type }}
                     {%if event.audience %}
@@ -231,5 +209,3 @@ label : events
 
           </div>
         </div>
-  </body>
-</html>
