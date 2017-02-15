@@ -75,17 +75,27 @@ label : Contacts
     </div>
     <div class = "ui grid container">
       <div class="ui link cards">
-        <div class="card">
+        {% for contact in site.data.contacts.contacts %}
+          <div class="card">
+            {% if contact.image_link %}
             <div class="image">
               <img src="http://lorempixel.com/output/people-q-c-290-290-1.jpg">
             </div>
+            {% endif %}
             <div class="content">
-              <div class="header">דליה ברברה</div>
-              <div class="meta">
-                <a>לשכת ראש העירייה</a>
-              </div>
+              {% if contact name %}
+                <div class="header">
+                  {{ contact.name }}
+                </div>
+              {% endif %}
+              {% if contact.department %}
+                <div class="meta">
+                  <a>{{ contact.department }}</a>
+                </div>
+              {% endif %}
+
               <div class="description">
-                מזכירות לשכה
+                {{ contact.title }}
               <h4 class = "ui horizontal divider"></h4>
 
               <div class="ui blue small labels">
@@ -99,26 +109,36 @@ label : Contacts
             </div>
             <h4 class = "ui section divider"></h4>
             <div class="contact-details center aligned">
+              {% if contact.email %}
               <span>
                 <i class="phone icon"></i>
-                <a href="mailto:a@b.com">a@b.com</a>
+                <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
               </span>
+              {% endif %}
+              {% if contact.phone %}
               <span>
                 <i class="mail icon"></i>
-                <a href="tel:08-8500842/3">08-8500842/3</a>
+                <a href="tel:08-8500842/3">{{ contact.phone}}</a>
               </span>
+              {% endif %}
+              {% if contact.address %}
               <span>
                 <h4 class = "ui horizontal divider"></h4>
-                <a href="#">בניין העיריה, חדר 423</a>
-              </span> <br>
+                <a href="#">{{ contact.address }}</a>
+              </span>
+              {% endif %}
+              <br>
+              {% if contact.openning %}
               <span>
                 <i class="add to calendar icon"></i>
                 <b>ימים</b> א׳, ב׳, ג׳ <br>
                 <b>שעות</b> 10:00 - 12:00 </b>
               </span>
+              {% endif %}
             </div>
           </div>
-        </div>
+          </div>
+        {% endfor %}
 
         <div class="card">
             <div class="image">
@@ -343,8 +363,7 @@ label : Contacts
                 </a>
               </div>
             </div>
-
-
+ 
           </div>
 
         </div>
