@@ -1,6 +1,6 @@
 ---
 layout: default
-label : Contacts
+label : פרטי יצירת קשר ושעות קבלה
 ---
 
   <div class= "ui center aligned basic segment">
@@ -83,7 +83,7 @@ label : Contacts
             </div>
             {% endif %}
             <div class="content">
-              {% if contact name %}
+              {% if contact.name %}
                 <div class="header">
                   {{ contact.name }}
                 </div>
@@ -98,27 +98,29 @@ label : Contacts
                 {{ contact.title }}
               <h4 class = "ui horizontal divider"></h4>
 
-              <div class="ui blue small labels">
-                <a class="ui label">
-                  מדיניות
-                </a>
-                <a class="ui label">
-                  קבלת קהל
-                </a>
+
+              <div class="ui small labels">
+                    {% assign services = site.data.arnona.citizen.actions | where: "relevant_contacts", contact.name %}
+                      {% for service in services %}
+                        <a class="ui {{ service.label_color }} label" href="{{ service.link }}">
+                          {{ service.title }}
+                        </a>
+                      {% endfor %}
               </div>
             </div>
+
             <h4 class = "ui section divider"></h4>
             <div class="contact-details center aligned">
               {% if contact.email %}
               <span>
-                <i class="phone icon"></i>
+                <i class="mail icon"></i>
                 <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
               </span>
               {% endif %}
               {% if contact.phone %}
               <span>
-                <i class="mail icon"></i>
-                <a href="tel:08-8500842/3">{{ contact.phone}}</a>
+                <i class="phone icon"></i>
+                <a href="tel:{{ contact.phone }}">{{ contact.phone}}</a>
               </span>
               {% endif %}
               {% if contact.address %}

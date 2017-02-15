@@ -2,10 +2,14 @@
   alternative_phrases:
     - תשלום ארנונה
     - לשלם מיסים
-  link: #
+  link: example.com
+  label_color: blue
+  relevant_contacts: [מישל טפירו, חיים שטיינר]
 
 - title: להודיע על שינוי דייר
   alternative_phrases:
+  label_color: green
+  relevant_contacts: [חיים שטיינר, מגי]
   link: #
 
 - title: להגיש בקשה על להנחה או פטור מארנונה
