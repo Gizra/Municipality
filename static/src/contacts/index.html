@@ -136,14 +136,20 @@ label : פרטי יצירת קשר ושעות קבלה
               {% endif %}
               {% if contact.openning %}
               <div class = "ui divider"></div>
-              <span>
+              <div>
                 <i class="add to calendar icon"></i>
                 <b>קבלת קהל: {{ contact.openning % }}</b>
-              </span>
+              </div>
+              {% endif %}
+              {% if contact.planned_absence %}
+              <div>
+                <span class = "ui red hotizontal label"> חופשה/העדרות מתוכננת:</span>
+                <b>{{ contact.planned_absence }}</b>
+              </div>
               {% endif %}
             </div>
           </div>
-          </div>
+        </div>
         {% endfor %}
 
         <div class="card">
