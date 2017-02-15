@@ -11,14 +11,14 @@ label : arnona-template
     <a class="item">English</a>
   </div>
 
-  <h3 class="ui purple header">מי אתה?</h3>
+  <h3 class="ui purple header">מי את/ה?</h3>
   <div class="ui link cards">
     <div class="ui card">
       <a class="image">
         <img src="http://semantic-ui.com/images/avatar/large/steve.jpg">
       </a>
       <div class="content">
-        <a class="header">תושב</a>
+        <a class="header">תושב/ת</a>
       </div>
     </div>
     <div class="ui card">
@@ -26,12 +26,12 @@ label : arnona-template
         <img src="http://semantic-ui.com/images/avatar2/large/molly.png">
       </a>
       <div class="content">
-        <a class="header">בעל עסק</a>
+        <a class="header">בעל/ת עסק</a>
       </div>
     </div>
   </div>
 
-  <h3 class="ui purple header">מה אתה מחפש?</h3>
+  <h3 class="ui purple header">מה את/ה מחפש/ת?<h3>
   <div class="ui search">
     <div class="ui icon input">
       <input class="prompt" type="text" placeholder="הזן מילת חיפוש...">
@@ -40,131 +40,90 @@ label : arnona-template
     <div class="results"></div>
   </div>
 
-  <h3 class="ui purple header">שאלות נפוצות</h3>
-  <div class="ui styled fluid accordion">
-    <div class="title">
-      <i class="dropdown icon"></i> מהי ארנונה?
+  {% if site.data.arnona.citizen.popular_questions.first %}
+    <h3 class="ui purple header">שאלות נפוצות</h3>
+    <div class="ui styled fluid accordion">
+      {% for popular_question in site.data.arnona.citizen.popular_questions %}
+        <div class="title">
+          <i class="dropdown icon"></i> {{popular_question.question}}
+        </div>
+        <div class="content">
+          <p class="transition hidden">{{ popular_question.answer }}</p>
+        </div>
+        {% endfor %}
     </div>
-    <div class="content">
-      <p class="transition hidden"> ארנונה היא מס המוטל עפ"י חוק על המחזיקים בנכס (מבנים למגורים ועסקים, קרקעות, וכיוצא באלה) .הארנונה מסייעת במימון הפעולות והשירותים הממלכתיים והמוניציפליים הניתנים על-ידי המועצה, לרווחת התושבים.</p>
-    </div>
-    <div class="title active">
-      <i class="dropdown icon"></i> כיצד נקבע חיוב ארנונה?
-    </div>
-    <div class="content active">
-      <p class="transition visible">הארנונה הינו חיוב שנתי (מינואר עד דצמבר) ונקבע כמכפלה של התעריף למ"ר בשטח הנכס. התעריף נקבע בהתאם לאזור המס, השימוש ושטח הנכס.</p>
-    </div>
-    <div class="title">
-      <i class="dropdown icon"></i> כיצד ניתן לשלם ארנונה?
-    </div>
-    <div class="content">
-      <p> 1.תשלום מראש-המשלמים מראש בתחילת השנה ועד 31 בינואר לאותה שנת כספים יהנו מהנחה של %2.</p>
-      <p>2 .תשלום בהוראת קבע.</p>
-      <p>3 .תשלום במזומן/צ'ק מזומן.</p>
-      <p>4 .תשלום באמצעות כרטיסי אשראי בקופת העירייה וכן בטלפון 9275915-03.</p>
-      <p>        5 .תשלום בהמחאות עתידיות.
-      <p>6 .באמצעות אתר האינטרנט של הרשות-כתובת האתר IL.ORG.M-K</p>
-    </div>
-    <div class="title">
-      <i class="dropdown icon"></i>מי זכאי להנחה?
-    </div>
-    <div class="content">
-      <p class="transition hidden"> הנחות מארנונה ניתנות לפי תקנות ההסדרים במשק המדינה )הנחה בארנונה(, כפי תוקפן מעת לעת.</p>
-    </div>
-  </div>
+  {% endif %}
 
-  <h3 class="ui purple header">מה תרצה לעשות?</h3>
-  <div class="ui menu">
-    <a href="https://www.eprsys.co.il/payments.asp?rshut=1250" target="_blank" class="orange item active">לשלם ארנונה</a>
-    <a class="yellow item">להודיע על שינוי דייר</a>
-    <a class="olive item">להגיש בקשה להנחה או פטור מארנונה</a>
-    <a class="green item">לחפש צווי מיסים</a>
-    <a class="red item">ליצור קשר עם מחלקת גביה</a>
-  </div>
+  {% if site.data.arnona.citizen.contacts %}
+    {% if site.data.arnona.citizen.actions %}
+      <h3 class="ui purple header">מה תרצו לעשות?</h3>
+      <div class="ui menu">
+        {% for action in site.data.arnona.citizen.actions %}
+          <a class = "item" href="{{ action.link }}" target="_blank"> {{ action.title }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
 
-  <button class="massive ui button">דווח על בעיה או הגש פניה למוקד</button>
+    {% if site.data.arnona.citizen.contacts.first.name == "מוקד" %}
+      <a href="{{site.data.arnona.citizen.contacts.first.link}}"<button class="massive ui button">דווחו על בעיה או הגישו פניה למוקד</button></a>
+    {% endif %}
 
-  <h3 class="ui purple header">אנשים שיוכלו לעזור לך</h3>
-  <div class="ui items">
-    <div class="item">
-      <a class="ui tiny image">
-        <img src="http://semantic-ui.com/images/avatar/large/stevie.jpg">
-      </a>
-      <div class="content">
-        <a class="header">ישראלה ישראלי - מנהלת מחלקת גבייה</a>
-        <div class="description">
-          <p>08-888888</p>
-          <p>israela@example.org.il</p>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <a class="ui tiny image">
-        <img src="http://semantic-ui.com/images/avatar/large/veronika.jpg">
-      </a>
-      <div class="content">
-        <a class="header">יאנה יוני - מנהלת אגף גיזברות</a>
-        <div class="description">
-          <p>08-999999</p>
-          <p>yana@example.org.il</p>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <a class="ui tiny image">
-        <img src="http://semantic-ui.com/images/avatar/large/jenny.jpg">
-      </a>
-      <div class="content">
-        <a class="header">אורי בורי - רכז פניות הציבור</a>
-        <div class="description">
-          <p>08-222222</p>
-          <p>uri@example.org.il</p>
-          <p>
-            שעות פעילות :
-            ימים א – ה 8.00-13.00
-            יום ג’ 16.00-18.00
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <h3 class="ui purple header">חדשות וידיעות בנושא ארנונה</h3>
-  <div class="ui items">
-    <div class="item">
-      <div class="image">
-        <img src="http://semantic-ui.com/images/wireframe/image.png">
-      </div>
-      <div class="content">
-        <a class="header">אושרה הנחה של 50% בארנונה לתושבים ותיקים</a>
-        <div class="meta">
-          <span>בשורה משמחת שקיבלנו ממשרד הפנים - תושבים ותיקים זכאים להנחה בארנונה</span>
+      <h3 class="ui purple header">אנשים שיוכלו לעזור לך</h3>
+      {% for contact in site.data.arnona.citizen.contacts %}
+        {% if contact.name !="מוקד" %}
+          <div class="ui items">
+          <div class="item">
+            {% if contact.image_link %}
+            <a class="ui tiny image">
+              <img src="{{ contact.image_link }}">
+            </a>
+            {% endif %}
+
+            <div class="content">
+              <a class="header">{{ contact.title }} - {{ contact.name }}</a>
+              <div class="description">
+              {% if contact.phone %}
+                <p><a><i class="phone icon"></i>{{ contact.phone }}</a></p>
+              {% endif %}
+              {% if contact.email %}
+                <p><a><i class="mail icon"></i> israela@example.org.il</a></p>
+              {% endif %}
+              {% if contact.openning %}
+                <p>
+                שעות פעילות : {{ contact.openning }}
+                </p>
+              {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+  {% endif %}
+
+  {% if site.data.arnona.citizen.updates.first %}
+    <h3 class="ui purple header">חדשות וידיעות בנושא ארנונה</h3>
+    <div class="ui items">
+      {% for update in site.data.arnona.citizen.updates %}
+        <div class="item">
+          <div class="image">
+            <img src="{{ update.image_link }}">
+          </div>
+          <div class="content">
+            <a class="header">{{ update.title }}</a>
+            <div class="meta">
+              <span>{{ update.short_description }}</span>
+            </div>
+              {% if update.full_link %}
+                <div class="extra">
+                  <a href="{{ update.full_link }}">קראו עוד</a>
+                </div>
+              {% endif %}
+          </div>
         </div>
-        <div class="description">
-          <p></p>
-        </div>
-        <div class="extra">
-          קראו עוד
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="image">
-        <img src="http://semantic-ui.com/images/wireframe/image.png">
-      </div>
-      <div class="content">
-        <a class="header">מהיום תוכלו לשלם ארנונה בקליק</a>
-        <div class="meta">
-          <span>שירות חדש לתושבים: תשלום ארנונה אונליין דרך האתר. לא עוד ניירת, לא צריך לצאת מהבית, פשוט וקל לשלם ארנונה.</span>
-        </div>
-        <div class="description">
-          <p></p>
-        </div>
-        <div class="extra">
-          קראו עוד
-        </div>
-      </div>
-    </div>
+      {% endfor %}
   </div>
+  {% endif %}
+</div>
 
 </div>

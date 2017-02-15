@@ -1,39 +1,37 @@
+
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css" integrity="sha256-wT6CFc7EKRuf7uyVfi+MQNHUzojuHN2pSw0YWFt2K5E=" crossorigin="anonymous" />
+    <!-- Latest compiled and minified CSS -->
+    <link
+    rel="stylesheet"
+    href="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.rtl.css"
+    integrity="sha384-h/tGiTStmgbDQyTAdp2s5BfyXn7wmnFsn3vDaCPYck9YKkOuLAdjHi6y154TBVJ4"
+    crossorigin="anonymous">
+
     <link rel="stylesheet" href="/assets/stylesheets/style.css" />
   </head>
-  <body>
-
-      {% include sidebar.html top=true %}
+  <body dir="rtl">
 
       <div class="pusher">
         <div class="ui grid container">
 
-        {% include sidebar.html top=false %}
-
-          <div class="ui main grid">
-            <!-- Responsive top menu -->
-            <div class="ui fixed inverted main menu">
-              <div class="ui container">
-                <a class="launch icon item sidebar-toggle">
-                  <i class="sidebar icon"></i>
-                </a>
-              </div>
-            </div>
-
             {{ content }}
 
-          </div>
         </div>
       </div>
 
-    <script
-        src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js" integrity="sha256-flVaeawsBV96vCHiLmXn03IRJym7+ZfcLVvUWONCas8=" crossorigin="anonymous"></script>
+      <script
+       src="https://code.jquery.com/jquery-2.2.4.min.js"
+       integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+       crossorigin="anonymous"></script>
+       <!-- Latest compiled and minified JavaScript -->
+       <script
+       src="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.min.js"
+       integrity="sha384-kZT+CItOKWHYL+Rz37W2NEz60Pu2JJJ8wgzq+82VWsi3QM53eNFzQJZqzhPuyo63"
+       crossorigin="anonymous"></script>
+
+
     <script src="/assets/javascript/script.js"></script>
   </body>
 </html>
