@@ -3,7 +3,6 @@ layout: default
 label : פרטי יצירת קשר ושעות קבלה
 ---
 
-  <div class= "ui center aligned basic segment">
     <div class="ui category search fields">
       <div class="ui icon input">
         <input class="prompt" type="text" placeholder="חפשו שם, תחום או מחלקה">
@@ -66,14 +65,14 @@ label : פרטי יצירת קשר ושעות קבלה
               <div class="item"><i class="calendar icon"></i>קבלת קהל</div>
             </div>
           </div>
-
+        </div>
 
       <div class="results"></div>
 
     <div class = "ui horizontal divider">
     תוצאות מתאימות
     </div>
-    <div class = "ui grid container">
+    <div class = "ui container center aligned">
       <div class="ui link cards">
         {% for contact in site.data.contacts.contacts %}
           <div class="card">
@@ -121,6 +120,12 @@ label : פרטי יצירת קשר ושעות קבלה
               <span>
                 <i class="phone icon"></i>
                 <a href="tel:{{ contact.phone }}">{{ contact.phone}}</a>
+              </span>
+              {% endif %}
+              {% if contact.fax %}
+              <span>
+                <i class="fax icon"></i>
+                {{contact.fax}}
               </span>
               {% endif %}
               {% if contact.address %}
@@ -367,7 +372,4 @@ label : פרטי יצירת קשר ושעות קבלה
             </div>
  
           </div>
-
         </div>
-      </div>
-    </div>
