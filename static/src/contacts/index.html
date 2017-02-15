@@ -134,12 +134,11 @@ label : פרטי יצירת קשר ושעות קבלה
                 <a href="#">{{ contact.address }}</a>
               </span>
               {% endif %}
-              <br>
               {% if contact.openning %}
+              <div class = "ui divider"></div>
               <span>
                 <i class="add to calendar icon"></i>
-                <b>ימים</b> א׳, ב׳, ג׳ <br>
-                <b>שעות</b> 10:00 - 12:00 </b>
+                <b>קבלת קהל: {{ contact.openning % }}</b>
               </span>
               {% endif %}
             </div>
