@@ -125,8 +125,10 @@ label : arnona-template
   </div>
   {% endif %}
 
-  <h3 class="ui purple header">הודעות בנושא ארנונה</h3>
-  <div class="ui blue message">מחר לא תתקיים קבלת קהל במחלקת הגבייה</div>
-  <div class="ui blue message">שוברים לתשלום שנתי נשלחו השבוע לכל בתי האב</div>
-
+  {% if site.data.arnona.citizen.announcements.first %}
+    <h3 class="ui purple header">הודעות בנושא ארנונה</h3>
+    {% for announcement in site.data.arnona.citizen.announcements %}
+      <div class="ui blue message"> {{ announcement.title }}</div>
+    {% endfor %}
+  {% endif %}
 </div>
