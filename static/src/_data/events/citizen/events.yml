@@ -19,7 +19,7 @@
   color: purple
   audience: כל המשפחה
   image_link: http://www.mhatzor.org.il/productImages2/44/2017/01/17/image1484650150.jpg
-  time:  מוצ"ש, 2.2.17, 19:45
+  time:  מוצ״ש, 4.2.17, 19:45
   location: מתנ"ס
   location_map_link: https://goo.gl/maps/KCDWo5Zm8J
   price: 30 ש"ח
@@ -32,7 +32,7 @@
   type_icon_name: music
   color: red
   audience: ילדים
-  image_link: http://www.mhatzor.org.il/productImages2/44/2016/07/19/image1468915939.jpg
+  image_link: http://www.mhatzor.org.il/productImages2/44/2016/11/27/image1480237145.jpg
   time:  יום שני, 6.2.17, 17:00
   location: אולם ספיר
   location_map_link: https://goo.gl/maps/KCDWo5Zm8J
@@ -45,7 +45,7 @@
   type_icon_name: music
   color: green
   audience: מבוגרים
-  image_link: http://www.mhatzor.org.il/productImages2/44/2016/07/19/image1468915939.jpg
+  image_link: http://www.mhatzor.org.il/productImages2/44/2017/01/30/image1485771012.jpg
   time: יום שני, 6.2.17, 19:00
   location: אולם ספיר
   location_map_link: https://goo.gl/maps/KCDWo5Zm8J
@@ -64,17 +64,3 @@
   location_map_link: https://goo.gl/maps/KCDWo5Zm8Jk
   price: 100 ש"ח
   details_link: http://www.mhatzor.org.il/page.php?type=event&id=4626&ht=%D7%94%D7%A6%D7%92%D7%AA%20%D7%9E%D7%A0%D7%95%D7%99:%20%D7%94%D7%90%D7%95%D7%A8%D7%97%D7%AA#navbar
-
-- title: חופשת פסח
-  description: משרדי הרשות המקומית יהיו סגורים בחול המועד פסח
-  type:  חופשה ברשות המקומית
-  type_icon_name: flag
-  color:
-  audience:
-  image_link:
-  time: 9.4.17
-  time_end: 18.4.17
-  location:
-  location_map_link:
-  price:
-  details_link: '#'

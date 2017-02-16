@@ -3,7 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "description": "Yeoman workflow for Ifat News",
-  "dependencies": {},
+  "dependencies": {
+    "semantic-ui-calendar": "0.0.6"
+  },
   "devDependencies": {
     "browser-sync": "^1.5.7",
     "del": "^1.1.1",

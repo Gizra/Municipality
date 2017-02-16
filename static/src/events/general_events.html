@@ -1,6 +1,6 @@
 ---
 layout: default
-label : events
+label : לוח אירועים לתושב/ת
 ---
 
     <div class = "ui container">
@@ -80,28 +80,9 @@ label : events
                 <i class = "paint brush icon"></i>
                 אומנות
               </div>
-
-              <div class="header">
-                <i class="tags icon"></i>
-                תאריכים ומועדי שירות
-              </div>
-              <div class = "divider"></div>
-                <div class="item" data-value="art">
-                  <i class = "flag outline icon"></i>
-                  חופשה ברשות המקומית
-                </div>
-                <div class = "item" data-value="service=citizen">
-                  <i class = "user icon"></i>
-                  שירות לתושב/ת
-                </div>
-                <div class = "item" data-value="service=citizen">
-                  <i class = "suitcase icon"></i>
-                  שירות לעסקים
-                </div>
-
-            </div>
           </div>
         </div>
+      </div>
 
         <div class="ui multiple dropdown filter">
           <input name="filters" type="hidden">
@@ -149,7 +130,7 @@ label : events
             <div class = "ui one columns stackable grid container cards">
               <div class = "column">
 
-                {% for event in site.data.events %}
+                {% for event in site.data.events.citizen.events %}
                 <div class="ui card row">
                   <div class="ui top left attached {{ event.color }} fluid label">
                     <i class="{{event.type_icon_name}} icon"></i>
