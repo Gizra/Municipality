@@ -102,7 +102,7 @@ label : arnona-template
   {% endif %}
 
   {% if site.data.arnona.citizen.updates.first %}
-    <h3 class="ui purple header">חדשות וידיעות בנושא ארנונה</h3>
+    <h3 class="ui purple header">חדשות ומאמרים בנושא ארנונה</h3>
     <div class="ui items">
       {% for update in site.data.arnona.citizen.updates %}
         <div class="item">
@@ -124,6 +124,9 @@ label : arnona-template
       {% endfor %}
   </div>
   {% endif %}
-</div>
+
+  <h3 class="ui purple header">הודעות בנושא ארנונה</h3>
+  <div class="ui blue message">מחר לא תתקיים קבלת קהל במחלקת הגבייה</div>
+  <div class="ui blue message">שוברים לתשלום שנתי נשלחו השבוע לכל בתי האב</div>
 
 </div>
