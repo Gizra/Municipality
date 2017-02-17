@@ -1,4 +1,41 @@
 citizens:
+    merkazia:
+      action_items:
+        hebrew:
+          - title: תשלום ארנונה
+            description: הסדירו את חובות תשלומי המסים המקומיים
+            url: "#"
+            icon: shekel
+
+          - title: הרשמה למוסדות החינוך
+            description: רישמו את ילדכם לגנים ולבתי הספר
+            url: "#"
+            icon: student
+
+          - title: מוקד הפניות
+            description: הפניית שאלה או תלונה
+            url: "#"
+            icon: question
+
+          - title: אנשי קשר ובעלי תפקידים
+            description: בירור פרטי קשר ושעות קבלת קהל
+            icon: phone
+            url: "../contacts"
+
+      popular_pages:
+        hebrew:
+          - title: על הארנונה
+            link: "../arnona-template"
+            icon: shekel
+
+          - title: פניה למוקד
+            link: "#"
+            icon: phone
+
+          - title: הרשמה למוסדות החינוך
+            link: "#"
+            icon: student
+
     service_events:
       - title: חופשת פסח
         description: משרדי הרשות המקומית יהיו סגורים בחול המועד פסח
@@ -131,7 +168,7 @@ citizens:
 
             - title: להגיש בקשה להנחה או פטור מארנונה
               alternative_phrases:
-              link: #
+              link: process.html
 
             - title: לחפש צווי מסים
               alternative_phrases:
@@ -211,3 +248,41 @@ citizens:
                     -  פקס להעברת הבקשה 80-0778068
                     - טלפון לתיאום ביקורת בנכס-8608728-08
                     - 'yacov@k-m.org.il – דוא״ל לפניות'
+
+business:
+    merkazia:
+      action_items:
+        hebrew:
+        - title: תשלום ארנונה
+          description: הסדירו את חובות תשלומי המסים המקומיים
+          url: "#"
+          icon: shekel
+
+        - title: הרשמה למוסדות החינוך
+          description: רישמו את ילדכם לגנים ולבתי הספר
+          url: "#"
+          icon: student
+
+        - title: מוקד הפניות
+          description: הפניית שאלה או תלונה
+          url: "#"
+          icon: question
+
+        - title: אנשי קשר ובעלי תפקידים
+          description: בירור פרטי קשר ושעות קבלת קהל
+          icon: phone
+          url: "#"
+
+      popular_pages:
+        hebrew:
+          - title: תשלום הארנונה
+            link: "#"
+            icon: shekel
+
+          - title: פניה למוקד
+            link: "#"
+            icon: phone
+
+          - title: הרשמה למוסדות החינוך
+            link: "#"
+            icon: student

@@ -3,8 +3,8 @@ layout: default
 label : מרכזיה - למצוא את המידע, ומהר
 
 ---
-
-<div class = "ui stackable grid container">
+{% assign merkazia = site.data.topics.citizens.merkazia %}
+<div class = "ui stackable centered grid container">
   <div class = "ui segment four wide column center aligned">
     <h4 class = "header">מה מתאים לך?</h4>
 
@@ -47,7 +47,7 @@ label : מרכזיה - למצוא את המידע, ומהר
 
       <div class = "ui medium header"> העמודים הפופולאריים </div>
         <div class="ui selection list">
-          {% for popular_page in site.data.merkazia.citizen.popular_pages %}
+          {% for popular_page in merkazia.popular_pages.hebrew %}
             <div class="item">
               <a href = "{{ popular_page.link }}" class = "content">
                 <i class="ui {{ popular_page.icon }} icon"></i>
@@ -61,8 +61,8 @@ label : מרכזיה - למצוא את המידע, ומהר
   <div class = "ui six wide column center">
     <h4 class = "ui header">עשו עכשיו!  </h4>
       <div class="ui relaxed divided list">
-
-        {% for action_item in site.data.merkazia.citizen.action_items %}
+ 
+        {% for action_item in merkazia.action_items.hebrew %}
         <div class="item">
           <a class="header" href="{{ action_item.link }}">
             <i class="large {{ action_item.icon }} middle aligned icon"></i>
@@ -74,6 +74,6 @@ label : מרכזיה - למצוא את המידע, ומהר
 
       </div>
     </div>
-</div>
+</div><
 <!-- local funcitnalities -->
-<script type='text/javascript' src="merkazia-poc.js"> </script>
+<!--<script type='text/javascript' src="merkazia-poc.js"> </script> -->
