@@ -2,9 +2,11 @@
 layout: default
 label: תהליך לדוגמה (בקשה לקבלת הנחה בארנונה לנכס ריק)
 ---
+{% assign process = site.data.arnona.citizen.processes.first %}
+
 <div class="sixteen wide column">
-  <h2 class="ui header">בקשה לקבלת הנחה בארנונה לנכס ריק</h2>
-  {% for section in site.data.arnona.citizen.process1 %}
+  <h2 class="ui header">{{ process.title}} </h2>
+  {% for section in process.sections %}
   <div>
     <div class="ui divider"></div>
     <h3 class="ui header">
