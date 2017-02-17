@@ -1,102 +1,47 @@
 ---
 layout: default
-label : process
+label: תהליך לדוגמה (בקשה לקבלת הנחה בארנונה לנכס ריק)
 ---
 <div class="sixteen wide column">
   <h2 class="ui header">בקשה לקבלת הנחה בארנונה לנכס ריק</h2>
-
+  {% for section in site.data.arnona.citizen.process1 %}
   <div>
     <div class="ui divider"></div>
     <h3 class="ui header">
-      <i class="users icon"></i>
+      <i class="{{ section.section_icon }} icon"></i>
       <div class="content">
-        מי זכאי?
+        {{ section.section_title }}
       </div>
     </h3>
-    <p>
-      על פי החלטת מועצת העירייה, המבוססת על תקנה 13
-      לתקנות ההסדרים במשק המדינה (הנחה
-      מארנונה),התשנ"ג 1993 , -זכאי מחזיק בנכס להנחה
-      מארנונה בשיעור של עד , %100 בתנאי שהנכס ריק
-      לחלוטין מכל חפץ ואדם, ולא נעשה בו שימוש.
-    </p>
-  </div>
 
-  <div>
-    <div class="ui divider"></div>
-    <h3 class="ui header">
-      <i class="calendar icon"></i>
-      <div class="content">
-        מועד להגשת הבקשות
-      </div>
-    </h3>
-    <p>
-      הנחה כאמור תינתן לתקופה מצטברת של עד חודשים 6
-      בתקופת בעלות אחת.
-      במניין התקופה המצטברת לא ניתן להגיש בקשה לנכס
-      ריק לתקופה הפחותה משלושים יום.
-      ההנחה תינתן ממועד הגשת הבקשה לעירייה בכפוף
-      למילוי ההצהרה המצ"ב על ידי מבקש הבקשה.
-    </p>
-  </div>
+      {% if section.description %}
+        <div>
+          <p>
+            {{ section.description }}
+          </p>
+        </div>
+      {% endif %}
 
-  <div>
-    <div class="ui divider"></div>
-    <h3 class="ui header">
-      <i class="hand pointer icon"></i>
-      <div class="content">
-        פעולות נדרשות
+      {% if section.description_numbered_list %}
+      <div>
+        <ol>
+          {% for item in section.description_numbered_list %}
+          <li> {{ item }} </li>
+          {% endfor %}
+        </ol>
       </div>
-    </h3>
-    <p>
-      1. עריכת ביקורת בנכס לקראת
-      סוף התקופה על ידי העירייה.
-      באחריות המבקש לתאם את הביקור בנכס מול פקח
-      הגביה, לפני איכלוס הנכס וכל עוד הוא ריק מחפצים.
-    </p>
-    <p>
-      2. על המבקש להגיש חשבונות על צריכת חשמל
-      ומים המראים שאין צריכה בנכס כתנאי לקבלת
-      הפטור.
-      בנוסף, שומרת לעצמה העירייה את הזכות לערוך
-      ביקורת בנכס גם במהלך תקופת ההנחה.
-      העתק מתשובת העירייה ישלח לבעל הנכס.
-    </p>
-    <p>
-      3. מילוי הצהרה על ידי מבקש הבקשה
-    </p>
-  </div>
+      {% endif %}
 
-  <div>
-    <div class="ui divider"></div>
-    <h3 class="ui header">
-      <i class="file text icon"></i>
-      <div class="content">
-        רשימת מסמכים להגשה
+      {% if section.section_unumbered_list %}
+      <div>
+        <ul>
+          {% for item in section.section_unumbered_list %}
+            <li> {{ item }} </li>
+          {% endfor %}
+        </ul>
       </div>
-    </h3>
-    <p>
-      1. חשבונות על צריכת חשמל
-      ומים המראים שאין צריכה בנכס
-    </p>
-    <p>
-      2. מילוי <a href="http://k-m.org.il/tofes/gvia/1.pdf" target="_blank">ההצהרה המצ"ב</a> על ידי מבקש הבקשה
-    </p>
-  </div>
+      {% endif %}
+    </div>
+  {% endfor %}
 
-  <div>
-    <div class="ui divider"></div>
-    <h3 class="ui header">
-      <i class="send outline icon"></i>
-      <div class="content">
-        למי להגיש?
-      </div>
-    </h3>
-    <p> פקס להעברת הבקשה 80-0778068</p>
-    <p>טלפון לתיאום ביקורת בנכס-8608728-08</p>
-    <p>yacov@k-m.org.il – דוא״ל לפניות</p>
-  </div>
 </div>
-
-
-
