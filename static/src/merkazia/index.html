@@ -1,45 +1,79 @@
 ---
 layout: default
-label : Mrkazia - citizen
+label : מרכזיה - למצוא את המידע, ומהר
+
 ---
 
-      <div class = "ui eight wide column">
+<div class = "ui stackable grid container">
+  <div class = "ui segment four wide column center aligned">
+    <h4 class = "header">מה מתאים לך?</h4>
 
-            <div class="ui icon input">
-                <input class="prompt" type="text" placeholder="מה תרצו לחפש...">
-                <i class="search icon"></i>
-              </div>
-            <div class="results"></div>
+    <div class = "segment unstackable row">
+      <label>
+        <span>
+          עברית
+        </span>
+        <div class="ui toggle checkbox">
+          <input name="public" type="checkbox">
+          <label></label>
+        </div>
+        <span>
+          عربيه
+        </span>
+      </label>
+    </div>
 
-              <div class = "ui medium header"> העמודים הפופולאריים </div>
-              <div class="ui selection list">
-                {% for popular_page in site.data.merkazia.citizen.popular_pages %}
-                  <div class="item">
-                    <a href = "{{ popular_page.link }}" class = "content">
-                      <i class="ui {{ popular_page.icon }} icon"></i>
-                      <span >{{ popular_page.title }}</span>
-                    </a>
-                  </div>
-                {% endfor %}
-              </div>
-          </div>
+    <div class= "ui divider"></div>
+    <div class = "ui vertical segment row">
+      <span>
+        מידע לתושב/ת
+      </span>
+      <div class="ui toggle checkbox">
+        <input name="public" type="checkbox">
+        <label></label>
+      </div>
+      <span>
+        מידע לעסק/ים
+      </span>
+    </div>
+  </div>
 
-            <div class = "ui eight wide column">
-              <h4 class = "ui header">עשו עכשיו!  </h4>
-              <div class="ui relaxed divided list">
+  <div class = "ui six wide column">
+    <div class="ui icon input">
+      <input class="prompt" type="text" placeholder="מה תרצו לחפש...">
+      <div class="results"></div>
+        <i class="search icon"></i>
+      </div>
 
-                {% for action_item in site.data.merkazia.citizen.action_items %}
-                <div class="item">
-                    <a class="header" href="{{ action_item.link }}">
-                      <i class="large {{ action_item.icon }} middle aligned icon"></i>
-                      {{action_item.title}}
-                    </a>
-                    <div class="description">{{action.item.description}}</div>
-                </div>
-                {% endfor %}
-
-              </div>
+      <div class = "ui medium header"> העמודים הפופולאריים </div>
+        <div class="ui selection list">
+          {% for popular_page in site.data.merkazia.citizen.popular_pages %}
+            <div class="item">
+              <a href = "{{ popular_page.link }}" class = "content">
+                <i class="ui {{ popular_page.icon }} icon"></i>
+                  <span >{{ popular_page.title }}</span>
+              </a>
             </div>
-        
-      <!-- local funcitnalities -->
-        <script type='text/javascript' src="merkazia-poc.js"> </script>
+          {% endfor %}
+        </div>
+      </div>
+
+  <div class = "ui six wide column center">
+    <h4 class = "ui header">עשו עכשיו!  </h4>
+      <div class="ui relaxed divided list">
+
+        {% for action_item in site.data.merkazia.citizen.action_items %}
+        <div class="item">
+          <a class="header" href="{{ action_item.link }}">
+            <i class="large {{ action_item.icon }} middle aligned icon"></i>
+              {{action_item.title}}
+          </a>
+          <div class="description">{{action.item.description}}</div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+</div>
+<!-- local funcitnalities -->
+<script type='text/javascript' src="merkazia-poc.js"> </script>
