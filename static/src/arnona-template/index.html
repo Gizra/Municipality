@@ -1,6 +1,6 @@
 ---
 layout: default
-label : arnona-template
+label : דף נושא - ארנונה
 ---
 
 <div class="sixteen wide column">
@@ -40,37 +40,39 @@ label : arnona-template
     <div class="results"></div>
   </div>
 
-  {% if site.data.arnona.citizen.popular_questions.first %}
+  {% assign topic = site.data.topics.citizens.arnona.hebrew %}
+
+    {% if topic.popular_questions %}
     <h3 class="ui purple header">שאלות נפוצות</h3>
     <div class="ui styled fluid accordion">
-      {% for popular_question in site.data.arnona.citizen.popular_questions %}
+      {% for popular_question in topic.popular_questions %}
         <div class="title">
           <i class="dropdown icon"></i> {{popular_question.question}}
         </div>
         <div class="content">
           <p class="transition hidden">{{ popular_question.answer }}</p>
         </div>
-        {% endfor %}
+      {% endfor %}
     </div>
-  {% endif %}
+    {% endif %}
 
-  {% if site.data.arnona.citizen.contacts %}
-    {% if site.data.arnona.citizen.actions %}
+    {% if topic.actions %}
       <h3 class="ui purple header">מה תרצו לעשות?</h3>
       <div class="ui menu">
-        {% for action in site.data.arnona.citizen.actions %}
+        {% for action in topic.actions %}
           <a class = "item" href="{{ action.link }}" target="_blank"> {{ action.title }}</a>
           {% endfor %}
         </div>
       {% endif %}
 
-    {% if site.data.arnona.citizen.contacts.first.name == "מוקד" %}
+    {% if topic.contacts %}
+
+    {% if topic.contacts.first.name == "מוקד" %}
       <a href="{{site.data.arnona.citizen.contacts.first.link}}"<button class="massive ui button">דווחו על בעיה או הגישו פניה למוקד</button></a>
     {% endif %}
 
-
       <h3 class="ui purple header">אנשים שיוכלו לעזור לך</h3>
-      {% for contact in site.data.arnona.citizen.contacts %}
+      {% for contact in topic.contacts %}
         {% if contact.name !="מוקד" %}
           <div class="ui items">
           <div class="item">
@@ -101,10 +103,10 @@ label : arnona-template
       {% endfor %}
   {% endif %}
 
-  {% if site.data.arnona.citizen.updates.first %}
+  {% if topic.updates.first %}
     <h3 class="ui purple header">חדשות ומאמרים בנושא ארנונה</h3>
     <div class="ui items">
-      {% for update in site.data.arnona.citizen.updates %}
+      {% for update in topic.updates %}
         <div class="item">
           <div class="image">
             <img src="{{ update.image_link }}">
@@ -125,10 +127,11 @@ label : arnona-template
   </div>
   {% endif %}
 
-  {% if site.data.arnona.citizen.announcements.first %}
+  {% if topic.announcements.first %}
     <h3 class="ui purple header">הודעות בנושא ארנונה</h3>
-    {% for announcement in site.data.arnona.citizen.announcements %}
+    {% for announcement in topic.announcements %}
       <div class="ui blue message"> {{ announcement.title }}</div>
     {% endfor %}
   {% endif %}
 </div>
+ 

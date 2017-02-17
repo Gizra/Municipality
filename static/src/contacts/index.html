@@ -74,7 +74,7 @@ label : פרטי יצירת קשר ושעות קבלה
     </div>
     <div class = "ui container center aligned">
       <div class="ui link cards">
-        {% for contact in site.data.contacts.contacts %}
+        {% for contact in site.data.contacts %}
           <div class="card">
             {% if contact.image_link %}
             <div class="image">
@@ -99,7 +99,7 @@ label : פרטי יצירת קשר ושעות קבלה
 
 
               <div class="ui small labels">
-                    {% assign services = site.data.arnona.citizen.actions | where: "relevant_contacts", contact.name %}
+                    {% assign services = site.data.topics.citizens.arnona.hebrew.actions | where: "relevant_contacts", contact.name %}
                       {% for service in services %}
                         <a class="ui {{ service.label_color }} label" href="{{ service.link }}">
                           {{ service.title }}
@@ -375,6 +375,6 @@ label : פרטי יצירת קשר ושעות קבלה
                 </a>
               </div>
             </div>
- 
           </div>
         </div>
+      </div>

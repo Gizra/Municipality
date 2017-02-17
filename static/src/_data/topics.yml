@@ -1,0 +1,288 @@
+citizens:
+    merkazia:
+      action_items:
+        hebrew:
+          - title: תשלום ארנונה
+            description: הסדירו את חובות תשלומי המסים המקומיים
+            url: "#"
+            icon: shekel
+
+          - title: הרשמה למוסדות החינוך
+            description: רישמו את ילדכם לגנים ולבתי הספר
+            url: "#"
+            icon: student
+
+          - title: מוקד הפניות
+            description: הפניית שאלה או תלונה
+            url: "#"
+            icon: question
+
+          - title: אנשי קשר ובעלי תפקידים
+            description: בירור פרטי קשר ושעות קבלת קהל
+            icon: phone
+            url: "../contacts"
+
+      popular_pages:
+        hebrew:
+          - title: על הארנונה
+            link: "../arnona-template"
+            icon: shekel
+
+          - title: פניה למוקד
+            link: "#"
+            icon: phone
+
+          - title: הרשמה למוסדות החינוך
+            link: "#"
+            icon: student
+
+    service_events:
+      - title: חופשת פסח
+        description: משרדי הרשות המקומית יהיו סגורים בחול המועד פסח
+        type:  חופשה ברשות המקומית
+        type_icon_name: flag
+        color:
+        audience:
+        image_link:
+        when:
+          time: 9.4.17
+          time_end: 18.4.17
+        location:
+        location_map_link:
+        price:
+        details_link: '#'
+
+    cultural_events:
+        - title: ירדנה ארזי והגבעטרון
+          when:
+            day:  מוצ"ש
+            date: 12.12.18
+            time: '21:00'
+          price: 120 ש"ח
+          color: green
+          type_icon_name: music
+          location_map_link: maps.google.com
+          promoted: true
+          hebrew:
+            description: השירים האהובים והמרגשים בעיבודים מחודשים בערב שכולו נוסטלגיה וחדשנות
+            location: אמפיתיאטרון
+            image_link: https://upload.wikimedia.org/wikipedia/commons/b/b3/Yardena_Arazi.jpg
+            type: תרבות ופנאי
+            details_link: "www.example.com"
+            audience: מבוגרים
+
+        - title: ריקודי עם שמעון ורד
+          when:
+            time: '19:45'
+            day: מוצ"ש
+            date: 4.2.17
+            recurring: true
+          color: purple
+          type_icon_name: music
+          price: 30 ש"ח
+          location_map_link: https://goo.gl/maps/KCDWo5Zm8J
+          hebrew:
+            type: חוגים והעשרה
+            audience: כל המשפחה
+            image_link: http://www.mhatzor.org.il/productImages2/44/2017/01/17/image1484650150.jpg
+            location: מתנ"ס
+            details_link: http://www.mhatzor.org.il/page.php?type=event&id=6997&ht=%D7%A8%D7%99%D7%A7%D7%95%D7%93%D7%99%20%D7%A2%D7%9D%20-%20%D7%A9%D7%9E%D7%A2%D7%95%D7%9F%20%D7%95%D7%A8%D7%93#navbar
+
+        - title: מי אכל את הדייסה שלי?
+          when:
+            day: יום שני
+            date: 6.2.17
+            time: '17:00'
+          color: red
+          type_icon_name: music
+          price: 45 ש"ח
+          location_map_link: https://goo.gl/maps/KCDWo5Zm8J
+          hebrew:
+            description: הצגה לגיל הרך של תיאטרון המטמון. בסוף כל הצגה מחכה לכם הפתעה
+            type: תרבות ופנאי
+            audience: ילדים
+            image_link: http://www.mhatzor.org.il/productImages2/44/2016/11/27/image1480237145.jpg
+            location: אולם ספיר
+            details_link: http://www.mhatzor.org.il/page.php?type=event&id=6329&ht=%D7%94%D7%A6%D7%92%D7%94%20%D7%9C%D7%92%D7%99%D7%9C%20%D7%94%D7%A8%D7%9A:%20%D7%9E%D7%99%20%D7%90%D7%9B%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%93%D7%99%D7%99%D7%A1%D7%94%20%D7%A9%D7%9C%D7%99#navbar
+
+        - title: מופע סטנד-אפ, החיים על-פי יעל
+          when:
+            day: יום שני
+            date: 6.2.17
+            time: '19:00'
+          color: green
+          type_icon_name: music
+          location_map_link: https://goo.gl/maps/KCDWo5Zm8J
+          price: 20 ש"ח
+          hebrew:
+            description: יעל לבנטל מביאה לבמה את הצרות של כולנו ועושה מהן מטעמים
+            type: תרבות ופנאי
+            audience: מבוגרים
+            image_link: http://www.mhatzor.org.il/productImages2/44/2017/01/30/image1485771012.jpg
+            location: אולם ספיר
+            details_link: http://www.mhatzor.org.il/page.php?type=event&id=7103&ht=%D7%9E%D7%95%D7%A4%D7%A2%20%D7%A1%D7%98%D7%A0%D7%93-%D7%90%D7%A4:%20%22%D7%94%D7%97%D7%99%D7%99%D7%9D%20%D7%A2%D7%9C-%D7%A4%D7%99%20%D7%99%D7%A2%D7%9C%22#
+
+        - title: הצגת מנוי, האורחת
+          when:
+            day: יום רביעי
+            date: 14.2.17
+            time: '20:30'
+          color: green
+          type_icon_name: music
+          location_map_link: https://goo.gl/maps/KCDWo5Zm8Jk
+          price: 100 ש"ח
+          hebrew:
+            description: דרמה קומית של תיאטרון בית לסין.
+            type: תרבות ופנאי
+            audience: מבוגרים
+            image_link: http://www.mhatzor.org.il/productImages2/44/2016/07/19/image1468915939.jpg
+            location: מתנ"ס
+            details_link: http://www.mhatzor.org.il/page.php?type=event&id=4626&ht=%D7%94%D7%A6%D7%92%D7%AA%20%D7%9E%D7%A0%D7%95%D7%99:%20%D7%94%D7%90%D7%95%D7%A8%D7%97%D7%AA#navbar
+
+    arnona:
+       hebrew:
+           popular_questions:
+            - question: מהי ארנונה?
+              answer: ארנונה היא מס המוטל עפ"י חוק על המחזיקים בנכס (מבנים למגורים ועסקים, קרקעות, וכיוצא באלה) .הארנונה מסייעת במימון הפעולות והשירותים הממלכתיים והמוניציפליים הניתנים על-ידי המועצה, לרווחת התושבים.
+
+            - question: כיצד ניתן לשלם ארנונה?
+              answer: <p> 1.תשלום מראש-המשלמים מראש בתחילת השנה ועד 31 בינואר לאותה שנת כספים יהנו מהנחה של %2.</p><p>2 .תשלום בהוראת קבע.</p><p>3 .תשלום במזומן/צ'ק מזומן.</p><p>4 .תשלום באמצעות כרטיסי אשראי בקופת העירייה וכן בטלפון 9275915-03.</p><p>        5 .תשלום בהמחאות עתידיות.<p>6 .באמצעות אתר האינטרנט של הרשות-כתובת האתר IL.ORG.M-K</p>
+
+            - question: מי זכא/ית להנחה?
+              answer: הנחות מארנונה ניתנות לפי תקנות ההסדרים במשק המדינה )הנחה בארנונה(, כפי תוקפן מעת לעת
+
+           actions:
+            - title: לשלם ארנונה
+              alternative_phrases:
+                - תשלום ארנונה
+                - לשלם מיסים
+              link: example.com
+              label_color: blue
+              relevant_contacts: [מישל טפירו, חיים שטיינר]
+
+            - title: להודיע על שינוי דייר
+              alternative_phrases:
+              label_color: green
+              relevant_contacts: [חיים שטיינר, מגי]
+              link: #
+
+            - title: להגיש בקשה להנחה או פטור מארנונה
+              alternative_phrases:
+              link: process.html
+
+            - title: לחפש צווי מסים
+              alternative_phrases:
+              link: #
+
+            - title: ליצור קשר עם מחלקת גביה
+              alternative_phrases:
+              link: contact/?query=finance
+
+           contacts:
+            - name: מוקד
+              link: moked/arnona.html
+
+            - name: ישראלה ישראלי
+              title: מנהלת מחלקת גביה
+              image_link: http://semantic-ui.com/images/avatar/large/stevie.jpg
+              phone: 08-888888
+              email: israela@example.org.il
+
+            - name: יאנה יוני
+              title: מנהלת אגף גזברות
+              image_link: http://semantic-ui.com/images/avatar/large/veronika.jpg
+              phone: 08-999999
+              email: yana@example.org.il
+
+            - name: אורי בורי
+              title: רכז פניות הציבור
+              image_link: http://semantic-ui.com/images/avatar/large/jenny.jpg
+              phone: 08-222222
+              email: uri@example.org.il
+              openning: א-ה 8:00-16:00, ג 16:00-18:00
+
+           updates:
+             - title: אושרה הנחה של 50% בארנונה לתושבים ותיקים
+               image_link: http://semantic-ui.com/images/wireframe/image.png
+               short_description:  בשורה משמחת שקיבלנו ממשרד הפנים - תושבים ותיקים זכאים להנחה בארנונה
+               full_link: here
+
+             - title: מהיום תוכלו לשלם ארנונה בקליק
+               image_link: http://semantic-ui.com/images/wireframe/image.png
+               short_description: 'שירות חדש לתושבים: תשלום ארנונה אונליין דרך האתר. לא עוד ניירת, לא צריך לצאת מהבית, פשוט וקל לשלם ארנונה.'
+
+           announcements:
+             - title: שוברים לתשלום שנתי נשלחו לכל בתי האב
+               main_page: false
+
+             - title: הנחה של 5% למשלמים בכרטיס אשראי
+               main_page: false
+
+           procceses:
+             - title: בקשה לקבלת הנחה בארנונה לנכס ריק
+               sections:
+                - section_title: מי זכאי?
+                  section_icon: users
+                  description:  על פי החלטת מועצת העירייה, המבוססת על תקנה 13 לתקנות ההסדרים במשק המדינה (הנחה מארנונה),התשנ"ג 1993 , -זכאי מחזיק בנכס להנחה מארנונה בשיעור של עד , %100 בתנאי שהנכס ריק לחלוטין מכל חפץ ואדם, ולא נעשה בו שימוש.
+
+                - section_title: מועד להגשת הבקשות
+                  section_icon: calendar
+                  description: ' הנחה כאמור תינתן לתקופה מצטברת של עד חודשים 6 בתקופת בעלות אחת. במניין התקופה המצטברת לא ניתן להגיש בקשה לנכס ריק לתקופה הפחותה משלושים יום. ההנחה תינתן ממועד הגשת הבקשה לעירייה בכפוף למילוי ההצהרה המצ"ב על ידי מבקש הבקשה.'
+
+                - section_title: פעולות נדרשות
+                  section_icon: hand pointer
+                  description_numbered_list:
+                    - עריכת ביקורת בנכס לקראת סוף התקופה על ידי העירייה. באחריות המבקש לתאם את הביקור בנכס מול פקח הגביה, לפני איכלוס הנכס וכל עוד הוא ריק מחפצים.
+                    - על המבקש להגיש חשבונות על צריכת חשמל ומים המראים שאין צריכה בנכס כתנאי לקבלת הפטור. בנוסף, שומרת לעצמה העירייה את הזכות לערוך ביקורת בנכס גם במהלך תקופת ה  הנחה. העתק מתשובת העירייה ישלח לבעל הנכס.
+                    - מילוי הצהרה על ידי מבקש הבקשה
+
+                - section_title: רשימת מסמכים להגשה
+                  section_icon: file text
+                  description_numbered_list:
+                    - מילוי <a href="http://k-m.org.il/tofes/gvia/1.pdf">ההצהרה המצ״ב</a> על ידי מבקש הבקשה
+                    - חשבונות על צריכת חשמל ומים המראים שאין צריכה בנכס
+
+                - section_title: למי להגיש?
+                  section_icon: send outline
+                  section_unumbered_list:
+                    -  פקס להעברת הבקשה 80-0778068
+                    - טלפון לתיאום ביקורת בנכס-8608728-08
+                    - 'yacov@k-m.org.il – דוא״ל לפניות'
+
+business:
+    merkazia:
+      action_items:
+        hebrew:
+        - title: תשלום ארנונה
+          description: הסדירו את חובות תשלומי המסים המקומיים
+          url: "#"
+          icon: shekel
+
+        - title: הרשמה למוסדות החינוך
+          description: רישמו את ילדכם לגנים ולבתי הספר
+          url: "#"
+          icon: student
+
+        - title: מוקד הפניות
+          description: הפניית שאלה או תלונה
+          url: "#"
+          icon: question
+
+        - title: אנשי קשר ובעלי תפקידים
+          description: בירור פרטי קשר ושעות קבלת קהל
+          icon: phone
+          url: "#"
+
+      popular_pages:
+        hebrew:
+          - title: תשלום הארנונה
+            link: "#"
+            icon: shekel
+
+          - title: פניה למוקד
+            link: "#"
+            icon: phone
+
+          - title: הרשמה למוסדות החינוך
+            link: "#"
+            icon: student
