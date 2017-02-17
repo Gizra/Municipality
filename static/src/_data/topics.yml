@@ -1,0 +1,110 @@
+citizens:
+    arnona:
+       hebrew:
+           popular_questions:
+            - question: מהי ארנונה?
+              answer: ארנונה היא מס המוטל עפ"י חוק על המחזיקים בנכס (מבנים למגורים ועסקים, קרקעות, וכיוצא באלה) .הארנונה מסייעת במימון הפעולות והשירותים הממלכתיים והמוניציפליים הניתנים על-ידי המועצה, לרווחת התושבים.
+
+            - question: כיצד ניתן לשלם ארנונה?
+              answer: <p> 1.תשלום מראש-המשלמים מראש בתחילת השנה ועד 31 בינואר לאותה שנת כספים יהנו מהנחה של %2.</p><p>2 .תשלום בהוראת קבע.</p><p>3 .תשלום במזומן/צ'ק מזומן.</p><p>4 .תשלום באמצעות כרטיסי אשראי בקופת העירייה וכן בטלפון 9275915-03.</p><p>        5 .תשלום בהמחאות עתידיות.<p>6 .באמצעות אתר האינטרנט של הרשות-כתובת האתר IL.ORG.M-K</p>
+
+            - question: מי זכא/ית להנחה?
+              answer: הנחות מארנונה ניתנות לפי תקנות ההסדרים במשק המדינה )הנחה בארנונה(, כפי תוקפן מעת לעת
+
+           actions:
+            - title: לשלם ארנונה
+              alternative_phrases:
+                - תשלום ארנונה
+                - לשלם מיסים
+              link: example.com
+              label_color: blue
+              relevant_contacts: [מישל טפירו, חיים שטיינר]
+
+            - title: להודיע על שינוי דייר
+              alternative_phrases:
+              label_color: green
+              relevant_contacts: [חיים שטיינר, מגי]
+              link: #
+
+            - title: להגיש בקשה להנחה או פטור מארנונה
+              alternative_phrases:
+              link: #
+
+            - title: לחפש צווי מסים
+              alternative_phrases:
+              link: #
+
+            - title: ליצור קשר עם מחלקת גביה
+              alternative_phrases:
+              link: contact/?query=finance
+
+           contacts:
+            - name: מוקד
+              link: moked/arnona.html
+
+            - name: ישראלה ישראלי
+              title: מנהלת מחלקת גביה
+              image_link: http://semantic-ui.com/images/avatar/large/stevie.jpg
+              phone: 08-888888
+              email: israela@example.org.il
+
+            - name: יאנה יוני
+              title: מנהלת אגף גזברות
+              image_link: http://semantic-ui.com/images/avatar/large/veronika.jpg
+              phone: 08-999999
+              email: yana@example.org.il
+
+            - name: אורי בורי
+              title: רכז פניות הציבור
+              image_link: http://semantic-ui.com/images/avatar/large/jenny.jpg
+              phone: 08-222222
+              email: uri@example.org.il
+              openning: א-ה 8:00-16:00, ג 16:00-18:00
+
+           updates:
+             - title: אושרה הנחה של 50% בארנונה לתושבים ותיקים
+               image_link: http://semantic-ui.com/images/wireframe/image.png
+               short_description:  בשורה משמחת שקיבלנו ממשרד הפנים - תושבים ותיקים זכאים להנחה בארנונה
+               full_link: here
+
+             - title: מהיום תוכלו לשלם ארנונה בקליק
+               image_link: http://semantic-ui.com/images/wireframe/image.png
+               short_description: 'שירות חדש לתושבים: תשלום ארנונה אונליין דרך האתר. לא עוד ניירת, לא צריך לצאת מהבית, פשוט וקל לשלם ארנונה.'
+
+           announcements:
+             - title: שוברים לתשלום שנתי נשלחו לכל בתי האב
+               main_page: false
+
+             - title: הנחה של 5% למשלמים בכרטיס אשראי
+               main_page: false
+
+           procceses:
+             - title: בקשה לקבלת הנחה בארנונה לנכס ריק
+               sections:
+                - section_title: מי זכאי?
+                  section_icon: users
+                  description:  על פי החלטת מועצת העירייה, המבוססת על תקנה 13 לתקנות ההסדרים במשק המדינה (הנחה מארנונה),התשנ"ג 1993 , -זכאי מחזיק בנכס להנחה מארנונה בשיעור של עד , %100 בתנאי שהנכס ריק לחלוטין מכל חפץ ואדם, ולא נעשה בו שימוש.
+
+                - section_title: מועד להגשת הבקשות
+                  section_icon: calendar
+                  description: ' הנחה כאמור תינתן לתקופה מצטברת של עד חודשים 6 בתקופת בעלות אחת. במניין התקופה המצטברת לא ניתן להגיש בקשה לנכס ריק לתקופה הפחותה משלושים יום. ההנחה תינתן ממועד הגשת הבקשה לעירייה בכפוף למילוי ההצהרה המצ"ב על ידי מבקש הבקשה.'
+
+                - section_title: פעולות נדרשות
+                  section_icon: hand pointer
+                  description_numbered_list:
+                    - עריכת ביקורת בנכס לקראת סוף התקופה על ידי העירייה. באחריות המבקש לתאם את הביקור בנכס מול פקח הגביה, לפני איכלוס הנכס וכל עוד הוא ריק מחפצים.
+                    - על המבקש להגיש חשבונות על צריכת חשמל ומים המראים שאין צריכה בנכס כתנאי לקבלת הפטור. בנוסף, שומרת לעצמה העירייה את הזכות לערוך ביקורת בנכס גם במהלך תקופת ה  הנחה. העתק מתשובת העירייה ישלח לבעל הנכס.
+                    - מילוי הצהרה על ידי מבקש הבקשה
+
+                - section_title: רשימת מסמכים להגשה
+                  section_icon: file text
+                  description_numbered_list:
+                    - מילוי <a href="http://k-m.org.il/tofes/gvia/1.pdf">ההצהרה המצ״ב</a> על ידי מבקש הבקשה
+                    - חשבונות על צריכת חשמל ומים המראים שאין צריכה בנכס
+
+                - section_title: למי להגיש?
+                  section_icon: send_outline
+                  section_unumbered_list:
+                    -  פקס להעברת הבקשה 80-0778068
+                    - טלפון לתיאום ביקורת בנכס-8608728-08
+                    - 'yacov@k-m.org.il – דוא״ל לפניות'
