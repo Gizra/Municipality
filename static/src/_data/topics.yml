@@ -50,94 +50,110 @@ citizens:
         location:
         location_map_link:
         price:
-        details_link: '#'
+        details_link: #
+
+      - title: חופשת פסח
+        description: משרדי הרשות המקומית יהיו סגורים בחול המועד פסח
+        type:  חופשה ברשות המקומית
+        type_icon_name: flag
+        color:
+        audience:
+        image_link:
+        when:
+          time: 9.4.17
+          time_end: 18.4.17
+        location:
+        location_map_link:
+        price:
+        details_link: #
+
 
     cultural_events:
-        - title: ירדנה ארזי והגבעטרון
-          when:
-            day:  מוצ"ש
-            date: 12.12.18
-            time: '21:00'
-          price: 120 ש"ח
-          color: green
-          type_icon_name: music
-          location_map_link: maps.google.com
-          promoted: true
-          hebrew:
-            description: השירים האהובים והמרגשים בעיבודים מחודשים בערב שכולו נוסטלגיה וחדשנות
-            location: אמפיתיאטרון
-            image_link: https://upload.wikimedia.org/wikipedia/commons/b/b3/Yardena_Arazi.jpg
-            type: תרבות ופנאי
-            details_link: "www.example.com"
-            audience: מבוגרים
+      - title: ירדנה ארזי והגבעטרון
+        when:
+          day:  מוצ"ש
+          date: 12.12.18
+          time: '21:00'
+        price: 120 ש"ח
+        color: green
+        type_icon_name: music
+        location_map_link: maps.google.com
+        promoted: true
+        hebrew:
+          description: השירים האהובים והמרגשים בעיבודים מחודשים בערב שכולו נוסטלגיה וחדשנות
+          location: אמפיתיאטרון
+          image_link: https://upload.wikimedia.org/wikipedia/commons/b/b3/Yardena_Arazi.jpg
+          type: תרבות ופנאי
+          details_link: "www.example.com"
+          audience: מבוגרים
 
-        - title: ריקודי עם שמעון ורד
-          when:
-            time: '19:45'
-            day: מוצ"ש
-            date: 4.2.17
-            recurring: true
-          color: purple
-          type_icon_name: music
-          price: 30 ש"ח
-          location_map_link: https://goo.gl/maps/KCDWo5Zm8J
-          hebrew:
+      - title: ריקודי עם שמעון ורד
+        when:
+          time: '19:45'
+          day: מוצ"ש
+          date: 4.2.17
+          recurring: true
+        color: purple
+        type_icon_name: music
+        price: 30 ש"ח
+        location_map_link: https://goo.gl/maps/KCDWo5Zm8J
+        hebrew:
             type: חוגים והעשרה
             audience: כל המשפחה
             image_link: http://www.mhatzor.org.il/productImages2/44/2017/01/17/image1484650150.jpg
             location: מתנ"ס
             details_link: http://www.mhatzor.org.il/page.php?type=event&id=6997&ht=%D7%A8%D7%99%D7%A7%D7%95%D7%93%D7%99%20%D7%A2%D7%9D%20-%20%D7%A9%D7%9E%D7%A2%D7%95%D7%9F%20%D7%95%D7%A8%D7%93#navbar
 
-        - title: מי אכל את הדייסה שלי?
-          when:
-            day: יום שני
-            date: 6.2.17
-            time: '17:00'
-          color: red
-          type_icon_name: music
-          price: 45 ש"ח
-          location_map_link: https://goo.gl/maps/KCDWo5Zm8J
-          hebrew:
-            description: הצגה לגיל הרך של תיאטרון המטמון. בסוף כל הצגה מחכה לכם הפתעה
-            type: תרבות ופנאי
-            audience: ילדים
-            image_link: http://www.mhatzor.org.il/productImages2/44/2016/11/27/image1480237145.jpg
-            location: אולם ספיר
-            details_link: http://www.mhatzor.org.il/page.php?type=event&id=6329&ht=%D7%94%D7%A6%D7%92%D7%94%20%D7%9C%D7%92%D7%99%D7%9C%20%D7%94%D7%A8%D7%9A:%20%D7%9E%D7%99%20%D7%90%D7%9B%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%93%D7%99%D7%99%D7%A1%D7%94%20%D7%A9%D7%9C%D7%99#navbar
+      - title: מי אכל את הדייסה שלי?
+        when:
+          day: יום שני
+          date: 6.2.17
+          time: '17:00'
+        color: red
+        type_icon_name: music
+        price: 45 ש"ח
+        location_map_link: https://goo.gl/maps/KCDWo5Zm8J
+        hebrew:
+          description: הצגה לגיל הרך של תיאטרון המטמון. בסוף כל הצגה מחכה לכם הפתעה
+          type: תרבות ופנאי
+          audience: ילדים
+          image_link: http://www.mhatzor.org.il/productImages2/44/2016/11/27/image1480237145.jpg
+          location: אולם ספיר
+          details_link: http://www.mhatzor.org.il/page.php?type=event&id=6329&ht=%D7%94%D7%A6%D7%92%D7%94%20%D7%9C%D7%92%D7%99%D7%9C%20%D7%94%D7%A8%D7%9A:%20%D7%9E%D7%99%20%D7%90%D7%9B%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%93%D7%99%D7%99%D7%A1%D7%94%20%D7%A9%D7%9C%D7%99#navbar
 
-        - title: מופע סטנד-אפ, החיים על-פי יעל
-          when:
-            day: יום שני
-            date: 6.2.17
-            time: '19:00'
-          color: green
-          type_icon_name: music
-          location_map_link: https://goo.gl/maps/KCDWo5Zm8J
-          price: 20 ש"ח
-          hebrew:
-            description: יעל לבנטל מביאה לבמה את הצרות של כולנו ועושה מהן מטעמים
-            type: תרבות ופנאי
-            audience: מבוגרים
-            image_link: http://www.mhatzor.org.il/productImages2/44/2017/01/30/image1485771012.jpg
-            location: אולם ספיר
-            details_link: http://www.mhatzor.org.il/page.php?type=event&id=7103&ht=%D7%9E%D7%95%D7%A4%D7%A2%20%D7%A1%D7%98%D7%A0%D7%93-%D7%90%D7%A4:%20%22%D7%94%D7%97%D7%99%D7%99%D7%9D%20%D7%A2%D7%9C-%D7%A4%D7%99%20%D7%99%D7%A2%D7%9C%22#
+      - title: מופע סטנד-אפ, החיים על-פי יעל
+        when:
+          day: יום שני
+          date: 6.2.17
+          time: '19:00'
+        color: green
+        type_icon_name: music
+        location_map_link: https://goo.gl/maps/KCDWo5Zm8J
+        price: 20 ש"ח
+        hebrew:
+          description: יעל לבנטל מביאה לבמה את הצרות של כולנו ועושה מהן מטעמים
+          type: תרבות ופנאי
+          audience: מבוגרים
+          image_link: http://www.mhatzor.org.il/productImages2/44/2017/01/30/image1485771012.jpg
+          location: אולם ספיר
+          details_link: http://www.mhatzor.org.il/page.php?type=event&id=7103&ht=%D7%9E%D7%95%D7%A4%D7%A2%20%D7%A1%D7%98%D7%A0%D7%93-%D7%90%D7%A4:%20%22%D7%94%D7%97%D7%99%D7%99%D7%9D%20%D7%A2%D7%9C-%D7%A4%D7%99%20%D7%99%D7%A2%D7%9C%22#
 
-        - title: הצגת מנוי, האורחת
-          when:
-            day: יום רביעי
-            date: 14.2.17
-            time: '20:30'
-          color: green
-          type_icon_name: music
-          location_map_link: https://goo.gl/maps/KCDWo5Zm8Jk
-          price: 100 ש"ח
-          hebrew:
-            description: דרמה קומית של תיאטרון בית לסין.
-            type: תרבות ופנאי
-            audience: מבוגרים
-            image_link: http://www.mhatzor.org.il/productImages2/44/2016/07/19/image1468915939.jpg
-            location: מתנ"ס
-            details_link: http://www.mhatzor.org.il/page.php?type=event&id=4626&ht=%D7%94%D7%A6%D7%92%D7%AA%20%D7%9E%D7%A0%D7%95%D7%99:%20%D7%94%D7%90%D7%95%D7%A8%D7%97%D7%AA#navbar
+      - title: הצגת מנוי, האורחת
+        when:
+          day: יום רביעי
+          date: 14.2.17
+          time: '20:30'
+        color: green
+        type_icon_name: music
+        location_map_link: https://goo.gl/maps/KCDWo5Zm8Jk
+        price: 100 ש"ח
+        hebrew:
+          description: דרמה קומית של תיאטרון בית לסין.
+          type: תרבות ופנאי
+          audience: מבוגרים
+          image_link: http://www.mhatzor.org.il/productImages2/44/2016/07/19/image1468915939.jpg
+          location: מתנ"ס
+          details_link: http://www.mhatzor.org.il/page.php?type=event&id=4626&ht=%D7%94%D7%A6%D7%92%D7%AA%20%D7%9E%D7%A0%D7%95%D7%99:%20%D7%94%D7%90%D7%95%D7%A8%D7%97%D7%AA#navbar
 
     arnona:
        hebrew:
@@ -253,41 +269,84 @@ citizens:
                 -  בקשה לקבלת הנחה בארנונה לנכס ריק
 business:
     merkazia:
-      action_items:
-        hebrew:
-        - title: תשלום ארנונה
-          description: הסדירו את חובות תשלומי המסים המקומיים
-          url: "#"
-          icon: shekel
+        action_items:
+          hebrew:
+            - title: תשלום ארנונה
+              description: הסדירו את חובות תשלומי המסים המקומיים
+              url: "#"
+              icon: shekel
 
-        - title: הרשמה למוסדות החינוך
-          description: רישמו את ילדכם לגנים ולבתי הספר
-          url: "#"
-          icon: student
+            - title: הרשמה למוסדות החינוך
+              description: רישמו את ילדכם לגנים ולבתי הספר
+              url: "#"
+              icon: student
 
-        - title: מוקד הפניות
-          description: הפניית שאלה או תלונה
-          url: "#"
-          icon: question
+            - title: מוקד הפניות
+              description: הפניית שאלה או תלונה
+              url: "#"
+              icon: question
 
-        - title: אנשי קשר ובעלי תפקידים
-          description: בירור פרטי קשר ושעות קבלת קהל
-          icon: phone
-          url: "#"
+            - title: אנשי קשר ובעלי תפקידים
+              description: בירור פרטי קשר ושעות קבלת קהל
+              icon: phone
+              url: "#"
 
-      popular_pages:
-        hebrew:
-          - title: תשלום הארנונה
-            link: "#"
-            icon: shekel
+        popular_pages:
+          hebrew:
+            - title: תשלום הארנונה
+              link: "#"
+              icon: shekel
 
-          - title: פניה למוקד
-            link: "#"
-            icon: phone
+            - title: פניה למוקד
+              link: "#"
+              icon: phone
 
-          - title: הרשמה למוסדות החינוך
-            link: "#"
-            icon: student
+            - title: הרשמה למוסדות החינוך
+              link: "#"
+              icon: student
+
+    tenders:
+        - title: שיפוץ חזיתות בניין העירייה ומבנה מרכזי בתיכון אמית
+          deadline:
+            time: '15:00'
+            date: 2.2.17
+          hebrew:
+            link: http://k-m.org.il/michraz/2017/%D7%A9%D7%99%D7%A4%D7%95%D7%A5%20%D7%97%D7%96%D7%99%D7%AA%D7%95%D7%AA%20%D7%91%D7%A0%D7%99%D7%99%D7%9F%20%D7%94%D7%A2%D7%99%D7%A8%D7%99%D7%99%D7%94%20%D7%95%D7%9E%D7%91%D7%A0%D7%94%20%D7%9E%D7%A8%D7%9B%D7%96%D7%99%20%D7%91%D7%AA%D7%99%D7%9B%D7%95%D7%9F%20%D7%90%D7%9E%D7%99%D7%AA%202-2017.pdf
+            basic_requirements:
+              - סיווג קבלנים - בנייה ג-1
+              - סיור קבלנים חובה ב 19/01/2017 בשעה 11:00 במשרדי העירייה
+            required_amount: 2500 ש״ח
+            contacts: [אושרית]
+            department: הנדסה
+            location: במשרדי הסגנים, קומה ב' בבניין העירייה
+
+        - title: שיפוץ חצרות גני ילדים
+          deadline:
+              time: '15:00'
+              date: 2.2.17
+          hebrew:
+            basic_requirements:
+              - סיווג קבלנים:פיתוח 200 ג-1
+              - סיור קבלנים חובה ביום 19/01/2017 בשעה 12:00 במשרדי העירייה מרכז מסחרי
+            required_amount: 1500 ש״ח
+            contacts: [אושרית]
+            department: הנדסה
+            location: במשרדי הסגנים, קומה ב' בבניין העירייה
+            link: http://k-m.org.il/michraz/2017/%D7%A9%D7%99%D7%A4%D7%95%D7%A5%20%D7%97%D7%A6%D7%A8%D7%95%D7%AA%20%D7%92%D7%A0%D7%99%20%D7%99%D7%9C%D7%93%D7%99%D7%9D%2023-2016.pdf
+
+        - title: פרסום חוצות
+          deadline:
+            time: '15:00'
+            date: 15.12.16
+            extension: true
+          hebrew:
+            link: http://k-m.org.il/michraz/%D7%9E%D7%9B%D7%A8%D7%96%2016-2016%20%D7%94%D7%90%D7%A8%D7%9B%D7%AA%20%D7%9E%D7%95%D7%A2%D7%93.pdf
+            basic_requirements:
+              - 'כנס המציעים ייערך ביום 3.11.2016 בשעה 12:00 במשרדי העירייה'
+            required_amount: 1500 ש״ח
+            contacts: [פזית דניאלי]
+            department:
+            location: במשרדי הסגנים, קומה ב' בבניין העירייה
 
 
 forms:
@@ -306,7 +365,7 @@ forms:
       - בקשת חופש מידע
 
 reports:
-  - title: דו״ח מבקר העיריה והממונה על תלונות הציבור, מס׳ 1
+  - title: דו״ח מבקר העיריה והממונה על תלונות הציבור, מס 1
     date: 2010
     link: http://k-m.org.il/machlakot/mevaker/tlunot2010.pdf
     department: מבקר העירייה
@@ -314,7 +373,7 @@ reports:
     alternative_phrases:
       - ביקורת פנים
 
-  - title: דו״ח מבקר העיריה והממונה על תלונות הציבור, מס׳ 2
+  - title: דו״ח מבקר העיריה והממונה על תלונות הציבור, מס 2
     date: 2011
     link: http://k-m.org.il/machlakot/mevaker/tlunot2011.pdf
     department: מבקר העירייה
@@ -322,50 +381,10 @@ reports:
     alternative_phrases:
       - ביקורת פנים
 
-  - title: דו״ח מבקר העיריה והממונה על תלונות הציבור, מס׳ 3
+  - title: דו״ח מבקר העיריה והממונה על תלונות הציבור, מס 3
     date: 2012
     link: http://k-m.org.il/machlakot/mevaker/tlunot2012.pdf
     department: מבקר העירייה
     contacts: [איתי קורן]
     alternative_phrases:
       - ביקורת פנים
-
-tenders:
-  - title: שיפוץ חזיתות בניין העירייה ומבנה מרכזי בתיכון אמית
-    link: http://k-m.org.il/michraz/2017/%D7%A9%D7%99%D7%A4%D7%95%D7%A5%20%D7%97%D7%96%D7%99%D7%AA%D7%95%D7%AA%20%D7%91%D7%A0%D7%99%D7%99%D7%9F%20%D7%94%D7%A2%D7%99%D7%A8%D7%99%D7%99%D7%94%20%D7%95%D7%9E%D7%91%D7%A0%D7%94%20%D7%9E%D7%A8%D7%9B%D7%96%D7%99%20%D7%91%D7%AA%D7%99%D7%9B%D7%95%D7%9F%20%D7%90%D7%9E%D7%99%D7%AA%202-2017.pdf
-    basic_requirements:
-      - סיווג קבלנים - בנייה ג-1
-      - סיור קבלנים חובה ב 19/01/2017 בשעה 11:00 במשרדי העירייה
-    required_amount: 2500 ש״ח
-    contacts: [אושרית]
-    department: הנדסה
-    location: במשרדי הסגנים, קומה ב' בבניין העירייה
-    deadline:
-      time: '15:00'
-      date: 2.2.17
-
-  - title: שיפוץ חצרות גני ילדים
-    link: http://k-m.org.il/michraz/2017/%D7%A9%D7%99%D7%A4%D7%95%D7%A5%20%D7%97%D7%A6%D7%A8%D7%95%D7%AA%20%D7%92%D7%A0%D7%99%20%D7%99%D7%9C%D7%93%D7%99%D7%9D%2023-2016.pdf
-    basic_requirements:
-      - סיווג קבלנים:פיתוח 200 ג-1
-      - סיור קבלנים חובה ביום 19/01/2017 בשעה 12:00 במשרדי העירייה מרכז מסחרי
-    required_amount: 1500 ש״ח
-    contacts: [אושרית]
-    department: הנדסה
-    location: במשרדי הסגנים, קומה ב' בבניין העירייה
-    deadline:
-      time: '15:00'
-      date: 2.2.17
-
-  - title: פרסום חוצות
-    link: http://k-m.org.il/michraz/%D7%9E%D7%9B%D7%A8%D7%96%2016-2016%20%D7%94%D7%90%D7%A8%D7%9B%D7%AA%20%D7%9E%D7%95%D7%A2%D7%93.pdf
-    basic_requirements:
-      - ׳      כנס המציעים ייערך ביום 3.11.2016 בשעה 12:00 במשרדי העירייה׳
-    required_amount: 1500 ש״ח
-    contacts: [פזית דניאלי]
-    department:
-    location: במשרדי הסגנים, קומה ב' בבניין העירייה
-    deadline:
-      time: '15:00'
-      date: 15.12.16
-      extension: true

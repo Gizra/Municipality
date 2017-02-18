@@ -1,6 +1,6 @@
 ---
 layout: default
-label : Protocols_and_Reports
+label : המגירה - טפסים, דו״חות, פרוטוקלים וחוקים
 ---
   <div class = "ui stackable grid container">
     <div class = "four wide column">
@@ -93,51 +93,6 @@ label : Protocols_and_Reports
         {% endif %}
         </div>
       </div>
-
-  {% assign all_tenders = (site.data.topics.tenders | sort: 'deadline.date') | reverse %}
-  {% if all_tenders.first %}
-  <div class = "item">
-    <i class ="folder open icon"></i>
-    <div class ="content">
-      <div class="header">
-        מכרזים
-      </div>
-      <div class = "list">
-        {% for tender in all_tenders %}
-        <div class = "item">
-            <i class = "file icon"></i>
-            <div class = "content">
-              <div class="header">
-                <a href="{{ report.link }}" target="_blank">
-                  {{ tender.title}}
-                </a>
-              </div>
-              {% if tender.department %}
-              <div class = "desciprtion">
-                מחלקה: {{ tender.department }},
-                אנשי קשר:
-                {% for contact in tender.contacts %}
-                  <span>
-                    {{ contact }}
-                  </span>
-                {% endfor %}.
-                  להגשה עד {{ tender.deadline.date }}, {{ tender.deadline.time }}
-            </div>
-              {% endif %}
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-      {% else %}
-      <div class = "item">
-        <i class ="folder icon"></i>
-        <div class ="content">
-          מכרזים
-        </div>
-      </div>
-      {% endif %}
-      </div>
-    </div>
 
 
       {% assign all_reports = site.data.topics.reports | sort: 'date' %}
