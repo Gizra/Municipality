@@ -2,232 +2,185 @@
 layout: default
 label : Protocols_and_Reports
 ---
-
-<html>
-  <head>
-    <!-- Latest compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.rtl.css"
-      integrity="sha384-h/tGiTStmgbDQyTAdp2s5BfyXn7wmnFsn3vDaCPYck9YKkOuLAdjHi6y154TBVJ4"
-      crossorigin="anonymous" />
-      <!-- Jquery -->
-      <script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script
-      src="https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.min.js"
-      integrity="sha384-kZT+CItOKWHYL+Rz37W2NEz60Pu2JJJ8wgzq+82VWsi3QM53eNFzQJZqzhPuyo63"
-      crossorigin="anonymous"></script>
-
-      <!-- Include Required Prerequisites -->
-      <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
-
-      <!-- Include Date Range Picker -->
-      <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-
-    </head>
-
-  <body lang="heb" dir="rtl">
-    <div class= "ui padded grid container">
-
-      <div class = "three column row">
-        <div class = "column">
-          <h4 class="ui horizontal divider header">נושאים, מונחים או שמות</h4>
-
-          <div class="ui category search">
-            <div class="ui icon input">
+  <div class = "ui stackable grid container">
+    <div class = "four wide column">
+      <h4 class="ui horizontal divider header">נושאים, מונחים או שמות</h4>
+      <div class="ui category search">
+          <div class="ui icon input">
               <input class="prompt" placeholder="חיפוש נושא, שם, מחלקה או תאריך" type="text">
               <i class="search icon"></i>
-            </div>
-            <div class="results"></div>
           </div>
-          <h4 class="ui horizontal divider header"> מקורות המידע</h4>
-
-
-            <select name="doc_types" multiple="" class="ui dropdown">
-              <option value="">מקורות המידע</option>
-              <option value="all">הכל</option>
-              <option value="protocols">פרוטוקולים</option>
-              <option value="protocols">מכרזים</option>
-              <option value="regulations">חוקי עזר</option>
-              <option value="local_regulations">תקנות עירוניות</option>
-              <option value="reports">דו״חות הרשות המקומית</option>
-              <option value="constructions_pres">פרסומי בניה</option>
-            </select>
-            <h4 class="ui horizontal divider header"> תאריכי פרסום </h4>
-            <div class="ui calendar">
-              <div class="ui input left icon">
-                <i class="calendar icon"></i>
-                <input type="text" placeholder="תאריכים" name="date1" id="date1">
-              </div>
+          <div class="results"></div>
             </div>
-            <br>
+        <h4 class="ui horizontal divider header"> מקורות המידע</h4>
 
-            <div class = "ui horizontal divider">קבלת התראות</div>
-            <div class = "ui input">
-              <input placeholder="דואר אלקטרוני" type="email">
-              <button class = "ui active button">
-                <i class = "alarm outline icon"></i>
+        <select name="doc_types" multiple="" class="ui dropdown">
+          <option value="">מקורות המידע</option>
+          <option value="all">הכל</option>
+          <option value="all">טפסים</option>
+          <option value="reports">דו״חות הרשות המקומית</option>
+          <option value="protocols">פרוטוקולים</option>
+          <option value="protocols">מכרזים</option>
+          <option value="regulations">חוקי עזר</option>
+          <option value="local_regulations">תקנות עירוניות</option>
+          <option value="constructions_pres">פרסומי בניה</option>
+        </select>
+
+        <h4 class="ui horizontal divider header"> תאריכי פרסום </h4>
+        <div class="ui calendar">
+          <div class="ui input left icon">
+            <i class="calendar icon"></i>
+            <input type="text" placeholder="תאריכים" name="date1" id="date1">
+          </div>
+        </div>
+        <br>
+
+        <div class = "ui horizontal divider">קבלת התראות</div>
+          <div class = "ui input">
+            <input placeholder="דואר אלקטרוני" type="email">
+            <button class = "ui active button">
+              <i class = "alarm outline icon"></i>
                 עדכנו אותי
-              </button>
+            </button>
           </div>
-          </div>
+        </div>
 
-      <div class="column">
+      <div class="twelve wide column">
         <div class = "ui list">
+        {% assign all_forms = site.data.topics.forms | sort: 'title' %}
+        {% if all_forms.first %}
+          <div class = "item">
+            <i class ="folder open icon"></i>
+            <div class ="content">
+              <div class="header">
+              טפסים
+              </div>
+            <div class = "list">
+              {% for form in all_forms %}
+              <div class = "item">
+                  <i class = "file icon"></i>
+                  <div class = "content">
+                  <div class="header">
+                      <a href="{{ form.link }}" target="_blank">
+                        {{ form.title}}
+                      </a>
+                  </div>
+
+                  {% if form.department %}
+                    <div class = "department">
+                      מחלקה: {{ form.department }}.
+                      {% if form.contacts %}
+                      אנשי קשר:
+                        {% for contact in form.contacts %}
+                          <span>
+                            {{ contact }}
+                          </span>
+                        {% endfor %}
+                      </div>
+                      {% endif %}
+                  {% endif %}
+                  </div>
+                </div>
+            {% endfor %}
+          </div>
+        {% else %}
         <div class = "item">
           <i class ="folder icon"></i>
           <div class ="content">
-            <div class = "header">מכרזים</div>
-            <div class = "description">פרסומי מכרזים של הרשות המקומית</div>
+            טפסים
           </div>
         </div>
-        <div class="item">
-          <i class="folder open icon"></i>
-          <div class="content">
-            <div class="header">פרוטוקולים</div>
-              <div class="description">תמלולי והקלטות ישיבות</div>
-                <div class="list">
-                  <div class="item">
-                    <i class="folder open icon"></i>
-                    <div class="content">
-                      <div class="header">ישיבות מליאת מועצת העיר</div>
-                        <div class="description">תמלולי הישיבות והקלטותיהן</div>
-                        <div class="item">
-                          <div class="content">
-                            <div class="header">1.1.16</div>
-                            <a class="description">
-                              <i class="file icon"></i>
-                              פרוטוקול הישיבה
-                            </a>
-                            <a class="description">
-                              <i class="sound icon"></i>
-                              הקלטת הישיבה
-                            </a>
-                          </div>
-                        </div>
-                        <div class="item">
-                          <div class="content">
-                            <div class="header">7.1.16</div>
-                            <a class="description">
-                              <i class="file icon"></i>
-                              פרוטוקול הישיבה
-                            </a>
-                            <a class="description">
-                              <i class="sound icon"></i>
-                              הקלטת הישיבה
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+        {% endif %}
+        </div>
+      </div>
 
-                    <div class="item">
-                      <i class="folder open icon"></i>
-                      <div class="content">
-                        <div class="header">הועדה העירונית לתכנון ובניה</div>
-                        <div class="description">תמלולי הישיבות</div>
-                        <div class="list">
-                          <div class="item">
-                            <div class="content">
-                              <div class="header">1.1.16</div>
-                              <a class="description">
-                                <i class="file icon"></i>
-                                פרוטוקול הישיבה
-                              </a>
-                              <a class="description">
-                                <i class="sound icon"></i>
-                                הקלטת הישיבה
-                              </a>
-                            </div>
-                          </div>
-                          <div class="item">
-                            <div class="content">
-                              <div class="header">7.1.16</div>
-                              <a class="description">
-                                <i class="file icon"></i>
-                                פרוטוקול הישיבה
-                              </a>
-                              <a class="description">
-                                <i class="sound icon"></i>
-                                הקלטת הישיבה
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class = "ui divider"></div>
-              <div class="item">
-                <i class="folder icon"></i>
-                <div class="content">
-                  <div class="header">דו״חות ופרסומים</div>
-                  <div class="description">פרסומי דו״חות הרשות המקומית</div>
-                </div>
-              </div>
-              <div class = "ui divider"></div>
-              <div class="item">
-                <i class="folder open icon"></i>
-                <div class="content">
-                  <div class="header">חוקי עזר ותקנות עירוניות</div>
-                  <div class="description">נוסחי חוקי העזר והתקנות המקומיות</div>
-                  <div class="list">
-                    <div class="item">
-                      <i class="folder icon"></i>
-                      <div class="content">
-                        <div class="header">מסחר ותעשיה</div>
-                        <div class="description">חוקי העזר בנושאי מסחר ותעשיה</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class = "ui divider"></div>
-              <div class="item">
-                <i class="folder icon"></i>
-                <div class="content">
-                  <div class="header">פרסומי בניה</div>
-                  <div class="description">פרסומים על אישורים וקולות קוראים לציבור</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-      <div class = "ui divided items column">
+  {% assign all_tenders = (site.data.topics.tenders | sort: 'deadline.date') | reverse %}
+  {% if all_tenders.first %}
+  <div class = "item">
+    <i class ="folder open icon"></i>
+    <div class ="content">
+      <div class="header">
+        מכרזים
+      </div>
+      <div class = "list">
+        {% for tender in all_tenders %}
         <div class = "item">
-          <div class = "content">
-            <a class = "header">מתוך פרוטוקול ישיבת המליאה 1.1.16</a>
-            <div class = "description">
-              <p>חיים: וברור שאין שום צדק בלהמשיך להאכיל את הינשופים שסובבים כאן כאילו היו חלק מאיתנו. עלינו להפסיק את התופעה מיד. התושבים סומכים עלינו</p>
-              <p>מנדלוביץ: איפה היית כשהתקיימה הישיבה על התקציב? איזה אומץ יש לך לבוא עכשיו ולדרוש לטפל בתופעה כשכל הכסף כבר הושקע בדוביהנמלים?</p>
+            <i class = "file icon"></i>
+            <div class = "content">
+              <div class="header">
+                <a href="{{ report.link }}" target="_blank">
+                  {{ tender.title}}
+                </a>
+              </div>
+              {% if tender.department %}
+              <div class = "desciprtion">
+                מחלקה: {{ tender.department }},
+                אנשי קשר:
+                {% for contact in tender.contacts %}
+                  <span>
+                    {{ contact }}
+                  </span>
+                {% endfor %}.
+                  להגשה עד {{ tender.deadline.date }}, {{ tender.deadline.time }}
             </div>
+              {% endif %}
           </div>
         </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class = "item">
+        <i class ="folder icon"></i>
+        <div class ="content">
+          מכרזים
+        </div>
+      </div>
+      {% endif %}
+      </div>
+    </div>
 
+
+      {% assign all_reports = site.data.topics.reports | sort: 'date' %}
+      {% if all_reports.first %}
         <div class = "item">
-          <div class = "content">
-            <a class = "header">מתוך פרוטוקול ישיבת המליאה 1.1.16</a>
-            <div class = "description">
-              <p>חיים: וברור שאין שום צדק בלהמשיך להאכיל את הינשופים שסובבים כאן כאילו היו חלק מאיתנו. עלינו להפסיק את התופעה מיד. התושבים סומכים עלינו</p>
-              <p>מנדלוביץ: איפה היית כשהתקיימה הישיבה על התקציב? איזה אומץ יש לך לבוא עכשיו ולדרוש לטפל בתופעה כשכל הכסף כבר הושקע בדוביהנמלים?</p>
+          <i class ="folder open icon"></i>
+          <div class ="content">
+            <div class="header">
+            דו״חות
             </div>
+          <div class = "list">
+            {% for report in all_reports %}
+            <div class = "item">
+                <i class = "file icon"></i>
+                <div class = "content">
+                <div class="header">
+                    <a href="{{ report.link }}" target="_blank">
+                      {{ report.title}} ({{ report.date }}).
+                    </a>
+                </div>
+                {% if report.department %}
+                  <div class = "department">
+                      מחלקה: {{ report.department }},
+                      אנשי קשר:
+                        {% for contact in report.contacts %}
+                        <span>
+                          {{ contact }}
+                        </span>
+                        {% endfor %}
+                  </div>
+                {% endif %}              </div>
           </div>
+          {% endfor %}
         </div>
-
+      {% else %}
+      <div class = "item">
+        <i class ="folder icon"></i>
+        <div class ="content">
+          דו״חות
+        </div>
+      </div>
+      {% endif %}
       </div>
     </div>
   </div>
-
-  </body>
-  </html>
+</div>

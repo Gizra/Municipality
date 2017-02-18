@@ -249,6 +249,8 @@ citizens:
                     - טלפון לתיאום ביקורת בנכס-8608728-08
                     - 'yacov@k-m.org.il – דוא״ל לפניות'
 
+               forms:
+                -  בקשה לקבלת הנחה בארנונה לנכס ריק
 business:
     merkazia:
       action_items:
@@ -286,3 +288,84 @@ business:
           - title: הרשמה למוסדות החינוך
             link: "#"
             icon: student
+
+
+forms:
+  - title: בקשה לקבלת הנחה בארנונה לנכס ריק
+    link: http://k-m.org.il/tofes/gvia/1.pdf
+    department: גבייה
+    contacts: [יעקב בן דוד]
+    alternative_phrases:
+
+
+  - title: בקשת מידע בתשלום
+    link: http://k-m.org.il/machlakot/lishka/meda.pdf
+    department: דובר העירייה
+    contacts: [יוסי פרץ]
+    alternative_phrases:
+      - בקשת חופש מידע
+
+reports:
+  - title: דו״ח מבקר העיריה והממונה על תלונות הציבור, מס׳ 1
+    date: 2010
+    link: http://k-m.org.il/machlakot/mevaker/tlunot2010.pdf
+    department: מבקר העירייה
+    contacts: [איתי קורן]
+    alternative_phrases:
+      - ביקורת פנים
+
+  - title: דו״ח מבקר העיריה והממונה על תלונות הציבור, מס׳ 2
+    date: 2011
+    link: http://k-m.org.il/machlakot/mevaker/tlunot2011.pdf
+    department: מבקר העירייה
+    contacts: [איתי קורן]
+    alternative_phrases:
+      - ביקורת פנים
+
+  - title: דו״ח מבקר העיריה והממונה על תלונות הציבור, מס׳ 3
+    date: 2012
+    link: http://k-m.org.il/machlakot/mevaker/tlunot2012.pdf
+    department: מבקר העירייה
+    contacts: [איתי קורן]
+    alternative_phrases:
+      - ביקורת פנים
+
+tenders:
+  - title: שיפוץ חזיתות בניין העירייה ומבנה מרכזי בתיכון אמית
+    link: http://k-m.org.il/michraz/2017/%D7%A9%D7%99%D7%A4%D7%95%D7%A5%20%D7%97%D7%96%D7%99%D7%AA%D7%95%D7%AA%20%D7%91%D7%A0%D7%99%D7%99%D7%9F%20%D7%94%D7%A2%D7%99%D7%A8%D7%99%D7%99%D7%94%20%D7%95%D7%9E%D7%91%D7%A0%D7%94%20%D7%9E%D7%A8%D7%9B%D7%96%D7%99%20%D7%91%D7%AA%D7%99%D7%9B%D7%95%D7%9F%20%D7%90%D7%9E%D7%99%D7%AA%202-2017.pdf
+    basic_requirements:
+      - סיווג קבלנים - בנייה ג-1
+      - סיור קבלנים חובה ב 19/01/2017 בשעה 11:00 במשרדי העירייה
+    required_amount: 2500 ש״ח
+    contacts: [אושרית]
+    department: הנדסה
+    location: במשרדי הסגנים, קומה ב' בבניין העירייה
+    deadline:
+      time: '15:00'
+      date: 2.2.17
+
+  - title: שיפוץ חצרות גני ילדים
+    link: http://k-m.org.il/michraz/2017/%D7%A9%D7%99%D7%A4%D7%95%D7%A5%20%D7%97%D7%A6%D7%A8%D7%95%D7%AA%20%D7%92%D7%A0%D7%99%20%D7%99%D7%9C%D7%93%D7%99%D7%9D%2023-2016.pdf
+    basic_requirements:
+      - סיווג קבלנים:פיתוח 200 ג-1
+      - סיור קבלנים חובה ביום 19/01/2017 בשעה 12:00 במשרדי העירייה מרכז מסחרי
+    required_amount: 1500 ש״ח
+    contacts: [אושרית]
+    department: הנדסה
+    location: במשרדי הסגנים, קומה ב' בבניין העירייה
+    deadline:
+      time: '15:00'
+      date: 2.2.17
+
+  - title: פרסום חוצות
+    link: http://k-m.org.il/michraz/%D7%9E%D7%9B%D7%A8%D7%96%2016-2016%20%D7%94%D7%90%D7%A8%D7%9B%D7%AA%20%D7%9E%D7%95%D7%A2%D7%93.pdf
+    basic_requirements:
+      - ׳      כנס המציעים ייערך ביום 3.11.2016 בשעה 12:00 במשרדי העירייה׳
+    required_amount: 1500 ש״ח
+    contacts: [פזית דניאלי]
+    department:
+    location: במשרדי הסגנים, קומה ב' בבניין העירייה
+    deadline:
+      time: '15:00'
+      date: 15.12.16
+      extension: true
