@@ -1,0 +1,49 @@
+---
+layout: default
+label: "الموضوع: تسجيل الطلاب للسنه الدراسية 2017-2018"
+---
+{% assign process = site.data.topics.citizens.kinder_garten.arabic.procceses.first %}
+
+<div class="sixteen wide column" lang="ar">>
+  <h2 class="ui header">{{ process.title}} </h2>
+  {% for section in process.sections %}
+  <div>
+    <div class="ui divider"></div>
+    <h3 class="ui header">
+      <i class="{{ section.section_icon }} icon"></i>
+      <div class="content">
+        {{ section.section_title }}
+      </div>
+    </h3>
+
+      {% if section.description %}
+        <div>
+          <p>
+            {{ section.description }}
+          </p>
+        </div>
+      {% endif %}
+
+      {% if section.description_numbered_list %}
+      <div>
+        <ol>
+          {% for item in section.description_numbered_list %}
+          <li> {{ item }} </li>
+          {% endfor %}
+        </ol>
+      </div>
+      {% endif %}
+
+      {% if section.section_unumbered_list %}
+      <div>
+        <ul>
+          {% for item in section.section_unumbered_list %}
+            <li> {{ item }} </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+</div>

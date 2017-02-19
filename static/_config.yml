@@ -7,3 +7,5 @@ url: localhost:4000
 
 source: src
 destination: serve
+
+emptyArray: []

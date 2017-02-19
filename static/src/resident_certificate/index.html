@@ -1,0 +1,136 @@
+---
+layout: default
+label : בקשה לאישור תושבות לקבלת הנחת תושב
+---
+
+<div class="sixteen wide column">
+  <h3 class="ui purple header">בחר שפה</h3>
+  <div class="ui three item menu">
+    <a class="active item">עברית</a>
+    <a class="item">عربى</a>
+    <a class="item">English</a>
+  </div>
+
+  <h3 class="ui purple header">מי את/ה?</h3>
+  <div class="ui link cards">
+    <div class="ui card">
+      <a class="image">
+        <img src="http://semantic-ui.com/images/avatar/large/steve.jpg">
+      </a>
+      <div class="content">
+        <a class="header">תושב/ת</a>
+      </div>
+    </div>
+    <div class="ui card">
+      <a class="image">
+        <img src="http://semantic-ui.com/images/avatar2/large/molly.png">
+      </a>
+      <div class="content">
+        <a class="header">בעל/ת עסק</a>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="ui purple header">מה את/ה מחפש/ת?<h3>
+  <div class="ui search">
+    <div class="ui icon input">
+      <input class="prompt" type="text" placeholder="הזן מילת חיפוש...">
+      <i class="search icon"></i>
+    </div>
+    <div class="results"></div>
+  </div>
+
+  {% assign topic = site.data.topics.citizens.resident_certificate.hebrew %}
+
+    {% if topic.popular_questions %}
+    <h3 class="ui purple header">שאלות נפוצות</h3>
+    <div class="ui styled fluid accordion">
+      {% for popular_question in topic.popular_questions %}
+        <div class="title">
+          <i class="dropdown icon"></i> {{popular_question.question}}
+        </div>
+        <div class="content">
+          <p class="transition hidden">{{ popular_question.answer }}</p>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if topic.actions %}
+      <h3 class="ui purple header">מה תרצו לעשות?</h3>
+      <div class="ui menu">
+        {% for action in topic.actions %}
+          <a class = "item" href="{{ action.link }}" target="_blank"> {{ action.title }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+    {% if topic.contacts %}
+
+    {% if topic.contacts.first.name == "מוקד" %}
+      <a href="{{site.data.arnona.citizen.contacts.first.link}}"<button class="massive ui button">דווחו על בעיה או הגישו פניה למוקד</button></a>
+    {% endif %}
+
+      <h3 class="ui purple header">אנשים שיוכלו לעזור לך</h3>
+      {% for contact in topic.contacts %}
+        {% if contact.name !="מוקד" %}
+          <div class="ui items">
+          <div class="item">
+            {% if contact.image_link %}
+            <a class="ui tiny image">
+              <img src="{{ contact.image_link }}">
+            </a>
+            {% endif %}
+
+            <div class="content">
+              <a class="header">{{ contact.title }} - {{ contact.name }}</a>
+              <div class="description">
+              {% if contact.phone %}
+                <p><a><i class="phone icon"></i>{{ contact.phone }}</a></p>
+              {% endif %}
+              {% if contact.email %}
+                <p><a><i class="mail icon"></i> israela@example.org.il</a></p>
+              {% endif %}
+              {% if contact.openning %}
+                <p>
+                שעות פעילות : {{ contact.openning }}
+                </p>
+              {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+  {% endif %}
+
+  {% if topic.updates.first %}
+    <h3 class="ui purple header">חדשות ומאמרים בנושא ארנונה</h3>
+    <div class="ui items">
+      {% for update in topic.updates %}
+        <div class="item">
+          <div class="image">
+            <img src="{{ update.image_link }}">
+          </div>
+          <div class="content">
+            <a class="header">{{ update.title }}</a>
+            <div class="meta">
+              <span>{{ update.short_description }}</span>
+            </div>
+              {% if update.full_link %}
+                <div class="extra">
+                  <a href="{{ update.full_link }}">קראו עוד</a>
+                </div>
+              {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if topic.announcements.first %}
+    <h3 class="ui purple header">הודעות בנושא ארנונה</h3>
+    {% for announcement in topic.announcements %}
+      <div class="ui blue message"> {{ announcement.title }}</div>
+    {% endfor %}
+  {% endif %}
+</div>
