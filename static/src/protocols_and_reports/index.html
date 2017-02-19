@@ -12,19 +12,31 @@ label : המגירה - טפסים, דו״חות, פרוטוקלים וחוקים
           </div>
           <div class="results"></div>
             </div>
-        <h4 class="ui horizontal divider header"> מקורות המידע</h4>
 
-        <select name="doc_types" multiple="" class="ui dropdown">
-          <option value="">מקורות המידע</option>
-          <option value="all">הכל</option>
-          <option value="all">טפסים</option>
-          <option value="reports">דו״חות הרשות המקומית</option>
-          <option value="protocols">פרוטוקולים</option>
-          <option value="protocols">מכרזים</option>
-          <option value="regulations">חוקי עזר</option>
-          <option value="local_regulations">תקנות עירוניות</option>
-          <option value="constructions_pres">פרסומי בניה</option>
-        </select>
+          <h4 class="ui horizontal divider header"> מקורות המידע</h4>
+
+          <div class = "ui column">
+            <div class="ui checkbox">
+              <input type="checkbox" name="example">
+              <label>טפסים</label>
+            </div>
+
+            <div class="ui checkbox">
+              <input type="checkbox" name="example">
+              <label>דו״חות</label>
+            </div>
+
+            <div class="ui checkbox">
+              <input type="checkbox" name="example">
+              <label>חוקי עזר ותקנות</label>
+            </div>
+
+            <div class="ui checkbox">
+              <input type="checkbox" name="example">
+              <label>פרוטוקולים</label>
+            </div>
+
+          </div>
 
         <h4 class="ui horizontal divider header"> תאריכי פרסום </h4>
         <div class="ui calendar">
@@ -35,14 +47,6 @@ label : המגירה - טפסים, דו״חות, פרוטוקלים וחוקים
         </div>
         <br>
 
-        <div class = "ui horizontal divider">קבלת התראות</div>
-          <div class = "ui input">
-            <input placeholder="דואר אלקטרוני" type="email">
-            <button class = "ui active button">
-              <i class = "alarm outline icon"></i>
-                עדכנו אותי
-            </button>
-          </div>
         </div>
 
       <div class="twelve wide column">
@@ -73,7 +77,7 @@ label : המגירה - טפסים, דו״חות, פרוטוקלים וחוקים
                       אנשי קשר:
                         {% for contact in form.contacts %}
                           <span>
-                            {{ contact }}
+                            <a>{{ contact }}</a>
                           </span>
                         {% endfor %}
                       </div>
@@ -93,7 +97,6 @@ label : המגירה - טפסים, דו״חות, פרוטוקלים וחוקים
         {% endif %}
         </div>
       </div>
-
 
       {% assign all_reports = site.data.topics.reports | sort: 'date' %}
       {% if all_reports.first %}
@@ -119,7 +122,7 @@ label : המגירה - טפסים, דו״חות, פרוטוקלים וחוקים
                       אנשי קשר:
                         {% for contact in report.contacts %}
                         <span>
-                          {{ contact }}
+                          <a>{{ contact }}</a>
                         </span>
                         {% endfor %}
                   </div>
@@ -137,5 +140,101 @@ label : המגירה - טפסים, דו״חות, פרוטוקלים וחוקים
       {% endif %}
       </div>
     </div>
+
+
+    {% assign all_topics = site.emptyArray %}
+    {% for rule in site.data.topics.rules %}
+      {% for rule_topic in rule.topics %}
+        {% unless all_topics contains rule_topic %}
+          {% assign all_topics = all_topics | push:rule_topic %}
+        {% endunless %}
+      {% endfor %}
+    {% endfor %}
+
+    {% assign all_rules = site.data.topics.rules | sort: 'date' %}
+
+    <div class = "item">
+      <i class ="folder open icon"></i>
+      <div class ="content">
+        <div class="header">
+        חוקי עזר ותקנות
+        </div>
+        <div class = "list">
+
+        {% for topic in all_topics %}
+          <div class = "item">
+            <i class = "folder open icon"></i>
+              <div class = "content">
+              <div class = "header">
+                <a> {{ topic }} </a>
+              </div>
+              <div class = "list">
+              {% for rule in all_rules %}
+                {% if rule.topics contains topic %}
+                  <div class = "item">
+                    <i class = "file icon"></i>
+                      <div class = "content">
+                        <div class = "description">
+                          <a href="{{ report.link }}" target="_blank">
+                            {{ rule.title}} ({{ rule.date }}).
+                          </a>
+                        </div>
+                      </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
   </div>
+
+
+<div class = "ui list">
+{% assign all_protocols = site.data.topics.protocols | sort: 'title' %}
+{% if all_protocols.first %}
+  <div class = "item">
+    <i class ="folder open icon"></i>
+    <div class ="content">
+      <div class="header">
+      פרוטוקולים
+      </div>
+    <div class>
+      {% for protocol in all_protocols %}
+      <div class = "ui segment">
+        <div class = "content">
+          <div class = "header">
+            <a href="{{ form.link }}" target="_blank">
+              {{ protocol.title}}
+            </a>
+          </div>
+          <div class = "meta">
+            {% if protocol.department %}
+              {{ protocol.department }}, {{ protocol.date }}.
+            {% endif %}
+          </div>
+          <div class = "description">
+          {% if protocol.topics %}
+          <div>
+            <ol>
+                      {% for topic in protocol.topics %}
+                          <li> {{ topic }} </li>
+                      {% endfor %}
+            </ol>
+          </div>
+          {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
 </div>
