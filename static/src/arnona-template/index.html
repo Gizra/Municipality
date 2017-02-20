@@ -1,6 +1,7 @@
 ---
 layout: default
-label : דף נושא - ארנונה
+label : ארנונה
+title: arnona
 ---
 
 <div class="sixteen wide column">
@@ -103,35 +104,37 @@ label : דף נושא - ארנונה
       {% endfor %}
   {% endif %}
 
-  {% if topic.updates.first %}
-    <h3 class="ui purple header">חדשות ומאמרים בנושא ארנונה</h3>
+  <h3 class="ui purple header">חדשות ומאמרים בנושא ארנונה</h3>
     <div class="ui items">
-      {% for update in topic.updates %}
-        <div class="item">
-          <div class="image">
-            <img src="{{ update.image_link }}">
-          </div>
-          <div class="content">
-            <a class="header">{{ update.title }}</a>
-            <div class="meta">
-              <span>{{ update.short_description }}</span>
+      {% for update in site.data.topics.citizens.updates %}
+        {% if update.hebrew.related_to_pages contains page.title %}
+          <div class="item">
+            <div class="image">
+              <img src="{{ update.hebrew.image_link }}">
+            </div> 
+            <div class="content">
+              <a class="header">{{ update.title }}</a>
+              <div class="meta">
+                <span>{{ update.hebrew.short_description }}</span>
+              </div>
+                {% if update.hebrew.full_link %}
+                  <div class="extra">
+                    <a href="{{ update.hebrew.full_link }}">קראו עוד</a>
+                  </div>
+                {% endif %}
             </div>
-              {% if update.full_link %}
-                <div class="extra">
-                  <a href="{{ update.full_link }}">קראו עוד</a>
-                </div>
-              {% endif %}
           </div>
-        </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+  <div>
+    <h3 class="ui purple header"> {{ page.label }} בנושא ארנונה</h3>
+      {% for announcement in site.data.topics.citizens.announcements.hebrew %}
+        {% if announcement.related_to_pages contains page.title %}
+          <div class="ui blue message"> {{ announcement.title }}</div>
+        {% endif %}
       {% endfor %}
   </div>
-  {% endif %}
-
-  {% if topic.announcements.first %}
-    <h3 class="ui purple header">הודעות בנושא ארנונה</h3>
-    {% for announcement in topic.announcements %}
-      <div class="ui blue message"> {{ announcement.title }}</div>
-    {% endfor %}
-  {% endif %}
 </div>
- 
+</div>
