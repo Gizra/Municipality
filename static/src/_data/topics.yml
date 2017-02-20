@@ -185,23 +185,6 @@ citizens:
               email: uri@example.org.il
               openning: א-ה 8:00-16:00, ג 16:00-18:00
 
-           updates:
-             - title: אושרה הנחה של 50% בארנונה לתושבים ותיקים
-               image_link: http://semantic-ui.com/images/wireframe/image.png
-               short_description:  בשורה משמחת שקיבלנו ממשרד הפנים - תושבים ותיקים זכאים להנחה בארנונה
-               full_link: here
-
-             - title: מהיום תוכלו לשלם ארנונה בקליק
-               image_link: http://semantic-ui.com/images/wireframe/image.png
-               short_description: 'שירות חדש לתושבים: תשלום ארנונה אונליין דרך האתר. לא עוד ניירת, לא צריך לצאת מהבית, פשוט וקל לשלם ארנונה.'
-
-           announcements:
-             - title: שוברים לתשלום שנתי נשלחו לכל בתי האב
-               main_page: false
-
-             - title: הנחה של 5% למשלמים בכרטיס אשראי
-               main_page: false
-
            procceses:
              - title: בקשה לקבלת הנחה בארנונה לנכס ריק
                sections:
@@ -275,9 +258,43 @@ citizens:
               phone: 08-999999
               email: two@example.org.il
 
-           announcements:
-             - title: הגשת האישורים תסתיים ב-4.2.16.
-               main_page: false
+    updates:
+        - title: אושרה הנחה של 50% בארנונה לתושבים ותיקים
+          date: 1.1.2016
+          hebrew:
+            image_link: http://semantic-ui.com/images/wireframe/image.png
+            short_description:  בשורה משמחת שקיבלנו ממשרד הפנים - תושבים ותיקים זכאים להנחה בארנונה
+            full_link: here
+            related_to_pages:
+              - arnona
+
+        - title: מהיום תוכלו לשלם ארנונה בקליק
+          date: 1.2.2016
+          hebrew:
+            image_link: http://semantic-ui.com/images/wireframe/image.png
+            short_description: 'שירות חדש לתושבים: תשלום ארנונה אונליין דרך האתר. לא עוד ניירת, לא צריך לצאת מהבית, פשוט וקל לשלם ארנונה.'
+            related_to_pages:
+              - arnona
+
+    announcements:
+      hebrew:
+        - title: שוברים לתשלום שנתי נשלחו לכל בתי האב
+          date: 1.1.2016
+          related_to_pages:
+            - arnona
+          main_page: false
+
+        - title: הנחה של  5% למשלמים בכרטיס אשראי
+          date: 1.2.2016
+          main_page: false
+          related_to_pages:
+            - arnona
+
+        - title: הגשת האישורים תסתיים ב-4.2.16.
+          date: 1.3.2016
+          realted_to_pages:
+            - resident_certificate
+          main_page: false
 
 
     kinder_garten:
