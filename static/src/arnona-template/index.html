@@ -127,7 +127,7 @@ label : ארנונה
       </div>
 
   <div>
-    <h3 class="ui purple header"> {{ page.label }} בנושא ארנונה</h3>
+    <h3 class="ui purple header">הודעות בנושא {{ page.label }}</h3>
       {% for announcement in site.data.topics.citizens.announcements.hebrew %}
         {% if announcement.related_to_pages contains page.title %}
           <div class="ui blue message"> {{ announcement.title }}</div>
