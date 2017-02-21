@@ -111,7 +111,7 @@ title: arnona
           <div class="item">
             <div class="image">
               <img src="{{ update.hebrew.image_link }}">
-            </div> 
+            </div>
             <div class="content">
               <a class="header">{{ update.title }}</a>
               <div class="meta">
@@ -129,7 +129,7 @@ title: arnona
       </div>
 
   <div>
-    <h3 class="ui purple header"> {{ page.label }} בנושא ארנונה</h3>
+    <h3 class="ui purple header">הודעות בנושא {{ page.label }}</h3>
       {% for announcement in site.data.topics.citizens.announcements.hebrew %}
         {% if announcement.related_to_pages contains page.title %}
           <div class="ui blue message"> {{ announcement.title }}</div>
