@@ -1,6 +1,6 @@
 ---
 layout: default
-label : דף נושא - ארנונה
+label : ארנונה
 ---
 
 <div class="sixteen wide column">
@@ -128,10 +128,9 @@ label : דף נושא - ארנונה
   {% endif %}
 
   {% if topic.announcements.first %}
-    <h3 class="ui purple header">הודעות בנושא ארנונה</h3>
+  <h3 class="ui purple header">הודעות   בנושא {{ page.label }}</h3>
     {% for announcement in topic.announcements %}
       <div class="ui blue message"> {{ announcement.title }}</div>
     {% endfor %}
   {% endif %}
 </div>
- 
