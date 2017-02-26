@@ -1,49 +1,33 @@
 ---
 layout: default
 label : ארנונה
+title: arnona
 ---
 
-<div class="sixteen wide column">
-  <h3 class="ui purple header">בחר שפה</h3>
-  <div class="ui three item menu">
-    <a class="active item">עברית</a>
-    <a class="item">عربى</a>
-    <a class="item">English</a>
-  </div>
+<div class = "ui segment centered row">
+  <h1 class = "ui header"> {{page.label}}</h1>
+</div>
 
-  <h3 class="ui purple header">מי את/ה?</h3>
-  <div class="ui link cards">
-    <div class="ui card">
-      <a class="image">
-        <img src="http://semantic-ui.com/images/avatar/large/steve.jpg">
-      </a>
-      <div class="content">
-        <a class="header">תושב/ת</a>
-      </div>
+<div class = "ui segment row">
+  <div class = "ui grid container">
+    <div class =  "centered row">
+      <h3 class="ui purple header">הודעות בנושא {{ page.label }}</h3>
     </div>
-    <div class="ui card">
-      <a class="image">
-        <img src="http://semantic-ui.com/images/avatar2/large/molly.png">
-      </a>
-      <div class="content">
-        <a class="header">בעל/ת עסק</a>
-      </div>
+      {% for announcement in site.data.topics.citizens.announcements.hebrew %}
+        {% if announcement.related_to_pages contains page.title %}
+          <div class="ui positive message row">{{ announcement.title }}</div>
+          {% endif %}
+      {% endfor %}
     </div>
   </div>
 
-  <h3 class="ui purple header">מה את/ה מחפש/ת?<h3>
-  <div class="ui search">
-    <div class="ui icon input">
-      <input class="prompt" type="text" placeholder="הזן מילת חיפוש...">
-      <i class="search icon"></i>
-    </div>
-    <div class="results"></div>
-  </div>
 
+<div class="ui segment row">
+  <div class = "column">
   {% assign topic = site.data.topics.citizens.arnona.hebrew %}
 
     {% if topic.popular_questions %}
-    <h3 class="ui purple header">שאלות נפוצות</h3>
+    <h3 class="ui purple centered header">שאלות נפוצות</h3>
     <div class="ui styled fluid accordion">
       {% for popular_question in topic.popular_questions %}
         <div class="title">
@@ -55,23 +39,48 @@ label : ארנונה
       {% endfor %}
     </div>
     {% endif %}
+  </div>
+</div>
 
+<div class = "ui segment row">
+  <div class = "ui center aligned column">
     {% if topic.actions %}
-      <h3 class="ui purple header">מה תרצו לעשות?</h3>
-      <div class="ui menu">
+    <h3 class="ui purple centered header">מה תרצו לעשות?</h3>
+      <div class="ui basic primary buttons">
         {% for action in topic.actions %}
-          <a class = "item" href="{{ action.link }}" target="_blank"> {{ action.title }}</a>
-          {% endfor %}
-        </div>
-      {% endif %}
-
-    {% if topic.contacts %}
-
-    {% if topic.contacts.first.name == "מוקד" %}
-      <a href="{{site.data.arnona.citizen.contacts.first.link}}"<button class="massive ui button">דווחו על בעיה או הגישו פניה למוקד</button></a>
+          <button class = "ui button" href="{{ action.link }}" target="_blank"> {{ action.title }}</button>
+        {% endfor %}
+    </div>
     {% endif %}
+  </div>
+</div>
 
-      <h3 class="ui purple header">אנשים שיוכלו לעזור לך</h3>
+<div class = "ui segment centered row">
+  {% if topic.contacts.first.name == "מוקד" %}
+    <button href="{{site.data.arnona.citizen.contacts.first.link}}" class="big ui button">דווחו על בעיה או הגישו פניה למוקד</button>
+  {% endif %}
+</div>
+
+{% if topic.forms %}
+<div class = "ui segment row">
+  <div class = "ui aligned column">
+    <h3 class="ui purple centered header">טפסים להורדה</h3>
+      <div class="ui basic primary buttons">
+        {% for form in topic.forms %}
+          <button class = "ui button" href="{{ form.link }}" target="_blank">
+            <i class="file icon"></i>
+             {{ form.title }}
+           </button>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+<div class = "ui segment centered row">
+  <div class = "four width column">
+    <h3 class="ui purple header">אנשים שיוכלו לעזור לך</h3>
       {% for contact in topic.contacts %}
         {% if contact.name !="מוקד" %}
           <div class="ui items">
@@ -101,7 +110,9 @@ label : ארנונה
           </div>
         {% endif %}
       {% endfor %}
-
+    </div>
+  </div>
+<!--
   <h3 class="ui purple header">חדשות ומאמרים בנושא ארנונה</h3>
     <div class="ui items">
       {% for update in site.data.topics.citizens.updates %}
@@ -125,22 +136,4 @@ label : ארנונה
           {% endif %}
         {% endfor %}
       </div>
-
-  <div>
-    <h3 class="ui purple header">הודעות בנושא {{ page.label }}</h3>
-      {% for announcement in site.data.topics.citizens.announcements.hebrew %}
-        {% if announcement.related_to_pages contains page.title %}
-          <div class="ui blue message"> {{ announcement.title }}</div>
-        {% endif %}
-      {% endfor %}
-  </div>
-  {% endif %}
-
-  {% if topic.announcements.first %}
-  <h3 class="ui purple header">הודעות   בנושא {{ page.label }}</h3>
-    {% for announcement in topic.announcements %}
-      <div class="ui blue message"> {{ announcement.title }}</div>
-    {% endfor %}
-  {% endif %}
-</div>
-</div>
+-->

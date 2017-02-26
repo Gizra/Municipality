@@ -12,14 +12,11 @@
     <link rel="stylesheet" href="/assets/stylesheets/style.css" />
   </head>
   <body dir="rtl">
-            {% include header.html %}
-      <div class="pusher">
-        <div class="ui grid container">
 
-            {{ content }}
-
-        </div>
-      </div>
+    <div class="ui stackable grid container">
+      {% include header.html %}
+      {{ content }}
+    </div>
 
       <script
        src="https://code.jquery.com/jquery-2.2.4.min.js"
