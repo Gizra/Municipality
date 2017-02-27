@@ -32,28 +32,15 @@ label : מרכזיה - דף הבית
       </div>
     </div>
 
-      <div class = "ui medium header"> העמודים הפופולאריים </div>
-        <div class="ui selection list">
-          {% for popular_page in merkazia.popular_pages.hebrew %}
-            <div class="item">
-              <a href = "{{ popular_page.link }}" class = "content">
-                <i class="ui {{ popular_page.icon }} icon"></i>
-                  <span >{{ popular_page.title }}</span>
-              </a>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-
-  <div class = "ui six wide column center">
-    <h4 class = "ui header">עשו עכשיו!  </h4>
+    <div class = "ui six wide column center">
+      <h3 class="ui purple centered header">עשו עכשיו!</h3>
       <div class="ui relaxed divided list">
 
         {% for action_item in merkazia.action_items.hebrew %}
         <div class="item">
           <a class="header" href="{{ action_item.link }}">
             <i class="large {{ action_item.icon }} middle aligned icon"></i>
-              {{action_item.title}}
+            {{action_item.title}}
           </a>
           <div class="description">{{action.item.description}}</div>
         </div>
@@ -61,4 +48,43 @@ label : מרכזיה - דף הבית
 
       </div>
     </div>
+
+    <h3 class="ui purple centered header">מה קורה בקריית מלאכי?</h3>
+    <div class="ui link items">
+      <div class="item">
+        <div class="ui tiny image">
+          <img src="http://k-m.org.il/mod/0d5d6683/php//timthumb.php?src=http://k-m.org.il/wp-content/uploads/2015/11/5.jpg&h=120&w=120&zc=1&q=100">
+        </div>
+        <div class="content">
+          <div class="header">שבוע הבטיחות בדרכים “הולכים על בטוח”</div>
+          <div class="description">
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui tiny image">
+          <img src="http://k-m.org.il/mod/0d5d6683/php//timthumb.php?src=http://k-m.org.il/wp-content/uploads/2016/01/darca.jpg&h=120&w=120&zc=1&q=100">
+        </div>
+        <div class="content">
+          <div class="header">קורס יזמים צעירים בתיכון “דרכא”</div>
+          <div class="description">
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui tiny image">
+          <img src="http://k-m.org.il/mod/0d5d6683/php//timthumb.php?src=http://k-m.org.il/wp-content/uploads/2015/12/11.jpg&h=120&w=120&zc=1&q=100הצלחה למרכז המדעים בקריית מלאכי">
+        </div>
+        <div class="content">
+          <div class="header">הצלחה למרכז המדעים בקריית מלאכי</div>
+          <div class="description">
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 </div>
