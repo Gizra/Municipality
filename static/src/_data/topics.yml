@@ -1,5 +1,13 @@
 citizens:
     merkazia:
+      popular_questions:
+        hebrew:
+          - question: איך משלמים ארנונה?
+            answer: ניתן לשלם באמצעות שובר בדואר, או דרך אתר האינטרנט.
+
+          - question: איך נרשמים לגני ילדים?
+            answer: בוחרים גן, ממלאים טופס ושולחים במייל למחלקת חינוך
+
       action_items:
         hebrew:
           - title: תשלום ארנונה

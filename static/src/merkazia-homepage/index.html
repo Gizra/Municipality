@@ -1,0 +1,64 @@
+---
+layout: default
+label : מרכזיה - דף הבית
+
+---
+{% assign merkazia = site.data.topics.citizens.merkazia %}
+
+  <div class = "ui six wide column">
+    <div class="ui icon input">
+      <input class="prompt" type="text" placeholder="מה תרצו לחפש...">
+      <div class="results"></div>
+        <i class="search icon"></i>
+      </div>
+
+    <div class="ui segment row">
+      <div class = "column">
+        {% assign topic = site.data.topics.citizens.merkazia %}
+
+        {% if topic.popular_questions %}
+        <h3 class="ui purple centered header">שאלות נפוצות</h3>
+        <div class="ui styled fluid accordion">
+          {% for popular_question in topic.popular_questions.hebrew %}
+          <div class="title">
+            <i class="dropdown icon"></i> {{popular_question.question}}
+          </div>
+          <div class="content">
+            <p class="transition hidden">{{ popular_question.answer }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+      <div class = "ui medium header"> העמודים הפופולאריים </div>
+        <div class="ui selection list">
+          {% for popular_page in merkazia.popular_pages.hebrew %}
+            <div class="item">
+              <a href = "{{ popular_page.link }}" class = "content">
+                <i class="ui {{ popular_page.icon }} icon"></i>
+                  <span >{{ popular_page.title }}</span>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+  <div class = "ui six wide column center">
+    <h4 class = "ui header">עשו עכשיו!  </h4>
+      <div class="ui relaxed divided list">
+
+        {% for action_item in merkazia.action_items.hebrew %}
+        <div class="item">
+          <a class="header" href="{{ action_item.link }}">
+            <i class="large {{ action_item.icon }} middle aligned icon"></i>
+              {{action_item.title}}
+          </a>
+          <div class="description">{{action.item.description}}</div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+</div>
