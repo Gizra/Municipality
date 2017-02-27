@@ -158,7 +158,7 @@ label : לוח אירועים לתושב/ת
                               {% if when.day %} {{ when.date }}, {% endif %}
                               {% if when.time %} {{ when.time}} {% endif %}
                               </span>
-                                {% if when.time_end !=null %}
+                                {% if when.time_end != null %}
                                   <span> - {{ when.time_end }}</span>
                                   {% endif %}
                                   {% if when.recurring %}
