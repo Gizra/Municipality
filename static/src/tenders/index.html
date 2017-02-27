@@ -2,6 +2,7 @@
 layout: default
 label : מכרזים
 ---
+
 <div class="ui segment stackable row">
     <div class="two wide column">
         <h4 class="ui header">כולל מכרזים שנסגרו</h4>
@@ -73,51 +74,33 @@ label : מכרזים
         </div>
     </div>
 </div>
-<div class="twelve wide column">
+<div class="ui stackable segment row">
 
-    <div class="ui list">
-        {% assign all_tenders = (site.data.topics.business.tenders | sort: 'deadline.date') | reverse %} {% if all_tenders.first %}
-        <div class="item">
-            <i class="folder open icon"></i>
-            <div class="content">
-                <div class="header">
-                    מכרזים
-                </div>
-                <div class="list">
-                    {% for tender in all_tenders %}
-                    <div class="item">
-                        <i class="file icon"></i>
-                        <div class="content">
-                            <div class="header">
-                                <a href="{{ tender.hebrew.link }}" target="_blank">
+    {% assign all_tenders = (site.data.topics.business.tenders | sort: 'deadline.date') | reverse %}
+    <div class="left aligned column">
+        <h4 class="ui header">מכרזים</h4>
+        <div class="ui list segments">
+            {% for tender in all_tenders %}
+            <div class="ui segment">
+                <div class="content">
+                    <div class="header">
+                        <a href="{{ tender.hebrew.link }}" target="_blank">
                   {{ tender.title}}
                 </a>
-                            </div>
-                            <div class="desciprtion">
-                                {% if tender.hebrew.department %} מחלקה: {{ tender.hebrew.department }}, {% endif %} {% if tender.hebrew.contacts %} אנשי קשר: {% for contact in tender.hebrew.contacts %}
-                                <span>
+                    </div>
+                    <div class="desciprtion">
+                        {% if tender.hebrew.department %} מחלקה: <span class="ui label">{{ tender.hebrew.department }}</span>, {% endif %} {% if tender.hebrew.contacts %} אנשי קשר: {% for contact in tender.hebrew.contacts %}
+                        <span>
                       <a>{{ contact }}</a>
-                    </span> {% endfor %} {% endif %}
-                                <div>
-                                    להגשה עד {{ tender.deadline.date }}, {{ tender.deadline.time }} {% if tender.deadline.extension %}
-                                    <div class="ui horizontal red label">הארכה</div>
-                                    {% endif %}
-                                </div>
+                    </span> {% endfor %} {% endif %} להגשה עד {{ tender.deadline.date }}, {{ tender.deadline.time }} {% if tender.deadline.extension %}
+                        <div class="ui horizontal red label">הארכה</div>
+                        {% endif %}
 
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% else %}
-                <div class="item">
-                    <i class="folder icon"></i>
-                    <div class="content">
-                        מכרזים
+
                     </div>
                 </div>
-                {% endif %}
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>
