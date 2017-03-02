@@ -1,0 +1,130 @@
+---
+layout: default
+label : מרכזיה - דף הבית
+
+---
+{% assign merkazia = site.data.topics.citizens.merkazia %}
+
+  <div class = "ui nine wide column">
+    <div class="ui icon input">
+      <input class="prompt" type="text" placeholder="מה תרצו לחפש...">
+      <div class="results"></div>
+        <i class="search icon"></i>
+    </div>
+  </div>
+
+  <div class = "ui nine wide column">
+    <div class="ui segment row">
+      <div class = "column">
+        {% assign topic = site.data.topics.citizens.merkazia %}
+
+        {% if topic.popular_questions %}
+        <h3 class="ui purple centered header">שאלות נפוצות</h3>
+        <div class="ui styled fluid accordion">
+          {% for popular_question in topic.popular_questions.hebrew %}
+          <div class="title">
+            <i class="dropdown icon"></i> {{popular_question.question}}
+          </div>
+          <div class="content">
+            <p class="transition hidden">{{ popular_question.answer }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class = "ui six wide column center">
+    <h3 class="ui purple centered header">עשו עכשיו!</h3>
+      <div class="ui relaxed divided list">
+
+        {% for action_item in merkazia.action_items.hebrew %}
+        <div class="item">
+          <a class="header" href="{{ action_item.link }}">
+            <i class="large {{ action_item.icon }} middle aligned icon"></i>
+            {{action_item.title}}
+          </a>
+          <div class="description">{{action.item.description}}</div>
+        </div>
+        {% endfor %}
+
+      </div>
+  </div>
+
+  <div class = "ui nine wide column center">
+    <h3 class="ui purple centered header">מה קורה בקריית מלאכי?</h3>
+    <div class="ui link items">
+      <div class="item">
+        <div class="ui tiny image">
+          <img src="http://k-m.org.il/mod/0d5d6683/php//timthumb.php?src=http://k-m.org.il/wp-content/uploads/2015/11/5.jpg&h=120&w=120&zc=1&q=100">
+        </div>
+        <div class="content">
+          <div class="header">מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17</div>
+          <div class="description">
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui tiny image">
+          <img src="http://k-m.org.il/mod/0d5d6683/php//timthumb.php?src=http://k-m.org.il/wp-content/uploads/2016/01/darca.jpg&h=120&w=120&zc=1&q=100">
+        </div>
+        <div class="content">
+          <div class="header">קורס יזמים צעירים בתיכון “דרכא”</div>
+          <div class="description">
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui tiny image">
+          <img src="http://k-m.org.il/mod/0d5d6683/php//timthumb.php?src=http://k-m.org.il/wp-content/uploads/2015/12/11.jpg&h=120&w=120&zc=1&q=100הצלחה למרכז המדעים בקריית מלאכי">
+        </div>
+        <div class="content">
+          <div class="header">הצלחה למרכז המדעים בקריית מלאכי</div>
+          <div class="description">
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <button class="ui primary basic button">לכל החדשות</button>
+    </div>
+  </div>
+
+  <div class = "ui six wide column center">
+    <h3 class="ui purple centered header">רשמו ביומן</h3>
+    <div class="ui divided items">
+      <div class="item">
+        <div class="ui tiny image">
+          <img src="http://semantic-ui.com/images/wireframe/image.png">
+        </div>
+        <div class="middle aligned content">
+          <p>עדלאידע מדינות ופולקלור</p>
+          <p>08/03/17 13:00 יציאה מפארק קק"ל</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui tiny image">
+          <img src="http://semantic-ui.com/images/wireframe/image.png">
+        </div>
+        <div class="middle aligned content">
+          <p>ריקודי עם - שמעון ורד</p>
+          <p>04/03/17 19:45 אולם ספיר</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui tiny image">
+          <img src="http://semantic-ui.com/images/wireframe/image.png">
+        </div>
+        <div class="middle aligned content">
+          <p>מופע לנשים ולנערות: גם כי אלך</p>
+          <p>27/02/17 20:00 אולם ספיר</p>
+        </div>
+      </div>
+      <button class="ui primary basic button">לכל האירועים</button>
+    </div>
+  </div>
+
+
+

@@ -1,5 +1,13 @@
 citizens:
     merkazia:
+      popular_questions:
+        hebrew:
+          - question: באילו שעות מפנים את הזבל?
+            answer: פינוי האשפה מתבצע בימים זוגיים, בשעות 5 עד 7 בבוקר.
+
+          - question: כמה סייעות יש בגן ילדים?
+            answer: בכל גן של עד 30 ילדים, גננת אחת ושתי סייעות
+
       action_items:
         hebrew:
           - title: תשלום ארנונה
