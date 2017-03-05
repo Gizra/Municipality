@@ -2,10 +2,13 @@
 layout: default
 label: "الموضوع: تسجيل الطلاب للسنه الدراسية 2017-2018"
 ---
+
+<div class = "ui segment centered row">
+  <h2>  الموضوع: تسجيل الطلاب للسنه الدراسية 2017-2018 </h2>
+</div>
 {% assign process = site.data.topics.citizens.kinder_garten.arabic.procceses.first %}
 
 <div class="sixteen wide column" lang="ar">>
-  <h2 class="ui header">{{ process.title}} </h2>
   {% for section in process.sections %}
   <div>
     <div class="ui divider"></div>
