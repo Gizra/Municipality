@@ -50,15 +50,10 @@ title: arnona
         {% for action in topic.actions %}
           <button class = "ui button" href="{{ action.link }}" target="_blank"> {{ action.title }}</button>
         {% endfor %}
+          <button class = "ui button" href="#" target = "_blank"> לפנות למוקד </button>
     </div>
     {% endif %}
   </div>
-</div>
-
-<div class = "ui segment centered row">
-  {% if topic.contacts.first.name == "מוקד" %}
-    <button href="{{site.data.arnona.citizen.contacts.first.link}}" class="big ui button">דווחו על בעיה או הגישו פניה למוקד</button>
-  {% endif %}
 </div>
 
 {% if topic.forms %}
@@ -112,28 +107,3 @@ title: arnona
       {% endfor %}
     </div>
   </div>
-<!--
-  <h3 class="ui purple header">חדשות ומאמרים בנושא ארנונה</h3>
-    <div class="ui items">
-      {% for update in site.data.topics.citizens.updates %}
-        {% if update.hebrew.related_to_pages contains page.title %}
-          <div class="item">
-            <div class="image">
-              <img src="{{ update.hebrew.image_link }}">
-            </div>
-            <div class="content">
-              <a class="header">{{ update.title }}</a>
-              <div class="meta">
-                <span>{{ update.hebrew.short_description }}</span>
-              </div>
-                {% if update.hebrew.full_link %}
-                  <div class="extra">
-                    <a href="{{ update.hebrew.full_link }}">קראו עוד</a>
-                  </div>
-                {% endif %}
-            </div>
-          </div>
-          {% endif %}
-        {% endfor %}
-      </div>
--->
