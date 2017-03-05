@@ -2,6 +2,10 @@
 layout: default
 label : מכרזים
 ---
+<div class="ui stackable grid">
+  <div class = "ui segment centered row">
+    <h2> מכרזים </h2>
+  </div>
 
 <div class="ui segment stackable row">
     <div class="two wide column">
@@ -78,7 +82,6 @@ label : מכרזים
 
     {% assign all_tenders = (site.data.topics.business.tenders | sort: 'deadline.date') | reverse %}
     <div class="left aligned column">
-        <h4 class="ui header">מכרזים</h4>
         <div class="ui list segments">
             {% for tender in all_tenders %}
             <div class="ui segment">

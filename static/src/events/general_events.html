@@ -4,6 +4,9 @@ label : לוח אירועים לתושב/ת
 ---
       {% assign sorted_events = (site.data.topics.citizens.cultural_events | sort: 'when.date') | reverse %}
       <div class="ui stackable grid">
+        <div class = "ui segment centered row">
+          <h2> אירועים לתושב/ת </h2>
+        </div>
         {% assign promoted_events = sorted_events | where: "promoted": "true" %} {% assign promoted_event = promoted_events.first %}
         <div class = "ui segment row">
           <div class = "ui two wide column">

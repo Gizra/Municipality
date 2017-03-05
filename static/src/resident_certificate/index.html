@@ -2,46 +2,13 @@
 layout: default
 label : בקשה לאישור תושבות לקבלת הנחת תושב
 ---
-
-<div class="sixteen wide column">
-  <h3 class="ui purple header">בחר שפה</h3>
-  <div class="ui three item menu">
-    <a class="active item">עברית</a>
-    <a class="item">عربى</a>
-    <a class="item">English</a>
-  </div>
-
-  <h3 class="ui purple header">מי את/ה?</h3>
-  <div class="ui link cards">
-    <div class="ui card">
-      <a class="image">
-        <img src="http://semantic-ui.com/images/avatar/large/steve.jpg">
-      </a>
-      <div class="content">
-        <a class="header">תושב/ת</a>
-      </div>
+  <div class="ui stackable grid">
+    <div class = "ui segment centered row">
+      <h2>  בקשה לאישור תושבות לקבלת הנחת תושב </h2>
     </div>
-    <div class="ui card">
-      <a class="image">
-        <img src="http://semantic-ui.com/images/avatar2/large/molly.png">
-      </a>
-      <div class="content">
-        <a class="header">בעל/ת עסק</a>
-      </div>
-    </div>
-  </div>
-
-  <h3 class="ui purple header">מה את/ה מחפש/ת?<h3>
-  <div class="ui search">
-    <div class="ui icon input">
-      <input class="prompt" type="text" placeholder="הזן מילת חיפוש...">
-      <i class="search icon"></i>
-    </div>
-    <div class="results"></div>
-  </div>
 
   {% assign topic = site.data.topics.citizens.resident_certificate.hebrew %}
-
+  <div class = "ui segment row">
     {% if topic.popular_questions %}
     <h3 class="ui purple header">שאלות נפוצות</h3>
     <div class="ui styled fluid accordion">
@@ -55,22 +22,20 @@ label : בקשה לאישור תושבות לקבלת הנחת תושב
       {% endfor %}
     </div>
     {% endif %}
+  </div>
+    <br>
 
-    {% if topic.actions %}
+    <div class = "ui segment row">
       <h3 class="ui purple header">מה תרצו לעשות?</h3>
       <div class="ui menu">
         {% for action in topic.actions %}
           <a class = "item" href="{{ action.link }}" target="_blank"> {{ action.title }}</a>
           {% endfor %}
+          <a class = "active item" href = "#" target = "_blank"> פניה למוקד </a>
         </div>
-      {% endif %}
+      </div>
 
-    {% if topic.contacts %}
-
-    {% if topic.contacts.first.name == "מוקד" %}
-      <a href="{{site.data.arnona.citizen.contacts.first.link}}"<button class="massive ui button">דווחו על בעיה או הגישו פניה למוקד</button></a>
-    {% endif %}
-
+      <div class = "ui segment row">
       <h3 class="ui purple header">אנשים שיוכלו לעזור לך</h3>
       {% for contact in topic.contacts %}
         {% if contact.name !="מוקד" %}
@@ -101,7 +66,6 @@ label : בקשה לאישור תושבות לקבלת הנחת תושב
           </div>
         {% endif %}
       {% endfor %}
-  {% endif %}
 
   {% if topic.updates.first %}
     <h3 class="ui purple header">חדשות ומאמרים בנושא ארנונה</h3>
@@ -125,6 +89,8 @@ label : בקשה לאישור תושבות לקבלת הנחת תושב
         </div>
       {% endfor %}
   </div>
+</div>
+</div>
   {% endif %}
 
   {% if topic.announcements.first %}
@@ -133,4 +99,8 @@ label : בקשה לאישור תושבות לקבלת הנחת תושב
       <div class="ui blue message"> {{ announcement.title }}</div>
     {% endfor %}
   {% endif %}
+</div>
+</div>
+</div>
+</div>
 </div>
