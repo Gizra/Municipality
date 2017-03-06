@@ -25,5 +25,4 @@ features[variable][] = menu_parent_municipality
 features[variable][] = node_options_municipality
 features[variable][] = node_preview_municipality
 features[variable][] = node_submitted_municipality
-features_exclude[dependencies][og_ui] = og_ui
 features_exclude[dependencies][options] = options

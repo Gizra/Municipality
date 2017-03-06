@@ -19,4 +19,5 @@ class HedleyMigrateMunicipalities extends HedleyMigrateNodes {
   protected $simpleMappings = [
     'title',
   ];
+
 }

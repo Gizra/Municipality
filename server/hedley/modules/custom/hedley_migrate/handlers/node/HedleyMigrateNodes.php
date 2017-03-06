@@ -27,9 +27,14 @@ abstract class HedleyMigrateNodes extends HedleyMigrateBase {
 
     $this->description = t('Import @bundle nodes.', ['@bundle' => $this->bundle]);
 
-
     $source_file = $this->getMigrateDirectory() . '/csv/' . $this->bundle . '.csv';
-    $this->source = new MigrateSourceCSV($source_file, drupal_map_assoc($this->csvColumns), ['header_rows' => 1]);
+
+    $columns = [];
+    foreach ($this->csvColumns as $column_name) {
+      $columns[] = [$column_name, $column_name];
+    }
+    $this->source = new MigrateSourceCSV($source_file, $columns, ['header_rows' => 1]);
+
     $this->destination = new MigrateDestinationNode($this->bundle);
 
     $key = [
@@ -50,5 +55,7 @@ abstract class HedleyMigrateNodes extends HedleyMigrateBase {
     $this->addFieldMapping('uid', 'author')
       ->sourceMigration('HedleyMigrateUsers')
       ->defaultValue(1);
+
   }
+
 }
