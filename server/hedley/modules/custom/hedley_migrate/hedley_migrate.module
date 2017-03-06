@@ -12,6 +12,7 @@ function hedley_migrate_migrate_api() {
   $migrations = array(
     // Nodes.
     'HedleyMigrateItems',
+    'HedleyMigrateMunicipalities',
     // Users.
     'HedleyMigrateUsers',
   );
