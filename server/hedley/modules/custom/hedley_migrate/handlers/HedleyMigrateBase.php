@@ -25,6 +25,9 @@ abstract class HedleyMigrateBase extends Migration {
     return variable_get('hedley_migrate_directory', FALSE) ? variable_get('hedley_migrate_directory') : drupal_get_path('module', 'hedley_migrate');
   }
 
+  /**
+   * HedleyMigrateBase constructor.
+   */
   public function __construct($arguments) {
     parent::__construct($arguments);
 

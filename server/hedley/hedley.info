@@ -45,4 +45,5 @@ dependencies[] = hedley_item
 dependencies[] = hedley_municipality
 dependencies[] = hedley_pusher
 dependencies[] = hedley_restful
+dependencies[] = hedley_terms
 dependencies[] = hedley_user
