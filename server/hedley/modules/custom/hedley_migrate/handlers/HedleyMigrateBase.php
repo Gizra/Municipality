@@ -36,10 +36,6 @@ abstract class HedleyMigrateBase extends Migration {
       return;
     }
 
-    $this->dependencies = [
-      'HedleyMigrateUsers',
-    ];
-
     $this->description = t('Import @bundle.', ['@bundle' => $this->bundle]);
 
     $source_file = $this->getMigrateDirectory() . '/csv/' . $this->bundle . '.csv';
@@ -50,7 +46,7 @@ abstract class HedleyMigrateBase extends Migration {
     }
     $this->source = new MigrateSourceCSV($source_file, $columns, ['header_rows' => 1]);
 
-    $this->destination = new MigrateDestinationEntityAPI($this->entityType, $this->bundle);
+    $this->destination = $this->entityType == 'node' ? new MigrateDestinationNode($this->bundle) : new MigrateDestinationTerm($this->bundle);
 
     // Define key column; Title for nodes, name for terms.
     $key_column = $this->entityType == 'node' ? 'title' : 'name';
@@ -69,10 +65,16 @@ abstract class HedleyMigrateBase extends Migration {
       $this->addSimpleMappings(drupal_map_assoc($this->simpleMappings));
     }
 
-    // Set the first user as the author.
-    $this->addFieldMapping('uid', 'author')
-      ->sourceMigration('HedleyMigrateUsers')
-      ->defaultValue(1);
+    if ($this->entityType == 'node') {
+      // Set the first user as the author.
+      $this->dependencies = [
+        'HedleyMigrateUsers',
+      ];
+
+      $this->addFieldMapping('uid', 'author')
+        ->sourceMigration('HedleyMigrateUsers')
+        ->defaultValue(1);
+    }
 
   }
 
