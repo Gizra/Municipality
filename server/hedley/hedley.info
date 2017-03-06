@@ -28,7 +28,6 @@ dependencies[] = entity_token
 dependencies[] = entityreference
 dependencies[] = entity_validator
 dependencies[] = features
-dependencies[] = flag
 dependencies[] = i18n_node
 dependencies[] = i18n_taxonomy
 dependencies[] = libraries

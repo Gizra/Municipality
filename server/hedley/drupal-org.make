@@ -45,9 +45,6 @@ projects[facetapi][version] = "1.5"
 projects[features][subdir] = "contrib"
 projects[features][version] = "2.10"
 
-projects[flag][subdir] = "contrib"
-projects[flag][version] = "3.9"
-
 projects[i18n][subdir] = "contrib"
 projects[i18n][version] = "1.15"
 
