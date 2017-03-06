@@ -1,5 +1,5 @@
-name = Hedley
-description = Hedley
+name = Municipality
+description = Municipality backend.
 version = VERSION
 core = 7.x
 

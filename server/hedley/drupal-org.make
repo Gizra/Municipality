@@ -27,7 +27,7 @@ projects[email][subdir] = "contrib"
 projects[email][version] = "1.3"
 
 projects[entity][subdir] = "contrib"
-projects[entity][version] = "1.6"
+projects[entity][version] = "1.8"
 projects[entity][patch][] = "https://www.drupal.org/files/issues/2086225-entity-access-check-node-create-3.patch"
 
 projects[entitycache][subdir] = "contrib"
@@ -73,7 +73,7 @@ projects[og][subdir] = "contrib"
 projects[og][version] = 2.x
 
 projects[restful][subdir] = "contrib"
-projects[restful][version] = "1.x-dev"
+projects[restful][version] = "1.8"
 
 projects[search_api][subdir] = "contrib"
 projects[search_api][version] = "1.12"
@@ -88,13 +88,13 @@ projects[title][subdir] = "contrib"
 projects[title][version] = "1.0-alpha7"
 
 projects[token][subdir] = "contrib"
-projects[token][version] = "1.6"
+projects[token][version] = "1.7"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.14"
+projects[views][version] = "3.15"
 
 projects[views_bulk_operations][subdir] = "contrib"
-projects[views_bulk_operations][version] = "3.3"
+projects[views_bulk_operations][version] = "3.4"
 
 ; Development
 projects[devel][subdir] = "development"
