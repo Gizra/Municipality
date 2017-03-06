@@ -8,7 +8,9 @@
 /**
  * Class HedleyMigrateMunicipalities.
  */
-class HedleyMigrateMunicipalities extends HedleyMigrateNodes {
+class HedleyMigrateMunicipalities extends HedleyMigrateBase {
+
+  protected $entityType = 'node';
 
   protected $bundle = 'municipality';
 

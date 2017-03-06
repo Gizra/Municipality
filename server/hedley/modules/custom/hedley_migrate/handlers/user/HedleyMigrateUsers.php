@@ -10,11 +10,7 @@
  */
 class HedleyMigrateUsers extends HedleyMigrateBase {
 
-  public $entityType = 'user';
-
   /**
-   * UnioMigrateUsers constructor.
-   *
    * {@inheritdoc}
    */
   public function __construct($arguments) {
