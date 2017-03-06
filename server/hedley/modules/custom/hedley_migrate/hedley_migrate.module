@@ -13,6 +13,8 @@ function hedley_migrate_migrate_api() {
     // Nodes.
     'HedleyMigrateItems',
     'HedleyMigrateMunicipalities',
+    // Terms.
+    'HedleyMigrateProfileTypes',
     // Users.
     'HedleyMigrateUsers',
   );

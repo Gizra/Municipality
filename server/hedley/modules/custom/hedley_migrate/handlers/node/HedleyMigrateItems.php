@@ -8,7 +8,9 @@
 /**
  * Class HedleyMigrateItems.
  */
-class HedleyMigrateItems extends HedleyMigrateNodes {
+class HedleyMigrateItems extends HedleyMigrateBase {
+
+  protected $entityType = 'node';
 
   protected $bundle = 'item';
 
