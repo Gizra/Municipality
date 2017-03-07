@@ -48,10 +48,8 @@ abstract class HedleyMigrateBase extends Migration {
 
     $this->destination = $this->entityType == 'node' ? new MigrateDestinationNode($this->bundle) : new MigrateDestinationTerm($this->bundle);
 
-    // Define key column; Title for nodes, name for terms.
-    $key_column = $this->entityType == 'node' ? 'title' : 'name';
     $key = [
-      $key_column => [
+      'id' => [
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,

@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the Hedley FAQ feature.
+ */
+
+include_once 'hedley_faq.features.inc';

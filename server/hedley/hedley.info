@@ -40,6 +40,8 @@ dependencies[] = views
 dependencies[] = views_bulk_operations
 
 ; Hedley
+dependencies[] = hedley_faq
+dependencies[] = hedley_fields
 dependencies[] = hedley_item
 dependencies[] = hedley_municipality
 dependencies[] = hedley_pusher
