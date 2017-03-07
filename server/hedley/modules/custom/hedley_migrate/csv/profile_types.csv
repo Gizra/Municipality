@@ -1,4 +1,4 @@
-name
-Business
-Resident
-Tourist
+id,name
+1,Business
+2,Resident
+3,Tourist

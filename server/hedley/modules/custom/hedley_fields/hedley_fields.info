@@ -8,5 +8,6 @@ dependencies[] = text
 features[features_api][] = api:2
 features[field_base][] = field_answer
 features[field_base][] = field_profile_types
+features[field_base][] = field_question
 features[field_base][] = field_topic
 features_exclude[dependencies][hedley_terms] = hedley_terms
