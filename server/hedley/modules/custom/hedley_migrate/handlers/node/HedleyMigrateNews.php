@@ -2,32 +2,34 @@
 
 /**
  * @file
- * Contains \HedleyMigrateFaqs.
+ * Contains \HedleyMigrateNews.
  */
 
 /**
- * Class HedleyMigrateFaqs.
+ * Class HedleyMigrateNews.
  */
-class HedleyMigrateFaqs extends HedleyMigrateBase {
+class HedleyMigrateNews extends HedleyMigrateBase {
 
   protected $entityType = 'node';
-  protected $bundle = 'faq';
+  protected $bundle = 'news';
   protected $csvColumns = [
     'id',
     'municipality',
-    'field_question',
-    'field_answer',
-    'field_topic',
+    'title',
+    'field_subtitle',
+    'body',
+    'field_topics',
     'field_profile_types',
+    'field_image',
   ];
   protected $simpleMappings = [
-    'field_question',
-    'field_answer',
-    'field_topic',
+    'title',
+    'field_subtitle',
+    'body',
   ];
 
   /**
-   * HedleyMigrateFaqs constructor.
+   * HedleyMigrateNews constructor.
    */
   public function __construct($arguments) {
     parent::__construct($arguments);
@@ -39,6 +41,10 @@ class HedleyMigrateFaqs extends HedleyMigrateBase {
     $this
       ->addFieldMapping(OG_AUDIENCE_FIELD, 'municipality')
       ->sourceMigration('HedleyMigrateMunicipalities');
+
+    $this
+      ->addFieldMapping('field_topics', 'field_topics')
+      ->separator('|');
 
     $this
       ->addFieldMapping('field_profile_types', 'field_profile_types')
