@@ -14,7 +14,7 @@ class HedleyMigrateFaqs extends HedleyMigrateBase {
   protected $bundle = 'faq';
   protected $csvColumns = [
     'id',
-    'og_group_ref',
+    OG_AUDIENCE_FIELD,
     'field_question',
     'field_answer',
     'field_topic',
@@ -23,6 +23,7 @@ class HedleyMigrateFaqs extends HedleyMigrateBase {
   protected $simpleMappings = [
     'field_question',
     'field_answer',
+    'field_topic',
   ];
 
   /**
@@ -32,14 +33,16 @@ class HedleyMigrateFaqs extends HedleyMigrateBase {
     parent::__construct($arguments);
 
     $this->dependencies[] = 'HedleyMigrateMunicipalities';
+    $this->dependencies[] = 'HedleyMigrateProfileTypes';
+    $this->dependencies[] = 'HedleyMigrateTopics';
+
     $this
       ->addFieldMapping(OG_AUDIENCE_FIELD, OG_AUDIENCE_FIELD)
       ->sourceMigration('HedleyMigrateMunicipalities');
 
-    $this->dependencies[] = 'HedleyMigrateProfileTypes';
     $this
       ->addFieldMapping('field_profile_types', 'field_profile_types')
-      ->sourceMigration('HedleyMigrateProfileTypes');
+      ->separator('|');
 
   }
 

@@ -9,20 +9,21 @@
  * Implements hook_migrate_api().
  */
 function hedley_migrate_migrate_api() {
-  $migrations = array(
+  $migrations = [
     // Nodes.
     'HedleyMigrateFaqs',
     'HedleyMigrateItems',
     'HedleyMigrateMunicipalities',
     // Terms.
     'HedleyMigrateProfileTypes',
+    'HedleyMigrateTopics',
     // Users.
     'HedleyMigrateUsers',
-  );
+  ];
 
   $api['api'] = 2;
   foreach ($migrations as $migration) {
-    $api['migrations'][$migration] = array('class_name' => $migration);
+    $api['migrations'][$migration] = ['class_name' => $migration];
   }
 
   return $api;
