@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Hedley Action feature.
+ */
+
+include_once 'hedley_action.features.inc';
