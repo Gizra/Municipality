@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Hedley News feature.
+ */
+
+include_once 'hedley_news.features.inc';
