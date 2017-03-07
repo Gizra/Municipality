@@ -6,26 +6,3 @@
  */
 
 include_once 'hedley_faq.features.inc';
-
-/**
- * Implements hook_node_presave().
- *
- * Set the faq title to its question.
- */
-function hedley_faq_node_presave($node) {
-  if ($node->type != 'faq') {
-    return;
-  }
-
-  $wrapper = entity_metadata_wrapper('node', $node);
-  $node->title = $wrapper->field_question->value();
-}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * Remove the title from the faq node form.
- */
-function hedley_faq_form_faq_node_form_alter(&$form, &$form_state) {
-  $form['title']['#access'] = FALSE;
-}

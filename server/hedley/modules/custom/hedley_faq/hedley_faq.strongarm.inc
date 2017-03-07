@@ -13,6 +13,27 @@ function hedley_faq_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_node_faq';
+  $strongarm->value = '1';
+  $export['auto_entitylabel_node_faq'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_pattern_node_faq';
+  $strongarm->value = '[node:field_question]';
+  $export['auto_entitylabel_pattern_node_faq'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_php_node_faq';
+  $strongarm->value = 0;
+  $export['auto_entitylabel_php_node_faq'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_faq';
   $strongarm->value = 0;
   $export['comment_anonymous_faq'] = $strongarm;
