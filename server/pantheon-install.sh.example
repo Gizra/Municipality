@@ -6,9 +6,9 @@
 
 PROFILE="hedley"
 
-MAKE_DIR="/var/www/hedley"
-PANTHEON_DIR="/var/www/pantheon-hedley"
-PANTHEON_ALIAS="@pantheon.hedley.dev"
+MAKE_DIR="/var/www/municipality"
+PANTHEON_DIR="/var/www/municipality_pantheon"
+PANTHEON_ALIAS="@pantheon.municipality.dev"
 
 # Some variable definitions
 BOLD=`tput bold`
