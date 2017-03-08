@@ -2,16 +2,16 @@
 
 /**
  * @file
- * Contains \HedleyMigrateProfileTypes.
+ * Contains \HedleyMigrateTopics.
  */
 
 /**
- * Class HedleyMigrateProfileTypes.
+ * Class HedleyMigrateTopics.
  */
-class HedleyMigrateProfileTypes extends HedleyMigrateBase {
+class HedleyMigrateTopics extends HedleyMigrateBase {
 
   protected $entityType = 'taxonomy_term';
-  protected $bundle = 'profile_types';
+  protected $bundle = 'topics';
   protected $csvColumns = [
     'id',
     'name',

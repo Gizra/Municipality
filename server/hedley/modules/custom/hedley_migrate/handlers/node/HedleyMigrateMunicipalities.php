@@ -15,6 +15,7 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
   protected $bundle = 'municipality';
 
   protected $csvColumns = [
+    'id',
     'title',
   ];
 

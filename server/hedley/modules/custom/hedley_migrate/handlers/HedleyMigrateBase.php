@@ -48,10 +48,8 @@ abstract class HedleyMigrateBase extends Migration {
 
     $this->destination = $this->entityType == 'node' ? new MigrateDestinationNode($this->bundle) : new MigrateDestinationTerm($this->bundle);
 
-    // Define key column; Title for nodes, name for terms.
-    $key_column = $this->entityType == 'node' ? 'title' : 'name';
     $key = [
-      $key_column => [
+      'id' => [
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
@@ -74,6 +72,16 @@ abstract class HedleyMigrateBase extends Migration {
       $this->addFieldMapping('uid', 'author')
         ->sourceMigration('HedleyMigrateUsers')
         ->defaultValue(1);
+    }
+
+    // Map image field.
+    if (in_array('field_image', $this->csvColumns)) {
+      $this->addFieldMapping('field_image', 'field_image');
+      $this->addFieldMapping('field_image:file_replace')
+        ->defaultValue(FILE_EXISTS_REPLACE);
+
+      $this->addFieldMapping('field_image:source_dir')
+        ->defaultValue($this->getMigrateDirectory() . '/images/');
     }
 
   }
