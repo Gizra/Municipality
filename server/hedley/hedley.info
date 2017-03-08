@@ -27,7 +27,8 @@ dependencies[] = entity_token
 dependencies[] = entityreference
 dependencies[] = entity_validator
 dependencies[] = features
-dependencies[] = flag
+dependencies[] = i18n_node
+dependencies[] = i18n_taxonomy
 dependencies[] = libraries
 dependencies[] = message
 dependencies[] = module_filter
@@ -42,6 +43,7 @@ dependencies[] = views_bulk_operations
 ; Hedley
 dependencies[] = hedley_faq
 dependencies[] = hedley_fields
+dependencies[] = hedley_i18n
 dependencies[] = hedley_item
 dependencies[] = hedley_municipality
 dependencies[] = hedley_news
