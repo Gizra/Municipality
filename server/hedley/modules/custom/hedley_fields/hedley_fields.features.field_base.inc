@@ -263,6 +263,7 @@ function hedley_fields_field_default_field_bases() {
         'add to calendar icon' => 'add to calendar icon',
         'alarm icon' => 'alarm icon',
         'bug icon' => 'bug icon',
+        'paw icon' => 'paw icon',
         'find icon' => 'find icon',
         'handshake icon' => 'handshake icon',
       ),

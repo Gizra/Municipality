@@ -31,8 +31,13 @@ abstract class HedleyMigrateBase extends Migration {
   public function __construct($arguments) {
     parent::__construct($arguments);
 
-    // Add default settings, only for nodes and terms.
-    if (!in_array($this->entityType, ['node', 'taxonomy_term'])) {
+    $destination_classes = [
+      'node' => 'MigrateDestinationNode',
+      'taxonomy_term' => 'MigrateDestinationTerm',
+      'multifield' => 'MigrateDestinationMultifield',
+    ];
+    // Add default settings, only for nodes, terms and multifields.
+    if (empty($destination_classes[$this->entityType])) {
       return;
     }
 
@@ -46,7 +51,8 @@ abstract class HedleyMigrateBase extends Migration {
     }
     $this->source = new MigrateSourceCSV($source_file, $columns, ['header_rows' => 1]);
 
-    $this->destination = $this->entityType == 'node' ? new MigrateDestinationNode($this->bundle) : new MigrateDestinationTerm($this->bundle);
+    $destination_class = $destination_classes[$this->entityType];
+    $this->destination = new $destination_class($this->bundle);
 
     $key = [
       'id' => [

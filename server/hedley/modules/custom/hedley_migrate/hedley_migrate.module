@@ -10,6 +10,8 @@
  */
 function hedley_migrate_migrate_api() {
   $migrations = [
+    // Multifields.
+    'HedleyMigrateActionSections',
     // Nodes.
     'HedleyMigrateActions',
     'HedleyMigrateFaqs',
