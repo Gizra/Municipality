@@ -10,6 +10,6 @@ Feature: Verify that content is accessible.
       | Title                                         | Type           |
       | Kiryat Malakhi                                | municipality   |
       | Title                                         | event          |
-      | כמה סייעות יש בגן ילדים?                        | faq            |
+      | כמה סייעות יש בגן ילדים?                         | faq            |
       | Title                                         | action         |
-      | מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17 | news           |
+      | מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17   | news           |
