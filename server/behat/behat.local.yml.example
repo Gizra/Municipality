@@ -1,5 +1,7 @@
 default:
   extensions:
+    Behat\MinkExtension:
+      base_url: "http://muni.ll"
     Drupal\DrupalExtension:
       drupal:
-        drupal_root: "/var/www/hedley/www"
+        drupal_root: "/Users/itamar/Sites/municipality/server/www"

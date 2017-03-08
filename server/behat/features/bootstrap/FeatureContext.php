@@ -163,4 +163,29 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
         }
       });
   }
+
+  /**
+   * @When /^I visit "(.*)" node of type "([^"]*)"$/
+   */
+  public function iVisitNodePageOfType($title, $type) {
+    $query = new \entityFieldQuery();
+    $result = $query
+      ->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', $type)
+      ->propertyCondition('title', $title)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->range(0, 1)
+      ->execute();
+
+    if (empty($result['node'])) {
+      $params = [
+        '@title' => $title,
+        '@type' => $type,
+      ];
+      throw new \Exception(format_string('Node @title of @type not found.', $params));
+    }
+    $nid = key($result['node']);
+    $this->getSession()->visit($this->locatePath('node/' . $nid));
+  }
+
 }
