@@ -10,9 +10,6 @@
  */
 class HedleyMigrateDestinationMultifield extends MigrateDestination {
 
-  /**
-   * The multifield bundle.
-   */
   private $bundle;
 
   /**
