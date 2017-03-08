@@ -9,6 +9,16 @@
  */
 function hedley_terms_taxonomy_default_vocabularies() {
   return array(
+    'audiences' => array(
+      'name' => 'Audiences',
+      'machine_name' => 'audiences',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+      'language' => 'und',
+      'i18n_mode' => 1,
+    ),
     'profile_types' => array(
       'name' => 'Profile types',
       'machine_name' => 'profile_types',

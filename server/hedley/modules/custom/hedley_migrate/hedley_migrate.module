@@ -19,6 +19,7 @@ function hedley_migrate_migrate_api() {
     'HedleyMigrateMunicipalities',
     'HedleyMigrateNews',
     // Terms.
+    'HedleyMigrateAudiences',
     'HedleyMigrateProfileTypes',
     'HedleyMigrateTopics',
     // Users.

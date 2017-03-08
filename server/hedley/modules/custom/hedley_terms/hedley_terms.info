@@ -5,5 +5,6 @@ package = Hedley
 dependencies[] = features
 dependencies[] = taxonomy
 features[features_api][] = api:2
+features[taxonomy][] = audiences
 features[taxonomy][] = profile_types
 features[taxonomy][] = topics
