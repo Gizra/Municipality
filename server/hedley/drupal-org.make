@@ -31,7 +31,7 @@ projects[entity][version] = "1.8"
 projects[entity][patch][] = "https://www.drupal.org/files/issues/2086225-entity-access-check-node-create-3.patch"
 
 projects[entitycache][subdir] = "contrib"
-projects[entitycache][version] = 1.2
+projects[entitycache][version] = "1.2"
 
 projects[entityreference][subdir] = "contrib"
 projects[entityreference][version] = "1.2"
@@ -54,8 +54,11 @@ projects[jquery_update][version] = "2.4"
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "2.3"
 
-projects[mailsystem][version] = 2.34
+projects[link][subdir] = "contrib"
+projects[link][version] = "1.4"
+
 projects[mailsystem][subdir] = "contrib"
+projects[mailsystem][version] = "2.34"
 
 projects[message][subdir] = "contrib"
 projects[message][version] = "1.12"
@@ -63,14 +66,17 @@ projects[message][version] = "1.12"
 projects[message_notify][subdir] = "contrib"
 projects[message_notify][version] = "2.5"
 
-projects[mimemail][version] = 1.0-beta3
 projects[mimemail][subdir] = "contrib"
+projects[mimemail][version] = "1.0-beta3"
 
 projects[module_filter][subdir] = "contrib"
-projects[module_filter][version] = 2.0
+projects[module_filter][version] = "2.0"
+
+projects[multifield][subdir] = "contrib"
+projects[multifield][version] = "1.0-alpha4"
 
 projects[og][subdir] = "contrib"
-projects[og][version] = 2.x
+projects[og][version] = "2.x"
 
 projects[restful][subdir] = "contrib"
 projects[restful][version] = "1.8"
@@ -107,4 +113,4 @@ projects[migrate][subdir] = "development"
 projects[migrate][version] = "2.8"
 
 projects[migrate_extras][subdir] = "development"
-projects[migrate_extras][version] = 2.5
+projects[migrate_extras][version] = "2.5"
