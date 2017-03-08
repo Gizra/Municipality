@@ -45,8 +45,8 @@ projects[facetapi][version] = "1.5"
 projects[features][subdir] = "contrib"
 projects[features][version] = "2.10"
 
-projects[flag][subdir] = "contrib"
-projects[flag][version] = "3.9"
+projects[i18n][subdir] = "contrib"
+projects[i18n][version] = "1.15"
 
 projects[jquery_update][subdir] = "contrib"
 projects[jquery_update][version] = "2.4"
@@ -95,6 +95,9 @@ projects[title][version] = "1.0-alpha7"
 
 projects[token][subdir] = "contrib"
 projects[token][version] = "1.7"
+
+projects[variable][subdir] = "contrib"
+projects[variable][version] = "2.5"
 
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.15"
