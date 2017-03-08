@@ -2,24 +2,23 @@
 
 /**
  * @file
- * Contains \HedleyMigrateMunicipalities.
+ * Contains \HedleyMigrateDestinationMultifield.
  */
 
 /**
- * Class MigrateDestinationMultifield
+ * Class HedleyMigrateDestinationMultifield.
  */
-class MigrateDestinationMultifield extends MigrateDestination {
+class HedleyMigrateDestinationMultifield extends MigrateDestination {
 
   /**
-   * @var $bundle
-   *   The multifield bundle.
+   * The multifield bundle.
    */
   private $bundle;
 
   /**
-   * @return array
+   * The key schema.
    */
-  static public function getKeySchema() {
+  public static function getKeySchema() {
     return [
       'id' => [
         'type' => 'int',
@@ -29,8 +28,7 @@ class MigrateDestinationMultifield extends MigrateDestination {
   }
 
   /**
-   * @param $bundle
-   *  The multifield bundle, which is also the field name.
+   * HedleyMigrateDestinationMultifield constructor.
    */
   public function __construct($bundle) {
     $this->bundle = $bundle;
@@ -83,11 +81,11 @@ class MigrateDestinationMultifield extends MigrateDestination {
 
     // Add the custom multifield fields from the migration mapping.
     $multifield_columns = [];
-    foreach($object as $field => $value) {
+    foreach ($object as $field => $value) {
       $column = 'value';
 
       // Set the value column according to the field type.
-      switch(field_info_field($field)['type']) {
+      switch (field_info_field($field)['type']) {
         case 'taxonomy_term_reference':
           $column = 'tid';
           break;
@@ -118,7 +116,6 @@ class MigrateDestinationMultifield extends MigrateDestination {
 
     if (isset($row->migrate_map_destid1)) {
       // Updating a previously migrated multifield.
-
       $multifield_id = $row->migrate_map_destid1;
 
       db_update('field_data_' . $multifield_name)
@@ -129,9 +126,8 @@ class MigrateDestinationMultifield extends MigrateDestination {
       $this->numUpdated++;
 
     }
+    // Creating a new multifield.
     else {
-      // Creating a new multifield.
-
       // Determine the multifield delta.
       $delta = !empty($node->{$multifield_name}) ? max(array_keys($node->{$multifield_name}[LANGUAGE_NONE])) + 1 : 0;
       $multifield_id = multifield_get_next_id();

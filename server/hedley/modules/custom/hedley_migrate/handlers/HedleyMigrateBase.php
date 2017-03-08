@@ -34,7 +34,7 @@ abstract class HedleyMigrateBase extends Migration {
     $destination_classes = [
       'node' => 'MigrateDestinationNode',
       'taxonomy_term' => 'MigrateDestinationTerm',
-      'multifield' => 'MigrateDestinationMultifield',
+      'multifield' => 'HedleyMigrateDestinationMultifield',
     ];
     // Add default settings, only for nodes, terms and multifields.
     if (empty($destination_classes[$this->entityType])) {

@@ -6,7 +6,7 @@
  */
 
 /**
- * Class HedleyMigrateActionSections
+ * Class HedleyMigrateActionSections.
  */
 class HedleyMigrateActionSections extends HedleyMigrateBase {
 
@@ -26,7 +26,6 @@ class HedleyMigrateActionSections extends HedleyMigrateBase {
     'field_section_description',
   ];
 
-
   /**
    * HedleyMigrateActionSections constructor.
    */
@@ -37,4 +36,5 @@ class HedleyMigrateActionSections extends HedleyMigrateBase {
     $this->addFieldMapping('host', 'host')
       ->sourceMigration('HedleyMigrateActions');
   }
+
 }

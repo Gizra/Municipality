@@ -8,7 +8,7 @@ dependencies[] = migrate_extras
 ; Handlers
 files[] = handlers/HedleyMigrateBase.php
 files[] = handlers/multifield/HedleyMigrateActionSections.php
-files[] = handlers/multifield/MigrateDestinationMultifield.php
+files[] = handlers/multifield/HedleyMigrateDestinationMultifield.php
 files[] = handlers/node/HedleyMigrateActions.php
 files[] = handlers/node/HedleyMigrateFaqs.php
 files[] = handlers/node/HedleyMigrateItems.php
