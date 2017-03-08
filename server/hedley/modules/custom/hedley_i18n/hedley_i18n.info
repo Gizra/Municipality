@@ -1,5 +1,5 @@
 name = Hedley I18n
-description = Municipality Internationalization.
+description = Municipality i18n settings.
 core = 7.x
 package = Hedley
 dependencies[] = ctools
