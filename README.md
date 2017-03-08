@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/Gizra/Municipality.svg?token=cc5rexEmBpJWPVqXvSs9&branch=master)](https://travis-ci.com/Gizra/Municipality)
+
 # Municipality
 
 * Characterization Partners Map: [link](https://www.google.com/maps/d/u/1/edit?hl=en&authuser=1&mid=12DmMA8g3o1_FqVMlqITQQVCbUDc&ll=32.03967029544769%2C35.11458200000004&z=8)
