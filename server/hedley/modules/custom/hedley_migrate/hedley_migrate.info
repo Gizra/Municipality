@@ -10,6 +10,7 @@ files[] = handlers/HedleyMigrateBase.php
 files[] = handlers/multifield/HedleyMigrateActionSections.php
 files[] = handlers/multifield/HedleyMigrateDestinationMultifield.php
 files[] = handlers/node/HedleyMigrateActions.php
+files[] = handlers/node/HedleyMigrateEvents.php
 files[] = handlers/node/HedleyMigrateFaqs.php
 files[] = handlers/node/HedleyMigrateItems.php
 files[] = handlers/node/HedleyMigrateMunicipalities.php
