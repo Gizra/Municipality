@@ -15,8 +15,12 @@ class HedleyMigrateFaqs extends HedleyMigrateBase {
   protected $csvColumns = [
     'id',
     'municipality',
-    'field_question',
-    'field_answer',
+    'field_question_ar',
+    'field_question_en',
+    'field_question_he',
+    'field_answer_ar',
+    'field_answer_en',
+    'field_answer_he',
     'field_topic',
     'field_profile_types',
   ];
