@@ -8,7 +8,7 @@ Feature: Verify that content is accessible.
 
     Examples:
       | Title                                         | Type           |
-      | Kiryat Malakhi                                | municipality   |
+      | Tuba-Zangariyye                               | municipality   |
       | Title                                         | event          |
       | כמה סייעות יש בגן ילדים?                         | faq            |
       | Title                                         | action         |
