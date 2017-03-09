@@ -11,16 +11,15 @@
 class HedleyMigrateMunicipalities extends HedleyMigrateBase {
 
   protected $entityType = 'node';
-
   protected $bundle = 'municipality';
-
   protected $csvColumns = [
     'id',
-    'title',
+    'title_field_ar',
+    'title_field_en',
+    'title_field_he',
   ];
-
   protected $simpleMappings = [
-    'title',
+    'title_field',
   ];
 
 }
