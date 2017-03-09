@@ -3,6 +3,7 @@ description = Municipality content type.
 core = 7.x
 package = Hedley
 dependencies[] = features
+dependencies[] = hedley_fields
 dependencies[] = hedley_i18n
 dependencies[] = list
 dependencies[] = og

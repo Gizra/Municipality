@@ -14,7 +14,13 @@ abstract class HedleyMigrateBase extends Migration {
   protected $bundle = NULL;
   protected $csvColumns = [];
   protected $simpleMappings = [];
-  protected $translatableFields = ['body', 'title_field', 'field_subtitle'];
+  protected $translatableFields = [
+    'body',
+    'title_field',
+    'field_subtitle',
+    'field_question',
+    'field_answer',
+  ];
 
   /**
    * Returns the migrate directory.

@@ -65,7 +65,7 @@ function hedley_fields_field_default_field_bases() {
       ),
       'hide_blank_items' => 1,
     ),
-    'translatable' => 0,
+    'translatable' => 1,
     'type' => 'multifield',
   );
 
@@ -86,7 +86,7 @@ function hedley_fields_field_default_field_bases() {
     'settings' => array(
       'entity_translation_sync' => FALSE,
     ),
-    'translatable' => 0,
+    'translatable' => 1,
     'type' => 'text_long',
   );
 
@@ -279,7 +279,7 @@ function hedley_fields_field_default_field_bases() {
     'settings' => array(
       'entity_translation_sync' => FALSE,
     ),
-    'translatable' => 0,
+    'translatable' => 1,
     'type' => 'text_long',
   );
 
