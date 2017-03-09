@@ -48,7 +48,6 @@ dependencies[] = hedley_event
 dependencies[] = hedley_faq
 dependencies[] = hedley_fields
 dependencies[] = hedley_i18n
-dependencies[] = hedley_item
 dependencies[] = hedley_municipality
 dependencies[] = hedley_news
 dependencies[] = hedley_pusher
