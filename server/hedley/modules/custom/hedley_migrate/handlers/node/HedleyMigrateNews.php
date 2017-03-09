@@ -29,7 +29,7 @@ class HedleyMigrateNews extends HedleyMigrateBase {
     'field_image',
   ];
   protected $simpleMappings = [
-    'title',
+    'title_field',
     'field_subtitle',
     'body',
   ];
