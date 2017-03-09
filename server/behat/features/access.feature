@@ -11,5 +11,5 @@ Feature: Verify that content is accessible.
       | Tuba-Zangariyye                               | municipality   |
       | Title                                         | event          |
       | כמה סייעות יש בגן ילדים?                         | faq            |
-      | Title                                         | action         |
+      | Action title EN                               | action         |
       | מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17    | news           |

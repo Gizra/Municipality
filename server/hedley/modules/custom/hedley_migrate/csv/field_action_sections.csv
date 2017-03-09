@@ -1,2 +1,4 @@
-id,host,field_section_title,field_section_icon,field_section_description,field_section_hardcopy_form
-1,1,section title 1,paw icon,Section 1 description,
+id,host,language,field_section_title,field_section_icon,field_section_description,field_section_hardcopy_form
+1,1,ar,section title 1 AR,paw icon,Section 1 description AR,
+2,1,en,section title 1 EN,paw icon,Section 1 description EN,
+3,1,he,section title 1 HE,paw icon,Section 1 description HE,
