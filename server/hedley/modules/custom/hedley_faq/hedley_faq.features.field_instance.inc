@@ -36,6 +36,7 @@ function hedley_faq_field_default_field_instances() {
     'label' => 'Answer',
     'required' => 1,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
@@ -76,6 +77,7 @@ function hedley_faq_field_default_field_instances() {
     'label' => 'Profile types',
     'required' => 1,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -113,6 +115,7 @@ function hedley_faq_field_default_field_instances() {
     'label' => 'Question',
     'required' => 1,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -153,6 +156,7 @@ function hedley_faq_field_default_field_instances() {
     'label' => 'Topic',
     'required' => 1,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -204,6 +208,7 @@ function hedley_faq_field_default_field_instances() {
           'status' => TRUE,
         ),
       ),
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'view modes' => array(

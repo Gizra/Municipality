@@ -26,8 +26,10 @@ function hedley_municipality_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(),
-    'translatable' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 1,
     'type' => 'text_with_summary',
   );
 
@@ -51,6 +53,7 @@ function hedley_municipality_field_default_field_bases() {
         1 => 'Group',
       ),
       'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'list_boolean',

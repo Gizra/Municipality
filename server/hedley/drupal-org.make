@@ -36,6 +36,9 @@ projects[entitycache][version] = "1.2"
 projects[entityreference][subdir] = "contrib"
 projects[entityreference][version] = "1.2"
 
+projects[entity_translation][subdir] = "contrib"
+projects[entity_translation][version] = "1.0-beta6"
+
 projects[entity_validator][subdir] = "contrib"
 projects[entity_validator][version] = "1.x"
 
