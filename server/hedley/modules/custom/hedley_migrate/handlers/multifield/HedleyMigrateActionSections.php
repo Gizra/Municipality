@@ -16,11 +16,13 @@ class HedleyMigrateActionSections extends HedleyMigrateBase {
   protected $csvColumns = [
     'id',
     'host',
+    'language',
     'field_section_title',
     'field_section_icon',
     'field_section_description',
   ];
   protected $simpleMappings = [
+    'language',
     'field_section_title',
     'field_section_icon',
     'field_section_description',

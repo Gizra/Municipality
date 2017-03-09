@@ -15,13 +15,15 @@ class HedleyMigrateActions extends HedleyMigrateBase {
   protected $csvColumns = [
     'id',
     'municipality',
-    'title',
+    'title_field_ar',
+    'title_field_en',
+    'title_field_he',
     'field_topics',
     'field_profile_types',
     'field_link',
   ];
   protected $simpleMappings = [
-    'title',
+    'title_field',
     'field_link',
   ];
 
