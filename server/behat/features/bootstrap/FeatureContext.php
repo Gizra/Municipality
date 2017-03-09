@@ -172,7 +172,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $result = $query
       ->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', $type)
-      ->propertyCondition('title', $title)
+      ->fieldCondition('title_field', 'value', $title)
       ->propertyCondition('status', NODE_PUBLISHED)
       ->range(0, 1)
       ->execute();

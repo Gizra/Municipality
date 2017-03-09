@@ -1,2 +1,2 @@
-id,municipality,title,field_subtitle,body,field_topics,field_profile_types,field_image
-1,1,מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17,,,,Resident,terrified-cat.jpeg
+id,municipality,title_field_ar,title_field_en,title_field_he,field_subtitle_ar,field_subtitle_en,field_subtitle_he,body_ar,body_en,body_he,field_topics,field_profile_types,field_image
+1,1,News ar,News en,מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17,العنوان الثانوي,Subtitle,כותרת משנה,محتويات,Body,בודי,,Resident,terrified-cat.jpeg
