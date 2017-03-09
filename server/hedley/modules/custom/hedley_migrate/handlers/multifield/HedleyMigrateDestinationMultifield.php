@@ -74,6 +74,13 @@ class HedleyMigrateDestinationMultifield extends MigrateDestination {
     $node = node_load($object->host);
     unset($object->host);
 
+    // Extract language.
+    $multifield_language = LANGUAGE_NONE;
+    if (!empty($object->language)) {
+      $multifield_language = $object->language;
+      unset($object->language);
+    }
+
     $multifield_name = $this->bundle;
 
     // Add the custom multifield fields from the migration mapping.
@@ -126,7 +133,7 @@ class HedleyMigrateDestinationMultifield extends MigrateDestination {
     // Creating a new multifield.
     else {
       // Determine the multifield delta.
-      $delta = !empty($node->{$multifield_name}) ? max(array_keys($node->{$multifield_name}[LANGUAGE_NONE])) + 1 : 0;
+      $delta = !empty($node->{$multifield_name}[$multifield_language]) ? max(array_keys($node->{$multifield_name}[$multifield_language])) + 1 : 0;
       $multifield_id = multifield_get_next_id();
 
       // Common multifield columns.
@@ -136,7 +143,7 @@ class HedleyMigrateDestinationMultifield extends MigrateDestination {
         'deleted' => 0,
         'entity_id' => $node->nid,
         'revision_id' => $node->nid,
-        'language' => LANGUAGE_NONE,
+        'language' => $multifield_language,
         'delta' => $delta,
         $multifield_name . '_id' => $multifield_id,
       ];
