@@ -81,7 +81,7 @@ abstract class HedleyMigrateBase extends Migration {
         ->defaultValue(1);
 
       // Map translatable fields languages lists.
-      foreach($this->translatableFields as $translated_field) {
+      foreach ($this->translatableFields as $translated_field) {
         if (in_array($translated_field, $this->simpleMappings)) {
           $this->addFieldMapping($translated_field . ':language', $translated_field . '_languages');
         }
@@ -117,7 +117,7 @@ abstract class HedleyMigrateBase extends Migration {
    * Merge translatable fields' columns into arrays.
    */
   public function prepareRow($row) {
-    foreach($this->translatableFields as $translated_field) {
+    foreach ($this->translatableFields as $translated_field) {
       $this->mergeTranslatedColumns($row, $translated_field);
     }
 
@@ -136,13 +136,16 @@ abstract class HedleyMigrateBase extends Migration {
       return;
     }
 
+    // Combine the translated columns into this array.
     $row->$field = [];
     $field_languages_column = $field . '_languages';
+    // Lists the actual translation languages.
     $row->$field_languages_column = [];
 
     foreach (array_keys(language_list('language')) as $language) {
       $column = $field . '_' . $language;
       if (empty($row->$column)) {
+        // Ignore non translated languages.
         continue;
       }
 
