@@ -15,8 +15,12 @@ class HedleyMigrateEvents extends HedleyMigrateBase {
   protected $csvColumns = [
     'id',
     'municipality',
-    'title',
-    'body',
+    'title_field_ar',
+    'title_field_en',
+    'title_field_he',
+    'body_ar',
+    'body_en',
+    'body_he',
     'field_image',
     'field_topics',
     'field_recurring_weekly',
@@ -28,7 +32,7 @@ class HedleyMigrateEvents extends HedleyMigrateBase {
     'field_profile_types',
   ];
   protected $simpleMappings = [
-    'title',
+    'title_field',
     'body',
     'field_recurring_weekly',
     'field_audience',

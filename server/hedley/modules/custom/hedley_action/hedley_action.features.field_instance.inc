@@ -31,6 +31,7 @@ function hedley_action_field_default_field_instances() {
     'label' => 'Section description',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -68,6 +69,7 @@ function hedley_action_field_default_field_instances() {
     'label' => 'Section hardcopy form',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -104,6 +106,7 @@ function hedley_action_field_default_field_instances() {
     'label' => 'Section icon',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -136,6 +139,7 @@ function hedley_action_field_default_field_instances() {
     'label' => 'Section title',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -178,6 +182,7 @@ function hedley_action_field_default_field_instances() {
     'label' => 'Action sections',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -228,6 +233,7 @@ function hedley_action_field_default_field_instances() {
         'url_cutoff' => 80,
       ),
       'enable_tokens' => 1,
+      'entity_translation_sync' => FALSE,
       'rel_remove' => 'default',
       'title' => 'optional',
       'title_label_use_field_label' => 0,
@@ -272,6 +278,7 @@ function hedley_action_field_default_field_instances() {
     'label' => 'Profile types',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -309,6 +316,7 @@ function hedley_action_field_default_field_instances() {
     'label' => 'Topics',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -360,6 +368,7 @@ function hedley_action_field_default_field_instances() {
           'status' => TRUE,
         ),
       ),
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'view modes' => array(
@@ -382,6 +391,49 @@ function hedley_action_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-action-title_field'.
+  $field_instances['node-action-title_field'] = array(
+    'bundle' => 'action',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'title_field',
+    'label' => 'Title',
+    'required' => TRUE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => 0,
+        'page' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => -5,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Action sections');
@@ -392,6 +444,7 @@ function hedley_action_field_default_field_instances() {
   t('Section hardcopy form');
   t('Section icon');
   t('Section title');
+  t('Title');
   t('Topics');
 
   return $field_instances;

@@ -36,6 +36,9 @@ projects[entitycache][version] = "1.2"
 projects[entityreference][subdir] = "contrib"
 projects[entityreference][version] = "1.2"
 
+projects[entity_translation][subdir] = "contrib"
+projects[entity_translation][version] = "1.0-beta6"
+
 projects[entity_validator][subdir] = "contrib"
 projects[entity_validator][version] = "1.x"
 
@@ -91,7 +94,7 @@ projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 
 projects[title][subdir] = "contrib"
-projects[title][version] = "1.0-alpha7"
+projects[title][version] = "1.0-alpha9"
 
 projects[token][subdir] = "contrib"
 projects[token][version] = "1.7"
