@@ -12,10 +12,10 @@ function hedley_install() {
   ini_set('auto_detect_line_endings', TRUE);
 
   // Enable our themes.
-  theme_enable(array('bartik', 'seven'));
+  theme_enable(['hedley_theme', 'seven']);
 
   // Set the default theme.
-  variable_set('theme_default', 'bartik');
+  variable_set('theme_default', 'hedley_theme');
   variable_set('admin_theme', 'seven');
 
   // Enable node view page override by Page manager module.
@@ -91,7 +91,7 @@ function hedley_standard_install() {
   filter_format_save($full_html_format);
 
   // Enable some standard blocks.
-  $default_theme = variable_get('theme_default', 'bartik');
+  $default_theme = variable_get('theme_default', 'hedley_theme');
 
   $values = array(
     array(

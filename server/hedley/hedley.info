@@ -28,6 +28,7 @@ dependencies[] = entityreference
 dependencies[] = entity_translation
 dependencies[] = entity_validator
 dependencies[] = features
+dependencies[] = jquery_update
 dependencies[] = libraries
 dependencies[] = link
 dependencies[] = message
