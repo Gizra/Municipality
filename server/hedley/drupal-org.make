@@ -90,6 +90,12 @@ projects[search_api][version] = "1.12"
 projects[search_api_solr][subdir] = "contrib"
 projects[search_api_solr][version] = "1.5"
 
+projects[semanticui][subdir] = "contrib"
+; Using 1.x-dev due to no stable release.
+projects[semanticui][version] = "1.x-dev"
+; https://www.drupal.org/node/2859537 .
+projects[semanticui][patch][] = "https://www.drupal.org/files/issues/use-semantic-library-as-is-2859537-1.patch"
+
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 
@@ -107,6 +113,11 @@ projects[views][version] = "3.15"
 
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.4"
+
+; Libraries
+libraries[semanticui][type] = "libraries"
+libraries[semanticui][download][type] = "get"
+libraries[semanticui][download][url] = "https://github.com/Semantic-Org/Semantic-UI/archive/master.zip"
 
 ; Development
 projects[devel][subdir] = "development"

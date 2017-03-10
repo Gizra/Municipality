@@ -1,0 +1,4 @@
+name = Hedley theme
+description = Municipality Semantic UI subtheme.
+core = 7.x
+base theme = semanticui
