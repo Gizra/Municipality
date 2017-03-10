@@ -9,10 +9,13 @@ $plugin = [
   'title' => t('Promoted municipality content'),
   'description' => t("Promoted municipality's content."),
   'category' => t('Hedley'),
+  'hook theme' => 'hedley_municipality_promoted_content_content_type_theme',
   'required context' => new ctools_context_required(t('Municipality'), 'node'),
   'defaults' => [
     'bundle' => NULL,
     'title' => NULL,
+    'all_nodes_title' => NULL,
+    'all_nodes_url' => NULL,
   ],
 ];
 
@@ -30,13 +33,25 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
     return NULL;
   }
 
+  $nodes = node_view_multiple($nodes, 'homepage_teaser');
+  $variables = ['nodes' => $nodes];
+
   $wrapper = entity_metadata_wrapper('node', $group_nid);
   $block = new stdClass();
   $block->module = 'hedley_municipality';
+  // Ignoring the "Only string literals should be passed to t()" validation,
+  // because it doesn't make sense in this case.
   // @codingStandardsIgnoreStart
   $block->title = t($conf['title'], ['@municipality' => $wrapper->label()]);
   // @codingStandardsIgnoreEnd
-  $block->content = node_view_multiple($nodes, 'homepage_teaser');
+
+  // Add the "View all nodes" link.
+  if ($conf['all_nodes_title']) {
+    // @codingStandardsIgnoreStart
+    $variables['all_nodes_link'] = l(t($conf['all_nodes_title']), $conf['all_nodes_url'], ['attributes' => ['class' => ['ui basic button']]]);
+    // @codingStandardsIgnoreEnd
+  }
+  $block->content = theme('hedley_municipality_promoted_content', $variables);
 
   return $block;
 }
@@ -62,6 +77,18 @@ function hedley_municipality_promoted_content_content_type_edit_form($form, &$fo
     '#default_value' => $conf['title'],
   ];
 
+  $form['all_nodes_title'] = [
+    '#type' => 'textfield',
+    '#title' => t('All nodes link title'),
+    '#default_value' => $conf['all_nodes_title'],
+  ];
+
+  $form['all_nodes_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('All nodes url'),
+    '#default_value' => $conf['all_nodes_url'],
+  ];
+
   return $form;
 }
 
@@ -73,4 +100,18 @@ function hedley_municipality_promoted_content_content_type_edit_form_submit($for
   foreach (array_keys($form_state['plugin']['defaults']) as $key) {
     $form_state['conf'][$key] = $form_state['values'][$key];
   }
+}
+
+/**
+ * Delegated hook_theme().
+ */
+function hedley_municipality_promoted_content_content_type_theme(&$theme, $plugin) {
+  $theme['hedley_municipality_promoted_content'] = [
+    'variables' => [
+      'nodes' => NULL,
+      'all_nodes_link' => NULL,
+    ],
+    'path' => $plugin['path'],
+    'template' => 'promoted-content',
+  ];
 }

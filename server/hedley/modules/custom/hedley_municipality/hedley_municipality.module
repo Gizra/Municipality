@@ -43,3 +43,15 @@ function hedley_municipality_get_group_promoted_nodes($group_nid, $bundle, $max_
 
   return !empty($result['node']) ? node_load_multiple(array_keys($result['node'])) : [];
 }
+
+/**
+ * Implements hook_entity_info_alter().
+ *
+ * Adding teaser view mode for the municipality homepage.
+ */
+function hedley_municipality_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['homepage_teaser'] = [
+    'label' => t('Municipality homepage teaser'),
+    'custom settings' => TRUE,
+  ];
+}

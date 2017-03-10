@@ -77,7 +77,7 @@ function hedley_municipality_default_page_manager_handlers() {
   );
   $pane->css = array(
     'css_id' => '',
-    'css_class' => 'ui nine wide column',
+    'css_class' => 'ui segment nine wide column',
   );
   $pane->extras = array();
   $pane->position = 0;
@@ -99,12 +99,17 @@ function hedley_municipality_default_page_manager_handlers() {
     'override_title_text' => 'What happens in %title',
     'override_title_heading' => 'h2',
     'title' => 'What happens in @municipality?',
+    'all_nodes_title' => 'See all news',
+    'all_nodes_url' => '',
   );
   $pane->cache = array();
   $pane->style = array(
     'settings' => NULL,
   );
-  $pane->css = array();
+  $pane->css = array(
+    'css_id' => '',
+    'css_class' => 'ui segment nine wide column',
+  );
   $pane->extras = array();
   $pane->position = 1;
   $pane->locks = array();
