@@ -4,7 +4,6 @@
  * @file
  * FAQs accordion template.
  */
-
 ?>
 <div class="ui styled fluid accordion">
   <?php foreach ($faqs as $faq): ?>
