@@ -24,6 +24,12 @@ function hedley_municipality_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -73,6 +79,12 @@ function hedley_municipality_field_default_field_instances() {
           'field_name' => FALSE,
         ),
         'type' => 'og_group_subscribe',
+        'weight' => 0,
+      ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'teaser' => array(
@@ -126,6 +138,12 @@ function hedley_municipality_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 2,
+      ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',

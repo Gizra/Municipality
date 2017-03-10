@@ -4,3 +4,5 @@ core = 7.x
 base theme = semanticui
 
 scripts[] = semanticui-inits.js
+
+plugins[panels][layouts] = layouts

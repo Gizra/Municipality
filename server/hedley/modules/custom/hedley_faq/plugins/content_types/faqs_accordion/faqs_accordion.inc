@@ -21,25 +21,15 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
   if (empty($context->data->nid)) {
     return NULL;
   }
-  $group_nid = $context->data->nid;
 
   // Get promoted FAQ nodes of the viewed municipality.
-  $query = new EntityFieldQuery();
-  $results = $query
-    ->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', 'faq')
-    ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyCondition('promote', NODE_PROMOTED)
-    ->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $group_nid)
-    ->execute();
-
-  if (empty($results['node'])) {
+  if (!$nodes = hedley_municipality_get_group_promoted_nodes($context->data->nid, 'faq', 10)) {
     return NULL;
   }
 
   // Extract the questions and answers from the FAQ nodes.
   $faqs = [];
-  foreach (node_load_multiple(array_keys($results['node'])) as $node) {
+  foreach ($nodes as $node) {
     $wrapper = entity_metadata_wrapper('node', $node);
     $wrapper->language($language->language);
 

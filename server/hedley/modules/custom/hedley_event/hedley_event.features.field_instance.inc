@@ -24,6 +24,12 @@ function hedley_event_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -70,6 +76,12 @@ function hedley_event_field_default_field_instances() {
         'type' => 'i18n_taxonomy_term_reference_link',
         'weight' => 4,
       ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -113,6 +125,20 @@ function hedley_event_field_default_field_instances() {
         ),
         'type' => 'date_default',
         'weight' => 5,
+      ),
+      'homepage_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'short',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 1,
+        ),
+        'type' => 'date_default',
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -166,6 +192,16 @@ function hedley_event_field_default_field_instances() {
         'type' => 'image',
         'weight' => 10,
       ),
+      'homepage_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'thumbnail',
+        ),
+        'type' => 'image',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -215,6 +251,12 @@ function hedley_event_field_default_field_instances() {
         'type' => 'i18n_taxonomy_term_reference_link',
         'weight' => 8,
       ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -257,6 +299,12 @@ function hedley_event_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 3,
       ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -296,6 +344,12 @@ function hedley_event_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 6,
+      ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -338,6 +392,12 @@ function hedley_event_field_default_field_instances() {
         'type' => 'i18n_taxonomy_term_reference_link',
         'weight' => 7,
       ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -378,6 +438,12 @@ function hedley_event_field_default_field_instances() {
         'settings' => array(),
         'type' => 'og_list_default',
         'weight' => 0,
+      ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -437,6 +503,17 @@ function hedley_event_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 9,
+      ),
+      'homepage_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => 'content',
+          'title_style' => 'h4',
+        ),
+        'type' => 'title_linked',
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
