@@ -6,3 +6,40 @@
  */
 
 include_once 'hedley_municipality.features.inc';
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function hedley_municipality_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
+ * Get promoted nodes of a municipality group.
+ *
+ * @param int $group_nid
+ *   A municipality node ID.
+ * @param string $bundle
+ *   The wanted nodes bundle.
+ * @param int $max_range
+ *   Maximal amount of nodes to fetch.
+ *
+ * @return array
+ *   Node objects.
+ */
+function hedley_municipality_get_group_promoted_nodes($group_nid, $bundle, $max_range) {
+  $query = new EntityFieldQuery();
+  $result = $query
+    ->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', $bundle)
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyCondition('promote', NODE_PROMOTED)
+    ->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $group_nid)
+    ->propertyOrderBy('created', 'DESC')
+    ->range(0, $max_range)
+    ->execute();
+
+  return !empty($result['node']) ? node_load_multiple(array_keys($result['node'])) : [];
+}
