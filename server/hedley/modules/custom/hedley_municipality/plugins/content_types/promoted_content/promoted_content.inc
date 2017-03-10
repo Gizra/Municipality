@@ -12,10 +12,11 @@ $plugin = [
   'hook theme' => 'hedley_municipality_promoted_content_content_type_theme',
   'required context' => new ctools_context_required(t('Municipality'), 'node'),
   'defaults' => [
-    'bundle' => NULL,
-    'title' => NULL,
     'all_nodes_title' => NULL,
     'all_nodes_url' => NULL,
+    'bundle' => NULL,
+    'items_class' => NULL,
+    'title' => NULL,
   ],
 ];
 
@@ -34,7 +35,10 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
   }
 
   $nodes = node_view_multiple($nodes, 'homepage_teaser');
-  $variables = ['nodes' => $nodes];
+  $variables = [
+    'nodes' => $nodes,
+    'items_class' => $conf['items_class'],
+  ];
 
   $wrapper = entity_metadata_wrapper('node', $group_nid);
   $block = new stdClass();
@@ -75,6 +79,13 @@ function hedley_municipality_promoted_content_content_type_edit_form($form, &$fo
     '#title' => t('Title'),
     '#description' => t('The block title.'),
     '#default_value' => $conf['title'],
+  ];
+
+  $form['items_class'] = [
+    '#type' => 'textfield',
+    '#title' => t('Items wrapper class'),
+    '#description' => t('The items wrapping div class.'),
+    '#default_value' => $conf['items_class'],
   ];
 
   $form['all_nodes_title'] = [

@@ -21,3 +21,12 @@ function hedley_theme_preprocess_node(&$variables) {
     $preprocess_function($variables);
   }
 }
+
+/**
+ * Theme override.
+ *
+ * Remove the default panel separators.
+ */
+function hedley_theme_panels_default_style_render_region($variables) {
+  return implode('', $variables['panes']);
+}
