@@ -21,6 +21,9 @@ function hedley_news_strongarm() {
         'title' => array(
           'weight' => '0',
         ),
+        'language' => array(
+          'weight' => '5',
+        ),
       ),
       'display' => array(),
     ),

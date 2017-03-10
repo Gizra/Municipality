@@ -22,6 +22,7 @@ dependencies[] = auto_entitylabel
 dependencies[] = composer_manager
 dependencies[] = ctools
 dependencies[] = date
+dependencies[] = diff
 dependencies[] = entity
 dependencies[] = entity_token
 dependencies[] = entityreference
