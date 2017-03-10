@@ -7,7 +7,6 @@ dependencies[] = date
 dependencies[] = features
 dependencies[] = file
 dependencies[] = hedley_fields
-dependencies[] = hedley_item
 dependencies[] = hedley_municipality
 dependencies[] = image
 dependencies[] = og
