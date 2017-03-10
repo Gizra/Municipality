@@ -52,7 +52,7 @@ projects[i18n][subdir] = "contrib"
 projects[i18n][version] = "1.15"
 
 projects[jquery_update][subdir] = "contrib"
-projects[jquery_update][version] = "2.4"
+projects[jquery_update][version] = "2.7"
 
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "2.3"
@@ -79,7 +79,7 @@ projects[multifield][subdir] = "contrib"
 projects[multifield][version] = "1.0-alpha4"
 
 projects[og][subdir] = "contrib"
-projects[og][version] = "2.x"
+projects[og][version] = "2.9"
 
 projects[restful][subdir] = "contrib"
 projects[restful][version] = "1.8"
