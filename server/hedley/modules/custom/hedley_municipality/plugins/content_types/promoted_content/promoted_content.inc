@@ -33,7 +33,9 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
   $wrapper = entity_metadata_wrapper('node', $group_nid);
   $block = new stdClass();
   $block->module = 'hedley_municipality';
+  // @codingStandardsIgnoreStart
   $block->title = t($conf['title'], ['@municipality' => $wrapper->label()]);
+  // @codingStandardsIgnoreEnd
   $block->content = node_view_multiple($nodes, 'homepage_teaser');
 
   return $block;
