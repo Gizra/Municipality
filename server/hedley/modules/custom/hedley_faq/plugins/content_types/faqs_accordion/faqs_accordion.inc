@@ -7,7 +7,7 @@
 
 $plugin = [
   'title' => t('FAQs accordion'),
-  'description' => t('Promoted municipality\'s FAQs as an accordion.'),
+  'description' => t("Promoted municipality's FAQs as an accordion."),
   'category' => t('Hedley'),
   'hook theme' => 'hedley_faq_faqs_accordion_content_type_theme',
   'required context' => new ctools_context_required(t('Municipality'), 'node'),
