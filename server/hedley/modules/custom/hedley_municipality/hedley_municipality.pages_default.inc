@@ -179,6 +179,38 @@ function hedley_municipality_default_page_manager_handlers() {
   $pane->uuid = 'fb1c6e5e-f7b3-4fcc-821d-23a173bc173c';
   $display->content['new-fb1c6e5e-f7b3-4fcc-821d-23a173bc173c'] = $pane;
   $display->panels['main'][3] = 'new-fb1c6e5e-f7b3-4fcc-821d-23a173bc173c';
+  $pane = new stdClass();
+  $pane->pid = 'new-bff022db-6e50-4f7e-954b-3d694b9ef8d1';
+  $pane->panel = 'main';
+  $pane->type = 'promoted_content';
+  $pane->subtype = 'promoted_content';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'all_nodes_title' => 'See all events',
+    'all_nodes_url' => '',
+    'bundle' => 'event',
+    'items_class' => 'ui divided items',
+    'title' => 'Upcoming events',
+    'context' => 'argument_entity_id:node_1',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array(
+    'css_id' => '',
+    'css_class' => 'ui segment seven wide column',
+  );
+  $pane->extras = array();
+  $pane->position = 4;
+  $pane->locks = array();
+  $pane->uuid = 'bff022db-6e50-4f7e-954b-3d694b9ef8d1';
+  $display->content['new-bff022db-6e50-4f7e-954b-3d694b9ef8d1'] = $pane;
+  $display->panels['main'][4] = 'new-bff022db-6e50-4f7e-954b-3d694b9ef8d1';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

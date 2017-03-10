@@ -5,7 +5,7 @@
  * News node homepage-teaser template.
  */
 ?>
-<div class="item">
+<div class="item news homepage-teaser">
   <div class="ui tiny image">
     <?php print render($content['field_image']); ?>
   </div>
