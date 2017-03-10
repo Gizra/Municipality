@@ -6,7 +6,6 @@ dependencies[] = ctools
 dependencies[] = date
 dependencies[] = features
 dependencies[] = hedley_fields
-dependencies[] = hedley_item
 dependencies[] = hedley_municipality
 dependencies[] = i18n_taxonomy
 dependencies[] = image
