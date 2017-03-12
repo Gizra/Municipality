@@ -3,14 +3,15 @@ layout: default
 label: תהליך לדוגמה (בקשה לקבלת הנחה בארנונה לנכס ריק)
 ---
 
+
 <div class = "ui segment centered row">
+  <a class="ui bottom attached green label">בחזרה לעמוד המידע בנושא ארנונה</a>
   <h2> בקשה לקבלת הנחה בארנונה לנכס ריק </h2>
 </div>
 
 {% assign process = site.data.topics.citizens.arnona.hebrew.procceses.first %}
 
 <div class="sixteen wide column">
-  <h2 class="ui header">{{ process.title}} </h2>
   {% for section in process.sections %}
   <div>
     <div class="ui divider"></div>
@@ -25,6 +26,12 @@ label: תהליך לדוגמה (בקשה לקבלת הנחה בארנונה לנ
         <div>
           <p>
             {{ section.description }}
+            <br>
+            <div class = "right aligned">
+            <a href="#">
+              <i class = "file icon"></i>טופס בקשה רשמי
+            </a>
+          </div>
           </p>
         </div>
       {% endif %}
