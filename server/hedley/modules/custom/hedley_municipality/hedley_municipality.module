@@ -55,3 +55,17 @@ function hedley_municipality_entity_info_alter(&$entity_info) {
     'custom settings' => TRUE,
   ];
 }
+
+/**
+ * Get the current municipality context.
+ *
+ * @return mixed
+ *   The municipality node, when available.
+ */
+function hedley_municipality_get_current() {
+  $purl_gids = og_purl_og_context_handler();
+  if (empty($purl_gids['node']) || count($purl_gids['node']) != 1) {
+    return FALSE;
+  }
+  return node_load(reset($purl_gids['node']));
+}
