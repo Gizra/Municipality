@@ -60,7 +60,7 @@ function hedley_municipality_entity_info_alter(&$entity_info) {
  * Get the current municipality context.
  *
  * @return mixed
- *   The municipality node when available.
+ *   The municipality node, when available.
  */
 function hedley_municipality_get_current() {
   $purl_gids = og_purl_og_context_handler();
