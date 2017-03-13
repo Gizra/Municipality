@@ -67,5 +67,27 @@ function hedley_municipality_strongarm() {
   $strongarm->value = 1;
   $export['node_submitted_municipality'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'purl_method_og_purl|node';
+  $strongarm->value = 'path';
+  $export['purl_method_og_purl|node'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'purl_types';
+  $strongarm->value = array(
+    'path' => 'path',
+    'pair' => 0,
+    'subdomain' => 0,
+    'domain' => 0,
+    'extension' => 0,
+    'useragent' => 0,
+    'querystring' => 0,
+  );
+  $export['purl_types'] = $strongarm;
+
   return $export;
 }

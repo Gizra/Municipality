@@ -81,8 +81,14 @@ projects[multifield][version] = "1.0-alpha4"
 projects[og][subdir] = "contrib"
 projects[og][version] = "2.9"
 
+projects[og_purl][subdir] = "contrib"
+projects[og_purl][version] = "1.2"
+
 projects[panels][subdir] = "contrib"
 projects[panels][version] = "3.9"
+
+projects[purl][subdir] = "contrib"
+projects[purl][version] = "1.0-beta1"
 
 projects[restful][subdir] = "contrib"
 projects[restful][version] = "1.8"
