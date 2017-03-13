@@ -33,16 +33,20 @@ function hedley_theme_panels_default_style_render_region($variables) {
 
 /**
  * Preprocess page.
- *
- * Replace the default theme logo with the municipality's logo.
  */
 function hedley_theme_preprocess_page(&$variables) {
   if (!$node = hedley_municipality_get_current()) {
     return;
   }
   $wrapper = entity_metadata_wrapper('node', $node);
+
+  // Override the site name with the municipality's name.
+  $variables['site_name'] = $wrapper->label();
+
+  // Replace the default logo with the municipality's logo.
   if ($wrapper->field_logo->value()) {
-    // Replace the default logo with the municipality's logo.
     $variables['logo'] = image_style_url('thumbnail', $wrapper->field_logo->value()['uri']);
   }
+
+  dpm($variables);
 }
