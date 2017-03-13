@@ -17,9 +17,11 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
     'title_field_ar',
     'title_field_en',
     'title_field_he',
+    'field_logo',
   ];
   protected $simpleMappings = [
     'title_field',
+    'field_logo',
   ];
 
 }

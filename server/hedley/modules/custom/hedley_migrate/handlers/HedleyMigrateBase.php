@@ -101,12 +101,15 @@ abstract class HedleyMigrateBase extends Migration {
     }
 
     // Map image field.
-    if (in_array('field_image', $this->csvColumns)) {
-      $this->addFieldMapping('field_image', 'field_image');
-      $this->addFieldMapping('field_image:file_replace')
+    foreach (['field_image', 'field_logo'] as $image_field) {
+      if (!in_array($image_field, $this->csvColumns)) {
+        continue;
+      }
+      $this->addFieldMapping($image_field, $image_field);
+      $this->addFieldMapping($image_field . ':file_replace')
         ->defaultValue(FILE_EXISTS_REPLACE);
 
-      $this->addFieldMapping('field_image:source_dir')
+      $this->addFieldMapping($image_field . ':source_dir')
         ->defaultValue($this->getMigrateDirectory() . '/images/');
     }
 

@@ -10,19 +10,21 @@
 function hedley_municipality_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-municipality-body'.
-  $field_instances['node-municipality-body'] = array(
+  // Exported field_instance: 'node-municipality-field_logo'.
+  $field_instances['node-municipality-field_logo'] = array(
     'bundle' => 'municipality',
-    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 3,
       ),
       'homepage_teaser' => array(
         'label' => 'above',
@@ -31,33 +33,37 @@ function hedley_municipality_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 1,
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
+    'field_name' => 'field_logo',
+    'label' => 'Logo',
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'alt_field' => 0,
+      'default_image' => 0,
       'entity_translation_sync' => FALSE,
-      'text_processing' => 1,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'module' => 'text',
+      'active' => 1,
+      'module' => 'image',
       'settings' => array(
-        'rows' => 20,
-        'summary_rows' => 5,
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
       ),
-      'type' => 'text_textarea_with_summary',
-      'weight' => 1,
+      'type' => 'image_image',
+      'weight' => 6,
     ),
   );
 
@@ -177,9 +183,9 @@ function hedley_municipality_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Body');
   t('Determine if this is an OG group.');
   t('Group');
+  t('Logo');
   t('Title');
 
   return $field_instances;
