@@ -12,9 +12,15 @@
     </a>
   <?php endif; ?>
 
-  <h1>
-    <a class="item" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
+  <h1 class="item">
+    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
   </h1>
+
+  <?php if (!empty($social_links)): ?>
+    <div class="item social-links">
+      <?php print render($social_links); ?>
+    </div>
+  <?php endif; ?>
 
   <?php if (!empty($primary_navigation)): ?>
     <div class="right menu">
@@ -45,7 +51,7 @@
 
       <?php print render($secondary_navigation); ?>
 
-      <?php if ($breadcrumb): ?>
+      <?php if (!empty($breadcrumb)): ?>
         <?php print $breadcrumb; ?>
       <?php endif; ?>
 
