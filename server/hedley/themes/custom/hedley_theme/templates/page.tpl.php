@@ -11,9 +11,11 @@
       <img class="ui" src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
     </a>
   <?php endif; ?>
-  <?php if (!empty($site_name)): ?>
+
+  <h1>
     <a class="item" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
-  <?php endif; ?>
+  </h1>
+
   <?php if (!empty($primary_navigation)): ?>
     <div class="right menu">
       <?php print render($primary_navigation); ?>
@@ -43,7 +45,10 @@
 
       <?php print render($secondary_navigation); ?>
 
-      <?php if (!empty($breadcrumb)): print $breadcrumb; endif; ?>
+      <?php if ($breadcrumb): ?>
+        <?php print $breadcrumb; ?>
+      <?php endif; ?>
+
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
       <?php print render($title_suffix); ?>
