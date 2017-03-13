@@ -21,6 +21,9 @@ function hedley_municipality_strongarm() {
         'language' => array(
           'weight' => '5',
         ),
+        'og_purl' => array(
+          'weight' => '-40',
+        ),
       ),
       'display' => array(),
     ),
