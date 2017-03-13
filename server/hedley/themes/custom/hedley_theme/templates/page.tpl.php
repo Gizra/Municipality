@@ -5,10 +5,10 @@
  */
 ?>
 
-<div class="ui inverted menu <?php print $fixed_navbar; ?>">
+<div class="ui menu <?php print $fixed_navbar; ?>">
   <?php if ($logo): ?>
     <a class="item logo" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-      <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+      <img class="ui" src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
     </a>
   <?php endif; ?>
   <?php if (!empty($site_name)): ?>
