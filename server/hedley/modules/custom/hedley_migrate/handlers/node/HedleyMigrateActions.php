@@ -26,6 +26,10 @@ class HedleyMigrateActions extends HedleyMigrateBase {
     'title_field',
     'field_link',
   ];
+  protected $simpleMultipleMappings = [
+    'field_topics',
+    'field_profile_types',
+  ];
 
   /**
    * HedleyMigrateFaqs constructor.
@@ -40,15 +44,6 @@ class HedleyMigrateActions extends HedleyMigrateBase {
     $this
       ->addFieldMapping(OG_AUDIENCE_FIELD, 'municipality')
       ->sourceMigration('HedleyMigrateMunicipalities');
-
-    $this
-      ->addFieldMapping('field_topics', 'field_topics')
-      ->separator('|');
-
-    $this
-      ->addFieldMapping('field_profile_types', 'field_profile_types')
-      ->separator('|');
-
   }
 
 }
