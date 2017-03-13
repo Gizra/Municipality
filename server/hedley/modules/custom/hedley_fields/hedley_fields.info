@@ -31,6 +31,7 @@ features[field_base][] = field_section_description
 features[field_base][] = field_section_hardcopy_form
 features[field_base][] = field_section_icon
 features[field_base][] = field_section_title
+features[field_base][] = field_social_links
 features[field_base][] = field_subtitle
 features[field_base][] = field_ticket_price
 features[field_base][] = field_topic

@@ -14,6 +14,7 @@ abstract class HedleyMigrateBase extends Migration {
   protected $bundle = NULL;
   protected $csvColumns = [];
   protected $simpleMappings = [];
+  protected $simpleMultipleMappings = [];
   protected $translatableFields = [
     'body',
     'title_field',
@@ -75,6 +76,11 @@ abstract class HedleyMigrateBase extends Migration {
     if ($this->simpleMappings) {
       $this->addSimpleMappings(drupal_map_assoc($this->simpleMappings));
     }
+    foreach ($this->simpleMultipleMappings as $field) {
+      $this
+        ->addFieldMapping($field, $field)
+        ->separator('|');
+    }
 
     if ($this->entityType == 'node') {
       // Set the first user as the author.
@@ -129,7 +135,6 @@ abstract class HedleyMigrateBase extends Migration {
     foreach ($this->translatableFields as $translated_field) {
       $this->mergeTranslatedColumns($row, $translated_field);
     }
-
   }
 
   /**
@@ -161,7 +166,6 @@ abstract class HedleyMigrateBase extends Migration {
       $row->{$field}[] = $row->$column;
       $row->{$field_languages_column}[] = $language;
     }
-
   }
 
 }

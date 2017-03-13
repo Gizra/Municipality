@@ -1,2 +1,3 @@
-id,title_field_ar,title_field_en,title_field_he,field_logo
-1,طوبا الزنغرية,Tuba-Zangariyye,טובא-זנגרייה,logo-tuba-zangariyye.gif
+id,title_field_ar,title_field_en,title_field_he,field_logo,field_social_links,field_social_links:title,field_social_links:attributes,,,
+1,طوبا الزنغرية,Tuba-Zangariyye,טובא-זנגרייה,logo-tuba-zangariyye.gif,http://facebook.com|http://youtube.com,|title2,"a:1:{s:5:""class"";s:20:""facebook square icon"";}|a:1:{s:5:""class"";s:19:""youtube square icon"";}",,,
+2,Another municipality AR,Another municipality EN,Another municipality HE,,,,,,,
