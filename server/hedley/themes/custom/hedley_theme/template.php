@@ -47,6 +47,4 @@ function hedley_theme_preprocess_page(&$variables) {
   if ($wrapper->field_logo->value()) {
     $variables['logo'] = image_style_url('thumbnail', $wrapper->field_logo->value()['uri']);
   }
-
-  dpm($variables);
 }
