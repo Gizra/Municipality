@@ -62,18 +62,17 @@ function hedley_topic_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
-  $pane->pid = 'new-6154e3c1-3a97-404b-ad53-542e599a4521';
+  $pane->pid = 'new-2078aacd-02a1-4738-9745-5483cd6b6b12';
   $pane->panel = 'main';
-  $pane->type = 'entity_view';
-  $pane->subtype = 'taxonomy_term';
+  $pane->type = 'term_title';
+  $pane->subtype = 'term_title';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_mode' => 'full',
     'context' => 'argument_term_1',
-    'override_title' => 1,
-    'override_title_text' => '%term:name_field',
-    'override_title_heading' => 'h1',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -83,9 +82,9 @@ function hedley_topic_default_page_manager_handlers() {
   $pane->extras = array();
   $pane->position = 0;
   $pane->locks = array();
-  $pane->uuid = '6154e3c1-3a97-404b-ad53-542e599a4521';
-  $display->content['new-6154e3c1-3a97-404b-ad53-542e599a4521'] = $pane;
-  $display->panels['main'][0] = 'new-6154e3c1-3a97-404b-ad53-542e599a4521';
+  $pane->uuid = '2078aacd-02a1-4738-9745-5483cd6b6b12';
+  $display->content['new-2078aacd-02a1-4738-9745-5483cd6b6b12'] = $pane;
+  $display->panels['main'][0] = 'new-2078aacd-02a1-4738-9745-5483cd6b6b12';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
