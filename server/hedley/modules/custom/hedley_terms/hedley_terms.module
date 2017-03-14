@@ -2,5 +2,61 @@
 
 /**
  * @file
- * Drupal needs this blank file.
+ * Hedley Terms module.
  */
+
+/**
+ * Get links for changing the profile type.
+ *
+ * @return string
+ *   Rendered profile type links.
+ */
+function hedley_terms_get_profile_type_links() {
+  $links = [];
+  $node = hedley_municipality_get_current();
+  // When re-setting profile type, redirect either to the current municipality's
+  // homepage or the global homepage.
+  $path = $node ? 'node/' . $node->nid : '<front>';
+  $vocabulary = taxonomy_vocabulary_machine_name_load('profile_types');
+  foreach (taxonomy_get_tree($vocabulary->vid) as $term) {
+    $wrapper = entity_metadata_wrapper('taxonomy_term', $term->tid);
+    $profile_name = drupal_html_class($term->name);
+    $links[] = [
+      'label' => $wrapper->label(),
+      'url' => url($path, ['query' => ['profile' => $profile_name]]),
+      'active' => $profile_name == hedley_terms_get_current_profile_type(),
+    ];
+  }
+
+  $variables = [
+    'links' => $links,
+    'count_class' => hedley_theme_number_as_word(count($links)),
+  ];
+  return theme('hedley_terms_profile_type_links', $variables);
+}
+
+/**
+ * Get the current profile type.
+ *
+ * @return string
+ *   The profile type name.
+ */
+function hedley_terms_get_current_profile_type() {
+  return !empty($_GET['profile']) ? check_plain($_GET['profile']) : 'residents';
+}
+
+/**
+ * Implements hook_theme().
+ */
+function hedley_terms_theme($existing, $type, $theme, $path) {
+  return [
+    'hedley_terms_profile_type_links' => array(
+      'variables' => [
+        'links' => NULL,
+        'count_class' => NULL,
+      ],
+      'template' => 'profile-type-links',
+      'path' => drupal_get_path('module', 'hedley_terms') . '/templates',
+    ),
+  ];
+}

@@ -34,6 +34,10 @@
 
   <div class="ui row">
 
+    <div class="ui four wide column">
+      <?php print $profile_type_links; ?>
+    </div>
+
     <div class="ui eight wide center aligned column">
       <?php print render($social_links); ?>
     </div>
