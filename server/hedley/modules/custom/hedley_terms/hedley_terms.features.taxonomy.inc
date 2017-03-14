@@ -29,15 +29,5 @@ function hedley_terms_taxonomy_default_vocabularies() {
       'language' => 'und',
       'i18n_mode' => 32768,
     ),
-    'topics' => array(
-      'name' => 'Topics',
-      'machine_name' => 'topics',
-      'description' => '',
-      'hierarchy' => 0,
-      'module' => 'taxonomy',
-      'weight' => 0,
-      'language' => 'und',
-      'i18n_mode' => 32768,
-    ),
   );
 }
