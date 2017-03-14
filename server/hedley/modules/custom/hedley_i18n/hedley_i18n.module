@@ -6,3 +6,26 @@
  */
 
 include_once 'hedley_i18n.features.inc';
+
+/**
+ * Get the language switch links.
+ *
+ * @return array
+ *   The language switch links.
+ */
+function hedley_i18n_language_switch_links() {
+  $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
+  $links = language_negotiation_get_switch_links('language', $path);
+  if (empty($links->links)) {
+    return [];
+  }
+  $rendered_links = [];
+  foreach ($links->links as $link) {
+    $options = [
+      'attributes' => ['class' => ['item']],
+      'language' => $link['language'],
+    ];
+    $rendered_links[] = l($link['title'], $link['href'], $options);
+  }
+  return $rendered_links;
+}

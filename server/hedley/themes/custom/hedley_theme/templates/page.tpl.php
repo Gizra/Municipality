@@ -6,27 +6,46 @@
 ?>
 
 <div class="ui menu <?php print $fixed_navbar; ?>">
-  <?php if ($logo): ?>
-    <a class="item logo" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-      <img class="ui" src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-    </a>
-  <?php endif; ?>
-
-  <h1 class="item">
-    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
-  </h1>
-
-  <?php if (!empty($social_links)): ?>
-    <div class="item social-links">
-      <?php print render($social_links); ?>
-    </div>
-  <?php endif; ?>
-
   <?php if (!empty($primary_navigation)): ?>
     <div class="right menu">
       <?php print render($primary_navigation); ?>
     </div>
   <?php endif; ?>
+</div>
+
+<div class="ui centered grid container">
+  <div class="ui row">
+    <div class="ui four wide column">
+      <?php if ($logo): ?>
+        <a class="item logo" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+          <img class="ui" src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+        </a>
+      <?php endif; ?>
+    </div>
+
+    <div class="ui eight wide center aligned middle aligned column">
+      <h2 class="ui header">
+        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
+      </h2>
+    </div>
+    <div class="ui four wide center aligned middle aligned column">
+    </div>
+  </div>
+
+  <div class="ui row">
+
+    <div class="ui eight wide center aligned column">
+      <?php print render($social_links); ?>
+    </div>
+
+    <div class="ui four wide column">
+      <div class="ui three item menu">
+        <?php foreach ($language_switch_links as $link): ?>
+          <?php print $link; ?>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
 </div>
 
 <?php if (!empty($page['header'])): ?>
