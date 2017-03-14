@@ -70,6 +70,27 @@ function hedley_i18n_strongarm() {
       ),
       'file' => 'includes/locale.inc',
     ),
+    'locale-session' => array(
+      'callbacks' => array(
+        'language' => 'locale_language_from_session',
+        'switcher' => 'locale_language_switcher_session',
+        'url_rewrite' => 'locale_language_url_rewrite_session',
+      ),
+      'file' => 'includes/locale.inc',
+    ),
+    'locale-user' => array(
+      'callbacks' => array(
+        'language' => 'locale_language_from_user',
+      ),
+      'file' => 'includes/locale.inc',
+    ),
+    'locale-browser' => array(
+      'callbacks' => array(
+        'language' => 'locale_language_from_browser',
+      ),
+      'file' => 'includes/locale.inc',
+      'cache' => 0,
+    ),
     'language-default' => array(
       'callbacks' => array(
         'language' => 'language_from_default',
@@ -88,6 +109,11 @@ function hedley_i18n_strongarm() {
         'language' => 'locale_language_from_interface',
       ),
       'file' => 'includes/locale.inc',
+    ),
+    'language-default' => array(
+      'callbacks' => array(
+        'language' => 'language_from_default',
+      ),
     ),
   );
   $export['language_negotiation_language_content'] = $strongarm;
