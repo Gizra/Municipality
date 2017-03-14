@@ -17,7 +17,7 @@ function hedley_terms_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',
-      'i18n_mode' => 0,
+      'i18n_mode' => 32768,
     ),
     'profile_types' => array(
       'name' => 'Profile types',
@@ -27,7 +27,7 @@ function hedley_terms_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',
-      'i18n_mode' => 0,
+      'i18n_mode' => 32768,
     ),
     'topics' => array(
       'name' => 'Topics',
@@ -37,7 +37,7 @@ function hedley_terms_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',
-      'i18n_mode' => 0,
+      'i18n_mode' => 32768,
     ),
   );
 }

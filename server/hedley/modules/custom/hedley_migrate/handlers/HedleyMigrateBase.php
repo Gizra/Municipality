@@ -85,25 +85,23 @@ abstract class HedleyMigrateBase extends Migration {
 
     if ($this->entityType == 'node') {
       // Set the first user as the author.
-      $this->dependencies = [
-        'HedleyMigrateUsers',
-      ];
+      $this->dependencies = ['HedleyMigrateUsers'];
 
-      $this->addFieldMapping('uid', 'author')
+      $this
+        ->addFieldMapping('uid', 'author')
         ->sourceMigration('HedleyMigrateUsers')
         ->defaultValue(1);
 
-      // Map translatable fields languages lists.
-      foreach ($this->translatableFields as $translated_field) {
-        if (in_array($translated_field, $this->simpleMappings)) {
-          $this->addFieldMapping($translated_field . ':language', $translated_field . '_languages');
-        }
-      }
       // Map the translated title field to the default title.
       $default_title_column = 'title_field_' . language_default('language');
       if (in_array($default_title_column, $this->csvColumns)) {
         $this->addFieldMapping('title', $default_title_column);
       }
+
+      // Set the default language as the entity language.
+      $this
+        ->addFieldMapping('language')
+        ->defaultValue(language_default('language'));
     }
     elseif ($this->entityType == 'taxonomy_term') {
       // Map the translated name field to the default term name.
@@ -123,11 +121,11 @@ abstract class HedleyMigrateBase extends Migration {
         ->defaultValue($this->getMigrateDirectory() . '/images/');
     }
 
-    if (in_array($this->entityType, ['node', 'taxonomy_term'])) {
-      // Set the default language as the entity language.
-      $this
-        ->addFieldMapping('language')
-        ->defaultValue(language_default('language'));
+    // Map translatable fields languages lists.
+    foreach ($this->translatableFields as $translated_field) {
+      if (in_array($translated_field, $this->simpleMappings)) {
+        $this->addFieldMapping($translated_field . ':language', $translated_field . '_languages');
+      }
     }
   }
 
