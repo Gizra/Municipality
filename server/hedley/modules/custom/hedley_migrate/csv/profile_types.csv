@@ -1,4 +1,3 @@
-id,name
-1,Business
-2,Resident
-3,Tourist
+id,name_ar,name_en,name_he
+1,Business AR,Business,עסקים
+2,Resident AR,Resident,תושבים

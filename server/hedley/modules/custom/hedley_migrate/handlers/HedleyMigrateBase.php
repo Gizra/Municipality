@@ -17,6 +17,7 @@ abstract class HedleyMigrateBase extends Migration {
   protected $simpleMultipleMappings = [];
   protected $translatableFields = [
     'body',
+    'name_field',
     'title_field',
     'field_subtitle',
     'field_question',
@@ -98,12 +99,15 @@ abstract class HedleyMigrateBase extends Migration {
           $this->addFieldMapping($translated_field . ':language', $translated_field . '_languages');
         }
       }
-
       // Map the translated title field to the default title.
       $default_title_column = 'title_field_' . language_default('language');
       if (in_array($default_title_column, $this->csvColumns)) {
         $this->addFieldMapping('title', $default_title_column);
       }
+    }
+    elseif ($this->entityType == 'taxonomy_term') {
+      // Map the translated name field to the default term name.
+      $this->addFieldMapping('name', 'name_field_' . language_default('language'));
     }
 
     // Map image field.
@@ -125,7 +129,6 @@ abstract class HedleyMigrateBase extends Migration {
         ->addFieldMapping('language')
         ->defaultValue(language_default('language'));
     }
-
   }
 
   /**

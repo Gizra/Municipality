@@ -11,6 +11,7 @@ features[features_api][] = api:2
 features[language][] = ar
 features[language][] = en
 features[language][] = he
+features[variable][] = entity_translation_entity_types
 features[variable][] = i18n_node_extended_municipality
 features[variable][] = i18n_node_options_municipality
 features[variable][] = language_content_type_municipality
