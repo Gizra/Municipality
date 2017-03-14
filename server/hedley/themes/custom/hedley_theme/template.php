@@ -35,6 +35,10 @@ function hedley_theme_panels_default_style_render_region($variables) {
  * Preprocess page.
  */
 function hedley_theme_preprocess_page(&$variables) {
+  // Add the language switch links.
+  $variables['language_switch_links'] = hedley_i18n_language_switch_links();
+
+  // Add municipality variables.
   if (!$node = hedley_municipality_get_current()) {
     return;
   }
