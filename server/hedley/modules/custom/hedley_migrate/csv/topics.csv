@@ -1,4 +1,4 @@
-id,name
-1,Kindergarten
-2,Garbage collection
-3,Arnona
+id,name_ar,name_en,name_he
+1,Kindergarten AR,Kindergarten,גני ילדים
+2,Garbage collection AR,Garbage collection,איסוף אשפה
+3,Arnona AR,Arnona,ארנונה

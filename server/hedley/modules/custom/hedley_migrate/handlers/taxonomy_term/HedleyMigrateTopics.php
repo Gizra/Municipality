@@ -14,10 +14,12 @@ class HedleyMigrateTopics extends HedleyMigrateBase {
   protected $bundle = 'topics';
   protected $csvColumns = [
     'id',
-    'name',
+    'name_field_ar',
+    'name_field_en',
+    'name_field_he',
   ];
   protected $simpleMappings = [
-    'name',
+    'name_field',
   ];
 
 }
