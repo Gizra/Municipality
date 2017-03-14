@@ -1,0 +1,94 @@
+<?php
+/**
+ * @file
+ * hedley_topic.pages_default.inc
+ */
+
+/**
+ * Implements hook_default_page_manager_handlers().
+ */
+function hedley_topic_default_page_manager_handlers() {
+  $export = array();
+
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'term_view__panel_context_87916a7c-c92c-4818-a626-a9f865d52863';
+  $handler->task = 'term_view';
+  $handler->subtask = '';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => '',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'entity_bundle:taxonomy_term',
+          'settings' => array(
+            'type' => array(
+              'topics' => 'topics',
+            ),
+          ),
+          'context' => 'argument_term_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'stackable';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'main' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '%term:name_field';
+  $display->uuid = 'd593c23a-4078-4556-80cc-678efafd5c94';
+  $display->storage_type = 'page_manager';
+  $display->storage_id = 'term_view__panel_context_87916a7c-c92c-4818-a626-a9f865d52863';
+  $display->content = array();
+  $display->panels = array();
+  $pane = new stdClass();
+  $pane->pid = 'new-2078aacd-02a1-4738-9745-5483cd6b6b12';
+  $pane->panel = 'main';
+  $pane->type = 'term_title';
+  $pane->subtype = 'term_title';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'context' => 'argument_term_1',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 0;
+  $pane->locks = array();
+  $pane->uuid = '2078aacd-02a1-4738-9745-5483cd6b6b12';
+  $display->content['new-2078aacd-02a1-4738-9745-5483cd6b6b12'] = $pane;
+  $display->panels['main'][0] = 'new-2078aacd-02a1-4738-9745-5483cd6b6b12';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $export['term_view__panel_context_87916a7c-c92c-4818-a626-a9f865d52863'] = $handler;
+
+  return $export;
+}

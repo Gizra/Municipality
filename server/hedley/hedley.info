@@ -59,4 +59,5 @@ dependencies[] = hedley_news
 dependencies[] = hedley_pusher
 dependencies[] = hedley_restful
 dependencies[] = hedley_terms
+dependencies[] = hedley_topic
 dependencies[] = hedley_user
