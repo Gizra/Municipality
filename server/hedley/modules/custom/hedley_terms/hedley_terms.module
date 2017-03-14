@@ -60,3 +60,18 @@ function hedley_terms_theme($existing, $type, $theme, $path) {
     ),
   ];
 }
+
+/**
+ * Implements hook_url_outbound_alter().
+ */
+function hedley_terms_url_outbound_alter(&$path, &$options, $original_path) {
+  if ($options['external']) {
+    // Ignore external URLs.
+    return;
+  }
+  // When a specific profile was set on the query, but the url doesn't define a
+  // a profile, then add the profile to the url.
+  if (!empty($_GET['profile']) && empty($options['query']['profile'])) {
+    $options['query']['profile'] = check_plain($_GET['profile']);
+  }
+}
