@@ -24,7 +24,7 @@ function hedley_topic_term_title_content_type_render($subtype, $conf, $args, $co
   $wrapper = entity_metadata_wrapper('taxonomy_term', $context->data);
 
   $block = new stdClass();
-  $block->module = 'hedley_municipality';
+  $block->module = 'hedley_topic';
   $block->content = theme('hedley_topic_term_title', ['title' => $wrapper->label()]);
 
   return $block;

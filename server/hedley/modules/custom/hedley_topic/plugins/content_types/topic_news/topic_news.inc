@@ -21,11 +21,47 @@ function hedley_topic_topic_news_content_type_render($subtype, $conf, $args, $co
   if (empty($context->data)) {
     return NULL;
   }
-  $wrapper = entity_metadata_wrapper('taxonomy_term', $context->data);
+  $topic_wrapper = entity_metadata_wrapper('taxonomy_term', $context->data);
+
+  $query = new EntityFieldQuery();
+  $query
+    ->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'news')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyOrderBy('created', 'DESC')
+    // Filter by the current topic.
+    ->fieldCondition('field_topics', 'tid', $topic_wrapper->getIdentifier())
+    // Filter by the current profile type.
+    ->fieldCondition('field_profile_types', 'tid', hedley_terms_get_current_profile_type_tid())
+    ->range(0, 10);
+
+  // When in municipality context, filter by it.
+  $municipality_node = hedley_municipality_get_current();
+  if ($municipality_node) {
+    $query->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $municipality_node->nid);
+  }
+
+  $result = $query->execute();
+  if (empty($result['node'])) {
+    // No news found.
+    return NULL;
+  }
+
+  // Get the news titles.
+  $news_items = [];
+  foreach (node_load_multiple(array_keys($result['node'])) as $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $news_items[] = $wrapper->label();
+  }
 
   $block = new stdClass();
-  $block->module = 'hedley_municipality';
-  $block->content = theme('hedley_topic_topic_news', ['title' => $wrapper->label()]);
+  $block->module = 'hedley_topic';
+
+  $variables = [
+    'title' => $topic_wrapper->label(),
+    'news_items' => $news_items,
+  ];
+  $block->content = theme('hedley_topic_topic_news', $variables);
 
   return $block;
 }
@@ -54,6 +90,7 @@ function hedley_topic_topic_news_content_type_theme(&$theme, $plugin) {
   $theme['hedley_topic_topic_news'] = [
     'variables' => [
       'title' => NULL,
+      'news_items' => NULL,
     ],
     'path' => $plugin['path'],
     'template' => 'topic-news',

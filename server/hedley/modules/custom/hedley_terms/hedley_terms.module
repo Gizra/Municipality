@@ -36,13 +36,32 @@ function hedley_terms_get_profile_type_links() {
 }
 
 /**
+ * Get the current profile type's term ID.
+ *
+ * @return int
+ *   The profile type term ID.
+ */
+function hedley_terms_get_current_profile_type_tid() {
+  $current_profile_name = hedley_terms_get_current_profile_type();
+  // Find the profile type term with the same name as the current name.
+  $vocabulary = taxonomy_vocabulary_machine_name_load('profile_types');
+  foreach (taxonomy_get_tree($vocabulary->vid) as $term) {
+    if (drupal_html_class($term->name) == $current_profile_name) {
+      return $term->tid;
+    }
+  }
+  // Not found.
+  return 0;
+}
+
+/**
  * Get the current profile type.
  *
  * @return string
  *   The profile type name.
  */
 function hedley_terms_get_current_profile_type() {
-  return !empty($_GET['profile']) ? check_plain($_GET['profile']) : 'residents';
+  return !empty($_GET['profile']) ? drupal_html_class($_GET['profile']) : 'residents';
 }
 
 /**
