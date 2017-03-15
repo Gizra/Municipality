@@ -78,13 +78,43 @@ function hedley_topic_default_page_manager_handlers() {
   $pane->style = array(
     'settings' => NULL,
   );
-  $pane->css = array();
+  $pane->css = array(
+    'css_id' => '',
+    'css_class' => 'ui segment centered row',
+  );
   $pane->extras = array();
   $pane->position = 0;
   $pane->locks = array();
   $pane->uuid = '2078aacd-02a1-4738-9745-5483cd6b6b12';
   $display->content['new-2078aacd-02a1-4738-9745-5483cd6b6b12'] = $pane;
   $display->panels['main'][0] = 'new-2078aacd-02a1-4738-9745-5483cd6b6b12';
+  $pane = new stdClass();
+  $pane->pid = 'new-98797ebd-9983-4297-abcd-9b0f2f9b2617';
+  $pane->panel = 'main';
+  $pane->type = 'topic_news';
+  $pane->subtype = 'topic_news';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'context' => 'argument_term_1',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array(
+    'css_id' => '',
+    'css_class' => 'ui segment row',
+  );
+  $pane->extras = array();
+  $pane->position = 1;
+  $pane->locks = array();
+  $pane->uuid = '98797ebd-9983-4297-abcd-9b0f2f9b2617';
+  $display->content['new-98797ebd-9983-4297-abcd-9b0f2f9b2617'] = $pane;
+  $display->panels['main'][1] = 'new-98797ebd-9983-4297-abcd-9b0f2f9b2617';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
