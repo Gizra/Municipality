@@ -38,6 +38,9 @@ function hedley_theme_preprocess_page(&$variables) {
   // Add the language switch links.
   $variables['language_switch_links'] = hedley_i18n_language_switch_links();
 
+  // Add profile type links.
+  $variables['profile_type_links'] = hedley_terms_get_profile_type_links();
+
   // Add municipality variables.
   if (!$node = hedley_municipality_get_current()) {
     return;
@@ -56,4 +59,18 @@ function hedley_theme_preprocess_page(&$variables) {
   if ($wrapper->field_social_links->value()) {
     $variables['social_links'] = field_view_field('node', $node, 'field_social_links');
   }
+}
+
+/**
+ * Get a small number as a word, for semantic ui list classes.
+ *
+ * @param $number
+ *   A number between 0 and 9.
+ *
+ * @return string
+ *   The number as a word.
+ */
+function hedley_theme_number_as_word($number) {
+  $numbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+  return $numbers[$number];
 }
