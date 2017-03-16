@@ -14,6 +14,7 @@
 function hedley_terms_get_profile_type_links() {
   $links = [];
 
+  // Get the target path for when changing the profile type.
   $path = _hedley_terms_profile_type_links_path();
 
   $vocabulary = taxonomy_vocabulary_machine_name_load('profile_types');
