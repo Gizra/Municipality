@@ -53,7 +53,8 @@ function hedley_topic_topic_news_content_type_render($subtype, $conf, $args, $co
   foreach (node_load_multiple(array_keys($result['node'])) as $node) {
     $wrapper = entity_metadata_wrapper('node', $node);
     // Explicitly set the wrapper language to the current language.
-    // Otherwise $wrapper->body->value() returns the default language instead
+    // Otherwise $wrapper->body->value() returns the default language instead of
+    // the current language.
     $wrapper->language($language->language);
 
     // Ignore nodes without titles in the current language.
