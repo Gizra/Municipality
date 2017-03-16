@@ -18,6 +18,7 @@ $plugin = [
  * Render callback.
  */
 function hedley_topic_topic_news_content_type_render($subtype, $conf, $args, $context) {
+  global $language;
   if (empty($context->data)) {
     return NULL;
   }
@@ -51,7 +52,20 @@ function hedley_topic_topic_news_content_type_render($subtype, $conf, $args, $co
   $news_items = [];
   foreach (node_load_multiple(array_keys($result['node'])) as $node) {
     $wrapper = entity_metadata_wrapper('node', $node);
-    $news_items[] = $wrapper->label();
+    // Explicitly set the wrapper language to the current language.
+    // Otherwise $wrapper->body->value() returns the default language instead
+    $wrapper->language($language->language);
+
+    // Ignore nodes without titles in the current language.
+    if (!$wrapper->label()) {
+      continue;
+    }
+
+    $news_items[] = [
+      'title' => $wrapper->label(),
+      // Add a read more link when the news has a body.
+      'read_more' => $wrapper->body->value() ? l(t('Read more'), 'node/' . $node->nid) : '',
+    ];
   }
 
   $block = new stdClass();
