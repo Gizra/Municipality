@@ -1,2 +1,7 @@
 id,municipality,title_field_ar,title_field_en,title_field_he,field_subtitle_ar,field_subtitle_en,field_subtitle_he,body_ar,body_en,body_he,field_topics,field_profile_types,field_image
-1,1,News ar,News en,מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17,العنوان الثانوي,Subtitle,כותרת משנה,محتويات,Body,בודי,,Resident,terrified-cat.jpeg
+1,1,News ar,TZ R News EN no topic,מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17,العنوان الثانوي,Subtitle,כותרת משנה,محتويات,Body,בודי,,Residents,terrified-cat.jpeg
+2,1,Businesses News AR,TZ B News EN,Businesses News HE,Businesses News AR subtitle,Businesses News EN subtitle,Businesses News HE subtitle,Businesses News AR body,Businesses News EN body,Businesses News HE body,Arnona,Businesses,
+3,1,B/R News AR,TZ B/R News EN,B/R News HE,B/R News AR subtitle,B/R News EN subtitle,B/R News HE subtitle,B/R News AR body,B/R News EN body,B/R News HE body,Arnona,Residents|Businesses,
+4,2,Another municipality’s news,Another municipality’s news,Another municipality’s news,Another municipality’s news,Another municipality’s news,Another municipality’s news,Another municipality’s news,Another municipality’s news,Another municipality’s news,Arnona,Residents|Businesses,
+5,1,,TZ R Only English only title,,,Only English title,,,,,Arnona,Residents,
+6,1,,,TZ R Hebrew Only,,,TZ R Hebrew Only,,,TZ R Hebrew Only,Arnona,Residents,

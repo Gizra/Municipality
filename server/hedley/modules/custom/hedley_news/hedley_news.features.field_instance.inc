@@ -263,7 +263,7 @@ function hedley_news_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_profile_types',
     'label' => 'Profile types',
-    'required' => 0,
+    'required' => TRUE,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
