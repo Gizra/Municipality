@@ -13,10 +13,9 @@
  */
 function hedley_terms_get_profile_type_links() {
   $links = [];
-  $node = hedley_municipality_get_current();
-  // When re-setting profile type, redirect either to the current municipality's
-  // homepage or the global homepage.
-  $path = $node ? 'node/' . $node->nid : '<front>';
+
+  $path = _hedley_terms_profile_type_links_path();
+
   $vocabulary = taxonomy_vocabulary_machine_name_load('profile_types');
   foreach (taxonomy_get_tree($vocabulary->vid) as $term) {
     $wrapper = entity_metadata_wrapper('taxonomy_term', $term->tid);
@@ -33,6 +32,27 @@ function hedley_terms_get_profile_type_links() {
     'count_class' => hedley_theme_number_as_word(count($links)),
   ];
   return theme('hedley_terms_profile_type_links', $variables);
+}
+
+/**
+ * Get the target path for the profile type select links.
+ *
+ * @return string
+ *   The target path.
+ */
+function _hedley_terms_profile_type_links_path() {
+  // When re-setting profile type, redirect either to the current municipality's
+  // homepage or the global homepage, unless it make sense to stay on the
+  // current page and only change the profile.
+  $menu_item = menu_get_item();
+  switch ($menu_item['path']) {
+    case 'taxonomy/term/%':
+      return current_path();
+
+    default:
+      $node = hedley_municipality_get_current();
+      return $node ? 'node/' . $node->nid : '<front>';
+  }
 }
 
 /**
