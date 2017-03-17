@@ -65,42 +65,22 @@ function hedley_municipality_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
-  $pane->pid = 'new-f80b880e-1d4f-478a-bcd3-f3e30541a876';
-  $pane->panel = 'main';
-  $pane->type = 'custom';
-  $pane->subtype = 'custom';
-  $pane->shown = TRUE;
-  $pane->access = array();
-  $pane->configuration = array(
-    'admin_title' => '',
-    'title' => '[header]',
-    'title_heading' => 'h2',
-    'body' => '.',
-    'format' => 'filtered_html',
-    'substitute' => 0,
-  );
-  $pane->cache = array();
-  $pane->style = array(
-    'settings' => NULL,
-  );
-  $pane->css = array(
-    'css_id' => '',
-    'css_class' => 'ui segment sixteen wide column',
-  );
-  $pane->extras = array();
-  $pane->position = 0;
-  $pane->locks = array();
-  $pane->uuid = 'f80b880e-1d4f-478a-bcd3-f3e30541a876';
-  $display->content['new-f80b880e-1d4f-478a-bcd3-f3e30541a876'] = $pane;
-  $display->panels['main'][0] = 'new-f80b880e-1d4f-478a-bcd3-f3e30541a876';
-  $pane = new stdClass();
-  $pane->pid = 'new-dd845d83-4f2d-4a69-b388-52151d09c6f8';
+  $pane->pid = 'new-8b672159-4aee-443e-aab2-629608f9fbaa';
   $pane->panel = 'main';
   $pane->type = 'faqs_accordion';
   $pane->subtype = 'faqs_accordion';
   $pane->shown = TRUE;
   $pane->access = array();
-  $pane->configuration = array();
+  $pane->configuration = array(
+    'promoted_only' => 1,
+    'context' => array(
+      0 => 'argument_entity_id:node_1',
+      1 => 'empty',
+    ),
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
   $pane->cache = array();
   $pane->style = array(
     'settings' => NULL,
@@ -110,11 +90,11 @@ function hedley_municipality_default_page_manager_handlers() {
     'css_class' => 'ui segment nine wide column',
   );
   $pane->extras = array();
-  $pane->position = 1;
+  $pane->position = 0;
   $pane->locks = array();
-  $pane->uuid = 'dd845d83-4f2d-4a69-b388-52151d09c6f8';
-  $display->content['new-dd845d83-4f2d-4a69-b388-52151d09c6f8'] = $pane;
-  $display->panels['main'][1] = 'new-dd845d83-4f2d-4a69-b388-52151d09c6f8';
+  $pane->uuid = '8b672159-4aee-443e-aab2-629608f9fbaa';
+  $display->content['new-8b672159-4aee-443e-aab2-629608f9fbaa'] = $pane;
+  $display->panels['main'][0] = 'new-8b672159-4aee-443e-aab2-629608f9fbaa';
   $pane = new stdClass();
   $pane->pid = 'new-75c69053-6f5d-435e-8769-370397d44d36';
   $pane->panel = 'main';
@@ -142,11 +122,11 @@ function hedley_municipality_default_page_manager_handlers() {
     'css_class' => 'ui segment seven wide column',
   );
   $pane->extras = array();
-  $pane->position = 2;
+  $pane->position = 1;
   $pane->locks = array();
   $pane->uuid = '75c69053-6f5d-435e-8769-370397d44d36';
   $display->content['new-75c69053-6f5d-435e-8769-370397d44d36'] = $pane;
-  $display->panels['main'][2] = 'new-75c69053-6f5d-435e-8769-370397d44d36';
+  $display->panels['main'][1] = 'new-75c69053-6f5d-435e-8769-370397d44d36';
   $pane = new stdClass();
   $pane->pid = 'new-fb1c6e5e-f7b3-4fcc-821d-23a173bc173c';
   $pane->panel = 'main';
@@ -174,11 +154,11 @@ function hedley_municipality_default_page_manager_handlers() {
     'css_class' => 'ui segment nine wide column',
   );
   $pane->extras = array();
-  $pane->position = 3;
+  $pane->position = 2;
   $pane->locks = array();
   $pane->uuid = 'fb1c6e5e-f7b3-4fcc-821d-23a173bc173c';
   $display->content['new-fb1c6e5e-f7b3-4fcc-821d-23a173bc173c'] = $pane;
-  $display->panels['main'][3] = 'new-fb1c6e5e-f7b3-4fcc-821d-23a173bc173c';
+  $display->panels['main'][2] = 'new-fb1c6e5e-f7b3-4fcc-821d-23a173bc173c';
   $pane = new stdClass();
   $pane->pid = 'new-bff022db-6e50-4f7e-954b-3d694b9ef8d1';
   $pane->panel = 'main';
@@ -206,11 +186,11 @@ function hedley_municipality_default_page_manager_handlers() {
     'css_class' => 'ui segment seven wide column',
   );
   $pane->extras = array();
-  $pane->position = 4;
+  $pane->position = 3;
   $pane->locks = array();
   $pane->uuid = 'bff022db-6e50-4f7e-954b-3d694b9ef8d1';
   $display->content['new-bff022db-6e50-4f7e-954b-3d694b9ef8d1'] = $pane;
-  $display->panels['main'][4] = 'new-bff022db-6e50-4f7e-954b-3d694b9ef8d1';
+  $display->panels['main'][3] = 'new-bff022db-6e50-4f7e-954b-3d694b9ef8d1';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

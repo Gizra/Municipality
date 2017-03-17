@@ -148,8 +148,8 @@ function hedley_faq_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-faq-field_topic'.
-  $field_instances['node-faq-field_topic'] = array(
+  // Exported field_instance: 'node-faq-field_topics'.
+  $field_instances['node-faq-field_topics'] = array(
     'bundle' => 'faq',
     'default_value' => NULL,
     'deleted' => 0,
@@ -157,10 +157,10 @@ function hedley_faq_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
+        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 2,
+        'type' => 'i18n_taxonomy_term_reference_link',
+        'weight' => 8,
       ),
       'homepage_teaser' => array(
         'label' => 'above',
@@ -176,9 +176,9 @@ function hedley_faq_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_topic',
-    'label' => 'Topic',
-    'required' => 1,
+    'field_name' => 'field_topics',
+    'label' => 'Topics',
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -257,7 +257,7 @@ function hedley_faq_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -306,7 +306,7 @@ function hedley_faq_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 
@@ -317,7 +317,7 @@ function hedley_faq_field_default_field_instances() {
   t('Profile types');
   t('Question');
   t('Title');
-  t('Topic');
+  t('Topics');
 
   return $field_instances;
 }

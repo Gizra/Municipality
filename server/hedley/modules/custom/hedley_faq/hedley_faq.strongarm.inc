@@ -70,6 +70,9 @@ function hedley_faq_strongarm() {
         'title' => array(
           'weight' => '0',
         ),
+        'language' => array(
+          'weight' => '6',
+        ),
       ),
       'display' => array(),
     ),

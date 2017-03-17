@@ -1,28 +1,28 @@
 <?php
 /**
  * @file
- * hedley_news.views_default.inc
+ * hedley_faq.views_default.inc
  */
 
 /**
  * Implements hook_views_default_views().
  */
-function hedley_news_views_default_views() {
+function hedley_faq_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'news';
+  $view->name = 'faqs';
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'News';
+  $view->human_name = 'FAQs';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'News';
+  $handler->display->display_options['title'] = 'FAQs';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'administer nodes';
@@ -33,18 +33,20 @@ function hedley_news_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '25';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-    'title' => 'title',
-    'body' => 'body',
-    'field_expiration_date' => 'field_expiration_date',
-    'field_file' => 'field_file',
     'og_group_ref' => 'og_group_ref',
-    'field_image' => 'field_image',
+    'title' => 'title',
+    'field_question' => 'field_question',
+    'field_answer' => 'field_answer',
     'field_profile_types' => 'field_profile_types',
-    'field_subtitle' => 'field_subtitle',
     'field_topics' => 'field_topics',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
+    'og_group_ref' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -52,34 +54,15 @@ function hedley_news_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'body' => array(
+    'field_question' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_expiration_date' => array(
+    'field_answer' => array(
       'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_file' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'og_group_ref' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_image' => array(
-      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -90,50 +73,12 @@ function hedley_news_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_subtitle' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_topics' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
   );
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Body */
-  $handler->display->display_options['fields']['body']['id'] = 'body';
-  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
-  $handler->display->display_options['fields']['body']['field'] = 'body';
-  $handler->display->display_options['fields']['body']['type'] = 'text_trimmed';
-  $handler->display->display_options['fields']['body']['settings'] = array(
-    'trim_length' => '128',
-  );
-  /* Field: Content: Expiration date */
-  $handler->display->display_options['fields']['field_expiration_date']['id'] = 'field_expiration_date';
-  $handler->display->display_options['fields']['field_expiration_date']['table'] = 'field_data_field_expiration_date';
-  $handler->display->display_options['fields']['field_expiration_date']['field'] = 'field_expiration_date';
-  $handler->display->display_options['fields']['field_expiration_date']['settings'] = array(
-    'format_type' => 'long',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
-  /* Field: Content: File */
-  $handler->display->display_options['fields']['field_file']['id'] = 'field_file';
-  $handler->display->display_options['fields']['field_file']['table'] = 'field_data_field_file';
-  $handler->display->display_options['fields']['field_file']['field'] = 'field_file';
-  $handler->display->display_options['fields']['field_file']['click_sort_column'] = 'fid';
   /* Field: Content: Groups audience */
   $handler->display->display_options['fields']['og_group_ref']['id'] = 'og_group_ref';
   $handler->display->display_options['fields']['og_group_ref']['table'] = 'og_membership';
@@ -142,24 +87,25 @@ function hedley_news_views_default_views() {
     'link' => 0,
   );
   $handler->display->display_options['fields']['og_group_ref']['delta_offset'] = '0';
-  /* Field: Content: Image */
-  $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
-  $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
-  $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
-  $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_image']['settings'] = array(
-    'image_style' => 'thumbnail',
-    'image_link' => '',
-  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Question */
+  $handler->display->display_options['fields']['field_question']['id'] = 'field_question';
+  $handler->display->display_options['fields']['field_question']['table'] = 'field_data_field_question';
+  $handler->display->display_options['fields']['field_question']['field'] = 'field_question';
+  /* Field: Content: Answer */
+  $handler->display->display_options['fields']['field_answer']['id'] = 'field_answer';
+  $handler->display->display_options['fields']['field_answer']['table'] = 'field_data_field_answer';
+  $handler->display->display_options['fields']['field_answer']['field'] = 'field_answer';
   /* Field: Content: Profile types */
   $handler->display->display_options['fields']['field_profile_types']['id'] = 'field_profile_types';
   $handler->display->display_options['fields']['field_profile_types']['table'] = 'field_data_field_profile_types';
   $handler->display->display_options['fields']['field_profile_types']['field'] = 'field_profile_types';
   $handler->display->display_options['fields']['field_profile_types']['delta_offset'] = '0';
-  /* Field: Content: Subtitle */
-  $handler->display->display_options['fields']['field_subtitle']['id'] = 'field_subtitle';
-  $handler->display->display_options['fields']['field_subtitle']['table'] = 'field_data_field_subtitle';
-  $handler->display->display_options['fields']['field_subtitle']['field'] = 'field_subtitle';
   /* Field: Content: Topics */
   $handler->display->display_options['fields']['field_topics']['id'] = 'field_topics';
   $handler->display->display_options['fields']['field_topics']['table'] = 'field_data_field_topics';
@@ -185,7 +131,7 @@ function hedley_news_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'news' => 'news',
+    'faq' => 'faq',
   );
   /* Filter criterion: Content: Groups audience (og_group_ref) */
   $handler->display->display_options['filters']['og_group_ref_target_id']['id'] = 'og_group_ref_target_id';
@@ -201,19 +147,51 @@ function hedley_news_views_default_views() {
     1 => 0,
     3 => 0,
   );
+  /* Filter criterion: Content: Profile types (field_profile_types) */
+  $handler->display->display_options['filters']['field_profile_types_tid']['id'] = 'field_profile_types_tid';
+  $handler->display->display_options['filters']['field_profile_types_tid']['table'] = 'field_data_field_profile_types';
+  $handler->display->display_options['filters']['field_profile_types_tid']['field'] = 'field_profile_types_tid';
+  $handler->display->display_options['filters']['field_profile_types_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_profile_types_tid']['expose']['operator_id'] = 'field_profile_types_tid_op';
+  $handler->display->display_options['filters']['field_profile_types_tid']['expose']['label'] = 'Profile types (field_profile_types)';
+  $handler->display->display_options['filters']['field_profile_types_tid']['expose']['operator'] = 'field_profile_types_tid_op';
+  $handler->display->display_options['filters']['field_profile_types_tid']['expose']['identifier'] = 'field_profile_types_tid';
+  $handler->display->display_options['filters']['field_profile_types_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_profile_types_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_profile_types_tid']['vocabulary'] = 'profile_types';
+  /* Filter criterion: Content: Topics (field_topics) */
+  $handler->display->display_options['filters']['field_topics_tid']['id'] = 'field_topics_tid';
+  $handler->display->display_options['filters']['field_topics_tid']['table'] = 'field_data_field_topics';
+  $handler->display->display_options['filters']['field_topics_tid']['field'] = 'field_topics_tid';
+  $handler->display->display_options['filters']['field_topics_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_topics_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_topics_tid']['expose']['operator_id'] = 'field_topics_tid_op';
+  $handler->display->display_options['filters']['field_topics_tid']['expose']['label'] = 'Topics (field_topics)';
+  $handler->display->display_options['filters']['field_topics_tid']['expose']['operator'] = 'field_topics_tid_op';
+  $handler->display->display_options['filters']['field_topics_tid']['expose']['identifier'] = 'field_topics_tid';
+  $handler->display->display_options['filters']['field_topics_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_topics_tid']['vocabulary'] = 'topics';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'admin/content/news';
+  $handler->display->display_options['path'] = 'admin/content/faqs';
   $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'News';
+  $handler->display->display_options['menu']['title'] = 'FAQs';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
   $handler->display->display_options['tab_options']['weight'] = '0';
-  $translatables['news'] = array(
+  $translatables['faqs'] = array(
     t('Master'),
-    t('News'),
+    t('FAQs'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -227,20 +205,19 @@ function hedley_news_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('Title'),
-    t('Body'),
-    t('Expiration date'),
-    t('File'),
     t('Groups audience'),
-    t('Image'),
+    t('Title'),
+    t('Question'),
+    t('Answer'),
     t('Profile types'),
-    t('Subtitle'),
     t('Topics'),
     t('Edit link'),
     t('Groups audience (og_group_ref)'),
+    t('Profile types (field_profile_types)'),
+    t('Topics (field_topics)'),
     t('Page'),
   );
-  $export['news'] = $view;
+  $export['faqs'] = $view;
 
   return $export;
 }

@@ -1,3 +1,6 @@
-id,municipality,field_question_ar,field_question_en,field_question_he,field_answer_ar,field_answer_en,field_answer_he,field_topic,field_profile_types
+id,municipality,field_question_ar,field_question_en,field_question_he,field_answer_ar,field_answer_en,field_answer_he,field_topics,field_profile_types
 1,1,سؤال ؟,Question?,באילו שעות מפנים את הזבל?,إجابة,Answer,"פינוי האשפה מתבצע בימים זוגיים, בשעות 5 עד 7 בבוקר.",Garbage collection,Residents|Businesses
 2,1,سؤال ؟,Question?,כמה סייעות יש בגן ילדים?,إجابة,Answer,"בכל גן של עד 30 ילדים, גננת אחת ושתי סייעות",Kindergarten,Residents
+3,1,,TZ Only English question,,,TZ Only English answer,,Arnona|Kindergarten,Businesses
+4,2,,AM Question,,,AM Answer,,Arnona|Kindergarten,Businesses
+5,1,TZ Only AR question,,,TZ Only AR answer,,,Arnona|Kindergarten,Businesses

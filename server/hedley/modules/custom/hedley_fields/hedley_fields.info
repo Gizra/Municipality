@@ -34,7 +34,6 @@ features[field_base][] = field_section_title
 features[field_base][] = field_social_links
 features[field_base][] = field_subtitle
 features[field_base][] = field_ticket_price
-features[field_base][] = field_topic
 features[field_base][] = field_topics
 features[field_base][] = name_field
 features[field_base][] = og_group_ref
