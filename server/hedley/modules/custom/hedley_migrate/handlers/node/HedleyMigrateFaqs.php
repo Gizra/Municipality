@@ -21,15 +21,15 @@ class HedleyMigrateFaqs extends HedleyMigrateBase {
     'field_answer_ar',
     'field_answer_en',
     'field_answer_he',
-    'field_topic',
+    'field_topics',
     'field_profile_types',
   ];
   protected $simpleMappings = [
     'field_question',
     'field_answer',
-    'field_topic',
   ];
   protected $simpleMultipleMappings = [
+    'field_topics',
     'field_profile_types',
   ];
 
