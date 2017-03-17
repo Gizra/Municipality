@@ -27,10 +27,11 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
   if (empty($context->data->nid)) {
     return NULL;
   }
-  $group_nid = $context->data->nid;
+  $municipality_node = $context->data;
+  $wrapper = entity_metadata_wrapper('node', $municipality_node);
 
   // Get promoted FAQ nodes of the viewed municipality.
-  if (!$nodes = hedley_municipality_get_group_promoted_nodes($group_nid, $conf['bundle'], 10)) {
+  if (!$nodes = hedley_municipality_get_nodes($conf['bundle'], 10, $municipality_node, TRUE)) {
     return NULL;
   }
 
@@ -40,7 +41,6 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
     'items_class' => $conf['items_class'],
   ];
 
-  $wrapper = entity_metadata_wrapper('node', $group_nid);
   $block = new stdClass();
   $block->module = 'hedley_municipality';
   // Ignoring the "Only string literals should be passed to t()" validation,

@@ -25,40 +25,17 @@ $plugin = [
 function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $context) {
   global $language;
 
-  // Get promoted FAQ nodes of the viewed municipality.
-  $query = new EntityFieldQuery();
-  $query
-    ->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', 'faq')
-    ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyOrderBy('created', 'DESC')
-    // Filter by current profile type.
-    ->fieldCondition('field_profile_types', 'tid', hedley_terms_get_current_profile_type_tid())
-    ->range(0, 10);
-  // Fetch the municipality context from the ctools context or from the purl
-  // context.
   $municipality_node = !empty($context[0]->data->nid) ? $context[0]->data : hedley_municipality_get_current();
-  if ($municipality_node) {
-    // Filter by current municipality.
-    $query->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $municipality_node->nid);
-  }
-  // Filter by promoted nodes (Only on the municipality's homepage).
-  if ($conf['promoted_only']) {
-    $query->propertyCondition('promote', NODE_PROMOTED);
-  }
-  // Filter by current topic.
-  if (!empty($context[1]->data->tid)) {
-    $query->fieldCondition('field_topics', 'tid', $context[1]->data->tid);
-  }
-  $result = $query->execute();
+  $topic_tid = !empty($context[1]->data->tid) ? $context[1]->data->tid : 0;
 
-  if (empty($result['node'])) {
+  $nodes = hedley_municipality_get_nodes('faq', 10, $municipality_node, $conf['promoted_only'], $topic_tid);
+  if (!$nodes) {
     return NULL;
   }
 
   // Extract the questions and answers from the FAQ nodes.
   $faqs = [];
-  foreach (node_load_multiple(array_keys($result['node'])) as $node) {
+  foreach ($nodes as $node) {
     $wrapper = entity_metadata_wrapper('node', $node);
     // Set the wrapper to the current language.
     $wrapper->language($language->language);

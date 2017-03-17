@@ -24,33 +24,15 @@ function hedley_topic_topic_news_content_type_render($subtype, $conf, $args, $co
   }
   $topic_wrapper = entity_metadata_wrapper('taxonomy_term', $context->data);
 
-  $query = new EntityFieldQuery();
-  $query
-    ->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', 'news')
-    ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyOrderBy('created', 'DESC')
-    // Filter by the current topic.
-    ->fieldCondition('field_topics', 'tid', $topic_wrapper->getIdentifier())
-    // Filter by the current profile type.
-    ->fieldCondition('field_profile_types', 'tid', hedley_terms_get_current_profile_type_tid())
-    ->range(0, 10);
-
-  // When in municipality context, filter by it.
-  $municipality_node = hedley_municipality_get_current();
-  if ($municipality_node) {
-    $query->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $municipality_node->nid);
-  }
-
-  $result = $query->execute();
-  if (empty($result['node'])) {
+  $nodes = hedley_municipality_get_nodes('news', 10, hedley_municipality_get_current(), FALSE, $topic_wrapper->getIdentifier());
+  if (!$nodes) {
     // No news found.
     return NULL;
   }
 
   // Get the news titles.
   $news_items = [];
-  foreach (node_load_multiple(array_keys($result['node'])) as $node) {
+  foreach ($nodes as $node) {
     $wrapper = entity_metadata_wrapper('node', $node);
     // Explicitly set the wrapper language to the current language.
     // Otherwise $wrapper->body->value() returns the default language instead of
