@@ -30,7 +30,7 @@ function hedley_municipality_ctools_plugin_directory($module, $plugin) {
  * @param int $topic_tid
  *   Optional filter by field_topics.
  *
- * @return array Node objects.
+ * @return array
  *   Node objects.
  */
 function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0) {
