@@ -47,8 +47,6 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
     $query->propertyCondition('promote', NODE_PROMOTED);
   }
 
-
-
   $result = $query->execute();
 
   if (empty($result['node'])) {
