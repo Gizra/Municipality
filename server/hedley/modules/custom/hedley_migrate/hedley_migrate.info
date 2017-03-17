@@ -1,6 +1,6 @@
 name = "Hedley migration"
 description = "Populate content."
-package = "Hedley"
+package = "Custom"
 core = 7.x
 dependencies[] = migrate
 dependencies[] = migrate_extras
