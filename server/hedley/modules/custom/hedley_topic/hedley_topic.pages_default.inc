@@ -115,6 +115,34 @@ function hedley_topic_default_page_manager_handlers() {
   $pane->uuid = '98797ebd-9983-4297-abcd-9b0f2f9b2617';
   $display->content['new-98797ebd-9983-4297-abcd-9b0f2f9b2617'] = $pane;
   $display->panels['main'][1] = 'new-98797ebd-9983-4297-abcd-9b0f2f9b2617';
+  $pane = new stdClass();
+  $pane->pid = 'new-421793cb-36dd-4b1a-8a60-1c32b0c25dc7';
+  $pane->panel = 'main';
+  $pane->type = 'faqs_accordion';
+  $pane->subtype = 'faqs_accordion';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'promoted_only' => 0,
+    'context' => array(
+      0 => 'empty',
+      1 => 'argument_term_1',
+    ),
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 2;
+  $pane->locks = array();
+  $pane->uuid = '421793cb-36dd-4b1a-8a60-1c32b0c25dc7';
+  $display->content['new-421793cb-36dd-4b1a-8a60-1c32b0c25dc7'] = $pane;
+  $display->panels['main'][2] = 'new-421793cb-36dd-4b1a-8a60-1c32b0c25dc7';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
