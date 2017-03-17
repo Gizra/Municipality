@@ -1,7 +1,7 @@
 name = Hedley I18n
 description = Municipality i18n settings.
 core = 7.x
-package = Hedley
+package = Custom
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = locale

@@ -1,7 +1,7 @@
 name = Hedley Municipality
 description = Municipality content type.
 core = 7.x
-package = Hedley
+package = "Custom"
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = hedley_fields

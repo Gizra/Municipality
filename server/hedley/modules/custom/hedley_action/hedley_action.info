@@ -1,7 +1,7 @@
 name = Hedley Action
 description = Municipality action nodes.
 core = 7.x
-package = Hedley
+package = "Custom"
 dependencies[] = ctools
 dependencies[] = entityreference
 dependencies[] = features

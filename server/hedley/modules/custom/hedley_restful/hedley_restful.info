@@ -1,7 +1,7 @@
 name = Hedley RESTFul
 description = "Hedley RESTFul"
 core = 7.x
-package = Hedley
+package = "Custom"
 dependencies[] = restful
 dependencies[] = entity_validator
 
