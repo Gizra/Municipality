@@ -47,7 +47,10 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
     $query->propertyCondition('promote', NODE_PROMOTED);
   }
 
-
+  // Filter by current topic.
+  if (!empty($context[1]->data->tid)) {
+    $query->fieldCondition('field_topics', 'tid', $context[1]->data->tid);
+  }
 
   $result = $query->execute();
 
