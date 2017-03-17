@@ -32,8 +32,9 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
     ->entityCondition('bundle', 'faq')
     ->propertyCondition('status', NODE_PUBLISHED)
     ->propertyOrderBy('created', 'DESC')
+    // Filter by current profile type.
+    ->fieldCondition('field_profile_types', 'tid', hedley_terms_get_current_profile_type_tid())
     ->range(0, 10);
-
   // Fetch the municipality context from the ctools context or from the purl
   // context.
   $municipality_node = !empty($context[0]->data->nid) ? $context[0]->data : hedley_municipality_get_current();
@@ -41,17 +42,14 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
     // Filter by current municipality.
     $query->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $municipality_node->nid);
   }
-
   // Filter by promoted nodes (Only on the municipality's homepage).
   if ($conf['promoted_only']) {
     $query->propertyCondition('promote', NODE_PROMOTED);
   }
-
   // Filter by current topic.
   if (!empty($context[1]->data->tid)) {
     $query->fieldCondition('field_topics', 'tid', $context[1]->data->tid);
   }
-
   $result = $query->execute();
 
   if (empty($result['node'])) {
@@ -62,7 +60,12 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
   $faqs = [];
   foreach (node_load_multiple(array_keys($result['node'])) as $node) {
     $wrapper = entity_metadata_wrapper('node', $node);
+    // Set the wrapper to the current language.
     $wrapper->language($language->language);
+    // Ignore items that are not translated to the current language.
+    if (!$wrapper->field_answer->value() || !$wrapper->label()) {
+      continue;
+    }
 
     $faqs[] = [
       'question' => $wrapper->field_question->value(),
