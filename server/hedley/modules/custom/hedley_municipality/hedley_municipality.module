@@ -17,29 +17,47 @@ function hedley_municipality_ctools_plugin_directory($module, $plugin) {
 }
 
 /**
- * Get promoted nodes of a municipality group.
+ * Get nodes of a municipality group, according to current profile type.
  *
- * @param int $group_nid
- *   A municipality node ID.
  * @param string $bundle
  *   The wanted nodes bundle.
  * @param int $max_range
  *   Maximal amount of nodes to fetch.
+ * @param int $municipality_node
+ *   Optional municipality node to filter by.
+ * @param bool $promoted_only
+ *   Whether to get only promoted nodes.
+ * @param int $topic_tid
+ *   Optional filter by field_topics.
  *
- * @return array
+ * @return array Node objects.
  *   Node objects.
  */
-function hedley_municipality_get_group_promoted_nodes($group_nid, $bundle, $max_range) {
+function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0) {
+  // Get promoted FAQ nodes of the viewed municipality.
   $query = new EntityFieldQuery();
-  $result = $query
+  $query
     ->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', $bundle)
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyCondition('promote', NODE_PROMOTED)
-    ->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $group_nid)
     ->propertyOrderBy('created', 'DESC')
-    ->range(0, $max_range)
-    ->execute();
+    // Filter by current profile type.
+    ->fieldCondition('field_profile_types', 'tid', hedley_terms_get_current_profile_type_tid())
+    ->range(0, $max_range);
+
+  // Filter by municipality.
+  if ($municipality_node) {
+    $query->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $municipality_node->nid);
+  }
+  // Filter by promoted nodes.
+  if ($promoted_only) {
+    $query->propertyCondition('promote', NODE_PROMOTED);
+  }
+  // Filter by current topic.
+  if ($topic_tid) {
+    $query->fieldCondition('field_topics', 'tid', $topic_tid);
+  }
+  $result = $query->execute();
 
   return !empty($result['node']) ? node_load_multiple(array_keys($result['node'])) : [];
 }
