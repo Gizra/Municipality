@@ -30,13 +30,9 @@ function hedley_topic_topic_hardcopy_forms_content_type_render($subtype, $conf, 
     return NULL;
   }
 
-  // Get the hardcopy_forms titles.
   $hardcopy_forms = [];
   foreach ($nodes as $node) {
     $wrapper = entity_metadata_wrapper('node', $node);
-    // Explicitly set the wrapper language to the current language.
-    // Otherwise $wrapper->body->value() returns the default language instead of
-    // the current language.
     $wrapper->language($language->language);
 
     // Ignore nodes without titles in the current language.

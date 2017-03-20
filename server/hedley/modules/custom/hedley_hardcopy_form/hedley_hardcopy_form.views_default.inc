@@ -105,7 +105,7 @@ function hedley_hardcopy_form_views_default_views() {
   $handler->display->display_options['fields']['field_topics']['id'] = 'field_topics';
   $handler->display->display_options['fields']['field_topics']['table'] = 'field_data_field_topics';
   $handler->display->display_options['fields']['field_topics']['field'] = 'field_topics';
-  /* Field: Content: Hardcopy form */
+  /* Field: Content: File */
   $handler->display->display_options['fields']['field_file']['id'] = 'field_file';
   $handler->display->display_options['fields']['field_file']['table'] = 'field_data_field_file';
   $handler->display->display_options['fields']['field_file']['field'] = 'field_file';
@@ -209,7 +209,7 @@ function hedley_hardcopy_form_views_default_views() {
     t('Title'),
     t('Profile types'),
     t('Topics'),
-    t('Hardcopy form'),
+    t('File'),
     t('Edit link'),
     t('Groups audience (og_group_ref)'),
     t('Profile types (field_profile_types)'),

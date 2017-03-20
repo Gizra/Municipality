@@ -129,7 +129,7 @@ function hedley_news_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Hardcopy form */
+  /* Field: Content: File */
   $handler->display->display_options['fields']['field_file']['id'] = 'field_file';
   $handler->display->display_options['fields']['field_file']['table'] = 'field_data_field_file';
   $handler->display->display_options['fields']['field_file']['field'] = 'field_file';
@@ -230,7 +230,7 @@ function hedley_news_views_default_views() {
     t('Title'),
     t('Body'),
     t('Expiration date'),
-    t('Hardcopy form'),
+    t('File'),
     t('Groups audience'),
     t('Image'),
     t('Profile types'),
