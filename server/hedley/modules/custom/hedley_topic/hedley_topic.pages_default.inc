@@ -173,6 +173,33 @@ function hedley_topic_default_page_manager_handlers() {
   $pane->uuid = '654f021f-86d9-471d-9b4f-b82bbc565da0';
   $display->content['new-654f021f-86d9-471d-9b4f-b82bbc565da0'] = $pane;
   $display->panels['main'][3] = 'new-654f021f-86d9-471d-9b4f-b82bbc565da0';
+  $pane = new stdClass();
+  $pane->pid = 'new-3a41ba08-e729-4f83-8273-e739b928e5a5';
+  $pane->panel = 'main';
+  $pane->type = 'topic_hardcopy_forms';
+  $pane->subtype = 'topic_hardcopy_forms';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'context' => 'argument_term_1',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array(
+    'css_id' => '',
+    'css_class' => 'ui segment row',
+  );
+  $pane->extras = array();
+  $pane->position = 4;
+  $pane->locks = array();
+  $pane->uuid = '3a41ba08-e729-4f83-8273-e739b928e5a5';
+  $display->content['new-3a41ba08-e729-4f83-8273-e739b928e5a5'] = $pane;
+  $display->panels['main'][4] = 'new-3a41ba08-e729-4f83-8273-e739b928e5a5';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
