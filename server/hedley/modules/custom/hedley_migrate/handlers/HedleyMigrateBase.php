@@ -108,17 +108,17 @@ abstract class HedleyMigrateBase extends Migration {
       $this->addFieldMapping('name', 'name_field_' . language_default('language'));
     }
 
-    // Map image field.
-    foreach (['field_image', 'field_logo'] as $image_field) {
-      if (!in_array($image_field, $this->csvColumns)) {
+    // Map file fields.
+    foreach (['field_file', 'field_image', 'field_logo'] as $file_field) {
+      if (!in_array($file_field, $this->csvColumns)) {
         continue;
       }
-      $this->addFieldMapping($image_field, $image_field);
-      $this->addFieldMapping($image_field . ':file_replace')
+      $this->addFieldMapping($file_field, $file_field);
+      $this->addFieldMapping($file_field . ':file_replace')
         ->defaultValue(FILE_EXISTS_REPLACE);
 
-      $this->addFieldMapping($image_field . ':source_dir')
-        ->defaultValue($this->getMigrateDirectory() . '/images/');
+      $this->addFieldMapping($file_field . ':source_dir')
+        ->defaultValue($this->getMigrateDirectory() . '/files/');
     }
 
     // Map translatable fields languages lists.

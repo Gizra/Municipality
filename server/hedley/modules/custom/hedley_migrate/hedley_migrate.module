@@ -16,6 +16,7 @@ function hedley_migrate_migrate_api() {
     'HedleyMigrateActions',
     'HedleyMigrateEvents',
     'HedleyMigrateFaqs',
+    'HedleyMigrateHardcopyForms',
     'HedleyMigrateMunicipalities',
     'HedleyMigrateNews',
     // Terms.
