@@ -1,7 +1,7 @@
 name = Hedley FAQ
 description = Municipality FAQ nodes.
 core = 7.x
-package = "Custom"
+package = Custom
 dependencies[] = ctools
 dependencies[] = entityreference
 dependencies[] = features

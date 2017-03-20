@@ -1,7 +1,7 @@
 name = Hedley Terms
 description = Municipality taxonomy terms.
 core = 7.x
-package = "Custom"
+package = Custom
 dependencies[] = features
 dependencies[] = hedley_fields
 dependencies[] = taxonomy
