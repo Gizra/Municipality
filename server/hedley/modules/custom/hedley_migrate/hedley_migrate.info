@@ -12,6 +12,7 @@ files[] = handlers/multifield/HedleyMigrateDestinationMultifield.php
 files[] = handlers/node/HedleyMigrateActions.php
 files[] = handlers/node/HedleyMigrateEvents.php
 files[] = handlers/node/HedleyMigrateFaqs.php
+files[] = handlers/node/HedleyMigrateHardcopyForms.php
 files[] = handlers/node/HedleyMigrateMunicipalities.php
 files[] = handlers/node/HedleyMigrateNews.php
 files[] = handlers/taxonomy_term/HedleyMigrateAudiences.php
