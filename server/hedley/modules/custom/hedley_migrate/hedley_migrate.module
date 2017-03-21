@@ -12,6 +12,7 @@ function hedley_migrate_migrate_api() {
   $migrations = [
     // Multifields.
     'HedleyMigrateActionSections',
+    'HedleyMigrateReceptionHours',
     // Nodes.
     'HedleyMigrateActions',
     'HedleyMigrateContacts',
