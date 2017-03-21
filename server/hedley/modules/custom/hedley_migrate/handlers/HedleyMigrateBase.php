@@ -19,9 +19,12 @@ abstract class HedleyMigrateBase extends Migration {
     'body',
     'name_field',
     'title_field',
-    'field_subtitle',
-    'field_question',
     'field_answer',
+    'field_first_name',
+    'field_job_title',
+    'field_last_name',
+    'field_question',
+    'field_subtitle',
   ];
 
   /**

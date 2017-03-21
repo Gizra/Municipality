@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Code for the Hedley contact feature.
+ */
+
+include_once 'hedley_contact.features.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Remove the title from the contact node form.
+ */
+function hedley_contact_form_contact_node_form_alter(&$form, &$form_state) {
+  $form['title']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_node_presave().
+ *
+ * Set contact node title according to the municipality's default language.
+ */
+function hedley_contact_node_presave($node) {
+  if ($node->type != 'contact') {
+    return;
+  }
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+  // TODO: Set the title according to the name in the municipality's default
+  // language.
+  $wrapper->language('ar');
+  $node->title = $wrapper->field_first_name->value() . ' ' . $wrapper->field_last_name->value();
+}

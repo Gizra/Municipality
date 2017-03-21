@@ -23,6 +23,7 @@ dependencies[] = composer_manager
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = diff
+dependencies[] = email
 dependencies[] = entity
 dependencies[] = entity_token
 dependencies[] = entityreference
@@ -50,6 +51,7 @@ dependencies[] = views_bulk_operations
 
 ; Hedley
 dependencies[] = hedley_action
+dependencies[] = hedley_contact
 dependencies[] = hedley_event
 dependencies[] = hedley_faq
 dependencies[] = hedley_fields
