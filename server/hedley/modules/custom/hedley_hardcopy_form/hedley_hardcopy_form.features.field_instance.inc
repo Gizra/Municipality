@@ -38,7 +38,7 @@ function hedley_hardcopy_form_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_file',
-    'label' => 'Hardcopy form',
+    'label' => 'File',
     'required' => 1,
     'settings' => array(
       'description_field' => 0,
@@ -267,8 +267,8 @@ function hedley_hardcopy_form_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('File');
   t('Groups audience');
-  t('Hardcopy form');
   t('Profile types');
   t('Title');
   t('Topics');
