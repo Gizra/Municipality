@@ -10,6 +10,73 @@
 function hedley_contact_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'multifield-field_reception_hours-field_hours'.
+  $field_instances['multifield-field_reception_hours-field_hours'] = array(
+    'bundle' => 'field_reception_hours',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Reception hours. E.g. "14:30 - 18:00".',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'multifield',
+    'field_name' => 'field_hours',
+    'label' => 'Hours',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'multifield-field_reception_hours-field_weekday'.
+  $field_instances['multifield-field_reception_hours-field_weekday'] = array(
+    'bundle' => 'field_reception_hours',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'multifield',
+    'field_name' => 'field_weekday',
+    'label' => 'Weekday',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'node-contact-field_address'.
   $field_instances['node-contact-field_address'] = array(
     'bundle' => 'contact',
@@ -180,7 +247,7 @@ function hedley_contact_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_first_name',
     'label' => 'First name',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'text_processing' => 0,
@@ -331,7 +398,7 @@ function hedley_contact_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_last_name',
     'label' => 'Last name',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'text_processing' => 0,
@@ -455,28 +522,11 @@ function hedley_contact_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'office_hours',
+        'module' => 'multifield',
         'settings' => array(
-          'closedformat' => 'Closed',
-          'compress' => FALSE,
-          'current_status' => array(
-            'closed_text' => 'Currently closed',
-            'open_text' => 'Currently open!',
-            'position' => 'hide',
-          ),
-          'date_first_day' => 1,
-          'daysformat' => 'long',
-          'grouped' => FALSE,
-          'hoursformat' => 0,
-          'separator_day_hours' => ': ',
-          'separator_days' => '<br />',
-          'separator_grouped_days' => ' - ',
-          'separator_hours_hours' => '-',
-          'separator_more_hours' => ', ',
-          'showclosed' => 'all',
-          'timezone_field' => '',
+          'view_mode' => 'default',
         ),
-        'type' => 'office_hours',
+        'type' => 'multifield_default',
         'weight' => 11,
       ),
       'homepage_teaser' => array(
@@ -502,9 +552,9 @@ function hedley_contact_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'office_hours',
+      'module' => 'multifield',
       'settings' => array(),
-      'type' => 'office_hours',
+      'type' => 'multifield_default',
       'weight' => 15,
     ),
   );
@@ -629,13 +679,16 @@ function hedley_contact_field_default_field_instances() {
   t('Fax');
   t('First name');
   t('Groups audience');
+  t('Hours');
   t('Image');
   t('Job title');
   t('Last name');
   t('Phone');
   t('Profile types');
   t('Reception hours');
+  t('Reception hours. E.g. "14:30 - 18:00".');
   t('Topics');
+  t('Weekday');
 
   return $field_instances;
 }

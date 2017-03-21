@@ -78,9 +78,6 @@ projects[module_filter][version] = "2.0"
 projects[multifield][subdir] = "contrib"
 projects[multifield][version] = "1.0-alpha4"
 
-projects[office_hours][subdir] = "contrib"
-projects[office_hours][version] = "1.5"
-
 projects[og][subdir] = "contrib"
 projects[og][version] = "2.9"
 

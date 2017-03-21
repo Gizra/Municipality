@@ -286,6 +286,28 @@ function hedley_fields_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_hours'.
+  $field_bases['field_hours'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_hours',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_image'.
   $field_bases['field_image'] = array(
     'active' => 1,
@@ -488,20 +510,27 @@ function hedley_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_reception_hours',
-    'indexes' => array(),
+    'indexes' => array(
+      'field_hours_format' => array(
+        0 => 'field_hours_format',
+      ),
+      'field_weekday_value' => array(
+        0 => 'field_weekday_value',
+      ),
+      'id' => array(
+        0 => 'id',
+      ),
+    ),
     'locked' => 0,
-    'module' => 'office_hours',
+    'module' => 'multifield',
     'settings' => array(
-      'cardinality' => 2,
-      'entity_translation_sync' => FALSE,
-      'granularity' => 30,
-      'hoursformat' => 0,
-      'limitend' => '',
-      'limitstart' => '',
-      'valhrs' => 0,
+      'entity_translation_sync' => array(
+        0 => 'id',
+      ),
+      'hide_blank_items' => 1,
     ),
     'translatable' => 0,
-    'type' => 'office_hours',
+    'type' => 'multifield',
   );
 
   // Exported field_base: 'field_recurring_weekly'.
@@ -736,6 +765,37 @@ function hedley_fields_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
+  );
+
+  // Exported field_base: 'field_weekday'.
+  $field_bases['field_weekday'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_weekday',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'Sunday',
+        1 => 'Monday',
+        2 => 'Tuesday',
+        3 => 'Wednesday',
+        4 => 'Thursday',
+        5 => 'Friday',
+        6 => 'Saturday',
+      ),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'name_field'.

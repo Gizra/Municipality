@@ -13,6 +13,27 @@ function hedley_contact_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_node_contact';
+  $strongarm->value = '0';
+  $export['auto_entitylabel_node_contact'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_pattern_node_contact';
+  $strongarm->value = '';
+  $export['auto_entitylabel_pattern_node_contact'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_php_node_contact';
+  $strongarm->value = 0;
+  $export['auto_entitylabel_php_node_contact'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'diff_enable_revisions_page_node_contact';
   $strongarm->value = 1;
   $export['diff_enable_revisions_page_node_contact'] = $strongarm;

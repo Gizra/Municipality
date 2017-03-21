@@ -14,6 +14,13 @@ function hedley_contact_ctools_plugin_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function hedley_contact_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
+}
+
+/**
  * Implements hook_node_info().
  */
 function hedley_contact_node_info() {
