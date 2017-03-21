@@ -200,6 +200,33 @@ function hedley_topic_default_page_manager_handlers() {
   $pane->uuid = '3a41ba08-e729-4f83-8273-e739b928e5a5';
   $display->content['new-3a41ba08-e729-4f83-8273-e739b928e5a5'] = $pane;
   $display->panels['main'][4] = 'new-3a41ba08-e729-4f83-8273-e739b928e5a5';
+  $pane = new stdClass();
+  $pane->pid = 'new-babebd25-9028-439f-8c3c-10f559efaf1b';
+  $pane->panel = 'main';
+  $pane->type = 'topic_contacts';
+  $pane->subtype = 'topic_contacts';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'context' => 'argument_term_1',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array(
+    'css_id' => '',
+    'css_class' => 'ui segment row',
+  );
+  $pane->extras = array();
+  $pane->position = 5;
+  $pane->locks = array();
+  $pane->uuid = 'babebd25-9028-439f-8c3c-10f559efaf1b';
+  $display->content['new-babebd25-9028-439f-8c3c-10f559efaf1b'] = $pane;
+  $display->panels['main'][5] = 'new-babebd25-9028-439f-8c3c-10f559efaf1b';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
