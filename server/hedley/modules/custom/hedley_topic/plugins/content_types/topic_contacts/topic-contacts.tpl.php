@@ -53,6 +53,17 @@
               </p>
             <?php endif; ?>
 
+            <?php if ($contact['reception_hours']): ?>
+              <p>
+                <?php print t('Activity hours'); ?>:<br/>
+                <?php foreach ($contact['reception_hours'] as $reception_hours): ?>
+                  <?php print ($reception_hours['days']); ?>:
+                  <?php print ($reception_hours['hours']); ?>
+                  <br/>
+                <?php endforeach; ?>
+              </p>
+            <?php endif; ?>
+
           </div>
         </div>
       </div>

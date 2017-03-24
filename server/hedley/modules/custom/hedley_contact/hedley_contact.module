@@ -32,3 +32,88 @@ function hedley_contact_node_presave($node) {
   $wrapper->language('ar');
   $node->title = $wrapper->field_first_name->value() . ' ' . $wrapper->field_last_name->value();
 }
+
+/**
+ * Format the contact reception hours array, grouped by hours and days.
+ *
+ * @param object $node
+ *   A contact node.
+ *
+ * @return array
+ *   The formatted hours, keyed by days labels.
+ */
+function hedley_contact_get_reception_hours($node) {
+  if (empty($node->field_reception_hours[LANGUAGE_NONE])) {
+    return [];
+  }
+
+  // Fetch values from reception hours multifield. Accessing the node directly
+  // because the wrapper doesn't seem to work consistently with multifields.
+  $reception_hours = [];
+  foreach ($node->field_reception_hours[LANGUAGE_NONE] as $reception_hour) {
+    if (!isset($reception_hour['field_hours'][LANGUAGE_NONE][0]['value']) || !isset($reception_hour['field_weekday'][LANGUAGE_NONE][0]['value'])) {
+      continue;
+    }
+
+    // The weekday as int from Sunday = 0 to Saturday = 6.
+    $day_index = intval($reception_hour['field_weekday'][LANGUAGE_NONE][0]['value']);
+    $hours = check_plain($reception_hour['field_hours'][LANGUAGE_NONE][0]['value']);
+    // Group the reception hours by day, as a unified string.
+    if (!isset($reception_hours[$day_index])) {
+      $reception_hours[$day_index] = $hours;
+    }
+    else {
+      $reception_hours[$day_index] .= ', ' . $hours;
+    }
+  }
+  // Sort by day.
+  ksort($reception_hours);
+
+  // Group days with identical hours together.
+  $reception_hours_grouped = [];
+  foreach ($reception_hours as $day_index => $hours) {
+    if (!isset($reception_hours_grouped[$hours])) {
+      $reception_hours_grouped[$hours] = $day_index;
+    }
+    else {
+      $reception_hours_grouped[$hours] .= '|' . $day_index;
+    }
+  }
+
+  // Format the hours.
+  $formatted_hours = [];
+  // Day names, for converting the day indices to names.
+  $day_names = [
+    t('Sunday'),
+    t('Monday'),
+    t('Tuesday'),
+    t('Wednesday'),
+    t('Thursday'),
+    t('Friday'),
+    t('Saturday'),
+  ];
+  foreach ($reception_hours_grouped as $hours => $days) {
+    $days = explode('|', $days);
+    $days_text = '';
+    foreach ($days as $delta => $day_index) {
+      // In case the current day is is between two consecutive days, then add a
+      // dash instead of listing it. E.g. "Monday - Thursday".
+      if (isset($days[$delta - 1]) && $days[$delta - 1] == $day_index - 1 && isset($days[$delta + 1]) && $days[$delta + 1] == $day_index + 1) {
+        // Remove the previous dash if any, and re-add the dash.
+        $days_text = rtrim($days_text, ', - ');
+        $days_text .= ' - ';
+      }
+      else {
+        $days_text .= $day_names[$day_index] . ', ';
+      }
+    }
+    // Remove the trailing comma.
+    $days_text = rtrim($days_text, ', ');
+    $formatted_hours[] = [
+      'days' => $days_text,
+      'hours' => $hours,
+    ];
+  }
+
+  return $formatted_hours;
+}
