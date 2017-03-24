@@ -17,9 +17,11 @@ class HedleyMigrateTopics extends HedleyMigrateBase {
     'name_field_ar',
     'name_field_en',
     'name_field_he',
+    'field_color',
   ];
   protected $simpleMappings = [
     'name_field',
+    'field_color',
   ];
 
 }

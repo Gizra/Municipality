@@ -139,6 +139,43 @@ function hedley_fields_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
+  // Exported field_base: 'field_color'.
+  $field_bases['field_color'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_color',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'red' => 'red',
+        'orange' => 'orange',
+        'yellow' => 'yellow',
+        'olive' => 'olive',
+        'green' => 'green',
+        'teal' => 'teal',
+        'blue' => 'blue',
+        'violet' => 'violet',
+        'purple' => 'purple',
+        'pink' => 'pink',
+        'brown' => 'brown',
+        'grey' => 'grey',
+        'black' => 'black',
+      ),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_date'.
   $field_bases['field_date'] = array(
     'active' => 1,
