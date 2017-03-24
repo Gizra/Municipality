@@ -36,7 +36,7 @@ function hedley_contact_node_presave($node) {
 /**
  * Format the contact reception hours array, grouped by hours and days.
  *
- * @param $node
+ * @param object $node
  *   A contact node.
  *
  * @return array
@@ -83,7 +83,15 @@ function hedley_contact_get_reception_hours($node) {
   // Format the hours.
   $formatted_hours = [];
   // Day names, for converting the day indices to names.
-  $day_names = [t('Sunday'), t('Monday'), t('Tuesday'), t('Wednesday'), t('Thursday'), t('Friday'), t('Saturday')];
+  $day_names = [
+    t('Sunday'),
+    t('Monday'),
+    t('Tuesday'),
+    t('Wednesday'),
+    t('Thursday'),
+    t('Friday'),
+    t('Saturday'),
+  ];
   foreach ($reception_hours_grouped as $hours => $days) {
     $days = explode('|', $days);
     $days_text = '';
