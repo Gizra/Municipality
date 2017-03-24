@@ -46,6 +46,7 @@ function hedley_topic_topic_contacts_content_type_render($subtype, $conf, $args,
       'fax' => check_plain($wrapper->field_fax->value()),
       'email' => check_plain($wrapper->field_email->value()),
       'address' => check_plain($wrapper->field_address->value()),
+      'reception_hours' => hedley_contact_get_reception_hours($node),
     ];
 
     // Set the contact title as name and job title.
