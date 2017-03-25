@@ -87,3 +87,14 @@ function hedley_municipality_get_current() {
   }
   return node_load(reset($purl_gids['node']));
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Set the field_default_language options.
+ */
+function hedley_municipality_form_municipality_node_form_alter(&$form, &$form_state) {
+  foreach (language_list() as $language) {
+    $form['field_default_language'][LANGUAGE_NONE]['#options'][$language->language] = $language->name;
+  }
+}
