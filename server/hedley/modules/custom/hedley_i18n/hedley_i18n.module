@@ -14,18 +14,44 @@ include_once 'hedley_i18n.features.inc';
  *   The language switch links.
  */
 function hedley_i18n_language_switch_links() {
+  global $language;
+
   $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
   $links = language_negotiation_get_switch_links('language', $path);
   if (empty($links->links)) {
     return [];
   }
   $rendered_links = [];
-  foreach ($links->links as $link) {
+  foreach ($links->links as $language_code => $link) {
+    // Using language in the query string, to avoid a conflict with og_purl when
+    // it's the first element in the path.
     $options = [
-      'attributes' => ['class' => ['item']],
-      'language' => $link['language'],
+      'query' => ['language' => $language_code],
     ];
-    $rendered_links[] = l($link['title'], $link['href'], $options);
+    // Creating the link markup manually, because otherwise the "active" class
+    // isn't added correctly according the global language.
+    $active = $language_code == $language->language ? 'active' : '';
+    $url = url($link['href'], $options);
+    $rendered_links[] = "<a class=\"item $active\" href=\"$url\">{$link['title']}</a>";
   }
   return $rendered_links;
+}
+
+/**
+ * Implements hook_url_outbound_alter().
+ *
+ * Add the language as a query to all internal URLs.
+ */
+function hedley_i18n_url_outbound_alter(&$path, &$options, $original_path) {
+  global $language;
+
+  if ($options['external']) {
+    // Ignore external URLs.
+    return;
+  }
+
+  // Set the language, unless it's already explicitly set.
+  if (empty($options['query']['language'])) {
+    $options['query']['language'] = $language->language;
+  }
 }
