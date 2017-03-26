@@ -22,6 +22,7 @@ features[field_base][] = field_answer
 features[field_base][] = field_audience
 features[field_base][] = field_color
 features[field_base][] = field_date
+features[field_base][] = field_default_language
 features[field_base][] = field_email
 features[field_base][] = field_expiration_date
 features[field_base][] = field_fax

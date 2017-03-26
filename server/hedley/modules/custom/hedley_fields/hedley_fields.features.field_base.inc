@@ -206,6 +206,29 @@ function hedley_fields_field_default_field_bases() {
     'type' => 'datestamp',
   );
 
+  // Exported field_base: 'field_default_language'.
+  $field_bases['field_default_language'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_default_language',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_email'.
   $field_bases['field_email'] = array(
     'active' => 1,

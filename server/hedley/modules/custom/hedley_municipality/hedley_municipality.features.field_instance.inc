@@ -10,6 +10,50 @@
 function hedley_municipality_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-municipality-field_default_language'.
+  $field_instances['node-municipality-field_default_language'] = array(
+    'bundle' => 'municipality',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_default_language',
+    'label' => 'Default language',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 8,
+    ),
+  );
+
   // Exported field_instance: 'node-municipality-field_logo'.
   $field_instances['node-municipality-field_logo'] = array(
     'bundle' => 'municipality',
@@ -247,6 +291,7 @@ function hedley_municipality_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Default language');
   t('Determine if this is an OG group.');
   t('Group');
   t('Logo');
