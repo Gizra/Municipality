@@ -45,8 +45,8 @@ function hedley_i18n_language_switch_links() {
 function hedley_i18n_url_outbound_alter(&$path, &$options, $original_path) {
   global $language;
 
-  if ($options['external']) {
-    // Ignore external URLs.
+  if ($options['external'] || drupal_is_cli()) {
+    // Ignore external URLs, or when creating a link with cli.
     return;
   }
 
