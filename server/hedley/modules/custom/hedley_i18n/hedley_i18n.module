@@ -55,3 +55,35 @@ function hedley_i18n_url_outbound_alter(&$path, &$options, $original_path) {
     $options['query']['language'] = $language->language;
   }
 }
+
+/**
+ * Implements hook_language_negotiation_info().
+ */
+function hedley_i18n_language_negotiation_info() {
+  $providers = [];
+
+  $providers['hedley-i18n-municipality-default-language'] = [
+    'callbacks' => ['language' => 'hedley_i18n_municipality_language_negotiation'],
+    'weight' => -2,
+    'name' => t('Default municipality language'),
+    'description' => t("Use the municipality's default language."),
+  ];
+
+  return $providers;
+}
+
+/**
+ * Language negotiation provider for default municipality language.
+ *
+ * @return bool|string
+ *    The municipality's language code. FALSE when not in municipality context.
+ */
+function hedley_i18n_municipality_language_negotiation() {
+  if (!$node = hedley_municipality_get_current()) {
+    // No current municipality.
+    return FALSE;
+  }
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+  return $wrapper->field_default_language->value();
+}
