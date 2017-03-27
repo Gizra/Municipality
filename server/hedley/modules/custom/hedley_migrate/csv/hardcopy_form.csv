@@ -1,7 +1,3 @@
 id,municipality,title_field_ar,title_field_en,title_field_he,field_topics,field_profile_types,field_file
-1,1,Hardcopy form ar,TZ R Hardcopy form EN no topic,Hardcopy form HE,,Residents,form.pdf
-2,1,Businesses Hardcopy form AR,TZ B Hardcopy form EN,Businesses Hardcopy form HE,Arnona,Businesses,form.pdf
-3,1,B/R Hardcopy form AR,TZ B/R Hardcopy form EN,B/R Hardcopy form HE,Arnona,Residents|Businesses,form.pdf
-4,2,Another municipality’s Hardcopy form,Another municipality’s Hardcopy form,Another municipality’s Hardcopy form,Arnona,Residents|Businesses,form.pdf
-5,1,,TZ R Only English only title,,Arnona,Residents,form.pdf
-6,1,,,TZ R Hebrew Only,Arnona,Residents,form.pdf
+1,2,إجراءات التقدم بطلب للحصول على رخصة تجارية,,נוהל הגשת בקשה לרשיון עסק,Business license,Businesses,business_license_request_arara.pdf
+2,1,طلب للحصول على تصريح الإقامة,,בקשה לאישור תושבות,Resident service,Residents,approval_residency_tuba.pdf

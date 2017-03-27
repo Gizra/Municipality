@@ -1,4 +1,8 @@
 id,name_ar,name_en,name_he,field_color
 1,Kindergarten AR,Kindergarten,גני ילדים,olive
-2,Garbage collection AR,Garbage collection,איסוף אשפה,
+2,Garbage collection AR,Garbage collection,איסוף אשפה,green
 3,Arnona AR,Arnona,ארנונה,pink
+4,Business license AR,Business license,רישיון עסק,blue
+5,Resident service AR,Resident service,שירות לתושב,red
+6,Culture AR,Culture,תרבות,purple
+7,Tenders AR,Tenders,מכרזים,brown
