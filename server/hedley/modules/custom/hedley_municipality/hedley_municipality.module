@@ -97,4 +97,38 @@ function hedley_municipality_form_municipality_node_form_alter(&$form, &$form_st
   foreach (language_list() as $language) {
     $form['field_default_language'][LANGUAGE_NONE]['#options'][$language->language] = $language->name;
   }
+
+  // The default value has to be set manually, because options are built
+  // manually.
+  if (!empty($form['#entity']->field_default_language[LANGUAGE_NONE][0]['value'])) {
+    $form['field_default_language'][LANGUAGE_NONE]['#default_value'] = $form['#entity']->field_default_language[LANGUAGE_NONE][0]['value'];
+  }
+}
+
+/**
+ * Implements hook_node_presave().
+ *
+ * Set nodes titles according to their municipality's default language.
+ */
+function hedley_municipality_node_presave($node) {
+  $wrapper = entity_metadata_wrapper('node', $node);
+
+  // Fetch the node's municipality.
+  if ($node->type == 'municipality') {
+    $municipality_node = $node;
+  }
+  else {
+    // Assuming all nodes other than municipality belong to one municipality
+    // exactly.
+    $municipality_node = $wrapper->{OG_AUDIENCE_FIELD}->get(0)->value();
+  }
+  $municipality_wrapper = entity_metadata_wrapper('node', $municipality_node);
+
+  // For nodes with title_field, set the title property according to the title
+  // field in the municipality's language.
+  if ($wrapper->__isset('title_field')) {
+    // Set the wrapper language to the municipality's language.
+    $wrapper->language($municipality_wrapper->field_default_language->value());
+    $node->title = $wrapper->title_field->value();
+  }
 }
