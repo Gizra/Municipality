@@ -27,9 +27,8 @@ function hedley_contact_node_presave($node) {
   }
 
   $wrapper = entity_metadata_wrapper('node', $node);
-  // TODO: Set the title according to the name in the municipality's default
-  // language.
-  $wrapper->language('ar');
+  // Set the wrapper language to the municipality's default language.
+  $wrapper->language($wrapper->{OG_AUDIENCE_FIELD}->get(0)->field_default_language->value());
   $node->title = $wrapper->field_first_name->value() . ' ' . $wrapper->field_last_name->value();
 }
 
