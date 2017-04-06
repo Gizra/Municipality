@@ -8,8 +8,8 @@ Feature: Verify that content is accessible.
 
     Examples:
       | Title                                         | Type           |
-      | Tuba-Zangariyye                               | municipality   |
-      | Title                                         | event          |
-      | כמה סייעות יש בגן ילדים?                         | faq            |
-      | Action title EN                               | action         |
-      | מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17    | news           |
+      | طوبا الزنغرية                                 | municipality   |
+      | مسرحية للأطفال: صباح السبت                     | event          |
+      | כמה סייעות יש בגן ילדים?                       | faq            |
+      | לשלם ארנונה                                   | action         |
+      | מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17 | news           |
