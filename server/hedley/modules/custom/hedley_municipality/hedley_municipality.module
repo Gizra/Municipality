@@ -148,7 +148,7 @@ function hedley_municipality_node_presave($node) {
  * @return string
  *   The first available language for the field.
  */
-function hedley_municipality_get_non_empty_language_for_field($field_attribute) {
+function hedley_municipality_get_non_empty_language_for_field(array $field_attribute) {
   // Iterate the languages in the field attribute, and return the first non
   // empty value.
   foreach ($field_attribute as $language_code => $value) {
