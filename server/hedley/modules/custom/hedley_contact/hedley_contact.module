@@ -29,7 +29,15 @@ function hedley_contact_node_presave($node) {
   $wrapper = entity_metadata_wrapper('node', $node);
   // Set the wrapper language to the municipality's default language.
   $wrapper->language($wrapper->{OG_AUDIENCE_FIELD}->get(0)->field_default_language->value());
-  $node->title = $wrapper->field_first_name->value() . ' ' . $wrapper->field_last_name->value();
+
+  // If the name isn't available in the default language, try another language,
+  // in which the last name isn't empty.
+  if (!$wrapper->field_first_name->value() && !$wrapper->field_last_name->value()) {
+    if ($language_code = hedley_municipality_get_non_empty_language_for_field($node->field_last_name)) {
+      $wrapper->language($language_code);
+    }
+  }
+  $node->title = trim($wrapper->field_first_name->value() . ' ' . $wrapper->field_last_name->value());
 }
 
 /**

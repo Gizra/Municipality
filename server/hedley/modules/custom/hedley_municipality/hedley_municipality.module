@@ -130,5 +130,30 @@ function hedley_municipality_node_presave($node) {
     // Set the wrapper language to the municipality's language.
     $wrapper->language($municipality_wrapper->field_default_language->value());
     $node->title = $wrapper->title_field->value();
+
+    // If the title was left empty, try another language.
+    if (!$node->title && $language_code = hedley_municipality_get_non_empty_language_for_field($node->title_field)) {
+      $wrapper->language($language_code);
+      $node->title = $wrapper->title_field->value();
+    }
+  }
+}
+
+/**
+ * Get the first language in which a field value is not empty.
+ *
+ * @param $field_attribute
+ *   The field attribute from the node object.
+ *
+ * @return string
+ *   The first available language for the field.
+ */
+function hedley_municipality_get_non_empty_language_for_field($field_attribute) {
+  // Iterate the languages in the field attribute, and return the first non
+  // empty value.
+  foreach ($field_attribute as $language_code => $value) {
+    if (!empty($value[0]['value'])) {
+      return $language_code;
+    }
   }
 }
