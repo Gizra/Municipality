@@ -6,3 +6,31 @@
  */
 
 include_once 'hedley_action.features.inc';
+
+/**
+ * Implements hook_node_presave().
+ *
+ * Fix empty entity references on the action's field_action_sections. For some
+ * reason when the hardcopy reference is left empty, it's being saved as an
+ * empty string, which is not allowed on the multifield table. So we convert
+ * empty strings to NULLs for this column.
+ */
+function hedley_action_node_presave($node) {
+  if ($node->type != 'action') {
+    return;
+  }
+
+  // Iterate all action sections values, and search for hardcopy_form references
+  // that are set to an empty string.
+  foreach ($node->field_action_sections as &$language_values) {
+    foreach ($language_values as &$value) {
+      if (!isset($value['field_section_hardcopy_form'][LANGUAGE_NONE][0]['target_id'])) {
+        continue;
+      }
+      if ($value['field_section_hardcopy_form'][LANGUAGE_NONE][0]['target_id'] === '') {
+        // Convert the reference to NULL.
+        $value['field_section_hardcopy_form'][LANGUAGE_NONE][0]['target_id'] = NULL;
+      }
+    }
+  }
+}
