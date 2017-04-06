@@ -20,6 +20,10 @@ function hedley_action_node_presave($node) {
     return;
   }
 
+  if (!$node->field_action_sections) {
+    return;
+  }
+
   // Iterate all action sections values, and search for hardcopy_form references
   // that are set to an empty string.
   foreach ($node->field_action_sections as &$language_values) {
