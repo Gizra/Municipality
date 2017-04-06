@@ -142,7 +142,7 @@ function hedley_municipality_node_presave($node) {
 /**
  * Get the first language in which a field value is not empty.
  *
- * @param $field_attribute
+ * @param array $field_attribute
  *   The field attribute from the node object.
  *
  * @return string
