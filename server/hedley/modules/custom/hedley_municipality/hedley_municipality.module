@@ -113,22 +113,17 @@ function hedley_municipality_form_municipality_node_form_alter(&$form, &$form_st
 function hedley_municipality_node_presave($node) {
   $wrapper = entity_metadata_wrapper('node', $node);
 
-  // Fetch the node's municipality.
-  if ($node->type == 'municipality') {
-    $municipality_node = $node;
-  }
-  else {
-    // Assuming all nodes other than municipality belong to one municipality
-    // exactly.
-    $municipality_node = $wrapper->{OG_AUDIENCE_FIELD}->get(0)->value();
-  }
-  $municipality_wrapper = entity_metadata_wrapper('node', $municipality_node);
+  $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_node_municipality($node));
+
+  // Set the node language according to the municipality's default.
+  $municipality_language = $municipality_wrapper->field_default_language->value();
+  $node->language = $municipality_language;
 
   // For nodes with title_field, set the title property according to the title
   // field in the municipality's language.
   if ($wrapper->__isset('title_field')) {
     // Set the wrapper language to the municipality's language.
-    $wrapper->language($municipality_wrapper->field_default_language->value());
+    $wrapper->language($municipality_language);
     $node->title = $wrapper->title_field->value();
 
     // If the title was left empty, try another language.
@@ -136,6 +131,28 @@ function hedley_municipality_node_presave($node) {
       $wrapper->language($language_code);
       $node->title = $wrapper->title_field->value();
     }
+  }
+}
+
+/**
+ * Get the municipality of a node, or the node itself when it's a municipality.
+ *
+ * @param object $node
+ *   Either a municipality, or municipality content node.
+ *
+ * @return object
+ *   The relevant municipality node.
+ */
+function hedley_municipality_node_municipality($node) {
+  // Fetch the node's municipality.
+  if ($node->type == 'municipality') {
+    return $node;
+  }
+  else {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    // Assuming all nodes other than municipality belong to one municipality
+    // exactly.
+    return $wrapper->{OG_AUDIENCE_FIELD}->get(0)->value();
   }
 }
 
