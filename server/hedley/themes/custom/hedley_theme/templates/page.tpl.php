@@ -29,6 +29,14 @@
       </h2>
     </div>
     <div class="ui four wide center aligned middle aligned column">
+      <div class="ui segments">
+        <div class="ui vertical segment center aligned middle aligned">
+          <a href="#" class="change-font-size plus"><i class="plus icon"></i></a>
+          <i class="font icon"></i>
+          <a href="#" class="change-font-size minus"><i class="minus icon"></i></a>
+        </div>
+
+      </div>
     </div>
   </div>
 
