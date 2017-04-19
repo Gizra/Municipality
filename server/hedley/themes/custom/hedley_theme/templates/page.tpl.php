@@ -124,8 +124,12 @@
     <div class="ui grid container">
       <div class="row">
         <div class="right floated ten wide column list">
-          <a class="item">נגישות</a>
-          <a class="item">תנאי שימוש באתר</a>
+          <?php if (isset($accessibility_url)): ?>
+            <a href="<?php print $accessibility_url; ?>" class="item"><?php print t('Accessibility'); ?></a>
+          <?php endif; ?>
+          <?php if (isset($terms_url)): ?>
+            <a href="<?php print $terms_url; ?>" class="item"><?php print t('Terms of use'); ?></a>
+          <?php endif; ?>
         </div>
         <?php if (isset($last_updated)): ?>
         <div class="left aligned six wide column">
@@ -134,7 +138,7 @@
         <?php endif; ?>
       </div>
       <div class="centered row">
-        <p>© כל הזכויות שמורות לעיריית קריית מלאכי, ז'בוטיסקי 18, טלפון: 08-8500888. האתר מספק מידע כללי בלבד. הנוסח המחייב הוא זה הקבוע בהוראות הדין הרלוונטיות כפי שתהיינה בתוקף מעת לעת.</p>
+        <?php print $footer_text; ?>
       </div>
     </div>
   </footer>

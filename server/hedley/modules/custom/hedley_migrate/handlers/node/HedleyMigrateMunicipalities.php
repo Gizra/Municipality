@@ -22,10 +22,12 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
     'field_social_links:title',
     'field_social_links:attributes',
     'field_default_language',
+    'field_footer_text',
   ];
   protected $simpleMappings = [
     'title_field',
     'field_default_language',
+    'field_footer_text',
   ];
   protected $simpleMultipleMappings = [
     'field_social_links',

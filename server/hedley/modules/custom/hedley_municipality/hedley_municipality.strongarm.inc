@@ -50,7 +50,7 @@ function hedley_municipality_strongarm() {
           'weight' => '5',
         ),
         'og_purl' => array(
-          'weight' => '-40',
+          'weight' => '0',
         ),
       ),
       'display' => array(),

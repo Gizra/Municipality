@@ -1,3 +1,4 @@
-id,municipality,is_accessibility_page,title_field_ar,title_field_en,title_field_he,body_ar,body_en,body_he,field_topics,field_profile_types
-1,1,0,Title AR,Title,כותרת,Body AR,Body,בודי,Garbage collection,Residents|Businesses
-2,1,1,Accessibility page,,,Accessibility page,,,,Residents|Businesses
+id,municipality,set_as_special_page,title_field_ar,title_field_en,title_field_he,body_ar,body_en,body_he,field_topics,field_profile_types
+1,1,,Title AR,Title,כותרת,Body AR,Body,בודי,Garbage collection,Residents|Businesses
+2,1,accessibility,Accessibility page,,,Accessibility page,,,,Residents|Businesses
+3,1,terms,Terms page,,,Terms page,,,,Residents|Businesses
