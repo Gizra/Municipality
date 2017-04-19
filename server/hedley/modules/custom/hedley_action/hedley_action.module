@@ -20,7 +20,7 @@ function hedley_action_node_presave($node) {
     return;
   }
 
-  if (!$node->field_action_sections) {
+  if (empty($node->field_action_sections)) {
     return;
   }
 
