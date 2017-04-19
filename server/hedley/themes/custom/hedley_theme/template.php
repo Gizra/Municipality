@@ -59,6 +59,11 @@ function hedley_theme_preprocess_page(&$variables) {
   if ($wrapper->field_social_links->value()) {
     $variables['social_links'] = field_view_field('node', $node, 'field_social_links');
   }
+
+  // Add the accessibility page link.
+  if ($wrapper->field_accessibility_page->value()) {
+    $variables['accessibility_url'] = url('node/' . $wrapper->field_accessibility_page->getIdentifier());
+  }
 }
 
 /**

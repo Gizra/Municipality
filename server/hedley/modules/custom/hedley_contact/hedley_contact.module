@@ -26,9 +26,8 @@ function hedley_contact_node_presave($node) {
     return;
   }
 
-  $wrapper = entity_metadata_wrapper('node', $node);
-
-  if ($language_code = hedley_municipality_get_non_empty_language_for_field($node->field_last_name, $wrapper->{OG_AUDIENCE_FIELD}->get(0)->field_default_language->value())) {
+  $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_node_municipality($node));
+  if ($language_code = hedley_municipality_get_non_empty_language_for_field($node->field_last_name, $municipality_wrapper->field_default_language->value())) {
     $node->title = trim($node->field_first_name[$language_code][0]['value'] . ' ' . $node->field_last_name[$language_code][0]['value']);
   }
 }
