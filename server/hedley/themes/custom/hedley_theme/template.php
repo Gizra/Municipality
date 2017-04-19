@@ -49,21 +49,26 @@ function hedley_theme_preprocess_page(&$variables) {
 
   // Override the site name with the municipality's name.
   $variables['site_name'] = $wrapper->label();
-
   // Replace the default logo with the municipality's logo.
   if ($wrapper->field_logo->value()) {
     $variables['logo'] = image_style_url('thumbnail', $wrapper->field_logo->value()['uri']);
   }
-
   // Add the municipality's social links for the header.
   if ($wrapper->field_social_links->value()) {
     $variables['social_links'] = field_view_field('node', $node, 'field_social_links');
   }
-
-  // Add the accessibility page link.
+  // Accessibility page link.
   if ($wrapper->field_accessibility_page->value()) {
     $variables['accessibility_url'] = url('node/' . $wrapper->field_accessibility_page->getIdentifier());
   }
+  // Terms page link.
+  if ($wrapper->field_terms_page->value()) {
+    $variables['terms_url'] = url('node/' . $wrapper->field_terms_page->getIdentifier());
+  }
+  // Last updated date.
+  $variables['last_updated'] = format_date($wrapper->field_last_update->value(), 'short');
+  // Footer text.
+  $variables['footer_text'] = $wrapper->field_footer_text->value() ? $wrapper->field_footer_text->value->value() : NULL;
 }
 
 /**

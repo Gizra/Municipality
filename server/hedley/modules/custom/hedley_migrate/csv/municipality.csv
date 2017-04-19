@@ -1,5 +1,5 @@
-id,title_field_ar,title_field_en,title_field_he,field_logo,field_social_links,field_social_links:title,field_social_links:attributes,field_default_language
-1,طوبا الزنغرية,Tuba-Zangariyye,טובא-זנגריה,logo-tuba-zangariyye.gif,https://facebook.com|http://youtube.com,|title2,"a:1:{s:5:""class"";s:20:""facebook square icon"";}|a:1:{s:5:""class"";s:19:""youtube square icon"";}",ar
-2,عرعرة,Ar'ara,ערערה,logo-arara.jpeg,https://facebook.com|http://youtube.com,|title2,"a:1:{s:5:""class"";s:20:""facebook square icon"";}|a:1:{s:5:""class"";s:19:""youtube square icon"";}",ar
-3,المجلس الإقليمي للالسحرية,Al-Kasom,אל-קסום,logo-al-kasom.jpeg,https://facebook.com|http://youtube.com,|title2,"a:1:{s:5:""class"";s:20:""facebook square icon"";}|a:1:{s:5:""class"";s:19:""youtube square icon"";}",ar
-4,,Kiryat Malakhi,קריית מלאכי,kiryat-malachi.png,https://facebook.com|http://youtube.com,|title2,"a:1:{s:5:""class"";s:20:""facebook square icon"";}|a:1:{s:5:""class"";s:19:""youtube square icon"";}",he
+id,title_field_ar,title_field_en,title_field_he,field_logo,field_social_links,field_social_links:title,field_social_links:attributes,field_default_language,field_footer_text
+1,طوبا الزنغرية,Tuba-Zangariyye,טובא-זנגריה,logo-tuba-zangariyye.gif,https://facebook.com|http://youtube.com,|title2,"a:1:{s:5:""class"";s:20:""facebook square icon"";}|a:1:{s:5:""class"";s:19:""youtube square icon"";}",ar,Footer text
+2,عرعرة,Ar'ara,ערערה,logo-arara.jpeg,https://facebook.com|http://youtube.com,|title2,"a:1:{s:5:""class"";s:20:""facebook square icon"";}|a:1:{s:5:""class"";s:19:""youtube square icon"";}",ar,
+3,المجلس الإقليمي للالسحرية,Al-Kasom,אל-קסום,logo-al-kasom.jpeg,https://facebook.com|http://youtube.com,|title2,"a:1:{s:5:""class"";s:20:""facebook square icon"";}|a:1:{s:5:""class"";s:19:""youtube square icon"";}",ar,
+4,,Kiryat Malakhi,קריית מלאכי,kiryat-malachi.png,https://facebook.com|http://youtube.com,|title2,"a:1:{s:5:""class"";s:20:""facebook square icon"";}|a:1:{s:5:""class"";s:19:""youtube square icon"";}",he,

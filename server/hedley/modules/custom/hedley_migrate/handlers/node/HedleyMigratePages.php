@@ -15,7 +15,7 @@ class HedleyMigratePages extends HedleyMigrateBase {
   protected $csvColumns = [
     'id',
     'municipality',
-    'is_accessibility_page',
+    'set_as_special_page',
     'title_field_ar',
     'title_field_en',
     'title_field_he',
@@ -50,15 +50,19 @@ class HedleyMigratePages extends HedleyMigrateBase {
   }
 
   /**
-   * Set pages as their municipality's accessibility page.
+   * Set pages as their municipality's accessibility or terms page.
    */
   public function complete($node, $row) {
-    if (!$row->is_accessibility_page) {
+    if (!$row->set_as_special_page) {
       return;
     }
 
     $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_node_municipality($node));
-    $municipality_wrapper->field_accessibility_page->set($node->nid);
+    $fields = [
+      'accessibility' => 'field_accessibility_page',
+      'terms' => 'field_terms_page',
+    ];
+    $municipality_wrapper->{$fields[$row->set_as_special_page]}->set($node->nid);
     $municipality_wrapper->save();
   }
 

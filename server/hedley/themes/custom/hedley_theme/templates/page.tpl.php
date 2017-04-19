@@ -119,13 +119,29 @@
       <?php endif; ?>
 
   </div> 
-</div>
 
-<?php if (!empty($page['footer'])): ?>
-  <div class="ui divider"></div>
-  <div class="ui grid container">
-    <div class="column">
-      <?php print render($page['footer']); ?>
+  <footer class="ui inverted vertical footer segment">
+    <div class="ui grid container">
+      <div class="row">
+        <div class="right floated ten wide column list">
+          <?php if (isset($accessibility_url)): ?>
+            <a href="<?php print $accessibility_url; ?>" class="item"><?php print t('Accessibility'); ?></a>
+          <?php endif; ?>
+          <?php if (isset($terms_url)): ?>
+            <a href="<?php print $terms_url; ?>" class="item"><?php print t('Terms of use'); ?></a>
+          <?php endif; ?>
+        </div>
+        <?php if (isset($last_updated)): ?>
+        <div class="left aligned six wide column">
+          <?php print t('Last updated at @last_updated', ['@last_updated' => $last_updated]); ?>
+        </div>
+        <?php endif; ?>
+      </div>
+      <?php if (!empty($footer_text)): ?>
+        <div class="centered row">
+          <?php print $footer_text; ?>
+        </div>
+      <?php endif; ?>
     </div>
-  </div>
-<?php endif; ?>
+  </footer>
+</div>
