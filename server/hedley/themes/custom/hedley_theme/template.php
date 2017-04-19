@@ -68,7 +68,7 @@ function hedley_theme_preprocess_page(&$variables) {
   // Last updated date.
   $variables['last_updated'] = format_date($wrapper->field_last_update->value(), 'short');
   // Footer text.
-  $variables['footer_text'] = $wrapper->field_footer_text->value();
+  $variables['footer_text'] = $wrapper->field_footer_text->value() ? $wrapper->field_footer_text->value->value() : NULL;
 }
 
 /**
