@@ -137,9 +137,11 @@
         </div>
         <?php endif; ?>
       </div>
-      <div class="centered row">
-        <?php print $footer_text; ?>
-      </div>
+      <?php if (!empty($footer_text)): ?>
+        <div class="centered row">
+          <?php print $footer_text; ?>
+        </div>
+      <?php endif; ?>
     </div>
   </footer>
 </div>
