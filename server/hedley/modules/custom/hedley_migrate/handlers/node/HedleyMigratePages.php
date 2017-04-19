@@ -15,6 +15,7 @@ class HedleyMigratePages extends HedleyMigrateBase {
   protected $csvColumns = [
     'id',
     'municipality',
+    'is_accessibility_page',
     'title_field_ar',
     'title_field_en',
     'title_field_he',
@@ -48,4 +49,16 @@ class HedleyMigratePages extends HedleyMigrateBase {
       ->sourceMigration('HedleyMigrateMunicipalities');
   }
 
+  /**
+   * Set pages as their municipality's accessibility page.
+   */
+  public function complete($node, $row) {
+    if (!$row->is_accessibility_page) {
+      return;
+    }
+
+    $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_node_municipality($node));
+    $municipality_wrapper->field_accessibility_page->set($node->nid);
+    $municipality_wrapper->save();
+  }
 }

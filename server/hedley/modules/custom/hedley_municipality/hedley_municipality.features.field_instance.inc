@@ -10,6 +10,56 @@
 function hedley_municipality_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-municipality-field_accessibility_page'.
+  $field_instances['node-municipality-field_accessibility_page'] = array(
+    'bundle' => 'municipality',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 6,
+      ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_accessibility_page',
+    'label' => 'Accessibility page',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 9,
+    ),
+  );
+
   // Exported field_instance: 'node-municipality-field_default_language'.
   $field_instances['node-municipality-field_default_language'] = array(
     'bundle' => 'municipality',
@@ -291,6 +341,7 @@ function hedley_municipality_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Accessibility page');
   t('Default language');
   t('Determine if this is an OG group.');
   t('Group');
