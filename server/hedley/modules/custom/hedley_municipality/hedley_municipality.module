@@ -117,6 +117,14 @@ function hedley_municipality_node_presave($node) {
   $municipality_language = $municipality_wrapper->field_default_language->value();
   $node->language = $municipality_language;
 
+  // Update the municipality's last updated field.
+  $municipality_wrapper->field_last_update->set(REQUEST_TIME);
+  // Save the municipality, unless the node being saved is already the
+  // municipality.
+  if ($node->type != 'municipality') {
+    $municipality_wrapper->save();
+  }
+
   if (!isset($node->title_field)) {
     return;
   }

@@ -119,13 +119,23 @@
       <?php endif; ?>
 
   </div> 
-</div>
 
-<?php if (!empty($page['footer'])): ?>
-  <div class="ui divider"></div>
-  <div class="ui grid container">
-    <div class="column">
-      <?php print render($page['footer']); ?>
+  <footer class="ui inverted vertical footer segment">
+    <div class="ui grid container">
+      <div class="row">
+        <div class="right floated ten wide column list">
+          <a class="item">נגישות</a>
+          <a class="item">תנאי שימוש באתר</a>
+        </div>
+        <?php if (isset($last_updated)): ?>
+        <div class="left aligned six wide column">
+          <?php print t('Last updated at @last_updated', ['@last_updated' => $last_updated]); ?>
+        </div>
+        <?php endif; ?>
+      </div>
+      <div class="centered row">
+        <p>© כל הזכויות שמורות לעיריית קריית מלאכי, ז'בוטיסקי 18, טלפון: 08-8500888. האתר מספק מידע כללי בלבד. הנוסח המחייב הוא זה הקבוע בהוראות הדין הרלוונטיות כפי שתהיינה בתוקף מעת לעת.</p>
+      </div>
     </div>
-  </div>
-<?php endif; ?>
+  </footer>
+</div>

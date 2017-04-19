@@ -33,6 +33,7 @@ features[field_base][] = field_hours
 features[field_base][] = field_image
 features[field_base][] = field_job_title
 features[field_base][] = field_last_name
+features[field_base][] = field_last_update
 features[field_base][] = field_link
 features[field_base][] = field_logo
 features[field_base][] = field_phone

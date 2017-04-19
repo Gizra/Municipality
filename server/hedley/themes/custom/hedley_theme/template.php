@@ -64,6 +64,9 @@ function hedley_theme_preprocess_page(&$variables) {
   if ($wrapper->field_accessibility_page->value()) {
     $variables['accessibility_url'] = url('node/' . $wrapper->field_accessibility_page->getIdentifier());
   }
+
+  // Add municipality last updated field.
+  $variables['last_updated'] = $wrapper->field_last_update->value();
 }
 
 /**
