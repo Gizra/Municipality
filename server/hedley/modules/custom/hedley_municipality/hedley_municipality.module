@@ -111,26 +111,20 @@ function hedley_municipality_form_municipality_node_form_alter(&$form, &$form_st
  * Set nodes titles according to their municipality's default language.
  */
 function hedley_municipality_node_presave($node) {
-  $wrapper = entity_metadata_wrapper('node', $node);
-
   $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_node_municipality($node));
 
   // Set the node language according to the municipality's default.
   $municipality_language = $municipality_wrapper->field_default_language->value();
   $node->language = $municipality_language;
 
-  // For nodes with title_field, set the title property according to the title
-  // field in the municipality's language.
-  if ($wrapper->__isset('title_field')) {
-    // Set the wrapper language to the municipality's language.
-    $wrapper->language($municipality_language);
-    $node->title = $wrapper->title_field->value();
-
-    // If the title was left empty, try another language.
-    if (!$node->title && $language_code = hedley_municipality_get_non_empty_language_for_field($node->title_field)) {
-      $wrapper->language($language_code);
-      $node->title = $wrapper->title_field->value();
-    }
+  if (!isset($node->title_field)) {
+    return;
+  }
+  // For nodes with title_field, set the title property according to the
+  // municipality's language, or the next available language.
+  if ($language_code = hedley_municipality_get_non_empty_language_for_field($node->title_field, $municipality_language)) {
+    // Set the title to the title_field in an available language.
+    $node->title = $node->title_field[$language_code][0]['value'];
   }
 }
 
@@ -157,15 +151,23 @@ function hedley_municipality_node_municipality($node) {
 }
 
 /**
- * Get the first language in which a field value is not empty.
+ * Get an available language for a field, preferring the muni's default.
  *
  * @param array $field_attribute
  *   The field attribute from the node object.
+ * @param string $municipality_language
+ *   The municipality's default language.
  *
  * @return string
  *   The first available language for the field.
  */
-function hedley_municipality_get_non_empty_language_for_field(array $field_attribute) {
+function hedley_municipality_get_non_empty_language_for_field(array $field_attribute, $municipality_language) {
+  if (!empty($field_attribute[$municipality_language][0]['value'])) {
+    return $municipality_language;
+  }
+
+  // If the field isn't available in the default language, try another non empty
+  // language.
   // Iterate the languages in the field attribute, and return the first non
   // empty value.
   foreach ($field_attribute as $language_code => $value) {
