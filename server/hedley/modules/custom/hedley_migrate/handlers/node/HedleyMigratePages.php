@@ -61,4 +61,5 @@ class HedleyMigratePages extends HedleyMigrateBase {
     $municipality_wrapper->field_accessibility_page->set($node->nid);
     $municipality_wrapper->save();
   }
+
 }

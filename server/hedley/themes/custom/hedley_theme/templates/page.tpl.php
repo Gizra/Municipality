@@ -31,6 +31,12 @@
     <div class="ui four wide center aligned middle aligned column">
       <div class="ui segments">
         <div class="ui vertical segment center aligned middle aligned">
+          <?php if (isset($accessibility_url)): ?>
+            <a href="<?php print $accessibility_url; ?>">
+              <i class="large wheelchair icon"></i>
+            </a>
+          <?php endif; ?>
+
           <a href="#" class="change-font-size plus"><i class="plus icon"></i></a>
           <i class="font icon"></i>
           <a href="#" class="change-font-size minus"><i class="minus icon"></i></a>
