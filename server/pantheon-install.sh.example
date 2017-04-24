@@ -30,15 +30,6 @@ cp -R $MAKE_DIR/server/www/sites/all $PANTHEON_DIR/sites/all
 
 
 printf "${GREEN}Build app and sync to the Pantheon folder.${NORMAL}\n"
-cd $MAKE_DIR/client
-elm-package install -y
-bower install
-gulp publish
-rm -rf $PANTHEON_DIR/app
-mkdir $PANTHEON_DIR/app
-cp -R $MAKE_DIR/client/dist/ $PANTHEON_DIR/app
-
-
 cd $PANTHEON_DIR
 printf "${GREEN}Git commit new code.${NORMAL}\n"
 git add . --all
