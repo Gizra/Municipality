@@ -21,6 +21,7 @@ features[field_base][] = field_action_sections
 features[field_base][] = field_address
 features[field_base][] = field_answer
 features[field_base][] = field_audience
+features[field_base][] = field_background_images
 features[field_base][] = field_color
 features[field_base][] = field_date
 features[field_base][] = field_default_language

@@ -60,6 +60,63 @@ function hedley_municipality_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-municipality-field_background_images'.
+  $field_instances['node-municipality-field_background_images'] = array(
+    'bundle' => 'municipality',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 10,
+      ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_background_images',
+    'label' => 'Background images',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'node-municipality-field_default_language'.
   $field_instances['node-municipality-field_default_language'] = array(
     'bundle' => 'municipality',
@@ -501,6 +558,7 @@ function hedley_municipality_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Accessibility page');
+  t('Background images');
   t('Default language');
   t('Determine if this is an OG group.');
   t('Footer text');
