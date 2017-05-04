@@ -11,3 +11,6 @@ Http password: `gizra`/ `1234`
 
 Municipality page:
 https://dev-municipality.pantheonsite.io/municipality-1/node/1?language=he
+
+Topic page:
+https://dev-municipality.pantheonsite.io/municipality-1/taxonomy/term/10?language=he
