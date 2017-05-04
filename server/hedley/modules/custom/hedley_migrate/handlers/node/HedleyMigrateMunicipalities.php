@@ -53,4 +53,5 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
       ->addFieldMapping('field_background_images:source_dir')
       ->defaultValue($this->getMigrateDirectory() . '/files/');
   }
+
 }
