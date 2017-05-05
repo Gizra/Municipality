@@ -23,6 +23,7 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
     'field_social_links:attributes',
     'field_default_language',
     'field_footer_text',
+    'field_background_images',
   ];
   protected $simpleMappings = [
     'title_field',
@@ -34,5 +35,23 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
     'field_social_links:title',
     'field_social_links:attributes',
   ];
+
+  /**
+   * HedleyMigrateMunicipalities constructor.
+   */
+  public function __construct($arguments) {
+    parent::__construct($arguments);
+
+    $this
+      ->addFieldMapping('field_background_images', 'field_background_images')
+      ->separator('|');
+    $this
+      ->addFieldMapping('field_background_images:file_replace')
+      ->defaultValue(FILE_EXISTS_REPLACE);
+
+    $this
+      ->addFieldMapping('field_background_images:source_dir')
+      ->defaultValue($this->getMigrateDirectory() . '/files/');
+  }
 
 }
