@@ -94,11 +94,6 @@ function hedley_i18n_strongarm() {
       'file' => 'includes/locale.inc',
       'cache' => 0,
     ),
-    'hedley-i18n-municipality-default-language' => array(
-      'callbacks' => array(
-        'language' => 'hedley_i18n_municipality_language_negotiation',
-      ),
-    ),
     'language-default' => array(
       'callbacks' => array(
         'language' => 'language_from_default',
@@ -182,7 +177,6 @@ function hedley_i18n_strongarm() {
     'locale-session' => '-6',
     'locale-user' => '-4',
     'locale-browser' => '-2',
-    'hedley-i18n-municipality-default-language' => '-2',
     'language-default' => '10',
   );
   $export['locale_language_providers_weight_language'] = $strongarm;
