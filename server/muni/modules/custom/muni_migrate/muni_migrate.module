@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Populate Muni content.
+ */
+
+/**
+ * Implements hook_migrate_api().
+ */
+function muni_migrate_migrate_api() {
+  $migrations = [
+    // Multifields.
+    'MuniMigrateActionSections',
+    'MuniMigrateReceptionHours',
+    // Nodes.
+    'MuniMigrateActions',
+    'MuniMigrateContacts',
+    'MuniMigrateEvents',
+    'MuniMigrateFaqs',
+    'MuniMigrateHardcopyForms',
+    'MuniMigrateMunicipalities',
+    'MuniMigrateNews',
+    'MuniMigratePages',
+    // Terms.
+    'MuniMigrateAudiences',
+    'MuniMigrateProfileTypes',
+    'MuniMigrateTopics',
+    // Users.
+    'MuniMigrateUsers',
+  ];
+
+  $api['api'] = 2;
+  foreach ($migrations as $migration) {
+    $api['migrations'][$migration] = ['class_name' => $migration];
+  }
+
+  return $api;
+}

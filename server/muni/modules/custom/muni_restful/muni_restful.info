@@ -1,0 +1,8 @@
+name = Muni RESTFul
+description = "Muni RESTFul"
+core = 7.x
+package = "Custom"
+dependencies[] = restful
+dependencies[] = entity_validator
+
+files[] = plugins/restful/node/MuniRestfulEntityBaseNode.php

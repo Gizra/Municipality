@@ -1,0 +1,117 @@
+<?php
+
+/**
+ * @file
+ * Muni Terms module.
+ */
+
+/**
+ * Get links for changing the profile type.
+ *
+ * @return string
+ *   Rendered profile type links.
+ */
+function muni_terms_get_profile_type_links() {
+  $links = [];
+
+  // Get the target path for when changing the profile type.
+  $path = _muni_terms_profile_type_links_path();
+
+  $vocabulary = taxonomy_vocabulary_machine_name_load('profile_types');
+  foreach (taxonomy_get_tree($vocabulary->vid) as $term) {
+    $wrapper = entity_metadata_wrapper('taxonomy_term', $term->tid);
+    $profile_name = drupal_html_class($term->name);
+    $links[] = [
+      'label' => $wrapper->label(),
+      'url' => url($path, ['query' => ['profile' => $profile_name]]),
+      'active' => $profile_name == muni_terms_get_current_profile_type(),
+    ];
+  }
+
+  $variables = [
+    'links' => $links,
+    'count_class' => muni_theme_number_as_word(count($links)),
+  ];
+  return theme('muni_terms_profile_type_links', $variables);
+}
+
+/**
+ * Get the target path for the profile type select links.
+ *
+ * @return string
+ *   The target path.
+ */
+function _muni_terms_profile_type_links_path() {
+  // When re-setting profile type, redirect either to the current municipality's
+  // homepage or the global homepage, unless it make sense to stay on the
+  // current page and only change the profile.
+  $menu_item = menu_get_item();
+  switch ($menu_item['path']) {
+    case 'taxonomy/term/%':
+      return current_path();
+
+    default:
+      $node = muni_municipality_get_current();
+      return $node ? 'node/' . $node->nid : '<front>';
+  }
+}
+
+/**
+ * Get the current profile type's term ID.
+ *
+ * @return int
+ *   The profile type term ID.
+ */
+function muni_terms_get_current_profile_type_tid() {
+  $current_profile_name = muni_terms_get_current_profile_type();
+  // Find the profile type term with the same name as the current name.
+  $vocabulary = taxonomy_vocabulary_machine_name_load('profile_types');
+  foreach (taxonomy_get_tree($vocabulary->vid) as $term) {
+    if (drupal_html_class($term->name) == $current_profile_name) {
+      return $term->tid;
+    }
+  }
+  // Not found.
+  return 0;
+}
+
+/**
+ * Get the current profile type.
+ *
+ * @return string
+ *   The profile type name.
+ */
+function muni_terms_get_current_profile_type() {
+  return !empty($_GET['profile']) ? drupal_html_class($_GET['profile']) : 'residents';
+}
+
+/**
+ * Implements hook_theme().
+ */
+function muni_terms_theme($existing, $type, $theme, $path) {
+  return [
+    'muni_terms_profile_type_links' => array(
+      'variables' => [
+        'links' => NULL,
+        'count_class' => NULL,
+      ],
+      'template' => 'profile-type-links',
+      'path' => drupal_get_path('module', 'muni_terms') . '/templates',
+    ),
+  ];
+}
+
+/**
+ * Implements hook_url_outbound_alter().
+ */
+function muni_terms_url_outbound_alter(&$path, &$options, $original_path) {
+  if ($options['external']) {
+    // Ignore external URLs.
+    return;
+  }
+  // When a specific profile was set on the query, but the url doesn't define a
+  // a profile, then add the profile to the url.
+  if (!empty($_GET['profile']) && empty($options['query']['profile'])) {
+    $options['query']['profile'] = check_plain($_GET['profile']);
+  }
+}

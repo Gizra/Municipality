@@ -1,0 +1,5 @@
+name = Muni Pusher
+core = 7.x
+description = "Muni Pusher integration."
+package = "Custom"
+dependencies[] = composer_manager

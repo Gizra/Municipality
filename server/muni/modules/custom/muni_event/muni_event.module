@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the Muni Event feature.
+ */
+
+include_once 'muni_event.features.inc';

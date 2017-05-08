@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the Muni News feature.
+ */
+
+include_once 'muni_news.features.inc';

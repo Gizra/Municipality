@@ -1,5 +1,0 @@
-name = Hedley Pusher
-core = 7.x
-description = "Hedley Pusher integration."
-package = "Custom"
-dependencies[] = composer_manager

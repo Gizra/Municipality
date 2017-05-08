@@ -10,13 +10,13 @@
 
 
 # The profile used to install the platform.
-PROFILE_NAME="hedley"
+PROFILE_NAME="muni"
 # The human name of the install profile
-PROFILE_TITLE="Hedley"
+PROFILE_TITLE="Municipality"
 
 
 # Modify the URL below to match your local domain the site will be accessible on.
-BASE_DOMAIN_URL="http://localhost/drupal-elm-starter/server/www"
+BASE_DOMAIN_URL="http://localhost/municipality/server/www"
 
 
 # Modify the login details below to be the desired
@@ -30,7 +30,7 @@ ADMIN_EMAIL="admin@example.com"
 MYSQL_USERNAME="root"
 MYSQL_PASSWORD="root"
 MYSQL_HOSTNAME="127.0.0.1"
-MYSQL_DB_NAME="drupal_elm_starter"
+MYSQL_DB_NAME="municipality"
 
 
 
@@ -72,10 +72,10 @@ function post_install {
   chmod 777 www/sites/default/settings.php
 
   # Pusher integration.
-  echo "\$conf['hedley_pusher_app_id'] = 'pusher_app_id';"  >> www/sites/default/settings.php
-  echo "\$conf['hedley_pusher_app_key'] = 'pusher_app_key';"  >> www/sites/default/settings.php
-  echo "\$conf['hedley_pusher_app_secret'] = 'pusher_app_secret';"  >> www/sites/default/settings.php
-  echo "\$conf['hedley_pusher_app_cluster'] = 'pusher_app_cluster';"  >> www/sites/default/settings.php
+  echo "\$conf['muni_pusher_app_id'] = 'pusher_app_id';"  >> www/sites/default/settings.php
+  echo "\$conf['muni_pusher_app_key'] = 'pusher_app_key';"  >> www/sites/default/settings.php
+  echo "\$conf['muni_pusher_app_secret'] = 'pusher_app_secret';"  >> www/sites/default/settings.php
+  echo "\$conf['muni_pusher_app_cluster'] = 'pusher_app_cluster';"  >> www/sites/default/settings.php
 }
 
 # Post upgrade script.
@@ -86,8 +86,8 @@ function post_reset {
   chmod 777 www/sites/default/settings.php
 
   # Pusher integration.
-  echo "\$conf['hedley_pusher_app_id'] = '<your-app-id>';"  >> www/sites/default/settings.php
-  echo "\$conf['hedley_pusher_app_key'] = '<your-app-key>';"  >> www/sites/default/settings.php
-  echo "\$conf['hedley_pusher_app_secret'] = '<your-app-secret>';"  >> www/sites/default/settings.php
-  echo "\$conf['hedley_pusher_app_cluster'] = '<your-app-cluster>';"  >> www/sites/default/settings.php
+  echo "\$conf['muni_pusher_app_id'] = '<your-app-id>';"  >> www/sites/default/settings.php
+  echo "\$conf['muni_pusher_app_key'] = '<your-app-key>';"  >> www/sites/default/settings.php
+  echo "\$conf['muni_pusher_app_secret'] = '<your-app-secret>';"  >> www/sites/default/settings.php
+  echo "\$conf['muni_pusher_app_cluster'] = '<your-app-cluster>';"  >> www/sites/default/settings.php
 }
