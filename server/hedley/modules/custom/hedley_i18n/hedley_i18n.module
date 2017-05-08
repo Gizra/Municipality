@@ -9,14 +9,29 @@ include_once 'hedley_i18n.features.inc';
 
 /**
  * Implementation of hook_init().
+ *
+ * When language isn't explicitly set, redirect to the municipality's default
+ * language.
  */
 function hedley_i18n_init() {
-  // Set the site's language according to the municipality's language.
-  $query_aprams = drupal_get_query_parameters();
-  if (($municipality_language = hedley_i18n_municipality_language_negotiation()) && (!isset($query_aprams['language']) || $query_aprams['language'] != $municipality_language)) {
-    $query_aprams['language'] = $municipality_language;
-    drupal_goto(current_path(), array('query' => $query_aprams));
+  if (drupal_is_cli()) {
+    return;
   }
+
+  // Do nothing if the language is already explicitly set.
+  $query_params = drupal_get_query_parameters();
+  if (!empty($query_params['language'])) {
+    return;
+  }
+
+  // Get default language for current municipality.
+  if (!$node = hedley_municipality_get_current()) {
+    return;
+  }
+  $wrapper = entity_metadata_wrapper('node', $node);
+  // Redirect to the same page with the municipality's language.
+  $query_params['language'] = $wrapper->field_default_language->value();
+  drupal_goto(current_path(), array('query' => $query_params));
 }
 
 /**
@@ -66,20 +81,4 @@ function hedley_i18n_url_outbound_alter(&$path, &$options, $original_path) {
   if (empty($options['query']['language'])) {
     $options['query']['language'] = $language->language;
   }
-}
-
-/**
- * Language negotiation provider for default municipality language.
- *
- * @return bool|string
- *   The municipality's language code. FALSE when not in municipality context.
- */
-function hedley_i18n_municipality_language_negotiation() {
-  if (!$node = hedley_municipality_get_current()) {
-    // No current municipality.
-    return FALSE;
-  }
-
-  $wrapper = entity_metadata_wrapper('node', $node);
-  return $wrapper->field_default_language->value();
 }
