@@ -1,6 +1,6 @@
 {
-  "name": "Behat tests for Muni",
-  "description": "Functional testing for Muni installation profile.",
+  "name": "Behat tests for Municipality",
+  "description": "Functional testing for Municipality installation profile.",
   "require": {
     "drupal/drupal-extension": "~3.0"
   },

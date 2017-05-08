@@ -8,7 +8,7 @@ This is a starting base to create Drupal 7 websites using an install profile.
 **Warning:** you need to setup [Drush](https://github.com/drush-ops/drush)
 first or the installation and update scripts will not work.
 
-Clone the project from [GitHub](https://github.com/Gizra/muni).
+Clone the project from [GitHub](https://github.com/Gizra/Municipality).
 
 #### Create config file
 
@@ -59,7 +59,7 @@ You can Reinstall the platform any type by running the install script.
 5. Create an empty sites/default/files directory
 6. Makes a symlink within the /www/profiles directory to the /muni
    directory.
-7. Run the Drupal installer (Drush) using the Muni profile.
+7. Run the Drupal installer (Drush) using the Municipality profile.
 
 #### Warning!
 
