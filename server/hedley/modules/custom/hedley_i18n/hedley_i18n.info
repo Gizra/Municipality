@@ -6,7 +6,6 @@ dependencies[] = ctools
 dependencies[] = features
 dependencies[] = locale
 dependencies[] = strongarm
-dependencies[] = hedley_municipality
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[language][] = ar
