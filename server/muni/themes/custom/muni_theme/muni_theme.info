@@ -1,0 +1,11 @@
+name = Muni theme
+description = Municipality Semantic UI subtheme.
+core = 7.x
+base theme = semanticui
+
+scripts[] = js/font-size-controls.js
+scripts[] = js/semanticui-inits.js
+
+stylesheets[all][] = css/font-size.css
+
+plugins[panels][layouts] = layouts

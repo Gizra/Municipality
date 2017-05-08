@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the Muni Page feature.
+ */
+
+include_once 'muni_page.features.inc';

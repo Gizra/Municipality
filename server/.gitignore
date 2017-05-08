@@ -1,10 +1,10 @@
 # Drupal profile #
 ##################
-hedley/modules/contrib
-hedley/modules/development
-hedley/1
-hedley/themes/contrib
-hedley/libraries
+muni/modules/contrib
+muni/modules/development
+muni/1
+muni/themes/contrib
+muni/libraries
 
 # Temporary "build" files
 www

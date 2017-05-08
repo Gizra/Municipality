@@ -4,7 +4,7 @@
 # 2. Make sure you have a settings.php file in the Pantheon repo, as it is needed
 #    for drush si to work.
 
-PROFILE="hedley"
+PROFILE="muni"
 
 MAKE_DIR="/var/www/municipality"
 PANTHEON_DIR="/var/www/municipality_pantheon"
@@ -45,7 +45,7 @@ drush $PANTHEON_ALIAS sql-drop -y
 drush $PANTHEON_ALIAS si -y $PROFILE --account-pass=admin
 
 printf "${GREEN}Migrate content.${NORMAL}\n"
-drush $PANTHEON_ALIAS en hedley_migrate --yes --strict=0
+drush $PANTHEON_ALIAS en muni_migrate --yes --strict=0
 drush $PANTHEON_ALIAS migrate-register --user=1 --strict=0
 drush $PANTHEON_ALIAS mi --all --user=1 --strict=0
 drush $PANTHEON_ALIAS dis migrate --yes  --strict=0

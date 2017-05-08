@@ -1,0 +1,84 @@
+<?php
+
+/**
+ * @file
+ * Code for the Muni I18n feature.
+ */
+
+include_once 'muni_i18n.features.inc';
+
+/**
+ * Implements hook_init().
+ *
+ * When language isn't explicitly set, redirect to the municipality's default
+ * language.
+ */
+function muni_i18n_init() {
+  if (drupal_is_cli()) {
+    return;
+  }
+
+  // Do nothing if the language is already explicitly set.
+  $query_params = drupal_get_query_parameters();
+  if (!empty($query_params['language'])) {
+    return;
+  }
+
+  // Get default language for current municipality.
+  if (!$node = muni_municipality_get_current()) {
+    return;
+  }
+  $wrapper = entity_metadata_wrapper('node', $node);
+  // Redirect to the same page with the municipality's language.
+  $query_params['language'] = $wrapper->field_default_language->value();
+  drupal_goto(current_path(), array('query' => $query_params));
+}
+
+/**
+ * Get the language switch links.
+ *
+ * @return array
+ *   The language switch links.
+ */
+function muni_i18n_language_switch_links() {
+  global $language;
+
+  $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
+  $links = language_negotiation_get_switch_links('language', $path);
+  if (empty($links->links)) {
+    return [];
+  }
+  $rendered_links = [];
+  foreach ($links->links as $language_code => $link) {
+    // Using language in the query string, to avoid a conflict with og_purl when
+    // it's the first element in the path.
+    $options = [
+      'query' => ['language' => $language_code],
+    ];
+    // Creating the link markup manually, because otherwise the "active" class
+    // isn't added correctly according the global language.
+    $active = $language_code == $language->language ? 'active' : '';
+    $url = url($link['href'], $options);
+    $rendered_links[] = "<a class=\"item $active\" href=\"$url\">{$link['title']}</a>";
+  }
+  return $rendered_links;
+}
+
+/**
+ * Implements hook_url_outbound_alter().
+ *
+ * Add the language as a query to all internal URLs.
+ */
+function muni_i18n_url_outbound_alter(&$path, &$options, $original_path) {
+  global $language;
+
+  if ($options['external'] || drupal_is_cli()) {
+    // Ignore external URLs, or when creating a link with cli.
+    return;
+  }
+
+  // Set the language, unless it's already explicitly set.
+  if (empty($options['query']['language'])) {
+    $options['query']['language'] = $language->language;
+  }
+}

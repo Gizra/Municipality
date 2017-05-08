@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Code for the Muni FAQ feature.
+ */
+
+include_once 'muni_faq.features.inc';
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function muni_faq_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools') {
+    return 'plugins/' . $plugin;
+  }
+}

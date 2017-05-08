@@ -1,0 +1,24 @@
+name = "Muni migration"
+description = "Populate content."
+package = "Custom"
+core = 7.x
+dependencies[] = migrate
+dependencies[] = migrate_extras
+
+; Handlers
+files[] = handlers/MuniMigrateBase.php
+files[] = handlers/multifield/MuniMigrateActionSections.php
+files[] = handlers/multifield/MuniMigrateDestinationMultifield.php
+files[] = handlers/multifield/MuniMigrateReceptionHours.php
+files[] = handlers/node/MuniMigrateActions.php
+files[] = handlers/node/MuniMigrateContacts.php
+files[] = handlers/node/MuniMigrateEvents.php
+files[] = handlers/node/MuniMigrateFaqs.php
+files[] = handlers/node/MuniMigrateHardcopyForms.php
+files[] = handlers/node/MuniMigrateMunicipalities.php
+files[] = handlers/node/MuniMigrateNews.php
+files[] = handlers/node/MuniMigratePages.php
+files[] = handlers/taxonomy_term/MuniMigrateAudiences.php
+files[] = handlers/taxonomy_term/MuniMigrateProfileTypes.php
+files[] = handlers/taxonomy_term/MuniMigrateTopics.php
+files[] = handlers/user/MuniMigrateUsers.php

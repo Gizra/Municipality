@@ -1,0 +1,186 @@
+<?php
+
+/**
+ * @file
+ * Code for the Muni Municipality feature.
+ */
+
+include_once 'muni_municipality.features.inc';
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function muni_municipality_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
+ * Get nodes of a municipality group, according to current profile type.
+ *
+ * @param string $bundle
+ *   The wanted nodes bundle.
+ * @param int $max_range
+ *   Maximal amount of nodes to fetch.
+ * @param int $municipality_node
+ *   Optional municipality node to filter by.
+ * @param bool $promoted_only
+ *   Whether to get only promoted nodes.
+ * @param int $topic_tid
+ *   Optional filter by field_topics.
+ *
+ * @return array
+ *   Node objects.
+ */
+function muni_municipality_get_nodes($bundle, $max_range, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0) {
+  // Get promoted FAQ nodes of the viewed municipality.
+  $query = new EntityFieldQuery();
+  $query
+    ->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', $bundle)
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyOrderBy('created', 'DESC')
+    // Filter by current profile type.
+    ->fieldCondition('field_profile_types', 'tid', muni_terms_get_current_profile_type_tid())
+    ->range(0, $max_range);
+
+  // Filter by municipality.
+  if ($municipality_node) {
+    $query->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $municipality_node->nid);
+  }
+  // Filter by promoted nodes.
+  if ($promoted_only) {
+    $query->propertyCondition('promote', NODE_PROMOTED);
+  }
+  // Filter by current topic.
+  if ($topic_tid) {
+    $query->fieldCondition('field_topics', 'tid', $topic_tid);
+  }
+  $result = $query->execute();
+
+  return !empty($result['node']) ? node_load_multiple(array_keys($result['node'])) : [];
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ *
+ * Adding teaser view mode for the municipality homepage.
+ */
+function muni_municipality_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['homepage_teaser'] = [
+    'label' => t('Municipality homepage teaser'),
+    'custom settings' => TRUE,
+  ];
+}
+
+/**
+ * Get the current municipality context.
+ *
+ * @return mixed
+ *   The municipality node, when available.
+ */
+function muni_municipality_get_current() {
+  $purl_gids = og_purl_og_context_handler();
+  if (empty($purl_gids['node']) || count($purl_gids['node']) != 1) {
+    return FALSE;
+  }
+  return node_load(reset($purl_gids['node']));
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Set the field_default_language options.
+ */
+function muni_municipality_form_municipality_node_form_alter(&$form, &$form_state) {
+  foreach (language_list() as $language) {
+    $form['field_default_language'][LANGUAGE_NONE]['#options'][$language->language] = $language->name;
+  }
+
+  // The default value has to be set manually, because options are built
+  // manually.
+  if (!empty($form['#entity']->field_default_language[LANGUAGE_NONE][0]['value'])) {
+    $form['field_default_language'][LANGUAGE_NONE]['#default_value'] = $form['#entity']->field_default_language[LANGUAGE_NONE][0]['value'];
+  }
+}
+
+/**
+ * Implements hook_node_presave().
+ *
+ * Set nodes titles according to their municipality's default language.
+ */
+function muni_municipality_node_presave($node) {
+  $municipality_wrapper = entity_metadata_wrapper('node', muni_municipality_node_municipality($node));
+
+  // Set the node language according to the municipality's default.
+  $municipality_language = $municipality_wrapper->field_default_language->value();
+  $node->language = $municipality_language;
+
+  // Update the municipality's last updated field.
+  $municipality_wrapper->field_last_update->set(REQUEST_TIME);
+  // Save the municipality, unless the node being saved is already the
+  // municipality.
+  if ($node->type != 'municipality') {
+    $municipality_wrapper->save();
+  }
+
+  if (!isset($node->title_field)) {
+    return;
+  }
+  // For nodes with title_field, set the title property according to the
+  // municipality's language, or the next available language.
+  if ($language_code = muni_municipality_get_non_empty_language_for_field($node->title_field, $municipality_language)) {
+    // Set the title to the title_field in an available language.
+    $node->title = $node->title_field[$language_code][0]['value'];
+  }
+}
+
+/**
+ * Get the municipality of a node, or the node itself when it's a municipality.
+ *
+ * @param object $node
+ *   Either a municipality, or municipality content node.
+ *
+ * @return object
+ *   The relevant municipality node.
+ */
+function muni_municipality_node_municipality($node) {
+  // Fetch the node's municipality.
+  if ($node->type == 'municipality') {
+    return $node;
+  }
+  else {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    // Assuming all nodes other than municipality belong to one municipality
+    // exactly.
+    return $wrapper->{OG_AUDIENCE_FIELD}->get(0)->value();
+  }
+}
+
+/**
+ * Get an available language for a field, preferring the muni's default.
+ *
+ * @param array $field_attribute
+ *   The field attribute from the node object.
+ * @param string $municipality_language
+ *   The municipality's default language.
+ *
+ * @return string
+ *   The first available language for the field.
+ */
+function muni_municipality_get_non_empty_language_for_field(array $field_attribute, $municipality_language) {
+  if (!empty($field_attribute[$municipality_language][0]['value'])) {
+    return $municipality_language;
+  }
+
+  // If the field isn't available in the default language, try another non empty
+  // language.
+  // Iterate the languages in the field attribute, and return the first non
+  // empty value.
+  foreach ($field_attribute as $language_code => $value) {
+    if (!empty($value[0]['value'])) {
+      return $language_code;
+    }
+  }
+}

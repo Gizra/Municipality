@@ -1,0 +1,10 @@
+id,municipality,title_field_ar,title_field_en,title_field_he,field_topics,field_profile_types,field_link
+1,1,الاتصال على,,לפנות למוקד,Kindergarten|Garbage collection|Arnona,Residents|Businesses,https://example.com
+2,2,الاتصال على,,לפנות למוקד,Kindergarten|Garbage collection|Arnona,Residents|Businesses,https://example.com
+3,4,,,לפנות למוקד,Kindergarten|Garbage collection|Arnona,Residents|Businesses,https://example.com
+4,2,تطبيق الرخصة التجارية,,בקשה לרשיון עסק,Business license,Businesses,
+5,1,دفع الضرائب,,לשלם ארנונה,Arnona,Residents|Businesses,https://www.citypay.co.il/htmls_Heb/tofes_tashlum.asp?SId=9&amp;LAMASID=909620
+6,1,السجل الزفاف,,לרשום חתונה,Resident service,Residents,https://docs.google.com/forms/d/e/1FAIpQLSeOGXcmzYY4SSuuDJeVHusldVi3E2p2K3TrMb4nbYpUUXq1rQ/viewform
+7,1,الحصول على الإقامة,,לקבל אישור תושב,Resident service,Residents,
+8,4,,,לרשום לגן,Kindergarten,Residents,https://www.eprsys.co.il/EPRPayments/hin/entery1?rshut=1250
+9,4,,,לשלם ארנונה,Arnona,Residents|Businesses,https://www.eprsys.co.il/payments.asp?rshut=1250
