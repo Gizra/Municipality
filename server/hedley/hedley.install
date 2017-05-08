@@ -26,8 +26,9 @@ function hedley_install() {
   // Set required date API variables.
   // See date_api_status().
   date_default_timezone_set('Asia/Jerusalem');
+  variable_set('site_default_country', 'IL');
   variable_set('date_default_timezone', 'Asia/Jerusalem');
-  variable_set('date_first_day', 1);
+  variable_set('date_first_day', 0);
 }
 
 /**
