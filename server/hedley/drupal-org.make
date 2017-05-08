@@ -11,11 +11,11 @@ projects[admin_views][version] = "1.6"
 projects[auto_entitylabel][subdir] = "contrib"
 projects[auto_entitylabel][version] = "1.3"
 
-projects[ctools][subdir] = "contrib"
-projects[ctools][version] = "1.12"
-
 projects[coffee][subdir] = "contrib"
 projects[coffee][version] = "2.3"
+
+projects[ctools][subdir] = "contrib"
+projects[ctools][version] = "1.12"
 
 projects[composer_manager][subdir] = "contrib"
 projects[composer_manager][version] = "1.8"
