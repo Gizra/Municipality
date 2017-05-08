@@ -19,6 +19,7 @@ dependencies[] = file
 dependencies[] = admin_menu_toolbar
 dependencies[] = admin_views
 dependencies[] = auto_entitylabel
+dependencies[] = coffee
 dependencies[] = composer_manager
 dependencies[] = ctools
 dependencies[] = date
