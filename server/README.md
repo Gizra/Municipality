@@ -8,7 +8,7 @@ This is a starting base to create Drupal 7 websites using an install profile.
 **Warning:** you need to setup [Drush](https://github.com/drush-ops/drush)
 first or the installation and update scripts will not work.
 
-Clone the project from [GitHub](https://github.com/Gizra/hedley).
+Clone the project from [GitHub](https://github.com/Gizra/Municipality).
 
 #### Create config file
 
