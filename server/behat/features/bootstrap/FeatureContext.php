@@ -225,6 +225,28 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
+   * @When I visit a :municipality website homepage with a specific :language and a specific user :profile
+   */
+  public function iVisitAWebsiteHomepageWithASpecificAndASpecificUser($municipality, $language, $profile) {
+    $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
+    $options = [
+      'query' => [
+        'language' => $language,
+        'profile' => $profile,
+      ]
+    ];
+    $uri = $this->createUriWithGroupContext($group, '<front>', $options);
+    $this->getSession()->visit($this->locatePath($uri));
+  }
+
+  /**
+   * @Then I should see page :title and :text in the chosen :language and for the chosen user :profile only
+   */
+  public function iShouldSeePageAndInTheChosenAndForTheChosenUserOnly($title, $text, $language, $profile) {
+    throw new PendingException();
+  }
+
+  /**
    * Helper to get the group based on the title & type.
    *
    * @param string $title
