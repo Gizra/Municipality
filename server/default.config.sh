@@ -12,11 +12,11 @@
 # The profile used to install the platform.
 PROFILE_NAME="hedley"
 # The human name of the install profile
-PROFILE_TITLE="Hedley"
+PROFILE_TITLE="Municipality"
 
 
 # Modify the URL below to match your local domain the site will be accessible on.
-BASE_DOMAIN_URL="http://localhost/drupal-elm-starter/server/www"
+BASE_DOMAIN_URL="http://localhost/municipality/server/www"
 
 
 # Modify the login details below to be the desired
@@ -30,7 +30,7 @@ ADMIN_EMAIL="admin@example.com"
 MYSQL_USERNAME="root"
 MYSQL_PASSWORD="root"
 MYSQL_HOSTNAME="127.0.0.1"
-MYSQL_DB_NAME="drupal_elm_starter"
+MYSQL_DB_NAME="municipality"
 
 
 
