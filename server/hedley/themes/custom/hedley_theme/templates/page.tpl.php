@@ -40,7 +40,7 @@
 
     <div class="ui row">
 
-      <div class="ui four wide column">
+      <div class="ui four wide column profiles">
         <?php print $profile_type_links; ?>
       </div>
 
@@ -49,7 +49,7 @@
       </div>
 
       <div class="ui four wide column">
-        <div class="ui three item menu">
+        <div class="ui three item menu languages">
           <?php foreach ($language_switch_links as $link): ?>
             <?php print $link; ?>
           <?php endforeach; ?>

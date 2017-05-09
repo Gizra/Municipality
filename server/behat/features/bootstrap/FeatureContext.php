@@ -193,53 +193,97 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @When I visit a :municipality website homepage with no parameters in URL
    */
   public function iVisitAWebsiteHomepageWithNoParametersInUrl($municipality) {
-    $nid = $this->getNodeIdOfType($municipality, 'municipality');
-    $this->getSession()->visit($this->locatePath('municipality-' . $nid . '/node/' . $nid));
+    $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
+    $uri = $this->createUriWithGroupContext($group);
+    $this->getSession()->visit($this->locatePath($uri));
   }
 
   /**
-   * @Then I should see the home page in the default :language of the municipality and for citizens user profile
+   * @Then I should see the home page in the default :language of the municipality and for :citizens user profile
    */
-  public function iShouldSeeTheHomePageInTheDefaultOfTheMunicipalityAndForCitizensUserProfile($language) {
-    switch ($language) {
-      case 'ar':
-        $this->assertSession()->elementTextContains('css', '.active', 'Residents AR');
-        break;
+  public function iShouldSeeTheHomePageInTheDefaultOfTheMunicipalityAndForCitizensUserProfile($language, $citizens) {
+    $page = $this->getSession()->getPage();
+    // Check is the given language is the active one on the page.
+    $language_element = $page->find('css', '.background .languages a.active');
+    if ($language_element === null) {
+      throw new \Exception('The languages has no active items.');
+    }
+    if ($language_element->getText() !== $language) {
+      $params = array('@language' => $language);
+      throw new \Exception(format_string('Active language is not "@language".', $params));
+    }
 
-      case 'he':
-        $this->assertSession()->elementTextContains('css', '.active', 'תושבים');
-        break;
+    $profile_element = $page->find('css', '.background .profiles a.active');
+    if ($profile_element === null) {
+      throw new \Exception('The profiles has no active items.');
+    }
 
-      default:
-        $this->assertSession()->elementTextContains('css', '.active', 'Residents');
-        break;
+    if ($profile_element->getText() !== $citizens) {
+      $params = array('@profile_name' => $citizens);
+      throw new \Exception(format_string('Active profile is not "@profile_name".', $params));
     }
   }
 
   /**
-   * @param $title
-   * @param $type
+   * Helper to get the group based on the title & type.
    *
-   * @return mixed
+   * @param string $title
+   *   The group title.
+   * @param string $type
+   *   The group node type.
+   *
+   * @return object
+   * The group (if any) or NULL.
    * @throws \Exception
    */
-  protected function getNodeIdOfType($title, $type) {
+  private function loadGroupByTitleAndType($title, $type) {
     $query = new \entityFieldQuery();
     $result = $query
       ->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', $type)
-      ->fieldCondition('title_field', 'value', $title)
+      ->propertyCondition('title', $title)
       ->propertyCondition('status', NODE_PUBLISHED)
       ->range(0, 1)
       ->execute();
-
     if (empty($result['node'])) {
       $params = [
         '@title' => $title,
         '@type' => $type,
       ];
-      throw new \Exception(format_string('Node @title of @type not found.', $params));
+      throw new \Exception(format_string("Group @title not found (type @type).", $params));
     }
-    return key($result['node']);
+    $gid = (int) key($result['node']);
+    $group = node_load($gid);
+    if (!$group) {
+      $params = [
+        '@title' => $title,
+        '@type' => $type,
+      ];
+      throw new \Exception(format_string("Group @title not found (type @type).", $params));
+    }
+    return $group;
   }
+
+  /**
+   * Helper to create a uri within a group context.
+   *
+   * @param object $group
+   *   The group context.
+   * @param string $path
+   *   The path part.
+   * @param array $options
+   *   Options to pass to url.
+   *
+   * @return string
+   */
+  private function createUriWithGroupContext($group, $path = '<front>', $options = []) {
+    $purl = [
+      'provider' => "og_purl|node",
+      'id' => $group->nid,
+    ];
+    $options = array_merge($options, ['purl' => $purl, 'absolute' => TRUE]);
+    $uri = ltrim(url($path, $options), '/');
+    return $uri;
+  }
+
 }
