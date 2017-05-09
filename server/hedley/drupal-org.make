@@ -3,13 +3,20 @@ api = 2
 
 ; Modules
 projects[admin_menu][subdir] = "contrib"
-projects[admin_menu][version] = "3.0-rc5"
+projects[admin_menu][version] = "3.x-dev"
+projects[admin_menu][download][url] = "git://git.drupal.org/project/admin_menu.git"
+projects[admin_menu][download][revision] = "67abd3a2e42c28167551b5d0e753ca322bc592ce"
+; Fix notice, https://www.drupal.org/node/2502695
+projects[admin_menu][patch][] = "https://www.drupal.org/files/issues/admin_menu-issetmapfix-2502695-3.patch"
 
 projects[admin_views][subdir] = "contrib"
 projects[admin_views][version] = "1.6"
 
 projects[auto_entitylabel][subdir] = "contrib"
 projects[auto_entitylabel][version] = "1.3"
+
+projects[coffee][subdir] = "contrib"
+projects[coffee][version] = "2.3"
 
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.12"
