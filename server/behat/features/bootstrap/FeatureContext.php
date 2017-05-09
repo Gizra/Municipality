@@ -188,4 +188,58 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $this->getSession()->visit($this->locatePath('node/' . $nid));
   }
 
+
+  /**
+   * @When I visit a :municipality website homepage with no parameters in URL
+   */
+  public function iVisitAWebsiteHomepageWithNoParametersInUrl($municipality) {
+    $nid = $this->getNodeIdOfType($municipality, 'municipality');
+    $this->getSession()->visit($this->locatePath('municipality-' . $nid . '/node/' . $nid));
+  }
+
+  /**
+   * @Then I should see the home page in the default :language of the municipality and for citizens user profile
+   */
+  public function iShouldSeeTheHomePageInTheDefaultOfTheMunicipalityAndForCitizensUserProfile($language) {
+    switch ($language) {
+      case 'ar':
+        $this->assertSession()->elementTextContains('css', '.active', 'Residents AR');
+        break;
+
+      case 'he':
+        $this->assertSession()->elementTextContains('css', '.active', 'תושבים');
+        break;
+
+      default:
+        $this->assertSession()->elementTextContains('css', '.active', 'Residents');
+        break;
+    }
+  }
+
+  /**
+   * @param $title
+   * @param $type
+   *
+   * @return mixed
+   * @throws \Exception
+   */
+  protected function getNodeIdOfType($title, $type) {
+    $query = new \entityFieldQuery();
+    $result = $query
+      ->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', $type)
+      ->fieldCondition('title_field', 'value', $title)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->range(0, 1)
+      ->execute();
+
+    if (empty($result['node'])) {
+      $params = [
+        '@title' => $title,
+        '@type' => $type,
+      ];
+      throw new \Exception(format_string('Node @title of @type not found.', $params));
+    }
+    return key($result['node']);
+  }
 }
