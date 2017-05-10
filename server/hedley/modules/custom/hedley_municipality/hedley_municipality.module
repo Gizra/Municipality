@@ -72,9 +72,9 @@ function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node =
  * i.e. All entities that are have Arabic translation in "Tuba-Zangariyye"
  * municipality.
  *
- * @param $municipality_node
+ * @param object $municipality_node
  *   Municipality node to filter by.
- * @param $language_code
+ * @param string $language_code
  *   Language code to filter in the translations.
  * @param int $range
  *   Amount of nodes to fetch.
