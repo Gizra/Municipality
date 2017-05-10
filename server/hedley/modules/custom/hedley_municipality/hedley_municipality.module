@@ -63,63 +63,6 @@ function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node =
 }
 
 /**
- * Get all nodes of a municipality group, filtered by a translated language.
- *
- * Getting all the content that belong to a certain group and
- * filtering those entity by a language translation, meaning this function will
- * return the nodes that are translated in a given language.
- *
- * i.e. All entities that are have Arabic translation in "Tuba-Zangariyye"
- * municipality.
- *
- * @param object $municipality_node
- *   Municipality node to filter by.
- * @param string $language_code
- *   Language code to filter in the translations.
- * @param int $range
- *   Amount of nodes to fetch.
- *
- * @return array
- *   Node objects.
- */
-function hedley_municipality_get_municipality_content_by_translated_language($municipality_node, $language_code, $range = 100) {
-  // Get group content bundles of the group (municipality).
-  $bundles = og_get_all_group_content_bundle();
-  if (empty($bundles['node'])) {
-    // No need to check if there's no group content bundles.
-    return [];
-  }
-
-  $query = new EntityFieldQuery();
-  $query
-    ->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', array_keys($bundles['node']), 'IN')
-    ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyOrderBy('created', 'DESC')
-    // Filter by municipality.
-    ->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $municipality_node->nid)
-    // Filter by translated language.
-    ->addTag('entity_translation')
-    ->addMetaData('language_code', $language_code)
-    ->range(0, $range);
-
-  $result = $query->execute();
-
-  return !empty($result['node']) ? node_load_multiple(array_keys($result['node'])) : [];
-}
-
-/**
- * Implements hook_query_TAG_alter().
- *
- * Filter by translated languages of the entity.
- */
-function hedley_municipality_query_entity_translation_alter(QueryAlterableInterface $query) {
-  $language_code = $query->getMetaData('language_code');
-  $query->innerJoin('entity_translation', 'et', "et.entity_type = 'node' AND et.entity_id = node.nid");
-  $query->condition('et.language', $language_code);
-}
-
-/**
  * Implements hook_entity_info_alter().
  *
  * Adding teaser view mode for the municipality homepage.

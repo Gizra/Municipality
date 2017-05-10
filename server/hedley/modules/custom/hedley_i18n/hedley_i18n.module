@@ -59,7 +59,7 @@ function hedley_i18n_language_switch_links() {
   }
   $rendered_links = [];
   foreach ($links->links as $language_code => $link) {
-    if (!in_array($language_code, array_keys($translations)) && empty(hedley_municipality_get_municipality_content_by_translated_language($municipality, $language_code, 1))) {
+    if (!in_array($language_code, array_keys($translations))) {
       // Don't add a language to the switcher if the municipality doesn't have a
       // translation in that language and doesn't have any content in this
       // language.
