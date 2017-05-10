@@ -65,9 +65,9 @@ function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node =
 /**
  * Get all nodes of a municipality group, filtered by a translated language.
  *
- * Checking and getting all the content that belong to a certain group and
+ * Getting all the content that belong to a certain group and
  * filtering those entity by a language translation, meaning this function will
- * return the nodes that are translated to a given language.
+ * return the nodes that are translated in a given language.
  *
  * i.e. All entities that are have Arabic translation in "Tuba-Zangariyye"
  * municipality.
