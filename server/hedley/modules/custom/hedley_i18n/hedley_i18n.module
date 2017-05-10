@@ -44,11 +44,11 @@ function hedley_i18n_language_switch_links() {
   global $language;
 
   // Get the current municipality and extract it's translations.
-  $node = hedley_municipality_get_current();
-  $translations = $node->translations->data;
+  $municipality = hedley_municipality_get_current();
+  $translations = $municipality->translations->data;
 
   if (!is_array($translations) || count($translations) <= 1) {
-    // No need for the language switcher is there's only one language.
+    // No need for the language switcher if there's only one language.
     return [];
   }
 
@@ -59,9 +59,10 @@ function hedley_i18n_language_switch_links() {
   }
   $rendered_links = [];
   foreach ($links->links as $language_code => $link) {
-    if (!in_array($language_code, array_keys($translations))) {
+    if (!in_array($language_code, array_keys($translations)) && empty(hedley_municipality_get_municipality_content_by_translated_language($municipality, $language_code, 1))) {
       // Don't add a language to the switcher if the municipality doesn't have a
-      // translation in that language.
+      // translation in that language and doesn't have any content in this
+      // language.
       continue;
     }
     // Using language in the query string, to avoid a conflict with og_purl when
