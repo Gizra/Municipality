@@ -43,6 +43,15 @@ function hedley_i18n_init() {
 function hedley_i18n_language_switch_links() {
   global $language;
 
+  // Get the current municipality and extract it's translations.
+  $node = hedley_municipality_get_current();
+  $translations = $node->translations->data;
+
+  if (!is_array($translations) || count($translations) <= 1) {
+    // No need for the language switcher is there's only one language.
+    return [];
+  }
+
   $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
   $links = language_negotiation_get_switch_links('language', $path);
   if (empty($links->links)) {
@@ -50,6 +59,11 @@ function hedley_i18n_language_switch_links() {
   }
   $rendered_links = [];
   foreach ($links->links as $language_code => $link) {
+    if (!in_array($language_code, array_keys($translations))) {
+      // Don't add a language to the switcher if the municipality doesn't have a
+      // translation in that language.
+      continue;
+    }
     // Using language in the query string, to avoid a conflict with og_purl when
     // it's the first element in the path.
     $options = [
