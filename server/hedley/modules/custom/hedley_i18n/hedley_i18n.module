@@ -61,8 +61,7 @@ function hedley_i18n_language_switch_links() {
   foreach ($links->links as $language_code => $link) {
     if (!in_array($language_code, array_keys($translations))) {
       // Don't add a language to the switcher if the municipality doesn't have a
-      // translation in that language and doesn't have any content in this
-      // language.
+      // translation in that language.
       continue;
     }
     // Using language in the query string, to avoid a conflict with og_purl when
