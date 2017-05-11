@@ -24,6 +24,7 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
     'field_default_language',
     'field_footer_text',
     'field_background_images',
+    'field_profile_types',
   ];
   protected $simpleMappings = [
     'title_field',
