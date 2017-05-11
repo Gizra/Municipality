@@ -42,16 +42,21 @@ function hedley_i18n_init() {
  */
 function hedley_i18n_language_switch_links() {
   global $language;
+  $language_object = clone $language;
   $node = hedley_municipality_get_current();
+  if (!$node) {
+    // No need for the switcher if somehow we are not in a municipality.
+    return [];
+  }
   $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
 
-  return hedley_i18n_language_get_switch_links($language, $node, $path);
+  return hedley_i18n_language_get_switch_links($language_object, $node, $path);
 }
 
 /**
  * Get a custom language switcher according to the node's translated languages.
  *
- * @param object $language
+ * @param object $language_object
  *   The global language.
  * @param object $node
  *   The desired node object.
@@ -62,7 +67,7 @@ function hedley_i18n_language_switch_links() {
  *   The language switch links or empty if the node has only one translated
  *   language.
  */
-function hedley_i18n_language_get_switch_links($language, $node, $path) {
+function hedley_i18n_language_get_switch_links($language_object, $node, $path) {
   // Extract node's translations.
   $translations = $node->translations->data;
 
@@ -89,7 +94,7 @@ function hedley_i18n_language_get_switch_links($language, $node, $path) {
     ];
     // Creating the link markup manually, because otherwise the "active" class
     // isn't added correctly according the global language.
-    $active = $language_code == $language->language ? 'active' : '';
+    $active = $language_code == $language_object->language ? 'active' : '';
     $url = url($link['href'], $options);
     $rendered_links[$language_code] = "<a class=\"item $active\" href=\"$url\">{$link['title']}</a>";
   }
