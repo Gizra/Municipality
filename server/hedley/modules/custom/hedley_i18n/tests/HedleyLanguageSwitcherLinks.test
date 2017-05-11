@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Test language switcher links returned according to the group's translated languages.
+ */
+
+/**
+ * Class HedleyLanguageSwitcherLinks.
+ */
+class HedleyLanguageSwitcherLinks extends DrupalWebTestCase {
+
+  /**
+   * The profile name.
+   *
+   * @var string
+   */
+  protected $profile = 'hedley';
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Language switcher links',
+      'description' => 'Test language switcher links returned according to the groups translated languages.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Test getting language switcher links.
+   */
+  public function testLanguageSwitchLinks() {
+    // Global language.
+    global $language;
+
+    // List the expected languages.
+    $expected_languages = ['he','ar'];
+
+    // Create a group with in the arabic language.
+    $node = $this->drupalCreateNode(['type' => 'municipality', 'language' => 'ar']);
+
+    // Add translations to the node.
+    $handler = entity_translation_get_handler('node', $node);
+    $translation = array(
+      'translate' => 0,
+      'status' => 1,
+      'language' => 'he',
+      'source' => $node->language,
+    );
+    $handler->setTranslation($translation, $node);
+
+    $path_node  = 'node/' . $node->nid;
+
+    // And then you can check the array you get by calling.
+    $rendered_links = hedley_i18n_language_get_switch_links($language, $node, $path_node);
+
+
+    $this->assertEqual(array_keys($rendered_links), $expected_languages, 'Expected languages are displayed.');
+  }
+
+}
