@@ -1,31 +1,40 @@
-sudo: require
-
+sudo: required
 language: php
 php:
-  - 5.6
-
+- 5.6
 env:
+  matrix:
   - BUILD_SERVER=1
-  - CODE_REVIEW=1
-    REVIEW_STANDARD="Drupal"
-  - CODE_REVIEW=1
-    REVIEW_STANDARD="DrupalPractice"
-
+  - BUILD_CLIENT=1
+  - BUILD_WEBDRIVERIO=1 BUILD_SERVER=1
+  - CODE_REVIEW=1 REVIEW_STANDARD="Drupal"
+  - CODE_REVIEW=1 REVIEW_STANDARD="DrupalPractice"
+  - SHELL_REVIEW=1
+  global:
+  - secure: yYJ+dW1dUxpDtAaRwlWVEFKy27dwW/28Nu9VRjodssfsoz+mphoDDx2kRcQXwXUD39mWSoZx9LWzpi2X3ca9jiE/kdfZKPg7N9ysHmAQDjoOd1Ju+asx40udU4uwiPncJkZ9iH/Cm/Wu7YE9yp3oRPO/OAwCmFY40FfJ1weALELsBx5QMIIz5NvrYIuleuYdt+MkY9XLEXbWzrOACRjmRQH4Hys0XHQo1BCIX9Wc8kOPKMJhlw7IrVhiZMvEXCU7w8R48TfM5kyogjp197TUSjD/47iBF8V9FueRX6Pzj+Pe0mg4lX0WyHln+YnqaVAVXG6+0e564WI9lLmP3n204r1Aw0WiN8GcBjcEUSqhiQ4NXwrvdkeMwdiTft5fYVyXylKJB6CeWscNKGiUcnhAOvctqmpe6Q7Xm58H7itxO94jwUpTZas0+6jMoBiyJiFnPdkcDDrTBvdyDxZ1re49nttjlXrqNFB6Qhu25Cuy+poTgSAVZlY0J5IuBgn5/Eg0qBucRBo/5+Wy74yT4/MH0N3I3X1OyWC3+2nmi/qSbl8ZYJ4zvRihk7HgmZJxR/TWaeCuygUWkWFX05CvUjee+JV6m4hqaWtub8ULBGp4ty1J8w990rMpeOg+ZFZRCoSEEXKKQgKiEHTaQdx70qY1CvOYVcIP34oHjA465ZDEJow=
 services:
-  - docker
-
+- docker
+before_install:
+- composer self-update
+- export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+- sudo pip install docker-compose
+- openssl aes-256-cbc -K $encrypted_b2dc5bc8fb77_key -iv $encrypted_b2dc5bc8fb77_iv
+  -in gdrive-service-account.json.enc -out gdrive-service-account.json -d
+install:
+- "$TRAVIS_BUILD_DIR/ci-scripts/install_client.sh"
+- "$TRAVIS_BUILD_DIR/ci-scripts/install_coder.sh"
+- "$TRAVIS_BUILD_DIR/ci-scripts/install_server.sh"
+- "$TRAVIS_BUILD_DIR/ci-scripts/install_shell.sh"
+before_script:
+- "$TRAVIS_BUILD_DIR/ci-scripts/prepare_client.sh"
+- sudo service postgresql stop
+- sudo service mysql stop
+script:
+- "$TRAVIS_BUILD_DIR/ci-scripts/test_client.sh"
+- "$TRAVIS_BUILD_DIR/ci-scripts/test_coder.sh"
+- "$TRAVIS_BUILD_DIR/ci-scripts/test_server.sh"
+- "$TRAVIS_BUILD_DIR/ci-scripts/test_shell.sh"
 cache:
   directories:
-    - sysconfcpus
-
-before_install:
-  - composer self-update
-  - export PATH="$HOME/.config/composer/vendor/bin:$PATH"
-
-install:
-  - $TRAVIS_BUILD_DIR/ci-scripts/install_coder.sh
-  - $TRAVIS_BUILD_DIR/ci-scripts/install_server.sh
-
-script:
-  - $TRAVIS_BUILD_DIR/ci-scripts/test_coder.sh
-  - $TRAVIS_BUILD_DIR/ci-scripts/test_server.sh
+  - client/elm-stuff/packages
+  - client/sysconfcpus
