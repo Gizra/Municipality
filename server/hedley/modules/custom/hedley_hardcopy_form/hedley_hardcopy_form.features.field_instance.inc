@@ -59,8 +59,8 @@ function hedley_hardcopy_form_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-hardcopy_form-field_profile_types'.
-  $field_instances['node-hardcopy_form-field_profile_types'] = array(
+  // Exported field_instance: 'node-hardcopy_form-field_user_types'.
+  $field_instances['node-hardcopy_form-field_user_types'] = array(
     'bundle' => 'hardcopy_form',
     'default_value' => NULL,
     'deleted' => 0,
@@ -87,8 +87,8 @@ function hedley_hardcopy_form_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_profile_types',
-    'label' => 'Profile types',
+    'field_name' => 'field_user_types',
+    'label' => 'User types',
     'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -269,7 +269,7 @@ function hedley_hardcopy_form_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('File');
   t('Groups audience');
-  t('Profile types');
+  t('User types');
   t('Title');
   t('Topics');
 

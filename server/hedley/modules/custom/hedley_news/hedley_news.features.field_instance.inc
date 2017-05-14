@@ -233,8 +233,8 @@ function hedley_news_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-news-field_profile_types'.
-  $field_instances['node-news-field_profile_types'] = array(
+  // Exported field_instance: 'node-news-field_user_types'.
+  $field_instances['node-news-field_user_types'] = array(
     'bundle' => 'news',
     'default_value' => NULL,
     'deleted' => 0,
@@ -261,8 +261,8 @@ function hedley_news_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_profile_types',
-    'label' => 'Profile types',
+    'field_name' => 'field_user_types',
+    'label' => 'User types',
     'required' => TRUE,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -498,7 +498,7 @@ function hedley_news_field_default_field_instances() {
   t('File');
   t('Groups audience');
   t('Image');
-  t('Profile types');
+  t('User types');
   t('Subtitle');
   t('Title');
   t('Topics');

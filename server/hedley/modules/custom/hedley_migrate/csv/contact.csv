@@ -1,4 +1,4 @@
-id,municipality,field_first_name_ar,field_first_name_en,field_first_name_he,field_last_name_ar,field_last_name_en,field_last_name_he,field_job_title_ar,field_job_title_en,field_job_title_he,field_image,field_email,field_phone,field_fax,field_address,field_topics,field_profile_types
+id,municipality,field_first_name_ar,field_first_name_en,field_first_name_he,field_last_name_ar,field_last_name_en,field_last_name_he,field_job_title_ar,field_job_title_en,field_job_title_he,field_image,field_email,field_phone,field_fax,field_address,field_topics,field_user_types
 1,2,اسم,,חכם,اسم عائلة,,יונס,المحاسبة,,חשבונאות,,hakamyns@gmail.com,526177102,08-12345678,"כתובת לדוגמה, 1, 2",,Residents|Businesses
 2,2,محمد,,מחמוד,اسم عائلة,,עיסא,المحاسبة,,חשבונאות,,mahmod5104@gmail.com,505728180,08-12345678,"כתובת לדוגמה, 1, 2",Business license,Residents|Businesses
 3,2,محمود,,מוחמד,اسم عائلة,,שיך עבד,صيانة,,אחזקה,,bees979@walla.co.il,526655875,08-12345678,"כתובת לדוגמה, 1, 2",,Residents|Businesses

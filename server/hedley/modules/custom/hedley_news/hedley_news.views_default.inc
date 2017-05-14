@@ -39,7 +39,7 @@ function hedley_news_views_default_views() {
     'field_file' => 'field_file',
     'og_group_ref' => 'og_group_ref',
     'field_image' => 'field_image',
-    'field_profile_types' => 'field_profile_types',
+    'field_user_types' => 'field_user_types',
     'field_subtitle' => 'field_subtitle',
     'field_topics' => 'field_topics',
   );
@@ -85,7 +85,7 @@ function hedley_news_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_profile_types' => array(
+    'field_user_types' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -151,11 +151,11 @@ function hedley_news_views_default_views() {
     'image_style' => 'thumbnail',
     'image_link' => '',
   );
-  /* Field: Content: Profile types */
-  $handler->display->display_options['fields']['field_profile_types']['id'] = 'field_profile_types';
-  $handler->display->display_options['fields']['field_profile_types']['table'] = 'field_data_field_profile_types';
-  $handler->display->display_options['fields']['field_profile_types']['field'] = 'field_profile_types';
-  $handler->display->display_options['fields']['field_profile_types']['delta_offset'] = '0';
+  /* Field: Content: user types */
+  $handler->display->display_options['fields']['field_user_types']['id'] = 'field_user_types';
+  $handler->display->display_options['fields']['field_user_types']['table'] = 'field_data_field_user_types';
+  $handler->display->display_options['fields']['field_user_types']['field'] = 'field_user_types';
+  $handler->display->display_options['fields']['field_user_types']['delta_offset'] = '0';
   /* Field: Content: Subtitle */
   $handler->display->display_options['fields']['field_subtitle']['id'] = 'field_subtitle';
   $handler->display->display_options['fields']['field_subtitle']['table'] = 'field_data_field_subtitle';
@@ -233,7 +233,7 @@ function hedley_news_views_default_views() {
     t('File'),
     t('Groups audience'),
     t('Image'),
-    t('Profile types'),
+    t('User types'),
     t('Subtitle'),
     t('Topics'),
     t('Edit link'),

@@ -19,9 +19,9 @@ function hedley_terms_taxonomy_default_vocabularies() {
       'language' => 'und',
       'i18n_mode' => 32768,
     ),
-    'profile_types' => array(
-      'name' => 'Profile types',
-      'machine_name' => 'profile_types',
+    'user_types' => array(
+      'name' => 'User types',
+      'machine_name' => 'user_types',
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',

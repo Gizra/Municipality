@@ -29,7 +29,7 @@ class HedleyMigrateEvents extends HedleyMigrateBase {
     'field_date:to',
     'field_ticket_price',
     'field_topics',
-    'field_profile_types',
+    'field_user_types',
   ];
   protected $simpleMappings = [
     'title_field',
@@ -42,7 +42,7 @@ class HedleyMigrateEvents extends HedleyMigrateBase {
   ];
   protected $simpleMultipleMappings = [
     'field_topics',
-    'field_profile_types',
+    'field_user_types',
   ];
 
   /**
@@ -53,7 +53,7 @@ class HedleyMigrateEvents extends HedleyMigrateBase {
 
     $this->dependencies[] = 'HedleyMigrateMunicipalities';
     $this->dependencies[] = 'HedleyMigrateAudiences';
-    $this->dependencies[] = 'HedleyMigrateProfileTypes';
+    $this->dependencies[] = 'HedleyMigrateUserTypes';
     $this->dependencies[] = 'HedleyMigrateTopics';
 
     $this

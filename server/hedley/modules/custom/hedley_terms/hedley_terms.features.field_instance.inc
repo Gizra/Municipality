@@ -47,9 +47,9 @@ function hedley_terms_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-profile_types-name_field'.
-  $field_instances['taxonomy_term-profile_types-name_field'] = array(
-    'bundle' => 'profile_types',
+  // Exported field_instance: 'taxonomy_term-user_types-name_field'.
+  $field_instances['taxonomy_term-user_types-name_field'] = array(
+    'bundle' => 'user_types',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
