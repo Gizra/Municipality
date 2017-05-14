@@ -199,9 +199,9 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * @Then I should see the home page in the default :language of the municipality and for :citizens user profile
+   * @Then I should see the home page in the default :language of the municipality and for :citizens user type
    */
-  public function iShouldSeeTheHomePageInTheDefaultOfTheMunicipalityAndForCitizensUserProfile($language, $citizens) {
+  public function iShouldSeeTheHomePageInTheDefaultOfTheMunicipalityAndForCitizensUserType($language, $citizens) {
     $page = $this->getSession()->getPage();
     // Check is the given language is the active one on the page.
     $language_element = $page->find('css', '.background .languages a.active');
@@ -225,14 +225,14 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * @When I visit a :municipality website homepage with a specific :language and a specific user :profile
+   * @When I visit a :municipality website homepage with a specific :language and a specific :user_type
    */
-  public function iVisitAWebsiteHomepageWithASpecificAndASpecificUser($municipality, $language, $profile) {
+  public function iVisitAWebsiteHomepageWithASpecificAndASpecificUser($municipality, $language, $user_type) {
     $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
     $options = [
       'query' => [
         'language' => $language,
-        'profile' => $profile,
+        'profile' => $user_type,
       ]
     ];
     $uri = $this->createUriWithGroupContext($group, '<front>', $options);
@@ -240,14 +240,14 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * @Then I should see page :title and :text in the chosen :language and for the chosen user :profile only
+   * @Then I should see page :title and :text in the chosen :language and for the chosen :user_type only
    */
-  public function iShouldSeePageAndInTheChosenAndForTheChosenUserOnly($title, $text, $language, $profile) {
+  public function iShouldSeePageAndInTheChosenAndForTheChosenUserOnly($title, $text, $language, $user_type) {
     throw new PendingException();
   }
 
   /**
-   * Helper to get the group based on the title & type.
+   * Get the group based on the title and type.
    *
    * @param string $title
    *   The group title.
@@ -255,10 +255,10 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    *   The group node type.
    *
    * @return object
-   * The group (if any) or NULL.
+   *   The group (if any) or NULL.
    * @throws \Exception
    */
-  private function loadGroupByTitleAndType($title, $type) {
+  protected function loadGroupByTitleAndType($title, $type) {
     $query = new \entityFieldQuery();
     $result = $query
       ->entityCondition('entity_type', 'node')
@@ -272,7 +272,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
         '@title' => $title,
         '@type' => $type,
       ];
-      throw new \Exception(format_string("Group @title not found (type @type).", $params));
+      throw new \Exception(format_string('Group @title not found (type @type).', $params));
     }
     $gid = (int) key($result['node']);
     $group = node_load($gid);
@@ -281,7 +281,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
         '@title' => $title,
         '@type' => $type,
       ];
-      throw new \Exception(format_string("Group @title not found (type @type).", $params));
+      throw new \Exception(format_string('Group @title not found (type @type).', $params));
     }
     return $group;
   }
@@ -298,9 +298,9 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    *
    * @return string
    */
-  private function createUriWithGroupContext($group, $path = '<front>', $options = []) {
+  protected function createUriWithGroupContext($group, $path = '<front>', $options = []) {
     $purl = [
-      'provider' => "og_purl|node",
+      'provider' => 'og_purl|node',
       'id' => $group->nid,
     ];
     $options = array_merge($options, ['purl' => $purl, 'absolute' => TRUE]);
