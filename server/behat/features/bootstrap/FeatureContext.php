@@ -214,8 +214,8 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
       throw new \Exception(format_string('Active language is not "@language".', $params));
     }
 
-    // Check if the given profile is the active one on the page.
-    $user_type_element = $page->find('css', '.background .profiles a.active');
+    // Check if the given user type is the active one on the page.
+    $user_type_element = $page->find('css', '.background .user-types a.active');
     if ($user_type_element === null) {
       throw new \Exception('The user type has no active items.');
     }
@@ -276,8 +276,8 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
       throw new \Exception(format_string('Active language is not "@language".', $params));
     }
 
-    // Check if the given profile is the active one on the page.
-    $user_type_element = $page->find('css', '.background .profiles a.active');
+    // Check if the given user type is the active one on the page.
+    $user_type_element = $page->find('css', '.background .user-types a.active');
     if ($user_type_element === null) {
       throw new \Exception('The user type has no active items.');
     }

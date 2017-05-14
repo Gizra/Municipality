@@ -40,7 +40,7 @@
 
     <div class="ui row">
 
-      <div class="ui four wide column profiles">
+      <div class="ui four wide column user-types">
         <?php print $user_type_links; ?>
       </div>
 
