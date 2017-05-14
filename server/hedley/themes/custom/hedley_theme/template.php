@@ -38,7 +38,7 @@ function hedley_theme_preprocess_page(&$variables) {
   // Add the language switch links.
   $variables['language_switch_links'] = hedley_i18n_language_switch_links();
   // The class depending on the amount of languages the municipality have.
-  $variables['language_switch_links_class'] = count($variables['language_switch_links']) == 3 ? 'three' : (count($variables['language_switch_links']) == 2 ? 'two' : 'one');
+  $variables['language_switch_links_class'] = hedley_theme_number_as_word(count($variables['language_switch_links']));
 
   // Add profile type links.
   $variables['profile_type_links'] = hedley_terms_get_profile_type_links();
