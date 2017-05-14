@@ -203,7 +203,8 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    */
   public function iShouldSeeTheHomePageInTheDefaultOfTheMunicipalityAndForCitizensUserType($language, $citizens) {
     $page = $this->getSession()->getPage();
-    // Check is the given language is the active one on the page.
+
+    // Check if the given language is the active one on the page.
     $language_element = $page->find('css', '.background .languages a.active');
     if ($language_element === null) {
       throw new \Exception('The languages has no active items.');
@@ -213,11 +214,11 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
       throw new \Exception(format_string('Active language is not "@language".', $params));
     }
 
+    // Check if the given profile is the active one on the page.
     $profile_element = $page->find('css', '.background .profiles a.active');
     if ($profile_element === null) {
       throw new \Exception('The profiles has no active items.');
     }
-
     if ($profile_element->getText() !== $citizens) {
       $params = array('@profile_name' => $citizens);
       throw new \Exception(format_string('Active profile is not "@profile_name".', $params));
@@ -235,7 +236,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
         'profile' => $user_type,
       ]
     ];
-    $uri = $this->createUriWithGroupContext($group, '<front>', $options);
+    $uri = $this->createUriWithGroupContext($group, 'node/' . $group->nid, $options);
     $this->getSession()->visit($this->locatePath($uri));
   }
 
@@ -243,7 +244,48 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @Then I should see page :title and :text in the chosen :language and for the chosen :user_type only
    */
   public function iShouldSeePageAndInTheChosenAndForTheChosenUserOnly($title, $text, $language, $user_type) {
-    throw new PendingException();
+    $page = $this->getSession()->getPage();
+
+    // Check the title of the page.
+    $title_element = $page->find('css', '.background .center h2.header');
+    if ($title_element === null) {
+      throw new \Exception('The title element is missing.');
+    }
+    if ($title_element->getText() !== $title) {
+      $params = array('@title' => $title);
+      throw new \Exception(format_string('The title is not "@title".', $params));
+    }
+
+    // Check some text on the municipality page.
+    $text_element = $page->find('css', '.news .content .header h3');
+    if ($text_element === null) {
+      throw new \Exception('The required text element is missing.');
+    }
+    if ($text_element->getText() !== $text) {
+      $params = array('@text' => $text);
+      throw new \Exception(format_string('There\'s no text matching "@text".', $params));
+    }
+
+    // Check if the given language is the active one on the page.
+    $language_element = $page->find('css', '.background .languages a.active');
+    if ($language_element === null) {
+      throw new \Exception('The languages has no active items.');
+    }
+    if (!strpos($language_element->getAttribute('href'), $language)) {
+      $params = array('@language' => $language);
+      throw new \Exception(format_string('Active language is not "@language".', $params));
+    }
+
+    // Check if the given profile is the active one on the page.
+    $profile_element = $page->find('css', '.background .profiles a.active');
+    if ($profile_element === null) {
+      throw new \Exception('The profiles has no active items.');
+    }
+    if (!strpos($language_element->getAttribute('href'), $user_type)) {
+      $params = array('@profile_name' => $user_type);
+      throw new \Exception(format_string('Active profile is not "@profile_name".', $params));
+    }
+
   }
 
   /**
