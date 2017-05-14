@@ -42,8 +42,8 @@ function hedley_terms_get_user_type_links() {
     ];
   }
 
-  // No need to display the "user type" switcher in case there's only one link or
-  // none.
+  // No need to display the "user type" switcher in case there's only one link
+  // or none.
   if (count($links) <= 1) {
     return FALSE;
   }
