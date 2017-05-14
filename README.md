@@ -14,3 +14,9 @@ https://dev-municipality.pantheonsite.io/municipality-1/node/1?language=he
 
 Topic page:
 https://dev-municipality.pantheonsite.io/municipality-1/taxonomy/term/10?language=he
+
+
+# Test Site:
+http://test-municipality.pantheonsite.io/?language=he
+
+admin/admin
