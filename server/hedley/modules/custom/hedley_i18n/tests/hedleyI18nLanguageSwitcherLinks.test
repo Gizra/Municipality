@@ -2,13 +2,14 @@
 
 /**
  * @file
- * Test language switcher links returned according to the group's translated languages.
+ * Test language switcher links returned according to the group's translated
+ * languages.
  */
 
 /**
- * Class HedleyLanguageSwitcherLinks.
+ * Class hedleyI18nLanguageSwitcherLinks.
  */
-class HedleyLanguageSwitcherLinks extends DrupalWebTestCase {
+class hedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
 
   /**
    * The profile name.
@@ -37,7 +38,7 @@ class HedleyLanguageSwitcherLinks extends DrupalWebTestCase {
     $language_object->language = 'he';
 
     // List the expected languages.
-    $expected_languages = ['he','ar'];
+    $expected_languages = ['he', 'ar'];
 
     // Create a group with in the arabic language.
     $node = $this->drupalCreateNode(['type' => 'municipality', 'language' => 'ar']);
@@ -52,7 +53,7 @@ class HedleyLanguageSwitcherLinks extends DrupalWebTestCase {
     );
     $handler->setTranslation($translation, $node);
 
-    $path_node  = 'node/' . $node->nid;
+    $path_node = 'node/' . $node->nid;
 
     // And then you can check the array you get by calling.
     $rendered_links = hedley_i18n_language_get_switch_links($language_object, $node, $path_node);
