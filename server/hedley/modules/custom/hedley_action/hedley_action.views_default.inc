@@ -37,7 +37,7 @@ function hedley_action_views_default_views() {
     'title_field' => 'title_field',
     'field_action_sections' => 'field_action_sections',
     'field_link' => 'field_link',
-    'field_profile_types' => 'field_profile_types',
+    'field_user_types' => 'field_user_types',
     'field_topics' => 'field_topics',
     'edit_node' => 'edit_node',
   );
@@ -67,7 +67,7 @@ function hedley_action_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_profile_types' => array(
+    'field_user_types' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -110,11 +110,11 @@ function hedley_action_views_default_views() {
   $handler->display->display_options['fields']['field_link']['table'] = 'field_data_field_link';
   $handler->display->display_options['fields']['field_link']['field'] = 'field_link';
   $handler->display->display_options['fields']['field_link']['click_sort_column'] = 'url';
-  /* Field: Content: Profile types */
-  $handler->display->display_options['fields']['field_profile_types']['id'] = 'field_profile_types';
-  $handler->display->display_options['fields']['field_profile_types']['table'] = 'field_data_field_profile_types';
-  $handler->display->display_options['fields']['field_profile_types']['field'] = 'field_profile_types';
-  $handler->display->display_options['fields']['field_profile_types']['delta_offset'] = '0';
+  /* Field: Content: user types */
+  $handler->display->display_options['fields']['field_user_types']['id'] = 'field_user_types';
+  $handler->display->display_options['fields']['field_user_types']['table'] = 'field_data_field_user_types';
+  $handler->display->display_options['fields']['field_user_types']['field'] = 'field_user_types';
+  $handler->display->display_options['fields']['field_user_types']['delta_offset'] = '0';
   /* Field: Content: Topics */
   $handler->display->display_options['fields']['field_topics']['id'] = 'field_topics';
   $handler->display->display_options['fields']['field_topics']['table'] = 'field_data_field_topics';
@@ -156,22 +156,22 @@ function hedley_action_views_default_views() {
     1 => 0,
     3 => 0,
   );
-  /* Filter criterion: Content: Profile types (field_profile_types) */
-  $handler->display->display_options['filters']['field_profile_types_tid']['id'] = 'field_profile_types_tid';
-  $handler->display->display_options['filters']['field_profile_types_tid']['table'] = 'field_data_field_profile_types';
-  $handler->display->display_options['filters']['field_profile_types_tid']['field'] = 'field_profile_types_tid';
-  $handler->display->display_options['filters']['field_profile_types_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_profile_types_tid']['expose']['operator_id'] = 'field_profile_types_tid_op';
-  $handler->display->display_options['filters']['field_profile_types_tid']['expose']['label'] = 'Profile types (field_profile_types)';
-  $handler->display->display_options['filters']['field_profile_types_tid']['expose']['operator'] = 'field_profile_types_tid_op';
-  $handler->display->display_options['filters']['field_profile_types_tid']['expose']['identifier'] = 'field_profile_types_tid';
-  $handler->display->display_options['filters']['field_profile_types_tid']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: User types (field_user_types) */
+  $handler->display->display_options['filters']['field_user_types_tid']['id'] = 'field_user_types_tid';
+  $handler->display->display_options['filters']['field_user_types_tid']['table'] = 'field_data_field_user_types';
+  $handler->display->display_options['filters']['field_user_types_tid']['field'] = 'field_user_types_tid';
+  $handler->display->display_options['filters']['field_user_types_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_user_types_tid']['expose']['operator_id'] = 'field_user_types_tid_op';
+  $handler->display->display_options['filters']['field_user_types_tid']['expose']['label'] = 'User types (field_user_types)';
+  $handler->display->display_options['filters']['field_user_types_tid']['expose']['operator'] = 'field_user_types_tid_op';
+  $handler->display->display_options['filters']['field_user_types_tid']['expose']['identifier'] = 'field_user_types_tid';
+  $handler->display->display_options['filters']['field_user_types_tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
   );
-  $handler->display->display_options['filters']['field_profile_types_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_profile_types_tid']['vocabulary'] = 'profile_types';
+  $handler->display->display_options['filters']['field_user_types_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_user_types_tid']['vocabulary'] = 'user_types';
   /* Filter criterion: Content: Topics (field_topics) */
   $handler->display->display_options['filters']['field_topics_tid']['id'] = 'field_topics_tid';
   $handler->display->display_options['filters']['field_topics_tid']['table'] = 'field_data_field_topics';
@@ -218,11 +218,11 @@ function hedley_action_views_default_views() {
     t('Title'),
     t('Action sections'),
     t('Link'),
-    t('Profile types'),
+    t('User types'),
     t('Topics'),
     t('Edit link'),
     t('Groups audience (og_group_ref)'),
-    t('Profile types (field_profile_types)'),
+    t('User types (field_user_types)'),
     t('Topics (field_topics)'),
     t('Page'),
   );

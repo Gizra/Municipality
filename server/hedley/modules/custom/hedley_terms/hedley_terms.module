@@ -6,25 +6,25 @@
  */
 
 /**
- * Get links for changing the profile type.
+ * Get links for changing the user type.
  *
  * @return string
- *   Rendered profile type links.
+ *   Rendered user type links.
  */
-function hedley_terms_get_profile_type_links() {
+function hedley_terms_get_user_type_links() {
   $links = [];
 
-  // Get the target path for when changing the profile type.
-  $path = _hedley_terms_profile_type_links_path();
+  // Get the target path for when changing the user type.
+  $path = _hedley_terms_user_type_links_path();
 
-  $vocabulary = taxonomy_vocabulary_machine_name_load('profile_types');
+  $vocabulary = taxonomy_vocabulary_machine_name_load('user_types');
   foreach (taxonomy_get_tree($vocabulary->vid) as $term) {
     $wrapper = entity_metadata_wrapper('taxonomy_term', $term->tid);
-    $profile_name = drupal_html_class($term->name);
+    $user_name = drupal_html_class($term->name);
     $links[] = [
       'label' => $wrapper->label(),
-      'url' => url($path, ['query' => ['profile' => $profile_name]]),
-      'active' => $profile_name == hedley_terms_get_current_profile_type(),
+      'url' => url($path, ['query' => ['user_type' => $user_name]]),
+      'active' => $user_name == hedley_terms_get_current_user_type(),
     ];
   }
 
@@ -32,19 +32,19 @@ function hedley_terms_get_profile_type_links() {
     'links' => $links,
     'count_class' => hedley_theme_number_as_word(count($links)),
   ];
-  return theme('hedley_terms_profile_type_links', $variables);
+  return theme('hedley_terms_user_type_links', $variables);
 }
 
 /**
- * Get the target path for the profile type select links.
+ * Get the target path for the user type select links.
  *
  * @return string
  *   The target path.
  */
-function _hedley_terms_profile_type_links_path() {
-  // When re-setting profile type, redirect either to the current municipality's
+function _hedley_terms_user_type_links_path() {
+  // When re-setting user type, redirect either to the current municipality's
   // homepage or the global homepage, unless it make sense to stay on the
-  // current page and only change the profile.
+  // current page and only change the user.
   $menu_item = menu_get_item();
   switch ($menu_item['path']) {
     case 'taxonomy/term/%':
@@ -57,17 +57,17 @@ function _hedley_terms_profile_type_links_path() {
 }
 
 /**
- * Get the current profile type's term ID.
+ * Get the current user type's term ID.
  *
  * @return int
- *   The profile type term ID.
+ *   The user type term ID.
  */
-function hedley_terms_get_current_profile_type_tid() {
-  $current_profile_name = hedley_terms_get_current_profile_type();
-  // Find the profile type term with the same name as the current name.
-  $vocabulary = taxonomy_vocabulary_machine_name_load('profile_types');
+function hedley_terms_get_current_user_type_tid() {
+  $current_user_name = hedley_terms_get_current_user_type();
+  // Find the user type term with the same name as the current name.
+  $vocabulary = taxonomy_vocabulary_machine_name_load('user_types');
   foreach (taxonomy_get_tree($vocabulary->vid) as $term) {
-    if (drupal_html_class($term->name) == $current_profile_name) {
+    if (drupal_html_class($term->name) == $current_user_name) {
       return $term->tid;
     }
   }
@@ -76,13 +76,13 @@ function hedley_terms_get_current_profile_type_tid() {
 }
 
 /**
- * Get the current profile type.
+ * Get the current user type.
  *
  * @return string
- *   The profile type name.
+ *   The user type name.
  */
-function hedley_terms_get_current_profile_type() {
-  return !empty($_GET['profile']) ? drupal_html_class($_GET['profile']) : 'residents';
+function hedley_terms_get_current_user_type() {
+  return !empty($_GET['user_type']) ? drupal_html_class($_GET['user_type']) : 'residents';
 }
 
 /**
@@ -90,12 +90,12 @@ function hedley_terms_get_current_profile_type() {
  */
 function hedley_terms_theme($existing, $type, $theme, $path) {
   return [
-    'hedley_terms_profile_type_links' => array(
+    'hedley_terms_user_type_links' => array(
       'variables' => [
         'links' => NULL,
         'count_class' => NULL,
       ],
-      'template' => 'profile-type-links',
+      'template' => 'user-type-links',
       'path' => drupal_get_path('module', 'hedley_terms') . '/templates',
     ),
   ];
@@ -109,9 +109,9 @@ function hedley_terms_url_outbound_alter(&$path, &$options, $original_path) {
     // Ignore external URLs.
     return;
   }
-  // When a specific profile was set on the query, but the url doesn't define a
-  // a profile, then add the profile to the url.
-  if (!empty($_GET['profile']) && empty($options['query']['profile'])) {
-    $options['query']['profile'] = check_plain($_GET['profile']);
+  // When a specific user was set on the query, but the url doesn't define a
+  // a user, then add the user to the url.
+  if (!empty($_GET['user_type']) && empty($options['query']['user_type'])) {
+    $options['query']['user_type'] = check_plain($_GET['user_type']);
   }
 }

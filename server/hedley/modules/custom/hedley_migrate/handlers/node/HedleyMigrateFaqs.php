@@ -22,7 +22,7 @@ class HedleyMigrateFaqs extends HedleyMigrateBase {
     'field_answer_en',
     'field_answer_he',
     'field_topics',
-    'field_profile_types',
+    'field_user_types',
   ];
   protected $simpleMappings = [
     'field_question',
@@ -30,7 +30,7 @@ class HedleyMigrateFaqs extends HedleyMigrateBase {
   ];
   protected $simpleMultipleMappings = [
     'field_topics',
-    'field_profile_types',
+    'field_user_types',
   ];
 
   /**
@@ -40,7 +40,7 @@ class HedleyMigrateFaqs extends HedleyMigrateBase {
     parent::__construct($arguments);
 
     $this->dependencies[] = 'HedleyMigrateMunicipalities';
-    $this->dependencies[] = 'HedleyMigrateProfileTypes';
+    $this->dependencies[] = 'HedleyMigrateUserTypes';
     $this->dependencies[] = 'HedleyMigrateTopics';
 
     $this
