@@ -17,13 +17,16 @@ function hedley_terms_get_user_type_links() {
   // Get the target path for when changing the user type.
   $path = _hedley_terms_user_type_links_path();
 
-  // Get current municipality to check which profiles it has.
-  $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_get_current());
+  // Get current municipality to check which user types it has.
+  $municipality = hedley_municipality_get_current_group();
 
   // No need to display the switcher if we don't have a group.
-  if (!empty($municipality_wrapper->value())) {
+  if (!$municipality) {
     return FALSE;
   }
+
+  // Get the wrapper of the group in order to get the user type value.
+  $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_get_current_group());
 
   $vocabulary = taxonomy_vocabulary_machine_name_load('user_types');
   foreach (taxonomy_get_tree($vocabulary->vid) as $term) {
@@ -68,7 +71,7 @@ function _hedley_terms_user_type_links_path() {
       return current_path();
 
     default:
-      $node = hedley_municipality_get_current();
+      $node = hedley_municipality_get_current_group();
       return $node ? 'node/' . $node->nid : '<front>';
   }
 }
