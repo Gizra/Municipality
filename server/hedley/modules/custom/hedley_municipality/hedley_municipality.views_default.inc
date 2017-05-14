@@ -37,7 +37,7 @@ function hedley_municipality_views_default_views() {
     'title_field' => 'title_field',
     'field_action_sections' => 'field_action_sections',
     'field_link' => 'field_link',
-    'field_profile_types' => 'field_profile_types',
+    'field_user_types' => 'field_user_types',
     'field_topics' => 'field_topics',
     'edit_node' => 'edit_node',
   );
@@ -67,7 +67,7 @@ function hedley_municipality_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_profile_types' => array(
+    'field_user_types' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,

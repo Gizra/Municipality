@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Profile type links template.
+ * User type links template.
  */
 ?>
 <div class="ui <?php print $count_class; ?> item menu">

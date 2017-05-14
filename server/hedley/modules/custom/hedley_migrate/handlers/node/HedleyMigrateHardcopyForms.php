@@ -19,7 +19,7 @@ class HedleyMigrateHardcopyForms extends HedleyMigrateBase {
     'title_field_en',
     'title_field_he',
     'field_topics',
-    'field_profile_types',
+    'field_user_types',
     'field_file',
   ];
   protected $simpleMappings = [
@@ -27,7 +27,7 @@ class HedleyMigrateHardcopyForms extends HedleyMigrateBase {
   ];
   protected $simpleMultipleMappings = [
     'field_topics',
-    'field_profile_types',
+    'field_user_types',
   ];
 
   /**
@@ -37,7 +37,7 @@ class HedleyMigrateHardcopyForms extends HedleyMigrateBase {
     parent::__construct($arguments);
 
     $this->dependencies[] = 'HedleyMigrateMunicipalities';
-    $this->dependencies[] = 'HedleyMigrateProfileTypes';
+    $this->dependencies[] = 'HedleyMigrateUserTypes';
     $this->dependencies[] = 'HedleyMigrateTopics';
 
     $this
