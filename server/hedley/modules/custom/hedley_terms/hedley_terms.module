@@ -23,7 +23,7 @@ function hedley_terms_get_user_type_links() {
     $user_name = drupal_html_class($term->name);
     $links[] = [
       'label' => $wrapper->label(),
-      'url' => url($path, ['query' => ['user' => $user_name]]),
+      'url' => url($path, ['query' => ['user_type' => $user_name]]),
       'active' => $user_name == hedley_terms_get_current_user_type(),
     ];
   }
