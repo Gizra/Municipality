@@ -17,8 +17,14 @@ function hedley_terms_get_profile_type_links() {
   // Get the target path for when changing the profile type.
   $path = _hedley_terms_profile_type_links_path();
 
+  // Get current municipality to check which profiles it has.
+  $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_get_current());
+
   $vocabulary = taxonomy_vocabulary_machine_name_load('profile_types');
   foreach (taxonomy_get_tree($vocabulary->vid) as $term) {
+    if (!in_array($term->tid, $municipality_wrapper->field_profile_types->raw())) {
+      continue;
+    }
     $wrapper = entity_metadata_wrapper('taxonomy_term', $term->tid);
     $profile_name = drupal_html_class($term->name);
     $links[] = [
@@ -26,6 +32,12 @@ function hedley_terms_get_profile_type_links() {
       'url' => url($path, ['query' => ['profile' => $profile_name]]),
       'active' => $profile_name == hedley_terms_get_current_profile_type(),
     ];
+  }
+
+  // No need to display the profile switcher in case there's only one link or
+  // none.
+  if (count($links) <= 1) {
+    return FALSE;
   }
 
   $variables = [
