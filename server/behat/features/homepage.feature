@@ -20,11 +20,11 @@ Feature: Homepage
   @api
   Scenario Outline: Verify that the Municipality shows the content in the chosen language and user type
     Given I am an anonymous user
-    When I visit a "<municipality>" website homepage with a specific "<language>" and a specific "<user_type>"
-    Then I should see page "<title>" and "<text>" in the chosen "<language>" and for the chosen "<user_type>" only
+     When I visit a "<municipality>" website homepage with a specific "<language>" and a specific "<user type>"
+     Then I should see page "<title>" and "<text>" in the chosen "<language>" and for the chosen "<user type>" only
 
     Examples:
-      | municipality            | language | user_type    | title                   | text                                                                                  |
+      | municipality            | language | user type    | title                   | text                                                                                  |
       | طوبا الزنغرية           | ar       | residents    | طوبا الزنغرية           | سوف تبدأ التعقيم محايد القطط الضالة يوم الاحد 05/03/17                                 |
       | طوبا الزنغرية           | ar       | businesses   | طوبا الزنغرية           | عملية الإنتهاء الديون الضريبية الممتلكات التجارية                                      |
       | طوبا الزنغرية           | he       | residents    | טובא-זנגריה              | מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17                                         |
@@ -33,3 +33,22 @@ Feature: Homepage
       | المجلس الإقليمي للالسحرية | he       | residents    | אל-קסום                 | הצלחה למרכז המדעים בקריית מלאכי                                                      |
       | קריית מלאכי              | he       | residents    | קריית מלאכי             | פתיחת שלוחות הרווחה במרכזים הקהילתיים הרב -תכליתיים במועצת אל-קסום                    |
       | קריית מלאכי              | he       | businesses   | קריית מלאכי             | היסטוריה במועצה אזורית אל-קסום: חוברו מוסדות החינוך לרשת החשמל של היישוב הבדואי אל-סייד |
+
+
+  @api
+  Scenario Outline: Verify that the user can change the Municipality's language and user type and the page shows the right content
+    Given I am an anonymous user
+     When I visit a "<municipality>" website homepage with a specific "<language>" and a specific "<user type>"
+      And I change user type to a "<new user type>"
+     Then I should see the homepage in the current "<language>" and the "<new user type>"
+
+    Examples:
+      | municipality            | language | user type    | new user type |
+      | طوبا الزنغرية           | ar       | residents    | Businesses AR |
+      | طوبا الزنغرية           | ar       | businesses   | Residents AR  |
+      | طوبا الزنغرية           | he       | residents    | עסקים         |
+      | طوبا الزنغرية           | he       | businesses   | תושבים        |
+      | عرعرة                   | ar       | residents    | Businesses AR |
+      | المجلس الإقليمي للالسحرية | he       | residents    | עסקים         |
+      | קריית מלאכי              | he       | residents    | עסקים         |
+      | קריית מלאכי              | he       | businesses   | תושבים        |

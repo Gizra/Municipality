@@ -205,24 +205,10 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $page = $this->getSession()->getPage();
 
     // Check if the given language is the active one on the page.
-    $language_element = $page->find('css', '.background .languages a.active');
-    if ($language_element === null) {
-      throw new \Exception('The languages has no active items.');
-    }
-    if ($language_element->getText() !== $language) {
-      $params = array('@language' => $language);
-      throw new \Exception(format_string('Active language is not "@language".', $params));
-    }
+    $this->checkActiveLanguage($language, $page, 'text');
 
     // Check if the given user type is the active one on the page.
-    $user_type_element = $page->find('css', '.background .user-types a.active');
-    if ($user_type_element === null) {
-      throw new \Exception('The user type has no active items.');
-    }
-    if ($user_type_element->getText() !== $citizens) {
-      $params = array('@user_type' => $citizens);
-      throw new \Exception(format_string('Active user type is not "@user_type".', $params));
-    }
+    $this->checkActiveUserType($citizens, $page, 'text');
   }
 
   /**
@@ -267,26 +253,40 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
 
     // Check if the given language is the active one on the page.
-    $language_element = $page->find('css', '.background .languages a.active');
-    if ($language_element === null) {
-      throw new \Exception('The languages has no active items.');
-    }
-    if (!strpos($language_element->getAttribute('href'), $language)) {
-      $params = array('@language' => $language);
-      throw new \Exception(format_string('Active language is not "@language".', $params));
-    }
+    $this->checkActiveLanguage($language, $page, 'href');
 
     // Check if the given user type is the active one on the page.
-    $user_type_element = $page->find('css', '.background .user-types a.active');
-    if ($user_type_element === null) {
-      throw new \Exception('The user type has no active items.');
-    }
-    if (!strpos($user_type_element->getAttribute('href'), $user_type)) {
-      $params = array('@user_type' => $user_type);
-      throw new \Exception(format_string('Active user type is not "@user_type".', $params));
-    }
+    $this->checkActiveUserType($user_type, $page, 'href');
 
   }
+
+  /**
+   * @When I change user type to a :new_user_type
+   */
+  public function iChangeUserTypeToA($new_user_type) {
+    $page = $this->getSession()->getPage();
+
+    $user_type_link = $page->findLink($new_user_type);
+    if ($user_type_link === null) {
+      throw new \Exception('Could not find the user type link.');
+    }
+
+    $user_type_link->click();
+  }
+
+  /**
+   * @Then I should see the homepage in the current :language and the :new_user_type
+   */
+  public function iShouldSeeTheHomepageInTheCurrentAndThe($language, $new_user_type) {
+    $page = $this->getSession()->getPage();
+
+    // Check if the given language is the active one on the page.
+    $this->checkActiveLanguage($language, $page, 'href');
+
+    // Check if the given user type is the active one on the page.
+    $this->checkActiveUserType($new_user_type, $page, 'text');
+  }
+
 
   /**
    * Get the group based on the title and type.
@@ -329,7 +329,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * Helper to create a uri within a group context.
+   * Create a uri within a group context.
    *
    * @param object $group
    *   The group context.
@@ -348,6 +348,66 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $options = array_merge($options, ['purl' => $purl, 'absolute' => TRUE]);
     $uri = ltrim(url($path, $options), '/');
     return $uri;
+  }
+
+  /**
+   * Checks if a given language is the active language in the switcher.
+   *
+   * @param $language
+   *   The language the function needs to check.
+   * @param $page
+   *   The session's page.
+   * @param $selector
+   *   The type of search needs to be done on the language switcher.
+   *   Options:
+   *    1. text => Searches in the link's title.
+   *    2. Any kind of attribute on the link itself, i.e. 'href','class', 'id'.
+   *
+   * @throws \Exception
+   */
+  protected function checkActiveLanguage($language, $page, $selector) {
+    $language_element = $page->find('css', '.background .languages a.active');
+    if ($language_element === null) {
+      throw new \Exception('The languages has no active items.');
+    }
+
+    // Define on which condition to check.
+    $condition = $selector == 'text' ? $language_element->getText() === $language : strpos($language_element->getAttribute($selector), $language);
+
+    if (!$condition) {
+      $params = array('@language' => $language);
+      throw new \Exception(format_string('Active language is not "@language".', $params));
+    }
+  }
+
+  /**
+   * Checks if a given user type is the active one in the switcher.
+   *
+   * @param $user_type
+   *   The user type the function needs to check.
+   * @param $page
+   *   The session's page.
+   * @param $selector
+   *   The type of search needs to be done on the language switcher.
+   *   Options:
+   *    1. text => Searches in the link's title.
+   *    2. Any kind of attribute on the link itself, i.e. 'href','class', 'id'.
+   *
+   * @throws \Exception
+   */
+  protected function checkActiveUserType($user_type, $page, $selector) {
+    $user_type_element = $page->find('css', '.background .user-types a.active');
+    if ($user_type_element === null) {
+      throw new \Exception('The user type has no active items.');
+    }
+
+    // Define on which condition to check.
+    $condition = $selector == 'text' ? $user_type_element->getText() === $user_type : strpos($user_type_element->getAttribute($selector), $user_type);
+
+    if (!$condition) {
+      $params = array('@user_type' => $user_type);
+      throw new \Exception(format_string('Active user type is not "@user_type".', $params));
+    }
   }
 
 }
