@@ -24,7 +24,7 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
     'field_default_language',
     'field_footer_text',
     'field_background_images',
-    'field_profile_types',
+    'field_user_types',
   ];
   protected $simpleMappings = [
     'title_field',
@@ -32,7 +32,7 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
     'field_footer_text',
   ];
   protected $simpleMultipleMappings = [
-    'field_profile_types',
+    'field_user_types',
     'field_social_links',
     'field_social_links:title',
     'field_social_links:attributes',
@@ -44,7 +44,7 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
   public function __construct($arguments) {
     parent::__construct($arguments);
 
-    $this->dependencies[] = 'HedleyMigrateProfileTypes';
+    $this->dependencies[] = 'HedleyMigrateUserTypes';
 
     $this
       ->addFieldMapping('field_background_images', 'field_background_images')

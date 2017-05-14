@@ -30,7 +30,7 @@ function hedley_terms_get_user_type_links() {
 
   $vocabulary = taxonomy_vocabulary_machine_name_load('user_types');
   foreach (taxonomy_get_tree($vocabulary->vid) as $term) {
-    if (!in_array($term->tid, $municipality_wrapper->field_profile_types->raw())) {
+    if (!in_array($term->tid, $municipality_wrapper->field_user_types->raw())) {
       continue;
     }
     $wrapper = entity_metadata_wrapper('taxonomy_term', $term->tid);
@@ -42,7 +42,7 @@ function hedley_terms_get_user_type_links() {
     ];
   }
 
-  // No need to display the profile switcher in case there's only one link or
+  // No need to display the "user type" switcher in case there's only one link or
   // none.
   if (count($links) <= 1) {
     return FALSE;

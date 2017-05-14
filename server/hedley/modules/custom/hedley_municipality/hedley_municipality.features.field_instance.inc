@@ -327,8 +327,8 @@ function hedley_municipality_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-municipality-field_profile_types'.
-  $field_instances['node-municipality-field_profile_types'] = array(
+  // Exported field_instance: 'node-municipality-field_user_types'.
+  $field_instances['node-municipality-field_user_types'] = array(
     'bundle' => 'municipality',
     'default_value' => NULL,
     'deleted' => 0,
@@ -355,8 +355,8 @@ function hedley_municipality_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_profile_types',
-    'label' => 'Profile types',
+    'field_name' => 'field_user_types',
+    'label' => 'User types',
     'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -609,7 +609,7 @@ function hedley_municipality_field_default_field_instances() {
   t('Group');
   t('Last update');
   t('Logo');
-  t('Profile types');
+  t('User types');
   t('Social links');
   t('Terms page');
   t('Title');
