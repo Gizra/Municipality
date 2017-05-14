@@ -25,7 +25,7 @@ class HedleyMigrateNews extends HedleyMigrateBase {
     'body_en',
     'body_he',
     'field_topics',
-    'field_profile_types',
+    'field_user_types',
     'field_image',
   ];
   protected $simpleMappings = [
@@ -35,7 +35,7 @@ class HedleyMigrateNews extends HedleyMigrateBase {
   ];
   protected $simpleMultipleMappings = [
     'field_topics',
-    'field_profile_types',
+    'field_user_types',
   ];
 
   /**
@@ -45,7 +45,7 @@ class HedleyMigrateNews extends HedleyMigrateBase {
     parent::__construct($arguments);
 
     $this->dependencies[] = 'HedleyMigrateMunicipalities';
-    $this->dependencies[] = 'HedleyMigrateProfileTypes';
+    $this->dependencies[] = 'HedleyMigrateUserTypes';
     $this->dependencies[] = 'HedleyMigrateTopics';
 
     $this

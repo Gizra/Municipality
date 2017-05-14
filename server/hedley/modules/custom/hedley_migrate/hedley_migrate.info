@@ -19,6 +19,6 @@ files[] = handlers/node/HedleyMigrateMunicipalities.php
 files[] = handlers/node/HedleyMigrateNews.php
 files[] = handlers/node/HedleyMigratePages.php
 files[] = handlers/taxonomy_term/HedleyMigrateAudiences.php
-files[] = handlers/taxonomy_term/HedleyMigrateProfileTypes.php
+files[] = handlers/taxonomy_term/HedleyMigrateUserTypes.php
 files[] = handlers/taxonomy_term/HedleyMigrateTopics.php
 files[] = handlers/user/HedleyMigrateUsers.php

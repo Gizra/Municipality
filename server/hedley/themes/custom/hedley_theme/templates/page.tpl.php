@@ -41,7 +41,7 @@
     <div class="ui row">
 
       <div class="ui four wide column profiles">
-        <?php print $profile_type_links; ?>
+        <?php print $user_type_links; ?>
       </div>
 
       <div class="ui eight wide center aligned column">
