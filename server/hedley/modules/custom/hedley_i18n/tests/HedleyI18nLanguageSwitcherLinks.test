@@ -2,14 +2,13 @@
 
 /**
  * @file
- * Test language switcher links returned according to the group's translated
- * languages.
+ * Test language switcher links returned according to the group's languages.
  */
 
 /**
- * Class hedleyI18nLanguageSwitcherLinks.
+ * Class HedleyI18nLanguageSwitcherLinks.
  */
-class hedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
+class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
 
   /**
    * The profile name.
