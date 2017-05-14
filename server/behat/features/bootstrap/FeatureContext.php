@@ -215,13 +215,13 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
 
     // Check if the given profile is the active one on the page.
-    $profile_element = $page->find('css', '.background .profiles a.active');
-    if ($profile_element === null) {
-      throw new \Exception('The profiles has no active items.');
+    $user_type_element = $page->find('css', '.background .profiles a.active');
+    if ($user_type_element === null) {
+      throw new \Exception('The user type has no active items.');
     }
-    if ($profile_element->getText() !== $citizens) {
-      $params = array('@profile_name' => $citizens);
-      throw new \Exception(format_string('Active profile is not "@profile_name".', $params));
+    if ($user_type_element->getText() !== $citizens) {
+      $params = array('@user_type' => $citizens);
+      throw new \Exception(format_string('Active user type is not "@user_type".', $params));
     }
   }
 
@@ -233,7 +233,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $options = [
       'query' => [
         'language' => $language,
-        'profile' => $user_type,
+        'user_type' => $user_type,
       ]
     ];
     $uri = $this->createUriWithGroupContext($group, 'node/' . $group->nid, $options);
@@ -277,13 +277,13 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
 
     // Check if the given profile is the active one on the page.
-    $profile_element = $page->find('css', '.background .profiles a.active');
-    if ($profile_element === null) {
-      throw new \Exception('The profiles has no active items.');
+    $user_type_element = $page->find('css', '.background .profiles a.active');
+    if ($user_type_element === null) {
+      throw new \Exception('The user type has no active items.');
     }
-    if (!strpos($language_element->getAttribute('href'), $user_type)) {
-      $params = array('@profile_name' => $user_type);
-      throw new \Exception(format_string('Active profile is not "@profile_name".', $params));
+    if (!strpos($user_type_element->getAttribute('href'), $user_type)) {
+      $params = array('@user_type' => $user_type);
+      throw new \Exception(format_string('Active user type is not "@user_type".', $params));
     }
 
   }
