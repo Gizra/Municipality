@@ -26,7 +26,7 @@ function hedley_terms_get_user_type_links() {
   }
 
   // Get the wrapper of the group in order to get the user type value.
-  $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_get_current_group());
+  $municipality_wrapper = entity_metadata_wrapper('node', $municipality);
 
   $vocabulary = taxonomy_vocabulary_machine_name_load('user_types');
   foreach (taxonomy_get_tree($vocabulary->vid) as $term) {
