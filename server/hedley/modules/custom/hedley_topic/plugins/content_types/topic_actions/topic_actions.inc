@@ -23,7 +23,7 @@ function hedley_topic_topic_actions_content_type_render($subtype, $conf, $args, 
     return NULL;
   }
   $topic_wrapper = entity_metadata_wrapper('taxonomy_term', $context->data);
-  if (!$municipality_node = hedley_municipality_get_current()) {
+  if (!$municipality_node = hedley_municipality_get_current_group()) {
     // Don't display actions without municipality context.
     return NULL;
   }
