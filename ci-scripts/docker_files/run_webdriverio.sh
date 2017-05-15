@@ -10,7 +10,8 @@ fi
 source helper_functions.sh
 
 print_message "Test WebDriverIO."
-cd "$ROOT_DIR"/client
+cd "$ROOT_DIR"/test
+npm install
 
 # Backup verbatim config.
 WDIO_CONF=wdio.conf.travis.js
