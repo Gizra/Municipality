@@ -45,24 +45,6 @@ citizens:
             icon: student
 
     cultural_events:
-      - title: ירדנה ארזי והגבעטרון
-        when:
-          day:  מוצ"ש
-          date: 12.12.18
-          time: '21:00'
-        price: 120 ש"ח
-        color: green
-        type_icon_name: music
-        location_map_link: maps.google.com
-        promoted: true
-        hebrew:
-          description: השירים האהובים והמרגשים בעיבודים מחודשים בערב שכולו נוסטלגיה וחדשנות
-          location: אמפיתיאטרון
-          image_link: https://upload.wikimedia.org/wikipedia/commons/b/b3/Yardena_Arazi.jpg
-          type: תרבות ופנאי
-          details_link: "www.example.com"
-          audience: מבוגרים
-
       - title: ריקודי עם שמעון ורד
         when:
           time: '19:45'
@@ -76,7 +58,7 @@ citizens:
         hebrew:
             type: חוגים והעשרה
             audience: כל המשפחה
-            image_link: http://www.mhatzor.org.il/productImages2/44/2017/01/17/image1484650150.jpg
+            image_link: https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karmiel_Dance_Festival_%289%29.JPG/500px-Karmiel_Dance_Festival_%289%29.JPG
             location: מתנ"ס
             details_link: http://www.mhatzor.org.il/page.php?type=event&id=6997&ht=%D7%A8%D7%99%D7%A7%D7%95%D7%93%D7%99%20%D7%A2%D7%9D%20-%20%D7%A9%D7%9E%D7%A2%D7%95%D7%9F%20%D7%95%D7%A8%D7%93#navbar
 
@@ -93,7 +75,7 @@ citizens:
           description: הצגה לגיל הרך של תיאטרון המטמון. בסוף כל הצגה מחכה לכם הפתעה
           type: תרבות ופנאי
           audience: ילדים
-          image_link: http://www.mhatzor.org.il/productImages2/44/2016/11/27/image1480237145.jpg
+          image_link: https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Hans_von_Aachen_-_Two_Laughing_Men_%28Self-portrait%29.jpg/340px-Hans_von_Aachen_-_Two_Laughing_Men_%28Self-portrait%29.jpg
           location: אולם ספיר
           details_link: http://www.mhatzor.org.il/page.php?type=event&id=6329&ht=%D7%94%D7%A6%D7%92%D7%94%20%D7%9C%D7%92%D7%99%D7%9C%20%D7%94%D7%A8%D7%9A:%20%D7%9E%D7%99%20%D7%90%D7%9B%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%93%D7%99%D7%99%D7%A1%D7%94%20%D7%A9%D7%9C%D7%99#navbar
 
@@ -110,7 +92,7 @@ citizens:
           description: יעל לבנטל מביאה לבמה את הצרות של כולנו ועושה מהן מטעמים
           type: תרבות ופנאי
           audience: מבוגרים
-          image_link: http://www.mhatzor.org.il/productImages2/44/2017/01/30/image1485771012.jpg
+          image_link: https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Yeltsin_and_clinton_laughing.jpg/500px-Yeltsin_and_clinton_laughing.jpg
           location: אולם ספיר
           details_link: http://www.mhatzor.org.il/page.php?type=event&id=7103&ht=%D7%9E%D7%95%D7%A4%D7%A2%20%D7%A1%D7%98%D7%A0%D7%93-%D7%90%D7%A4:%20%22%D7%94%D7%97%D7%99%D7%99%D7%9D%20%D7%A2%D7%9C-%D7%A4%D7%99%20%D7%99%D7%A2%D7%9C%22#
 
@@ -127,9 +109,63 @@ citizens:
           description: דרמה קומית של תיאטרון בית לסין.
           type: תרבות ופנאי
           audience: מבוגרים
-          image_link: http://www.mhatzor.org.il/productImages2/44/2016/07/19/image1468915939.jpg
+          image_link: https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Drama-icon.svg/500px-Drama-icon.svg.png
           location: מתנ"ס
           details_link: http://www.mhatzor.org.il/page.php?type=event&id=4626&ht=%D7%94%D7%A6%D7%92%D7%AA%20%D7%9E%D7%A0%D7%95%D7%99:%20%D7%94%D7%90%D7%95%D7%A8%D7%97%D7%AA#navbar
+
+      - title: ריקודי עם שמעון ורד
+        when:
+          time: '19:45'
+          day: מוצ"ש
+          date: 4.2.17
+          recurring: true
+        color: purple
+        type_icon_name: music
+        price: 30 ש"ח
+        location_map_link: https://goo.gl/maps/KCDWo5Zm8J
+        hebrew:
+            type: חוגים והעשרה
+            audience: כל המשפחה
+            image_link: https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karmiel_Dance_Festival_%289%29.JPG/500px-Karmiel_Dance_Festival_%289%29.JPG
+            location: מתנ"ס
+            details_link: http://www.mhatzor.org.il/page.php?type=event&id=6997&ht=%D7%A8%D7%99%D7%A7%D7%95%D7%93%D7%99%20%D7%A2%D7%9D%20-%20%D7%A9%D7%9E%D7%A2%D7%95%D7%9F%20%D7%95%D7%A8%D7%93#navbar
+
+      - title: ריקודי עם שמעון ורד
+        when:
+          time: '19:45'
+          day: מוצ"ש
+          date: 4.2.17
+          recurring: true
+        color: purple
+        type_icon_name: music
+        price: 30 ש"ח
+        location_map_link: https://goo.gl/maps/KCDWo5Zm8J
+        hebrew:
+            type: חוגים והעשרה
+            audience: כל המשפחה
+            image_link: https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karmiel_Dance_Festival_%289%29.JPG/500px-Karmiel_Dance_Festival_%289%29.JPG
+            location: מתנ"ס
+            details_link: http://www.mhatzor.org.il/page.php?type=event&id=6997&ht=%D7%A8%D7%99%D7%A7%D7%95%D7%93%D7%99%20%D7%A2%D7%9D%20-%20%D7%A9%D7%9E%D7%A2%D7%95%D7%9F%20%D7%95%D7%A8%D7%93#navbar
+
+      - title: ריקודי עם שמעון ורד
+        when:
+          time: '19:45'
+          day: מוצ"ש
+          date: 4.2.17
+          recurring: true
+        color: purple
+        type_icon_name: music
+        price: 30 ש"ח
+        location_map_link: https://goo.gl/maps/KCDWo5Zm8J
+        hebrew:
+            type: חוגים והעשרה
+            audience: כל המשפחה
+            image_link: https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karmiel_Dance_Festival_%289%29.JPG/500px-Karmiel_Dance_Festival_%289%29.JPG
+            location: מתנ"ס
+            details_link: http://www.mhatzor.org.il/page.php?type=event&id=6997&ht=%D7%A8%D7%99%D7%A7%D7%95%D7%93%D7%99%20%D7%A2%D7%9D%20-%20%D7%A9%D7%9E%D7%A2%D7%95%D7%9F%20%D7%95%D7%A8%D7%93#navbar
+
+
+
 
     arnona:
        hebrew:
