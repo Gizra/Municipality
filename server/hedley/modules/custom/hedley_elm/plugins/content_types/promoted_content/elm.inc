@@ -22,12 +22,9 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   $block->module = 'hedley_elm';
   $block->title = '';
 
-  dpm(drupal_get_path('module', 'hedley_elm') . '/Main.js');
-
-  $output = [
-    'temp' => ['#markup' => 'Elm app will be here'],
-//    'js' => ['#attached' => drupal_get_path('module', 'hedley_elm') . '/Main.js'],
-  ];
+  $output = [];
+  $output['temp'] = ['#markup' => 'Elm app will be here'];
+  $output['#attached']['js'] = [drupal_get_path('module', 'hedley_elm') . '/Main.js'];
 
   $block->content = $output;
 
