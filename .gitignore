@@ -42,3 +42,6 @@ Thumbs.db
 .project
 .settings/
 .idea
+
+# Elm app
+server/hedley/modules/custom/hedley_elm/Main.js
