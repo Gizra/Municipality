@@ -6,6 +6,7 @@ module App.Model
         , Model
         )
 
+import App.PageType exposing (Page(..))
 import Attribute.Model exposing (Attribute)
 import DictList exposing (DictList)
 import EveryDict exposing (EveryDict)
@@ -27,6 +28,7 @@ type alias Flags =
 type alias Model =
     { magnets : Magnets
     , people : DictList GitHubName Person
+    , page : Page
     }
 
 
@@ -34,4 +36,5 @@ emptyModel : Model
 emptyModel =
     { magnets = EveryDict.empty
     , people = people
+    , page = Contact
     }
