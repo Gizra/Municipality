@@ -1,7 +1,7 @@
 module App.Test exposing (all)
 
 import App.Model exposing (..)
-import App.PageType exposing (Page(..))
+import App.Types exposing (Page(..))
 import App.Update exposing (..)
 import App.View exposing (view)
 import Expect

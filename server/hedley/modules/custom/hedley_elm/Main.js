@@ -7842,7 +7842,10 @@ var _Gizra$elm_dictlist$DictList$fromDict = function (dict) {
 		_elm_lang$core$Dict$keys(dict));
 };
 
-var _Gizra$elm_spa_exmple$App_PageType$Contact = {ctor: 'Contact'};
+var _Gizra$elm_spa_exmple$App_Types$Contact = {ctor: 'Contact'};
+var _Gizra$elm_spa_exmple$App_Types$Hebrew = {ctor: 'Hebrew'};
+var _Gizra$elm_spa_exmple$App_Types$English = {ctor: 'English'};
+var _Gizra$elm_spa_exmple$App_Types$Arabic = {ctor: 'Arabic'};
 
 var _Gizra$elm_spa_exmple$Attribute_Model$WorkingRemote = {ctor: 'WorkingRemote'};
 var _Gizra$elm_spa_exmple$Attribute_Model$TvAndMovieGenereAttr = function (a) {
@@ -11357,13 +11360,13 @@ var _Gizra$elm_spa_exmple$Magnets_Model$DragStart = F3(
 		return {ctor: 'DragStart', _0: a, _1: b, _2: c};
 	});
 
-var _Gizra$elm_spa_exmple$App_Model$emptyModel = {magnets: _eeue56$elm_all_dict$EveryDict$empty, people: _Gizra$elm_spa_exmple$GizraTeam$people, page: _Gizra$elm_spa_exmple$App_PageType$Contact};
+var _Gizra$elm_spa_exmple$App_Model$emptyModel = {language: _Gizra$elm_spa_exmple$App_Types$Hebrew, magnets: _eeue56$elm_all_dict$EveryDict$empty, people: _Gizra$elm_spa_exmple$GizraTeam$people, page: _Gizra$elm_spa_exmple$App_Types$Contact};
 var _Gizra$elm_spa_exmple$App_Model$Flags = function (a) {
 	return {randomNumbers: a};
 };
-var _Gizra$elm_spa_exmple$App_Model$Model = F3(
-	function (a, b, c) {
-		return {magnets: a, people: b, page: c};
+var _Gizra$elm_spa_exmple$App_Model$Model = F4(
+	function (a, b, c, d) {
+		return {language: a, magnets: b, people: c, page: d};
 	});
 var _Gizra$elm_spa_exmple$App_Model$ToggleAttribute = function (a) {
 	return {ctor: 'ToggleAttribute', _0: a};
