@@ -10,5 +10,5 @@ main =
         { init = App.Update.init
         , update = App.Update.update
         , view = App.View.view
-        , subscriptions = App.Update.subscriptions
+        , subscriptions = always Sub.none
         }
