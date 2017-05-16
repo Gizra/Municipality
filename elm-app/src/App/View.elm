@@ -1,6 +1,7 @@
 module App.View exposing (..)
 
 import App.Model exposing (..)
+import App.Types exposing (Page(..))
 import App.Update exposing (..)
 import DictList
 import Html exposing (..)
@@ -10,4 +11,6 @@ import Html.Events exposing (onClick)
 
 view : Model -> Html Msg
 view model =
-    div [] [ text "App" ]
+    case model.page of
+        Contact ->
+            div [] [ text "App" ]

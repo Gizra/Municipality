@@ -1,7 +1,13 @@
 module Contact.Model exposing (..)
 
+import DictList exposing (DictList)
+
 
 type alias Name =
+    String
+
+
+type alias ContactId =
     String
 
 
@@ -17,3 +23,7 @@ type alias Contact =
     , phone : Maybe String
     , email : Maybe String
     }
+
+
+type alias DictListContact =
+    DictList ContactId Contact
