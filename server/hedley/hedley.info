@@ -53,6 +53,7 @@ dependencies[] = views_bulk_operations
 ; Hedley
 dependencies[] = hedley_action
 dependencies[] = hedley_contact
+dependencies[] = hedley_elm
 dependencies[] = hedley_event
 dependencies[] = hedley_faq
 dependencies[] = hedley_fields
