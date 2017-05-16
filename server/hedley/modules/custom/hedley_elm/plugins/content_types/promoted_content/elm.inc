@@ -7,8 +7,8 @@
 
 $plugin = [
   'title' => t('Elm app'),
-  'description' => t("Promoted municipality's content."),
   'category' => t('Hedley'),
+  'hook theme' => 'hedley_elm_elm_content_type_theme',
   'defaults' => [
     'page' => 'contact',
   ],
@@ -58,3 +58,17 @@ function hedley_elm_elm_content_type_edit_form_submit($form, &$form_state) {
     $form_state['conf'][$key] = $form_state['values'][$key];
   }
 }
+
+
+/**
+ * Delegated hook_theme().
+ */
+function hedley_elm_elm_content_type_theme(&$theme, $plugin) {
+  $theme['hedley_elm_elm'] = [
+    'variables' => [
+    ],
+    'path' => $plugin['path'],
+    'template' => 'elm',
+  ];
+}
+
