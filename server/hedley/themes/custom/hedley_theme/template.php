@@ -40,11 +40,11 @@ function hedley_theme_preprocess_page(&$variables) {
   // The class depending on the amount of languages the municipality have.
   $variables['language_switch_links_class'] = hedley_theme_number_as_word(count($variables['language_switch_links']));
 
-  // Add profile type links.
-  $variables['profile_type_links'] = hedley_terms_get_profile_type_links();
+  // Add user type links.
+  $variables['user_type_links'] = hedley_terms_get_user_type_links();
 
   // Add municipality variables.
-  if (!$node = hedley_municipality_get_current()) {
+  if (!$node = hedley_municipality_get_current_group()) {
     return;
   }
   $wrapper = entity_metadata_wrapper('node', $node);

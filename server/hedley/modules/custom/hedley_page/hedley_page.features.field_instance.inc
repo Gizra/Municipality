@@ -61,8 +61,8 @@ function hedley_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-page-field_profile_types'.
-  $field_instances['node-page-field_profile_types'] = array(
+  // Exported field_instance: 'node-page-field_user_types'.
+  $field_instances['node-page-field_user_types'] = array(
     'bundle' => 'page',
     'default_value' => NULL,
     'deleted' => 0,
@@ -88,8 +88,8 @@ function hedley_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_profile_types',
-    'label' => 'Profile types',
+    'field_name' => 'field_user_types',
+    'label' => 'User types',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -270,7 +270,7 @@ function hedley_page_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Body');
   t('Groups audience');
-  t('Profile types');
+  t('User types');
   t('Title');
   t('Topics');
 

@@ -626,13 +626,13 @@ function hedley_fields_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_profile_types'.
-  $field_bases['field_profile_types'] = array(
+  // Exported field_base: 'field_user_types'.
+  $field_bases['field_user_types'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_profile_types',
+    'field_name' => 'field_user_types',
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -643,7 +643,7 @@ function hedley_fields_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         0 => array(
-          'vocabulary' => 'profile_types',
+          'vocabulary' => 'user_types',
           'parent' => 0,
         ),
       ),
