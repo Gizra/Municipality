@@ -29,6 +29,16 @@ class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
   }
 
   /**
+   * Overrides DrupalWebTestCase::setUp().
+   */
+  protected function setUp() {
+    parent::setUp();
+
+    // Skip dealing with user ID 1.
+    $this->drupalCreateUser();
+  }
+
+  /**
    * Test getting language switcher links.
    */
   public function testLanguageSwitchLinks() {
