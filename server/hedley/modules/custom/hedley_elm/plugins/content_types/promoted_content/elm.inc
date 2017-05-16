@@ -17,12 +17,19 @@ $plugin = [
 /**
  * Render callback.
  */
-function hedley_elm_promoted_content_content_type_render($subtype, $conf, $args, $context) {
+function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   $block = new stdClass();
   $block->module = 'hedley_elm';
   $block->title = '';
 
-  $block->content = 'Elm app';
+  dpm(drupal_get_path('module', 'hedley_elm') . '/Main.js');
+
+  $output = [
+    'temp' => ['#markup' => 'Elm app will be here'],
+//    'js' => ['#attached' => drupal_get_path('module', 'hedley_elm') . '/Main.js'],
+  ];
+
+  $block->content = $output;
 
   return $block;
 }
@@ -30,12 +37,12 @@ function hedley_elm_promoted_content_content_type_render($subtype, $conf, $args,
 /**
  * Edit form.
  */
-function hedley_elm_promoted_content_content_type_edit_form($form, &$form_state) {
+function hedley_elm_elm_content_type_edit_form($form, &$form_state) {
   $conf = $form_state['conf'];
 
   $form['page'] = [
     '#type' => 'select',
-    '#title' => t('Bundle'),
+    '#title' => t('Page'),
     '#description' => t('The bundle of the displayed content.'),
     '#options' => drupal_map_assoc(['contact']),
     '#default_value' => $conf['page'],
@@ -48,7 +55,7 @@ function hedley_elm_promoted_content_content_type_edit_form($form, &$form_state)
 /**
  * Submit handler.
  */
-function hedley_elm_promoted_content_content_type_edit_form_submit($form, &$form_state) {
+function hedley_elm_elm_content_type_edit_form_submit($form, &$form_state) {
   // Copy submitted form values according to the defined defaults.
   foreach (array_keys($form_state['plugin']['defaults']) as $key) {
     $form_state['conf'][$key] = $form_state['values'][$key];
