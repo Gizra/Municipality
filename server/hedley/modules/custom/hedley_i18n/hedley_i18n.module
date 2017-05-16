@@ -43,7 +43,7 @@ function hedley_i18n_init() {
 function hedley_i18n_language_switch_links() {
   global $language;
   $language_object = clone $language;
-  $node = hedley_municipality_get_current();
+  $node = hedley_municipality_get_current_group();
   if (!$node) {
     // No need for the switcher if somehow we are not in a municipality.
     return [];
