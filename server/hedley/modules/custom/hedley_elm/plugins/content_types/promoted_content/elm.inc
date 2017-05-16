@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Plugin definition.
+ */
+
+$plugin = [
+  'title' => t('Elm app'),
+  'description' => t("Promoted municipality's content."),
+  'category' => t('Hedley'),
+  'defaults' => [
+    'page' => 'contact',
+  ],
+];
+
+/**
+ * Render callback.
+ */
+function hedley_elm_promoted_content_content_type_render($subtype, $conf, $args, $context) {
+  $block = new stdClass();
+  $block->module = 'hedley_elm';
+  $block->title = '';
+
+  $block->content = 'Elm app';
+
+  return $block;
+}
+
+/**
+ * Edit form.
+ */
+function hedley_elm_promoted_content_content_type_edit_form($form, &$form_state) {
+  $conf = $form_state['conf'];
+
+  $form['page'] = [
+    '#type' => 'select',
+    '#title' => t('Bundle'),
+    '#description' => t('The bundle of the displayed content.'),
+    '#options' => drupal_map_assoc(['contact']),
+    '#default_value' => $conf['page'],
+    '#required' => TRUE,
+  ];
+
+  return $form;
+}
+
+/**
+ * Submit handler.
+ */
+function hedley_elm_promoted_content_content_type_edit_form_submit($form, &$form_state) {
+  // Copy submitted form values according to the defined defaults.
+  foreach (array_keys($form_state['plugin']['defaults']) as $key) {
+    $form_state['conf'][$key] = $form_state['values'][$key];
+  }
+}

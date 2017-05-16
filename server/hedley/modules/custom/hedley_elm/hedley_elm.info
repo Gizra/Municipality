@@ -1,0 +1,6 @@
+name = Hedley Elm
+description = Municipality Elm app.
+core = 7.x
+package = Custom
+dependencies[] = ctools
+
