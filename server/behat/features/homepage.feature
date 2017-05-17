@@ -14,7 +14,6 @@ Feature: Homepage
       | طوبا الزنغرية           | العربية  | Residents AR |
       | عرعرة                   | العربية  | Residents AR |
       | المجلس الإقليمي للالسحرية | العربية  | Residents AR |
-      | קריית מלאכי              | עברית    | תושבים       |
 
   @api
   Scenario Outline: Verify that the Municipality shows the default language and user type
@@ -44,8 +43,6 @@ Feature: Homepage
       | طوبا الزنغرية           | he       | businesses   | טובא-זנגריה              | מבצע סגירת חובות ארנונה לעסקים                                                        |
       | عرعرة                   | ar       | residents    | عرعرة                   | ​إعلان من الشرطة                                                                        |
       | المجلس الإقليمي للالسحرية | he       | residents    | אל-קסום                 | הצלחה למרכז המדעים בקריית מלאכי                                                      |
-      | קריית מלאכי              | he       | residents    | קריית מלאכי             | פתיחת שלוחות הרווחה במרכזים הקהילתיים הרב -תכליתיים במועצת אל-קסום                    |
-      | קריית מלאכי              | he       | businesses   | קריית מלאכי             | היסטוריה במועצה אזורית אל-קסום: חוברו מוסדות החינוך לרשת החשמל של היישוב הבדואי אל-סייד |
 
 
   @api
@@ -63,5 +60,3 @@ Feature: Homepage
       | طوبا الزنغرية           | he       | businesses   | תושבים        |
       | عرعرة                   | ar       | residents    | Businesses AR |
       | المجلس الإقليمي للالسحرية | he       | residents    | עסקים         |
-      | קריית מלאכי              | he       | residents    | עסקים         |
-      | קריית מלאכי              | he       | businesses   | תושבים        |
