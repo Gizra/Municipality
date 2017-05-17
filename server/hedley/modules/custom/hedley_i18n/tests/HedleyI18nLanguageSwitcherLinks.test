@@ -47,10 +47,17 @@ class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
     $language_object = clone $language;
 
     // List the expected languages.
-    $expected_languages = ['he', 'ar', 'en'];
+    $expected_languages = ['ar', 'en'];
 
-    // Create a group with in the arabic language.
-    $node = $this->drupalCreateNode(['type' => 'municipality', 'language' => 'en']);
+    // Create a group with the default language (English).
+    $settings = [
+      'language' => $language_object->language,
+      'type' => 'municipality',
+      'body' => array($language_object->language => array(array())),
+    ];
+    $node = $this->drupalCreateNode($settings);
+
+    debug($node);
 
     // Add translations to the node.
     $handler = entity_translation_get_handler('node', $node);
@@ -58,7 +65,7 @@ class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
       'translate' => 0,
       'status' => 1,
       'language' => 'ar',
-      'source' => 'en',
+      'source' => $node->language,
     );
     $handler->setTranslation($translation, $node);
 
@@ -67,7 +74,7 @@ class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
     // And then you can check the array you get by calling.
     $rendered_links = hedley_i18n_language_get_switch_links($language_object, node_load($node->nid), $path_node);
 
-    $this->assertEqual(array_keys($rendered_links), $expected_languages, 'Expected languages are displayed.');
+    $this->assertEqual(array_keys($rendered_links), $expected_languages, 'Expected languages are NOT displayed.');
   }
 
 }
