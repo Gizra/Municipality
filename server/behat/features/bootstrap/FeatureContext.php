@@ -212,6 +212,36 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
+   * @Then I should see :user_types menu only for user types with content for the current Municipality
+   */
+  public function iShouldSeeMenuOnlyForUserTypesWithContentForTheCurrentMunicipality($user_types) {
+    $page = $this->getSession()->getPage();
+
+    // Get the user types switcher.
+    $user_type_element = $page->find('css', '.background .user-types');
+
+    if (!$user_types) {
+      // There shouldn't be a user types switcher on the page.
+      if (!empty($user_type_element->findAll('css', '.item'))) {
+        throw new \Exception('The user type element is present on the page when it should be hidden.');
+      }
+
+      // If there's links are present then the test has passed.
+      return;
+    }
+
+    // Check that we have the expected user types.
+    $user_types_array = explode(',', $user_types);
+
+    foreach ($user_types_array as $user_type) {
+      if (!strpos($user_type_element->getHtml(), $user_type)) {
+        // Throw an error if one fo the links is missing.
+        throw new \Exception(format_string('The user type @user_type is NOT present on the page.', array('@user_type' => $user_type)));
+      }
+    }
+  }
+
+  /**
    * @When I visit a :municipality website homepage with a specific :language and a specific :user_type
    */
   public function iVisitAWebsiteHomepageWithASpecificAndASpecificUser($municipality, $language, $user_type) {
@@ -366,13 +396,13 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @throws \Exception
    */
   protected function checkActiveLanguage($language, $page, $selector) {
-    $language_element = $page->find('css', '.background .languages a.active');
-    if ($language_element === null) {
+    $language_active_link = $page->find('css', '.background .languages a.active');
+    if ($language_active_link === null) {
       throw new \Exception('The languages has no active items.');
     }
 
     // Define on which condition to check.
-    $condition = $selector == 'text' ? $language_element->getText() === $language : strpos($language_element->getAttribute($selector), $language);
+    $condition = $selector == 'text' ? $language_active_link->getText() === $language : strpos($language_active_link->getAttribute($selector), $language);
 
     if (!$condition) {
       $params = array('@language' => $language);
@@ -396,13 +426,13 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @throws \Exception
    */
   protected function checkActiveUserType($user_type, $page, $selector) {
-    $user_type_element = $page->find('css', '.background .user-types a.active');
-    if ($user_type_element === null) {
+    $user_type_active_link = $page->find('css', '.background .user-types a.active');
+    if ($user_type_active_link === null) {
       throw new \Exception('The user type has no active items.');
     }
 
     // Define on which condition to check.
-    $condition = $selector == 'text' ? $user_type_element->getText() === $user_type : strpos($user_type_element->getAttribute($selector), $user_type);
+    $condition = $selector == 'text' ? $user_type_active_link->getText() === $user_type : strpos($user_type_active_link->getAttribute($selector), $user_type);
 
     if (!$condition) {
       $params = array('@user_type' => $user_type);

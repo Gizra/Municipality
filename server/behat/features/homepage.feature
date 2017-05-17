@@ -16,6 +16,19 @@ Feature: Homepage
       | المجلس الإقليمي للالسحرية | العربية  | Residents AR |
       | קריית מלאכי              | עברית    | תושבים       |
 
+  @api
+  Scenario Outline: Verify that the Municipality shows the default language and user type
+    Given I am an anonymous user
+    When I visit a "<municipality>" website homepage with no parameters in URL
+    Then I should see "<user types>" menu only for user types with content for the current Municipality
+
+    Examples:
+      | municipality            | user types                 |
+      | طوبا الزنغرية           | Residents AR,Businesses AR |
+      | عرعرة                   | Residents AR,Businesses AR |
+      | المجلس الإقليمي للالسحرية | Residents AR,Businesses AR |
+      | קריית מלאכי              |                            |
+
 
   @api
   Scenario Outline: Verify that the Municipality shows the content in the chosen language and user type
