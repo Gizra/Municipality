@@ -38,11 +38,11 @@ function hedley_theme_preprocess_page(&$variables) {
   // Add the language switch links.
   $variables['language_switch_links'] = hedley_i18n_language_switch_links();
 
-  // Add profile type links.
-  $variables['profile_type_links'] = hedley_terms_get_profile_type_links();
+  // Add user type links.
+  $variables['user_type_links'] = hedley_terms_get_user_type_links();
 
   // Add municipality variables.
-  if (!$node = hedley_municipality_get_current()) {
+  if (!$node = hedley_municipality_get_current_group()) {
     return;
   }
   $wrapper = entity_metadata_wrapper('node', $node);

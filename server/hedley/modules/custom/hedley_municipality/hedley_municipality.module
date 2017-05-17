@@ -17,7 +17,7 @@ function hedley_municipality_ctools_plugin_directory($module, $plugin) {
 }
 
 /**
- * Get nodes of a municipality group, according to current profile type.
+ * Get nodes of a municipality group, according to current user type.
  *
  * @param string $bundle
  *   The wanted nodes bundle.
@@ -41,8 +41,8 @@ function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node =
     ->entityCondition('bundle', $bundle)
     ->propertyCondition('status', NODE_PUBLISHED)
     ->propertyOrderBy('created', 'DESC')
-    // Filter by current profile type.
-    ->fieldCondition('field_profile_types', 'tid', hedley_terms_get_current_profile_type_tid())
+    // Filter by current user type.
+    ->fieldCondition('field_user_types', 'tid', hedley_terms_get_current_user_type_tid())
     ->range(0, $max_range);
 
   // Filter by municipality.
@@ -80,7 +80,7 @@ function hedley_municipality_entity_info_alter(&$entity_info) {
  * @return mixed
  *   The municipality node, when available.
  */
-function hedley_municipality_get_current() {
+function hedley_municipality_get_current_group() {
   $purl_gids = og_purl_og_context_handler();
   if (empty($purl_gids['node']) || count($purl_gids['node']) != 1) {
     return FALSE;

@@ -237,8 +237,8 @@ function hedley_event_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-event-field_profile_types'.
-  $field_instances['node-event-field_profile_types'] = array(
+  // Exported field_instance: 'node-event-field_user_types'.
+  $field_instances['node-event-field_user_types'] = array(
     'bundle' => 'event',
     'default_value' => NULL,
     'deleted' => 0,
@@ -265,8 +265,8 @@ function hedley_event_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_profile_types',
-    'label' => 'Profile types',
+    'field_name' => 'field_user_types',
+    'label' => 'User types',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -552,7 +552,7 @@ function hedley_event_field_default_field_instances() {
   t('Date');
   t('Groups audience');
   t('Image');
-  t('Profile types');
+  t('User types');
   t('Recurring weekly');
   t('Ticket price');
   t('Title');

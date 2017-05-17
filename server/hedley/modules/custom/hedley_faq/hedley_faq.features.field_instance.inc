@@ -57,8 +57,8 @@ function hedley_faq_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-faq-field_profile_types'.
-  $field_instances['node-faq-field_profile_types'] = array(
+  // Exported field_instance: 'node-faq-field_user_types'.
+  $field_instances['node-faq-field_user_types'] = array(
     'bundle' => 'faq',
     'default_value' => NULL,
     'deleted' => 0,
@@ -85,8 +85,8 @@ function hedley_faq_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_profile_types',
-    'label' => 'Profile types',
+    'field_name' => 'field_user_types',
+    'label' => 'User types',
     'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -314,7 +314,7 @@ function hedley_faq_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Answer');
   t('Groups audience');
-  t('Profile types');
+  t('User types');
   t('Question');
   t('Title');
   t('Topics');

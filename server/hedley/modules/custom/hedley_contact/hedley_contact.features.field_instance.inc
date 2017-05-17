@@ -462,8 +462,8 @@ function hedley_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_profile_types'.
-  $field_instances['node-contact-field_profile_types'] = array(
+  // Exported field_instance: 'node-contact-field_user_types'.
+  $field_instances['node-contact-field_user_types'] = array(
     'bundle' => 'contact',
     'default_value' => array(
       0 => array(
@@ -497,8 +497,8 @@ function hedley_contact_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_profile_types',
-    'label' => 'Profile types',
+    'field_name' => 'field_user_types',
+    'label' => 'User types',
     'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -684,7 +684,7 @@ function hedley_contact_field_default_field_instances() {
   t('Job title');
   t('Last name');
   t('Phone');
-  t('Profile types');
+  t('User types');
   t('Reception hours');
   t('Reception hours. E.g. "14:30 - 18:00".');
   t('Topics');
