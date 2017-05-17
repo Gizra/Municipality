@@ -42,7 +42,7 @@ function hedley_theme_preprocess_page(&$variables) {
   $variables['user_type_links'] = hedley_terms_get_user_type_links();
 
   // Add municipality variables.
-  if (!$node = hedley_municipality_get_current()) {
+  if (!$node = hedley_municipality_get_current_group()) {
     return;
   }
   $wrapper = entity_metadata_wrapper('node', $node);

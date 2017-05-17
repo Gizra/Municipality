@@ -80,7 +80,7 @@ function hedley_municipality_entity_info_alter(&$entity_info) {
  * @return mixed
  *   The municipality node, when available.
  */
-function hedley_municipality_get_current() {
+function hedley_municipality_get_current_group() {
   $purl_gids = og_purl_og_context_handler();
   if (empty($purl_gids['node']) || count($purl_gids['node']) != 1) {
     return FALSE;

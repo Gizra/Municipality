@@ -25,7 +25,7 @@ $plugin = [
 function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $context) {
   global $language;
 
-  $municipality_node = !empty($context[0]->data->nid) ? $context[0]->data : hedley_municipality_get_current();
+  $municipality_node = !empty($context[0]->data->nid) ? $context[0]->data : hedley_municipality_get_current_group();
   $topic_tid = !empty($context[1]->data->tid) ? $context[1]->data->tid : 0;
 
   $nodes = hedley_municipality_get_nodes('faq', 10, $municipality_node, $conf['promoted_only'], $topic_tid);
