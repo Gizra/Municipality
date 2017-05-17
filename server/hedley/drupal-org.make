@@ -107,12 +107,6 @@ projects[search_api][version] = "1.12"
 projects[search_api_solr][subdir] = "contrib"
 projects[search_api_solr][version] = "1.5"
 
-projects[semanticui][subdir] = "contrib"
-; Using 1.x-dev due to no stable release.
-projects[semanticui][version] = "1.x-dev"
-; https://www.drupal.org/node/2859537 .
-projects[semanticui][patch][] = "https://www.drupal.org/files/issues/use-semantic-library-as-is-2859537-1.patch"
-
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 
@@ -130,6 +124,15 @@ projects[views][version] = "3.16"
 
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.4"
+
+; Themes
+projects[semanticui][subdir] = "contrib"
+; Using 1.x-dev due to no stable release.
+projects[semanticui][version] = "1.x-dev"
+; https://www.drupal.org/node/2859537 .
+projects[semanticui][patch][] = "https://www.drupal.org/files/issues/use-semantic-library-as-is-2859537-1.patch"
+; Make sure it's downloaded as a theme.
+projects[semanticui][type] = "theme"
 
 ; Libraries
 libraries[semanticui][type] = "libraries"
