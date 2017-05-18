@@ -93,11 +93,11 @@ class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
   /**
    * Create a node of the specified type in the specified language.
    *
-   * @param $type
+   * @param string $type
    *   The node type.
-   * @param $title
+   * @param string $title
    *   Title of node in specified language.
-   * @param $langcode
+   * @param string $langcode
    *   Language code.
    *
    * @return object
