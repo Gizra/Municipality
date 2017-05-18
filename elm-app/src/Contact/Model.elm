@@ -15,7 +15,7 @@ emptyModel =
 
 
 type Msg
-    = NoOp
+    = HandleContacts (Result String DictListContact)
 
 
 type alias Name =
@@ -36,7 +36,6 @@ type alias Names =
 type alias Contact =
     { name : Names
     , phone : Maybe String
-    , email : Maybe String
     }
 
 

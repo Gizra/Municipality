@@ -7859,7 +7859,9 @@ var _Gizra$elm_spa_exmple$Contact_Model$Contact = F3(
 	function (a, b, c) {
 		return {name: a, phone: b, email: c};
 	});
-var _Gizra$elm_spa_exmple$Contact_Model$NoOp = {ctor: 'NoOp'};
+var _Gizra$elm_spa_exmple$Contact_Model$HandleContacts = function (a) {
+	return {ctor: 'HandleContacts', _0: a};
+};
 
 var _eeue56$elm_all_dict$EveryDict$foldr = F3(
 	function (f, acc, t) {
@@ -8858,10 +8860,18 @@ var _Gizra$elm_spa_exmple$App_Model$MsgPagesContact = function (a) {
 var _Gizra$elm_spa_exmple$Contact_Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
-		return A2(
-			_elm_lang$core$Platform_Cmd_ops['!'],
-			model,
-			{ctor: '[]'});
+		if (_p0._0.ctor === 'Ok') {
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				model,
+				{ctor: '[]'});
+		} else {
+			var _p1 = A2(_elm_lang$core$Debug$log, 'HandleContacts', _p0._0._0);
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				model,
+				{ctor: '[]'});
+		}
 	});
 var _Gizra$elm_spa_exmple$Contact_Update$contacts = _elm_lang$core$Native_Platform.incomingPort('contacts', _elm_lang$core$Json_Decode$value);
 
