@@ -4,16 +4,20 @@ module Contact.Decoder
         )
 
 import Contact.Model exposing (Contact, DictListContact, Names)
-import DictList exposing (DictList, decodeKeysAndValues)
+import DictList exposing (DictList, decodeKeysAndValues, empty)
 import Json.Decode exposing (Decoder, andThen, dict, int, index, fail, field, float, list, map, map2, nullable, oneOf, string, succeed)
 import Json.Decode.Pipeline exposing (custom, decode, optional, optionalAt, required, requiredAt)
+import Utils.Json exposing (decodeEmptyArrayAs)
 
 
 decodeContacts : Decoder DictListContact
 decodeContacts =
-    decodeKeysAndValues
-        (list string)
-        (\id -> requiredAt [ id ] decodeContact)
+    oneOf
+        [ decodeKeysAndValues
+            (list string)
+            (\id -> requiredAt [ id ] decodeContact)
+        , decodeEmptyArrayAs DictList.empty
+        ]
 
 
 decodeContact : Decoder Contact
