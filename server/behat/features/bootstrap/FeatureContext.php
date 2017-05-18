@@ -199,6 +199,35 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
+   * @When I visit a :municipality website homepage with a specific :language and a specific :user_type
+   */
+  public function iVisitAWebsiteHomepageWithASpecificAndASpecificUser($municipality, $language, $user_type) {
+    $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
+    $options = [
+      'query' => [
+        'language' => $language,
+        'user_type' => $user_type,
+      ]
+    ];
+    $uri = $this->createUriWithGroupContext($group, 'node/' . $group->nid, $options);
+    $this->getSession()->visit($this->locatePath($uri));
+  }
+
+  /**
+   * @When I change user type to a :new_user_type
+   */
+  public function iChangeUserTypeToA($new_user_type) {
+    $page = $this->getSession()->getPage();
+
+    $user_type_link = $page->findLink($new_user_type);
+    if ($user_type_link === null) {
+      throw new \Exception('Could not find the user type link.');
+    }
+
+    $user_type_link->click();
+  }
+
+  /**
    * @Then I should see the home page in the default :language of the municipality and for :citizens user type
    */
   public function iShouldSeeTheHomePageInTheDefaultOfTheMunicipalityAndForCitizensUserType($language, $citizens) {
@@ -217,7 +246,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   public function iShouldSeeMenuOnlyWithLanguagesWithContentForTheCurrentMunicipality($languages) {
     $page = $this->getSession()->getPage();
 
-    // Get the user types switcher.
+    // Get the languages switcher.
     $languages_element = $page->find('css', '.background .languages');
 
     // Sometimes we want to check that the links are not displayed therefor
@@ -243,21 +272,6 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
 
     // Check that the element has the correct links.
     $this->checkLinksExistInElement($user_type_element, 'user type', $user_types_array);
-  }
-
-  /**
-   * @When I visit a :municipality website homepage with a specific :language and a specific :user_type
-   */
-  public function iVisitAWebsiteHomepageWithASpecificAndASpecificUser($municipality, $language, $user_type) {
-    $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
-    $options = [
-      'query' => [
-        'language' => $language,
-        'user_type' => $user_type,
-      ]
-    ];
-    $uri = $this->createUriWithGroupContext($group, 'node/' . $group->nid, $options);
-    $this->getSession()->visit($this->locatePath($uri));
   }
 
   /**
@@ -290,20 +304,6 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     // Check if the given user type is the active one on the page.
     $this->checkActiveUserType($user_type, $page, 'href');
 
-  }
-
-  /**
-   * @When I change user type to a :new_user_type
-   */
-  public function iChangeUserTypeToA($new_user_type) {
-    $page = $this->getSession()->getPage();
-
-    $user_type_link = $page->findLink($new_user_type);
-    if ($user_type_link === null) {
-      throw new \Exception('Could not find the user type link.');
-    }
-
-    $user_type_link->click();
   }
 
   /**
