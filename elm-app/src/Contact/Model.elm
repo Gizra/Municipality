@@ -34,7 +34,7 @@ type alias Names =
 
 
 type alias Contact =
-    { name : Names
+    { names : Names
     , phone : Maybe String
     }
 

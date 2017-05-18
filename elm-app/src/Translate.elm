@@ -11,7 +11,8 @@ type alias TranslationSet =
 
 
 type TranslationId
-    = FilterContacts
+    = ContactsNotFound
+    | FilterContacts
 
 
 translate : Language -> TranslationId -> String
@@ -19,6 +20,12 @@ translate lang trans =
     let
         translationSet =
             case trans of
+                ContactsNotFound ->
+                    { arabic = "No contacts found"
+                    , english = "No contacts found"
+                    , hebrew = "לא נמצאו אנשי קשר מתאימים"
+                    }
+
                 FilterContacts ->
                     { arabic = "ابحث عن اسم، موضوع أو فئة"
                     , english = "Filter contacts"
