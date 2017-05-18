@@ -20,6 +20,8 @@ view language model =
         ]
 
 
+{-| View all contacts.
+-}
 viewContacts : Language -> DictListContact -> Html msg
 viewContacts language contacts =
     let
