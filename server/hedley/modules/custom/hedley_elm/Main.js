@@ -12087,7 +12087,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContactFilter = F2(
 						_0: _elm_lang$html$Html_Attributes$value(filter),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$type_('text'),
+							_0: _elm_lang$html$Html_Attributes$type_('search'),
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$html$Html_Attributes$placeholder(

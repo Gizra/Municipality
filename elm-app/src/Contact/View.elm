@@ -25,7 +25,7 @@ viewContactFilter language filter =
     div []
         [ input
             [ value filter
-            , type_ "text"
+            , type_ "search"
             , placeholder <| translate language FilterContactsPlaceholder
             , onInput SetFilter
             ]
