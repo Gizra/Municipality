@@ -12077,7 +12077,11 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContactFilter = F2(
 	function (language, filter) {
 		return A2(
 			_elm_lang$html$Html$div,
-			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('ui icon input'),
+				_1: {ctor: '[]'}
+			},
 			{
 				ctor: '::',
 				_0: A2(
@@ -12101,7 +12105,18 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContactFilter = F2(
 						}
 					},
 					{ctor: '[]'}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$i,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('search icon'),
+							_1: {ctor: '[]'}
+						},
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
 			});
 	});
 var _Gizra$elm_spa_exmple$Contact_View$view = F2(

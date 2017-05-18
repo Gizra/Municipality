@@ -22,7 +22,7 @@ view language model =
 
 viewContactFilter : Language -> String -> Html Msg
 viewContactFilter language filter =
-    div []
+    div [ class "ui icon input" ]
         [ input
             [ value filter
             , type_ "search"
@@ -30,6 +30,7 @@ viewContactFilter language filter =
             , onInput SetFilter
             ]
             []
+        , i [ class "search icon" ] []
         ]
 
 
