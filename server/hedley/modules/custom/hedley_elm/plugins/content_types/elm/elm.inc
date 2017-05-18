@@ -36,7 +36,6 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
 
   }
 
-
   // Add settings.
   $settings = [
     'elm' => [
@@ -73,10 +72,11 @@ function hedley_elm_elm_get_contacts() {
       'id' => 200,
       'name_arabic' => 'arabic_bar',
       'phone' => '5678',
-    ]
+    ],
   ];
 
 }
+
 /**
  * Edit form.
  */
@@ -104,4 +104,3 @@ function hedley_elm_elm_content_type_edit_form_submit($form, &$form_state) {
     $form_state['conf'][$key] = $form_state['values'][$key];
   }
 }
-

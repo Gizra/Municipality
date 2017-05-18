@@ -1,4 +1,8 @@
-(function($) {
+/**
+ * @file
+ */
+
+(function ($) {
 
 /**
  * Add the Elm app.
@@ -19,6 +23,5 @@ Drupal.behaviors.elm = {
     }
   }
 };
-
 
 })(jQuery);
