@@ -38,8 +38,8 @@ function hedley_topic_topic_events_content_type_render($subtype, $conf, $args, $
     $event = [
       'title' => check_plain($wrapper->label()),
       'image_url' => $image ? image_style_url('thumbnail', $image['uri']) : '',
-      'date_start' => $date['value'] ? date('d/m/Y', $date['value']) : '',
-      'date_end' => $date['value2'] ? date('d/m/Y', $date['value2']) : '',
+      'date_start' => $date['value'] ? date('d/m/Y H:i', $date['value']) : '',
+      'date_end' => $date['value2'] ? date('d/m/Y H:i', $date['value2']) : '',
     ];
 
     $events[] = $event;
