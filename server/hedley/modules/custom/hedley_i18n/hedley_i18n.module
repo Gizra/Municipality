@@ -42,14 +42,52 @@ function hedley_i18n_init() {
  */
 function hedley_i18n_language_switch_links() {
   global $language;
-
+  $language_object = clone $language;
+  $node = hedley_municipality_get_current_group();
+  if (!$node) {
+    // No need for the switcher if somehow we are not in a municipality.
+    return [];
+  }
   $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
+
+  return hedley_i18n_language_get_switch_links($language_object, $node, $path);
+}
+
+/**
+ * Get a custom language switcher according to the node's translated languages.
+ *
+ * @param object $language_object
+ *   A language object.
+ * @param object $node
+ *   A node object.
+ * @param string $path
+ *   The path for the switcher links.
+ *   i.e. '<front>', 'node/[nodeID]'.
+ *
+ * @return array
+ *   The language switch links or empty if the node has only one translated
+ *   language.
+ */
+function hedley_i18n_language_get_switch_links($language_object, $node, $path) {
+  // Extract node's translations.
+  $translations = $node->translations->data;
+
+  if (!is_array($translations) || count($translations) <= 1) {
+    // No need for the language switcher if there's only one language.
+    return [];
+  }
+
   $links = language_negotiation_get_switch_links('language', $path);
   if (empty($links->links)) {
     return [];
   }
   $rendered_links = [];
   foreach ($links->links as $language_code => $link) {
+    if (!in_array($language_code, array_keys($translations))) {
+      // Don't add a language to the switcher if the municipality doesn't have a
+      // translation in that language.
+      continue;
+    }
     // Using language in the query string, to avoid a conflict with og_purl when
     // it's the first element in the path.
     $options = [
@@ -57,10 +95,11 @@ function hedley_i18n_language_switch_links() {
     ];
     // Creating the link markup manually, because otherwise the "active" class
     // isn't added correctly according the global language.
-    $active = $language_code == $language->language ? 'active' : '';
+    $active = $language_code == $language_object->language ? 'active' : '';
     $url = url($link['href'], $options);
-    $rendered_links[] = "<a class=\"item $active\" href=\"$url\">{$link['title']}</a>";
+    $rendered_links[$language_code] = "<a class=\"item $active\" href=\"$url\">{$link['title']}</a>";
   }
+
   return $rendered_links;
 }
 
