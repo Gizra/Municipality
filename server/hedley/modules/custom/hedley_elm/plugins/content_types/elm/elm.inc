@@ -60,12 +60,12 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
  */
 function hedley_elm_elm_get_contacts() {
   return [
-    1 => [
+    100 => [
       'name_arabic' => 'foo',
       'name_hebrew' => 'bar',
       'phone' => '1234',
     ],
-    2 => [
+    200 => [
       'name_arabic' => 'nik',
       'phone' => '5678',
     ]

@@ -8981,9 +8981,22 @@ var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContacts = _elm_lang$core$Json_D
 		ctor: '::',
 		_0: A2(
 			_Gizra$elm_dictlist$DictList$decodeKeysAndValues,
-			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string),
+			A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (values) {
+					return _elm_lang$core$Json_Decode$succeed(
+						A2(_elm_lang$core$List$map, _elm_lang$core$Tuple$first, values));
+				},
+				_elm_lang$core$Json_Decode$keyValuePairs(_Gizra$elm_spa_exmple$Contact_Decoder$decodeContact)),
 			function (id) {
-				return _Gizra$elm_spa_exmple$Contact_Decoder$decodeContact;
+				return A2(
+					_elm_lang$core$Json_Decode$at,
+					{
+						ctor: '::',
+						_0: id,
+						_1: {ctor: '[]'}
+					},
+					_Gizra$elm_spa_exmple$Contact_Decoder$decodeContact);
 			}),
 		_1: {
 			ctor: '::',
@@ -9017,12 +9030,16 @@ var _Gizra$elm_spa_exmple$Contact_Update$subscriptions = _Gizra$elm_spa_exmple$C
 			A2(_elm_lang$core$Json_Decode$decodeValue, _Gizra$elm_spa_exmple$Contact_Decoder$decodeContacts, _p2));
 	});
 
+var _Gizra$elm_spa_exmple$App_Update$subscriptions = function (model) {
+	var _p0 = model.page;
+	return A2(_elm_lang$core$Platform_Sub$map, _Gizra$elm_spa_exmple$App_Model$MsgPagesContact, _Gizra$elm_spa_exmple$Contact_Update$subscriptions);
+};
 var _Gizra$elm_spa_exmple$App_Update$update = F2(
 	function (msg, model) {
-		var _p0 = msg;
-		var _p1 = A2(_Gizra$elm_spa_exmple$Contact_Update$update, _p0._0, model.pageContact);
-		var val = _p1._0;
-		var cmds = _p1._1;
+		var _p1 = msg;
+		var _p2 = A2(_Gizra$elm_spa_exmple$Contact_Update$update, _p1._0, model.pageContact);
+		var val = _p2._0;
+		var cmds = _p2._1;
 		return {
 			ctor: '_Tuple2',
 			_0: _elm_lang$core$Native_Utils.update(
@@ -11570,12 +11587,7 @@ var _Gizra$elm_spa_exmple$App_View$view = function (model) {
 };
 
 var _Gizra$elm_spa_exmple$Main$main = _elm_lang$html$Html$programWithFlags(
-	{
-		init: _Gizra$elm_spa_exmple$App_Update$init,
-		update: _Gizra$elm_spa_exmple$App_Update$update,
-		view: _Gizra$elm_spa_exmple$App_View$view,
-		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
-	})(
+	{init: _Gizra$elm_spa_exmple$App_Update$init, update: _Gizra$elm_spa_exmple$App_Update$update, view: _Gizra$elm_spa_exmple$App_View$view, subscriptions: _Gizra$elm_spa_exmple$App_Update$subscriptions})(
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
 		function (page) {
