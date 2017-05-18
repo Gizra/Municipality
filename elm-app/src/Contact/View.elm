@@ -10,5 +10,4 @@ view : Model -> Html msg
 view model =
     div []
         [ text "Contact lists"
-        , pre [] [ text <| toString model ]
         ]

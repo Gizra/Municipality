@@ -14,7 +14,10 @@ view : Model -> Html Msg
 view model =
     case model.page of
         Contact ->
-            Html.map MsgPagesContact <| Contact.View.view model.pageContact
+            div []
+                [ Html.map MsgPagesContact <| Contact.View.view model.pageContact
+                , pre [] [ text <| toString model ]
+                ]
 
         NotFound ->
             div [] [ text "Wrong page defined" ]

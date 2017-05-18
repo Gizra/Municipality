@@ -18,6 +18,7 @@ $plugin = [
  * Render callback.
  */
 function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
+  global $language;
   $block = new stdClass();
   $block->module = 'hedley_elm';
   $block->title = '';
@@ -40,6 +41,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   $settings = [
     'elm' => [
       'page' => $page,
+      'language' => $language->language,
       'values' => $values,
     ],
   ];

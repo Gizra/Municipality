@@ -18,6 +18,7 @@ type Msg
 
 type alias Flags =
     { page : String
+    , language : String
     }
 
 

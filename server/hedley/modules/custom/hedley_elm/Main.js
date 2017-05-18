@@ -8847,9 +8847,10 @@ var _eeue56$elm_all_dict$EveryDict$diff = F2(
 	});
 
 var _Gizra$elm_spa_exmple$App_Model$emptyModel = {language: _Gizra$elm_spa_exmple$App_Types$Hebrew, page: _Gizra$elm_spa_exmple$App_Types$NotFound, pageContact: _Gizra$elm_spa_exmple$Contact_Model$emptyModel};
-var _Gizra$elm_spa_exmple$App_Model$Flags = function (a) {
-	return {page: a};
-};
+var _Gizra$elm_spa_exmple$App_Model$Flags = F2(
+	function (a, b) {
+		return {page: a, language: b};
+	});
 var _Gizra$elm_spa_exmple$App_Model$Model = F3(
 	function (a, b, c) {
 		return {language: a, page: b, pageContact: c};
@@ -9054,9 +9055,22 @@ var _Gizra$elm_spa_exmple$App_Update$update = F2(
 		};
 	});
 var _Gizra$elm_spa_exmple$App_Update$init = function (flags) {
+	var language = function () {
+		var _p3 = flags.language;
+		switch (_p3) {
+			case 'ar':
+				return _Gizra$elm_spa_exmple$App_Types$Arabic;
+			case 'en':
+				return _Gizra$elm_spa_exmple$App_Types$English;
+			case 'he':
+				return _Gizra$elm_spa_exmple$App_Types$Hebrew;
+			default:
+				return _Gizra$elm_spa_exmple$App_Types$English;
+		}
+	}();
 	var page = function () {
-		var _p3 = flags.page;
-		if (_p3 === 'contact') {
+		var _p4 = flags.page;
+		if (_p4 === 'contact') {
 			return _Gizra$elm_spa_exmple$App_Types$Contact;
 		} else {
 			return _Gizra$elm_spa_exmple$App_Types$NotFound;
@@ -9066,7 +9080,7 @@ var _Gizra$elm_spa_exmple$App_Update$init = function (flags) {
 		ctor: '_Tuple2',
 		_0: _elm_lang$core$Native_Utils.update(
 			_Gizra$elm_spa_exmple$App_Model$emptyModel,
-			{page: page}),
+			{page: page, language: language}),
 		_1: _elm_lang$core$Platform_Cmd$none
 	};
 };
@@ -11581,19 +11595,7 @@ var _Gizra$elm_spa_exmple$Contact_View$view = function (model) {
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html$text('Contact lists'),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							_elm_lang$core$Basics$toString(model)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
+			_1: {ctor: '[]'}
 		});
 };
 
@@ -11601,9 +11603,28 @@ var _Gizra$elm_spa_exmple$App_View$view = function (model) {
 	var _p0 = model.page;
 	if (_p0.ctor === 'Contact') {
 		return A2(
-			_elm_lang$html$Html$map,
-			_Gizra$elm_spa_exmple$App_Model$MsgPagesContact,
-			_Gizra$elm_spa_exmple$Contact_View$view(model.pageContact));
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$map,
+					_Gizra$elm_spa_exmple$App_Model$MsgPagesContact,
+					_Gizra$elm_spa_exmple$Contact_View$view(model.pageContact)),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$pre,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								_elm_lang$core$Basics$toString(model)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
 	} else {
 		return A2(
 			_elm_lang$html$Html$div,
@@ -11620,11 +11641,16 @@ var _Gizra$elm_spa_exmple$Main$main = _elm_lang$html$Html$programWithFlags(
 	{init: _Gizra$elm_spa_exmple$App_Update$init, update: _Gizra$elm_spa_exmple$App_Update$update, view: _Gizra$elm_spa_exmple$App_View$view, subscriptions: _Gizra$elm_spa_exmple$App_Update$subscriptions})(
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
-		function (page) {
-			return _elm_lang$core$Json_Decode$succeed(
-				{page: page});
+		function (language) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (page) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{language: language, page: page});
+				},
+				A2(_elm_lang$core$Json_Decode$field, 'page', _elm_lang$core$Json_Decode$string));
 		},
-		A2(_elm_lang$core$Json_Decode$field, 'page', _elm_lang$core$Json_Decode$string)));
+		A2(_elm_lang$core$Json_Decode$field, 'language', _elm_lang$core$Json_Decode$string)));
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};

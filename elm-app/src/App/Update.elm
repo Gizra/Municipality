@@ -6,7 +6,7 @@ port module App.Update
         )
 
 import App.Model exposing (..)
-import App.Types exposing (Page(..))
+import App.Types exposing (Language(..), Page(..))
 import Contact.Update
 
 
@@ -18,10 +18,31 @@ init flags =
                 "contact" ->
                     Contact
 
+                -- Fallback to page not found.
                 _ ->
                     NotFound
+
+        language =
+            case flags.language of
+                "ar" ->
+                    Arabic
+
+                "en" ->
+                    English
+
+                "he" ->
+                    Hebrew
+
+                -- Fallback to English.
+                _ ->
+                    English
     in
-        ( { emptyModel | page = page }, Cmd.none )
+        ( { emptyModel
+            | page = page
+            , language = language
+          }
+        , Cmd.none
+        )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
