@@ -6,7 +6,7 @@
  */
 ?>
 <div class="ui grid container">
-  <div class="centered row"">
+  <div class="centered row">
     <h3 class="ui purple header"><?php print t('News regarding @topic', ['@topic' => $title]); ?></h3>
   </div>
 
