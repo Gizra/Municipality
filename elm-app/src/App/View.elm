@@ -16,7 +16,6 @@ view model =
         Contact ->
             div []
                 [ Html.map MsgPagesContact <| Contact.View.view model.language model.pageContact
-                , pre [] [ text <| toString model ]
                 ]
 
         NotFound ->

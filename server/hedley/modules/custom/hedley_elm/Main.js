@@ -12132,19 +12132,7 @@ var _Gizra$elm_spa_exmple$App_View$view = function (model) {
 					_elm_lang$html$Html$map,
 					_Gizra$elm_spa_exmple$App_Model$MsgPagesContact,
 					A2(_Gizra$elm_spa_exmple$Contact_View$view, model.language, model.pageContact)),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$pre,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(
-								_elm_lang$core$Basics$toString(model)),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
+				_1: {ctor: '[]'}
 			});
 	} else {
 		return A2(
