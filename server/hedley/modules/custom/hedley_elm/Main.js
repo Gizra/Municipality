@@ -11588,16 +11588,17 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _Gizra$elm_spa_exmple$Contact_View$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text('Contact lists'),
-			_1: {ctor: '[]'}
-		});
-};
+var _Gizra$elm_spa_exmple$Contact_View$view = F2(
+	function (language, model) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Contact lists'),
+				_1: {ctor: '[]'}
+			});
+	});
 
 var _Gizra$elm_spa_exmple$App_View$view = function (model) {
 	var _p0 = model.page;
@@ -11610,7 +11611,7 @@ var _Gizra$elm_spa_exmple$App_View$view = function (model) {
 				_0: A2(
 					_elm_lang$html$Html$map,
 					_Gizra$elm_spa_exmple$App_Model$MsgPagesContact,
-					_Gizra$elm_spa_exmple$Contact_View$view(model.pageContact)),
+					A2(_Gizra$elm_spa_exmple$Contact_View$view, model.language, model.pageContact)),
 				_1: {
 					ctor: '::',
 					_0: A2(

@@ -15,7 +15,7 @@ view model =
     case model.page of
         Contact ->
             div []
-                [ Html.map MsgPagesContact <| Contact.View.view model.pageContact
+                [ Html.map MsgPagesContact <| Contact.View.view model.language model.pageContact
                 , pre [] [ text <| toString model ]
                 ]
 
