@@ -7847,6 +7847,20 @@ var _Gizra$elm_spa_exmple$App_Types$Hebrew = {ctor: 'Hebrew'};
 var _Gizra$elm_spa_exmple$App_Types$English = {ctor: 'English'};
 var _Gizra$elm_spa_exmple$App_Types$Arabic = {ctor: 'Arabic'};
 
+var _Gizra$elm_spa_exmple$Contact_Model$emptyModel = {contacts: _Gizra$elm_dictlist$DictList$empty};
+var _Gizra$elm_spa_exmple$Contact_Model$Model = function (a) {
+	return {contacts: a};
+};
+var _Gizra$elm_spa_exmple$Contact_Model$Names = F3(
+	function (a, b, c) {
+		return {arabic: a, english: b, hebrew: c};
+	});
+var _Gizra$elm_spa_exmple$Contact_Model$Contact = F3(
+	function (a, b, c) {
+		return {name: a, phone: b, email: c};
+	});
+var _Gizra$elm_spa_exmple$Contact_Model$NoOp = {ctor: 'NoOp'};
+
 var _eeue56$elm_all_dict$EveryDict$foldr = F3(
 	function (f, acc, t) {
 		foldr:
@@ -8829,23 +8843,40 @@ var _eeue56$elm_all_dict$EveryDict$diff = F2(
 			t2);
 	});
 
-var _Gizra$elm_spa_exmple$App_Model$emptyModel = {language: _Gizra$elm_spa_exmple$App_Types$Hebrew, page: _Gizra$elm_spa_exmple$App_Types$Contact};
+var _Gizra$elm_spa_exmple$App_Model$emptyModel = {language: _Gizra$elm_spa_exmple$App_Types$Hebrew, page: _Gizra$elm_spa_exmple$App_Types$Contact, pageContact: _Gizra$elm_spa_exmple$Contact_Model$emptyModel};
 var _Gizra$elm_spa_exmple$App_Model$Flags = function (a) {
 	return {page: a};
 };
-var _Gizra$elm_spa_exmple$App_Model$Model = F2(
-	function (a, b) {
-		return {language: a, page: b};
+var _Gizra$elm_spa_exmple$App_Model$Model = F3(
+	function (a, b, c) {
+		return {language: a, page: b, pageContact: c};
 	});
-var _Gizra$elm_spa_exmple$App_Model$NoOp = {ctor: 'NoOp'};
+var _Gizra$elm_spa_exmple$App_Model$MsgPagesContact = function (a) {
+	return {ctor: 'MsgPagesContact', _0: a};
+};
 
-var _Gizra$elm_spa_exmple$App_Update$update = F2(
+var _Gizra$elm_spa_exmple$Contact_Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
 		return A2(
 			_elm_lang$core$Platform_Cmd_ops['!'],
 			model,
 			{ctor: '[]'});
+	});
+
+var _Gizra$elm_spa_exmple$App_Update$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		var _p1 = A2(_Gizra$elm_spa_exmple$Contact_Update$update, _p0._0, model.pageContact);
+		var val = _p1._0;
+		var cmds = _p1._1;
+		return {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				model,
+				{pageContact: val}),
+			_1: A2(_elm_lang$core$Platform_Cmd$map, _Gizra$elm_spa_exmple$App_Model$MsgPagesContact, cmds)
+		};
 	});
 var _Gizra$elm_spa_exmple$App_Update$init = function (flags) {
 	return {ctor: '_Tuple2', _0: _Gizra$elm_spa_exmple$App_Model$emptyModel, _1: _elm_lang$core$Platform_Cmd$none};
@@ -11354,16 +11385,23 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _Gizra$elm_spa_exmple$App_View$view = function (model) {
-	var _p0 = model.page;
+var _Gizra$elm_spa_exmple$Contact_View$view = function (contacts) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html$text('This is the Elm App!'),
+			_0: _elm_lang$html$Html$text('Contact lists'),
 			_1: {ctor: '[]'}
 		});
+};
+
+var _Gizra$elm_spa_exmple$App_View$view = function (model) {
+	var _p0 = model.page;
+	return A2(
+		_elm_lang$html$Html$map,
+		_Gizra$elm_spa_exmple$App_Model$MsgPagesContact,
+		_Gizra$elm_spa_exmple$Contact_View$view(model.pageContact));
 };
 
 var _Gizra$elm_spa_exmple$Main$main = _elm_lang$html$Html$programWithFlags(

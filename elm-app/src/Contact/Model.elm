@@ -3,6 +3,21 @@ module Contact.Model exposing (..)
 import DictList exposing (DictList)
 
 
+type alias Model =
+    { contacts : DictListContact
+    }
+
+
+emptyModel : Model
+emptyModel =
+    { contacts = DictList.empty
+    }
+
+
+type Msg
+    = NoOp
+
+
 type alias Name =
     String
 
