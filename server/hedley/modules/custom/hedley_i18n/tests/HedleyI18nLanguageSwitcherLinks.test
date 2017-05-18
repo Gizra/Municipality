@@ -48,7 +48,7 @@ class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
 
     // Set language negotiation options (necessary for
     // `language_negotiation_get_switch_links` to work).
-    variable_set('language_types', drupal_language_types() + array('language_custom' => TRUE));
+    variable_set('language_types', drupal_language_types() + ['language_custom' => TRUE]);
     variable_set('language_negotiation_' . LANGUAGE_TYPE_INTERFACE, locale_language_negotiation_info());
     variable_set('language_negotiation_' . LANGUAGE_TYPE_CONTENT, locale_language_negotiation_info());
     variable_set('language_negotiation_' . LANGUAGE_TYPE_URL, locale_language_negotiation_info());
@@ -64,21 +64,21 @@ class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
     $handler = $factory->getHandler('node', $source);
 
     // Add Arabic translation.
-    $translation = array(
+    $translation = [
       'translate' => 0,
       'status' => 1,
       'language' => 'ar',
       'source' => $source->language,
-    );
+    ];
     $handler->setTranslation($translation, $source);
 
     // Add Hebrew translation.
-    $translation = array(
+    $translation = [
       'translate' => 0,
       'status' => 1,
       'language' => 'he',
       'source' => $source->language,
-    );
+    ];
     $handler->setTranslation($translation, $source);
 
     $path_node = 'node/' . $source->nid;
@@ -87,7 +87,7 @@ class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
     // translations we sat above.)
     $rendered_links = hedley_i18n_language_get_switch_links($language_object, node_load($source->nid), $path_node);
 
-    $this->assertEqual(array_keys($rendered_links), $expected_languages, t('Expected languages are displayed.'));
+    $this->assertEqual(array_keys($rendered_links), $expected_languages, 'Expected languages are displayed.');
   }
 
   /**
@@ -113,7 +113,7 @@ class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
 
     // Check to make sure the node was created.
     $node = $this->drupalGetNodeByTitle($title);
-    $this->assertTrue($node, t('Node found in database.'));
+    $this->assertTrue($node, 'Node found in database.');
 
     return $node;
   }

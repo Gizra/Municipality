@@ -57,11 +57,12 @@ function hedley_i18n_language_switch_links() {
  * Get a custom language switcher according to the node's translated languages.
  *
  * @param object $language_object
- *   The global language.
+ *   A language object.
  * @param object $node
- *   The desired node object.
+ *   A node object.
  * @param string $path
  *   The path for the switcher links.
+ *   i.e. '<front>', 'node/[nodeID]'.
  *
  * @return array
  *   The language switch links or empty if the node has only one translated
