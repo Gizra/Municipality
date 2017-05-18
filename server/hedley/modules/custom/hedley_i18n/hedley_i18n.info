@@ -35,3 +35,4 @@ features[variable][] = language_types
 features[variable][] = locale_field_language_fallback
 features[variable][] = locale_language_negotiation_url_part
 features[variable][] = locale_language_providers_weight_language
+files[] = tests/HedleyI18nLanguageSwitcherLinks.test

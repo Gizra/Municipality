@@ -49,11 +49,13 @@
       </div>
 
       <div class="ui four wide column">
-        <div class="ui three item menu languages">
-          <?php foreach ($language_switch_links as $link): ?>
-            <?php print $link; ?>
-          <?php endforeach; ?>
-        </div>
+        <?php if ($language_switch_links) : ?>
+          <div class="ui <?php print $language_switch_links_class?> item menu languages">
+            <?php foreach ($language_switch_links as $link): ?>
+              <?php print $link; ?>
+            <?php endforeach; ?>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
   </div>
