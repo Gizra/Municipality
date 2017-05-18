@@ -15,3 +15,6 @@ view model =
     case model.page of
         Contact ->
             Html.map MsgPagesContact <| Contact.View.view model.pageContact
+
+        NotFound ->
+            div [] [ text "Wrong page defined" ]

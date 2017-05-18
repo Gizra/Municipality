@@ -16,10 +16,6 @@ type Msg
     = MsgPagesContact Contact.Model.Msg
 
 
-
--- @todo: Adapt flags.
-
-
 type alias Flags =
     { page : String
     }
@@ -35,6 +31,6 @@ type alias Model =
 emptyModel : Model
 emptyModel =
     { language = Hebrew
-    , page = Contact
+    , page = NotFound
     , pageContact = Contact.Model.emptyModel
     }

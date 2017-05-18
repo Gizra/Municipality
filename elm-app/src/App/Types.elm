@@ -7,6 +7,7 @@ module App.Types
 
 type Page
     = Contact
+    | NotFound
 
 
 type Language
