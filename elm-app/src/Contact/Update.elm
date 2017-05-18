@@ -12,7 +12,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         HandleContacts (Ok values) ->
-            model ! []
+            { model | contacts = values } ! []
 
         HandleContacts (Err err) ->
             let

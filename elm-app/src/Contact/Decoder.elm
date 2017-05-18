@@ -13,7 +13,7 @@ decodeContacts : Decoder DictListContact
 decodeContacts =
     decodeKeysAndValues
         (list string)
-        (\id -> requiredAt [ toString id ] decodeContact)
+        (\id -> requiredAt [ id ] decodeContact)
 
 
 decodeContact : Decoder Contact
