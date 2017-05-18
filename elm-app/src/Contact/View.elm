@@ -1,38 +1,66 @@
 module Contact.View exposing (..)
 
 import App.Types exposing (Language(..))
-import Contact.Model exposing (Contact, DictListContact, Model)
+import Contact.Model exposing (Contact, DictListContact, Model, Msg(..))
 import Contact.Utils exposing (getContactNameByLanguage, getContactsByLanguage)
 import DictList
 import Html exposing (..)
-import Html.Attributes exposing (alt, class, classList, href, src, style, target)
-import Html.Events exposing (onClick)
+import Html.Attributes exposing (alt, class, classList, href, placeholder, src, style, target, type_, value)
+import Html.Events exposing (onClick, onInput)
 import Maybe.Extra exposing (isJust)
-import Translate exposing (translate, TranslationId(..))
+import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (showIf, showMaybe)
 
 
-view : Language -> Model -> Html msg
+view : Language -> Model -> Html Msg
 view language model =
     div []
-        [ text "Contact lists"
-        , viewContacts language model.contacts
+        [ viewContactFilter language model.filter
+        , viewContacts language model
+        ]
+
+
+viewContactFilter : Language -> String -> Html Msg
+viewContactFilter language filter =
+    div []
+        [ input
+            [ value filter
+            , type_ "text"
+            , placeholder <| translate language FilterContactsPlaceholder
+            , onInput SetFilter
+            ]
+            []
         ]
 
 
 {-| View all contacts.
 -}
-viewContacts : Language -> DictListContact -> Html msg
-viewContacts language contacts =
+viewContacts : Language -> Model -> Html msg
+viewContacts language { contacts, filter } =
     let
         contactsByLanguage =
             getContactsByLanguage language contacts
+
+        filteredContacts =
+            if String.isEmpty filter then
+                -- No filtering
+                contactsByLanguage
+            else
+                let
+                    stringMatch =
+                        String.contains (String.toLower filter)
+                in
+                    DictList.filter
+                        (\_ contact ->
+                            stringMatch (String.toLower <| getContactNameByLanguage language contact)
+                        )
+                        contactsByLanguage
     in
-        if DictList.isEmpty contactsByLanguage then
+        if DictList.isEmpty filteredContacts then
             div [] [ text <| translate language ContactsNotFound ]
         else
             div []
-                ((getContactsByLanguage language contacts)
+                (filteredContacts
                     |> DictList.map
                         (\_ contact ->
                             viewContact language contact

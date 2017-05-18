@@ -7946,10 +7946,11 @@ var _Gizra$elm_spa_exmple$App_Types$Hebrew = {ctor: 'Hebrew'};
 var _Gizra$elm_spa_exmple$App_Types$English = {ctor: 'English'};
 var _Gizra$elm_spa_exmple$App_Types$Arabic = {ctor: 'Arabic'};
 
-var _Gizra$elm_spa_exmple$Contact_Model$emptyModel = {contacts: _Gizra$elm_dictlist$DictList$empty};
-var _Gizra$elm_spa_exmple$Contact_Model$Model = function (a) {
-	return {contacts: a};
-};
+var _Gizra$elm_spa_exmple$Contact_Model$emptyModel = {contacts: _Gizra$elm_dictlist$DictList$empty, filter: ''};
+var _Gizra$elm_spa_exmple$Contact_Model$Model = F2(
+	function (a, b) {
+		return {contacts: a, filter: b};
+	});
 var _Gizra$elm_spa_exmple$Contact_Model$Names = F3(
 	function (a, b, c) {
 		return {arabic: a, english: b, hebrew: c};
@@ -7958,6 +7959,9 @@ var _Gizra$elm_spa_exmple$Contact_Model$Contact = F2(
 	function (a, b) {
 		return {names: a, phone: b};
 	});
+var _Gizra$elm_spa_exmple$Contact_Model$SetFilter = function (a) {
+	return {ctor: 'SetFilter', _0: a};
+};
 var _Gizra$elm_spa_exmple$Contact_Model$HandleContacts = function (a) {
 	return {ctor: 'HandleContacts', _0: a};
 };
@@ -9124,18 +9128,27 @@ var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContacts = _elm_lang$core$Json_D
 var _Gizra$elm_spa_exmple$Contact_Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
-		if (_p0._0.ctor === 'Ok') {
+		if (_p0.ctor === 'HandleContacts') {
+			if (_p0._0.ctor === 'Ok') {
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{contacts: _p0._0._0}),
+					{ctor: '[]'});
+			} else {
+				var _p1 = A2(_elm_lang$core$Debug$log, 'HandleContacts', _p0._0._0);
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{ctor: '[]'});
+			}
+		} else {
 			return A2(
 				_elm_lang$core$Platform_Cmd_ops['!'],
 				_elm_lang$core$Native_Utils.update(
 					model,
-					{contacts: _p0._0._0}),
-				{ctor: '[]'});
-		} else {
-			var _p1 = A2(_elm_lang$core$Debug$log, 'HandleContacts', _p0._0._0);
-			return A2(
-				_elm_lang$core$Platform_Cmd_ops['!'],
-				model,
+					{filter: _p0._0}),
 				{ctor: '[]'});
 		}
 	});
@@ -11964,7 +11977,7 @@ var _Gizra$elm_spa_exmple$Translate$TranslationSet = F3(
 	function (a, b, c) {
 		return {arabic: a, english: b, hebrew: c};
 	});
-var _Gizra$elm_spa_exmple$Translate$FilterContacts = {ctor: 'FilterContacts'};
+var _Gizra$elm_spa_exmple$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
 var _Gizra$elm_spa_exmple$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
 
 var _Gizra$elm_spa_exmple$Utils_Html$divider = A2(
@@ -11982,10 +11995,65 @@ var _Gizra$elm_spa_exmple$Utils_Html$showIf = F2(
 	});
 var _Gizra$elm_spa_exmple$Utils_Html$showMaybe = _elm_lang$core$Maybe$withDefault(_Gizra$elm_spa_exmple$Utils_Html$emptyNode);
 
+var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
+	function (language, contact) {
+		return A2(
+			_elm_lang$html$Html$ul,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$li,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(_Gizra$elm_spa_exmple$Contact_Utils$getContactNameByLanguage, language, contact)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (phone) {
+								return A2(
+									_elm_lang$html$Html$li,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(phone),
+										_1: {ctor: '[]'}
+									});
+							},
+							contact.phone)),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
 var _Gizra$elm_spa_exmple$Contact_View$viewContacts = F2(
-	function (language, contacts) {
-		var contactsByLanguage = A2(_Gizra$elm_spa_exmple$Contact_Utils$getContactsByLanguage, language, contacts);
-		return _Gizra$elm_dictlist$DictList$isEmpty(contactsByLanguage) ? A2(
+	function (language, _p0) {
+		var _p1 = _p0;
+		var _p4 = _p1.filter;
+		var contactsByLanguage = A2(_Gizra$elm_spa_exmple$Contact_Utils$getContactsByLanguage, language, _p1.contacts);
+		var filteredContacts = function () {
+			if (_elm_lang$core$String$isEmpty(_p4)) {
+				return contactsByLanguage;
+			} else {
+				var stringMatch = _elm_lang$core$String$contains(
+					_elm_lang$core$String$toLower(_p4));
+				return A2(
+					_Gizra$elm_dictlist$DictList$filter,
+					F2(
+						function (_p2, contact) {
+							return stringMatch(
+								_elm_lang$core$String$toLower(
+									A2(_Gizra$elm_spa_exmple$Contact_Utils$getContactNameByLanguage, language, contact)));
+						}),
+					contactsByLanguage);
+			}
+		}();
+		return _Gizra$elm_dictlist$DictList$isEmpty(filteredContacts) ? A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
 			{
@@ -12000,42 +12068,41 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContacts = F2(
 				A2(
 					_Gizra$elm_dictlist$DictList$map,
 					F2(
-						function (_p0, contact) {
-							return A2(
-								_elm_lang$html$Html$ul,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$li,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(
-												A2(_Gizra$elm_spa_exmple$Contact_Utils$getContactNameByLanguage, language, contact)),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
-											A2(
-												_elm_lang$core$Maybe$map,
-												function (phone) {
-													return A2(
-														_elm_lang$html$Html$li,
-														{ctor: '[]'},
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html$text(phone),
-															_1: {ctor: '[]'}
-														});
-												},
-												contact.phone)),
-										_1: {ctor: '[]'}
-									}
-								});
+						function (_p3, contact) {
+							return A2(_Gizra$elm_spa_exmple$Contact_View$viewContact, language, contact);
 						}),
-					A2(_Gizra$elm_spa_exmple$Contact_Utils$getContactsByLanguage, language, contacts))));
+					filteredContacts)));
+	});
+var _Gizra$elm_spa_exmple$Contact_View$viewContactFilter = F2(
+	function (language, filter) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$value(filter),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_('text'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$placeholder(
+									A2(_Gizra$elm_spa_exmple$Translate$translate, language, _Gizra$elm_spa_exmple$Translate$FilterContactsPlaceholder)),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onInput(_Gizra$elm_spa_exmple$Contact_Model$SetFilter),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			});
 	});
 var _Gizra$elm_spa_exmple$Contact_View$view = F2(
 	function (language, model) {
@@ -12044,10 +12111,10 @@ var _Gizra$elm_spa_exmple$Contact_View$view = F2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('Contact lists'),
+				_0: A2(_Gizra$elm_spa_exmple$Contact_View$viewContactFilter, language, model.filter),
 				_1: {
 					ctor: '::',
-					_0: A2(_Gizra$elm_spa_exmple$Contact_View$viewContacts, language, model.contacts),
+					_0: A2(_Gizra$elm_spa_exmple$Contact_View$viewContacts, language, model),
 					_1: {ctor: '[]'}
 				}
 			});
