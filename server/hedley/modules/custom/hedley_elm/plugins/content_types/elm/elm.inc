@@ -26,11 +26,21 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   drupal_add_js(drupal_get_path('module', 'hedley_elm') . '/Main.js');
   drupal_add_js(drupal_get_path('module', 'hedley_elm') . '/elm.js');
 
+  $page = $conf['page'];
+
+  $values = [];
+  switch ($page) {
+    case 'contact':
+      $values = hedley_elm_elm_get_contacts();
+
+  }
+
+
   // Add settings.
   $settings = [
     'elm' => [
-      'page' => $conf['page'],
-      'values' => [],
+      'page' => $page,
+      'values' => $values,
     ],
   ];
   drupal_add_js($settings, 'setting');
@@ -40,6 +50,28 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   return $block;
 }
 
+/**
+ * Return contacts.
+ *
+ * @todo: Remove hardcoding.
+ *
+ * @return array
+ *   Array with the contacts list.
+ */
+function hedley_elm_elm_get_contacts() {
+  return [
+    1 => [
+      'name_arabic' => 'foo',
+      'name_hebrew' => 'bar',
+      'phone' => '1234',
+    ],
+    2 => [
+      'name_arabic' => 'nik',
+      'phone' => '5678',
+    ]
+  ];
+
+}
 /**
  * Edit form.
  */
