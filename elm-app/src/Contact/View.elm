@@ -33,11 +33,18 @@ viewContacts language contacts =
                 ((getContactsByLanguage language contacts)
                     |> DictList.map
                         (\_ contact ->
-                            ul
-                                []
-                                [ li [] [ text <| getContactNameByLanguage language contact ]
-                                , showMaybe <| Maybe.map (\phone -> li [] [ text phone ]) contact.phone
-                                ]
+                            viewContact language contact
                         )
                     |> DictList.values
                 )
+
+
+{-| View a single contact.
+-}
+viewContact : Language -> Contact -> Html msg
+viewContact language contact =
+    ul
+        []
+        [ li [] [ text <| getContactNameByLanguage language contact ]
+        , showMaybe <| Maybe.map (\phone -> li [] [ text phone ]) contact.phone
+        ]

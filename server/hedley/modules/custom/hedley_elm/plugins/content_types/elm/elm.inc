@@ -60,6 +60,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
  *   Array with the contacts list.
  */
 function hedley_elm_elm_get_contacts() {
+  return [];
   return [
     [
       'id' => 100,
