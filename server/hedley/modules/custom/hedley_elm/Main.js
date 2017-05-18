@@ -8863,6 +8863,7 @@ var _Gizra$elm_spa_exmple$Contact_Update$update = F2(
 			model,
 			{ctor: '[]'});
 	});
+var _Gizra$elm_spa_exmple$Contact_Update$contacts = _elm_lang$core$Native_Platform.incomingPort('contacts', _elm_lang$core$Json_Decode$value);
 
 var _Gizra$elm_spa_exmple$App_Update$update = F2(
 	function (msg, model) {

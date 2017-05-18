@@ -27,7 +27,12 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   drupal_add_js(drupal_get_path('module', 'hedley_elm') . '/elm.js');
 
   // Add settings.
-  $settings = ['elm' => ['page' => $conf['page']]];
+  $settings = [
+    'elm' => [
+      'page' => $conf['page'],
+      'values' => [],
+    ],
+  ];
   drupal_add_js($settings, 'setting');
 
   $block->content = '<div id="elm-app"></div>';
