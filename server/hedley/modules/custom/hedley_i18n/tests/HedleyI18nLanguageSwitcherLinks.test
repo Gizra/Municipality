@@ -42,39 +42,80 @@ class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
    * Test getting language switcher links.
    */
   public function testLanguageSwitchLinks() {
-    // Create a language object.
-    global $language;
-    $language_object = clone $language;
+    // Create a dummy Arabic language object.
+    $language_object = new stdClass();
+    $language_object->language = 'ar';
+
+    // Set language negotiation options (necessary for
+    // `language_negotiation_get_switch_links` to work).
+    variable_set('language_types', drupal_language_types() + array('language_custom' => TRUE));
+    variable_set('language_negotiation_' . LANGUAGE_TYPE_INTERFACE, locale_language_negotiation_info());
+    variable_set('language_negotiation_' . LANGUAGE_TYPE_CONTENT, locale_language_negotiation_info());
+    variable_set('language_negotiation_' . LANGUAGE_TYPE_URL, locale_language_negotiation_info());
 
     // List the expected languages.
-    $expected_languages = ['ar', 'en'];
+    $expected_languages = ['ar', 'he'];
 
-    // Create a group with the default language (English).
-    $settings = [
-      'language' => $language_object->language,
-      'type' => 'municipality',
-      'body' => array($language_object->language => array(array())),
-    ];
-    $node = $this->drupalCreateNode($settings);
-
-    debug($node);
+    // Create a municipality with a specific language (Arabic).
+    $source = $this->createNode('municipality', $this->randomName(), $language_object->language);
 
     // Add translations to the node.
-    $handler = entity_translation_get_handler('node', $node);
+    $factory = EntityTranslationHandlerFactory::getInstance();
+    $handler = $factory->getHandler('node', $source);
+
+    // Add Arabic translation.
     $translation = array(
       'translate' => 0,
       'status' => 1,
       'language' => 'ar',
-      'source' => $node->language,
+      'source' => $source->language,
     );
-    $handler->setTranslation($translation, $node);
+    $handler->setTranslation($translation, $source);
 
-    $path_node = 'node/' . $node->nid;
+    // Add Hebrew translation.
+    $translation = array(
+      'translate' => 0,
+      'status' => 1,
+      'language' => 'he',
+      'source' => $source->language,
+    );
+    $handler->setTranslation($translation, $source);
 
-    // And then you can check the array you get by calling.
-    $rendered_links = hedley_i18n_language_get_switch_links($language_object, node_load($node->nid), $path_node);
+    $path_node = 'node/' . $source->nid;
 
-    $this->assertEqual(array_keys($rendered_links), $expected_languages, 'Expected languages are NOT displayed.');
+    // Get the language switcher links (loading the node to get the
+    // translations we sat above.)
+    $rendered_links = hedley_i18n_language_get_switch_links($language_object, node_load($source->nid), $path_node);
+
+    $this->assertEqual(array_keys($rendered_links), $expected_languages, t('Expected languages are displayed.'));
+  }
+
+  /**
+   * Create a node of the specified type in the specified language.
+   *
+   * @param $type
+   *   The node type.
+   * @param $title
+   *   Title of node in specified language.
+   * @param $langcode
+   *   Language code.
+   *
+   * @return object
+   *   The created node object.
+   */
+  protected function createNode($type, $title, $langcode) {
+    $node = new stdClass();
+    $node->type = $type;
+    node_object_prepare($node);
+    $node->title = $title;
+    $node->language = $langcode;
+    node_save($node);
+
+    // Check to make sure the node was created.
+    $node = $this->drupalGetNodeByTitle($title);
+    $this->assertTrue($node, t('Node found in database.'));
+
+    return $node;
   }
 
 }
