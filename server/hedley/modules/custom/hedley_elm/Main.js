@@ -7122,8 +7122,8 @@ var _Gizra$elm_dictlist$DictList$unsafeGet = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'DictList',
 				{
-					start: {line: 950, column: 5},
-					end: {line: 955, column: 78}
+					start: {line: 1046, column: 5},
+					end: {line: 1051, column: 78}
 				},
 				_p0)('Internal error: DictList list not in sync with dict');
 		}
@@ -7148,8 +7148,8 @@ var _Gizra$elm_dictlist$DictList$foldr = F3(
 					return _elm_lang$core$Native_Utils.crashCase(
 						'DictList',
 						{
-							start: {line: 853, column: 13},
-							end: {line: 858, column: 86}
+							start: {line: 863, column: 13},
+							end: {line: 868, column: 86}
 						},
 						_p8)('Internal error: DictList list not in sync with dict');
 				}
@@ -7727,6 +7727,16 @@ var _Gizra$elm_dictlist$DictList$intersect = F2(
 				}),
 			t1);
 	});
+var _Gizra$elm_dictlist$DictList$removeWhen = F2(
+	function (pred, dict) {
+		return A2(
+			_Gizra$elm_dictlist$DictList$filter,
+			F2(
+				function (k, v) {
+					return !A2(pred, k, v);
+				}),
+			dict);
+	});
 var _Gizra$elm_dictlist$DictList$partition = F2(
 	function (predicate, dict) {
 		var add = F3(
@@ -7786,6 +7796,52 @@ var _Gizra$elm_dictlist$DictList$decodeArray = F2(
 			},
 			_elm_lang$core$Json_Decode$list(valueDecoder));
 	});
+var _Gizra$elm_dictlist$DictList$fromListBy = F2(
+	function (keyfn, xs) {
+		return A3(
+			_elm_lang$core$List$foldl,
+			F2(
+				function (x, acc) {
+					return A3(
+						_Gizra$elm_dictlist$DictList$insert,
+						keyfn(x),
+						x,
+						acc);
+				}),
+			_Gizra$elm_dictlist$DictList$empty,
+			xs);
+	});
+var _Gizra$elm_dictlist$DictList$keepOnly = F2(
+	function (set, dict) {
+		return A3(
+			_elm_lang$core$Set$foldl,
+			F2(
+				function (k, acc) {
+					return A2(
+						_elm_lang$core$Maybe$withDefault,
+						acc,
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (v) {
+								return A3(_Gizra$elm_dictlist$DictList$insert, k, v, acc);
+							},
+							A2(_Gizra$elm_dictlist$DictList$get, k, dict)));
+				}),
+			_Gizra$elm_dictlist$DictList$empty,
+			set);
+	});
+var _Gizra$elm_dictlist$DictList$mapKeys = F2(
+	function (keyMapper, dict) {
+		var addKey = F3(
+			function (key, value, d) {
+				return A3(
+					_Gizra$elm_dictlist$DictList$insert,
+					keyMapper(key),
+					value,
+					d);
+			});
+		return A3(_Gizra$elm_dictlist$DictList$foldl, addKey, _Gizra$elm_dictlist$DictList$empty, dict);
+	});
 var _Gizra$elm_dictlist$DictList$remove = F2(
 	function (key, dictList) {
 		var _p101 = dictList;
@@ -7805,6 +7861,37 @@ var _Gizra$elm_dictlist$DictList$update = F3(
 			return A3(_Gizra$elm_dictlist$DictList$insert, key, _p103._0, dictList);
 		}
 	});
+var _Gizra$elm_dictlist$DictList$groupBy = F2(
+	function (keyfn, list) {
+		return A3(
+			_elm_lang$core$List$foldr,
+			F2(
+				function (x, acc) {
+					return A3(
+						_Gizra$elm_dictlist$DictList$update,
+						keyfn(x),
+						function (_p104) {
+							return _elm_lang$core$Maybe$Just(
+								A2(
+									_elm_lang$core$Maybe$withDefault,
+									{
+										ctor: '::',
+										_0: x,
+										_1: {ctor: '[]'}
+									},
+									A2(
+										_elm_lang$core$Maybe$map,
+										F2(
+											function (x, y) {
+												return {ctor: '::', _0: x, _1: y};
+											})(x),
+										_p104)));
+						},
+						acc);
+				}),
+			_Gizra$elm_dictlist$DictList$empty,
+			list);
+	});
 var _Gizra$elm_dictlist$DictList$diff = F2(
 	function (t1, t2) {
 		return A3(
@@ -7815,6 +7902,17 @@ var _Gizra$elm_dictlist$DictList$diff = F2(
 				}),
 			t1,
 			t2);
+	});
+var _Gizra$elm_dictlist$DictList$removeMany = F2(
+	function (set, dict) {
+		return A3(
+			_elm_lang$core$Set$foldl,
+			F2(
+				function (k, acc) {
+					return A2(_Gizra$elm_dictlist$DictList$remove, k, acc);
+				}),
+			dict,
+			set);
 	});
 var _Gizra$elm_dictlist$DictList$singleton = F2(
 	function (key, value) {
@@ -7828,12 +7926,12 @@ var _Gizra$elm_dictlist$DictList$singleton = F2(
 			});
 	});
 var _Gizra$elm_dictlist$DictList$map = F2(
-	function (func, _p104) {
-		var _p105 = _p104;
+	function (func, _p105) {
+		var _p106 = _p105;
 		return A2(
 			_Gizra$elm_dictlist$DictList$DictList,
-			A2(_elm_lang$core$Dict$map, func, _p105._0),
-			_p105._1);
+			A2(_elm_lang$core$Dict$map, func, _p106._0),
+			_p106._1);
 	});
 var _Gizra$elm_dictlist$DictList$fromDict = function (dict) {
 	return A2(
@@ -8939,6 +9037,22 @@ var _NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required = F3(
 			decoder);
 	});
 
+var _Gizra$elm_spa_exmple$Utils_Json$decodeIntAsString = _elm_lang$core$Json_Decode$oneOf(
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$core$Json_Decode$andThen,
+			function (val) {
+				return _elm_lang$core$Json_Decode$succeed(
+					_elm_lang$core$Basics$toString(val));
+			},
+			_elm_lang$core$Json_Decode$int),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$core$Json_Decode$string,
+			_1: {ctor: '[]'}
+		}
+	});
 var _Gizra$elm_spa_exmple$Utils_Json$decodeEmptyArrayAs = function ($default) {
 	return A2(
 		_elm_lang$core$Json_Decode$andThen,
@@ -8978,28 +9092,28 @@ var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContact = A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
 		_Gizra$elm_spa_exmple$Contact_Decoder$decodeNames,
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Contact)));
+var _Gizra$elm_spa_exmple$Contact_Decoder$decodeArray2 = F2(
+	function (keyDecoder, valueDecoder) {
+		return A2(
+			_elm_lang$core$Json_Decode$map,
+			_Gizra$elm_dictlist$DictList$fromList,
+			_elm_lang$core$Json_Decode$list(
+				A3(
+					_elm_lang$core$Json_Decode$map2,
+					F2(
+						function (v0, v1) {
+							return {ctor: '_Tuple2', _0: v0, _1: v1};
+						}),
+					keyDecoder,
+					valueDecoder)));
+	});
 var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContacts = _elm_lang$core$Json_Decode$oneOf(
 	{
 		ctor: '::',
 		_0: A2(
-			_Gizra$elm_dictlist$DictList$decodeKeysAndValues,
-			A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (values) {
-					return _elm_lang$core$Json_Decode$succeed(
-						A2(_elm_lang$core$List$map, _elm_lang$core$Tuple$first, values));
-				},
-				_elm_lang$core$Json_Decode$keyValuePairs(_Gizra$elm_spa_exmple$Contact_Decoder$decodeContact)),
-			function (id) {
-				return A2(
-					_elm_lang$core$Json_Decode$at,
-					{
-						ctor: '::',
-						_0: id,
-						_1: {ctor: '[]'}
-					},
-					_Gizra$elm_spa_exmple$Contact_Decoder$decodeContact);
-			}),
+			_Gizra$elm_spa_exmple$Contact_Decoder$decodeArray2,
+			A2(_elm_lang$core$Json_Decode$field, 'id', _Gizra$elm_spa_exmple$Utils_Json$decodeIntAsString),
+			_Gizra$elm_spa_exmple$Contact_Decoder$decodeContact),
 		_1: {
 			ctor: '::',
 			_0: _Gizra$elm_spa_exmple$Utils_Json$decodeEmptyArrayAs(_Gizra$elm_dictlist$DictList$empty),
