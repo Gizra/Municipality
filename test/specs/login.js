@@ -9,6 +9,6 @@ describe('login page', function() {
         browser.setValueSafe('#edit-pass', 'wrong-pass');
         browser.submitForm('#user-login');
 
-        browser.waitForVisible('.ui.message.error');
+        browser.waitForVisible('.ui.message.errorNOERROR');
     });
 });
