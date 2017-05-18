@@ -220,8 +220,11 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     // Get the user types switcher.
     $languages_element = $page->find('css', '.background .languages');
 
+    // Sometimes we want to check that the links are not displayed therefor
+    // there will be an empty variable.
     $languages_array = $languages ? explode(',', $languages) : [];
 
+    // Check that the element has the correct links.
     $this->checkLinksExistInElement($languages_element, 'languages', $languages_array);
   }
 
@@ -234,8 +237,11 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     // Get the user types switcher.
     $user_type_element = $page->find('css', '.background .user-types');
 
+    // Sometimes we want to check that the links are not displayed therefor
+    // there will be an empty variable.
     $user_types_array = $user_types ? explode(',', $user_types) : [];
 
+    // Check that the element has the correct links.
     $this->checkLinksExistInElement($user_type_element, 'user type', $user_types_array);
   }
 
@@ -391,18 +397,18 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    */
   protected function checkLinksExistInElement($element, $element_name, array $links) {
     if (empty($links)) {
-      // There shouldn't be a user types switcher on the page.
+      // There shouldn't be an element on the page at all.
       if ($element !== null) {
         throw new \Exception(format_string('The @element_name element is present on the page when it should be hidden.', ['@element_name' => $element_name]));
       }
 
-      // If there're no links present then the test has passed.
+      // If the element is not present then the test has passed.
       return;
     }
 
     foreach ($links as $link) {
       if (!strpos($element->getHtml(), $link)) {
-        // Throw an error if one fo the links is missing.
+        // Throw an error if one of the expected links is missing.
         throw new \Exception(format_string('The @element_name @link is NOT present on the page.', ['@element_name' => $element_name, '@link' => $link]));
       }
     }
