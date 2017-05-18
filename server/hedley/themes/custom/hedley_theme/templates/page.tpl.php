@@ -40,9 +40,11 @@
 
     <div class="ui row">
 
-      <div class="ui four wide column user-types">
-        <?php print $user_type_links; ?>
-      </div>
+      <?php if ($user_type_links): ?>
+        <div class="ui four wide column user-types">
+          <?php print $user_type_links; ?>
+        </div>
+      <?php endif; ?>
 
       <div class="ui eight wide center aligned column">
         <?php print render($social_links); ?>

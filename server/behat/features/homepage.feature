@@ -15,8 +15,23 @@ Feature: Homepage
       | عرعرة                   | العربية  | Residents AR |
       | المجلس الإقليمي للالسحرية | العربية  | Residents AR |
 
+
   @api
-  Scenario Outline: Verify that the Municipality shows the default language and user type
+  Scenario Outline: Verify that the Municipality shows the right links on the language switcher
+    Given I am an anonymous user
+    When I visit a "<municipality>" website homepage with no parameters in URL
+    Then I should see "<languages>" menu only with languages with content for the current Municipality
+
+    Examples:
+      | municipality            | languages     |
+      | طوبا الزنغرية           | العربية,עברית |
+      | عرعرة                   | العربية,עברית |
+      | المجلس الإقليمي للالسحرية | العربية,עברית |
+      | קריית מלאכי              |               |
+
+
+  @api
+  Scenario Outline: Verify that the Municipality shows the right links on the user type switcher
     Given I am an anonymous user
     When I visit a "<municipality>" website homepage with no parameters in URL
     Then I should see "<user types>" menu only for user types with content for the current Municipality

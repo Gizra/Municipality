@@ -212,6 +212,20 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
+   * @Then I should see :languages menu only with languages with content for the current Municipality
+   */
+  public function iShouldSeeMenuOnlyWithLanguagesWithContentForTheCurrentMunicipality($languages) {
+    $page = $this->getSession()->getPage();
+
+    // Get the user types switcher.
+    $languages_element = $page->find('css', '.background .languages');
+
+    $languages_array = $languages ? explode(',', $languages) : [];
+
+    $this->checkLinksExistInElement($languages_element, 'languages', $languages_array);
+  }
+
+  /**
    * @Then I should see :user_types menu only for user types with content for the current Municipality
    */
   public function iShouldSeeMenuOnlyForUserTypesWithContentForTheCurrentMunicipality($user_types) {
@@ -220,25 +234,9 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     // Get the user types switcher.
     $user_type_element = $page->find('css', '.background .user-types');
 
-    if (!$user_types) {
-      // There shouldn't be a user types switcher on the page.
-      if (!empty($user_type_element->findAll('css', '.item'))) {
-        throw new \Exception('The user type element is present on the page when it should be hidden.');
-      }
+    $user_types_array = $user_types ? explode(',', $user_types) : [];
 
-      // If there's links are present then the test has passed.
-      return;
-    }
-
-    // Check that we have the expected user types.
-    $user_types_array = explode(',', $user_types);
-
-    foreach ($user_types_array as $user_type) {
-      if (!strpos($user_type_element->getHtml(), $user_type)) {
-        // Throw an error if one fo the links is missing.
-        throw new \Exception(format_string('The user type @user_type is NOT present on the page.', array('@user_type' => $user_type)));
-      }
-    }
+    $this->checkLinksExistInElement($user_type_element, 'user type', $user_types_array);
   }
 
   /**
@@ -268,8 +266,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
       throw new \Exception('The title element is missing.');
     }
     if ($title_element->getText() !== $title) {
-      $params = array('@title' => $title);
-      throw new \Exception(format_string('The title is not "@title".', $params));
+      throw new \Exception(format_string('The title is not "@title".', ['@title' => $title]));
     }
 
     // Check some text on the municipality page.
@@ -278,8 +275,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
       throw new \Exception('The required text element is missing.');
     }
     if ($text_element->getText() !== $text) {
-      $params = array('@text' => $text);
-      throw new \Exception(format_string('There\'s no text matching "@text".', $params));
+      throw new \Exception(format_string('There\'s no text matching "@text".', ['@text' => $text]));
     }
 
     // Check if the given language is the active one on the page.
@@ -381,6 +377,38 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
+   * Check that a list of links exist inside an element.
+   *
+   * @param object $element
+   *   An element extracted from the current page.
+   * @param string $element_name
+   *   The name of the element.
+   *   i.e. languages, user type, FAQ.
+   * @param array $links
+   *   An array of links' titles.
+   *
+   * @throws \Exception
+   */
+  protected function checkLinksExistInElement($element, $element_name, array $links) {
+    if (empty($links)) {
+      // There shouldn't be a user types switcher on the page.
+      if ($element !== null) {
+        throw new \Exception(format_string('The @element_name element is present on the page when it should be hidden.', ['@element_name' => $element_name]));
+      }
+
+      // If there're no links present then the test has passed.
+      return;
+    }
+
+    foreach ($links as $link) {
+      if (!strpos($element->getHtml(), $link)) {
+        // Throw an error if one fo the links is missing.
+        throw new \Exception(format_string('The @element_name @link is NOT present on the page.', ['@element_name' => $element_name, '@link' => $link]));
+      }
+    }
+  }
+
+  /**
    * Checks if a given language is the active language in the switcher.
    *
    * @param $language
@@ -405,8 +433,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $condition = $selector == 'text' ? $language_active_link->getText() === $language : strpos($language_active_link->getAttribute($selector), $language);
 
     if (!$condition) {
-      $params = array('@language' => $language);
-      throw new \Exception(format_string('Active language is not "@language".', $params));
+      throw new \Exception(format_string('Active language is not "@language".', ['@language' => $language]));
     }
   }
 
@@ -435,8 +462,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $condition = $selector == 'text' ? $user_type_active_link->getText() === $user_type : strpos($user_type_active_link->getAttribute($selector), $user_type);
 
     if (!$condition) {
-      $params = array('@user_type' => $user_type);
-      throw new \Exception(format_string('Active user type is not "@user_type".', $params));
+      throw new \Exception(format_string('Active user type is not "@user_type".', ['@user_type' => $user_type]));
     }
   }
 
