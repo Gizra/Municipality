@@ -18,7 +18,6 @@ $plugin = [
  * Render callback.
  */
 function hedley_topic_topic_events_content_type_render($subtype, $conf, $args, $context) {
-  global $language;
   if (empty($context->data)) {
     return NULL;
   }
