@@ -15,8 +15,12 @@ type Msg
     = NoOp
 
 
+
+-- @todo: Adapt flags.
+
+
 type alias Flags =
-    { randomNumbers : List Int
+    { page : String
     }
 
 

@@ -8831,7 +8831,7 @@ var _eeue56$elm_all_dict$EveryDict$diff = F2(
 
 var _Gizra$elm_spa_exmple$App_Model$emptyModel = {language: _Gizra$elm_spa_exmple$App_Types$Hebrew, page: _Gizra$elm_spa_exmple$App_Types$Contact};
 var _Gizra$elm_spa_exmple$App_Model$Flags = function (a) {
-	return {randomNumbers: a};
+	return {page: a};
 };
 var _Gizra$elm_spa_exmple$App_Model$Model = F2(
 	function (a, b) {
@@ -11355,12 +11355,13 @@ var _elm_lang$html$Html_Events$Options = F2(
 	});
 
 var _Gizra$elm_spa_exmple$App_View$view = function (model) {
+	var _p0 = model.page;
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html$text('App'),
+			_0: _elm_lang$html$Html$text('This is the Elm App!'),
 			_1: {ctor: '[]'}
 		});
 };
@@ -11374,14 +11375,11 @@ var _Gizra$elm_spa_exmple$Main$main = _elm_lang$html$Html$programWithFlags(
 	})(
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
-		function (randomNumbers) {
+		function (page) {
 			return _elm_lang$core$Json_Decode$succeed(
-				{randomNumbers: randomNumbers});
+				{page: page});
 		},
-		A2(
-			_elm_lang$core$Json_Decode$field,
-			'randomNumbers',
-			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$int))));
+		A2(_elm_lang$core$Json_Decode$field, 'page', _elm_lang$core$Json_Decode$string)));
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};

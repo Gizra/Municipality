@@ -13,4 +13,4 @@ view : Model -> Html Msg
 view model =
     case model.page of
         Contact ->
-            div [] [ text "App" ]
+            div [] [ text "This is the Elm App!" ]
