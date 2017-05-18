@@ -18,7 +18,6 @@ decodeContacts =
                 |> andThen (\values -> succeed (List.map Tuple.first values))
             )
             (\id -> at [ id ] decodeContact)
-          -- (\id -> decodeContact)
         , decodeEmptyArrayAs DictList.empty
         ]
 
