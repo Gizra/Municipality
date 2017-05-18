@@ -7855,9 +7855,9 @@ var _Gizra$elm_spa_exmple$Contact_Model$Names = F3(
 	function (a, b, c) {
 		return {arabic: a, english: b, hebrew: c};
 	});
-var _Gizra$elm_spa_exmple$Contact_Model$Contact = F3(
-	function (a, b, c) {
-		return {name: a, phone: b, email: c};
+var _Gizra$elm_spa_exmple$Contact_Model$Contact = F2(
+	function (a, b) {
+		return {name: a, phone: b};
 	});
 var _Gizra$elm_spa_exmple$Contact_Model$HandleContacts = function (a) {
 	return {ctor: 'HandleContacts', _0: a};
@@ -8857,13 +8857,150 @@ var _Gizra$elm_spa_exmple$App_Model$MsgPagesContact = function (a) {
 	return {ctor: 'MsgPagesContact', _0: a};
 };
 
+var _NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode = _elm_lang$core$Json_Decode$succeed;
+var _NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$resolve = _elm_lang$core$Json_Decode$andThen(_elm_lang$core$Basics$identity);
+var _NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom = _elm_lang$core$Json_Decode$map2(
+	F2(
+		function (x, y) {
+			return y(x);
+		}));
+var _NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$hardcoded = function (_p0) {
+	return _NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom(
+		_elm_lang$core$Json_Decode$succeed(_p0));
+};
+var _NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optionalDecoder = F3(
+	function (pathDecoder, valDecoder, fallback) {
+		var nullOr = function (decoder) {
+			return _elm_lang$core$Json_Decode$oneOf(
+				{
+					ctor: '::',
+					_0: decoder,
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Json_Decode$null(fallback),
+						_1: {ctor: '[]'}
+					}
+				});
+		};
+		var handleResult = function (input) {
+			var _p1 = A2(_elm_lang$core$Json_Decode$decodeValue, pathDecoder, input);
+			if (_p1.ctor === 'Ok') {
+				var _p2 = A2(
+					_elm_lang$core$Json_Decode$decodeValue,
+					nullOr(valDecoder),
+					_p1._0);
+				if (_p2.ctor === 'Ok') {
+					return _elm_lang$core$Json_Decode$succeed(_p2._0);
+				} else {
+					return _elm_lang$core$Json_Decode$fail(_p2._0);
+				}
+			} else {
+				return _elm_lang$core$Json_Decode$succeed(fallback);
+			}
+		};
+		return A2(_elm_lang$core$Json_Decode$andThen, handleResult, _elm_lang$core$Json_Decode$value);
+	});
+var _NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optionalAt = F4(
+	function (path, valDecoder, fallback, decoder) {
+		return A2(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optionalDecoder,
+				A2(_elm_lang$core$Json_Decode$at, path, _elm_lang$core$Json_Decode$value),
+				valDecoder,
+				fallback),
+			decoder);
+	});
+var _NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional = F4(
+	function (key, valDecoder, fallback, decoder) {
+		return A2(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optionalDecoder,
+				A2(_elm_lang$core$Json_Decode$field, key, _elm_lang$core$Json_Decode$value),
+				valDecoder,
+				fallback),
+			decoder);
+	});
+var _NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt = F3(
+	function (path, valDecoder, decoder) {
+		return A2(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
+			A2(_elm_lang$core$Json_Decode$at, path, valDecoder),
+			decoder);
+	});
+var _NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required = F3(
+	function (key, valDecoder, decoder) {
+		return A2(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
+			A2(_elm_lang$core$Json_Decode$field, key, valDecoder),
+			decoder);
+	});
+
+var _Gizra$elm_spa_exmple$Utils_Json$decodeEmptyArrayAs = function ($default) {
+	return A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (list) {
+			var length = _elm_lang$core$List$length(list);
+			return _elm_lang$core$Native_Utils.eq(length, 0) ? _elm_lang$core$Json_Decode$succeed($default) : _elm_lang$core$Json_Decode$fail(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'Expected an empty array, not an array with length: ',
+					_elm_lang$core$Basics$toString(length)));
+		},
+		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value));
+};
+
+var _Gizra$elm_spa_exmple$Contact_Decoder$decodeNames = A4(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+	'name_hebrew',
+	_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+	_elm_lang$core$Maybe$Nothing,
+	A4(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+		'name_english',
+		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+		_elm_lang$core$Maybe$Nothing,
+		A4(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+			'name_arabic',
+			_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+			_elm_lang$core$Maybe$Nothing,
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Names))));
+var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContact = A4(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+	'phone',
+	_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+	_elm_lang$core$Maybe$Nothing,
+	A2(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
+		_Gizra$elm_spa_exmple$Contact_Decoder$decodeNames,
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Contact)));
+var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContacts = _elm_lang$core$Json_Decode$oneOf(
+	{
+		ctor: '::',
+		_0: A2(
+			_Gizra$elm_dictlist$DictList$decodeKeysAndValues,
+			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string),
+			function (id) {
+				return _Gizra$elm_spa_exmple$Contact_Decoder$decodeContact;
+			}),
+		_1: {
+			ctor: '::',
+			_0: _Gizra$elm_spa_exmple$Utils_Json$decodeEmptyArrayAs(_Gizra$elm_dictlist$DictList$empty),
+			_1: {ctor: '[]'}
+		}
+	});
+
 var _Gizra$elm_spa_exmple$Contact_Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
 		if (_p0._0.ctor === 'Ok') {
 			return A2(
 				_elm_lang$core$Platform_Cmd_ops['!'],
-				model,
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{contacts: _p0._0._0}),
 				{ctor: '[]'});
 		} else {
 			var _p1 = A2(_elm_lang$core$Debug$log, 'HandleContacts', _p0._0._0);
@@ -8874,6 +9011,11 @@ var _Gizra$elm_spa_exmple$Contact_Update$update = F2(
 		}
 	});
 var _Gizra$elm_spa_exmple$Contact_Update$contacts = _elm_lang$core$Native_Platform.incomingPort('contacts', _elm_lang$core$Json_Decode$value);
+var _Gizra$elm_spa_exmple$Contact_Update$subscriptions = _Gizra$elm_spa_exmple$Contact_Update$contacts(
+	function (_p2) {
+		return _Gizra$elm_spa_exmple$Contact_Model$HandleContacts(
+			A2(_elm_lang$core$Json_Decode$decodeValue, _Gizra$elm_spa_exmple$Contact_Decoder$decodeContacts, _p2));
+	});
 
 var _Gizra$elm_spa_exmple$App_Update$update = F2(
 	function (msg, model) {
@@ -11396,14 +11538,26 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _Gizra$elm_spa_exmple$Contact_View$view = function (contacts) {
+var _Gizra$elm_spa_exmple$Contact_View$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html$text('Contact lists'),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$pre,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							_elm_lang$core$Basics$toString(model)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
 		});
 };
 

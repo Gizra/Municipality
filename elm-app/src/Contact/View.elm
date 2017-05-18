@@ -7,5 +7,8 @@ import Html.Events exposing (onClick)
 
 
 view : Model -> Html msg
-view contacts =
-    div [] [ text "Contact lists" ]
+view model =
+    div []
+        [ text "Contact lists"
+        , pre [] [ text <| toString model ]
+        ]
