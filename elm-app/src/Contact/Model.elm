@@ -29,15 +29,8 @@ type alias ContactId =
     String
 
 
-type alias Names =
-    { arabic : Maybe Name
-    , english : Maybe Name
-    , hebrew : Maybe Name
-    }
-
-
 type alias Contact =
-    { names : Names
+    { name : Name
     , phone : Maybe String
     }
 

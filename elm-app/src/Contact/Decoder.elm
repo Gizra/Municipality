@@ -3,7 +3,7 @@ module Contact.Decoder
         ( decodeContacts
         )
 
-import Contact.Model exposing (Contact, DictListContact, Names)
+import Contact.Model exposing (Contact, DictListContact)
 import DictList exposing (DictList, decodeArray, empty)
 import Json.Decode exposing (Decoder, at, andThen, dict, int, index, keyValuePairs, fail, field, float, list, map, map2, nullable, oneOf, string, succeed)
 import Json.Decode.Pipeline exposing (custom, decode, optional, optionalAt, required, requiredAt)
@@ -31,13 +31,5 @@ decodeContacts =
 decodeContact : Decoder Contact
 decodeContact =
     decode Contact
-        |> custom decodeNames
+        |> required "name" string
         |> optional "phone" (nullable string) Nothing
-
-
-decodeNames : Decoder Names
-decodeNames =
-    decode Names
-        |> optional "name_arabic" (nullable string) Nothing
-        |> optional "name_english" (nullable string) Nothing
-        |> optional "name_hebrew" (nullable string) Nothing

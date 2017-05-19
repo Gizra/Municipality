@@ -7951,13 +7951,9 @@ var _Gizra$elm_spa_exmple$Contact_Model$Model = F2(
 	function (a, b) {
 		return {contacts: a, filter: b};
 	});
-var _Gizra$elm_spa_exmple$Contact_Model$Names = F3(
-	function (a, b, c) {
-		return {arabic: a, english: b, hebrew: c};
-	});
 var _Gizra$elm_spa_exmple$Contact_Model$Contact = F2(
 	function (a, b) {
-		return {names: a, phone: b};
+		return {name: a, phone: b};
 	});
 var _Gizra$elm_spa_exmple$Contact_Model$SetFilter = function (a) {
 	return {ctor: 'SetFilter', _0: a};
@@ -9071,30 +9067,15 @@ var _Gizra$elm_spa_exmple$Utils_Json$decodeEmptyArrayAs = function ($default) {
 		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value));
 };
 
-var _Gizra$elm_spa_exmple$Contact_Decoder$decodeNames = A4(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-	'name_hebrew',
-	_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
-	_elm_lang$core$Maybe$Nothing,
-	A4(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-		'name_english',
-		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
-		_elm_lang$core$Maybe$Nothing,
-		A4(
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-			'name_arabic',
-			_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
-			_elm_lang$core$Maybe$Nothing,
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Names))));
 var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContact = A4(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 	'phone',
 	_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 	_elm_lang$core$Maybe$Nothing,
-	A2(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
-		_Gizra$elm_spa_exmple$Contact_Decoder$decodeNames,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'name',
+		_elm_lang$core$Json_Decode$string,
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Contact)));
 var _Gizra$elm_spa_exmple$Contact_Decoder$decodeArray2 = F2(
 	function (keyDecoder, valueDecoder) {
@@ -9211,238 +9192,6 @@ var _Gizra$elm_spa_exmple$App_Update$init = function (flags) {
 		_1: _elm_lang$core$Platform_Cmd$none
 	};
 };
-
-var _elm_community$maybe_extra$Maybe_Extra$foldrValues = F2(
-	function (item, list) {
-		var _p0 = item;
-		if (_p0.ctor === 'Nothing') {
-			return list;
-		} else {
-			return {ctor: '::', _0: _p0._0, _1: list};
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$values = A2(
-	_elm_lang$core$List$foldr,
-	_elm_community$maybe_extra$Maybe_Extra$foldrValues,
-	{ctor: '[]'});
-var _elm_community$maybe_extra$Maybe_Extra$filter = F2(
-	function (f, m) {
-		var _p1 = A2(_elm_lang$core$Maybe$map, f, m);
-		if ((_p1.ctor === 'Just') && (_p1._0 === true)) {
-			return m;
-		} else {
-			return _elm_lang$core$Maybe$Nothing;
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$traverseArray = function (f) {
-	var step = F2(
-		function (e, acc) {
-			var _p2 = f(e);
-			if (_p2.ctor === 'Nothing') {
-				return _elm_lang$core$Maybe$Nothing;
-			} else {
-				return A2(
-					_elm_lang$core$Maybe$map,
-					_elm_lang$core$Array$push(_p2._0),
-					acc);
-			}
-		});
-	return A2(
-		_elm_lang$core$Array$foldl,
-		step,
-		_elm_lang$core$Maybe$Just(_elm_lang$core$Array$empty));
-};
-var _elm_community$maybe_extra$Maybe_Extra$combineArray = _elm_community$maybe_extra$Maybe_Extra$traverseArray(_elm_lang$core$Basics$identity);
-var _elm_community$maybe_extra$Maybe_Extra$traverse = function (f) {
-	var step = F2(
-		function (e, acc) {
-			var _p3 = f(e);
-			if (_p3.ctor === 'Nothing') {
-				return _elm_lang$core$Maybe$Nothing;
-			} else {
-				return A2(
-					_elm_lang$core$Maybe$map,
-					F2(
-						function (x, y) {
-							return {ctor: '::', _0: x, _1: y};
-						})(_p3._0),
-					acc);
-			}
-		});
-	return A2(
-		_elm_lang$core$List$foldr,
-		step,
-		_elm_lang$core$Maybe$Just(
-			{ctor: '[]'}));
-};
-var _elm_community$maybe_extra$Maybe_Extra$combine = _elm_community$maybe_extra$Maybe_Extra$traverse(_elm_lang$core$Basics$identity);
-var _elm_community$maybe_extra$Maybe_Extra$maybeToArray = function (m) {
-	var _p4 = m;
-	if (_p4.ctor === 'Nothing') {
-		return _elm_lang$core$Array$empty;
-	} else {
-		return A2(_elm_lang$core$Array$repeat, 1, _p4._0);
-	}
-};
-var _elm_community$maybe_extra$Maybe_Extra$maybeToList = function (m) {
-	var _p5 = m;
-	if (_p5.ctor === 'Nothing') {
-		return {ctor: '[]'};
-	} else {
-		return {
-			ctor: '::',
-			_0: _p5._0,
-			_1: {ctor: '[]'}
-		};
-	}
-};
-var _elm_community$maybe_extra$Maybe_Extra$orElse = F2(
-	function (ma, mb) {
-		var _p6 = mb;
-		if (_p6.ctor === 'Nothing') {
-			return ma;
-		} else {
-			return mb;
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$orElseLazy = F2(
-	function (fma, mb) {
-		var _p7 = mb;
-		if (_p7.ctor === 'Nothing') {
-			return fma(
-				{ctor: '_Tuple0'});
-		} else {
-			return mb;
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$orLazy = F2(
-	function (ma, fmb) {
-		var _p8 = ma;
-		if (_p8.ctor === 'Nothing') {
-			return fmb(
-				{ctor: '_Tuple0'});
-		} else {
-			return ma;
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$or = F2(
-	function (ma, mb) {
-		var _p9 = ma;
-		if (_p9.ctor === 'Nothing') {
-			return mb;
-		} else {
-			return ma;
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$prev = _elm_lang$core$Maybe$map2(_elm_lang$core$Basics$always);
-var _elm_community$maybe_extra$Maybe_Extra$next = _elm_lang$core$Maybe$map2(
-	_elm_lang$core$Basics$flip(_elm_lang$core$Basics$always));
-var _elm_community$maybe_extra$Maybe_Extra$andMap = _elm_lang$core$Maybe$map2(
-	F2(
-		function (x, y) {
-			return y(x);
-		}));
-var _elm_community$maybe_extra$Maybe_Extra$unpack = F3(
-	function (d, f, m) {
-		var _p10 = m;
-		if (_p10.ctor === 'Nothing') {
-			return d(
-				{ctor: '_Tuple0'});
-		} else {
-			return f(_p10._0);
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$unwrap = F3(
-	function (d, f, m) {
-		var _p11 = m;
-		if (_p11.ctor === 'Nothing') {
-			return d;
-		} else {
-			return f(_p11._0);
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$isJust = function (m) {
-	var _p12 = m;
-	if (_p12.ctor === 'Nothing') {
-		return false;
-	} else {
-		return true;
-	}
-};
-var _elm_community$maybe_extra$Maybe_Extra$isNothing = function (m) {
-	var _p13 = m;
-	if (_p13.ctor === 'Nothing') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var _elm_community$maybe_extra$Maybe_Extra$join = function (mx) {
-	var _p14 = mx;
-	if (_p14.ctor === 'Just') {
-		return _p14._0;
-	} else {
-		return _elm_lang$core$Maybe$Nothing;
-	}
-};
-var _elm_community$maybe_extra$Maybe_Extra_ops = _elm_community$maybe_extra$Maybe_Extra_ops || {};
-_elm_community$maybe_extra$Maybe_Extra_ops['?'] = F2(
-	function (mx, x) {
-		return A2(_elm_lang$core$Maybe$withDefault, x, mx);
-	});
-
-var _Gizra$elm_spa_exmple$Contact_Utils$getContactNameByLanguage = F2(
-	function (language, contact) {
-		var property = function () {
-			var _p0 = language;
-			switch (_p0.ctor) {
-				case 'Arabic':
-					return function (_) {
-						return _.arabic;
-					};
-				case 'Hebrew':
-					return function (_) {
-						return _.hebrew;
-					};
-				default:
-					return function (_) {
-						return _.english;
-					};
-			}
-		}();
-		return A2(
-			_elm_lang$core$Maybe$withDefault,
-			'',
-			property(contact.names));
-	});
-var _Gizra$elm_spa_exmple$Contact_Utils$getContactsByLanguage = F2(
-	function (language, contacts) {
-		return A2(
-			_Gizra$elm_dictlist$DictList$filter,
-			F2(
-				function (_p1, contact) {
-					var property = function () {
-						var _p2 = language;
-						switch (_p2.ctor) {
-							case 'Arabic':
-								return function (_) {
-									return _.arabic;
-								};
-							case 'Hebrew':
-								return function (_) {
-									return _.hebrew;
-								};
-							default:
-								return function (_) {
-									return _.english;
-								};
-						}
-					}();
-					return _elm_community$maybe_extra$Maybe_Extra$isJust(
-						property(contact.names));
-				}),
-			contacts);
-	});
 
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrap;
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrapWithFlags;
@@ -11947,6 +11696,185 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
+var _elm_community$maybe_extra$Maybe_Extra$foldrValues = F2(
+	function (item, list) {
+		var _p0 = item;
+		if (_p0.ctor === 'Nothing') {
+			return list;
+		} else {
+			return {ctor: '::', _0: _p0._0, _1: list};
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$values = A2(
+	_elm_lang$core$List$foldr,
+	_elm_community$maybe_extra$Maybe_Extra$foldrValues,
+	{ctor: '[]'});
+var _elm_community$maybe_extra$Maybe_Extra$filter = F2(
+	function (f, m) {
+		var _p1 = A2(_elm_lang$core$Maybe$map, f, m);
+		if ((_p1.ctor === 'Just') && (_p1._0 === true)) {
+			return m;
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$traverseArray = function (f) {
+	var step = F2(
+		function (e, acc) {
+			var _p2 = f(e);
+			if (_p2.ctor === 'Nothing') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				return A2(
+					_elm_lang$core$Maybe$map,
+					_elm_lang$core$Array$push(_p2._0),
+					acc);
+			}
+		});
+	return A2(
+		_elm_lang$core$Array$foldl,
+		step,
+		_elm_lang$core$Maybe$Just(_elm_lang$core$Array$empty));
+};
+var _elm_community$maybe_extra$Maybe_Extra$combineArray = _elm_community$maybe_extra$Maybe_Extra$traverseArray(_elm_lang$core$Basics$identity);
+var _elm_community$maybe_extra$Maybe_Extra$traverse = function (f) {
+	var step = F2(
+		function (e, acc) {
+			var _p3 = f(e);
+			if (_p3.ctor === 'Nothing') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				return A2(
+					_elm_lang$core$Maybe$map,
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						})(_p3._0),
+					acc);
+			}
+		});
+	return A2(
+		_elm_lang$core$List$foldr,
+		step,
+		_elm_lang$core$Maybe$Just(
+			{ctor: '[]'}));
+};
+var _elm_community$maybe_extra$Maybe_Extra$combine = _elm_community$maybe_extra$Maybe_Extra$traverse(_elm_lang$core$Basics$identity);
+var _elm_community$maybe_extra$Maybe_Extra$maybeToArray = function (m) {
+	var _p4 = m;
+	if (_p4.ctor === 'Nothing') {
+		return _elm_lang$core$Array$empty;
+	} else {
+		return A2(_elm_lang$core$Array$repeat, 1, _p4._0);
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra$maybeToList = function (m) {
+	var _p5 = m;
+	if (_p5.ctor === 'Nothing') {
+		return {ctor: '[]'};
+	} else {
+		return {
+			ctor: '::',
+			_0: _p5._0,
+			_1: {ctor: '[]'}
+		};
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra$orElse = F2(
+	function (ma, mb) {
+		var _p6 = mb;
+		if (_p6.ctor === 'Nothing') {
+			return ma;
+		} else {
+			return mb;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$orElseLazy = F2(
+	function (fma, mb) {
+		var _p7 = mb;
+		if (_p7.ctor === 'Nothing') {
+			return fma(
+				{ctor: '_Tuple0'});
+		} else {
+			return mb;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$orLazy = F2(
+	function (ma, fmb) {
+		var _p8 = ma;
+		if (_p8.ctor === 'Nothing') {
+			return fmb(
+				{ctor: '_Tuple0'});
+		} else {
+			return ma;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$or = F2(
+	function (ma, mb) {
+		var _p9 = ma;
+		if (_p9.ctor === 'Nothing') {
+			return mb;
+		} else {
+			return ma;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$prev = _elm_lang$core$Maybe$map2(_elm_lang$core$Basics$always);
+var _elm_community$maybe_extra$Maybe_Extra$next = _elm_lang$core$Maybe$map2(
+	_elm_lang$core$Basics$flip(_elm_lang$core$Basics$always));
+var _elm_community$maybe_extra$Maybe_Extra$andMap = _elm_lang$core$Maybe$map2(
+	F2(
+		function (x, y) {
+			return y(x);
+		}));
+var _elm_community$maybe_extra$Maybe_Extra$unpack = F3(
+	function (d, f, m) {
+		var _p10 = m;
+		if (_p10.ctor === 'Nothing') {
+			return d(
+				{ctor: '_Tuple0'});
+		} else {
+			return f(_p10._0);
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$unwrap = F3(
+	function (d, f, m) {
+		var _p11 = m;
+		if (_p11.ctor === 'Nothing') {
+			return d;
+		} else {
+			return f(_p11._0);
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$isJust = function (m) {
+	var _p12 = m;
+	if (_p12.ctor === 'Nothing') {
+		return false;
+	} else {
+		return true;
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra$isNothing = function (m) {
+	var _p13 = m;
+	if (_p13.ctor === 'Nothing') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra$join = function (mx) {
+	var _p14 = mx;
+	if (_p14.ctor === 'Just') {
+		return _p14._0;
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra_ops = _elm_community$maybe_extra$Maybe_Extra_ops || {};
+_elm_community$maybe_extra$Maybe_Extra_ops['?'] = F2(
+	function (mx, x) {
+		return A2(_elm_lang$core$Maybe$withDefault, x, mx);
+	});
+
 var _Gizra$elm_spa_exmple$Translate$translate = F2(
 	function (lang, trans) {
 		var translationSet = function () {
@@ -12007,8 +11935,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_Gizra$elm_spa_exmple$Contact_Utils$getContactNameByLanguage, language, contact)),
+						_0: _elm_lang$html$Html$text(contact.name),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -12034,23 +11961,22 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 var _Gizra$elm_spa_exmple$Contact_View$viewContacts = F2(
 	function (language, _p0) {
 		var _p1 = _p0;
-		var _p4 = _p1.filter;
-		var contactsByLanguage = A2(_Gizra$elm_spa_exmple$Contact_Utils$getContactsByLanguage, language, _p1.contacts);
+		var _p5 = _p1.filter;
+		var _p4 = _p1.contacts;
 		var filteredContacts = function () {
-			if (_elm_lang$core$String$isEmpty(_p4)) {
-				return contactsByLanguage;
+			if (_elm_lang$core$String$isEmpty(_p5)) {
+				return _p4;
 			} else {
 				var stringMatch = _elm_lang$core$String$contains(
-					_elm_lang$core$String$toLower(_p4));
+					_elm_lang$core$String$toLower(_p5));
 				return A2(
 					_Gizra$elm_dictlist$DictList$filter,
 					F2(
 						function (_p2, contact) {
 							return stringMatch(
-								_elm_lang$core$String$toLower(
-									A2(_Gizra$elm_spa_exmple$Contact_Utils$getContactNameByLanguage, language, contact)));
+								_elm_lang$core$String$toLower(contact.name));
 						}),
-					contactsByLanguage);
+					_p4);
 			}
 		}();
 		return _Gizra$elm_dictlist$DictList$isEmpty(filteredContacts) ? A2(
