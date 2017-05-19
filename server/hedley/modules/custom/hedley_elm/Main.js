@@ -11924,7 +11924,9 @@ var _Gizra$elm_spa_exmple$Utils_Html$showIf = F2(
 var _Gizra$elm_spa_exmple$Utils_Html$showMaybe = _elm_lang$core$Maybe$withDefault(_Gizra$elm_spa_exmple$Utils_Html$emptyNode);
 
 var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
-	function (language, contact) {
+	function (language, _p0) {
+		var _p1 = _p0;
+		var _p2 = _p1._1;
 		return A2(
 			_elm_lang$html$Html$ul,
 			{ctor: '[]'},
@@ -11935,7 +11937,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text(contact.name),
+						_0: _elm_lang$html$Html$text(_p2.name),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -11953,30 +11955,30 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 										_1: {ctor: '[]'}
 									});
 							},
-							contact.phone)),
+							_p2.phone)),
 					_1: {ctor: '[]'}
 				}
 			});
 	});
 var _Gizra$elm_spa_exmple$Contact_View$viewContacts = F2(
-	function (language, _p0) {
-		var _p1 = _p0;
-		var _p5 = _p1.filter;
-		var _p4 = _p1.contacts;
+	function (language, _p3) {
+		var _p4 = _p3;
+		var _p7 = _p4.filter;
+		var _p6 = _p4.contacts;
 		var filteredContacts = function () {
-			if (_elm_lang$core$String$isEmpty(_p5)) {
-				return _p4;
+			if (_elm_lang$core$String$isEmpty(_p7)) {
+				return _p6;
 			} else {
 				var stringMatch = _elm_lang$core$String$contains(
-					_elm_lang$core$String$toLower(_p5));
+					_elm_lang$core$String$toLower(_p7));
 				return A2(
 					_Gizra$elm_dictlist$DictList$filter,
 					F2(
-						function (_p2, contact) {
+						function (_p5, contact) {
 							return stringMatch(
 								_elm_lang$core$String$toLower(contact.name));
 						}),
-					_p4);
+					_p6);
 			}
 		}();
 		return _Gizra$elm_dictlist$DictList$isEmpty(filteredContacts) ? A2(
@@ -11994,8 +11996,11 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContacts = F2(
 				A2(
 					_Gizra$elm_dictlist$DictList$map,
 					F2(
-						function (_p3, contact) {
-							return A2(_Gizra$elm_spa_exmple$Contact_View$viewContact, language, contact);
+						function (contactId, contact) {
+							return A2(
+								_Gizra$elm_spa_exmple$Contact_View$viewContact,
+								language,
+								{ctor: '_Tuple2', _0: contactId, _1: contact});
 						}),
 					filteredContacts)));
 	});

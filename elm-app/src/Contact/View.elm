@@ -1,7 +1,7 @@
 module Contact.View exposing (..)
 
 import App.Types exposing (Language(..))
-import Contact.Model exposing (Contact, DictListContact, Model, Msg(..))
+import Contact.Model exposing (Contact, ContactId, DictListContact, Model, Msg(..))
 import DictList
 import Html exposing (..)
 import Html.Attributes exposing (alt, class, classList, href, placeholder, src, style, target, type_, value)
@@ -59,8 +59,8 @@ viewContacts language { contacts, filter } =
             div []
                 (filteredContacts
                     |> DictList.map
-                        (\_ contact ->
-                            viewContact language contact
+                        (\contactId contact ->
+                            viewContact language ( contactId, contact )
                         )
                     |> DictList.values
                 )
@@ -68,8 +68,8 @@ viewContacts language { contacts, filter } =
 
 {-| View a single contact.
 -}
-viewContact : Language -> Contact -> Html msg
-viewContact language contact =
+viewContact : Language -> ( ContactId, Contact ) -> Html msg
+viewContact language ( contactId, contact ) =
     ul
         []
         [ li [] [ text <| contact.name ]
