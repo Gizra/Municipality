@@ -2,6 +2,7 @@ module Contact.View exposing (..)
 
 import App.Types exposing (Language(..))
 import Contact.Model exposing (Contact, ContactId, DictListContact, Model, Msg(..))
+import Contact.Utils exposing (filterContacts)
 import DictList
 import Html exposing (..)
 import Html.Attributes exposing (alt, class, classList, href, placeholder, src, style, target, type_, value)
@@ -35,22 +36,10 @@ viewContactFilter language filter =
 {-| View all contacts.
 -}
 viewContacts : Language -> Model -> Html msg
-viewContacts language { contacts, filter } =
+viewContacts language { contacts, filterString } =
     let
         filteredContacts =
-            if String.isEmpty filter then
-                -- No filtering
-                contacts
-            else
-                let
-                    stringMatch =
-                        String.contains (String.toLower filter)
-                in
-                    DictList.filter
-                        (\_ contact ->
-                            stringMatch (String.toLower <| contact.name)
-                        )
-                        contacts
+            filterContacts contacts filterString
     in
         if DictList.isEmpty filteredContacts then
             div [] [ text <| translate language ContactsNotFound ]
