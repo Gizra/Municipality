@@ -130,8 +130,8 @@ function hedley_municipality_default_page_manager_handlers() {
   $pane = new stdClass();
   $pane->pid = 'new-fb1c6e5e-f7b3-4fcc-821d-23a173bc173c';
   $pane->panel = 'main';
-  $pane->type = 'elm';
-  $pane->subtype = 'elm';
+  $pane->type = 'promoted_content';
+  $pane->subtype = 'promoted_content';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
@@ -162,8 +162,8 @@ function hedley_municipality_default_page_manager_handlers() {
   $pane = new stdClass();
   $pane->pid = 'new-bff022db-6e50-4f7e-954b-3d694b9ef8d1';
   $pane->panel = 'main';
-  $pane->type = 'elm';
-  $pane->subtype = 'elm';
+  $pane->type = 'promoted_content';
+  $pane->subtype = 'promoted_content';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
