@@ -15,6 +15,6 @@ $plugin = array(
  * Check for access.
  */
 function hedley_municipality_og_context__access_check($conf, $context) {
-  return (bool)og_context();
+  return (bool)hedley_municipality_get_current_group();
 }
 
