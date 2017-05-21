@@ -188,4 +188,288 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $this->getSession()->visit($this->locatePath('node/' . $nid));
   }
 
+
+  /**
+   * @When I visit a :municipality website homepage with no parameters in URL
+   */
+  public function iVisitAWebsiteHomepageWithNoParametersInUrl($municipality) {
+    $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
+    $uri = $this->createUriWithGroupContext($group);
+    $this->getSession()->visit($this->locatePath($uri));
+  }
+
+  /**
+   * @When I visit a :municipality website homepage with a specific :language and a specific :user_type
+   */
+  public function iVisitAWebsiteHomepageWithASpecificAndASpecificUser($municipality, $language, $user_type) {
+    $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
+    $options = [
+      'query' => [
+        'language' => $language,
+        'user_type' => $user_type,
+      ]
+    ];
+    $uri = $this->createUriWithGroupContext($group, 'node/' . $group->nid, $options);
+    $this->getSession()->visit($this->locatePath($uri));
+  }
+
+  /**
+   * @When I change user type to a :new_user_type
+   */
+  public function iChangeUserTypeToA($new_user_type) {
+    $page = $this->getSession()->getPage();
+
+    $user_type_link = $page->findLink($new_user_type);
+    if ($user_type_link === null) {
+      throw new \Exception('Could not find the user type link.');
+    }
+
+    $user_type_link->click();
+  }
+
+  /**
+   * @Then I should see the home page in the default :language of the municipality and for :citizens user type
+   */
+  public function iShouldSeeTheHomePageInTheDefaultOfTheMunicipalityAndForCitizensUserType($language, $citizens) {
+    $page = $this->getSession()->getPage();
+
+    // Check if the given language is the active one on the page.
+    $this->checkActiveLanguage($language, $page, 'text');
+
+    // Check if the given user type is the active one on the page.
+    $this->checkActiveUserType($citizens, $page, 'text');
+  }
+
+  /**
+   * @Then I should see :languages menu only with languages with content for the current Municipality
+   */
+  public function iShouldSeeMenuOnlyWithLanguagesWithContentForTheCurrentMunicipality($languages) {
+    $page = $this->getSession()->getPage();
+
+    // Get the languages switcher.
+    $languages_element = $page->find('css', '.background .languages');
+
+    // Sometimes we want to check that the links are not displayed therefor
+    // there will be an empty variable.
+    $languages_array = $languages ? explode(',', $languages) : [];
+
+    // Check that the element has the correct links.
+    $this->checkLinksExistInElement($languages_element, 'languages', $languages_array);
+  }
+
+  /**
+   * @Then I should see :user_types menu only for user types with content for the current Municipality
+   */
+  public function iShouldSeeMenuOnlyForUserTypesWithContentForTheCurrentMunicipality($user_types) {
+    $page = $this->getSession()->getPage();
+
+    // Get the user types switcher.
+    $user_type_element = $page->find('css', '.background .user-types');
+
+    // Sometimes we want to check that the links are not displayed therefor
+    // there will be an empty variable.
+    $user_types_array = $user_types ? explode(',', $user_types) : [];
+
+    // Check that the element has the correct links.
+    $this->checkLinksExistInElement($user_type_element, 'user type', $user_types_array);
+  }
+
+  /**
+   * @Then I should see page :title and :text in the chosen :language and for the chosen :user_type only
+   */
+  public function iShouldSeePageAndInTheChosenAndForTheChosenUserOnly($title, $text, $language, $user_type) {
+    $page = $this->getSession()->getPage();
+
+    // Check the title of the page.
+    $title_element = $page->find('css', '.background .center h2.header');
+    if ($title_element === null) {
+      throw new \Exception('The title element is missing.');
+    }
+    if ($title_element->getText() !== $title) {
+      throw new \Exception(format_string('The title is not "@title".', ['@title' => $title]));
+    }
+
+    // Check some text on the municipality page.
+    $text_element = $page->find('css', '.news .content .header h3');
+    if ($text_element === null) {
+      throw new \Exception('The required text element is missing.');
+    }
+    if ($text_element->getText() !== $text) {
+      throw new \Exception(format_string('There\'s no text matching "@text".', ['@text' => $text]));
+    }
+
+    // Check if the given language is the active one on the page.
+    $this->checkActiveLanguage($language, $page, 'href');
+
+    // Check if the given user type is the active one on the page.
+    $this->checkActiveUserType($user_type, $page, 'href');
+
+  }
+
+  /**
+   * @Then I should see the homepage in the current :language and the :new_user_type
+   */
+  public function iShouldSeeTheHomepageInTheCurrentAndThe($language, $new_user_type) {
+    $page = $this->getSession()->getPage();
+
+    // Check if the given language is the active one on the page.
+    $this->checkActiveLanguage($language, $page, 'href');
+
+    // Check if the given user type is the active one on the page.
+    $this->checkActiveUserType($new_user_type, $page, 'text');
+  }
+
+
+  /**
+   * Get the group based on the title and type.
+   *
+   * @param string $title
+   *   The group title.
+   * @param string $type
+   *   The group node type.
+   *
+   * @return object
+   *   The group (if any) or NULL.
+   * @throws \Exception
+   */
+  protected function loadGroupByTitleAndType($title, $type) {
+    $query = new \entityFieldQuery();
+    $result = $query
+      ->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', $type)
+      ->propertyCondition('title', $title)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->range(0, 1)
+      ->execute();
+    if (empty($result['node'])) {
+      $params = [
+        '@title' => $title,
+        '@type' => $type,
+      ];
+      throw new \Exception(format_string('Group @title not found (type @type).', $params));
+    }
+    $gid = (int) key($result['node']);
+    $group = node_load($gid);
+    if (!$group) {
+      $params = [
+        '@title' => $title,
+        '@type' => $type,
+      ];
+      throw new \Exception(format_string('Group @title not found (type @type).', $params));
+    }
+    return $group;
+  }
+
+  /**
+   * Create a uri within a group context.
+   *
+   * @param object $group
+   *   The group context.
+   * @param string $path
+   *   The path part.
+   * @param array $options
+   *   Options to pass to url.
+   *
+   * @return string
+   */
+  protected function createUriWithGroupContext($group, $path = '<front>', $options = []) {
+    $purl = [
+      'provider' => 'og_purl|node',
+      'id' => $group->nid,
+    ];
+    $options = array_merge($options, ['purl' => $purl, 'absolute' => TRUE]);
+    $uri = ltrim(url($path, $options), '/');
+    return $uri;
+  }
+
+  /**
+   * Check that a list of links exist inside an element.
+   *
+   * @param object $element
+   *   An element extracted from the current page.
+   * @param string $element_name
+   *   The name of the element.
+   *   i.e. languages, user type, FAQ.
+   * @param array $links
+   *   An array of links' titles.
+   *
+   * @throws \Exception
+   */
+  protected function checkLinksExistInElement($element, $element_name, array $links) {
+    if (empty($links)) {
+      // There shouldn't be an element on the page at all.
+      if ($element !== null) {
+        throw new \Exception(format_string('The @element_name element is present on the page when it should be hidden.', ['@element_name' => $element_name]));
+      }
+
+      // If the element is not present then the test has passed.
+      return;
+    }
+
+    foreach ($links as $link) {
+      if (!strpos($element->getHtml(), $link)) {
+        // Throw an error if one of the expected links is missing.
+        throw new \Exception(format_string('The @element_name @link is NOT present on the page.', ['@element_name' => $element_name, '@link' => $link]));
+      }
+    }
+  }
+
+  /**
+   * Checks if a given language is the active language in the switcher.
+   *
+   * @param $language
+   *   The language the function needs to check.
+   * @param $page
+   *   The session's page.
+   * @param $selector
+   *   The type of search needs to be done on the language switcher.
+   *   Options:
+   *    1. text => Searches in the link's title.
+   *    2. Any kind of attribute on the link itself, i.e. 'href','class', 'id'.
+   *
+   * @throws \Exception
+   */
+  protected function checkActiveLanguage($language, $page, $selector) {
+    $language_active_link = $page->find('css', '.background .languages a.active');
+    if ($language_active_link === null) {
+      throw new \Exception('The languages has no active items.');
+    }
+
+    // Define on which condition to check.
+    $condition = $selector == 'text' ? $language_active_link->getText() === $language : strpos($language_active_link->getAttribute($selector), $language);
+
+    if (!$condition) {
+      throw new \Exception(format_string('Active language is not "@language".', ['@language' => $language]));
+    }
+  }
+
+  /**
+   * Checks if a given user type is the active one in the switcher.
+   *
+   * @param $user_type
+   *   The user type the function needs to check.
+   * @param $page
+   *   The session's page.
+   * @param $selector
+   *   The type of search needs to be done on the language switcher.
+   *   Options:
+   *    1. text => Searches in the link's title.
+   *    2. Any kind of attribute on the link itself, i.e. 'href','class', 'id'.
+   *
+   * @throws \Exception
+   */
+  protected function checkActiveUserType($user_type, $page, $selector) {
+    $user_type_active_link = $page->find('css', '.background .user-types a.active');
+    if ($user_type_active_link === null) {
+      throw new \Exception('The user type has no active items.');
+    }
+
+    // Define on which condition to check.
+    $condition = $selector == 'text' ? $user_type_active_link->getText() === $user_type : strpos($user_type_active_link->getAttribute($selector), $user_type);
+
+    if (!$condition) {
+      throw new \Exception(format_string('Active user type is not "@user_type".', ['@user_type' => $user_type]));
+    }
+  }
+
 }
