@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Hedley Tender feature.
+ */
+
+include_once 'hedley_tender.features.inc';
