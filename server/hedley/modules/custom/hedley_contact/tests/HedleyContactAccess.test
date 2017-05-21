@@ -6,7 +6,7 @@
  */
 
 /**
- * Class HedleyContactAccess
+ * Class HedleyContactAccess.
  */
 class HedleyContactAccess extends DrupalWebTestCase {
 
@@ -47,9 +47,20 @@ class HedleyContactAccess extends DrupalWebTestCase {
     $this->assertResponse(403);
 
     // Create a group.
+    $user1 = $this->drupalCreateUser();
+    $settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+    ];
 
+    $node = $this->drupalCreateNode($settings);
+
+    $purl = [
+      'provider' => 'og_purl|node',
+      'id' => $node->nid,
+    ];
+    $this->drupalGet('contact', ['purl' => $purl]);
+    $this->assertResponse(200);
   }
-
-
 
 }
