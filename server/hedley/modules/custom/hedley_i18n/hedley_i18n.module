@@ -116,6 +116,11 @@ function hedley_i18n_url_outbound_alter(&$path, &$options, $original_path) {
     return;
   }
 
+  if (strpos($path, 'autocomplete') || strpos($original_path, 'autocomplete') || strpos($path, 'ctools/context/ajax') === 0) {
+    // Ignore when building AJAX URLs.
+    return;
+  }
+
   // Set the language, unless it's already explicitly set.
   if (empty($options['query']['language'])) {
     $options['query']['language'] = $language->language;
