@@ -13,6 +13,17 @@ filterContactsTest =
         [ test "should return all contacts if filter string is empty" <|
             \() ->
                 Expect.equal (filterContacts contacts "") contacts
+        , test "should return no matching contacts if filter string is filled" <|
+            \() ->
+                Expect.equal (filterContacts contacts "foo") DictList.empty
+        , test "should return no contacts if filter string has other names" <|
+            \() ->
+                Expect.equal (filterContacts contacts "a")
+                    (DictList.fromList
+                        [ contact1
+                        , contact2
+                        ]
+                    )
         ]
 
 
@@ -27,31 +38,37 @@ all =
 -- FIXTURES
 
 
-contact1 : Contact
+contact1 : ( ContactId, Contact )
 contact1 =
-    { name = "alice"
-    , phone = Nothing
-    }
+    ( "100"
+    , { name = "alice"
+      , phone = Nothing
+      }
+    )
 
 
-contact2 : Contact
+contact2 : ( ContactId, Contact )
 contact2 =
-    { name = "carl"
-    , phone = Just "1234"
-    }
+    ( "200"
+    , { name = "carl"
+      , phone = Just "1234"
+      }
+    )
 
 
-contact3 : Contact
+contact3 : ( ContactId, Contact )
 contact3 =
-    { name = "john"
-    , phone = Just "5678"
-    }
+    ( "300"
+    , { name = "john"
+      , phone = Just "5678"
+      }
+    )
 
 
 contacts : DictListContact
 contacts =
     DictList.fromList
-        [ ( "100", contact1 )
-        , ( "200", contact2 )
-        , ( "300", contact3 )
+        [ contact1
+        , contact2
+        , contact3
         ]
