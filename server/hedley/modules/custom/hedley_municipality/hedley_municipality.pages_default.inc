@@ -98,8 +98,8 @@ function hedley_municipality_default_page_manager_handlers() {
   $pane = new stdClass();
   $pane->pid = 'new-75c69053-6f5d-435e-8769-370397d44d36';
   $pane->panel = 'main';
-  $pane->type = 'elm';
-  $pane->subtype = 'elm';
+  $pane->type = 'promoted_content';
+  $pane->subtype = 'promoted_content';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
