@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Code for the Hedley Elm feature.
+ */
+
+include_once 'hedley_elm.features.inc';
+
+/**
+ * @file
+ * Code for the Hedley Elm app module.
+ */
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function hedley_elm_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools') {
+    return 'plugins/' . $plugin;
+  }
+}
