@@ -2,13 +2,13 @@
 
 /**
  * @file
- * Contains \HedleyMigrateTopics.
+ * Contains \HedleyMigrateDepartments.
  */
 
 /**
- * Class HedleyMigrateDepartment.
+ * Class HedleyMigrateDepartments.
  */
-class HedleyMigrateDepartment extends HedleyMigrateBase {
+class HedleyMigrateDepartments extends HedleyMigrateBase {
 
   protected $entityType = 'taxonomy_term';
   protected $bundle = 'departments';
