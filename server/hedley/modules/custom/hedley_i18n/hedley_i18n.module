@@ -70,10 +70,17 @@ function hedley_i18n_language_switch_links() {
  * Add the language as a query to all internal URLs.
  */
 function hedley_i18n_url_outbound_alter(&$path, &$options, $original_path) {
+  debug($path);
+  return;
   global $language;
 
   if ($options['external'] || drupal_is_cli()) {
     // Ignore external URLs, or when creating a link with cli.
+    return;
+  }
+
+  if (strpos($path, 'autocomplete') || strpos($original_path, 'autocomplete') || strpos($path, 'ctools/context/ajax') === 0) {
+    // Ignore when building AJAX URLs.
     return;
   }
 
