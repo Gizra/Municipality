@@ -40,9 +40,11 @@
 
     <div class="ui row">
 
-      <div class="ui four wide column">
-        <?php print $user_type_links; ?>
-      </div>
+      <?php if ($user_type_links): ?>
+        <div class="ui four wide column user-types">
+          <?php print $user_type_links; ?>
+        </div>
+      <?php endif; ?>
 
       <div class="ui eight wide center aligned column">
         <?php print render($social_links); ?>
@@ -50,7 +52,7 @@
 
       <div class="ui four wide column">
         <?php if ($language_switch_links) : ?>
-          <div class="ui <?php print $language_switch_links_class?> item menu">
+          <div class="ui <?php print $language_switch_links_class?> item menu languages">
             <?php foreach ($language_switch_links as $link): ?>
               <?php print $link; ?>
             <?php endforeach; ?>
