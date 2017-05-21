@@ -16,7 +16,16 @@ function hedley_elm_default_page_manager_pages() {
   $page->admin_title = 'Contact';
   $page->admin_description = '';
   $page->path = 'contact';
-  $page->access = array();
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'og_context',
+        'settings' => NULL,
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'and',
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(
