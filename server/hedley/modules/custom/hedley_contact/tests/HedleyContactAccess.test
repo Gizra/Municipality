@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyContactAccess.
+ */
+
+/**
+ * Class HedleyContactAccess
+ */
+class HedleyContactAccess extends DrupalWebTestCase {
+
+  /**
+   * The profile name.
+   *
+   * @var string
+   */
+  protected $profile = 'hedley';
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Contact access',
+      'description' => 'Test access to the Contact page.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Overrides DrupalWebTestCase::setUp().
+   */
+  protected function setUp() {
+    parent::setUp();
+
+    // Skip dealing with user ID 1.
+    $this->drupalCreateUser();
+  }
+
+  /**
+   * Test getting language switcher links.
+   */
+  public function testAccess() {
+    // Access site-wide contact.
+    $this->drupalGet('contact');
+    $this->assertResponse(403);
+
+    // Create a group.
+
+  }
+
+
+
+}
