@@ -41,8 +41,8 @@ function hedley_topic_topic_events_content_type_render($subtype, $conf, $args, $
       'title' => check_plain($wrapper->label()),
       'url' => url('node/' . $wrapper->getIdentifier()),
       'image_url' => $image ? image_style_url('thumbnail', $image['uri']) : '',
-      'date_start' => $date['value'] ? date('d/m/Y H:i', $date['value']) : '',
-      'date_end' => $date['value2'] ? date('d/m/Y H:i', $date['value2']) : '',
+      'date_start' => $date['value'] ? date('d/m/y H:i', $date['value']) : '',
+      'date_end' => (isset($date['value2']) && $date['value'] != $date['value2']) ? date('d/m/y H:i', $date['value2']) : '',
       'float_direction' => $language->direction ? 'right' : 'left',
     ];
 
