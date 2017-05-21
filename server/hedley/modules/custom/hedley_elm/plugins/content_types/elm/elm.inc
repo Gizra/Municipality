@@ -63,14 +63,12 @@ function hedley_elm_elm_get_contacts() {
   return [
     [
       'id' => 100,
-      'name_arabic' => 'arabic_foo',
-      'name_hebrew' => 'hebrew_foo',
-      'name_english' => 'english_foo',
+      'name' => 'foo',
       'phone' => '1234',
     ],
     [
       'id' => 200,
-      'name_arabic' => 'arabic_bar',
+      'name' => 'bar',
       'phone' => '5678',
     ],
   ];

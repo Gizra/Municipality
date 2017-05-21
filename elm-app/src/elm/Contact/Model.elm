@@ -5,17 +5,20 @@ import DictList exposing (DictList)
 
 type alias Model =
     { contacts : DictListContact
+    , filter : String
     }
 
 
 emptyModel : Model
 emptyModel =
     { contacts = DictList.empty
+    , filter = ""
     }
 
 
 type Msg
     = HandleContacts (Result String DictListContact)
+    | SetFilter String
 
 
 type alias Name =
@@ -26,15 +29,8 @@ type alias ContactId =
     String
 
 
-type alias Names =
-    { arabic : Maybe Name
-    , english : Maybe Name
-    , hebrew : Maybe Name
-    }
-
-
 type alias Contact =
-    { names : Names
+    { name : Name
     , phone : Maybe String
     }
 

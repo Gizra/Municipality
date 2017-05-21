@@ -12,7 +12,7 @@ type alias TranslationSet =
 
 type TranslationId
     = ContactsNotFound
-    | FilterContacts
+    | FilterContactsPlaceholder
 
 
 translate : Language -> TranslationId -> String
@@ -26,7 +26,7 @@ translate lang trans =
                     , hebrew = "לא נמצאו אנשי קשר מתאימים"
                     }
 
-                FilterContacts ->
+                FilterContactsPlaceholder ->
                     { arabic = "ابحث عن اسم، موضوع أو فئة"
                     , english = "Filter contacts"
                     , hebrew = "חפשו שם, נושא או מחלקה"
