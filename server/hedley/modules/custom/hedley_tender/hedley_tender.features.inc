@@ -18,8 +18,8 @@ function hedley_tender_ctools_plugin_api($module = NULL, $api = NULL) {
  */
 function hedley_tender_node_info() {
   $items = array(
-    'tinder' => array(
-      'name' => t('Tinder'),
+    'tender' => array(
+      'name' => t('Tender'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',

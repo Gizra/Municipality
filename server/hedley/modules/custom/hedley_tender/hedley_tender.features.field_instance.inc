@@ -10,9 +10,9 @@
 function hedley_tender_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-tinder-body'.
-  $field_instances['node-tinder-body'] = array(
-    'bundle' => 'tinder',
+  // Exported field_instance: 'node-tender-body'.
+  $field_instances['node-tender-body'] = array(
+    'bundle' => 'tender',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -61,9 +61,9 @@ function hedley_tender_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-tinder-og_group_ref'.
-  $field_instances['node-tinder-og_group_ref'] = array(
-    'bundle' => 'tinder',
+  // Exported field_instance: 'node-tender-og_group_ref'.
+  $field_instances['node-tender-og_group_ref'] = array(
+    'bundle' => 'tender',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
