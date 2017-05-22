@@ -280,9 +280,6 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   public function iShouldSeePageAndInTheChosenAndForTheChosenUserOnly($title, $text, $language, $user_type) {
     $page = $this->getSession()->getPage();
 
-    // Check if this is the reason.
-    sleep(2);
-
     // Check the title of the page.
     $title_element = $page->find('css', '.background .center h2.header');
     if ($title_element === null) {
@@ -293,7 +290,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
 
     // Check some text on the municipality page.
-    $text_element = $page->find('css', '.news .content .header h3');
+    $text_element = $page->find('css', '.news .content .header h3 a');
     if ($text_element === null) {
       throw new \Exception('The required text element is missing.');
     }

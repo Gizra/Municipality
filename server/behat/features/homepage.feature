@@ -44,7 +44,7 @@ Feature: Homepage
       | קריית מלאכי              |                            |
 
 
-  @api @test
+  @api
   Scenario Outline: Verify that the Municipality shows the content in the chosen language and user type
     Given I am an anonymous user
      When I visit a "<municipality>" website homepage with a specific "<language>" and a specific "<user type>"
