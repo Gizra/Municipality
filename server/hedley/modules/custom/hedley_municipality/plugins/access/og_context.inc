@@ -1,13 +1,18 @@
 <?php
 
 /**
+ * @file
+ * OG context CTools access plugin.
+ */
+
+/**
  * Plugin definition
  */
-$plugin = array(
+$plugin = [
   'title' => t('OG context'),
   'description' => t('Determine if OG context exists.'),
   'callback' => 'hedley_municipality_og_context__access_check',
-);
+];
 
 /**
  * Check for access.
