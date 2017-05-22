@@ -33,3 +33,4 @@ decodeContact =
     decode Contact
         |> required "name" string
         |> optional "phone" (nullable string) Nothing
+        |> optional "email" (nullable string) Nothing

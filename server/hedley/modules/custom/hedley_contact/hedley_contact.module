@@ -116,3 +116,32 @@ function hedley_contact_get_reception_hours($node) {
 
   return $formatted_hours;
 }
+
+
+/**
+ * Return contacts by group.
+ *
+ * @param int $gid
+ *   The group ID.
+ * @param string $language_code
+ *   The language code (e.g. "he", "ar").
+ *
+ * @return array
+ *   Array with the contacts list.
+ */
+function hedley_contact_get_get_contacts_by_group($gid, $language_code) {
+  return [
+    [
+      'id' => 100,
+      'name' => 'foo',
+      'phone' => '1234',
+      'email' => 'foo@bar.com',
+    ],
+    [
+      'id' => 200,
+      'name' => 'bar',
+      'email' => NULL,
+    ],
+  ];
+
+}

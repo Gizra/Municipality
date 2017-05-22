@@ -14,7 +14,7 @@ import Utils.Html exposing (showIf, showMaybe)
 view : Language -> Model -> Html Msg
 view language model =
     div []
-        [ viewContactFilter language model.filter
+        [ viewContactFilter language model.filterString
         , viewContacts language model
         ]
 
@@ -62,4 +62,5 @@ viewContact language ( contactId, contact ) =
         []
         [ li [] [ text <| contact.name ]
         , showMaybe <| Maybe.map (\phone -> li [] [ text phone ]) contact.phone
+        , showMaybe <| Maybe.map (\email -> li [] [ text email ]) contact.email
         ]

@@ -7946,14 +7946,14 @@ var _Gizra$elm_spa_exmple$App_Types$Hebrew = {ctor: 'Hebrew'};
 var _Gizra$elm_spa_exmple$App_Types$English = {ctor: 'English'};
 var _Gizra$elm_spa_exmple$App_Types$Arabic = {ctor: 'Arabic'};
 
-var _Gizra$elm_spa_exmple$Contact_Model$emptyModel = {contacts: _Gizra$elm_dictlist$DictList$empty, filter: ''};
+var _Gizra$elm_spa_exmple$Contact_Model$emptyModel = {contacts: _Gizra$elm_dictlist$DictList$empty, filterString: ''};
 var _Gizra$elm_spa_exmple$Contact_Model$Model = F2(
 	function (a, b) {
-		return {contacts: a, filter: b};
+		return {contacts: a, filterString: b};
 	});
-var _Gizra$elm_spa_exmple$Contact_Model$Contact = F2(
-	function (a, b) {
-		return {name: a, phone: b};
+var _Gizra$elm_spa_exmple$Contact_Model$Contact = F3(
+	function (a, b, c) {
+		return {name: a, phone: b, email: c};
 	});
 var _Gizra$elm_spa_exmple$Contact_Model$SetFilter = function (a) {
 	return {ctor: 'SetFilter', _0: a};
@@ -9069,14 +9069,19 @@ var _Gizra$elm_spa_exmple$Utils_Json$decodeEmptyArrayAs = function ($default) {
 
 var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContact = A4(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-	'phone',
+	'email',
 	_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 	_elm_lang$core$Maybe$Nothing,
-	A3(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'name',
-		_elm_lang$core$Json_Decode$string,
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Contact)));
+	A4(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+		'phone',
+		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+		_elm_lang$core$Maybe$Nothing,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'name',
+			_elm_lang$core$Json_Decode$string,
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Contact))));
 var _Gizra$elm_spa_exmple$Contact_Decoder$decodeArray2 = F2(
 	function (keyDecoder, valueDecoder) {
 		return A2(
@@ -9129,7 +9134,7 @@ var _Gizra$elm_spa_exmple$Contact_Update$update = F2(
 				_elm_lang$core$Platform_Cmd_ops['!'],
 				_elm_lang$core$Native_Utils.update(
 					model,
-					{filter: _p0._0}),
+					{filterString: _p0._0}),
 				{ctor: '[]'});
 		}
 	});
@@ -9192,6 +9197,24 @@ var _Gizra$elm_spa_exmple$App_Update$init = function (flags) {
 		_1: _elm_lang$core$Platform_Cmd$none
 	};
 };
+
+var _Gizra$elm_spa_exmple$Contact_Utils$filterContacts = F2(
+	function (contacts, filterString) {
+		if (_elm_lang$core$String$isEmpty(filterString)) {
+			return contacts;
+		} else {
+			var stringMatch = _elm_lang$core$String$contains(
+				_elm_lang$core$String$toLower(filterString));
+			return A2(
+				_Gizra$elm_dictlist$DictList$filter,
+				F2(
+					function (_p0, contact) {
+						return stringMatch(
+							_elm_lang$core$String$toLower(contact.name));
+					}),
+				contacts);
+		}
+	});
 
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrap;
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrapWithFlags;
@@ -11777,31 +11800,31 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 									});
 							},
 							_p2.phone)),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
+							A2(
+								_elm_lang$core$Maybe$map,
+								function (email) {
+									return A2(
+										_elm_lang$html$Html$li,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(email),
+											_1: {ctor: '[]'}
+										});
+								},
+								_p2.email)),
+						_1: {ctor: '[]'}
+					}
 				}
 			});
 	});
 var _Gizra$elm_spa_exmple$Contact_View$viewContacts = F2(
 	function (language, _p3) {
 		var _p4 = _p3;
-		var _p7 = _p4.filter;
-		var _p6 = _p4.contacts;
-		var filteredContacts = function () {
-			if (_elm_lang$core$String$isEmpty(_p7)) {
-				return _p6;
-			} else {
-				var stringMatch = _elm_lang$core$String$contains(
-					_elm_lang$core$String$toLower(_p7));
-				return A2(
-					_Gizra$elm_dictlist$DictList$filter,
-					F2(
-						function (_p5, contact) {
-							return stringMatch(
-								_elm_lang$core$String$toLower(contact.name));
-						}),
-					_p6);
-			}
-		}();
+		var filteredContacts = A2(_Gizra$elm_spa_exmple$Contact_Utils$filterContacts, _p4.contacts, _p4.filterString);
 		return _Gizra$elm_dictlist$DictList$isEmpty(filteredContacts) ? A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
@@ -11878,7 +11901,7 @@ var _Gizra$elm_spa_exmple$Contact_View$view = F2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: A2(_Gizra$elm_spa_exmple$Contact_View$viewContactFilter, language, model.filter),
+				_0: A2(_Gizra$elm_spa_exmple$Contact_View$viewContactFilter, language, model.filterString),
 				_1: {
 					ctor: '::',
 					_0: A2(_Gizra$elm_spa_exmple$Contact_View$viewContacts, language, model),

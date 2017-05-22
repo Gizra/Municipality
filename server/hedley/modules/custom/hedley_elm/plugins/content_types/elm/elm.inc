@@ -29,10 +29,12 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
 
   $page = $conf['page'];
 
+  $node = hedley_municipality_get_current_group();
+
   $values = [];
   switch ($page) {
     case 'contact':
-      $values = hedley_elm_elm_get_contacts();
+      $values = hedley_contact_get_get_contacts_by_group($node->nid, $language->language);
 
   }
 
@@ -51,29 +53,6 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   return $block;
 }
 
-/**
- * Return contacts.
- *
- * @todo: Remove hardcoding.
- *
- * @return array
- *   Array with the contacts list.
- */
-function hedley_elm_elm_get_contacts() {
-  return [
-    [
-      'id' => 100,
-      'name' => 'foo',
-      'phone' => '1234',
-    ],
-    [
-      'id' => 200,
-      'name' => 'bar',
-      'phone' => '5678',
-    ],
-  ];
-
-}
 
 /**
  * Edit form.
