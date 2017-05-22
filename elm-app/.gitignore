@@ -43,5 +43,22 @@ Thumbs.db
 .settings/
 .idea
 
-# Elm app
-server/hedley/modules/custom/hedley_elm/Main.js
+src/bower_components
+node_modules
+.tmp
+
+# Jekyll compiled stylesheet
+src/assets/stylesheets/style.css
+site/assets/stylesheets/style.css
+
+# Jekyll related folders
+serve
+site
+.jekyll-metadata
+vendor/
+.bundle/
+.sass-cache
+.jekyll
+.publish
+
+elm-stuff/*
