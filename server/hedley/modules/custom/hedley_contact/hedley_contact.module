@@ -136,6 +136,7 @@ function hedley_contact_get_get_contacts_by_group($gid, $language_code) {
       'name' => 'foo',
       'phone' => '1234',
       'email' => 'foo@bar.com',
+      'job_title' => 'collection',
     ],
     [
       'id' => 200,

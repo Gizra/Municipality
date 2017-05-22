@@ -26,7 +26,7 @@ var wiredep = require('wiredep').stream;
 
 gulp.task('elm-init', elm.init);
 gulp.task('elm', ['elm-init'], function() {
-  return gulp.src('src/Main.elm')
+  return gulp.src('src/elm/Main.elm')
     .pipe(plumber())
     .pipe(elm({
       'debug': false,
