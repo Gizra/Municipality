@@ -23,7 +23,7 @@ set +o errexit
 for SPEC in specs/*js; do
   print_message "Executing $SPEC"
   WDIO_RET=0
-  SPEC_BASENAME=$(echo "$SPEC" | cut -d '/' -f 3 | cut -d '.' -f 1)
+  SPEC_BASENAME=$(echo "$SPEC" | cut -d '/' -f 2 | cut -d '.' -f 1)
   sed "s/<<SPEC_NAME>>/$SPEC_BASENAME/" < $WDIO_CONF.orig > "$WDIO_CONF"
   for i in $(seq 3); do
     ./node_modules/.bin/wdio "$WDIO_CONF" --spec "$SPEC"
