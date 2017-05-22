@@ -18,7 +18,7 @@ echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 npm install -g elm@~0.18.0
 npm install -g elm-test
 
-cd "$TRAVIS_BUILD_DIR"/client
+cd "$TRAVIS_BUILD_DIR"/elm-app
 elm-package install -y
 
 # Getting elm-make to run quicker.
