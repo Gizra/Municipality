@@ -39,7 +39,7 @@ class HedleyContactAccess extends DrupalWebTestCase {
   }
 
   /**
-   * Test getting language switcher links.
+   * Test access to the Contact page.
    */
   public function testAccess() {
     // Access site-wide contact.

@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Plugin definition
  */
@@ -9,7 +8,6 @@ $plugin = array(
   'description' => t('Determine if OG context exists.'),
   'callback' => 'hedley_municipality_og_context__access_check',
 );
-
 
 /**
  * Check for access.
