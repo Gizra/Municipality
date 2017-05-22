@@ -10,7 +10,7 @@ fi
 source helper_functions.sh
 
 print_message "Test WebDriverIO."
-cd "$ROOT_DIR"/test
+cd "$ROOT_DIR"/wdio
 npm install
 
 # Backup verbatim config.
@@ -24,7 +24,7 @@ for SPEC in specs/*js; do
   print_message "Executing $SPEC"
   WDIO_RET=0
   SPEC_BASENAME=$(echo "$SPEC" | cut -d '/' -f 3 | cut -d '.' -f 1)
-  sed "s/<<SPECNAME>>/$SPEC_BASENAME/" < $WDIO_CONF.orig > "$WDIO_CONF"
+  sed "s/<<SPEC_NAME>>/$SPEC_BASENAME/" < $WDIO_CONF.orig > "$WDIO_CONF"
   for i in $(seq 3); do
     ./node_modules/.bin/wdio "$WDIO_CONF" --spec "$SPEC"
     WDIO_RET=$?
