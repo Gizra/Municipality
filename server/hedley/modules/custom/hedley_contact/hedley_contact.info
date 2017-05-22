@@ -6,9 +6,11 @@ dependencies[] = hedley_fields
 dependencies[] = i18n_taxonomy
 dependencies[] = og_ui
 dependencies[] = strongarm
+features[ctools][] = page_manager:pages_default:1
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
+features[page_manager_pages][] = contact
 features[field_instance][] = multifield-field_reception_hours-field_hours
 features[field_instance][] = multifield-field_reception_hours-field_weekday
 features[field_instance][] = node-contact-field_address
@@ -49,3 +51,6 @@ features_exclude[field_base][field_email] = field_email
 features_exclude[field_base][field_fax] = field_fax
 features_exclude[field_base][field_address] = field_address
 features_exclude[field_base][field_reception_hours] = field_reception_hours
+
+; Tests
+files[] = tests/HedleyContactAccess.test

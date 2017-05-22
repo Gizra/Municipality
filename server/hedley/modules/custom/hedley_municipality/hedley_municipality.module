@@ -77,6 +77,9 @@ function hedley_municipality_entity_info_alter(&$entity_info) {
 /**
  * Get the current municipality context.
  *
+ * @todo: This should be removed in favor of og_context(), which should get
+ * the answers.
+ *
  * @return mixed
  *   The municipality node, when available.
  */
