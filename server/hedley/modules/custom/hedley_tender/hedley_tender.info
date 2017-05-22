@@ -14,7 +14,6 @@ features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[field_instance][] = multifield-field_tender_files-field_file
 features[field_instance][] = multifield-field_tender_files-title_field
-features[field_instance][] = node-tender-body
 features[field_instance][] = node-tender-field_deadline
 features[field_instance][] = node-tender-field_department
 features[field_instance][] = node-tender-field_publish_date
