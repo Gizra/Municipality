@@ -280,6 +280,9 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   public function iShouldSeePageAndInTheChosenAndForTheChosenUserOnly($title, $text, $language, $user_type) {
     $page = $this->getSession()->getPage();
 
+    // Check if this is the reason.
+    sleep(2);
+
     // Check the title of the page.
     $title_element = $page->find('css', '.background .center h2.header');
     if ($title_element === null) {
