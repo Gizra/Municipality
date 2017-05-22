@@ -58,6 +58,10 @@ docker-compose --file=docker-compose.yml ps -q server.local | xargs docker inspe
       cp /tmp/test_results/failed_tests /tmp/test_results/failed_tests.tmp
       while IFS= read -r FAILED_SPEC
       do
+        if [ -z "$FAILED_SPEC" ]; then
+          continue
+        fi
+
         if [[ $VIDEO_FILE == *"$FAILED_SPEC"* ]]; then
           UPLOAD=1
           # Uploading one video per failed spec. Assuming that it failed
