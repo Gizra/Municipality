@@ -1,0 +1,15 @@
+{
+  "name": "WDIO-test",
+  "private": false,
+  "version": "0.1.0",
+  "dependencies": {
+   "webdriverio": "4.6.2",
+    "wdio-mocha-framework": "0.5.8",
+    "wdio-selenium-standalone-service": "0.0.7",
+    "wdio-spec-reporter": "0.0.5"
+  },
+  "engines": {
+    "node": ">0.10.0"
+  },
+  "scripts": {}
+}

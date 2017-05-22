@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * hedley_elm.pages_default.inc
+ * hedley_contact.pages_default.inc
  */
 
 /**
  * Implements hook_default_page_manager_pages().
  */
-function hedley_elm_default_page_manager_pages() {
+function hedley_contact_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
@@ -16,7 +16,16 @@ function hedley_elm_default_page_manager_pages() {
   $page->admin_title = 'Contact';
   $page->admin_description = '';
   $page->path = 'contact';
-  $page->access = array();
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'og_context',
+        'settings' => NULL,
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'and',
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(

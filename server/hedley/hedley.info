@@ -39,6 +39,7 @@ dependencies[] = message
 dependencies[] = module_filter
 dependencies[] = multifield
 dependencies[] = og
+dependencies[] = og_context
 dependencies[] = og_purl
 dependencies[] = og_ui
 dependencies[] = page_manager

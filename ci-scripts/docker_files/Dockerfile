@@ -1,4 +1,4 @@
-FROM gizra/drupal-lamp
+FROM gizra/drupal-lamp:php7
 
 ADD $TRAVIS_BUILD_DIR /var/www/html/Server
 WORKDIR /var/www/html/Server
