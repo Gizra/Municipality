@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
+set -e
 
-# Load helper functionality.
 cd ci-scripts/docker_files
 
 
