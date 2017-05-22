@@ -22,6 +22,9 @@ update msg model =
             in
                 model ! []
 
+        SetFilter filter ->
+            { model | filter = filter } ! []
+
 
 subscriptions : Sub Msg
 subscriptions =
