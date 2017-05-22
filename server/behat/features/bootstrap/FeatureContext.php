@@ -297,7 +297,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
 
     // Check if the requested string is contained in this element's text,
     // checking it this way because of spaces.
-    if (strpos($text_element->getText(), $text) === TRUE) {
+    if (strpos($text_element->getText(), $text)) {
       throw new \Exception(format_string('There\'s no text matching "@text".', ['@text' => $text]));
     }
 
@@ -410,7 +410,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
 
     foreach ($links as $link) {
-      if (!strpos($element->getHtml(), $link) === TRUE) {
+      if (!strpos($element->getHtml(), $link)) {
         // Throw an error if one of the expected links is missing.
         throw new \Exception(format_string('The @element_name @link is NOT present on the page.', ['@element_name' => $element_name, '@link' => $link]));
       }
@@ -439,7 +439,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
 
     // Define on which condition to check.
-    $condition = $selector == 'text' ? $language_active_link->getText() === $language : strpos($language_active_link->getAttribute($selector), $language) === TRUE;
+    $condition = $selector == 'text' ? $language_active_link->getText() === $language : strpos($language_active_link->getAttribute($selector), $language);
 
     if (!$condition) {
       throw new \Exception(format_string('Active language is not "@language".', ['@language' => $language]));
@@ -468,7 +468,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
 
     // Define on which condition to check.
-    $condition = $selector == 'text' ? $user_type_active_link->getText() === $user_type : strpos($user_type_active_link->getAttribute($selector), $user_type) === TRUE;
+    $condition = $selector == 'text' ? $user_type_active_link->getText() === $user_type : strpos($user_type_active_link->getAttribute($selector), $user_type);
 
     if (!$condition) {
       throw new \Exception(format_string('Active user type is not "@user_type".', ['@user_type' => $user_type]));
