@@ -285,7 +285,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     if ($title_element === null) {
       throw new \Exception('The title element is missing.');
     }
-    if ($title_element->getText() !== $title) {
+    if (trim($title_element->getText()) !== trim($title)) {
       throw new \Exception(format_string('The title is not "@title".', ['@title' => $title]));
     }
 
@@ -294,10 +294,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     if ($text_element === null) {
       throw new \Exception('The required text element is missing.');
     }
-
-    // Check if the requested string is contained in this element's text,
-    // checking it this way because of spaces.
-    if (strpos($text_element->getText(), $text)) {
+    if (trim($text_element->getText()) !== trim($text)) {
       throw new \Exception(format_string('There\'s no text matching "@text".', ['@text' => $text]));
     }
 
@@ -439,7 +436,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
 
     // Define on which condition to check.
-    $condition = $selector == 'text' ? $language_active_link->getText() === $language : strpos($language_active_link->getAttribute($selector), $language);
+    $condition = $selector == 'text' ? trim($language_active_link->getText()) === trim($language) : strpos($language_active_link->getAttribute($selector), $language);
 
     if (!$condition) {
       throw new \Exception(format_string('Active language is not "@language".', ['@language' => $language]));
@@ -468,7 +465,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
 
     // Define on which condition to check.
-    $condition = $selector == 'text' ? $user_type_active_link->getText() === $user_type : strpos($user_type_active_link->getAttribute($selector), $user_type);
+    $condition = $selector == 'text' ? trim($user_type_active_link->getText()) === trim($user_type) : strpos($user_type_active_link->getAttribute($selector), $user_type);
 
     if (!$condition) {
       throw new \Exception(format_string('Active user type is not "@user_type".', ['@user_type' => $user_type]));
