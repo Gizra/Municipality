@@ -11945,26 +11945,26 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 												},
 												{
 													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html$span,
-														{ctor: '[]'},
-														{
-															ctor: '::',
-															_0: A2(
-																_elm_lang$html$Html$i,
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('mail icon'),
-																	_1: {ctor: '[]'}
-																},
-																{ctor: '[]'}),
-															_1: {
-																ctor: '::',
-																_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
-																	A2(
-																		_elm_lang$core$Maybe$map,
-																		function (email) {
-																			return A2(
+													_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
+														A2(
+															_elm_lang$core$Maybe$map,
+															function (email) {
+																return A2(
+																	_elm_lang$html$Html$span,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$i,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$class('mail icon'),
+																				_1: {ctor: '[]'}
+																			},
+																			{ctor: '[]'}),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
 																				_elm_lang$html$Html$a,
 																				{
 																					ctor: '::',
@@ -11976,34 +11976,34 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																					ctor: '::',
 																					_0: _elm_lang$html$Html$text(email),
 																					_1: {ctor: '[]'}
-																				});
-																		},
-																		_p2.email)),
-																_1: {ctor: '[]'}
-															}
-														}),
+																				}),
+																			_1: {ctor: '[]'}
+																		}
+																	});
+															},
+															_p2.email)),
 													_1: {
 														ctor: '::',
-														_0: A2(
-															_elm_lang$html$Html$span,
-															{ctor: '[]'},
-															{
-																ctor: '::',
-																_0: A2(
-																	_elm_lang$html$Html$i,
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$class('phone icon'),
-																		_1: {ctor: '[]'}
-																	},
-																	{ctor: '[]'}),
-																_1: {
-																	ctor: '::',
-																	_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
-																		A2(
-																			_elm_lang$core$Maybe$map,
-																			function (phone) {
-																				return A2(
+														_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
+															A2(
+																_elm_lang$core$Maybe$map,
+																function (phone) {
+																	return A2(
+																		_elm_lang$html$Html$span,
+																		{ctor: '[]'},
+																		{
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$i,
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$class('phone icon'),
+																					_1: {ctor: '[]'}
+																				},
+																				{ctor: '[]'}),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
 																					_elm_lang$html$Html$a,
 																					{
 																						ctor: '::',
@@ -12015,12 +12015,12 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																						ctor: '::',
 																						_0: _elm_lang$html$Html$text(phone),
 																						_1: {ctor: '[]'}
-																					});
-																			},
-																			_p2.phone)),
-																	_1: {ctor: '[]'}
-																}
-															}),
+																					}),
+																				_1: {ctor: '[]'}
+																			}
+																		});
+																},
+																_p2.phone)),
 														_1: {
 															ctor: '::',
 															_0: A2(
