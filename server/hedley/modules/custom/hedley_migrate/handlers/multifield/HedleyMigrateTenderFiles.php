@@ -21,11 +21,10 @@ class HedleyMigrateTenderFiles extends HedleyMigrateBase {
   ];
   protected $simpleMappings = [
     'title_field',
-    'field_file',
   ];
 
   /**
-   * HedleyMigrateReceptionHours constructor.
+   * HedleyMigrateTenderFiles constructor.
    */
   public function __construct($arguments) {
     parent::__construct($arguments);

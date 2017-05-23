@@ -15,32 +15,30 @@ class HedleyMigrateTenders extends HedleyMigrateBase {
   protected $csvColumns = [
     'id',
     'municipality',
-    'title_ar',
-    'title_en',
-    'title_he',
+    'title_field_ar',
+    'title_field_en',
+    'title_field_he',
     'field_department',
     'field_publish_date',
     'field_deadline',
     'field_tender_extension',
     'field_tender_requirements',
-    'field_tinder_requirement_payment',
+    'field_tender_requirement_payment',
   ];
   protected $simpleMappings = [
     'id',
     'municipality',
-    'title_ar',
-    'title_en',
-    'title_he',
     'field_department',
+    'title_field',
     'field_publish_date',
     'field_deadline',
     'field_tender_extension',
     'field_tender_requirements',
-    'field_tinder_requirement_payment',
+    'field_tender_requirement_payment',
   ];
 
   /**
-   * HedleyMigrateEvents constructor.
+   * HedleyMigrateTenders constructor.
    */
   public function __construct($arguments) {
     parent::__construct($arguments);
@@ -51,10 +49,6 @@ class HedleyMigrateTenders extends HedleyMigrateBase {
     $this
       ->addFieldMapping(OG_AUDIENCE_FIELD, 'municipality')
       ->sourceMigration('HedleyMigrateMunicipalities');
-
-    $this
-      ->addFieldMapping('field_department', 'field_department')
-      ->sourceMigration('HedleyMigrateDepartments');
   }
 
 }
