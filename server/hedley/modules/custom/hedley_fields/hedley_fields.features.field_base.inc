@@ -1022,7 +1022,7 @@ function hedley_fields_field_default_field_bases() {
     'settings' => array(
       'entity_translation_sync' => FALSE,
     ),
-    'translatable' => 0,
+    'translatable' => 1,
     'type' => 'text_long',
   );
 
@@ -1084,13 +1084,13 @@ function hedley_fields_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_tinder_requirement_payment'.
-  $field_bases['field_tinder_requirement_payment'] = array(
+  // Exported field_base: 'field_tender_requirement_payment'.
+  $field_bases['field_tender_requirement_payment'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_tinder_requirement_payment',
+    'field_name' => 'field_tender_requirement_payment',
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1101,8 +1101,8 @@ function hedley_fields_field_default_field_bases() {
     'settings' => array(
       'entity_translation_sync' => FALSE,
     ),
-    'translatable' => 0,
-    'type' => 'text_long',
+    'translatable' => 1,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_topics'.

@@ -396,8 +396,8 @@ function hedley_tender_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-tender-field_tinder_requirement_payment'.
-  $field_instances['node-tender-field_tinder_requirement_payment'] = array(
+  // Exported field_instance: 'node-tender-field_tender_requirement_payment'.
+  $field_instances['node-tender-field_tender_requirement_payment'] = array(
     'bundle' => 'tender',
     'default_value' => NULL,
     'deleted' => 0,
@@ -424,21 +424,21 @@ function hedley_tender_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_tinder_requirement_payment',
+    'field_name' => 'field_tender_requirement_payment',
     'label' => 'Requirement payment',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 5,
+        'size' => 60,
       ),
-      'type' => 'text_textarea',
+      'type' => 'text_textfield',
       'weight' => 8,
     ),
   );
