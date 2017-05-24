@@ -31,6 +31,7 @@ type alias ContactId =
 
 type alias Contact =
     { name : Name
+    , image_url : Maybe String
     , phone : Maybe String
     , email : Maybe String
     }

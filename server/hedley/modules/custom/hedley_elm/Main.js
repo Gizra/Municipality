@@ -7951,9 +7951,9 @@ var _Gizra$elm_spa_exmple$Contact_Model$Model = F2(
 	function (a, b) {
 		return {contacts: a, filterString: b};
 	});
-var _Gizra$elm_spa_exmple$Contact_Model$Contact = F3(
-	function (a, b, c) {
-		return {name: a, phone: b, email: c};
+var _Gizra$elm_spa_exmple$Contact_Model$Contact = F4(
+	function (a, b, c, d) {
+		return {name: a, image_url: b, phone: c, email: d};
 	});
 var _Gizra$elm_spa_exmple$Contact_Model$SetFilter = function (a) {
 	return {ctor: 'SetFilter', _0: a};
@@ -9077,11 +9077,16 @@ var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContact = A4(
 		'phone',
 		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 		_elm_lang$core$Maybe$Nothing,
-		A3(
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'name',
-			_elm_lang$core$Json_Decode$string,
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Contact))));
+		A4(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+			'image_url',
+			_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+			_elm_lang$core$Maybe$Nothing,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'name',
+				_elm_lang$core$Json_Decode$string,
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Contact)))));
 var _Gizra$elm_spa_exmple$Contact_Decoder$decodeArray2 = F2(
 	function (keyDecoder, valueDecoder) {
 		return A2(
@@ -11780,25 +11785,31 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 			},
 			{
 				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('image'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$img,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$src('http://lorempixel.com/output/nightlife-q-c-290-290-1.jpg'),
-								_1: {ctor: '[]'}
-							},
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}),
+				_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
+					A2(
+						_elm_lang$core$Maybe$map,
+						function (image_url) {
+							return A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('image'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$img,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$src(image_url),
+											_1: {ctor: '[]'}
+										},
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								});
+						},
+						_p2.image_url)),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -11951,7 +11962,11 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 															function (email) {
 																return A2(
 																	_elm_lang$html$Html$span,
-																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$class('email-wrapper'),
+																		_1: {ctor: '[]'}
+																	},
 																	{
 																		ctor: '::',
 																		_0: A2(
@@ -11990,7 +12005,11 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																function (phone) {
 																	return A2(
 																		_elm_lang$html$Html$span,
-																		{ctor: '[]'},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('phone-wrapper'),
+																			_1: {ctor: '[]'}
+																		},
 																		{
 																			ctor: '::',
 																			_0: A2(

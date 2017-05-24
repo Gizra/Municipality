@@ -62,10 +62,15 @@ viewContacts language { contacts, filterString } =
 viewContact : Language -> ( ContactId, Contact ) -> Html msg
 viewContact language ( contactId, contact ) =
     div [ class "card" ]
-        [ div [ class "image" ]
-            [ img [ src "http://lorempixel.com/output/nightlife-q-c-290-290-1.jpg" ]
-                []
-            ]
+        [ showMaybe <|
+            Maybe.map
+                (\image_url ->
+                    div [ class "image" ]
+                        [ img [ src image_url ]
+                            []
+                        ]
+                )
+                contact.image_url
         , div [ class "content" ]
             [ div [ class "header" ]
                 [ text <| contact.name ]

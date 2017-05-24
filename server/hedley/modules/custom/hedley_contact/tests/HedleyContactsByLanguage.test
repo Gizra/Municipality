@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyContactsByLanguage.
+ */
+
+/**
+ * Class HedleyContactsByLanguage.
+ */
+class HedleyContactsByLanguage extends DrupalWebTestCase {
+
+  /**
+   * The profile name.
+   *
+   * @var string
+   */
+  protected $profile = 'hedley';
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Contacts by language',
+      'description' => 'Test getting the expected contacts per language.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Overrides DrupalWebTestCase::setUp().
+   */
+  protected function setUp() {
+    parent::setUp();
+
+    // Skip dealing with user ID 1.
+    $this->drupalCreateUser();
+  }
+
+  /**
+   * Test access to the Contact page.
+   */
+  public function testContactsByLanguage() {
+    $ar_language_code = 'ar';
+    $he_language_code = 'he';
+
+    // Create a municipality group.
+    $user1 = $this->drupalCreateUser();
+    $municipality_settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+    ];
+    $municipality = $this->drupalCreateNode($municipality_settings);
+
+    // Create a contact group content.
+    $contact_settings = [
+      'type' => 'contact',
+      'field_first_name' => [
+        $he_language_code => [
+          ['value' => 'שם'],
+        ],
+        $ar_language_code => [
+          ['value' => 'اسم'],
+        ],
+      ],
+      'uid' => $user1->uid,
+    ];
+    // Add the created group as the parent group for this entity.
+    $contact_settings[OG_AUDIENCE_FIELD][LANGUAGE_NONE][0]['target_id'] = $municipality->nid;
+    $contact = $this->drupalCreateNode($contact_settings);
+
+    debug($contact);
+
+    $he_municipality_contact = hedley_contact_get_get_contacts_by_group($municipality, $he_language_code);
+    $ar_municipality_contact = hedley_contact_get_get_contacts_by_group($municipality, $ar_language_code);
+
+    debug($he_municipality_contact);
+    debug($ar_municipality_contact);
+
+  }
+
+}
