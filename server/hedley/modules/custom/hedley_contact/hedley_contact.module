@@ -120,28 +120,58 @@ function hedley_contact_get_reception_hours($node) {
 /**
  * Return contacts by group.
  *
- * @param int $gid
- *   The group ID.
+ * @param object $group
+ *   The group.
  * @param string $language_code
  *   The language code (e.g. "he", "ar").
  *
  * @return array
  *   Array with the contacts list.
  */
-function hedley_contact_get_get_contacts_by_group($gid, $language_code) {
-  return [
-    [
-      'id' => 100,
-      'name' => 'foo',
-      'phone' => '1234',
-      'email' => 'foo@bar.com',
-      'job_title' => 'collection',
-    ],
-    [
-      'id' => 200,
-      'name' => 'bar',
-      'email' => NULL,
-    ],
-  ];
+function hedley_contact_get_get_contacts_by_group($group, $language_code) {
+  $nodes = hedley_municipality_get_nodes('contact', 100, $group, FALSE);
+  if (!$nodes) {
+    // No contacts found.
+    return NULL;
+  }
+  $contacts = [];
+  foreach ($nodes as $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $wrapper->language($language_code);
+    // Ignore contacts without a name in the current language.
+    if (!$wrapper->field_last_name->value()) {
+      continue;
+    }
+
+    $image = $wrapper->field_image->value();
+
+    // Get the topics related to the user, if not empty.
+    $topics = array();
+    if (!empty($wrapper->field_topics->raw())) {
+      foreach ($wrapper->field_topics->value() as $topic) {
+        $topics[$topic->tid] = $topic->name;
+      }
+    }
+
+    $contact = [
+      'id' => $wrapper->getIdentifier(),
+      'image_url' => $image ? image_style_url('medium', $image['uri']) : '',
+      'phone' => check_plain($wrapper->field_phone->value()),
+      'fax' => check_plain($wrapper->field_fax->value()),
+      'email' => check_plain($wrapper->field_email->value()),
+      'address' => check_plain($wrapper->field_address->value()),
+      'job_title' => check_plain($wrapper->field_job_title->value()),
+      'topics' => $topics,
+      'reception_hours' => hedley_contact_get_reception_hours($node),
+    ];
+
+    // Set the contact title as name and job title.
+    $name = check_plain($wrapper->field_first_name->value()) . ' ' . check_plain($wrapper->field_last_name->value());
+    $contact['name'] = implode(' - ', [$name, check_plain($wrapper->field_job_title->value())]);
+
+    $contacts[] = $contact;
+  }
+
+  return $contacts;
 
 }

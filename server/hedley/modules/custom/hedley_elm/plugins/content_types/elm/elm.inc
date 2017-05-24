@@ -39,7 +39,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   $values = [];
   switch ($page) {
     case 'contact':
-      $values = hedley_contact_get_get_contacts_by_group($node->nid, $language->language);
+      $values = hedley_contact_get_get_contacts_by_group($node, $language->language);
 
   }
 
