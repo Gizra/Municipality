@@ -23,6 +23,8 @@ abstract class HedleyMigrateBase extends Migration {
     'field_first_name',
     'field_job_title',
     'field_last_name',
+    'field_tender_requirements',
+    'field_tender_payment',
     'field_question',
     'field_subtitle',
   ];
@@ -112,7 +114,7 @@ abstract class HedleyMigrateBase extends Migration {
     }
 
     // Map file fields.
-    foreach (['field_file', 'field_image', 'field_logo'] as $file_field) {
+    foreach (['field_file', 'field_image', 'field_logo', 'field_files'] as $file_field) {
       if (!in_array($file_field, $this->csvColumns)) {
         continue;
       }
