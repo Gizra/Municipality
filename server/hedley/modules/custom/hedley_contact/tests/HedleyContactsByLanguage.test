@@ -45,6 +45,9 @@ class HedleyContactsByLanguage extends DrupalWebTestCase {
     $ar_language_code = 'ar';
     $he_language_code = 'he';
 
+    // Create the OG audience field.
+    og_create_field(OG_AUDIENCE_FIELD, 'node', 'contact');
+
     // Create a municipality group.
     $user1 = $this->drupalCreateUser();
     $municipality_settings = [
@@ -58,26 +61,32 @@ class HedleyContactsByLanguage extends DrupalWebTestCase {
       'type' => 'contact',
       'field_first_name' => [
         $he_language_code => [
-          ['value' => 'שם'],
+          ['value' => 'פרטי'],
         ],
         $ar_language_code => [
-          ['value' => 'اسم'],
+          ['value' => 'اسم خاص'],
         ],
+      ],
+      'field_last_name' => [
+        $he_language_code => [
+          ['value' => 'משפחה'],
+        ],
+        $ar_language_code => [
+          ['value' => 'عائلة'],
+        ],
+      ],
+      OG_AUDIENCE_FIELD => [
+        LANGUAGE_NONE => [
+          ['target_id' => $municipality->nid]
+        ]
       ],
       'uid' => $user1->uid,
     ];
     // Add the created group as the parent group for this entity.
-    $contact_settings[OG_AUDIENCE_FIELD][LANGUAGE_NONE][0]['target_id'] = $municipality->nid;
     $contact = $this->drupalCreateNode($contact_settings);
-
-    debug($contact);
 
     $he_municipality_contact = hedley_contact_get_get_contacts_by_group($municipality, $he_language_code);
     $ar_municipality_contact = hedley_contact_get_get_contacts_by_group($municipality, $ar_language_code);
-
-    debug($he_municipality_contact);
-    debug($ar_municipality_contact);
-
   }
 
 }
