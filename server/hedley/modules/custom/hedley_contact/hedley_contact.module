@@ -154,8 +154,8 @@ function hedley_contact_get_get_contacts_by_group($group, $language_code) {
     }
 
     $contact = [
-      'name' => check_plain($wrapper->field_first_name->value()) . ' ' . check_plain($wrapper->field_last_name->value()),
       'id' => $wrapper->getIdentifier(),
+      'name' => check_plain($wrapper->field_first_name->value()) . ' ' . check_plain($wrapper->field_last_name->value()),
       'image_url' => $image ? image_style_url('medium', $image['uri']) : '',
       'phone' => check_plain($wrapper->field_phone->value()),
       'fax' => check_plain($wrapper->field_fax->value()),
@@ -166,7 +166,8 @@ function hedley_contact_get_get_contacts_by_group($group, $language_code) {
       'reception_hours' => hedley_contact_get_reception_hours($node),
     ];
 
-    $contacts[] = $contact;
+    // Remove empty values (elm expects the correct value or nothing).
+    $contacts[] = array_filter($contact);
   }
 
   return $contacts;

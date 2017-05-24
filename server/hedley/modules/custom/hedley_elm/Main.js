@@ -7951,9 +7951,9 @@ var _Gizra$elm_spa_exmple$Contact_Model$Model = F2(
 	function (a, b) {
 		return {contacts: a, filterString: b};
 	});
-var _Gizra$elm_spa_exmple$Contact_Model$Contact = F4(
-	function (a, b, c, d) {
-		return {name: a, image_url: b, phone: c, email: d};
+var _Gizra$elm_spa_exmple$Contact_Model$Contact = F7(
+	function (a, b, c, d, e, f, g) {
+		return {name: a, job_title: b, image_url: c, phone: d, fax: e, email: f, address: g};
 	});
 var _Gizra$elm_spa_exmple$Contact_Model$SetFilter = function (a) {
 	return {ctor: 'SetFilter', _0: a};
@@ -9069,24 +9069,39 @@ var _Gizra$elm_spa_exmple$Utils_Json$decodeEmptyArrayAs = function ($default) {
 
 var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContact = A4(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-	'email',
+	'address',
 	_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 	_elm_lang$core$Maybe$Nothing,
 	A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-		'phone',
+		'email',
 		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 		_elm_lang$core$Maybe$Nothing,
 		A4(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-			'image_url',
+			'fax',
 			_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 			_elm_lang$core$Maybe$Nothing,
-			A3(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'name',
-				_elm_lang$core$Json_Decode$string,
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Contact)))));
+			A4(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+				'phone',
+				_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+				_elm_lang$core$Maybe$Nothing,
+				A4(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+					'image_url',
+					_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+					_elm_lang$core$Maybe$Nothing,
+					A4(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+						'job_title',
+						_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+						_elm_lang$core$Maybe$Nothing,
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+							'name',
+							_elm_lang$core$Json_Decode$string,
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Contact))))))));
 var _Gizra$elm_spa_exmple$Contact_Decoder$decodeArray2 = F2(
 	function (keyDecoder, valueDecoder) {
 		return A2(
@@ -11865,7 +11880,13 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 										},
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html$text('עוזר ראש העיר'),
+											_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
+												A2(
+													_elm_lang$core$Maybe$map,
+													function (job_title) {
+														return _elm_lang$html$Html$text(job_title);
+													},
+													_p2.job_title)),
 											_1: {
 												ctor: '::',
 												_0: A2(
@@ -11961,7 +11982,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 															_elm_lang$core$Maybe$map,
 															function (email) {
 																return A2(
-																	_elm_lang$html$Html$span,
+																	_elm_lang$html$Html$p,
 																	{
 																		ctor: '::',
 																		_0: _elm_lang$html$Html_Attributes$class('email-wrapper'),
@@ -12004,7 +12025,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																_elm_lang$core$Maybe$map,
 																function (phone) {
 																	return A2(
-																		_elm_lang$html$Html$span,
+																		_elm_lang$html$Html$p,
 																		{
 																			ctor: '::',
 																			_0: _elm_lang$html$Html_Attributes$class('phone-wrapper'),
@@ -12042,42 +12063,85 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																_p2.phone)),
 														_1: {
 															ctor: '::',
-															_0: A2(
-																_elm_lang$html$Html$span,
-																{ctor: '[]'},
-																{
-																	ctor: '::',
-																	_0: A2(
-																		_elm_lang$html$Html$h4,
-																		{
-																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
-																			_1: {ctor: '[]'}
-																		},
-																		{ctor: '[]'}),
-																	_1: {
-																		ctor: '::',
-																		_0: A2(
-																			_elm_lang$html$Html$a,
+															_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
+																A2(
+																	_elm_lang$core$Maybe$map,
+																	function (fax) {
+																		return A2(
+																			_elm_lang$html$Html$p,
 																			{
 																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$href('#'),
+																				_0: _elm_lang$html$Html_Attributes$class('fax-wrapper'),
 																				_1: {ctor: '[]'}
 																			},
 																			{
 																				ctor: '::',
-																				_0: _elm_lang$html$Html$text('בניין העיריה, חדר 421'),
-																				_1: {ctor: '[]'}
-																			}),
-																		_1: {ctor: '[]'}
-																	}
-																}),
+																				_0: A2(
+																					_elm_lang$html$Html$i,
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$class('fax icon'),
+																						_1: {ctor: '[]'}
+																					},
+																					{ctor: '[]'}),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_elm_lang$html$Html$a,
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$href(
+																								A2(_elm_lang$core$Basics_ops['++'], 'fax:', fax)),
+																							_1: {ctor: '[]'}
+																						},
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html$text(fax),
+																							_1: {ctor: '[]'}
+																						}),
+																					_1: {ctor: '[]'}
+																				}
+																			});
+																	},
+																	_p2.fax)),
 															_1: {
 																ctor: '::',
 																_0: A2(
-																	_elm_lang$html$Html$br,
+																	_elm_lang$html$Html$div,
 																	{ctor: '[]'},
-																	{ctor: '[]'}),
+																	{
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$h4,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
+																				_1: {ctor: '[]'}
+																			},
+																			{ctor: '[]'}),
+																		_1: {
+																			ctor: '::',
+																			_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
+																				A2(
+																					_elm_lang$core$Maybe$map,
+																					function (address) {
+																						return A2(
+																							_elm_lang$html$Html$p,
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$class('address-wrapper'),
+																								_1: {ctor: '[]'}
+																							},
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html$text(address),
+																								_1: {ctor: '[]'}
+																							});
+																					},
+																					_p2.address)),
+																			_1: {ctor: '[]'}
+																		}
+																	}),
 																_1: {
 																	ctor: '::',
 																	_0: A2(

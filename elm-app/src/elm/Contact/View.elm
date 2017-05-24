@@ -44,17 +44,17 @@ viewContacts language { contacts, filterString } =
         filteredContacts =
             filterContacts contacts filterString
     in
-        if DictList.isEmpty filteredContacts then
-            div [] [ text <| translate language ContactsNotFound ]
-        else
-            div [ class "ui link cards" ]
-                (filteredContacts
-                    |> DictList.map
-                        (\contactId contact ->
-                            viewContact language ( contactId, contact )
-                        )
-                    |> DictList.values
-                )
+    if DictList.isEmpty filteredContacts then
+        div [] [ text <| translate language ContactsNotFound ]
+    else
+        div [ class "ui link cards" ]
+            (filteredContacts
+                |> DictList.map
+                    (\contactId contact ->
+                        viewContact language ( contactId, contact )
+                    )
+                |> DictList.values
+            )
 
 
 {-| View a single contact.
@@ -79,7 +79,7 @@ viewContact language ( contactId, contact ) =
                     [ text "לשכת ראש העירייה" ]
                 ]
             , div [ class "description" ]
-                [ text "עוזר ראש העיר"
+                [ showMaybe <| Maybe.map (\job_title -> text job_title) contact.job_title
                 , h4 [ class "ui horizontal divider" ]
                     []
                 , div [ class "ui blue small labels" ]
@@ -97,7 +97,7 @@ viewContact language ( contactId, contact ) =
                 [ showMaybe <|
                     Maybe.map
                         (\email ->
-                            span [ class "email-wrapper" ]
+                            p [ class "email-wrapper" ]
                                 [ i [ class "mail icon" ] []
                                 , a [ href ("mailto:" ++ email) ] [ text email ]
                                 ]
@@ -106,20 +106,32 @@ viewContact language ( contactId, contact ) =
                 , showMaybe <|
                     Maybe.map
                         (\phone ->
-                            span [ class "phone-wrapper" ]
+                            p [ class "phone-wrapper" ]
                                 [ i [ class "phone icon" ] []
                                 , a [ href ("tel:" ++ phone) ] [ text phone ]
                                 ]
                         )
                         contact.phone
-                , span []
+                , showMaybe <|
+                    Maybe.map
+                        (\fax ->
+                            p [ class "fax-wrapper" ]
+                                [ i [ class "fax icon" ] []
+                                , a [ href ("fax:" ++ fax) ] [ text fax ]
+                                ]
+                        )
+                        contact.fax
+                , div []
                     [ h4 [ class "ui horizontal divider" ]
                         []
-                    , a [ href "#" ]
-                        [ text "בניין העיריה, חדר 421" ]
+                    , showMaybe <|
+                        Maybe.map
+                            (\address ->
+                                p [ class "address-wrapper" ]
+                                    [ text address ]
+                            )
+                            contact.address
                     ]
-                , br []
-                    []
                 , span []
                     [ i [ class "add to calendar icon" ]
                         []
