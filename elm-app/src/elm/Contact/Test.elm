@@ -40,12 +40,12 @@ viewContactTest =
             \() ->
                 viewContact English contact1
                     |> Query.fromHtml
-                    |> Query.hasNot [ Selector.class "email" ]
+                    |> Query.hasNot [ Selector.class "email-wrapper" ]
         , test "Contact without Phone" <|
             \() ->
                 viewContact English contact1
                     |> Query.fromHtml
-                    |> Query.hasNot [ Selector.class "phone" ]
+                    |> Query.hasNot [ Selector.class "phone-wrapper" ]
         , test "Contact with Email" <|
             \() ->
                 viewContact English contact2
