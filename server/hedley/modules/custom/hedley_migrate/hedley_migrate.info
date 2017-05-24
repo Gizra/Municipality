@@ -22,6 +22,7 @@ files[] = handlers/node/HedleyMigrateHardcopyForms.php
 files[] = handlers/node/HedleyMigrateMunicipalities.php
 files[] = handlers/node/HedleyMigrateNews.php
 files[] = handlers/node/HedleyMigratePages.php
+files[] = handlers/node/HedleyMigrateTenders.php
 
 ; Taxonomies
 files[] = handlers/taxonomy_term/HedleyMigrateAudiences.php
