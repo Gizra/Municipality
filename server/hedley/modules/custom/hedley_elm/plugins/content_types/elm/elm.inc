@@ -29,9 +29,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
 
   $page = $conf['page'];
 
-  $node = hedley_municipality_get_current_group();
-
-  if (!$node) {
+  if (!$node = hedley_municipality_get_current_group()) {
     // Don't display the elm app if not in the context of a municipality group.
     return FALSE;
   }
