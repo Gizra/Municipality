@@ -443,6 +443,32 @@ function hedley_fields_field_default_field_bases() {
     'type' => 'file',
   );
 
+  // Exported field_base: 'field_files'.
+  $field_bases['field_files'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_files',
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'file',
+    'settings' => array(
+      'display_default' => 0,
+      'display_field' => 0,
+      'entity_translation_sync' => array(
+        0 => 'fid',
+      ),
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'file',
+  );
+
   // Exported field_base: 'field_first_name'.
   $field_bases['field_first_name'] = array(
     'active' => 1,
@@ -973,36 +999,6 @@ function hedley_fields_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_boolean',
-  );
-
-  // Exported field_base: 'field_tender_files'.
-  $field_bases['field_tender_files'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_tender_files',
-    'indexes' => array(
-      'field_file_fid' => array(
-        0 => 'field_file_fid',
-      ),
-      'id' => array(
-        0 => 'id',
-      ),
-      'title_field_format' => array(
-        0 => 'title_field_format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'multifield',
-    'settings' => array(
-      'entity_translation_sync' => array(
-        0 => 'id',
-      ),
-      'hide_blank_items' => 1,
-    ),
-    'translatable' => 0,
-    'type' => 'multifield',
   );
 
   // Exported field_base: 'field_tender_requirement_payment'.

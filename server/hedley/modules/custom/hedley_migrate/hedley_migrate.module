@@ -13,7 +13,6 @@ function hedley_migrate_migrate_api() {
     // Multifields.
     'HedleyMigrateActionSections',
     'HedleyMigrateReceptionHours',
-    'HedleyMigrateTenderFiles',
     // Nodes.
     'HedleyMigrateActions',
     'HedleyMigrateContacts',

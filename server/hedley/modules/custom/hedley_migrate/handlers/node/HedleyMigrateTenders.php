@@ -24,17 +24,20 @@ class HedleyMigrateTenders extends HedleyMigrateBase {
     'field_tender_extension',
     'field_tender_requirements',
     'field_tender_requirement_payment',
+    'field_files',
   ];
   protected $simpleMappings = [
     'id',
     'municipality',
-    'field_department',
     'title_field',
     'field_publish_date',
     'field_deadline',
     'field_tender_extension',
     'field_tender_requirements',
     'field_tender_requirement_payment',
+  ];
+  protected $simpleMultipleMappings = [
+    'field_files',
   ];
 
   /**
@@ -45,6 +48,10 @@ class HedleyMigrateTenders extends HedleyMigrateBase {
 
     $this->dependencies[] = 'HedleyMigrateMunicipalities';
     $this->dependencies[] = 'HedleyMigrateDepartments';
+
+    $this
+      ->addFieldMapping('field_department', 'field_department')
+      ->sourceMigration('HedleyMigrateDepartments');
 
     $this
       ->addFieldMapping(OG_AUDIENCE_FIELD, 'municipality')

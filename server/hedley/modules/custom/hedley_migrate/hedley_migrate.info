@@ -12,7 +12,6 @@ files[] = handlers/HedleyMigrateBase.php
 files[] = handlers/multifield/HedleyMigrateActionSections.php
 files[] = handlers/multifield/HedleyMigrateDestinationMultifield.php
 files[] = handlers/multifield/HedleyMigrateReceptionHours.php
-files[] = handlers/multifield/HedleyMigrateTenderFiles.php
 
 ; Nodes
 files[] = handlers/node/HedleyMigrateActions.php

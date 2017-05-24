@@ -10,78 +10,6 @@
 function hedley_tender_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'multifield-field_tender_files-field_file'.
-  $field_instances['multifield-field_tender_files-field_file'] = array(
-    'bundle' => 'field_tender_files',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'file',
-        'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'multifield',
-    'field_name' => 'field_file',
-    'label' => 'File',
-    'required' => 1,
-    'settings' => array(
-      'description_field' => 0,
-      'entity_translation_sync' => FALSE,
-      'file_directory' => '',
-      'file_extensions' => 'doc docx pdf ppt pptx mov jpg jpeg png tiff xls xlsx html',
-      'max_filesize' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'file',
-      'settings' => array(
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'file_generic',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'multifield-field_tender_files-title_field'.
-  $field_instances['multifield-field_tender_files-title_field'] = array(
-    'bundle' => 'field_tender_files',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'multifield',
-    'field_name' => 'title_field',
-    'label' => 'File description',
-    'required' => 1,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 4,
-    ),
-  );
-
   // Exported field_instance: 'node-tender-field_deadline'.
   $field_instances['node-tender-field_deadline'] = array(
     'bundle' => 'tender',
@@ -188,6 +116,55 @@ function hedley_tender_field_default_field_instances() {
       ),
       'type' => 'taxonomy_autocomplete',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-tender-field_files'.
+  $field_instances['node-tender-field_files'] = array(
+    'bundle' => 'tender',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 11,
+      ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_files',
+    'label' => 'Tender files',
+    'required' => 1,
+    'settings' => array(
+      'description_field' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'doc docx pdf ppt pptx mov jpg jpeg png tiff xls xlsx html',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 9,
     ),
   );
 
@@ -300,52 +277,6 @@ function hedley_tender_field_default_field_instances() {
       ),
       'type' => 'options_onoff',
       'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance: 'node-tender-field_tender_files'.
-  $field_instances['node-tender-field_tender_files'] = array(
-    'bundle' => 'tender',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'multifield',
-        'settings' => array(
-          'view_mode' => 'default',
-        ),
-        'type' => 'multifield_default',
-        'weight' => 8,
-      ),
-      'homepage_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_tender_files',
-    'label' => 'Tender files',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'multifield',
-      'settings' => array(),
-      'type' => 'multifield_default',
-      'weight' => 9,
     ),
   );
 
@@ -563,8 +494,6 @@ function hedley_tender_field_default_field_instances() {
   t('Deadline');
   t('Department');
   t('Extension of the original deadline.');
-  t('File');
-  t('File description');
   t('Groups audience');
   t('Publish date');
   t('Requirement payment');
