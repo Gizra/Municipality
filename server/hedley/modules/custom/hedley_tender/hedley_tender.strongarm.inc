@@ -43,7 +43,7 @@ function hedley_tender_strongarm() {
           'weight' => '0',
         ),
         'language' => array(
-          'weight' => '5',
+          'weight' => '4',
         ),
       ),
       'display' => array(),

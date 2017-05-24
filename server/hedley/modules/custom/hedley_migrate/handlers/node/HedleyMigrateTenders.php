@@ -23,7 +23,7 @@ class HedleyMigrateTenders extends HedleyMigrateBase {
     'field_deadline',
     'field_tender_extension',
     'field_tender_requirements',
-    'field_tender_requirement_payment',
+    'field_tender_payment',
     'field_files',
   ];
   protected $simpleMappings = [
@@ -35,7 +35,7 @@ class HedleyMigrateTenders extends HedleyMigrateBase {
     'field_deadline',
     'field_tender_extension',
     'field_tender_requirements',
-    'field_tender_requirement_payment',
+    'field_tender_payment',
   ];
 
   /**

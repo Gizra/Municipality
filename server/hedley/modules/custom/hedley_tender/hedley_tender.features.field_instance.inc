@@ -115,7 +115,7 @@ function hedley_tender_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -147,7 +147,7 @@ function hedley_tender_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_files',
-    'label' => 'Tender files',
+    'label' => 'Files',
     'required' => 1,
     'settings' => array(
       'description_field' => 0,
@@ -226,7 +226,7 @@ function hedley_tender_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -263,7 +263,7 @@ function hedley_tender_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_tender_extension',
-    'label' => 'Tender extension',
+    'label' => 'Extension',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -280,8 +280,8 @@ function hedley_tender_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-tender-field_tender_requirement_payment'.
-  $field_instances['node-tender-field_tender_requirement_payment'] = array(
+  // Exported field_instance: 'node-tender-field_tender_payment'.
+  $field_instances['node-tender-field_tender_payment'] = array(
     'bundle' => 'tender',
     'default_value' => NULL,
     'deleted' => 0,
@@ -292,7 +292,7 @@ function hedley_tender_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 13,
       ),
       'homepage_teaser' => array(
         'label' => 'above',
@@ -308,8 +308,8 @@ function hedley_tender_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_tender_requirement_payment',
-    'label' => 'Requirement payment',
+    'field_name' => 'field_tender_payment',
+    'label' => 'Payment',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -339,7 +339,7 @@ function hedley_tender_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 12,
       ),
       'homepage_teaser' => array(
         'label' => 'above',
@@ -485,7 +485,7 @@ function hedley_tender_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 
@@ -493,13 +493,13 @@ function hedley_tender_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Deadline');
   t('Department');
+  t('Extension');
   t('Extension of the original deadline.');
+  t('Files');
   t('Groups audience');
+  t('Payment');
   t('Publish date');
-  t('Requirement payment');
   t('Requirements');
-  t('Tender extension');
-  t('Tender files');
   t('This is the official tender publish date.');
   t('Title');
 
