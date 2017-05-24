@@ -18,6 +18,7 @@ files[] = handlers/node/HedleyMigrateActions.php
 files[] = handlers/node/HedleyMigrateContacts.php
 files[] = handlers/node/HedleyMigrateEvents.php
 files[] = handlers/node/HedleyMigrateFaqs.php
+files[] = handlers/node/HedleyMigrateFoi.php
 files[] = handlers/node/HedleyMigrateHardcopyForms.php
 files[] = handlers/node/HedleyMigrateMunicipalities.php
 files[] = handlers/node/HedleyMigrateNews.php

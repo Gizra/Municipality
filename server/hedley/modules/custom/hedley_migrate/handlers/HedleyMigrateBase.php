@@ -114,7 +114,7 @@ abstract class HedleyMigrateBase extends Migration {
     }
 
     // Map file fields.
-    foreach (['field_file', 'field_image', 'field_logo', 'field_files'] as $file_field) {
+    foreach (['field_file', 'field_image', 'field_logo', 'field_files', 'field_audio'] as $file_field) {
       if (!in_array($file_field, $this->csvColumns)) {
         continue;
       }
