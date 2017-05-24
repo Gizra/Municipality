@@ -53,7 +53,6 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   return $block;
 }
 
-
 /**
  * Edit form.
  */
