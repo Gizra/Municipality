@@ -34,7 +34,7 @@ class HedleyMigrateFoi extends HedleyMigrateBase {
     'field_document_type',
   ];
   protected $simpleMultipleMappings = [
-    'field_alternative_phrases'
+    'field_alternative_phrases',
   ];
 
   /**
