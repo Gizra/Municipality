@@ -89,19 +89,19 @@ viewContact language ( contactId, contact ) =
             , h4 [ class "ui section divider" ]
                 []
             , div [ class "contact-details center aligned" ]
-                [ showMaybe
-                    <| Maybe.map
+                [ showMaybe <|
+                    Maybe.map
                         (\email ->
-                            span []
+                            span [ class "email-wrapper" ]
                                 [ i [ class "mail icon" ] []
                                 , a [ href ("mailto:" ++ email) ] [ text email ]
                                 ]
                         )
                         contact.email
-                , showMaybe
-                    <| Maybe.map
+                , showMaybe <|
+                    Maybe.map
                         (\phone ->
-                            span []
+                            span [ class "phone-wrapper" ]
                                 [ i [ class "phone icon" ] []
                                 , a [ href ("tel:" ++ phone) ] [ text phone ]
                                 ]
