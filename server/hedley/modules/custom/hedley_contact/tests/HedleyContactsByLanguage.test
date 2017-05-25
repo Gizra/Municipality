@@ -61,18 +61,18 @@ class HedleyContactsByLanguage extends DrupalWebTestCase {
       'type' => 'contact',
       'field_first_name' => [
         $he_language_code => [
-          ['value' => 'פרטי'],
+          ['value' => 'First name Hebrew'],
         ],
         $ar_language_code => [
-          ['value' => 'اسم خاص'],
+          ['value' => 'First name Arabic'],
         ],
       ],
       'field_last_name' => [
         $he_language_code => [
-          ['value' => 'משפחה'],
+          ['value' => 'Last name Hebrew'],
         ],
         $ar_language_code => [
-          ['value' => 'عائلة'],
+          ['value' => 'Last name Arabic'],
         ],
       ],
       OG_AUDIENCE_FIELD => [
