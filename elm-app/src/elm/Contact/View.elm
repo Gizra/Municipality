@@ -46,17 +46,17 @@ viewContacts language { contacts, filterString } =
         filteredContacts =
             filterContacts contacts filterString
     in
-        if DictList.isEmpty filteredContacts then
-            div [] [ text <| translate language ContactsNotFound ]
-        else
-            div [ class "ui link cards" ]
-                (filteredContacts
-                    |> DictList.map
-                        (\contactId contact ->
-                            viewContact language ( contactId, contact )
-                        )
-                    |> DictList.values
-                )
+    if DictList.isEmpty filteredContacts then
+        div [] [ text <| translate language ContactsNotFound ]
+    else
+        div [ class "ui link cards" ]
+            (filteredContacts
+                |> DictList.map
+                    (\contactId contact ->
+                        viewContact language ( contactId, contact )
+                    )
+                |> DictList.values
+            )
 
 
 {-| View a single contact.
@@ -66,22 +66,29 @@ viewContact language ( contactId, contact ) =
     div [ class "card" ]
         [ showMaybe <|
             Maybe.map
-                (\image_url ->
+                (\imageUrl ->
                     div [ class "image" ]
-                        [ img [ src image_url ]
+                        [ img [ src imageUrl ]
                             []
                         ]
                 )
-                contact.image_url
+                contact.imageUrl
         , div [ class "content" ]
             [ div [ class "header" ]
                 [ text <| contact.name ]
             , div [ class "description" ]
-                [ showMaybe <| Maybe.map (\job_title -> text job_title) contact.job_title
+                [ showMaybe <| Maybe.map (\jobTitle -> text jobTitle) contact.jobTitle
                 , h4 [ class "ui horizontal divider" ]
                     []
                 , div [ class "ui blue small labels" ]
-                    []
+                    [-- showMaybe <|
+                     --     Maybe.map
+                     --         (\{ id, name } ->
+                     --             a [ class "ui label" ]
+                     --                 [ text name ]
+                     --         )
+                     --         contact.topics
+                    ]
                 ]
             , h4 [ class "ui section divider" ]
                 []

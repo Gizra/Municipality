@@ -7957,7 +7957,7 @@ var _Gizra$elm_spa_exmple$Contact_Model$Topic = F2(
 	});
 var _Gizra$elm_spa_exmple$Contact_Model$Contact = F8(
 	function (a, b, c, d, e, f, g, h) {
-		return {name: a, job_title: b, image_url: c, topics: d, phone: e, fax: f, email: g, address: h};
+		return {name: a, jobTitle: b, imageUrl: c, topics: d, phone: e, fax: f, email: g, address: h};
 	});
 var _Gizra$elm_spa_exmple$Contact_Model$SetFilter = function (a) {
 	return {ctor: 'SetFilter', _0: a};
@@ -9108,12 +9108,12 @@ var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContact = A4(
 					_elm_lang$core$Maybe$Nothing,
 					A4(
 						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-						'image_url',
+						'imageUrl',
 						_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 						_elm_lang$core$Maybe$Nothing,
 						A4(
 							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-							'job_title',
+							'jobTitle',
 							_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 							_elm_lang$core$Maybe$Nothing,
 							A3(
@@ -11826,7 +11826,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 				_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
 					A2(
 						_elm_lang$core$Maybe$map,
-						function (image_url) {
+						function (imageUrl) {
 							return A2(
 								_elm_lang$html$Html$div,
 								{
@@ -11840,14 +11840,14 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 										_elm_lang$html$Html$img,
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$src(image_url),
+											_0: _elm_lang$html$Html_Attributes$src(imageUrl),
 											_1: {ctor: '[]'}
 										},
 										{ctor: '[]'}),
 									_1: {ctor: '[]'}
 								});
 						},
-						_p2.image_url)),
+						_p2.imageUrl)),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -11885,10 +11885,10 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 										_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
 											A2(
 												_elm_lang$core$Maybe$map,
-												function (job_title) {
-													return _elm_lang$html$Html$text(job_title);
+												function (jobTitle) {
+													return _elm_lang$html$Html$text(jobTitle);
 												},
-												_p2.job_title)),
+												_p2.jobTitle)),
 										_1: {
 											ctor: '::',
 											_0: A2(

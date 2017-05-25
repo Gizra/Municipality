@@ -37,8 +37,8 @@ type alias Topic =
 
 type alias Contact =
     { name : Name
-    , job_title : Maybe String
-    , image_url : Maybe String
+    , jobTitle : Maybe String
+    , imageUrl : Maybe String
     , topics : Maybe (List Topic)
     , phone : Maybe String
     , fax : Maybe String

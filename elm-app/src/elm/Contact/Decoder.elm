@@ -32,8 +32,8 @@ decodeContact : Decoder Contact
 decodeContact =
     decode Contact
         |> required "name" string
-        |> optional "job_title" (nullable string) Nothing
-        |> optional "image_url" (nullable string) Nothing
+        |> optional "jobTitle" (nullable string) Nothing
+        |> optional "imageUrl" (nullable string) Nothing
         |> optional "topics" (nullable decodeTopic) Nothing
         |> optional "phone" (nullable string) Nothing
         |> optional "fax" (nullable string) Nothing
