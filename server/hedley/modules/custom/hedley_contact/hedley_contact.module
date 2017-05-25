@@ -149,7 +149,10 @@ function hedley_contact_get_get_contacts_by_group($group, $language_code) {
     $topics = array();
     if (!empty($wrapper->field_topics->raw())) {
       foreach ($wrapper->field_topics->value() as $topic) {
-        $topics[$topic->tid] = $topic->name;
+        $topics[] = [
+          'id' => $topic->tid,
+          'name' => $topic->name,
+        ];
       }
     }
 
@@ -169,6 +172,8 @@ function hedley_contact_get_get_contacts_by_group($group, $language_code) {
     // Remove empty values (elm expects the correct value or nothing).
     $contacts[] = array_filter($contact);
   }
+
+  dpm($contacts);
 
   return $contacts;
 

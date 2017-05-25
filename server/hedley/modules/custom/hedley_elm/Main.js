@@ -7951,9 +7951,13 @@ var _Gizra$elm_spa_exmple$Contact_Model$Model = F2(
 	function (a, b) {
 		return {contacts: a, filterString: b};
 	});
-var _Gizra$elm_spa_exmple$Contact_Model$Contact = F7(
-	function (a, b, c, d, e, f, g) {
-		return {name: a, job_title: b, image_url: c, phone: d, fax: e, email: f, address: g};
+var _Gizra$elm_spa_exmple$Contact_Model$Topic = F2(
+	function (a, b) {
+		return {id: a, name: b};
+	});
+var _Gizra$elm_spa_exmple$Contact_Model$Contact = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {name: a, job_title: b, image_url: c, topics: d, phone: e, fax: f, email: g, address: h};
 	});
 var _Gizra$elm_spa_exmple$Contact_Model$SetFilter = function (a) {
 	return {ctor: 'SetFilter', _0: a};
@@ -9067,6 +9071,15 @@ var _Gizra$elm_spa_exmple$Utils_Json$decodeEmptyArrayAs = function ($default) {
 		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value));
 };
 
+var _Gizra$elm_spa_exmple$Contact_Decoder$decodeTopic = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'name',
+	_elm_lang$core$Json_Decode$string,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'id',
+		_elm_lang$core$Json_Decode$int,
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Topic)));
 var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContact = A4(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 	'address',
@@ -9089,19 +9102,24 @@ var _Gizra$elm_spa_exmple$Contact_Decoder$decodeContact = A4(
 				_elm_lang$core$Maybe$Nothing,
 				A4(
 					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-					'image_url',
-					_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+					'topics',
+					_elm_lang$core$Json_Decode$nullable(_Gizra$elm_spa_exmple$Contact_Decoder$decodeTopic),
 					_elm_lang$core$Maybe$Nothing,
 					A4(
 						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-						'job_title',
+						'image_url',
 						_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 						_elm_lang$core$Maybe$Nothing,
-						A3(
-							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-							'name',
-							_elm_lang$core$Json_Decode$string,
-							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Contact))))))));
+						A4(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+							'job_title',
+							_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+							_elm_lang$core$Maybe$Nothing,
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+								'name',
+								_elm_lang$core$Json_Decode$string,
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$Contact)))))))));
 var _Gizra$elm_spa_exmple$Contact_Decoder$decodeArray2 = F2(
 	function (keyDecoder, valueDecoder) {
 		return A2(
@@ -11854,138 +11872,115 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 									_elm_lang$html$Html$div,
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('meta'),
+										_0: _elm_lang$html$Html_Attributes$class('description'),
 										_1: {ctor: '[]'}
 									},
 									{
 										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$a,
-											{ctor: '[]'},
-											{
+										_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
+											A2(
+												_elm_lang$core$Maybe$map,
+												function (job_title) {
+													return _elm_lang$html$Html$text(job_title);
+												},
+												_p2.job_title)),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$h4,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
+													_1: {ctor: '[]'}
+												},
+												{ctor: '[]'}),
+											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('לשכת ראש העירייה'),
+												_0: A2(
+													_elm_lang$html$Html$div,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('ui blue small labels'),
+														_1: {ctor: '[]'}
+													},
+													{ctor: '[]'}),
 												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
+											}
+										}
 									}),
 								_1: {
 									ctor: '::',
 									_0: A2(
-										_elm_lang$html$Html$div,
+										_elm_lang$html$Html$h4,
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('description'),
+											_0: _elm_lang$html$Html_Attributes$class('ui section divider'),
 											_1: {ctor: '[]'}
 										},
-										{
-											ctor: '::',
-											_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
-												A2(
-													_elm_lang$core$Maybe$map,
-													function (job_title) {
-														return _elm_lang$html$Html$text(job_title);
-													},
-													_p2.job_title)),
-											_1: {
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
 												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$h4,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
-														_1: {ctor: '[]'}
-													},
-													{ctor: '[]'}),
-												_1: {
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html$div,
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$class('ui blue small labels'),
-															_1: {ctor: '[]'}
-														},
-														{
-															ctor: '::',
-															_0: A2(
-																_elm_lang$html$Html$a,
+												_0: _elm_lang$html$Html_Attributes$class('contact-details center aligned'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
+													A2(
+														_elm_lang$core$Maybe$map,
+														function (email) {
+															return A2(
+																_elm_lang$html$Html$p,
 																{
 																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('ui label'),
+																	_0: _elm_lang$html$Html_Attributes$class('email-wrapper'),
 																	_1: {ctor: '[]'}
 																},
 																{
 																	ctor: '::',
-																	_0: _elm_lang$html$Html$text('מדיניות'),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {
-																ctor: '::',
-																_0: A2(
-																	_elm_lang$html$Html$a,
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$class('ui label'),
-																		_1: {ctor: '[]'}
-																	},
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html$text('תכנון ובניה'),
-																		_1: {ctor: '[]'}
-																	}),
-																_1: {
-																	ctor: '::',
 																	_0: A2(
-																		_elm_lang$html$Html$a,
+																		_elm_lang$html$Html$i,
 																		{
 																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$class('ui label'),
+																			_0: _elm_lang$html$Html_Attributes$class('mail icon'),
 																			_1: {ctor: '[]'}
 																		},
-																		{
-																			ctor: '::',
-																			_0: _elm_lang$html$Html$text('עסקים'),
-																			_1: {ctor: '[]'}
-																		}),
-																	_1: {ctor: '[]'}
-																}
-															}
-														}),
-													_1: {ctor: '[]'}
-												}
-											}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$h4,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('ui section divider'),
-												_1: {ctor: '[]'}
-											},
-											{ctor: '[]'}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$div,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('contact-details center aligned'),
-													_1: {ctor: '[]'}
-												},
-												{
+																		{ctor: '[]'}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$a,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$href(
+																					A2(_elm_lang$core$Basics_ops['++'], 'mailto:', email)),
+																				_1: {ctor: '[]'}
+																			},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text(email),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																});
+														},
+														_p2.email)),
+												_1: {
 													ctor: '::',
 													_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
 														A2(
 															_elm_lang$core$Maybe$map,
-															function (email) {
+															function (phone) {
 																return A2(
 																	_elm_lang$html$Html$p,
 																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$class('email-wrapper'),
+																		_0: _elm_lang$html$Html_Attributes$class('phone-wrapper'),
 																		_1: {ctor: '[]'}
 																	},
 																	{
@@ -11994,7 +11989,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																			_elm_lang$html$Html$i,
 																			{
 																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$class('mail icon'),
+																				_0: _elm_lang$html$Html_Attributes$class('phone icon'),
 																				_1: {ctor: '[]'}
 																			},
 																			{ctor: '[]'}),
@@ -12005,30 +12000,30 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																				{
 																					ctor: '::',
 																					_0: _elm_lang$html$Html_Attributes$href(
-																						A2(_elm_lang$core$Basics_ops['++'], 'mailto:', email)),
+																						A2(_elm_lang$core$Basics_ops['++'], 'tel:', phone)),
 																					_1: {ctor: '[]'}
 																				},
 																				{
 																					ctor: '::',
-																					_0: _elm_lang$html$Html$text(email),
+																					_0: _elm_lang$html$Html$text(phone),
 																					_1: {ctor: '[]'}
 																				}),
 																			_1: {ctor: '[]'}
 																		}
 																	});
 															},
-															_p2.email)),
+															_p2.phone)),
 													_1: {
 														ctor: '::',
 														_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
 															A2(
 																_elm_lang$core$Maybe$map,
-																function (phone) {
+																function (fax) {
 																	return A2(
 																		_elm_lang$html$Html$p,
 																		{
 																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$class('phone-wrapper'),
+																			_0: _elm_lang$html$Html_Attributes$class('fax-wrapper'),
 																			_1: {ctor: '[]'}
 																		},
 																		{
@@ -12037,7 +12032,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																				_elm_lang$html$Html$i,
 																				{
 																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$class('phone icon'),
+																					_0: _elm_lang$html$Html_Attributes$class('fax icon'),
 																					_1: {ctor: '[]'}
 																				},
 																				{ctor: '[]'}),
@@ -12048,115 +12043,82 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																					{
 																						ctor: '::',
 																						_0: _elm_lang$html$Html_Attributes$href(
-																							A2(_elm_lang$core$Basics_ops['++'], 'tel:', phone)),
+																							A2(_elm_lang$core$Basics_ops['++'], 'fax:', fax)),
 																						_1: {ctor: '[]'}
 																					},
 																					{
 																						ctor: '::',
-																						_0: _elm_lang$html$Html$text(phone),
+																						_0: _elm_lang$html$Html$text(fax),
 																						_1: {ctor: '[]'}
 																					}),
 																				_1: {ctor: '[]'}
 																			}
 																		});
 																},
-																_p2.phone)),
+																_p2.fax)),
 														_1: {
 															ctor: '::',
-															_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
-																A2(
-																	_elm_lang$core$Maybe$map,
-																	function (fax) {
-																		return A2(
-																			_elm_lang$html$Html$p,
-																			{
-																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$class('fax-wrapper'),
-																				_1: {ctor: '[]'}
-																			},
-																			{
-																				ctor: '::',
-																				_0: A2(
-																					_elm_lang$html$Html$i,
-																					{
-																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$class('fax icon'),
-																						_1: {ctor: '[]'}
-																					},
-																					{ctor: '[]'}),
-																				_1: {
-																					ctor: '::',
-																					_0: A2(
-																						_elm_lang$html$Html$a,
+															_0: A2(
+																_elm_lang$html$Html$div,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$h4,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
+																			_1: {ctor: '[]'}
+																		},
+																		{ctor: '[]'}),
+																	_1: {
+																		ctor: '::',
+																		_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
+																			A2(
+																				_elm_lang$core$Maybe$map,
+																				function (address) {
+																					return A2(
+																						_elm_lang$html$Html$p,
 																						{
 																							ctor: '::',
-																							_0: _elm_lang$html$Html_Attributes$href(
-																								A2(_elm_lang$core$Basics_ops['++'], 'fax:', fax)),
+																							_0: _elm_lang$html$Html_Attributes$class('address-wrapper'),
 																							_1: {ctor: '[]'}
 																						},
 																						{
 																							ctor: '::',
-																							_0: _elm_lang$html$Html$text(fax),
+																							_0: _elm_lang$html$Html$text(address),
 																							_1: {ctor: '[]'}
-																						}),
-																					_1: {ctor: '[]'}
-																				}
-																			});
-																	},
-																	_p2.fax)),
+																						});
+																				},
+																				_p2.address)),
+																		_1: {ctor: '[]'}
+																	}
+																}),
 															_1: {
 																ctor: '::',
 																_0: A2(
-																	_elm_lang$html$Html$div,
+																	_elm_lang$html$Html$span,
 																	{ctor: '[]'},
 																	{
 																		ctor: '::',
 																		_0: A2(
-																			_elm_lang$html$Html$h4,
+																			_elm_lang$html$Html$i,
 																			{
 																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
+																				_0: _elm_lang$html$Html_Attributes$class('add to calendar icon'),
 																				_1: {ctor: '[]'}
 																			},
 																			{ctor: '[]'}),
 																		_1: {
 																			ctor: '::',
-																			_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
-																				A2(
-																					_elm_lang$core$Maybe$map,
-																					function (address) {
-																						return A2(
-																							_elm_lang$html$Html$p,
-																							{
-																								ctor: '::',
-																								_0: _elm_lang$html$Html_Attributes$class('address-wrapper'),
-																								_1: {ctor: '[]'}
-																							},
-																							{
-																								ctor: '::',
-																								_0: _elm_lang$html$Html$text(address),
-																								_1: {ctor: '[]'}
-																							});
-																					},
-																					_p2.address)),
-																			_1: {ctor: '[]'}
-																		}
-																	}),
-																_1: {
-																	ctor: '::',
-																	_0: A2(
-																		_elm_lang$html$Html$span,
-																		{ctor: '[]'},
-																		{
-																			ctor: '::',
 																			_0: A2(
-																				_elm_lang$html$Html$i,
+																				_elm_lang$html$Html$b,
+																				{ctor: '[]'},
 																				{
 																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$class('add to calendar icon'),
+																					_0: _elm_lang$html$Html$text('ימים א׳, ב׳, ג׳'),
 																					_1: {ctor: '[]'}
-																				},
-																				{ctor: '[]'}),
+																				}),
 																			_1: {
 																				ctor: '::',
 																				_0: A2(
@@ -12164,56 +12126,30 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																					{ctor: '[]'},
 																					{
 																						ctor: '::',
-																						_0: _elm_lang$html$Html$text('ימים א׳, ב׳, ג׳'),
+																						_0: _elm_lang$html$Html$text('שעות 10:00 - 12:00'),
 																						_1: {ctor: '[]'}
 																					}),
-																				_1: {
-																					ctor: '::',
-																					_0: A2(
-																						_elm_lang$html$Html$b,
-																						{ctor: '[]'},
-																						{
-																							ctor: '::',
-																							_0: _elm_lang$html$Html$text('שעות 10:00 - 12:00'),
-																							_1: {ctor: '[]'}
-																						}),
-																					_1: {ctor: '[]'}
-																				}
+																				_1: {ctor: '[]'}
 																			}
-																		}),
-																	_1: {ctor: '[]'}
-																}
+																		}
+																	}),
+																_1: {ctor: '[]'}
 															}
 														}
 													}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$h4,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
-														_1: {ctor: '[]'}
-													},
-													{ctor: '[]'}),
-												_1: {
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html$div,
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$class('ui red horizontal label'),
-															_1: {ctor: '[]'}
-														},
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html$text('מחוץ למשרד: 3-4/4/17'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
 												}
-											}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$h4,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
+													_1: {ctor: '[]'}
+												},
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
 										}
 									}
 								}

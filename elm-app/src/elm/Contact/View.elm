@@ -3,6 +3,7 @@ module Contact.View exposing (..)
 import App.Types exposing (Language(..))
 import Contact.Model exposing (Contact, ContactId, DictListContact, Model, Msg(..))
 import Contact.Utils exposing (filterContacts)
+import Debug exposing (log)
 import DictList
 import Html exposing (..)
 import Html.Attributes exposing (alt, class, classList, href, placeholder, src, style, target, type_, value)
@@ -13,7 +14,8 @@ import Utils.Html exposing (showIf, showMaybe)
 
 view : Language -> Model -> Html Msg
 view language model =
-    div []
+    div
+        []
         [ viewContactFilter language model.filterString
         , div [ class "ui horizontal divider" ]
             [ text "תוצאות מתאימות" ]
@@ -74,22 +76,12 @@ viewContact language ( contactId, contact ) =
         , div [ class "content" ]
             [ div [ class "header" ]
                 [ text <| contact.name ]
-            , div [ class "meta" ]
-                [ a []
-                    [ text "לשכת ראש העירייה" ]
-                ]
             , div [ class "description" ]
                 [ showMaybe <| Maybe.map (\job_title -> text job_title) contact.job_title
                 , h4 [ class "ui horizontal divider" ]
                     []
                 , div [ class "ui blue small labels" ]
-                    [ a [ class "ui label" ]
-                        [ text "מדיניות" ]
-                    , a [ class "ui label" ]
-                        [ text "תכנון ובניה" ]
-                    , a [ class "ui label" ]
-                        [ text "עסקים" ]
-                    ]
+                    []
                 ]
             , h4 [ class "ui section divider" ]
                 []
@@ -143,7 +135,5 @@ viewContact language ( contactId, contact ) =
                 ]
             , h4 [ class "ui horizontal divider" ]
                 []
-            , div [ class "ui red horizontal label" ]
-                [ text "מחוץ למשרד: 3-4/4/17" ]
             ]
         ]

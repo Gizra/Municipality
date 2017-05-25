@@ -29,10 +29,17 @@ type alias ContactId =
     String
 
 
+type alias Topic =
+    { id : Int
+    , name : Name
+    }
+
+
 type alias Contact =
     { name : Name
     , job_title : Maybe String
     , image_url : Maybe String
+    , topics : Maybe Topic
     , phone : Maybe String
     , fax : Maybe String
     , email : Maybe String
