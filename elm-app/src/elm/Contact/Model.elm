@@ -30,7 +30,7 @@ type alias ContactId =
 
 
 type alias Topic =
-    { id : Int
+    { id : String
     , name : Name
     }
 
@@ -39,7 +39,7 @@ type alias Contact =
     { name : Name
     , job_title : Maybe String
     , image_url : Maybe String
-    , topics : Maybe Topic
+    , topics : Maybe (List Topic)
     , phone : Maybe String
     , fax : Maybe String
     , email : Maybe String

@@ -41,8 +41,10 @@ decodeContact =
         |> optional "address" (nullable string) Nothing
 
 
-decodeTopic : Decoder Topic
+decodeTopic : Decoder (List Topic)
 decodeTopic =
-    decode Topic
-        |> required "id" int
-        |> required "name" string
+    list
+        (decode Topic
+            |> required "id" string
+            |> required "name" string
+        )
