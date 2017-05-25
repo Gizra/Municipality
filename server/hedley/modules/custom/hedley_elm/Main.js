@@ -11762,10 +11762,13 @@ var _Gizra$elm_spa_exmple$Translate$translate = F2(
 	function (lang, trans) {
 		var translationSet = function () {
 			var _p0 = trans;
-			if (_p0.ctor === 'ContactsNotFound') {
-				return {arabic: 'No contacts found', english: 'No contacts found', hebrew: 'לא נמצאו אנשי קשר מתאימים'};
-			} else {
-				return {arabic: 'ابحث عن اسم، موضوع أو فئة', english: 'Filter contacts', hebrew: 'חפשו שם, נושא או מחלקה'};
+			switch (_p0.ctor) {
+				case 'ContactsNotFound':
+					return {arabic: 'No contacts found', english: 'No contacts found', hebrew: 'לא נמצאו אנשי קשר מתאימים'};
+				case 'FilterContactsPlaceholder':
+					return {arabic: 'ابحث عن اسم، موضوع أو فئة', english: 'Filter contacts', hebrew: 'חפשו שם, נושא או מחלקה'};
+				default:
+					return {arabic: 'ابحث عن اسم، موضوع أو فئة', english: 'Matching Results', hebrew: 'תוצאות מתאימות'};
 			}
 		}();
 		var _p1 = lang;
@@ -11788,6 +11791,7 @@ var _Gizra$elm_spa_exmple$Translate$TranslationSet = F3(
 	function (a, b, c) {
 		return {arabic: a, english: b, hebrew: c};
 	});
+var _Gizra$elm_spa_exmple$Translate$MatchingResults = {ctor: 'MatchingResults'};
 var _Gizra$elm_spa_exmple$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
 var _Gizra$elm_spa_exmple$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
 
@@ -12256,7 +12260,8 @@ var _Gizra$elm_spa_exmple$Contact_View$view = F2(
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('תוצאות מתאימות'),
+							_0: _elm_lang$html$Html$text(
+								A2(_Gizra$elm_spa_exmple$Translate$translate, language, _Gizra$elm_spa_exmple$Translate$MatchingResults)),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
