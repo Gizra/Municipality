@@ -11795,11 +11795,19 @@ var _Gizra$elm_spa_exmple$Translate$MatchingResults = {ctor: 'MatchingResults'};
 var _Gizra$elm_spa_exmple$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
 var _Gizra$elm_spa_exmple$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
 
+var _Gizra$elm_spa_exmple$Utils_Html$sectionDivider = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('ui section divider'),
+		_1: {ctor: '[]'}
+	},
+	{ctor: '[]'});
 var _Gizra$elm_spa_exmple$Utils_Html$divider = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('ui divider'),
+		_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
 		_1: {ctor: '[]'}
 	},
 	{ctor: '[]'});
@@ -11891,14 +11899,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 												_p2.jobTitle)),
 										_1: {
 											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$h4,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
-													_1: {ctor: '[]'}
-												},
-												{ctor: '[]'}),
+											_0: _Gizra$elm_spa_exmple$Utils_Html$divider,
 											_1: {
 												ctor: '::',
 												_0: A2(
@@ -11915,14 +11916,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 									}),
 								_1: {
 									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$h4,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('ui section divider'),
-											_1: {ctor: '[]'}
-										},
-										{ctor: '[]'}),
+									_0: _Gizra$elm_spa_exmple$Utils_Html$sectionDivider,
 									_1: {
 										ctor: '::',
 										_0: A2(
@@ -12068,14 +12062,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																{ctor: '[]'},
 																{
 																	ctor: '::',
-																	_0: A2(
-																		_elm_lang$html$Html$h4,
-																		{
-																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
-																			_1: {ctor: '[]'}
-																		},
-																		{ctor: '[]'}),
+																	_0: _Gizra$elm_spa_exmple$Utils_Html$sectionDivider,
 																	_1: {
 																		ctor: '::',
 																		_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
@@ -12146,14 +12133,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 											}),
 										_1: {
 											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$h4,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
-													_1: {ctor: '[]'}
-												},
-												{ctor: '[]'}),
+											_0: _Gizra$elm_spa_exmple$Utils_Html$sectionDivider,
 											_1: {ctor: '[]'}
 										}
 									}

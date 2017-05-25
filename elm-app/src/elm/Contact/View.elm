@@ -9,7 +9,7 @@ import Html exposing (..)
 import Html.Attributes exposing (alt, class, classList, href, placeholder, src, style, target, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (showIf, showMaybe)
+import Utils.Html exposing (divider, sectionDivider,  showIf, showMaybe)
 
 
 view : Language -> Model -> Html Msg
@@ -78,8 +78,7 @@ viewContact language ( contactId, contact ) =
                 [ text <| contact.name ]
             , div [ class "description" ]
                 [ showMaybe <| Maybe.map (\jobTitle -> text jobTitle) contact.jobTitle
-                , h4 [ class "ui horizontal divider" ]
-                    []
+                , divider
                 , div [ class "ui blue small labels" ]
                     [-- showMaybe <|
                      --     Maybe.map
@@ -90,8 +89,7 @@ viewContact language ( contactId, contact ) =
                      --         contact.topics
                     ]
                 ]
-            , h4 [ class "ui section divider" ]
-                []
+            , sectionDivider
             , div [ class "contact-details center aligned" ]
                 [ showMaybe <|
                     Maybe.map
@@ -121,8 +119,7 @@ viewContact language ( contactId, contact ) =
                         )
                         contact.fax
                 , div []
-                    [ h4 [ class "ui horizontal divider" ]
-                        []
+                    [ sectionDivider
                     , showMaybe <|
                         Maybe.map
                             (\address ->
@@ -140,7 +137,6 @@ viewContact language ( contactId, contact ) =
                         [ text "שעות 10:00 - 12:00" ]
                     ]
                 ]
-            , h4 [ class "ui horizontal divider" ]
-                []
+            , sectionDivider
             ]
         ]

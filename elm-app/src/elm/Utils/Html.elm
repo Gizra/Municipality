@@ -2,6 +2,7 @@ module Utils.Html
     exposing
         ( divider
         , emptyNode
+        , sectionDivider
         , showIf
         , showMaybe
         )
@@ -40,4 +41,9 @@ showMaybe =
 
 divider : Html msg
 divider =
-    div [ class "ui divider" ] []
+    div [ class "ui horizontal divider" ] []
+
+
+sectionDivider : Html msg
+sectionDivider =
+    div [ class "ui section divider" ] []
