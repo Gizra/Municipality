@@ -25,11 +25,10 @@ function hedley_municipality_ctools_plugin_directory($module, $plugin) {
  *   Maximal amount of nodes to fetch.
  * @param int $municipality_node
  *   Optional municipality node to filter by.
- * @param bool $promoted_only
- *   Whether to get only promoted nodes.
- * @param int $topic_tid
  * @param bool $filter_by_user_type
  *   Whether to filter results by user type.
+ * @param bool $promoted_only
+ *   Whether to get only promoted nodes.
  * @param int $topic_tid
  *   Optional filter by field_topics.
  *
