@@ -119,7 +119,7 @@ abstract class HedleyMigrateBase extends Migration {
       'field_image',
       'field_logo',
       'field_files',
-      'field_audio'
+      'field_audio',
     ];
     foreach ($file_fields as $file_field) {
       if (!in_array($file_field, $this->csvColumns)) {
