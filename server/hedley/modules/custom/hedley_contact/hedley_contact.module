@@ -129,6 +129,7 @@ function hedley_contact_get_reception_hours($node) {
  *   Array with the contacts list.
  */
 function hedley_contact_get_get_contacts_by_group($group, $language_code) {
+  // Get contact nodes by group.
   $nodes = hedley_municipality_get_nodes('contact', 100, $group, FALSE);
   if (!$nodes) {
     // No contacts found.
@@ -172,8 +173,6 @@ function hedley_contact_get_get_contacts_by_group($group, $language_code) {
     // Remove empty values (elm expects the correct value or nothing).
     $contacts[] = array_filter($contact);
   }
-
-  dpm($contacts);
 
   return $contacts;
 

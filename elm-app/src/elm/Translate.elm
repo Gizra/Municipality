@@ -34,7 +34,7 @@ translate lang trans =
                     }
 
                 MatchingResults ->
-                    { arabic = "ابحث عن اسم، موضوع أو فئة"
+                    { arabic = "نتائج البحث"
                     , english = "Matching Results"
                     , hebrew = "תוצאות מתאימות"
                     }
