@@ -46,17 +46,17 @@ viewContacts language { contacts, filterString } =
         filteredContacts =
             filterContacts contacts filterString
     in
-    if DictList.isEmpty filteredContacts then
-        div [] [ text <| translate language ContactsNotFound ]
-    else
-        div [ class "ui link cards" ]
-            (filteredContacts
-                |> DictList.map
-                    (\contactId contact ->
-                        viewContact language ( contactId, contact )
-                    )
-                |> DictList.values
-            )
+        if DictList.isEmpty filteredContacts then
+            div [] [ text <| translate language ContactsNotFound ]
+        else
+            div [ class "ui link cards" ]
+                (filteredContacts
+                    |> DictList.map
+                        (\contactId contact ->
+                            viewContact language ( contactId, contact )
+                        )
+                    |> DictList.values
+                )
 
 
 {-| View a single contact.
