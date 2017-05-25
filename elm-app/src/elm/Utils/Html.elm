@@ -19,10 +19,11 @@ emptyNode =
 
 
 {-| Conditionally show Html. A bit cleaner than using if expressions in middle
-    of an html block:
+of an html block:
 
     showIf True <| text "I'm shown"
     showIf False <| text "I'm not shown"
+
 -}
 showIf : Bool -> Html msg -> Html msg
 showIf condition html =

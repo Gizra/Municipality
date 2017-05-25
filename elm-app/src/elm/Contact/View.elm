@@ -9,7 +9,7 @@ import Html exposing (..)
 import Html.Attributes exposing (alt, class, classList, href, placeholder, src, style, target, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (divider, sectionDivider,  showIf, showMaybe)
+import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
 
 view : Language -> Model -> Html Msg
