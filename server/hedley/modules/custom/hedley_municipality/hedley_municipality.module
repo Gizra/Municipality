@@ -28,22 +28,30 @@ function hedley_municipality_ctools_plugin_directory($module, $plugin) {
  * @param bool $promoted_only
  *   Whether to get only promoted nodes.
  * @param int $topic_tid
+ * @param bool $filter_by_user_type
+ *   Whether to filter results by user type.
+ * @param int $topic_tid
  *   Optional filter by field_topics.
  *
  * @return array
  *   Node objects.
  */
-function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0) {
+function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node = NULL, $filter_by_user_type = FALSE, $promoted_only = FALSE, $topic_tid = 0) {
   // Get promoted FAQ nodes of the viewed municipality.
   $query = new EntityFieldQuery();
   $query
     ->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', $bundle)
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyOrderBy('created', 'DESC')
+    ->propertyOrderBy('created', 'DESC');
+
+  if ($filter_by_user_type) {
     // Filter by current user type.
-    ->fieldCondition('field_user_types', 'tid', hedley_terms_get_current_user_type_tid())
-    ->range(0, $max_range);
+    $query->fieldCondition('field_user_types', 'tid', hedley_terms_get_current_user_type_tid());
+  }
+
+  // Set query range.
+  $query->range(0, $max_range);
 
   // Filter by municipality.
   if ($municipality_node) {
@@ -59,7 +67,14 @@ function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node =
   }
   $result = $query->execute();
 
-  return !empty($result['node']) ? node_load_multiple(array_keys($result['node'])) : [];
+  if (empty($result['node'])) {
+    // Return empty if there're no results.
+    return [];
+  }
+
+  $nodes_ids = array_keys($result['node']);
+
+  return node_load_multiple($nodes_ids);
 }
 
 /**
