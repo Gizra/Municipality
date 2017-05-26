@@ -80,13 +80,15 @@ viewContact language ( contactId, contact ) =
                 [ showMaybe <| Maybe.map (\jobTitle -> text jobTitle) contact.jobTitle
                 , divider
                 , div [ class "ui blue small labels" ]
-                    [-- showMaybe <|
-                     --     Maybe.map
-                     --         (\{ id, name } ->
-                     --             a [ class "ui label" ]
-                     --                 [ text name ]
-                     --         )
-                     --         contact.topics
+                    [ showMaybe <|
+                        Maybe.map
+                            -- since it's a `Maybe` value
+                            (\topics ->
+                                -- This is a List of Topics
+                                div [] (List.map (\topic -> a [ class "ui label" ] [ text topic.name ]) topics)
+                             -- we iterate over all the topics
+                            )
+                            contact.topics
                     ]
                 ]
             , sectionDivider
