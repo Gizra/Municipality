@@ -84,7 +84,14 @@ viewContact language ( contactId, contact ) =
                 , showMaybe <|
                     Maybe.map
                         (\topics ->
-                            div [ class "ui blue small labels" ] (List.map (\topic -> a [ class "ui label" ] [ text topic.name ]) topics)
+                            div [ class "ui blue small labels topic-wrapper" ]
+                                (List.map
+                                    (\topic ->
+                                        a [ href ("taxonomy/term/" ++ topic.id), class "ui label" ]
+                                            [ text topic.name ]
+                                    )
+                                    topics
+                                )
                         )
                         contact.topics
                 ]
@@ -95,7 +102,7 @@ viewContact language ( contactId, contact ) =
                         (\email ->
                             p [ class "email-wrapper" ]
                                 [ i [ class "mail icon" ] []
-                                , a [ href ("mailto:" ++ email) ] [ text email ]
+                                , a [ href ("mailto:" ++ email), target "_blank" ] [ text email ]
                                 ]
                         )
                         contact.email

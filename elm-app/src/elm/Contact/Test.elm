@@ -60,6 +60,18 @@ viewContactTest =
                     |> Query.find [ Selector.class "phone-wrapper" ]
                     |> Query.children [ tag "a" ]
                     |> Query.each (Query.has [ text "1234" ])
+        , test "Contact without topics" <|
+            \() ->
+                viewContact English contact1
+                    |> Query.fromHtml
+                    |> Query.hasNot [ Selector.class "topic-wrapper" ]
+        , test "Contact with topics" <|
+            \() ->
+                viewContact English contact2
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "topic-wrapper" ]
+                    |> Query.children [ tag "a" ]
+                    |> Query.each (Query.has [ text "arnona" ])
         ]
 
 

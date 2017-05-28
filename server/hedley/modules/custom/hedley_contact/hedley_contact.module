@@ -130,7 +130,7 @@ function hedley_contact_get_reception_hours($node) {
  */
 function hedley_contact_get_get_contacts_by_group($group, $language_code) {
   // Get contact nodes by group.
-  $nodes = hedley_municipality_get_nodes('contact', 100, $group, FALSE);
+  $nodes = hedley_municipality_get_nodes('contact', 100, $group);
   if (!$nodes) {
     // No contacts found.
     return NULL;

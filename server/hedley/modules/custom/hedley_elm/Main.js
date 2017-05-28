@@ -11941,7 +11941,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																_elm_lang$html$Html$div,
 																{
 																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('ui blue small labels'),
+																	_0: _elm_lang$html$Html_Attributes$class('ui blue small labels topic-wrapper'),
 																	_1: {ctor: '[]'}
 																},
 																A2(
@@ -11951,8 +11951,13 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																			_elm_lang$html$Html$a,
 																			{
 																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$class('ui label'),
-																				_1: {ctor: '[]'}
+																				_0: _elm_lang$html$Html_Attributes$href(
+																					A2(_elm_lang$core$Basics_ops['++'], 'taxonomy/term/', topic.id)),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$class('ui label'),
+																					_1: {ctor: '[]'}
+																				}
 																			},
 																			{
 																				ctor: '::',
@@ -12010,7 +12015,11 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																				ctor: '::',
 																				_0: _elm_lang$html$Html_Attributes$href(
 																					A2(_elm_lang$core$Basics_ops['++'], 'mailto:', email)),
-																				_1: {ctor: '[]'}
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																					_1: {ctor: '[]'}
+																				}
 																			},
 																			{
 																				ctor: '::',
