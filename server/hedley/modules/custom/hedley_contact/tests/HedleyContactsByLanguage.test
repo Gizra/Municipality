@@ -9,6 +9,7 @@
  * Class HedleyContactsByLanguage.
  */
 class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
+
   /**
    * Get info.
    */
@@ -82,7 +83,6 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
   public function testContactsByLanguage() {
     $ar_language_code = 'ar';
     $he_language_code = 'he';
-
 
     // Create a municipality group.
     $user1 = $this->drupalCreateUser();
