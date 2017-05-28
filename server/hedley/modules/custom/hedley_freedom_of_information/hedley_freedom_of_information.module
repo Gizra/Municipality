@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the Hedley Freedom Of Information feature.
+ */
+
+include_once 'hedley_freedom_of_information.features.inc';
