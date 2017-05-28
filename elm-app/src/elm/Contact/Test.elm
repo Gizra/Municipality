@@ -79,8 +79,14 @@ contact1 : ( ContactId, Contact )
 contact1 =
     ( "100"
     , { name = "alice"
+      , jobTitle = Nothing
+      , imageUrl = Nothing
+      , topics = Nothing
       , phone = Nothing
+      , fax = Nothing
       , email = Nothing
+      , address = Nothing
+      , receptionTimes = Nothing
       }
     )
 
@@ -89,8 +95,30 @@ contact2 : ( ContactId, Contact )
 contact2 =
     ( "200"
     , { name = "carl"
+      , jobTitle = Just "director"
+      , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
+      , topics =
+            Just
+                [ { id = "1"
+                  , name = "arnona"
+                  }
+                , { id = "2"
+                  , name = "garbage"
+                  }
+                ]
       , phone = Just "1234"
+      , fax = Just "5678"
       , email = Just "carl@example.com"
+      , address = Just "220b Baker Streert, London"
+      , receptionTimes =
+            Just
+                [ { days = "Mon-Fri"
+                  , hours = "8:00-19:00"
+                  }
+                , { days = "Sat"
+                  , hours = "8:00-12:00"
+                  }
+                ]
       }
     )
 
@@ -99,8 +127,27 @@ contact3 : ( ContactId, Contact )
 contact3 =
     ( "300"
     , { name = "john"
-      , phone = Just "5678"
+      , jobTitle = Just "assistant"
+      , imageUrl = Nothing
+      , topics =
+            Just
+                [ { id = "1"
+                  , name = "arnona"
+                  }
+                , { id = "2"
+                  , name = "garbage"
+                  }
+                ]
+      , phone = Just "9012"
+      , fax = Just "9013"
       , email = Just "john@example.com"
+      , address = Just "221b Baker Streert, London"
+      , receptionTimes =
+            Just
+                [ { days = "Mon-Fri"
+                  , hours = "8:00-14:00"
+                  }
+                ]
       }
     )
 

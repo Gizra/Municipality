@@ -77,8 +77,8 @@ class HedleyContactsByLanguage extends DrupalWebTestCase {
       ],
       OG_AUDIENCE_FIELD => [
         LANGUAGE_NONE => [
-          ['target_id' => $municipality->nid]
-        ]
+          ['target_id' => $municipality->nid],
+        ],
       ],
       'uid' => $user1->uid,
     ];

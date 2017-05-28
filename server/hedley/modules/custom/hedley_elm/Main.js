@@ -11895,7 +11895,19 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text(_p2.name),
+									_0: A2(
+										_elm_lang$html$Html$a,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$href(
+												A2(_elm_lang$core$Basics_ops['++'], 'node/', _p1._0)),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(_p2.name),
+											_1: {ctor: '[]'}
+										}),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -11921,43 +11933,36 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 											_0: _Gizra$elm_spa_exmple$Utils_Html$divider,
 											_1: {
 												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$div,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('ui blue small labels'),
-														_1: {ctor: '[]'}
-													},
-													{
-														ctor: '::',
-														_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
-															A2(
-																_elm_lang$core$Maybe$map,
-																function (topics) {
-																	return A2(
-																		_elm_lang$html$Html$div,
-																		{ctor: '[]'},
-																		A2(
-																			_elm_lang$core$List$map,
-																			function (topic) {
-																				return A2(
-																					_elm_lang$html$Html$a,
-																					{
-																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$class('ui label'),
-																						_1: {ctor: '[]'}
-																					},
-																					{
-																						ctor: '::',
-																						_0: _elm_lang$html$Html$text(topic.name),
-																						_1: {ctor: '[]'}
-																					});
-																			},
-																			topics));
+												_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
+													A2(
+														_elm_lang$core$Maybe$map,
+														function (topics) {
+															return A2(
+																_elm_lang$html$Html$div,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('ui blue small labels'),
+																	_1: {ctor: '[]'}
 																},
-																_p2.topics)),
-														_1: {ctor: '[]'}
-													}),
+																A2(
+																	_elm_lang$core$List$map,
+																	function (topic) {
+																		return A2(
+																			_elm_lang$html$Html$a,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$class('ui label'),
+																				_1: {ctor: '[]'}
+																			},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text(topic.name),
+																				_1: {ctor: '[]'}
+																			});
+																	},
+																	topics));
+														},
+														_p2.topics)),
 												_1: {ctor: '[]'}
 											}
 										}

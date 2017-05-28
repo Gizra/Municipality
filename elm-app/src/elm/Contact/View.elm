@@ -75,18 +75,18 @@ viewContact language ( contactId, contact ) =
                 contact.imageUrl
         , div [ class "content" ]
             [ div [ class "header" ]
-                [ text <| contact.name ]
+                [ a [ href ("node/" ++ contactId) ]
+                    [ text <| contact.name ]
+                ]
             , div [ class "description" ]
                 [ showMaybe <| Maybe.map (\jobTitle -> text jobTitle) contact.jobTitle
                 , divider
-                , div [ class "ui blue small labels" ]
-                    [ showMaybe <|
-                        Maybe.map
-                            (\topics ->
-                                div [] (List.map (\topic -> a [ class "ui label" ] [ text topic.name ]) topics)
-                            )
-                            contact.topics
-                    ]
+                , showMaybe <|
+                    Maybe.map
+                        (\topics ->
+                            div [ class "ui blue small labels" ] (List.map (\topic -> a [ class "ui label" ] [ text topic.name ]) topics)
+                        )
+                        contact.topics
                 ]
             , sectionDivider
             , div [ class "contact-details center aligned" ]
