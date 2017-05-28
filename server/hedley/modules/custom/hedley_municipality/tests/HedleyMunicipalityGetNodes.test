@@ -2,20 +2,13 @@
 
 /**
  * @file
- * Test the get nodes general function.
+ * Class HedleyMunicipalityGetNodes.
  */
 
 /**
  * Class HedleyMunicipalityGetNodes.
  */
-class HedleyMunicipalityGetNodes extends DrupalWebTestCase {
-
-  /**
-   * The profile name.
-   *
-   * @var string
-   */
-  protected $profile = 'hedley';
+class HedleyMunicipalityGetNodes extends HedleyMunicipalityWebTestCase {
 
   /**
    * Get info.
@@ -29,27 +22,17 @@ class HedleyMunicipalityGetNodes extends DrupalWebTestCase {
   }
 
   /**
-   * Overrides DrupalWebTestCase::setUp().
-   */
-  protected function setUp() {
-    parent::setUp();
-
-    // Skip dealing with user ID 1.
-    $this->drupalCreateUser();
-  }
-
-  /**
    * Test group returned from the general get nodes function.
    */
-  public function testHedleyMunicipalityGetGroup() {
+  public function testGetGroup() {
     // Create a municipality group.
     $user1 = $this->drupalCreateUser();
-    $municipality_settings = [
+    $settings = [
       'type' => 'municipality',
       'uid' => $user1->uid,
     ];
 
-    $municipality = $this->drupalCreateNode($municipality_settings);
+    $municipality = $this->drupalCreateNode($settings);
 
     $returned_municipalities = hedley_municipality_get_nodes('municipality', 1);
 
@@ -59,7 +42,7 @@ class HedleyMunicipalityGetNodes extends DrupalWebTestCase {
   /**
    * Test group content returned from the general get nodes function.
    */
-  public function testHedleyMunicipalityGetGroupContent() {
+  public function testGetGroupContent() {
     // Create the OG audience field.
     og_create_field(OG_AUDIENCE_FIELD, 'node', 'action');
 
@@ -71,7 +54,7 @@ class HedleyMunicipalityGetNodes extends DrupalWebTestCase {
     ];
     $municipality = $this->drupalCreateNode($municipality_settings);
 
-    // Create contacts.
+    // Create actions.
     $action_settings = [
       'type' => 'action',
       OG_AUDIENCE_FIELD => [

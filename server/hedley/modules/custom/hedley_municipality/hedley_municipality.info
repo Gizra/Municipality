@@ -52,5 +52,9 @@ features[variable][] = purl_method_og_purl|node
 features[variable][] = purl_types
 features[views_view][] = municipalities
 
+
+; Tests base class
+files[] = tests/HedleyMunicipalityWebTestCase.test
+
 ; Tests
 files[] = tests/HedleyMunicipalityGetNodes.test
