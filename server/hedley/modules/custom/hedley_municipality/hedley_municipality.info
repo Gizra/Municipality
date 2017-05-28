@@ -51,3 +51,6 @@ features[variable][] = node_submitted_municipality
 features[variable][] = purl_method_og_purl|node
 features[variable][] = purl_types
 features[views_view][] = municipalities
+
+; Tests
+files[] = tests/HedleyMunicipalityGetNodes.test

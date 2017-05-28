@@ -31,12 +31,15 @@ function hedley_municipality_ctools_plugin_directory($module, $plugin) {
  *   Whether to get only promoted nodes.
  * @param int $topic_tid
  *   Optional filter by field_topics.
+ * @param string $order_direction
+ *   Optional The direction of the order of the entities (i.e. 'DESC', 'ASC')
+ *   (Ordered by `nid` (node ID)).
  *
  * @return array
  *   Node objects.
  */
-function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node = NULL, $filter_by_user_type = FALSE, $promoted_only = FALSE, $topic_tid = 0) {
-  // Get promoted FAQ nodes of the viewed municipality.
+function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node = NULL, $filter_by_user_type = FALSE, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
+  // Get nodes of all types according to the municipality group (if given).
   $query = new EntityFieldQuery();
   $query
     ->entityCondition('entity_type', 'node')
@@ -64,6 +67,10 @@ function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node =
   if ($topic_tid) {
     $query->fieldCondition('field_topics', 'tid', $topic_tid);
   }
+
+  // Order entities by node ID.
+  $query->propertyOrderBy('nid', $order_direction);
+
   $result = $query->execute();
 
   if (empty($result['node'])) {
