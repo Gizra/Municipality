@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyMunicipalityGetNodes.
+ */
+
+/**
+ * Class HedleyMunicipalityGetNodes.
+ */
+class HedleyMunicipalityGetNodes extends HedleyMunicipalityWebTestCase {
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'General get nodes function',
+      'description' => 'Test that nodes returned from the general function match what is expected.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Test group content returned from the general get nodes function.
+   */
+  public function testGetGroupContent() {
+    // Create the OG audience field.
+    og_create_field(OG_AUDIENCE_FIELD, 'node', 'action');
+
+    // Create a municipality group.
+    $user1 = $this->drupalCreateUser();
+    $municipality_settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+    ];
+    $municipality = $this->drupalCreateNode($municipality_settings);
+
+    // Create actions.
+    $action_settings = [
+      'type' => 'action',
+      OG_AUDIENCE_FIELD => [
+        LANGUAGE_NONE => [
+          ['target_id' => $municipality->nid],
+        ],
+      ],
+      'uid' => $user1->uid,
+    ];
+    $action1 = $this->drupalCreateNode($action_settings);
+    $action2 = $this->drupalCreateNode($action_settings);
+    $action3 = $this->drupalCreateNode($action_settings);
+
+    // List the expected node IDs that should be returned from the function.
+    $expected_actions = [
+      $action1->nid,
+      $action2->nid,
+      $action3->nid,
+    ];
+
+    $returned_actions = hedley_municipality_get_nodes('action', 3, $municipality, FALSE, 0, 'ASC');
+
+    $this->assertEqual($expected_actions, array_keys($returned_actions), 'Expected group contents are returned.');
+  }
+
+}
