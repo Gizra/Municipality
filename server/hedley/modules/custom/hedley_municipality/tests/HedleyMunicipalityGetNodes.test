@@ -22,24 +22,6 @@ class HedleyMunicipalityGetNodes extends HedleyMunicipalityWebTestCase {
   }
 
   /**
-   * Test group returned from the general get nodes function.
-   */
-  public function testGetGroup() {
-    // Create a municipality group.
-    $user1 = $this->drupalCreateUser();
-    $settings = [
-      'type' => 'municipality',
-      'uid' => $user1->uid,
-    ];
-
-    $municipality = $this->drupalCreateNode($settings);
-
-    $returned_municipalities = hedley_municipality_get_nodes('municipality', 1);
-
-    $this->assertTrue(in_array($municipality->nid, array_keys($returned_municipalities)), 'Expected group is returned.');
-  }
-
-  /**
    * Test group content returned from the general get nodes function.
    */
   public function testGetGroupContent() {
@@ -75,7 +57,7 @@ class HedleyMunicipalityGetNodes extends HedleyMunicipalityWebTestCase {
       $action3->nid,
     ];
 
-    $returned_actions = hedley_municipality_get_nodes('action', 3, $municipality, FALSE, FALSE, 0, 'ASC');
+    $returned_actions = hedley_municipality_get_nodes('action', 3, $municipality, FALSE, 0, 'ASC');
 
     $this->assertEqual($expected_actions, array_keys($returned_actions), 'Expected group contents are returned.');
   }

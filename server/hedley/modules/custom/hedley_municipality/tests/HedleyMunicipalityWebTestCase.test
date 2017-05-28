@@ -17,7 +17,6 @@ class HedleyMunicipalityWebTestCase extends DrupalWebTestCase {
    */
   protected $profile = 'hedley';
 
-
   /**
    * Overrides DrupalWebTestCase::setUp().
    */

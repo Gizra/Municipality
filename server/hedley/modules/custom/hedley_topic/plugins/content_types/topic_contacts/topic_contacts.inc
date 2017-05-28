@@ -24,7 +24,7 @@ function hedley_topic_topic_contacts_content_type_render($subtype, $conf, $args,
   }
   $topic_wrapper = entity_metadata_wrapper('taxonomy_term', $context->data);
 
-  $nodes = hedley_municipality_get_nodes('contact', 10, hedley_municipality_get_current_group(), TRUE, FALSE, $topic_wrapper->getIdentifier());
+  $nodes = hedley_municipality_get_nodes_by_user_type('contact', 10, hedley_municipality_get_current_group(), FALSE, $topic_wrapper->getIdentifier());
   if (!$nodes) {
     // No contacts found.
     return NULL;
