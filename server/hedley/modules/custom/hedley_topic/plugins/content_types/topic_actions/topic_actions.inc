@@ -28,7 +28,7 @@ function hedley_topic_topic_actions_content_type_render($subtype, $conf, $args, 
     return NULL;
   }
 
-  $nodes = hedley_municipality_get_nodes('action', 10, $municipality_node, FALSE, $topic_wrapper->getIdentifier());
+  $nodes = hedley_municipality_get_nodes_by_user_type('action', 10, $municipality_node, FALSE, $topic_wrapper->getIdentifier());
   if (!$nodes) {
     // No actions found.
     return NULL;

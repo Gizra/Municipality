@@ -2,20 +2,13 @@
 
 /**
  * @file
- * Test language switcher links returned according to the group's languages.
+ * Class HedleyI18nLanguageSwitcherLinks.
  */
 
 /**
  * Class HedleyI18nLanguageSwitcherLinks.
  */
-class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
-
-  /**
-   * The profile name.
-   *
-   * @var string
-   */
-  protected $profile = 'hedley';
+class HedleyI18nLanguageSwitcherLinks extends HedleyMunicipalityWebTestCase {
 
   /**
    * Get info.
@@ -26,16 +19,6 @@ class HedleyI18nLanguageSwitcherLinks extends DrupalWebTestCase {
       'description' => 'Test language switcher links returned according to the groups translated languages.',
       'group' => 'Hedley',
     );
-  }
-
-  /**
-   * Overrides DrupalWebTestCase::setUp().
-   */
-  protected function setUp() {
-    parent::setUp();
-
-    // Skip dealing with user ID 1.
-    $this->drupalCreateUser();
   }
 
   /**

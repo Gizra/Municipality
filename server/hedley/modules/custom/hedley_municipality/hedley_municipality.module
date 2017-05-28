@@ -17,49 +17,151 @@ function hedley_municipality_ctools_plugin_directory($module, $plugin) {
 }
 
 /**
- * Get nodes of a municipality group, according to current user type.
+ * Get the base query for fetching nodes.
  *
  * @param string $bundle
  *   The wanted nodes bundle.
  * @param int $max_range
- *   Maximal amount of nodes to fetch.
- * @param int $municipality_node
- *   Optional municipality node to filter by.
- * @param bool $promoted_only
- *   Whether to get only promoted nodes.
- * @param int $topic_tid
- *   Optional filter by field_topics.
+ *   Maximal amount of nodes to fetch, defaults to 50.
  *
- * @return array
- *   Node objects.
+ * @return \EntityFieldQuery
+ *   The base query.
  */
-function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0) {
-  // Get promoted FAQ nodes of the viewed municipality.
+function hedley_municipality_get_nodes_base_query($bundle, $max_range = 50) {
   $query = new EntityFieldQuery();
   $query
     ->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', $bundle)
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyOrderBy('created', 'DESC')
-    // Filter by current user type.
-    ->fieldCondition('field_user_types', 'tid', hedley_terms_get_current_user_type_tid())
+    // Set query range.
     ->range(0, $max_range);
 
+  return $query;
+
+}
+
+/**
+ * Add filters to the base query for fetching nodes.
+ *
+ * @param \EntityFieldQuery $query
+ *   The base query.
+ * @param object|null $municipality_node
+ *   Optional "Municipality" node to filter by.
+ * @param bool $promoted_only
+ *   Whether to get only promoted nodes, defaults to FALSE.
+ * @param int $topic_tid
+ *   Optional filter by topics.
+ * @param string $order_direction
+ *   Optional The direction of the order of the entities. (i.e. 'DESC', 'ASC')
+ *   Ordered by node ID.
+ *
+ * @return \EntityFieldQuery
+ *   The filtered query.
+ */
+function hedley_municipality_get_nodes_add_filters_to_query(EntityFieldQuery $query, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
   // Filter by municipality.
   if ($municipality_node) {
     $query->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $municipality_node->nid);
   }
+
   // Filter by promoted nodes.
   if ($promoted_only) {
     $query->propertyCondition('promote', NODE_PROMOTED);
   }
+
   // Filter by current topic.
   if ($topic_tid) {
     $query->fieldCondition('field_topics', 'tid', $topic_tid);
   }
+
+  // Order entities by node ID.
+  $query->propertyOrderBy('nid', $order_direction);
+
+  return $query;
+}
+
+/**
+ * Get nodes of any content type.
+ *
+ * Has an option to get nodes by a group and then filter those nodes by more
+ * properties.
+ *
+ * @param string $bundle
+ *   The wanted nodes bundle.
+ * @param int $max_range
+ *   Maximal amount of nodes to fetch, defaults to 50.
+ * @param object|null $municipality_node
+ *   Optional "Municipality" node to filter by.
+ * @param bool $promoted_only
+ *   Whether to get only promoted nodes.
+ * @param int $topic_tid
+ *   Optional filter by topics.
+ * @param string $order_direction
+ *   Optional The direction of the order of the entities. (i.e. 'DESC', 'ASC')
+ *   Ordered by node ID.
+ *
+ * @return array
+ *   Node objects.
+ */
+function hedley_municipality_get_nodes($bundle, $max_range = 50, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
+  // Get the base node query for nodes.
+  $query = hedley_municipality_get_nodes_base_query($bundle, $max_range);
+
+  // Add filters to the query.
+  $query = hedley_municipality_get_nodes_add_filters_to_query($query, $municipality_node, $promoted_only, $topic_tid, $order_direction);
+
   $result = $query->execute();
 
-  return !empty($result['node']) ? node_load_multiple(array_keys($result['node'])) : [];
+  if (empty($result['node'])) {
+    // Return empty if there're no results.
+    return [];
+  }
+
+  $nodes_ids = array_keys($result['node']);
+
+  return node_load_multiple($nodes_ids);
+}
+
+/**
+ * Get nodes of a municipality group, according to current user type.
+ *
+ * @param string $bundle
+ *   The wanted nodes bundle.
+ * @param int $max_range
+ *   Maximal amount of nodes to fetch, defaults to 50.
+ * @param object|null $municipality_node
+ *   Optional "Municipality" node to filter by.
+ * @param bool $promoted_only
+ *   Whether to get only promoted nodes.
+ * @param int $topic_tid
+ *   Optional filter by topics.
+ * @param string $order_direction
+ *   Optional The direction of the order of the entities. (i.e. 'DESC', 'ASC')
+ *   Ordered by node ID.
+ *
+ * @return array
+ *   Node objects.
+ */
+function hedley_municipality_get_nodes_by_user_type($bundle, $max_range = 50, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
+  // Get the base node query for nodes.
+  $query = hedley_municipality_get_nodes_base_query($bundle, $max_range);
+
+  // Add filters to the query.
+  $query = hedley_municipality_get_nodes_add_filters_to_query($query, $municipality_node, $promoted_only, $topic_tid, $order_direction);
+
+  // Filter by current user type.
+  $query->fieldCondition('field_user_types', 'tid', hedley_terms_get_current_user_type_tid());
+
+  $result = $query->execute();
+
+  if (empty($result['node'])) {
+    // Return empty if there're no results.
+    return [];
+  }
+
+  $nodes_ids = array_keys($result['node']);
+
+  return node_load_multiple($nodes_ids);
 }
 
 /**
