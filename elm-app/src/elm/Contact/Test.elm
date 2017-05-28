@@ -109,7 +109,7 @@ contact2 =
       , phone = Just "1234"
       , fax = Just "5678"
       , email = Just "carl@example.com"
-      , address = Just "220b Baker Streert, London"
+      , address = Just "220b Baker Street, London"
       , receptionTimes =
             Just
                 [ { days = "Mon-Fri"
@@ -141,7 +141,7 @@ contact3 =
       , phone = Just "9012"
       , fax = Just "9013"
       , email = Just "john@example.com"
-      , address = Just "221b Baker Streert, London"
+      , address = Just "221b Baker Street, London"
       , receptionTimes =
             Just
                 [ { days = "Mon-Fri"
