@@ -11922,12 +11922,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 									{
 										ctor: '::',
 										_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
-											A2(
-												_elm_lang$core$Maybe$map,
-												function (jobTitle) {
-													return _elm_lang$html$Html$text(jobTitle);
-												},
-												_p2.jobTitle)),
+											A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p2.jobTitle)),
 										_1: {
 											ctor: '::',
 											_0: _Gizra$elm_spa_exmple$Utils_Html$divider,

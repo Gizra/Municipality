@@ -79,7 +79,7 @@ viewContact language ( contactId, contact ) =
                     [ text <| contact.name ]
                 ]
             , div [ class "description" ]
-                [ showMaybe <| Maybe.map (\jobTitle -> text jobTitle) contact.jobTitle
+                [ showMaybe <| Maybe.map text contact.jobTitle
                 , divider
                 , showMaybe <|
                     Maybe.map

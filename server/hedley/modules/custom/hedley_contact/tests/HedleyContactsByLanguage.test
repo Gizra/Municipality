@@ -8,15 +8,7 @@
 /**
  * Class HedleyContactsByLanguage.
  */
-class HedleyContactsByLanguage extends DrupalWebTestCase {
-
-  /**
-   * The profile name.
-   *
-   * @var string
-   */
-  protected $profile = 'hedley';
-
+class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
   /**
    * Get info.
    */
@@ -29,13 +21,59 @@ class HedleyContactsByLanguage extends DrupalWebTestCase {
   }
 
   /**
-   * Overrides DrupalWebTestCase::setUp().
+   * Overrides HedleyMunicipalityWebTestCase::setUp().
    */
   protected function setUp() {
     parent::setUp();
 
-    // Skip dealing with user ID 1.
-    $this->drupalCreateUser();
+    // Create the OG audience field.
+    og_create_field(OG_AUDIENCE_FIELD, 'node', 'contact');
+
+    // Create the fields' instances for the contact entity, necessary to work
+    // with the entity meta wrapper inside the
+    // `hedley_contact_get_get_contacts_by_group` function.
+    $instance = array(
+      'field_name' => 'field_first_name',
+      'bundle' => 'contact',
+      'entity_type' => 'node',
+    );
+    field_create_instance($instance);
+
+    // Repeat for last name.
+    $instance['field_name'] = 'field_last_name';
+    field_create_instance($instance);
+
+    // Repeat for image.
+    $instance['field_name'] = 'field_image';
+    field_create_instance($instance);
+
+    // Repeat for topics.
+    $instance['field_name'] = 'field_topics';
+    field_create_instance($instance);
+
+    // Repeat for phone.
+    $instance['field_name'] = 'field_phone';
+    field_create_instance($instance);
+
+    // Repeat for fax.
+    $instance['field_name'] = 'field_fax';
+    field_create_instance($instance);
+
+    // Repeat for email.
+    $instance['field_name'] = 'field_email';
+    field_create_instance($instance);
+
+    // Repeat for address.
+    $instance['field_name'] = 'field_address';
+    field_create_instance($instance);
+
+    // Repeat for job title.
+    $instance['field_name'] = 'field_job_title';
+    field_create_instance($instance);
+
+    // Repeat for reception hours.
+    $instance['field_name'] = 'field_reception_hours';
+    field_create_instance($instance);
   }
 
   /**
@@ -45,8 +83,6 @@ class HedleyContactsByLanguage extends DrupalWebTestCase {
     $ar_language_code = 'ar';
     $he_language_code = 'he';
 
-    // Create the OG audience field.
-    og_create_field(OG_AUDIENCE_FIELD, 'node', 'contact');
 
     // Create a municipality group.
     $user1 = $this->drupalCreateUser();
@@ -60,6 +96,9 @@ class HedleyContactsByLanguage extends DrupalWebTestCase {
     $contact_settings = [
       'type' => 'contact',
       'field_first_name' => [
+        LANGUAGE_NONE => [
+          ['value' => 'First name'],
+        ],
         $he_language_code => [
           ['value' => 'First name Hebrew'],
         ],
@@ -68,6 +107,9 @@ class HedleyContactsByLanguage extends DrupalWebTestCase {
         ],
       ],
       'field_last_name' => [
+        LANGUAGE_NONE => [
+          ['value' => 'Last name'],
+        ],
         $he_language_code => [
           ['value' => 'Last name Hebrew'],
         ],
@@ -75,6 +117,7 @@ class HedleyContactsByLanguage extends DrupalWebTestCase {
           ['value' => 'Last name Arabic'],
         ],
       ],
+      // Add the created group as the parent group for this entity.
       OG_AUDIENCE_FIELD => [
         LANGUAGE_NONE => [
           ['target_id' => $municipality->nid],
@@ -82,8 +125,31 @@ class HedleyContactsByLanguage extends DrupalWebTestCase {
       ],
       'uid' => $user1->uid,
     ];
-    // Add the created group as the parent group for this entity.
+
+    // Create the contact node.
     $contact = $this->drupalCreateNode($contact_settings);
+
+    // Add translations to the node.
+    $factory = EntityTranslationHandlerFactory::getInstance();
+    $handler = $factory->getHandler('node', $contact);
+
+    // Add Arabic translation.
+    $translation = [
+      'translate' => 0,
+      'status' => 1,
+      'language' => 'ar',
+      'source' => $contact->language,
+    ];
+    $handler->setTranslation($translation, $contact);
+
+    // Add Hebrew translation.
+    $translation = [
+      'translate' => 0,
+      'status' => 1,
+      'language' => 'he',
+      'source' => $contact->language,
+    ];
+    $handler->setTranslation($translation, $contact);
 
     $he_municipality_contact = hedley_contact_get_get_contacts_by_group($municipality, $he_language_code);
     $ar_municipality_contact = hedley_contact_get_get_contacts_by_group($municipality, $ar_language_code);
