@@ -35,6 +35,12 @@ type alias Topic =
     }
 
 
+type alias ReceptionTimes =
+    { days : String
+    , hours : String
+    }
+
+
 type alias Contact =
     { name : Name
     , jobTitle : Maybe String
@@ -44,6 +50,7 @@ type alias Contact =
     , fax : Maybe String
     , email : Maybe String
     , address : Maybe String
+    , receptionTimes : Maybe (List ReceptionTimes)
     }
 
 

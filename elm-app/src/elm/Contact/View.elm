@@ -82,11 +82,8 @@ viewContact language ( contactId, contact ) =
                 , div [ class "ui blue small labels" ]
                     [ showMaybe <|
                         Maybe.map
-                            -- since it's a `Maybe` value
                             (\topics ->
-                                -- This is a List of Topics
                                 div [] (List.map (\topic -> a [ class "ui label" ] [ text topic.name ]) topics)
-                             -- we iterate over all the topics
                             )
                             contact.topics
                     ]
@@ -130,14 +127,25 @@ viewContact language ( contactId, contact ) =
                             )
                             contact.address
                     ]
-                , span []
-                    [ i [ class "add to calendar icon" ]
-                        []
-                    , b []
-                        [ text "ימים א׳, ב׳, ג׳" ]
-                    , b []
-                        [ text "שעות 10:00 - 12:00" ]
-                    ]
+                , showMaybe <|
+                    Maybe.map
+                        (\receptionTimes ->
+                            div []
+                                (List.map
+                                    (\receptionTime ->
+                                        div []
+                                            [ i [ class "add to calendar icon" ]
+                                                []
+                                            , span []
+                                                [ text receptionTime.days ]
+                                            , span []
+                                                [ text receptionTime.hours ]
+                                            ]
+                                    )
+                                    receptionTimes
+                                )
+                        )
+                        contact.receptionTimes
                 ]
             , sectionDivider
             ]
