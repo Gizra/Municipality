@@ -1,15 +1,15 @@
-id,municipality,field_first_name_ar,field_first_name_en,field_first_name_he,field_last_name_ar,field_last_name_en,field_last_name_he,field_job_title_ar,field_job_title_en,field_job_title_he,field_image,field_email,field_phone,field_fax,field_address,field_topics,field_user_types
-1,2,اسم,,חכם,اسم عائلة,,יונס,المحاسبة,,חשבונאות,,hakamyns@gmail.com,526177102,08-12345678,"כתובת לדוגמה, 1, 2",,Residents|Businesses
-2,2,محمد,,מחמוד,اسم عائلة,,עיסא,المحاسبة,,חשבונאות,,mahmod5104@gmail.com,505728180,08-12345678,"כתובת לדוגמה, 1, 2",Business license,Residents|Businesses
-3,2,محمود,,מוחמד,اسم عائلة,,שיך עבד,صيانة,,אחזקה,,bees979@walla.co.il,526655875,08-12345678,"כתובת לדוגמה, 1, 2",,Residents|Businesses
-4,1,جميل,,ג׳מיל,اسم عائلة,,זנגריה,الصيانة المنزلية,,משק ואחזקה,,me@example.muni.il,04-9008509,08-12345678,"כתובת לדוגמה, 1, 2",Garbage collection,Residents|Businesses
-6,1,اسم,,ויקטור,اسم عائلة,,סבן,جمع,,גביה,,me@example.muni.il,04-9008507,08-12345678,"כתובת לדוגמה, 1, 2",Arnona,Residents|Businesses
-7,1,عبد الله,,עבדאללה,الهيب,,הייב,,,,,me@example.muni.il,,08-12345678,"כתובת לדוגמה, 1, 2",,Residents|Businesses
-8,1,اسم,,סמאהר,اسم عائلة,,סועאד,تعليم,,חינוך,,me@example.muni.il,04-6039103,08-12345678,"כתובת לדוגמה, 1, 2",Kindergarten,Residents|Businesses
-9,1,اسم,,איאד,اسم عائلة,,סולימאן,أمين صندوق,,גזבר,,me@example.muni.il,04-9008504,08-12345678,"כתובת לדוגמה, 1, 2",,Residents|Businesses
-10,4,اسم,,ניר,اسم عائلة,,שמואלי,تعليم,,חינוך,,me@example.muni.il,08-6796118,08-12345678,"כתובת לדוגמה, 1, 2",Kindergarten,Residents|Businesses
-11,4,اسم,,נסר,اسم عائلة,,בו סריחאן,خير,,רווחה,,me@example.muni.il,08-6796123,08-12345678,"כתובת לדוגמה, 1, 2",,Residents|Businesses
-12,4,اسم,,סלאח,اسم عائلة,,אבו האני,تعليم خاص,,חינוך מיוחד,,me@example.muni.il,08-6797321,08-12345678,"כתובת לדוגמה, 1, 2",Kindergarten,Residents|Businesses
-13,3,,,סמדר,,,פורתי,,,גבייה,,me@example.muni.il,08-608782,08-608770,"כתובת לדוגמה, 1, 2",Arnona,Residents|Businesses
-14,3,,,עידית,,,יפת,,,לשכה משפטית,,me@example.muni.il,08-8500878,,"כתובת לדוגמה, 1, 2",,Residents|Businesses
-15,3,,,איתי,,,קורן,,,מבקר העירייה,,me@example.muni.il,08-8500861,,"כתובת לדוגמה, 1, 2",,Residents|Businesses
+id,municipality,field_first_name_ar,field_first_name_en,field_first_name_he,field_last_name_ar,field_last_name_en,field_last_name_he,field_job_title_ar,field_job_title_en,field_job_title_he,field_image,field_email,field_phone,field_fax,field_address,field_topics,field_user_types,field_department
+1,2,اسم,,חכם,اسم عائلة,,יונס,المحاسبة,,חשבונאות,,hakamyns@gmail.com,526177102,08-12345678,"כתובת לדוגמה, 1, 2",,Residents|Businesses,Budget
+2,2,محمد,,מחמוד,اسم عائلة,,עיסא,المحاسبة,,חשבונאות,,mahmod5104@gmail.com,505728180,08-12345678,"כתובת לדוגמה, 1, 2",Business license,Residents|Businesses,Switchboard
+3,2,محمود,,מוחמד,اسم عائلة,,שיך עבד,صيانة,,אחזקה,,bees979@walla.co.il,526655875,08-12345678,"כתובת לדוגמה, 1, 2",,Residents|Businesses,Budget
+4,1,جميل,,ג׳מיל,اسم عائلة,,זנגריה,الصيانة المنزلية,,משק ואחזקה,,me@example.muni.il,04-9008509,08-12345678,"כתובת לדוגמה, 1, 2",Garbage collection,Residents|Businesses,Switchboard
+6,1,اسم,,ויקטור,اسم عائلة,,סבן,جمع,,גביה,,me@example.muni.il,04-9008507,08-12345678,"כתובת לדוגמה, 1, 2",Arnona,Residents|Businesses,Budget
+7,1,عبد الله,,עבדאללה,الهيب,,הייב,,,,,me@example.muni.il,,08-12345678,"כתובת לדוגמה, 1, 2",,Residents|Businesses,Switchboard
+8,1,اسم,,סמאהר,اسم عائلة,,סועאד,تعليم,,חינוך,,me@example.muni.il,04-6039103,08-12345678,"כתובת לדוגמה, 1, 2",Kindergarten,Residents|Businesses,Treasurer
+9,1,اسم,,איאד,اسم عائلة,,סולימאן,أمين صندوق,,גזבר,,me@example.muni.il,04-9008504,08-12345678,"כתובת לדוגמה, 1, 2",,Residents|Businesses,Budget
+10,4,اسم,,ניר,اسم عائلة,,שמואלי,تعليم,,חינוך,,me@example.muni.il,08-6796118,08-12345678,"כתובת לדוגמה, 1, 2",Kindergarten,Residents|Businesses,Switchboard
+11,4,اسم,,נסר,اسم عائلة,,בו סריחאן,خير,,רווחה,,me@example.muni.il,08-6796123,08-12345678,"כתובת לדוגמה, 1, 2",,Residents|Businesses,Budget
+12,4,اسم,,סלאח,اسم عائلة,,אבו האני,تعليم خاص,,חינוך מיוחד,,me@example.muni.il,08-6797321,08-12345678,"כתובת לדוגמה, 1, 2",Kindergarten,Residents|Businesses,Switchboard
+13,3,,,סמדר,,,פורתי,,,גבייה,,me@example.muni.il,08-608782,08-608770,"כתובת לדוגמה, 1, 2",Arnona,Residents|Businesses,Budget
+14,3,,,עידית,,,יפת,,,לשכה משפטית,,me@example.muni.il,08-8500878,,"כתובת לדוגמה, 1, 2",,Residents|Businesses,Switchboard
+15,3,,,איתי,,,קורן,,,מבקר העירייה,,me@example.muni.il,08-8500861,,"כתובת לדוגמה, 1, 2",,Residents|Businesses,Treasurer

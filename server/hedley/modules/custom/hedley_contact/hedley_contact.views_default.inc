@@ -95,7 +95,7 @@ function hedley_contact_views_default_views() {
     'link' => 0,
   );
   $handler->display->display_options['fields']['og_group_ref']['delta_offset'] = '0';
-  /* Field: Content: user types */
+  /* Field: Content: User types */
   $handler->display->display_options['fields']['field_user_types']['id'] = 'field_user_types';
   $handler->display->display_options['fields']['field_user_types']['table'] = 'field_data_field_user_types';
   $handler->display->display_options['fields']['field_user_types']['field'] = 'field_user_types';

@@ -75,9 +75,7 @@ viewContact language ( contactId, contact ) =
                 contact.imageUrl
         , div [ class "content" ]
             [ div [ class "header" ]
-                [ a [ href ("node/" ++ contactId) ]
-                    [ text <| contact.name ]
-                ]
+                [ h3 [] [ text <| contact.name ] ]
             , div [ class "description" ]
                 [ showMaybe <| Maybe.map text contact.jobTitle
                 , divider
