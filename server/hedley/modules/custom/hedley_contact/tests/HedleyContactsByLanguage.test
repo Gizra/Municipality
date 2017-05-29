@@ -22,62 +22,6 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
   }
 
   /**
-   * Overrides HedleyMunicipalityWebTestCase::setUp().
-   */
-  protected function setUp() {
-    parent::setUp();
-
-    // Create the OG audience field.
-    og_create_field(OG_AUDIENCE_FIELD, 'node', 'contact');
-
-    // Create the fields' instances for the contact entity, necessary to work
-    // with the entity meta wrapper inside the
-    // `hedley_contact_get_get_contacts_by_group` function.
-    $instance = array(
-      'field_name' => 'field_first_name',
-      'bundle' => 'contact',
-      'entity_type' => 'node',
-    );
-    field_create_instance($instance);
-
-    // Repeat for last name.
-    $instance['field_name'] = 'field_last_name';
-    field_create_instance($instance);
-
-    // Repeat for image.
-    $instance['field_name'] = 'field_image';
-    field_create_instance($instance);
-
-    // Repeat for topics.
-    $instance['field_name'] = 'field_topics';
-    field_create_instance($instance);
-
-    // Repeat for phone.
-    $instance['field_name'] = 'field_phone';
-    field_create_instance($instance);
-
-    // Repeat for fax.
-    $instance['field_name'] = 'field_fax';
-    field_create_instance($instance);
-
-    // Repeat for email.
-    $instance['field_name'] = 'field_email';
-    field_create_instance($instance);
-
-    // Repeat for address.
-    $instance['field_name'] = 'field_address';
-    field_create_instance($instance);
-
-    // Repeat for job title.
-    $instance['field_name'] = 'field_job_title';
-    field_create_instance($instance);
-
-    // Repeat for reception hours.
-    $instance['field_name'] = 'field_reception_hours';
-    field_create_instance($instance);
-  }
-
-  /**
    * Test access to the Contact page.
    */
   public function testContactsByLanguage() {
