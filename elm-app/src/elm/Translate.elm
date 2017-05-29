@@ -13,6 +13,7 @@ type alias TranslationSet =
 type TranslationId
     = ContactsNotFound
     | FilterContactsPlaceholder
+    | MatchingResults
 
 
 translate : Language -> TranslationId -> String
@@ -30,6 +31,12 @@ translate lang trans =
                     { arabic = "ابحث عن اسم، موضوع أو فئة"
                     , english = "Filter contacts"
                     , hebrew = "חפשו שם, נושא או מחלקה"
+                    }
+
+                MatchingResults ->
+                    { arabic = "نتائج البحث"
+                    , english = "Matching Results"
+                    , hebrew = "תוצאות מתאימות"
                     }
     in
         case lang of

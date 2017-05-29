@@ -22,8 +22,8 @@ update msg model =
             in
                 model ! []
 
-        SetFilter filter ->
-            { model | filter = filter } ! []
+        SetFilter filterString ->
+            { model | filterString = filterString } ! []
 
 
 subscriptions : Sub Msg

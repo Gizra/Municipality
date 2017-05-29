@@ -2,6 +2,7 @@ module Utils.Html
     exposing
         ( divider
         , emptyNode
+        , sectionDivider
         , showIf
         , showMaybe
         )
@@ -18,10 +19,11 @@ emptyNode =
 
 
 {-| Conditionally show Html. A bit cleaner than using if expressions in middle
-    of an html block:
+of an html block:
 
     showIf True <| text "I'm shown"
     showIf False <| text "I'm not shown"
+
 -}
 showIf : Bool -> Html msg -> Html msg
 showIf condition html =
@@ -40,4 +42,9 @@ showMaybe =
 
 divider : Html msg
 divider =
-    div [ class "ui divider" ] []
+    div [ class "ui horizontal divider" ] []
+
+
+sectionDivider : Html msg
+sectionDivider =
+    div [ class "ui section divider" ] []

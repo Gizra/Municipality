@@ -116,3 +116,66 @@ function hedley_contact_get_reception_hours($node) {
 
   return $formatted_hours;
 }
+
+/**
+ * Return contacts by group.
+ *
+ * @param object $group
+ *   The group.
+ * @param string $language_code
+ *   The language code (e.g. "he", "ar").
+ *
+ * @return array
+ *   Array with the contacts list.
+ */
+function hedley_contact_get_contacts_by_group($group, $language_code) {
+  // Get contact nodes by group.
+  $nodes = hedley_municipality_get_nodes('contact', 100, $group);
+  if (!$nodes) {
+    // No contacts found.
+    return NULL;
+  }
+  $contacts = [];
+  foreach ($nodes as $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $wrapper->language($language_code);
+
+    // Ignore contacts without a name in the current language.
+    if (!$wrapper->field_last_name->value()) {
+      continue;
+    }
+
+    $image = $wrapper->field_image->value();
+
+    // Get the topics related to the user, if not empty.
+    $topics_array = array();
+    $topics = $wrapper->field_topics->value();
+    if (!empty($wrapper->field_topics->raw())) {
+      foreach ($topics as $topic) {
+        $topics_array[] = [
+          'id' => $topic->tid,
+          'name' => $topic->name,
+        ];
+      }
+    }
+
+    $contact = [
+      'id' => $wrapper->getIdentifier(),
+      'name' => check_plain($wrapper->field_first_name->value()) . ' ' . check_plain($wrapper->field_last_name->value()),
+      'image_url' => $image ? image_style_url('medium', $image['uri']) : '',
+      'phone' => check_plain($wrapper->field_phone->value()),
+      'fax' => check_plain($wrapper->field_fax->value()),
+      'email' => check_plain($wrapper->field_email->value()),
+      'address' => check_plain($wrapper->field_address->value()),
+      'job_title' => check_plain($wrapper->field_job_title->value()),
+      'topics' => $topics_array,
+      'reception_hours' => hedley_contact_get_reception_hours($node),
+    ];
+
+    // Remove empty values (elm expects the correct value or nothing).
+    $contacts[] = array_filter($contact);
+  }
+
+  return $contacts;
+
+}

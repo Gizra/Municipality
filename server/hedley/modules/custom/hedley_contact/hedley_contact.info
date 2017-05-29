@@ -54,3 +54,4 @@ features_exclude[field_base][field_reception_hours] = field_reception_hours
 
 ; Tests
 files[] = tests/HedleyContactAccess.test
+files[] = tests/HedleyContactsByLanguage.test
