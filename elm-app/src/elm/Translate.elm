@@ -12,7 +12,9 @@ type alias TranslationSet =
 
 type TranslationId
     = ContactsNotFound
+    | EventsNotFound
     | FilterContactsPlaceholder
+    | FilterEventsPlaceholder
     | MatchingResults
 
 
@@ -22,8 +24,14 @@ translate lang trans =
         translationSet =
             case trans of
                 ContactsNotFound ->
-                    { arabic = "No contacts found"
+                    { arabic = "لم يتم العثور على جهات اتصال"
                     , english = "No contacts found"
+                    , hebrew = "לא נמצאו אירועים מתאימים"
+                    }
+
+                EventsNotFound ->
+                    { arabic = "لم يتم العثور على أية أحداث"
+                    , english = "No events found"
                     , hebrew = "לא נמצאו אנשי קשר מתאימים"
                     }
 
@@ -31,6 +39,12 @@ translate lang trans =
                     { arabic = "ابحث عن اسم، موضوع أو فئة"
                     , english = "Filter contacts"
                     , hebrew = "חפשו שם, נושא או מחלקה"
+                    }
+
+                FilterEventsPlaceholder ->
+                    { arabic = "ابحث عن الأحداث في ذوقك"
+                    , english = "Look for events to your liking"
+                    , hebrew = "חפשו אירועים לטעמכם"
                     }
 
                 MatchingResults ->

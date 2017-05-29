@@ -6,3 +6,42 @@
  */
 
 include_once 'hedley_event.features.inc';
+
+/**
+ * Return events by group.
+ *
+ * @param object $group
+ *   The group.
+ * @param string $language_code
+ *   The language code (e.g. "he", "ar").
+ *
+ * @return array
+ *   Array with the events list.
+ */
+function hedley_event_get_events_by_group($group, $language_code) {
+  // Get contact nodes by group.
+  $nodes = hedley_municipality_get_nodes('event', 100, $group);
+  if (!$nodes) {
+    // No contacts found.
+    return NULL;
+  }
+  $events = [];
+  foreach ($nodes as $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $wrapper->language($language_code);
+
+    $image = $wrapper->field_image->value();
+
+    $event = [
+      'id' => $wrapper->getIdentifier(),
+      'name' => check_plain($wrapper->label()),
+      'image_url' => $image ? image_style_url('medium', $image['uri']) : '',
+    ];
+
+    // Remove empty values (elm expects the correct value or nothing).
+    $events[] = array_filter($event);
+  }
+
+  return $events;
+
+}

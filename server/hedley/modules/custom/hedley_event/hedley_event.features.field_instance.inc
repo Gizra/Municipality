@@ -237,50 +237,6 @@ function hedley_event_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-event-field_user_types'.
-  $field_instances['node-event-field_user_types'] = array(
-    'bundle' => 'event',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'i18n_taxonomy',
-        'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_link',
-        'weight' => 8,
-      ),
-      'homepage_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_user_types',
-    'label' => 'User types',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 11,
-    ),
-  );
-
   // Exported field_instance: 'node-event-field_recurring_weekly'.
   $field_instances['node-event-field_recurring_weekly'] = array(
     'bundle' => 'event',
@@ -425,6 +381,50 @@ function hedley_event_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event-field_user_types'.
+  $field_instances['node-event-field_user_types'] = array(
+    'bundle' => 'event',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'i18n_taxonomy',
+        'settings' => array(),
+        'type' => 'i18n_taxonomy_term_reference_link',
+        'weight' => 8,
+      ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_user_types',
+    'label' => 'User types',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 11,
+    ),
+  );
+
   // Exported field_instance: 'node-event-og_group_ref'.
   $field_instances['node-event-og_group_ref'] = array(
     'bundle' => 'event',
@@ -552,11 +552,11 @@ function hedley_event_field_default_field_instances() {
   t('Date');
   t('Groups audience');
   t('Image');
-  t('User types');
   t('Recurring weekly');
   t('Ticket price');
   t('Title');
   t('Topics');
+  t('User types');
 
   return $field_instances;
 }
