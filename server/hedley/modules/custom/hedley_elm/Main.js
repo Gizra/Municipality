@@ -11896,13 +11896,8 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 								{
 									ctor: '::',
 									_0: A2(
-										_elm_lang$html$Html$a,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$href(
-												A2(_elm_lang$core$Basics_ops['++'], 'node/', _p1._0)),
-											_1: {ctor: '[]'}
-										},
+										_elm_lang$html$Html$h3,
+										{ctor: '[]'},
 										{
 											ctor: '::',
 											_0: _elm_lang$html$Html$text(_p2.name),
