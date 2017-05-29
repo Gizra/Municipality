@@ -24,7 +24,12 @@ function hedley_topic_topic_hardcopy_forms_content_type_render($subtype, $conf, 
   }
   $topic_wrapper = entity_metadata_wrapper('taxonomy_term', $context->data);
 
-  $nodes = hedley_municipality_get_nodes_by_user_type('hardcopy_form', 10, hedley_municipality_get_current_group(), FALSE, $topic_wrapper->getIdentifier());
+  if (!$municipality_node = hedley_municipality_get_current_group()) {
+    // Don't display hardcopy forms without municipality context.
+    return NULL;
+  }
+
+  $nodes = hedley_municipality_get_nodes_by_user_type('hardcopy_form', 10, $municipality_node, FALSE, $topic_wrapper->getIdentifier());
   if (!$nodes) {
     // No hardcopy forms found.
     return NULL;
