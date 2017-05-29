@@ -13,7 +13,11 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         HandleEvents (Ok values) ->
-            { model | events = values } ! []
+            let
+                _ =
+                    Debug.log "HandleEvents" values
+            in
+                { model | events = values } ! []
 
         HandleEvents (Err err) ->
             let

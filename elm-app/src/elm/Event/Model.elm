@@ -4,16 +4,12 @@ import DictList exposing (DictList)
 
 
 type alias Model =
-    { events : DictListEvent
-    , filterString : String
-    }
+    { events : DictListEvent }
 
 
 emptyModel : Model
 emptyModel =
-    { events = DictList.empty
-    , filterString = ""
-    }
+    { events = DictList.empty }
 
 
 type Msg
