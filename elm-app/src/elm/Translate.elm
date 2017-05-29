@@ -14,7 +14,6 @@ type TranslationId
     = ContactsNotFound
     | EventsNotFound
     | FilterContactsPlaceholder
-    | FilterEventsPlaceholder
     | MatchingResults
 
 
@@ -39,12 +38,6 @@ translate lang trans =
                     { arabic = "ابحث عن اسم، موضوع أو فئة"
                     , english = "Filter contacts"
                     , hebrew = "חפשו שם, נושא או מחלקה"
-                    }
-
-                FilterEventsPlaceholder ->
-                    { arabic = "ابحث عن الأحداث في ذوقك"
-                    , english = "Look for events to your liking"
-                    , hebrew = "חפשו אירועים לטעמכם"
                     }
 
                 MatchingResults ->

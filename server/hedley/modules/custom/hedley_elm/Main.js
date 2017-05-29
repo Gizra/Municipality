@@ -12230,8 +12230,6 @@ var _gizra$municipality$Translate$translate = F2(
 					return {arabic: 'لم يتم العثور على أية أحداث', english: 'No events found', hebrew: 'לא נמצאו אנשי קשר מתאימים'};
 				case 'FilterContactsPlaceholder':
 					return {arabic: 'ابحث عن اسم، موضوع أو فئة', english: 'Filter contacts', hebrew: 'חפשו שם, נושא או מחלקה'};
-				case 'FilterEventsPlaceholder':
-					return {arabic: 'ابحث عن الأحداث في ذوقك', english: 'Look for events to your liking', hebrew: 'חפשו אירועים לטעמכם'};
 				default:
 					return {arabic: 'نتائج البحث', english: 'Matching Results', hebrew: 'תוצאות מתאימות'};
 			}
@@ -12257,7 +12255,6 @@ var _gizra$municipality$Translate$TranslationSet = F3(
 		return {arabic: a, english: b, hebrew: c};
 	});
 var _gizra$municipality$Translate$MatchingResults = {ctor: 'MatchingResults'};
-var _gizra$municipality$Translate$FilterEventsPlaceholder = {ctor: 'FilterEventsPlaceholder'};
 var _gizra$municipality$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
 var _gizra$municipality$Translate$EventsNotFound = {ctor: 'EventsNotFound'};
 var _gizra$municipality$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
