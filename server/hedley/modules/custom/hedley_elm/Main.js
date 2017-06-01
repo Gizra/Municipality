@@ -12814,6 +12814,7 @@ var _gizra$municipality$Event_Utils$filterEvents = F2(
 var _gizra$municipality$Event_View$viewEvent = F2(
 	function (language, _p0) {
 		var _p1 = _p0;
+		var _p2 = _p1._1;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -12823,21 +12824,286 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 			},
 			{
 				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$h3,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(_p1._1.name),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
+				_0: _gizra$municipality$Utils_Html$showMaybe(
+					A2(
+						_elm_lang$core$Maybe$map,
+						function (imageUrl) {
+							return A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('image'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$img,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$src(imageUrl),
+											_1: {ctor: '[]'}
+										},
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								});
+						},
+						_p2.imageUrl)),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('content'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('header'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(_p2.name),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('description'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$p,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('event.description'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('divider'),
+											_1: {ctor: '[]'}
+										},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('ui row'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$div,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('ui four wide column'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$span,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$i,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$class('calendar icon'),
+																		_1: {ctor: '[]'}
+																	},
+																	{ctor: '[]'}),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('event.day event.date event.time'),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$span,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('- event.endDate'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$span,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$i,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$class('refresh icon'),
+																				_1: {ctor: '[]'}
+																			},
+																			{ctor: '[]'}),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('(אירוע שבועי)'),
+																			_1: {ctor: '[]'}
+																		}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$div,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('ui four wide column'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$a,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$href('event.location_mapLink'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																		_1: {ctor: '[]'}
+																	}
+																},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$i,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('map icon'),
+																			_1: {ctor: '[]'}
+																		},
+																		{ctor: '[]'}),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('איפה: event.location'),
+																		_1: {ctor: '[]'}
+																	}
+																}),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$div,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class('ui four wide column'),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$i,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$class('shekel icon'),
+																		_1: {ctor: '[]'}
+																	},
+																	{ctor: '[]'}),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('מחיר: event.price'),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$div,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('ui four wide column center aligned'),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$a,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('ui button primary basic middle aligned'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$href('event.detailsLink'),
+																					_1: {ctor: '[]'}
+																				}
+																			}
+																		},
+																		{
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$i,
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$class('add icon'),
+																					_1: {ctor: '[]'}
+																				},
+																				{ctor: '[]'}),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text('לפרטים נוספים'),
+																				_1: {ctor: '[]'}
+																			}
+																		}),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
 			});
 	});
 var _gizra$municipality$Event_View$viewEvents = F2(
-	function (language, _p2) {
-		var _p3 = _p2;
-		var filteredEvents = A2(_gizra$municipality$Event_Utils$filterEvents, _p3.events, _p3.filterString);
+	function (language, _p3) {
+		var _p4 = _p3;
+		var filteredEvents = A2(_gizra$municipality$Event_Utils$filterEvents, _p4.events, _p4.filterString);
 		return _Gizra$elm_dictlist$DictList$isEmpty(filteredEvents) ? A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},

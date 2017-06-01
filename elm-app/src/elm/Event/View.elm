@@ -65,5 +65,85 @@ viewEvents language { events, filterString } =
 -}
 viewEvent : Language -> ( EventId, Event ) -> Html msg
 viewEvent language ( eventId, event ) =
-    div [ class "card" ]
-        [ h3 [] [ text <| event.name ] ]
+    div
+        [ class "card" ]
+        [ showMaybe <|
+            Maybe.map
+                (\imageUrl ->
+                    div [ class "image" ]
+                        [ img [ src imageUrl ]
+                            []
+                        ]
+                )
+                event.imageUrl
+        , div
+            [ class "content" ]
+            [ div
+                [ class "header" ]
+                [ text event.name ]
+            , div
+                [ class "description" ]
+                [ p
+                    []
+                    [ text "event.description" ]
+                ]
+            , div
+                [ class "divider" ]
+                []
+            , div
+                [ class "ui row" ]
+                [ div
+                    [ class "ui four wide column" ]
+                    [ span
+                        []
+                        [ i
+                            [ class "calendar icon" ]
+                            []
+                        , text
+                            "event.day event.date event.time"
+                        ]
+                    , span
+                        []
+                        [ text "- event.endDate" ]
+                    , span
+                        []
+                        [ i
+                            [ class "refresh icon" ]
+                            []
+                        , text
+                            "(אירוע שבועי)"
+                        ]
+                    ]
+                , div
+                    [ class "ui four wide column" ]
+                    [ a
+                        [ href "event.location_mapLink", target "_blank" ]
+                        [ i
+                            [ class "map icon" ]
+                            []
+                        , text
+                            "איפה: event.location"
+                        ]
+                    ]
+                , div
+                    [ class "ui four wide column" ]
+                    [ i
+                        [ class "shekel icon" ]
+                        []
+                    , text
+                        "מחיר: event.price"
+                    ]
+                , div
+                    [ class "ui four wide column center aligned" ]
+                    [ a
+                        [ class "ui button primary basic middle aligned", target "_blank", href "event.detailsLink" ]
+                        [ i
+                            [ class "add icon" ]
+                            []
+                        , text
+                            "לפרטים נוספים"
+                        ]
+                    ]
+                ]
+            ]
+        ]
