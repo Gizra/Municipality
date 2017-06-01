@@ -25,16 +25,23 @@ function hedley_event_get_events_by_group($group, $language_code) {
     // No contacts found.
     return NULL;
   }
+
   $events = [];
   foreach ($nodes as $node) {
     $wrapper = entity_metadata_wrapper('node', $node);
     $wrapper->language($language_code);
+
+    // Ignore events without a title in the current language.
+    if (!$wrapper->label()) {
+      continue;
+    }
 
     $image = $wrapper->field_image->value();
 
     $event = [
       'id' => $wrapper->getIdentifier(),
       'name' => check_plain($wrapper->label()),
+      'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : '',
       'image_url' => $image ? image_style_url('medium', $image['uri']) : '',
     ];
 
