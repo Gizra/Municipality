@@ -111,6 +111,14 @@ abstract class HedleyMigrateBase extends Migration {
     elseif ($this->entityType == 'taxonomy_term') {
       // Map the translated name field to the default term name.
       $this->addFieldMapping('name', 'name_field_' . language_default('language'));
+
+      // All taxonomy terms are group content and should have a group audience
+      // field.
+      $this->dependencies[] = 'HedleyMigrateMunicipalities';
+
+      $this
+        ->addFieldMapping(OG_AUDIENCE_FIELD, 'municipality')
+        ->sourceMigration('HedleyMigrateMunicipalities');
     }
 
     // Map file fields.
