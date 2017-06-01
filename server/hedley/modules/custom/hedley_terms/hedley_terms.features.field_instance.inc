@@ -65,7 +65,7 @@ function hedley_terms_field_default_field_instances() {
     'entity_type' => 'taxonomy_term',
     'field_name' => 'og_group_ref',
     'label' => 'Groups audience',
-    'required' => FALSE,
+    'required' => 1,
     'settings' => array(
       'behaviors' => array(
         'og_widget' => array(
@@ -119,7 +119,7 @@ function hedley_terms_field_default_field_instances() {
     'entity_type' => 'taxonomy_term',
     'field_name' => 'og_group_ref',
     'label' => 'Groups audience',
-    'required' => FALSE,
+    'required' => 1,
     'settings' => array(
       'behaviors' => array(
         'og_widget' => array(
