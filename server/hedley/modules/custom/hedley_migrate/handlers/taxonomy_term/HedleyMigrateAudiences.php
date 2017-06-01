@@ -17,6 +17,7 @@ class HedleyMigrateAudiences extends HedleyMigrateBase {
     'name_field_ar',
     'name_field_en',
     'name_field_he',
+    'municipality',
   ];
   protected $simpleMappings = [
     'name_field',

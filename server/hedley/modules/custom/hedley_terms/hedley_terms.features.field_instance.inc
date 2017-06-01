@@ -191,7 +191,7 @@ function hedley_terms_field_default_field_instances() {
       'weight' => -5,
     ),
   );
-  
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Groups audience');
