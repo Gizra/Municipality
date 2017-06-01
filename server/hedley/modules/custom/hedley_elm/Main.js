@@ -11877,14 +11877,18 @@ var _gizra$municipality$Contact_Model$HandleContacts = function (a) {
 	return {ctor: 'HandleContacts', _0: a};
 };
 
-var _gizra$municipality$Event_Model$emptyModel = {events: _Gizra$elm_dictlist$DictList$empty};
-var _gizra$municipality$Event_Model$Model = function (a) {
-	return {events: a};
-};
+var _gizra$municipality$Event_Model$emptyModel = {events: _Gizra$elm_dictlist$DictList$empty, filterString: ''};
+var _gizra$municipality$Event_Model$Model = F2(
+	function (a, b) {
+		return {events: a, filterString: b};
+	});
 var _gizra$municipality$Event_Model$Event = F2(
 	function (a, b) {
 		return {name: a, imageUrl: b};
 	});
+var _gizra$municipality$Event_Model$SetFilter = function (a) {
+	return {ctor: 'SetFilter', _0: a};
+};
 var _gizra$municipality$Event_Model$HandleEvents = function (a) {
 	return {ctor: 'HandleEvents', _0: a};
 };
@@ -12105,28 +12109,35 @@ var _gizra$municipality$Event_Decoder$decodeEvents = _elm_lang$core$Json_Decode$
 var _gizra$municipality$Event_Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
-		if (_p0._0.ctor === 'Ok') {
-			var _p2 = _p0._0._0;
-			var _p1 = A2(_elm_lang$core$Debug$log, 'HandleEvents', _p2);
+		if (_p0.ctor === 'HandleEvents') {
+			if (_p0._0.ctor === 'Ok') {
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{events: _p0._0._0}),
+					{ctor: '[]'});
+			} else {
+				var _p1 = A2(_elm_lang$core$Debug$log, 'HandleEvents', _p0._0._0);
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{ctor: '[]'});
+			}
+		} else {
 			return A2(
 				_elm_lang$core$Platform_Cmd_ops['!'],
 				_elm_lang$core$Native_Utils.update(
 					model,
-					{events: _p2}),
-				{ctor: '[]'});
-		} else {
-			var _p3 = A2(_elm_lang$core$Debug$log, 'HandleEvents', _p0._0._0);
-			return A2(
-				_elm_lang$core$Platform_Cmd_ops['!'],
-				model,
+					{filterString: _p0._0}),
 				{ctor: '[]'});
 		}
 	});
 var _gizra$municipality$Event_Update$events = _elm_lang$core$Native_Platform.incomingPort('events', _elm_lang$core$Json_Decode$value);
 var _gizra$municipality$Event_Update$subscriptions = _gizra$municipality$Event_Update$events(
-	function (_p4) {
+	function (_p2) {
 		return _gizra$municipality$Event_Model$HandleEvents(
-			A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Event_Decoder$decodeEvents, _p4));
+			A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Event_Decoder$decodeEvents, _p2));
 	});
 
 var _gizra$municipality$App_Update$subscriptions = function (model) {
@@ -12230,6 +12241,8 @@ var _gizra$municipality$Translate$translate = F2(
 					return {arabic: 'لم يتم العثور على أية أحداث', english: 'No events found', hebrew: 'לא נמצאו אנשי קשר מתאימים'};
 				case 'FilterContactsPlaceholder':
 					return {arabic: 'ابحث عن اسم، موضوع أو فئة', english: 'Filter contacts', hebrew: 'חפשו שם, נושא או מחלקה'};
+				case 'FilterEventsPlaceholder':
+					return {arabic: 'ابحث عن الأحداث في ذوقك', english: 'Look for events to your liking', hebrew: 'חפשו אירועים לטעמכם'};
 				default:
 					return {arabic: 'نتائج البحث', english: 'Matching Results', hebrew: 'תוצאות מתאימות'};
 			}
@@ -12255,6 +12268,7 @@ var _gizra$municipality$Translate$TranslationSet = F3(
 		return {arabic: a, english: b, hebrew: c};
 	});
 var _gizra$municipality$Translate$MatchingResults = {ctor: 'MatchingResults'};
+var _gizra$municipality$Translate$FilterEventsPlaceholder = {ctor: 'FilterEventsPlaceholder'};
 var _gizra$municipality$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
 var _gizra$municipality$Translate$EventsNotFound = {ctor: 'EventsNotFound'};
 var _gizra$municipality$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
@@ -12687,7 +12701,7 @@ var _gizra$municipality$Contact_View$viewContacts = F2(
 					filteredContacts)));
 	});
 var _gizra$municipality$Contact_View$viewContactFilter = F2(
-	function (language, filter) {
+	function (language, filterString) {
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -12701,7 +12715,7 @@ var _gizra$municipality$Contact_View$viewContactFilter = F2(
 					_elm_lang$html$Html$input,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$value(filter),
+						_0: _elm_lang$html$Html_Attributes$value(filterString),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$type_('search'),
@@ -12769,10 +12783,32 @@ var _gizra$municipality$Contact_View$view = F2(
 								_0: A2(_gizra$municipality$Contact_View$viewContacts, language, model),
 								_1: {ctor: '[]'}
 							}),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _gizra$municipality$Utils_Html$divider,
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			});
+	});
+
+var _gizra$municipality$Event_Utils$filterEvents = F2(
+	function (events, filterString) {
+		if (_elm_lang$core$String$isEmpty(filterString)) {
+			return events;
+		} else {
+			var stringMatch = _elm_lang$core$String$contains(
+				_elm_lang$core$String$toLower(filterString));
+			return A2(
+				_Gizra$elm_dictlist$DictList$filter,
+				F2(
+					function (_p0, event) {
+						return stringMatch(
+							_elm_lang$core$String$toLower(event.name));
+					}),
+				events);
+		}
 	});
 
 var _gizra$municipality$Event_View$viewEvent = F2(
@@ -12801,8 +12837,8 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 var _gizra$municipality$Event_View$viewEvents = F2(
 	function (language, _p2) {
 		var _p3 = _p2;
-		var _p4 = _p3.events;
-		return _Gizra$elm_dictlist$DictList$isEmpty(_p4) ? A2(
+		var filteredEvents = A2(_gizra$municipality$Event_Utils$filterEvents, _p3.events, _p3.filterString);
+		return _Gizra$elm_dictlist$DictList$isEmpty(filteredEvents) ? A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
 			{
@@ -12827,7 +12863,57 @@ var _gizra$municipality$Event_View$viewEvents = F2(
 								language,
 								{ctor: '_Tuple2', _0: eventId, _1: event});
 						}),
-					_p4)));
+					filteredEvents)));
+	});
+var _gizra$municipality$Event_View$viewEventFilter = F2(
+	function (language, filterString) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('ui icon input'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$value(filterString),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_('search'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$id('search-events'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$placeholder(
+										A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$FilterEventsPlaceholder)),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Events$onInput(_gizra$municipality$Event_Model$SetFilter),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$i,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('search icon'),
+							_1: {ctor: '[]'}
+						},
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			});
 	});
 var _gizra$municipality$Event_View$view = F2(
 	function (language, model) {
@@ -12836,45 +12922,41 @@ var _gizra$municipality$Event_View$view = F2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$MatchingResults)),
-						_1: {ctor: '[]'}
-					}),
+				_0: A2(_gizra$municipality$Event_View$viewEventFilter, language, model.filterString),
 				_1: {
 					ctor: '::',
 					_0: A2(
 						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('ui container center aligned'),
+							_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: A2(_gizra$municipality$Event_View$viewEvents, language, model),
+							_0: _elm_lang$html$Html$text(
+								A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$MatchingResults)),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$pre,
-							{ctor: '[]'},
+							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(
-									_elm_lang$core$Basics$toString(model)),
+								_0: _elm_lang$html$Html_Attributes$class('ui container center aligned'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(_gizra$municipality$Event_View$viewEvents, language, model),
 								_1: {ctor: '[]'}
 							}),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _gizra$municipality$Utils_Html$divider,
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			});

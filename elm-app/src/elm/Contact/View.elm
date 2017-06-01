@@ -21,14 +21,15 @@ view language model =
             [ text <| translate language MatchingResults ]
         , div [ class "ui container center aligned" ]
             [ viewContacts language model ]
+        , divider
         ]
 
 
 viewContactFilter : Language -> String -> Html Msg
-viewContactFilter language filter =
+viewContactFilter language filterString =
     div [ class "ui icon input" ]
         [ input
-            [ value filter
+            [ value filterString
             , type_ "search"
             , placeholder <| translate language FilterContactsPlaceholder
             , onInput SetFilter

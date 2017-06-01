@@ -13,11 +13,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         HandleEvents (Ok values) ->
-            let
-                _ =
-                    Debug.log "HandleEvents" values
-            in
-                { model | events = values } ! []
+            { model | events = values } ! []
 
         HandleEvents (Err err) ->
             let
@@ -25,6 +21,9 @@ update msg model =
                     Debug.log "HandleEvents" err
             in
                 model ! []
+
+        SetFilter filterString ->
+            { model | filterString = filterString } ! []
 
 
 subscriptions : Sub Msg
