@@ -12,7 +12,6 @@ features[field_instance][] = taxonomy_term-audiences-name_field
 features[field_instance][] = taxonomy_term-audiences-og_group_ref
 features[field_instance][] = taxonomy_term-departments-og_group_ref
 features[field_instance][] = taxonomy_term-user_types-name_field
-features[field_instance][] = taxonomy_term-user_types-og_group_ref
 features[taxonomy][] = audiences
 features[taxonomy][] = departments
 features[taxonomy][] = user_types
