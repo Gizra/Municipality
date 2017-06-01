@@ -8,7 +8,7 @@
   ],
   "exposed-modules": [],
   "dependencies": {
-    "Gizra/elm-dictlist": "1.1.0 <= v < 2.0.0",
+    "Gizra/elm-dictlist": "1.2.0 <= v < 2.0.0",
     "NoRedInk/elm-decode-pipeline": "3.0.0 <= v < 4.0.0",
     "eeue56/elm-all-dict": "2.0.1 <= v < 3.0.0",
     "eeue56/elm-html-test": "2.0.0 <= v < 3.0.0",
