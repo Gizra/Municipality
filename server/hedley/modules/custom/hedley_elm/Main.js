@@ -11882,9 +11882,9 @@ var _gizra$municipality$Event_Model$Model = F2(
 	function (a, b) {
 		return {events: a, filterString: b};
 	});
-var _gizra$municipality$Event_Model$Event = F2(
-	function (a, b) {
-		return {name: a, imageUrl: b};
+var _gizra$municipality$Event_Model$Event = F3(
+	function (a, b, c) {
+		return {name: a, imageUrl: b, description: c};
 	});
 var _gizra$municipality$Event_Model$SetFilter = function (a) {
 	return {ctor: 'SetFilter', _0: a};
@@ -12069,14 +12069,19 @@ var _gizra$municipality$Contact_Update$subscriptions = _gizra$municipality$Conta
 
 var _gizra$municipality$Event_Decoder$decodeEvent = A4(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-	'image_url',
+	'description',
 	_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 	_elm_lang$core$Maybe$Nothing,
-	A3(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'name',
-		_elm_lang$core$Json_Decode$string,
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Event_Model$Event)));
+	A4(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+		'image_url',
+		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+		_elm_lang$core$Maybe$Nothing,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'name',
+			_elm_lang$core$Json_Decode$string,
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Event_Model$Event))));
 var _gizra$municipality$Event_Decoder$decodeArray2 = F2(
 	function (keyDecoder, valueDecoder) {
 		return A2(
@@ -12874,25 +12879,27 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 								}),
 							_1: {
 								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('description'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$p,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('event.description'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}),
+								_0: _gizra$municipality$Utils_Html$showMaybe(
+									A2(
+										_elm_lang$core$Maybe$map,
+										function (description) {
+											return A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('description'),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html_Attributes$property,
+															'innerHTML',
+															_elm_lang$core$Json_Encode$string(description)),
+														_1: {ctor: '[]'}
+													}
+												},
+												{ctor: '[]'});
+										},
+										_p2.description)),
 								_1: {
 									ctor: '::',
 									_0: A2(

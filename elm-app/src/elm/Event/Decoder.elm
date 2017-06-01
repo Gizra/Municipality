@@ -33,3 +33,4 @@ decodeEvent =
     decode Event
         |> required "name" string
         |> optional "image_url" (nullable string) Nothing
+        |> optional "description" (nullable string) Nothing

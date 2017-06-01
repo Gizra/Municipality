@@ -32,6 +32,7 @@ type alias EventId =
 type alias Event =
     { name : Name
     , imageUrl : Maybe String
+    , description : Maybe String
     }
 
 

@@ -5,8 +5,9 @@ import DictList
 import Event.Model exposing (DictListEvent, Event, EventId, Model, Msg(..))
 import Event.Utils exposing (filterEvents)
 import Html exposing (..)
-import Html.Attributes exposing (alt, class, classList, href, id, placeholder, src, style, target, type_, value)
+import Html.Attributes exposing (alt, class, classList, href, id, placeholder, property, src, style, target, type_, value)
 import Html.Events exposing (onClick, onInput)
+import Json.Encode exposing (string)
 import Svg.Attributes exposing (mode)
 import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
@@ -81,12 +82,16 @@ viewEvent language ( eventId, event ) =
             [ div
                 [ class "header" ]
                 [ text event.name ]
-            , div
-                [ class "description" ]
-                [ p
-                    []
-                    [ text "event.description" ]
-                ]
+            , showMaybe <|
+                Maybe.map
+                    (\description ->
+                        div
+                            [ class "description"
+                            , property "innerHTML" <| string description
+                            ]
+                            []
+                    )
+                    event.description
             , div
                 [ class "divider" ]
                 []
