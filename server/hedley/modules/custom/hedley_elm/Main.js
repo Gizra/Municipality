@@ -13664,29 +13664,36 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 														}),
 													_1: {
 														ctor: '::',
-														_0: A2(
-															_elm_lang$html$Html$div,
-															{
-																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$class('ui four wide column'),
-																_1: {ctor: '[]'}
-															},
-															{
-																ctor: '::',
-																_0: A2(
-																	_elm_lang$html$Html$i,
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$class('shekel icon'),
-																		_1: {ctor: '[]'}
-																	},
-																	{ctor: '[]'}),
-																_1: {
-																	ctor: '::',
-																	_0: _elm_lang$html$Html$text('מחיר: event.price'),
-																	_1: {ctor: '[]'}
-																}
-															}),
+														_0: _gizra$municipality$Utils_Html$showMaybe(
+															A2(
+																_elm_lang$core$Maybe$map,
+																function (ticketPrice) {
+																	return A2(
+																		_elm_lang$html$Html$div,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('ui four wide column'),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$i,
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$class('shekel icon'),
+																					_1: {ctor: '[]'}
+																				},
+																				{ctor: '[]'}),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text(
+																					A2(_elm_lang$core$Basics_ops['++'], 'מחיר: ', ticketPrice)),
+																				_1: {ctor: '[]'}
+																			}
+																		});
+																},
+																_p2.ticketPrice)),
 														_1: {
 															ctor: '::',
 															_0: A2(
@@ -13708,7 +13715,8 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																				_0: _elm_lang$html$Html_Attributes$target('_blank'),
 																				_1: {
 																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$href('event.detailsLink'),
+																					_0: _elm_lang$html$Html_Attributes$href(
+																						A2(_elm_lang$core$Basics_ops['++'], 'node/', _p1._0)),
 																					_1: {ctor: '[]'}
 																				}
 																			}

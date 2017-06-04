@@ -128,8 +128,7 @@ viewEvent language ( eventId, event ) =
                                     [ i
                                         [ class "refresh icon" ]
                                         []
-                                    , text
-                                        "(אירוע שבועי)"
+                                    , text "(אירוע שבועי)"
                                     ]
                             )
                             event.recurringWeekly
@@ -141,22 +140,25 @@ viewEvent language ( eventId, event ) =
                         [ i
                             [ class "map icon" ]
                             []
-                        , text
-                            "איפה: event.location"
+                        , text "איפה: event.location"
                         ]
                     ]
-                , div
-                    [ class "ui four wide column" ]
-                    [ i
-                        [ class "shekel icon" ]
-                        []
-                    , text
-                        "מחיר: event.price"
-                    ]
+                , showMaybe <|
+                    Maybe.map
+                        (\ticketPrice ->
+                            div
+                                [ class "ui four wide column" ]
+                                [ i
+                                    [ class "shekel icon" ]
+                                    []
+                                , text ("מחיר: " ++ ticketPrice)
+                                ]
+                        )
+                        event.ticketPrice
                 , div
                     [ class "ui four wide column center aligned" ]
                     [ a
-                        [ class "ui button primary basic middle aligned", target "_blank", href "event.detailsLink" ]
+                        [ class "ui button primary basic middle aligned", target "_blank", href ("node/" ++ eventId) ]
                         [ i
                             [ class "add icon" ]
                             []
