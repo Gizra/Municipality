@@ -99,25 +99,40 @@ viewEvent language ( eventId, event ) =
                 [ class "ui row" ]
                 [ div
                     [ class "ui four wide column" ]
-                    [ span
-                        []
-                        [ i
-                            [ class "calendar icon" ]
-                            []
-                        , text
-                            "event.day event.date event.time"
-                        ]
+                    [ showMaybe <|
+                        Maybe.map
+                            (\date ->
+                                span
+                                    []
+                                    [ i
+                                        [ class "calendar icon" ]
+                                        []
+                                    , text date
+                                    ]
+                            )
+                            event.date
                     , span
                         []
-                        [ text "- event.endDate" ]
-                    , span
-                        []
-                        [ i
-                            [ class "refresh icon" ]
-                            []
-                        , text
-                            "(אירוע שבועי)"
+                        [ showMaybe <|
+                            Maybe.map
+                                (\endDate ->
+                                    text ("- " ++ endDate)
+                                )
+                                event.endDate
                         ]
+                    , showMaybe <|
+                        Maybe.map
+                            (\weekly ->
+                                span
+                                    []
+                                    [ i
+                                        [ class "refresh icon" ]
+                                        []
+                                    , text
+                                        "(אירוע שבועי)"
+                                    ]
+                            )
+                            event.recurringWeekly
                     ]
                 , div
                     [ class "ui four wide column" ]
