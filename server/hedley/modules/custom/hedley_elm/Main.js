@@ -12966,19 +12966,19 @@ var _gizra$municipality$Translate$translate = F2(
 					var _p1 = _p0._0;
 					switch (_p1.ctor) {
 						case 'Mon':
-							return {arabic: '', english: 'Mon', hebrew: ''};
+							return {arabic: 'Mon', english: 'Mon', hebrew: 'Mon'};
 						case 'Tue':
-							return {arabic: '', english: 'Tue', hebrew: ''};
+							return {arabic: 'Tue', english: 'Tue', hebrew: 'Tue'};
 						case 'Wed':
-							return {arabic: '', english: 'Wed', hebrew: ''};
+							return {arabic: 'Wed', english: 'Wed', hebrew: 'רביעי'};
 						case 'Thu':
-							return {arabic: '', english: 'Thu', hebrew: ''};
+							return {arabic: 'Thu', english: 'Thu', hebrew: 'Thu'};
 						case 'Fri':
-							return {arabic: '', english: 'Fri', hebrew: ''};
+							return {arabic: 'Fri', english: 'Fri', hebrew: 'Fri'};
 						case 'Sat':
-							return {arabic: '', english: 'Sat', hebrew: ''};
+							return {arabic: 'Sat', english: 'Sat', hebrew: 'Sat'};
 						default:
-							return {arabic: '', english: 'Sun', hebrew: ''};
+							return {arabic: 'Sun', english: 'Sun', hebrew: 'Sun'};
 					}
 				case 'DayAndDate':
 					var _p2 = _p0._0;

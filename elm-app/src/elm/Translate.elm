@@ -39,45 +39,45 @@ translate lang trans =
                 DayTranslation day ->
                     case day of
                         Mon ->
-                            { arabic = ""
+                            { arabic = "Mon"
                             , english = "Mon"
-                            , hebrew = ""
+                            , hebrew = "Mon"
                             }
 
                         Tue ->
-                            { arabic = ""
+                            { arabic = "Tue"
                             , english = "Tue"
-                            , hebrew = ""
+                            , hebrew = "Tue"
                             }
 
                         Wed ->
-                            { arabic = ""
+                            { arabic = "Wed"
                             , english = "Wed"
-                            , hebrew = ""
+                            , hebrew = "רביעי"
                             }
 
                         Thu ->
-                            { arabic = ""
+                            { arabic = "Thu"
                             , english = "Thu"
-                            , hebrew = ""
+                            , hebrew = "Thu"
                             }
 
                         Fri ->
-                            { arabic = ""
+                            { arabic = "Fri"
                             , english = "Fri"
-                            , hebrew = ""
+                            , hebrew = "Fri"
                             }
 
                         Sat ->
-                            { arabic = ""
+                            { arabic = "Sat"
                             , english = "Sat"
-                            , hebrew = ""
+                            , hebrew = "Sat"
                             }
 
                         Sun ->
-                            { arabic = ""
+                            { arabic = "Sun"
                             , english = "Sun"
-                            , hebrew = ""
+                            , hebrew = "Sun"
                             }
 
                 DayAndDate date mEndDate ->
