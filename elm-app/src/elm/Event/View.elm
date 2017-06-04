@@ -112,7 +112,8 @@ viewEvent language ( eventId, event ) =
                         [ showMaybe <|
                             Maybe.map
                                 (\endDate ->
-                                    text ("- " ++ endDate)
+                                    span [ class "end-date" ]
+                                        [ text ("- " ++ endDate) ]
                                 )
                                 event.endDate
                         ]

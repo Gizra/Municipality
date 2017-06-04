@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyEventsByLanguage.
+ */
+
+/**
+ * Class HedleyEventsByLanguage.
+ */
+class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Events by language',
+      'description' => 'Test getting the expected events per language.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Test access to the Events page.
+   */
+  public function testeventsByLanguage() {
+    $ar_language_code = 'ar';
+    $he_language_code = 'he';
+
+    // Create a municipality group.
+    $user1 = $this->drupalCreateUser();
+    $municipality_settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+      'language' => $ar_language_code,
+      // We need to set the default language field for the group because this
+      // determines the language for all the group content under this group.
+      'field_default_language' => [
+        LANGUAGE_NONE => [
+          ['value' => $ar_language_code],
+        ],
+      ],
+    ];
+    $municipality = $this->drupalCreateNode($municipality_settings);
+
+    // Create a event group content.
+    $event_settings = [
+      'type' => 'event',
+      'uid' => $user1->uid,
+      'language' => $ar_language_code,
+      'title_field' => [
+        $he_language_code => [
+          ['value' => 'Event name Hebrew'],
+        ],
+        $ar_language_code => [
+          ['value' => 'Event name Arabic'],
+        ],
+      ],
+      'field_date' => [
+        LANGUAGE_NONE => [
+          ['value' => time()],
+        ]
+      ],
+      // Add the created group as the parent group for this entity.
+      OG_AUDIENCE_FIELD => [
+        LANGUAGE_NONE => [
+          ['target_id' => $municipality->nid],
+        ],
+      ],
+    ];
+
+    // Create the event node.
+    $this->drupalCreateNode($event_settings);
+
+    // Set expected titles in each language.
+    $he_expected_title = $event_settings['title_field'][$he_language_code][0]['value'];
+    $ar_expected_title = $event_settings['title_field'][$ar_language_code][0]['value'];
+
+    // Get the events from the function we want to test.
+    $he_municipality_event = hedley_event_get_events_by_group($municipality, $he_language_code);
+    $ar_municipality_event = hedley_event_get_events_by_group($municipality, $ar_language_code);
+
+    $this->assertEqual($he_municipality_event[0]['name'], $he_expected_title, 'Expected Hebrew title is correct.');
+    $this->assertEqual($ar_municipality_event[0]['name'], $ar_expected_title, 'Expected Arabic title is correct.');
+  }
+
+}

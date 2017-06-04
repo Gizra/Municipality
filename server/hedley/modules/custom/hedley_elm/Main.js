@@ -13002,8 +13002,19 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																		A2(
 																			_elm_lang$core$Maybe$map,
 																			function (endDate) {
-																				return _elm_lang$html$Html$text(
-																					A2(_elm_lang$core$Basics_ops['++'], '- ', endDate));
+																				return A2(
+																					_elm_lang$html$Html$span,
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$class('end-date'),
+																						_1: {ctor: '[]'}
+																					},
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html$text(
+																							A2(_elm_lang$core$Basics_ops['++'], '- ', endDate)),
+																						_1: {ctor: '[]'}
+																					});
 																			},
 																			_p2.endDate)),
 																	_1: {ctor: '[]'}
