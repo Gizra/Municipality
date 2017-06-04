@@ -99,18 +99,14 @@ viewEvent language ( eventId, event ) =
                 [ class "ui row" ]
                 [ div
                     [ class "ui four wide column" ]
-                    [ showMaybe <|
-                        Maybe.map
-                            (\date ->
-                                span
-                                    []
-                                    [ i
-                                        [ class "calendar icon" ]
-                                        []
-                                    , text date
-                                    ]
-                            )
-                            event.date
+                    [ span
+                        []
+                        [ i
+                            [ class "calendar icon" ]
+                            []
+                        , text (event.day ++ ", ")
+                        , text event.date
+                        ]
                     , span
                         []
                         [ showMaybe <|
@@ -122,13 +118,13 @@ viewEvent language ( eventId, event ) =
                         ]
                     , showMaybe <|
                         Maybe.map
-                            (\weekly ->
+                            (\recurringWeekly ->
                                 span
                                     []
                                     [ i
                                         [ class "refresh icon" ]
                                         []
-                                    , text "(אירוע שבועי)"
+                                    , text recurringWeekly
                                     ]
                             )
                             event.recurringWeekly
@@ -151,7 +147,7 @@ viewEvent language ( eventId, event ) =
                                 [ i
                                     [ class "shekel icon" ]
                                     []
-                                , text ("מחיר: " ++ ticketPrice)
+                                , text ticketPrice
                                 ]
                         )
                         event.ticketPrice
@@ -162,8 +158,7 @@ viewEvent language ( eventId, event ) =
                         [ i
                             [ class "add icon" ]
                             []
-                        , text
-                            "לפרטים נוספים"
+                        , text event.moreDetailsText
                         ]
                     ]
                 ]

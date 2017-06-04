@@ -11922,9 +11922,9 @@ var _gizra$municipality$Event_Model$Model = F2(
 	function (a, b) {
 		return {events: a, filterString: b};
 	});
-var _gizra$municipality$Event_Model$Event = F7(
-	function (a, b, c, d, e, f, g) {
-		return {name: a, imageUrl: b, description: c, date: d, endDate: e, recurringWeekly: f, ticketPrice: g};
+var _gizra$municipality$Event_Model$Event = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {name: a, imageUrl: b, description: c, day: d, date: e, endDate: f, recurringWeekly: g, ticketPrice: h, moreDetailsText: i};
 	});
 var _gizra$municipality$Event_Model$SetFilter = function (a) {
 	return {ctor: 'SetFilter', _0: a};
@@ -12092,41 +12092,48 @@ var _gizra$municipality$Contact_Update$subscriptions = _gizra$municipality$Conta
 			A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Contact_Decoder$decodeContacts, _p2));
 	});
 
-var _gizra$municipality$Event_Decoder$decodeEvent = A4(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-	'ticket_price',
-	_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
-	_elm_lang$core$Maybe$Nothing,
+var _gizra$municipality$Event_Decoder$decodeEvent = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'more_details_text',
+	_elm_lang$core$Json_Decode$string,
 	A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-		'recurring_weekly',
-		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$bool),
+		'ticket_price',
+		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 		_elm_lang$core$Maybe$Nothing,
 		A4(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-			'end_date',
+			'recurring_weekly',
 			_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 			_elm_lang$core$Maybe$Nothing,
 			A4(
 				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-				'date',
+				'end_date',
 				_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 				_elm_lang$core$Maybe$Nothing,
-				A4(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-					'description',
-					_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
-					_elm_lang$core$Maybe$Nothing,
-					A4(
-						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-						'image_url',
-						_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
-						_elm_lang$core$Maybe$Nothing,
-						A3(
-							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-							'name',
-							_elm_lang$core$Json_Decode$string,
-							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Event_Model$Event))))))));
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'date',
+					_elm_lang$core$Json_Decode$string,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'day',
+						_elm_lang$core$Json_Decode$string,
+						A4(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+							'description',
+							_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+							_elm_lang$core$Maybe$Nothing,
+							A4(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+								'image_url',
+								_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+								_elm_lang$core$Maybe$Nothing,
+								A3(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+									'name',
+									_elm_lang$core$Json_Decode$string,
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Event_Model$Event))))))))));
 var _gizra$municipality$Event_Decoder$decodeEvents = _elm_lang$core$Json_Decode$oneOf(
 	{
 		ctor: '::',
@@ -12960,31 +12967,30 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 													},
 													{
 														ctor: '::',
-														_0: _gizra$municipality$Utils_Html$showMaybe(
-															A2(
-																_elm_lang$core$Maybe$map,
-																function (date) {
-																	return A2(
-																		_elm_lang$html$Html$span,
-																		{ctor: '[]'},
-																		{
-																			ctor: '::',
-																			_0: A2(
-																				_elm_lang$html$Html$i,
-																				{
-																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$class('calendar icon'),
-																					_1: {ctor: '[]'}
-																				},
-																				{ctor: '[]'}),
-																			_1: {
-																				ctor: '::',
-																				_0: _elm_lang$html$Html$text(date),
-																				_1: {ctor: '[]'}
-																			}
-																		});
-																},
-																_p2.date)),
+														_0: A2(
+															_elm_lang$html$Html$span,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$i,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$class('calendar icon'),
+																		_1: {ctor: '[]'}
+																	},
+																	{ctor: '[]'}),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text(
+																		A2(_elm_lang$core$Basics_ops['++'], _p2.day, ', ')),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text(_p2.date),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}),
 														_1: {
 															ctor: '::',
 															_0: A2(
@@ -13007,7 +13013,7 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																_0: _gizra$municipality$Utils_Html$showMaybe(
 																	A2(
 																		_elm_lang$core$Maybe$map,
-																		function (weekly) {
+																		function (recurringWeekly) {
 																			return A2(
 																				_elm_lang$html$Html$span,
 																				{ctor: '[]'},
@@ -13023,7 +13029,7 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																						{ctor: '[]'}),
 																					_1: {
 																						ctor: '::',
-																						_0: _elm_lang$html$Html$text('(אירוע שבועי)'),
+																						_0: _elm_lang$html$Html$text(recurringWeekly),
 																						_1: {ctor: '[]'}
 																					}
 																				});
@@ -13098,8 +13104,7 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																				{ctor: '[]'}),
 																			_1: {
 																				ctor: '::',
-																				_0: _elm_lang$html$Html$text(
-																					A2(_elm_lang$core$Basics_ops['++'], 'מחיר: ', ticketPrice)),
+																				_0: _elm_lang$html$Html$text(ticketPrice),
 																				_1: {ctor: '[]'}
 																			}
 																		});
@@ -13144,7 +13149,7 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																				{ctor: '[]'}),
 																			_1: {
 																				ctor: '::',
-																				_0: _elm_lang$html$Html$text('לפרטים נוספים'),
+																				_0: _elm_lang$html$Html$text(_p2.moreDetailsText),
 																				_1: {ctor: '[]'}
 																			}
 																		}),

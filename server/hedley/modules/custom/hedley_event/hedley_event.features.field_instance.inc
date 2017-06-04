@@ -150,7 +150,7 @@ function hedley_event_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_date',
     'label' => 'Date',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'default_value' => 'now',
       'default_value2' => 'same',
