@@ -8,6 +8,7 @@ import DictList
 import Html exposing (..)
 import Html.Attributes exposing (alt, class, classList, href, placeholder, src, style, target, type_, value)
 import Html.Events exposing (onClick, onInput)
+import Html.Keyed
 import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
@@ -53,7 +54,12 @@ viewContacts language { contacts, filterString } =
                 (filteredContacts
                     |> DictList.map
                         (\contactId contact ->
-                            viewContact language ( contactId, contact )
+                            Html.Keyed.node "div"
+                                [ class "card" ]
+                                [ ( contactId
+                                  , viewContact language ( contactId, contact )
+                                  )
+                                ]
                         )
                     |> DictList.values
                 )
@@ -63,7 +69,7 @@ viewContacts language { contacts, filterString } =
 -}
 viewContact : Language -> ( ContactId, Contact ) -> Html msg
 viewContact language ( contactId, contact ) =
-    div [ class "card" ]
+    div []
         [ showMaybe <|
             Maybe.map
                 (\imageUrl ->
