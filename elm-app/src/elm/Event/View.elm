@@ -121,7 +121,7 @@ viewEvent language ( eventId, event ) =
                         Maybe.map
                             (\recurringWeekly ->
                                 span
-                                    []
+                                    [ class "recurring-weekly" ]
                                     [ i
                                         [ class "refresh icon" ]
                                         []
@@ -144,7 +144,7 @@ viewEvent language ( eventId, event ) =
                     Maybe.map
                         (\ticketPrice ->
                             div
-                                [ class "ui four wide column" ]
+                                [ class "ui four wide column ticket-price" ]
                                 [ i
                                     [ class "shekel icon" ]
                                     []

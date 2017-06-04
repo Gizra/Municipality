@@ -10,7 +10,7 @@ import Html
 import Html.Attributes exposing (class)
 import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
-import Test.Html.Selector as Selector exposing (class, tag, text, src)
+import Test.Html.Selector as Selector exposing (attribute, class, tag, text)
 
 
 filterEventsTest : Test
@@ -19,16 +19,22 @@ filterEventsTest =
         [ test "should return all events if filter string is empty" <|
             \() ->
                 Expect.equal (filterEvents events "") events
-        , test "should return no matching events if filter string is filled" <|
+        , test "should return no matching events if filter string does not match any events' names" <|
             \() ->
                 Expect.equal (filterEvents events "foo") DictList.empty
-        , test "should return no events if filter string has other names" <|
+        , test "should return events that has name matching the filter string 'o'" <|
             \() ->
                 Expect.equal (filterEvents events "o")
                     (DictList.fromList
                         [ event1
                         , event2
                         ]
+                    )
+        , test "should return events that has name matching the filter string 'evening'" <|
+            \() ->
+                Expect.equal (filterEvents events "evening")
+                    (DictList.fromList
+                        [ event3 ]
                     )
         ]
 
@@ -57,19 +63,31 @@ viewEventTest =
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "image" ]
                     |> Query.children [ tag "img" ]
-                    |> Query.each (Query.has [ src "https://placeholdit.imgix.net/~text?w=350&h=150" ])
+                    |> Query.each (Query.has [ attribute "src" "https://placeholdit.imgix.net/~text?w=350&h=150" ])
         , test "Event with Description" <|
             \() ->
                 viewEvent English event2
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "description" ]
-                    |> Query.has [ text "Afternoon event description" ]
+                    |> Query.has [ attribute "innerHTML" "Afternoon event description" ]
         , test "Event with End-Date" <|
             \() ->
                 viewEvent English event2
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "end-date" ]
                     |> Query.has [ text "20.4.17 16:00" ]
+        , test "Event with Weekly Recurring" <|
+            \() ->
+                viewEvent English event3
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "recurring-weekly" ]
+                    |> Query.has [ text "Weekly event" ]
+        , test "Event with Price" <|
+            \() ->
+                viewEvent English event3
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "ticket-price" ]
+                    |> Query.has [ text "Price: 180" ]
         ]
 
 

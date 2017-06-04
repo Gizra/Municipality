@@ -13027,7 +13027,11 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																		function (recurringWeekly) {
 																			return A2(
 																				_elm_lang$html$Html$span,
-																				{ctor: '[]'},
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$class('recurring-weekly'),
+																					_1: {ctor: '[]'}
+																				},
 																				{
 																					ctor: '::',
 																					_0: A2(
@@ -13100,7 +13104,7 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																		_elm_lang$html$Html$div,
 																		{
 																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$class('ui four wide column'),
+																			_0: _elm_lang$html$Html_Attributes$class('ui four wide column ticket-price'),
 																			_1: {ctor: '[]'}
 																		},
 																		{
