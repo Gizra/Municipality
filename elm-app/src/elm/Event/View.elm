@@ -8,8 +8,7 @@ import Html exposing (..)
 import Html.Attributes exposing (alt, class, classList, href, id, placeholder, property, src, style, target, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Json.Encode exposing (string)
-import Svg.Attributes exposing (mode)
-import Translate exposing (DayAndDate, TranslationId(..), translate)
+import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
 
@@ -104,18 +103,7 @@ viewEvent language ( eventId, event ) =
                         [ i
                             [ class "calendar icon" ]
                             []
-                        , text <| translate language (DayAndDate event.date)
-                        , text event.date
-                        ]
-                    , span
-                        []
-                        [ showMaybe <|
-                            Maybe.map
-                                (\endDate ->
-                                    span [ class "end-date" ]
-                                        [ text ("- " ++ endDate) ]
-                                )
-                                event.endDate
+                        , text <| translate language (DayAndDate event.date event.endDate)
                         ]
                     , showMaybe <|
                         Maybe.map
@@ -159,7 +147,7 @@ viewEvent language ( eventId, event ) =
                         [ i
                             [ class "add icon" ]
                             []
-                        , text event.moreDetailsText
+                        , text <| translate language MoreDetailsText
                         ]
                     ]
                 ]

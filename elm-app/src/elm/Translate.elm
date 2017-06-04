@@ -13,11 +13,12 @@ type alias TranslationSet =
 
 type TranslationId
     = ContactsNotFound
-    | DayAndDate Date
+    | DayAndDate Date (Maybe Date)
     | EventsNotFound
     | FilterContactsPlaceholder
     | FilterEventsPlaceholder
     | MatchingResults
+    | MoreDetailsText
     | PriceText
 
 
@@ -32,7 +33,7 @@ translate lang trans =
                     , hebrew = "לא נמצאו אירועים מתאימים"
                     }
 
-                DayAndDate date ->
+                DayAndDate date mEndDate ->
                     let
                         dayFromDate =
                             getDayFromDate lang date
@@ -64,6 +65,12 @@ translate lang trans =
                     { arabic = "نتائج البحث"
                     , english = "Matching Results"
                     , hebrew = "תוצאות מתאימות"
+                    }
+
+                MoreDetailsText ->
+                    { arabic = ""
+                    , english = ""
+                    , hebrew = ""
                     }
 
                 PriceText ->
