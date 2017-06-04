@@ -46,6 +46,11 @@ viewContactTest =
                 viewContact English contact1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "phone-wrapper" ]
+        , test "Contact without topics" <|
+            \() ->
+                viewContact English contact1
+                    |> Query.fromHtml
+                    |> Query.hasNot [ Selector.class "topic-wrapper" ]
         , test "Contact with Email" <|
             \() ->
                 viewContact English contact2
@@ -60,11 +65,6 @@ viewContactTest =
                     |> Query.find [ Selector.class "phone-wrapper" ]
                     |> Query.children [ tag "a" ]
                     |> Query.each (Query.has [ text "1234" ])
-        , test "Contact without topics" <|
-            \() ->
-                viewContact English contact1
-                    |> Query.fromHtml
-                    |> Query.hasNot [ Selector.class "topic-wrapper" ]
         , test "Contact with topics" <|
             \() ->
                 viewContact English contact2
@@ -113,9 +113,11 @@ contact2 =
             Just
                 [ { id = "1"
                   , name = "arnona"
+                  , color = Just "green"
                   }
                 , { id = "2"
                   , name = "garbage"
+                  , color = Nothing
                   }
                 ]
       , phone = Just "1234"
@@ -145,9 +147,11 @@ contact3 =
             Just
                 [ { id = "1"
                   , name = "arnona"
+                  , color = Just "pink"
                   }
                 , { id = "2"
                   , name = "garbage"
+                  , color = Just "red"
                   }
                 ]
       , phone = Just "9012"
