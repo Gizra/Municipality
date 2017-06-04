@@ -45,7 +45,8 @@ function hedley_event_get_events_by_group($group, $language_code) {
       'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : '',
       'image_url' => !empty($image )? image_style_url('medium', $image['uri']) : '',
       'date' => !empty($date) ? hedley_event_timestamp_to_iso8601($date['value']) : '',
-      'end_date' => !empty($date) && $date['value2'] ? hedley_event_timestamp_to_iso8601($date['value2']) : '',
+      // Make sure the end date isn't the same as the start date.
+      'end_date' => !empty($date) && $date['value2'] && $date['value'] != $date['value2'] ? hedley_event_timestamp_to_iso8601($date['value2']) : '',
       'recurring_weekly' => $wrapper->field_recurring_weekly->value(),
       'ticket_price' => $wrapper->field_ticket_price->value() ? $wrapper->field_ticket_price->value() : '',
     ];
