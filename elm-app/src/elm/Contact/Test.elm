@@ -70,8 +70,8 @@ viewContactTest =
                 viewContact English contact2
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "topic-wrapper" ]
-                    |> Query.children [ tag "a" ]
-                    |> Query.each (Query.has [ text "arnona" ])
+                    |> Query.children []
+                    |> Query.each (Query.has [ tag "a" ])
         ]
 
 

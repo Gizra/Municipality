@@ -33,16 +33,23 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
     $municipality_settings = [
       'type' => 'municipality',
       'uid' => $user1->uid,
+      'language' => $ar_language_code,
+      // We need to set the default language field for the group because this
+      // determines the language for all the group content under this group.
+      'field_default_language' => [
+        LANGUAGE_NONE => [
+          ['value' => $ar_language_code],
+        ],
+      ],
     ];
     $municipality = $this->drupalCreateNode($municipality_settings);
 
     // Create a contact group content.
     $contact_settings = [
       'type' => 'contact',
+      'uid' => $user1->uid,
+      'language' => $ar_language_code,
       'field_first_name' => [
-        LANGUAGE_NONE => [
-          ['value' => 'First name'],
-        ],
         $he_language_code => [
           ['value' => 'First name Hebrew'],
         ],
@@ -51,9 +58,6 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
         ],
       ],
       'field_last_name' => [
-        LANGUAGE_NONE => [
-          ['value' => 'Last name'],
-        ],
         $he_language_code => [
           ['value' => 'Last name Hebrew'],
         ],
@@ -67,36 +71,21 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
           ['target_id' => $municipality->nid],
         ],
       ],
-      'uid' => $user1->uid,
     ];
 
     // Create the contact node.
-    $contact = $this->drupalCreateNode($contact_settings);
+    $this->drupalCreateNode($contact_settings);
 
-    // Add translations to the node.
-    $factory = EntityTranslationHandlerFactory::getInstance();
-    $handler = $factory->getHandler('node', $contact);
+    // Set expected titles in each language.
+    $he_expected_title = $contact_settings['field_first_name'][$he_language_code][0]['value'] . ' ' . $contact_settings['field_last_name'][$he_language_code][0]['value'];
+    $ar_expected_title = $contact_settings['field_first_name'][$ar_language_code][0]['value'] . ' ' . $contact_settings['field_last_name'][$ar_language_code][0]['value'];
 
-    // Add Arabic translation.
-    $translation = [
-      'translate' => 0,
-      'status' => 1,
-      'language' => 'ar',
-      'source' => $contact->language,
-    ];
-    $handler->setTranslation($translation, $contact);
+    // Get the contacts from the function we want to test.
+    $he_municipality_contact = hedley_contact_get_contacts_by_group($municipality, $he_language_code);
+    $ar_municipality_contact = hedley_contact_get_contacts_by_group($municipality, $ar_language_code);
 
-    // Add Hebrew translation.
-    $translation = [
-      'translate' => 0,
-      'status' => 1,
-      'language' => 'he',
-      'source' => $contact->language,
-    ];
-    $handler->setTranslation($translation, $contact);
-
-    $he_municipality_contact = hedley_contact_get_get_contacts_by_group($municipality, $he_language_code);
-    $ar_municipality_contact = hedley_contact_get_get_contacts_by_group($municipality, $ar_language_code);
+    $this->assertEqual($he_municipality_contact[0]['name'], $he_expected_title, 'Expected Hebrew title is correct.');
+    $this->assertEqual($ar_municipality_contact[0]['name'], $ar_expected_title, 'Expected Arabic title is correct.');
   }
 
 }
