@@ -44,4 +44,4 @@ features[variable][] = node_options_event
 features[variable][] = node_preview_event
 features[variable][] = node_submitted_event
 ; Tests
-files[] = tests/HedleyEventsByLanguage.test
+; files[] = tests/HedleyEventsByLanguage.test
