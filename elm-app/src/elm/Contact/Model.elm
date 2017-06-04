@@ -32,6 +32,7 @@ type alias ContactId =
 type alias Topic =
     { id : String
     , name : Name
+    , color : Maybe String
     }
 
 

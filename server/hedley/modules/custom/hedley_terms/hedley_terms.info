@@ -8,6 +8,7 @@ dependencies[] = taxonomy
 dependencies[] = text
 features[features_api][] = api:2
 features[field_instance][] = taxonomy_term-audiences-name_field
+features[field_instance][] = taxonomy_term-departments-name_field
 features[field_instance][] = taxonomy_term-user_types-name_field
 features[taxonomy][] = audiences
 features[taxonomy][] = departments

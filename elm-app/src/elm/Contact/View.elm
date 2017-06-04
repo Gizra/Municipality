@@ -8,6 +8,7 @@ import DictList
 import Html exposing (..)
 import Html.Attributes exposing (alt, class, classList, href, placeholder, src, style, target, type_, value)
 import Html.Events exposing (onClick, onInput)
+import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
@@ -82,11 +83,26 @@ viewContact language ( contactId, contact ) =
                 , showMaybe <|
                     Maybe.map
                         (\topics ->
-                            div [ class "ui blue small labels topic-wrapper" ]
+                            div [ class "ui small labels topic-wrapper" ]
                                 (List.map
                                     (\topic ->
-                                        a [ href ("taxonomy/term/" ++ topic.id), class "ui label" ]
-                                            [ text topic.name ]
+                                        {- Add the topic's color, if there's no
+                                           color then display "blue" color.
+                                        -}
+                                        case topic.color of
+                                            Just color ->
+                                                a
+                                                    [ href ("taxonomy/term/" ++ topic.id)
+                                                    , class ("ui label " ++ color)
+                                                    ]
+                                                    [ text topic.name ]
+
+                                            Nothing ->
+                                                a
+                                                    [ href ("taxonomy/term/" ++ topic.id)
+                                                    , class ("ui label blue")
+                                                    ]
+                                                    [ text topic.name ]
                                     )
                                     topics
                                 )
@@ -118,7 +134,7 @@ viewContact language ( contactId, contact ) =
                         (\fax ->
                             p [ class "fax-wrapper" ]
                                 [ i [ class "fax icon" ] []
-                                , a [ href ("fax:" ++ fax) ] [ text fax ]
+                                , span [] [ text fax ]
                                 ]
                         )
                         contact.fax

@@ -48,6 +48,7 @@ decodeTopic =
         (decode Topic
             |> required "id" string
             |> required "name" string
+            |> optional "color" (nullable string) Nothing
         )
 
 
