@@ -129,7 +129,7 @@ event2 =
       , date = "20.4.17 14:00"
       , endDate = Just "20.4.17 16:00"
       , recurringWeekly = Just "Weekly event"
-      , ticketPrice = Just "Price: 120"
+      , ticketPrice = Just "120"
       , moreDetailsText = "More details"
       }
     )
@@ -145,7 +145,7 @@ event3 =
       , date = "20.4.17 20:00"
       , endDate = Just "20.4.17 22:00"
       , recurringWeekly = Just "Weekly event"
-      , ticketPrice = Just "Price: 180"
+      , ticketPrice = Just "180"
       , moreDetailsText = "More details"
       }
     )

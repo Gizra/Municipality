@@ -148,7 +148,7 @@ viewEvent language ( eventId, event ) =
                                 [ i
                                     [ class "shekel icon" ]
                                     []
-                                , text ticketPrice
+                                , text <| translate language PriceText ++ ": " ++ ticketPrice
                                 ]
                         )
                         event.ticketPrice

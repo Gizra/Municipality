@@ -12285,8 +12285,10 @@ var _gizra$municipality$Translate$translate = F2(
 					return {arabic: 'ابحث عن اسم، موضوع أو فئة', english: 'Filter contacts', hebrew: 'חפשו שם, נושא או מחלקה'};
 				case 'FilterEventsPlaceholder':
 					return {arabic: 'ابحث عن الأحداث في ذوقك', english: 'Look for events to your liking', hebrew: 'חפשו אירועים לטעמכם'};
-				default:
+				case 'MatchingResults':
 					return {arabic: 'نتائج البحث', english: 'Matching Results', hebrew: 'תוצאות מתאימות'};
+				default:
+					return {arabic: 'السعر', english: 'Price', hebrew: 'מחיר'};
 			}
 		}();
 		var _p1 = lang;
@@ -12309,6 +12311,7 @@ var _gizra$municipality$Translate$TranslationSet = F3(
 	function (a, b, c) {
 		return {arabic: a, english: b, hebrew: c};
 	});
+var _gizra$municipality$Translate$PriceText = {ctor: 'PriceText'};
 var _gizra$municipality$Translate$MatchingResults = {ctor: 'MatchingResults'};
 var _gizra$municipality$Translate$FilterEventsPlaceholder = {ctor: 'FilterEventsPlaceholder'};
 var _gizra$municipality$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
@@ -13119,7 +13122,11 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																				{ctor: '[]'}),
 																			_1: {
 																				ctor: '::',
-																				_0: _elm_lang$html$Html$text(ticketPrice),
+																				_0: _elm_lang$html$Html$text(
+																					A2(
+																						_elm_lang$core$Basics_ops['++'],
+																						A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$PriceText),
+																						A2(_elm_lang$core$Basics_ops['++'], ': ', ticketPrice))),
 																				_1: {ctor: '[]'}
 																			}
 																		});

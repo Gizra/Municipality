@@ -16,6 +16,7 @@ type TranslationId
     | FilterContactsPlaceholder
     | FilterEventsPlaceholder
     | MatchingResults
+    | PriceText
 
 
 translate : Language -> TranslationId -> String
@@ -51,6 +52,12 @@ translate lang trans =
                     { arabic = "نتائج البحث"
                     , english = "Matching Results"
                     , hebrew = "תוצאות מתאימות"
+                    }
+
+                PriceText ->
+                    { arabic = "السعر"
+                    , english = "Price"
+                    , hebrew = "מחיר"
                     }
     in
         case lang of
