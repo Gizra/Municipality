@@ -60,7 +60,7 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
       'field_date' => [
         LANGUAGE_NONE => [
           ['value' => time()],
-        ]
+        ],
       ],
       // Add the created group as the parent group for this entity.
       OG_AUDIENCE_FIELD => [

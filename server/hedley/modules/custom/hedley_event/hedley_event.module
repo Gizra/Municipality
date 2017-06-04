@@ -38,16 +38,18 @@ function hedley_event_get_events_by_group($group, $language_code) {
 
     $image = $wrapper->field_image->value();
     $date = $wrapper->field_date->value();
+    // Get the day of the week from the event date. i.e. ("Monday", "Friday")
+    $day = !empty($date) ? format_date($date['value'], 'custom', 'l') : '';
 
     $event = [
       'id' => $wrapper->getIdentifier(),
       'name' => check_plain($wrapper->label()),
       'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : '',
       'image_url' => $image ? image_style_url('medium', $image['uri']) : '',
+      'date' => !empty($date) ? format_date($date['value'], 'custom', 'd.m.y G:i') : '',
       // Adding t() to the day name to give the ability for the content editor
       // to add translations.
-      'date' => !empty($date) ? format_date($date['value'], 'custom', 'd.m.y G:i') : '',
-      'day' => !empty($date) ? t(format_date($date['value'], 'custom', 'l')) : '',
+      'day' => $day ? t($day) : '',
       'end_date' => !empty($date) && $date['value2'] ? format_date($date['value2'], 'custom', 'd.m.y G:i') : '',
       'recurring_weekly' => $wrapper->field_recurring_weekly->value() ? t('Weekly event') : '',
       'ticket_price' => $wrapper->field_ticket_price->value() ? t('Price: @price', array('@price' => $wrapper->field_ticket_price->value())) : '',
