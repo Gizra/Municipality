@@ -1,6 +1,7 @@
 module Translate exposing (..)
 
 import App.Types exposing (Language(..))
+import Date exposing (Day(..), Date)
 
 
 type alias TranslationSet =
@@ -12,6 +13,7 @@ type alias TranslationSet =
 
 type TranslationId
     = ContactsNotFound
+    | DayAndDate Date
     | EventsNotFound
     | FilterContactsPlaceholder
     | FilterEventsPlaceholder
@@ -29,6 +31,16 @@ translate lang trans =
                     , english = "No contacts found"
                     , hebrew = "לא נמצאו אירועים מתאימים"
                     }
+
+                DayAndDate date ->
+                    let
+                        dayFromDate =
+                            getDayFromDate lang date
+                    in
+                        { arabic = ""
+                        , english = ""
+                        , hebrew = ""
+                        }
 
                 EventsNotFound ->
                     { arabic = "لم يتم العثور على أية أحداث"
@@ -69,3 +81,8 @@ translate lang trans =
 
             Hebrew ->
                 .hebrew translationSet
+
+
+getDayFromDate : Language -> Date -> String
+getDayFromDate lang date =
+    ""

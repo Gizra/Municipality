@@ -1,5 +1,6 @@
 module Event.Model exposing (..)
 
+import Date exposing (Day, Date)
 import DictList exposing (DictList)
 
 
@@ -33,12 +34,10 @@ type alias Event =
     { name : Name
     , imageUrl : Maybe String
     , description : Maybe String
-    , day : String
-    , date : String
-    , endDate : Maybe String
-    , recurringWeekly : Maybe String
+    , date : Date
+    , endDate : Maybe Date
+    , recurringWeekly : Bool
     , ticketPrice : Maybe String
-    , moreDetailsText : String
     }
 
 

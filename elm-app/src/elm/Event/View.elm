@@ -9,7 +9,7 @@ import Html.Attributes exposing (alt, class, classList, href, id, placeholder, p
 import Html.Events exposing (onClick, onInput)
 import Json.Encode exposing (string)
 import Svg.Attributes exposing (mode)
-import Translate exposing (TranslationId(..), translate)
+import Translate exposing (DayAndDate, TranslationId(..), translate)
 import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
 
@@ -104,7 +104,7 @@ viewEvent language ( eventId, event ) =
                         [ i
                             [ class "calendar icon" ]
                             []
-                        , text (event.day ++ ", ")
+                        , text <| translate language (DayAndDate event.date)
                         , text event.date
                         ]
                     , span
