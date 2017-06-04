@@ -105,18 +105,14 @@ viewEvent language ( eventId, event ) =
                             []
                         , text <| translate language (DayAndDate event.date event.endDate)
                         ]
-                    , showMaybe <|
-                        Maybe.map
-                            (\recurringWeekly ->
-                                span
-                                    [ class "recurring-weekly" ]
-                                    [ i
-                                        [ class "refresh icon" ]
-                                        []
-                                    , text recurringWeekly
-                                    ]
-                            )
-                            event.recurringWeekly
+                    , showIf event.recurringWeekly <|
+                        span
+                            [ class "recurring-weekly" ]
+                            [ i
+                                [ class "refresh icon" ]
+                                []
+                            , text <| translate language EventRecurringWeekly
+                            ]
                     ]
                 , div
                     [ class "ui four wide column" ]

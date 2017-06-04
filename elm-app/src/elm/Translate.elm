@@ -1,7 +1,8 @@
 module Translate exposing (..)
 
 import App.Types exposing (Language(..))
-import Date exposing (Day(..), Date)
+import Date exposing (Date, Day(..), dayOfWeek)
+import Date.Format exposing (format)
 
 
 type alias TranslationSet =
@@ -13,7 +14,9 @@ type alias TranslationSet =
 
 type TranslationId
     = ContactsNotFound
+    | DayTranslation Day
     | DayAndDate Date (Maybe Date)
+    | EventRecurringWeekly
     | EventsNotFound
     | FilterContactsPlaceholder
     | FilterEventsPlaceholder
@@ -33,15 +36,79 @@ translate lang trans =
                     , hebrew = "לא נמצאו אירועים מתאימים"
                     }
 
+                DayTranslation day ->
+                    case day of
+                        Mon ->
+                            { arabic = ""
+                            , english = "Mon"
+                            , hebrew = ""
+                            }
+
+                        Tue ->
+                            { arabic = ""
+                            , english = "Tue"
+                            , hebrew = ""
+                            }
+
+                        Wed ->
+                            { arabic = ""
+                            , english = "Wed"
+                            , hebrew = ""
+                            }
+
+                        Thu ->
+                            { arabic = ""
+                            , english = "Thu"
+                            , hebrew = ""
+                            }
+
+                        Fri ->
+                            { arabic = ""
+                            , english = "Fri"
+                            , hebrew = ""
+                            }
+
+                        Sat ->
+                            { arabic = ""
+                            , english = "Sat"
+                            , hebrew = ""
+                            }
+
+                        Sun ->
+                            { arabic = ""
+                            , english = "Sun"
+                            , hebrew = ""
+                            }
+
                 DayAndDate date mEndDate ->
                     let
-                        dayFromDate =
-                            getDayFromDate lang date
+                        dayTranslated =
+                            translate lang <| DayTranslation (dayOfWeek date)
+
+                        formater =
+                            format "%d/%m/%Y"
+
+                        dateFormated =
+                            formater date
+
+                        allDatesFormated =
+                            Maybe.map
+                                (\endDate ->
+                                    dateFormated ++ " - " ++ (formater endDate)
+                                )
+                                mEndDate
+                                |> Maybe.withDefault dateFormated
                     in
-                        { arabic = ""
-                        , english = ""
-                        , hebrew = ""
+                        { arabic = allDatesFormated ++ " ," ++ dayTranslated
+                        , english = dayTranslated ++ ", " ++ allDatesFormated
+                        , hebrew = allDatesFormated ++ " ," ++ dayTranslated
                         }
+
+                EventRecurringWeekly ->
+                    { arabic = "EventRecurringWeekly"
+                    , english = "EventRecurringWeekly"
+                    , hebrew = "EventRecurringWeekly"
+                    }
 
                 EventsNotFound ->
                     { arabic = "لم يتم العثور على أية أحداث"
@@ -88,8 +155,3 @@ translate lang trans =
 
             Hebrew ->
                 .hebrew translationSet
-
-
-getDayFromDate : Language -> Date -> String
-getDayFromDate lang date =
-    ""
