@@ -12972,7 +12972,7 @@ var _gizra$municipality$Translate$translate = F2(
 						case 'Wed':
 							return {arabic: 'Wed', english: 'Wed', hebrew: 'רביעי'};
 						case 'Thu':
-							return {arabic: 'Thu', english: 'Thu', hebrew: 'Thu'};
+							return {arabic: 'Thu', english: 'Thu', hebrew: 'חמישי'};
 						case 'Fri':
 							return {arabic: 'Fri', english: 'Fri', hebrew: 'Fri'};
 						case 'Sat':
@@ -13019,7 +13019,7 @@ var _gizra$municipality$Translate$translate = F2(
 							A2(_elm_lang$core$Basics_ops['++'], ' ,', dayTranslated))
 					};
 				case 'EventRecurringWeekly':
-					return {arabic: 'EventRecurringWeekly', english: 'EventRecurringWeekly', hebrew: 'EventRecurringWeekly'};
+					return {arabic: 'EventRecurringWeekly', english: 'Recurring every week', hebrew: 'מתקיים כל שבוע'};
 				case 'EventsNotFound':
 					return {arabic: 'لم يتم العثور على أية أحداث', english: 'No events found', hebrew: 'לא נמצאו אנשי קשר מתאימים'};
 				case 'FilterContactsPlaceholder':

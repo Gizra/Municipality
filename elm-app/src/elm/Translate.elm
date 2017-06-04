@@ -59,7 +59,7 @@ translate lang trans =
                         Thu ->
                             { arabic = "Thu"
                             , english = "Thu"
-                            , hebrew = "Thu"
+                            , hebrew = "חמישי"
                             }
 
                         Fri ->
@@ -106,8 +106,8 @@ translate lang trans =
 
                 EventRecurringWeekly ->
                     { arabic = "EventRecurringWeekly"
-                    , english = "EventRecurringWeekly"
-                    , hebrew = "EventRecurringWeekly"
+                    , english = "Recurring every week"
+                    , hebrew = "מתקיים כל שבוע"
                     }
 
                 EventsNotFound ->
