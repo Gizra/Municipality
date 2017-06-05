@@ -3,6 +3,7 @@ module App.View exposing (..)
 import App.Model exposing (..)
 import App.Types exposing (Page(..))
 import Contact.View exposing (view)
+import Event.View exposing (view)
 import Html exposing (..)
 
 
@@ -12,6 +13,11 @@ view model =
         Contact ->
             div []
                 [ Html.map MsgPagesContact <| Contact.View.view model.language model.pageContact
+                ]
+
+        Event ->
+            div []
+                [ Html.map MsgPagesEvent <| Event.View.view model.language model.pageEvent
                 ]
 
         NotFound ->
