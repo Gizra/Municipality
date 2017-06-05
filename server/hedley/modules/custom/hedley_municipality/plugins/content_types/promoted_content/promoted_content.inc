@@ -37,7 +37,6 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
     return NULL;
   }
 
-
   $items = [];
   foreach ($nodes as $node) {
     $wrapper = entity_metadata_wrapper('node', $node);

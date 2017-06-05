@@ -46,7 +46,7 @@ function hedley_action_node_presave($node) {
  * 1. The field link is NOT empty, return the link inside this field.
  * 2. The field link is empty, return the link to the entity itself.
  *
- * @param $wrapper
+ * @param object $wrapper
  *   The action entity wrapper.
  *
  * @return string
