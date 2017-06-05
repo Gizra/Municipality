@@ -32,7 +32,7 @@ features[field_instance][] = node-event-field_user_types
 features[field_instance][] = node-event-og_group_ref
 features[field_instance][] = node-event-title_field
 features[node][] = event
-features[page_manager_pages][] = event
+features[page_manager_pages][] = events
 features[variable][] = entity_translation_hide_translation_links_event
 features[variable][] = field_bundle_settings_node__event
 features[variable][] = i18n_node_extended_event
@@ -43,5 +43,3 @@ features[variable][] = menu_parent_event
 features[variable][] = node_options_event
 features[variable][] = node_preview_event
 features[variable][] = node_submitted_event
-; Tests
-; files[] = tests/HedleyEventsByLanguage.test

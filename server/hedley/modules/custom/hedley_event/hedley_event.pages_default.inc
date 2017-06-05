@@ -11,11 +11,11 @@ function hedley_event_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
-  $page->name = 'event';
+  $page->name = 'events';
   $page->task = 'page';
-  $page->admin_title = 'Event';
+  $page->admin_title = 'Events';
   $page->admin_description = '';
-  $page->path = 'event';
+  $page->path = 'events';
   $page->access = array(
     'plugins' => array(
       0 => array(
@@ -37,9 +37,9 @@ function hedley_event_default_page_manager_pages() {
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
-  $handler->name = 'page_event__panel';
+  $handler->name = 'page_events__panel';
   $handler->task = 'page';
-  $handler->subtask = 'event';
+  $handler->subtask = 'events';
   $handler->handler = 'panel_context';
   $handler->weight = 0;
   $handler->conf = array(
@@ -67,7 +67,7 @@ function hedley_event_default_page_manager_pages() {
   $display->title = '';
   $display->uuid = 'a6678f2a-211c-406d-80d4-cd5753f9767d';
   $display->storage_type = 'page_manager';
-  $display->storage_id = 'page_event__panel';
+  $display->storage_id = 'page_events__panel';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
@@ -78,7 +78,7 @@ function hedley_event_default_page_manager_pages() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'page' => 'event',
+    'page' => 'events',
     'override_title' => 0,
     'override_title_text' => '',
     'override_title_heading' => 'h2',
@@ -98,7 +98,7 @@ function hedley_event_default_page_manager_pages() {
   $display->title_pane = 'new-daf16a4b-fe3d-4ea4-9376-dca466d59962';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
-  $pages['event'] = $page;
+  $pages['events'] = $page;
 
   return $pages;
 
