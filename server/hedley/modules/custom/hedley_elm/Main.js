@@ -12985,7 +12985,7 @@ var _gizra$municipality$Translate$translate = F2(
 					var _p2 = _p0._0;
 					if (_p2.ctor === 'Just') {
 						var _p3 = _p2._0;
-						var formater = _mgold$elm_date_format$Date_Format$format('%d.%m.%Y %H:%M');
+						var formater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y %H:%M');
 						var dateFormated = formater(_p3);
 						var allDatesFormated = A2(
 							_elm_lang$core$Maybe$withDefault,

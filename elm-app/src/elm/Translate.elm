@@ -89,7 +89,7 @@ translate lang trans =
                                     translate lang <| DayTranslation (dayOfWeek date)
 
                                 formater =
-                                    format "%d.%m.%Y %H:%M"
+                                    format "%d/%m/%Y %H:%M"
 
                                 dateFormated =
                                     formater date
