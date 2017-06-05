@@ -68,6 +68,16 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
         ];
 
         break;
+
+      case 'news':
+        $image = $wrapper->field_image->value();
+
+        $items[] = [
+          'title' => l($wrapper->label(), url('node/' . $wrapper->getIdentifier(), ['absolute' => TRUE])),
+          'image_url' => !empty($image) ? image_style_url('thumbnail', $image['uri']) : NULL,
+        ];
+
+        break;
     }
   }
 
@@ -183,5 +193,12 @@ function hedley_municipality_promoted_content_content_type_theme(&$theme, $plugi
     ],
     'path' => $plugin['path'],
     'template' => 'promoted-content-event',
+  ];
+  $theme['hedley_municipality_promoted_content_news'] = [
+    'variables' => [
+      'items' => NULL,
+    ],
+    'path' => $plugin['path'],
+    'template' => 'promoted-content-news',
   ];
 }
