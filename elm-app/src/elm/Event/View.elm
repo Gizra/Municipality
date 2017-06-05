@@ -104,15 +104,13 @@ viewEvent language ( eventId, event ) =
                         , text <| translate language (DayAndDate event.date event.endDate)
                         ]
                     , showIf event.recurringWeekly <|
-                        span [] [ text " (" ]
-                    , span
-                        [ class "recurring-weekly" ]
-                        [ i
-                            [ class "refresh icon" ]
-                            []
-                        , text <| translate language EventRecurringWeekly
-                        ]
-                    , span [] [ text ")" ]
+                        span
+                            [ class "recurring-weekly" ]
+                            [ i
+                                [ class "refresh icon" ]
+                                []
+                            , text <| translate language EventRecurringWeekly
+                            ]
                     ]
                 , div
                     [ class "ui four wide column" ]

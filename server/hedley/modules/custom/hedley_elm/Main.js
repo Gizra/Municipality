@@ -13727,16 +13727,6 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																_p2.recurringWeekly,
 																A2(
 																	_elm_lang$html$Html$span,
-																	{ctor: '[]'},
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html$text(' ('),
-																		_1: {ctor: '[]'}
-																	})),
-															_1: {
-																ctor: '::',
-																_0: A2(
-																	_elm_lang$html$Html$span,
 																	{
 																		ctor: '::',
 																		_0: _elm_lang$html$Html_Attributes$class('recurring-weekly'),
@@ -13758,20 +13748,8 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																				A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EventRecurringWeekly)),
 																			_1: {ctor: '[]'}
 																		}
-																	}),
-																_1: {
-																	ctor: '::',
-																	_0: A2(
-																		_elm_lang$html$Html$span,
-																		{ctor: '[]'},
-																		{
-																			ctor: '::',
-																			_0: _elm_lang$html$Html$text(')'),
-																			_1: {ctor: '[]'}
-																		}),
-																	_1: {ctor: '[]'}
-																}
-															}
+																	})),
+															_1: {ctor: '[]'}
 														}
 													}),
 												_1: {

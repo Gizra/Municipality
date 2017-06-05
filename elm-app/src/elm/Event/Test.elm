@@ -1,6 +1,8 @@
 module Event.Test exposing (all)
 
 import App.Types exposing (Language(..))
+import Date exposing (Date)
+import Date.Format
 import DictList
 import Event.Model exposing (..)
 import Event.Utils exposing (filterEvents)
@@ -52,11 +54,16 @@ viewEventTest =
                 viewEvent English event1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "description" ]
-        , test "Event without End-Date" <|
+        , test "Event without Weekly Recurring" <|
+            \() ->
+                viewEvent English event2
+                    |> Query.fromHtml
+                    |> Query.hasNot [ Selector.class "recurring-weekly" ]
+        , test "Event without Price" <|
             \() ->
                 viewEvent English event1
                     |> Query.fromHtml
-                    |> Query.hasNot [ Selector.class "end-date" ]
+                    |> Query.hasNot [ Selector.class "ticket-price" ]
         , test "Event with Image" <|
             \() ->
                 viewEvent English event2
@@ -70,12 +77,6 @@ viewEventTest =
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "description" ]
                     |> Query.has [ attribute "innerHTML" "Afternoon event description" ]
-        , test "Event with End-Date" <|
-            \() ->
-                viewEvent English event2
-                    |> Query.fromHtml
-                    |> Query.find [ Selector.class "end-date" ]
-                    |> Query.has [ text "20.4.17 16:00" ]
         , test "Event with Weekly Recurring" <|
             \() ->
                 viewEvent English event3
@@ -109,12 +110,10 @@ event1 =
     , { name = "Morning event"
       , imageUrl = Nothing
       , description = Nothing
-      , day = "Sunday"
-      , date = "20.4.17 10:00"
+      , date = Date.fromTime 0
       , endDate = Nothing
-      , recurringWeekly = Nothing
+      , recurringWeekly = False
       , ticketPrice = Nothing
-      , moreDetailsText = "More details"
       }
     )
 
@@ -125,12 +124,10 @@ event2 =
     , { name = "Afternoon event"
       , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
       , description = Just "Afternoon event description"
-      , day = "Sunday"
-      , date = "20.4.17 14:00"
-      , endDate = Just "20.4.17 16:00"
-      , recurringWeekly = Just "Weekly event"
+      , date = Date.fromTime 0
+      , endDate = Just (Date.fromTime 120000000000)
+      , recurringWeekly = False
       , ticketPrice = Just "120"
-      , moreDetailsText = "More details"
       }
     )
 
@@ -141,12 +138,10 @@ event3 =
     , { name = "Evening event"
       , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
       , description = Just "Evening event description"
-      , day = "Sunday"
-      , date = "20.4.17 20:00"
-      , endDate = Just "20.4.17 22:00"
-      , recurringWeekly = Just "Weekly event"
+      , date = Date.fromTime 0
+      , endDate = Just (Date.fromTime 120000000000000)
+      , recurringWeekly = True
       , ticketPrice = Just "180"
-      , moreDetailsText = "More details"
       }
     )
 
