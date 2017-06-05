@@ -1,5 +1,6 @@
 module Contact.Model exposing (..)
 
+import Date exposing (Day)
 import DictList exposing (DictList)
 
 
@@ -54,7 +55,7 @@ type alias Topic =
 
 
 type alias ReceptionTimes =
-    { days : String
+    { days : List Day
     , hours : String
     }
 

@@ -181,6 +181,13 @@ function hedley_contact_get_contacts_by_group($group, $language_code) {
       'reception_hours' => hedley_contact_get_reception_hours($node),
     ];
 
+    // Explode reception days to a list for elm.
+    if (!empty($contact['reception_hours'])) {
+      foreach ($contact['reception_hours'] as $index => $reception_hour) {
+        $contact['reception_hours'][$index]['days'] = isset($reception_hour['days']) && !empty($reception_hour['days']) ? explode(',', $reception_hour['days']) : array();
+      }
+    }
+
     // Remove empty values (elm expects the correct value or nothing).
     $contacts[] = array_filter($contact);
   }

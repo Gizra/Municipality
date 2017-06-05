@@ -3,6 +3,7 @@ module Contact.View exposing (..)
 import App.Types exposing (Language(..))
 import Contact.Model exposing (Contact, ContactId, DictListContact, Model, Msg(..))
 import Contact.Utils exposing (filterContacts)
+import Date exposing (dayOfWeek)
 import Debug exposing (log)
 import DictList
 import Html exposing (..)
@@ -10,7 +11,7 @@ import Html.Attributes exposing (alt, class, classList, href, placeholder, src, 
 import Html.Events exposing (onClick, onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe, colorToString)
+import Utils.Html exposing (colorToString, divider, sectionDivider, showIf, showMaybe)
 
 
 view : Language -> Model -> Html Msg
@@ -146,8 +147,15 @@ viewContact language ( contactId, contact ) =
                                         div []
                                             [ i [ class "add to calendar icon" ]
                                                 []
-                                            , span []
-                                                [ text receptionTime.days ]
+                                            , span
+                                                []
+                                                (List.map
+                                                    (\day ->
+                                                        span []
+                                                            [ text <| translate language (DayTranslation (dayOfWeek day)) ]
+                                                    )
+                                                    receptionTime.days
+                                                )
                                             , span []
                                                 [ text receptionTime.hours ]
                                             ]
