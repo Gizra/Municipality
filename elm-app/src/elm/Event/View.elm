@@ -8,7 +8,6 @@ import Html exposing (..)
 import Html.Attributes exposing (alt, class, classList, href, id, placeholder, property, src, style, target, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Json.Encode exposing (string)
-import Svg.Attributes exposing (mode)
 import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
@@ -92,43 +91,26 @@ viewEvent language ( eventId, event ) =
                             []
                     )
                     event.description
-            , div
-                [ class "divider" ]
-                []
+            , sectionDivider
             , div
                 [ class "ui row" ]
                 [ div
-                    [ class "ui four wide column" ]
+                    [ class "ui four wide column event-date" ]
                     [ span
                         []
                         [ i
                             [ class "calendar icon" ]
                             []
-                        , text (event.day ++ ", ")
-                        , text event.date
+                        , text <| translate language (DayAndDate event.date event.endDate)
                         ]
-                    , span
-                        []
-                        [ showMaybe <|
-                            Maybe.map
-                                (\endDate ->
-                                    span [ class "end-date" ]
-                                        [ text ("- " ++ endDate) ]
-                                )
-                                event.endDate
-                        ]
-                    , showMaybe <|
-                        Maybe.map
-                            (\recurringWeekly ->
-                                span
-                                    [ class "recurring-weekly" ]
-                                    [ i
-                                        [ class "refresh icon" ]
-                                        []
-                                    , text recurringWeekly
-                                    ]
-                            )
-                            event.recurringWeekly
+                    , showIf event.recurringWeekly <|
+                        span
+                            [ class "recurring-weekly" ]
+                            [ i
+                                [ class "refresh icon" ]
+                                []
+                            , text <| translate language EventRecurringWeekly
+                            ]
                     ]
                 , div
                     [ class "ui four wide column" ]
@@ -152,6 +134,7 @@ viewEvent language ( eventId, event ) =
                                 ]
                         )
                         event.ticketPrice
+                , sectionDivider
                 , div
                     [ class "ui four wide column center aligned" ]
                     [ a
@@ -159,7 +142,7 @@ viewEvent language ( eventId, event ) =
                         [ i
                             [ class "add icon" ]
                             []
-                        , text event.moreDetailsText
+                        , text <| translate language MoreDetailsText
                         ]
                     ]
                 ]

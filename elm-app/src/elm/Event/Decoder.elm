@@ -3,11 +3,12 @@ module Event.Decoder
         ( decodeEvents
         )
 
+import Date exposing (Day(..))
 import DictList exposing (DictList, decodeArray2, empty)
 import Event.Model exposing (DictListEvent, Event)
-import Json.Decode exposing (Decoder, andThen, at, dict, fail, field, float, index, keyValuePairs, list, map, map2, nullable, oneOf, string, succeed)
+import Json.Decode exposing (Decoder, andThen, at, bool, dict, fail, field, float, index, keyValuePairs, list, map, map2, nullable, oneOf, string, succeed)
 import Json.Decode.Pipeline exposing (custom, decode, optional, optionalAt, required, requiredAt)
-import Utils.Json exposing (decodeEmptyArrayAs, decodeIntAsString)
+import Utils.Json exposing (decodeDate, decodeEmptyArrayAs, decodeIntAsString)
 
 
 decodeEvents : Decoder DictListEvent
@@ -24,9 +25,7 @@ decodeEvent =
         |> required "name" string
         |> optional "image_url" (nullable string) Nothing
         |> optional "description" (nullable string) Nothing
-        |> required "day" string
-        |> required "date" string
-        |> optional "end_date" (nullable string) Nothing
-        |> optional "recurring_weekly" (nullable string) Nothing
+        |> required "date" decodeDate
+        |> optional "end_date" (nullable decodeDate) Nothing
+        |> required "recurring_weekly" bool
         |> optional "ticket_price" (nullable string) Nothing
-        |> required "more_details_text" string

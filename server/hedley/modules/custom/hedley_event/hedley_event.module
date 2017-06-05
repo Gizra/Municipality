@@ -39,24 +39,42 @@ function hedley_event_get_events_by_group($group, $language_code) {
     $image = $wrapper->field_image->value();
     $date = $wrapper->field_date->value();
 
+    if (empty($date)) {
+      // Date is required but just in case date is missing in some translation.
+      continue;
+    }
+
     $event = [
       'id' => $wrapper->getIdentifier(),
       'name' => check_plain($wrapper->label()),
-      'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : '',
-      'image_url' => $image ? image_style_url('medium', $image['uri']) : '',
-      'date' => !empty($date) ? format_date($date['value'], 'custom', 'd.m.y G:i') : '',
-      // Get the day of the week from the event date. i.e. ("Monday", "Friday")
-      'day' => !empty($date) ? format_date($date['value'], 'custom', 'l') : '',
-      'end_date' => !empty($date) && $date['value2'] ? format_date($date['value2'], 'custom', 'd.m.y G:i') : '',
-      'recurring_weekly' => $wrapper->field_recurring_weekly->value() ? t('Weekly event') : '',
-      'ticket_price' => $wrapper->field_ticket_price->value() ? $wrapper->field_ticket_price->value() : '',
-      'more_details_text' => t('More details'),
+      'image_url' => !empty($image) ? image_style_url('medium', $image['uri']) : NULL,
+      'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : NULL,
+      'date' => hedley_event_timestamp_to_iso8601($date['value']),
+      // Make sure the end date isn't the same as the start date.
+      'end_date' => !empty($date) && $date['value2'] && $date['value'] != $date['value2'] ? hedley_event_timestamp_to_iso8601($date['value2']) : NULL,
+      'recurring_weekly' => $wrapper->field_recurring_weekly->value(),
+      'ticket_price' => $wrapper->field_ticket_price->value() ? $wrapper->field_ticket_price->value() : NULL,
     ];
 
-    // Remove empty values (elm expects the correct value or nothing).
-    $events[] = array_filter($event);
+    // Remove empty values (elm expects the correct value or nothing), but keep
+    // the values with `FALSE` value.
+    $events[] = array_filter($event, function ($value) {
+      return !is_null($value);
+    });
   }
 
   return $events;
+}
 
+/**
+ * Convert Unix timestamp to ISO8601.
+ *
+ * @param int $timestamp
+ *   The Unix timestamp.
+ *
+ * @return false|string
+ *   The converted timestamp.
+ */
+function hedley_event_timestamp_to_iso8601($timestamp) {
+  return date('c', $timestamp);
 }
