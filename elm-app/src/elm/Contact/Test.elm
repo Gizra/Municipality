@@ -7,7 +7,6 @@ import Contact.View exposing (viewContact)
 import DictList
 import Expect
 import Html
-import Html.Attributes exposing (class)
 import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
 import Test.Html.Selector as Selector exposing (class, text, tag)
@@ -46,7 +45,7 @@ viewContactTest =
                 viewContact English contact1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "phone-wrapper" ]
-        , test "Contact without topics" <|
+        , test "Contact without Topics" <|
             \() ->
                 viewContact English contact1
                     |> Query.fromHtml
@@ -65,13 +64,21 @@ viewContactTest =
                     |> Query.find [ Selector.class "phone-wrapper" ]
                     |> Query.children [ tag "a" ]
                     |> Query.each (Query.has [ text "1234" ])
-        , test "Contact with topics" <|
+        , test "Contact with Topics" <|
             \() ->
                 viewContact English contact2
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "topic-wrapper" ]
                     |> Query.children []
                     |> Query.each (Query.has [ tag "a" ])
+        , test "Contact with Topics Color" <|
+            \() ->
+                viewContact English contact3
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "topic-wrapper" ]
+                    |> Query.findAll [ tag "a" ]
+                    |> Query.first
+                    |> Query.has [ class "pink" ]
         ]
 
 
@@ -113,11 +120,11 @@ contact2 =
             Just
                 [ { id = "1"
                   , name = "arnona"
-                  , color = Just "green"
+                  , color = Pink
                   }
                 , { id = "2"
-                  , name = "garbage"
-                  , color = Nothing
+                  , name = "mayor"
+                  , color = Green
                   }
                 ]
       , phone = Just "1234"
@@ -147,11 +154,11 @@ contact3 =
             Just
                 [ { id = "1"
                   , name = "arnona"
-                  , color = Just "pink"
+                  , color = Pink
                   }
                 , { id = "2"
                   , name = "garbage"
-                  , color = Just "red"
+                  , color = Red
                   }
                 ]
       , phone = Just "9012"
