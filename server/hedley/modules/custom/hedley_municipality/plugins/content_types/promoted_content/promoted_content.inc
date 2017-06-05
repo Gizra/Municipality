@@ -56,11 +56,17 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
 
         break;
 
-//      case 'event':
-//        $items[] = [
-//          'title' => l($wrapper->label(), url('node/' . $wrapper->getIdentifier(), ['absolute' => TRUE])),
-//          'image' => l($wrapper->label(), url('node/' . $wrapper->getIdentifier(), ['absolute' => TRUE])),
-//        ];
+      case 'event':
+        $image = $wrapper->field_image->value();
+        $date = $wrapper->field_date->value();
+        $start_date = !empty($date) ? format_date($date['value'], 'custom', 'd/m/Y H:i') : NULL;
+        $end_date = !empty($date) && $date['value2'] && $date['value'] != $date['value2'] ? format_date($date['value2'], 'custom', 'd/m/Y H:i') : NULL;
+
+        $items[] = [
+          'title' => l($wrapper->label(), url('node/' . $wrapper->getIdentifier(), ['absolute' => TRUE])),
+          'image_url' => !empty($image) ? image_style_url('thumbnail', $image['uri']) : NULL,
+          'date' => $end_date ? $start_date . ' - ' . $end_date : $start_date,
+        ];
 
         break;
     }
@@ -171,5 +177,12 @@ function hedley_municipality_promoted_content_content_type_theme(&$theme, $plugi
     ],
     'path' => $plugin['path'],
     'template' => 'promoted-content-action',
+  ];
+  $theme['hedley_municipality_promoted_content_event'] = [
+    'variables' => [
+      'items' => NULL,
+    ],
+    'path' => $plugin['path'],
+    'template' => 'promoted-content-event',
   ];
 }
