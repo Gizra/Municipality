@@ -16,7 +16,7 @@ type alias TranslationSet =
 type TranslationId
     = ContactsNotFound
     | DayTranslation Day
-    | DayAndDate (Maybe Date) (Maybe Date)
+    | DayAndDate Date (Maybe Date)
     | EventRecurringWeekly
     | EventsNotFound
     | FilterContactsPlaceholder
@@ -81,37 +81,29 @@ translate lang trans =
                             , hebrew = "ראשון"
                             }
 
-                DayAndDate mDate mEndDate ->
-                    case mDate of
-                        Just date ->
-                            let
-                                dayTranslated =
-                                    translate lang <| DayTranslation (dayOfWeek date)
+                DayAndDate date mEndDate ->
+                    let
+                        dayTranslated =
+                            translate lang <| DayTranslation (dayOfWeek date)
 
-                                formater =
-                                    format "%d/%m/%Y %H:%M"
+                        formater =
+                            format "%d/%m/%Y %H:%M"
 
-                                dateFormated =
-                                    formater date
+                        dateFormated =
+                            formater date
 
-                                allDatesFormated =
-                                    Maybe.map
-                                        (\endDate ->
-                                            dateFormated ++ " - " ++ (formater endDate)
-                                        )
-                                        mEndDate
-                                        |> Maybe.withDefault dateFormated
-                            in
-                                { arabic = allDatesFormated ++ " ," ++ dayTranslated
-                                , english = dayTranslated ++ ", " ++ allDatesFormated
-                                , hebrew = allDatesFormated ++ " ," ++ dayTranslated
-                                }
-
-                        Nothing ->
-                            { arabic = ""
-                            , english = ""
-                            , hebrew = ""
-                            }
+                        allDatesFormated =
+                            Maybe.map
+                                (\endDate ->
+                                    dateFormated ++ " - " ++ (formater endDate)
+                                )
+                                mEndDate
+                                |> Maybe.withDefault dateFormated
+                    in
+                        { arabic = allDatesFormated ++ " ," ++ dayTranslated
+                        , english = dayTranslated ++ ", " ++ allDatesFormated
+                        , hebrew = allDatesFormated ++ " ," ++ dayTranslated
+                        }
 
                 EventRecurringWeekly ->
                     { arabic = "حدث اسبوعي"

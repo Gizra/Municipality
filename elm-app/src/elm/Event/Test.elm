@@ -116,7 +116,7 @@ event1 =
     , { name = "Morning event"
       , imageUrl = Nothing
       , description = Nothing
-      , date = Nothing
+      , date = Date.fromTime 0
       , endDate = Nothing
       , recurringWeekly = False
       , ticketPrice = Nothing
@@ -130,7 +130,7 @@ event2 =
     , { name = "Afternoon event"
       , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
       , description = Just "Afternoon event description"
-      , date = Just (Date.fromTime 0)
+      , date = Date.fromTime 0
       , endDate = Just (Date.fromTime 120000000000)
       , recurringWeekly = False
       , ticketPrice = Just "120"
@@ -144,7 +144,7 @@ event3 =
     , { name = "Evening event"
       , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
       , description = Just "Evening event description"
-      , date = Just (Date.fromTime 0)
+      , date = Date.fromTime 0
       , endDate = Just (Date.fromTime 120000000000000)
       , recurringWeekly = True
       , ticketPrice = Just "180"

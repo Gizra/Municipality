@@ -25,7 +25,7 @@ decodeEvent =
         |> required "name" string
         |> optional "image_url" (nullable string) Nothing
         |> optional "description" (nullable string) Nothing
-        |> optional "date" (nullable decodeDate) Nothing
+        |> required "date" decodeDate
         |> optional "end_date" (nullable decodeDate) Nothing
         |> required "recurring_weekly" bool
         |> optional "ticket_price" (nullable string) Nothing

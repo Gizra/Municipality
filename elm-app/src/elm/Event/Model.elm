@@ -34,7 +34,7 @@ type alias Event =
     { name : Name
     , imageUrl : Maybe String
     , description : Maybe String
-    , date : Maybe Date
+    , date : Date
     , endDate : Maybe Date
     , recurringWeekly : Bool
     , ticketPrice : Maybe String
