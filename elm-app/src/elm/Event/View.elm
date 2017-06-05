@@ -95,7 +95,7 @@ viewEvent language ( eventId, event ) =
             , div
                 [ class "ui row" ]
                 [ div
-                    [ class "ui four wide column" ]
+                    [ class "ui four wide column event-date" ]
                     [ span
                         []
                         [ i

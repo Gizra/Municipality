@@ -42,17 +42,20 @@ function hedley_event_get_events_by_group($group, $language_code) {
     $event = [
       'id' => $wrapper->getIdentifier(),
       'name' => check_plain($wrapper->label()),
-      'image_url' => !empty($image )? image_style_url('medium', $image['uri']) : '',
-      'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : '',
-      'date' => !empty($date) ? hedley_event_timestamp_to_iso8601($date['value']) : '',
+      'image_url' => !empty($image )? image_style_url('medium', $image['uri']) : NULL,
+      'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : NULL,
+      'date' => !empty($date) ? hedley_event_timestamp_to_iso8601($date['value']) : NULL,
       // Make sure the end date isn't the same as the start date.
-      'end_date' => !empty($date) && $date['value2'] && $date['value'] != $date['value2'] ? hedley_event_timestamp_to_iso8601($date['value2']) : '',
+      'end_date' => !empty($date) && $date['value2'] && $date['value'] != $date['value2'] ? hedley_event_timestamp_to_iso8601($date['value2']) : NULL,
       'recurring_weekly' => $wrapper->field_recurring_weekly->value(),
-      'ticket_price' => $wrapper->field_ticket_price->value() ? $wrapper->field_ticket_price->value() : '',
+      'ticket_price' => $wrapper->field_ticket_price->value() ? $wrapper->field_ticket_price->value() : NULL,
     ];
 
-    // Remove empty values (elm expects the correct value or nothing).
-    $events[] = array_filter($event);
+    // Remove empty values (elm expects the correct value or nothing), but keep
+    // the values with `FALSE` value.
+    $events[] = array_filter($event, function ($value) {
+      return !is_null($value);
+    });
   }
 
   return $events;

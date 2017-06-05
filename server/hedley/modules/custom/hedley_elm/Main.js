@@ -12517,10 +12517,11 @@ var _gizra$municipality$Event_Decoder$decodeEvent = A4(
 			'end_date',
 			_elm_lang$core$Json_Decode$nullable(_gizra$municipality$Utils_Json$decodeDate),
 			_elm_lang$core$Maybe$Nothing,
-			A3(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			A4(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 				'date',
-				_gizra$municipality$Utils_Json$decodeDate,
+				_elm_lang$core$Json_Decode$nullable(_gizra$municipality$Utils_Json$decodeDate),
+				_elm_lang$core$Maybe$Nothing,
 				A4(
 					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 					'description',
@@ -12982,42 +12983,47 @@ var _gizra$municipality$Translate$translate = F2(
 					}
 				case 'DayAndDate':
 					var _p2 = _p0._0;
-					var formater = _mgold$elm_date_format$Date_Format$format('%d.%m.%Y %H:%M');
-					var dateFormated = formater(_p2);
-					var allDatesFormated = A2(
-						_elm_lang$core$Maybe$withDefault,
-						dateFormated,
-						A2(
-							_elm_lang$core$Maybe$map,
-							function (endDate) {
-								return A2(
-									_elm_lang$core$Basics_ops['++'],
-									dateFormated,
-									A2(
+					if (_p2.ctor === 'Just') {
+						var _p3 = _p2._0;
+						var formater = _mgold$elm_date_format$Date_Format$format('%d.%m.%Y %H:%M');
+						var dateFormated = formater(_p3);
+						var allDatesFormated = A2(
+							_elm_lang$core$Maybe$withDefault,
+							dateFormated,
+							A2(
+								_elm_lang$core$Maybe$map,
+								function (endDate) {
+									return A2(
 										_elm_lang$core$Basics_ops['++'],
-										' - ',
-										formater(endDate)));
-							},
-							_p0._1));
-					var dayTranslated = A2(
-						_gizra$municipality$Translate$translate,
-						lang,
-						_gizra$municipality$Translate$DayTranslation(
-							_elm_lang$core$Date$dayOfWeek(_p2)));
-					return {
-						arabic: A2(
-							_elm_lang$core$Basics_ops['++'],
-							allDatesFormated,
-							A2(_elm_lang$core$Basics_ops['++'], ' ,', dayTranslated)),
-						english: A2(
-							_elm_lang$core$Basics_ops['++'],
-							dayTranslated,
-							A2(_elm_lang$core$Basics_ops['++'], ', ', allDatesFormated)),
-						hebrew: A2(
-							_elm_lang$core$Basics_ops['++'],
-							allDatesFormated,
-							A2(_elm_lang$core$Basics_ops['++'], ' ,', dayTranslated))
-					};
+										dateFormated,
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											' - ',
+											formater(endDate)));
+								},
+								_p0._1));
+						var dayTranslated = A2(
+							_gizra$municipality$Translate$translate,
+							lang,
+							_gizra$municipality$Translate$DayTranslation(
+								_elm_lang$core$Date$dayOfWeek(_p3)));
+						return {
+							arabic: A2(
+								_elm_lang$core$Basics_ops['++'],
+								allDatesFormated,
+								A2(_elm_lang$core$Basics_ops['++'], ' ,', dayTranslated)),
+							english: A2(
+								_elm_lang$core$Basics_ops['++'],
+								dayTranslated,
+								A2(_elm_lang$core$Basics_ops['++'], ', ', allDatesFormated)),
+							hebrew: A2(
+								_elm_lang$core$Basics_ops['++'],
+								allDatesFormated,
+								A2(_elm_lang$core$Basics_ops['++'], ' ,', dayTranslated))
+						};
+					} else {
+						return {arabic: '', english: '', hebrew: ''};
+					}
 				case 'EventRecurringWeekly':
 					return {arabic: 'حدث اسبوعي', english: 'Weekly event', hebrew: 'אירוע שבועי'};
 				case 'EventsNotFound':
@@ -13034,8 +13040,8 @@ var _gizra$municipality$Translate$translate = F2(
 					return {arabic: 'السعر', english: 'Price', hebrew: 'מחיר'};
 			}
 		}();
-		var _p3 = lang;
-		switch (_p3.ctor) {
+		var _p4 = lang;
+		switch (_p4.ctor) {
 			case 'Arabic':
 				return function (_) {
 					return _.arabic;
@@ -13692,7 +13698,7 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 													_elm_lang$html$Html$div,
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('ui four wide column'),
+														_0: _elm_lang$html$Html_Attributes$class('ui four wide column event-date'),
 														_1: {ctor: '[]'}
 													},
 													{
