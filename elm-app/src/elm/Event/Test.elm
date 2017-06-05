@@ -83,12 +83,6 @@ viewEventTest =
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "description" ]
                     |> Query.has [ attribute "innerHTML" "Afternoon event description" ]
-        , test "Event with Date" <|
-            \() ->
-                viewEvent English event2
-                    |> Query.fromHtml
-                    |> Query.find [ Selector.class "event-date" ]
-                    |> Query.has [ text "Thu, 01.01.1970 02:00 - 20.10.1973 23:20" ]
         , test "Event with Weekly Recurring" <|
             \() ->
                 viewEvent English event3
