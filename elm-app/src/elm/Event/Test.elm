@@ -24,7 +24,7 @@ filterEventsTest =
         , test "should return no matching events if filter string does not match any events' names" <|
             \() ->
                 Expect.equal (filterEvents events "foo") DictList.empty
-        , test "should return events that has name matching the filter string 'o'" <|
+        , test "should return events that has name matching the filter" <|
             \() ->
                 Expect.equal (filterEvents events "o")
                     (DictList.fromList
@@ -32,7 +32,7 @@ filterEventsTest =
                         , event2
                         ]
                     )
-        , test "should return events that has name matching the filter string 'evening'" <|
+        , test "should return events that has name matching the filter" <|
             \() ->
                 Expect.equal (filterEvents events "evening")
                     (DictList.fromList

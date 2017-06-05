@@ -3,7 +3,6 @@ module Event.Decoder
         ( decodeEvents
         )
 
-import Date exposing (Day(..))
 import DictList exposing (DictList, decodeArray2, empty)
 import Event.Model exposing (DictListEvent, Event)
 import Json.Decode exposing (Decoder, andThen, at, bool, dict, fail, field, float, index, keyValuePairs, list, map, map2, nullable, oneOf, string, succeed)
