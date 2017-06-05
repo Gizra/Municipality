@@ -33,51 +33,51 @@ translate lang trans =
                 ContactsNotFound ->
                     { arabic = "لم يتم العثور على جهات اتصال"
                     , english = "No contacts found"
-                    , hebrew = "לא נמצאו אירועים מתאימים"
+                    , hebrew = "לא נמצאו אנשי קשר מתאימים"
                     }
 
                 DayTranslation day ->
                     case day of
                         Mon ->
-                            { arabic = "Mon"
+                            { arabic = "الإثنين"
                             , english = "Mon"
-                            , hebrew = "Mon"
+                            , hebrew = "שני"
                             }
 
                         Tue ->
-                            { arabic = "Tue"
+                            { arabic = "الثلاثاء"
                             , english = "Tue"
-                            , hebrew = "Tue"
+                            , hebrew = "שלישי"
                             }
 
                         Wed ->
-                            { arabic = "Wed"
+                            { arabic = "الأربعاء"
                             , english = "Wed"
                             , hebrew = "רביעי"
                             }
 
                         Thu ->
-                            { arabic = "Thu"
+                            { arabic = "الخميس"
                             , english = "Thu"
                             , hebrew = "חמישי"
                             }
 
                         Fri ->
-                            { arabic = "Fri"
+                            { arabic = "الجمعة"
                             , english = "Fri"
-                            , hebrew = "Fri"
+                            , hebrew = "שישי"
                             }
 
                         Sat ->
-                            { arabic = "Sat"
+                            { arabic = "السبت"
                             , english = "Sat"
-                            , hebrew = "Sat"
+                            , hebrew = "שבת"
                             }
 
                         Sun ->
-                            { arabic = "Sun"
+                            { arabic = "الأحد"
                             , english = "Sun"
-                            , hebrew = "Sun"
+                            , hebrew = "ראשון"
                             }
 
                 DayAndDate date mEndDate ->
@@ -86,7 +86,7 @@ translate lang trans =
                             translate lang <| DayTranslation (dayOfWeek date)
 
                         formater =
-                            format "%d/%m/%Y"
+                            format "%d.%m.%Y %H:%M"
 
                         dateFormated =
                             formater date
@@ -105,15 +105,15 @@ translate lang trans =
                         }
 
                 EventRecurringWeekly ->
-                    { arabic = "EventRecurringWeekly"
-                    , english = "Recurring every week"
-                    , hebrew = "מתקיים כל שבוע"
+                    { arabic = "حدث اسبوعي"
+                    , english = "Weekly event"
+                    , hebrew = "אירוע שבועי"
                     }
 
                 EventsNotFound ->
                     { arabic = "لم يتم العثور على أية أحداث"
                     , english = "No events found"
-                    , hebrew = "לא נמצאו אנשי קשר מתאימים"
+                    , hebrew = "לא נמצאו אירועים מתאימים"
                     }
 
                 FilterContactsPlaceholder ->
@@ -135,9 +135,9 @@ translate lang trans =
                     }
 
                 MoreDetailsText ->
-                    { arabic = ""
-                    , english = ""
-                    , hebrew = ""
+                    { arabic = "لمزيد من التفاصيل"
+                    , english = "For more details"
+                    , hebrew = "לפרטים נוספים"
                     }
 
                 PriceText ->

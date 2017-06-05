@@ -42,8 +42,8 @@ function hedley_event_get_events_by_group($group, $language_code) {
     $event = [
       'id' => $wrapper->getIdentifier(),
       'name' => check_plain($wrapper->label()),
-      'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : '',
       'image_url' => !empty($image )? image_style_url('medium', $image['uri']) : '',
+      'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : '',
       'date' => !empty($date) ? hedley_event_timestamp_to_iso8601($date['value']) : '',
       // Make sure the end date isn't the same as the start date.
       'end_date' => !empty($date) && $date['value2'] && $date['value'] != $date['value2'] ? hedley_event_timestamp_to_iso8601($date['value2']) : '',

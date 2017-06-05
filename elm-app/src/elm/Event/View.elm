@@ -91,9 +91,7 @@ viewEvent language ( eventId, event ) =
                             []
                     )
                     event.description
-            , div
-                [ class "divider" ]
-                []
+            , sectionDivider
             , div
                 [ class "ui row" ]
                 [ div
@@ -106,13 +104,15 @@ viewEvent language ( eventId, event ) =
                         , text <| translate language (DayAndDate event.date event.endDate)
                         ]
                     , showIf event.recurringWeekly <|
-                        span
-                            [ class "recurring-weekly" ]
-                            [ i
-                                [ class "refresh icon" ]
-                                []
-                            , text <| translate language EventRecurringWeekly
-                            ]
+                        span [] [ text " (" ]
+                    , span
+                        [ class "recurring-weekly" ]
+                        [ i
+                            [ class "refresh icon" ]
+                            []
+                        , text <| translate language EventRecurringWeekly
+                        ]
+                    , span [] [ text ")" ]
                     ]
                 , div
                     [ class "ui four wide column" ]
@@ -136,6 +136,7 @@ viewEvent language ( eventId, event ) =
                                 ]
                         )
                         event.ticketPrice
+                , sectionDivider
                 , div
                     [ class "ui four wide column center aligned" ]
                     [ a

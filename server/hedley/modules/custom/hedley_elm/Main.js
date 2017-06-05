@@ -12961,28 +12961,28 @@ var _gizra$municipality$Translate$translate = F2(
 			var _p0 = trans;
 			switch (_p0.ctor) {
 				case 'ContactsNotFound':
-					return {arabic: 'لم يتم العثور على جهات اتصال', english: 'No contacts found', hebrew: 'לא נמצאו אירועים מתאימים'};
+					return {arabic: 'لم يتم العثور على جهات اتصال', english: 'No contacts found', hebrew: 'לא נמצאו אנשי קשר מתאימים'};
 				case 'DayTranslation':
 					var _p1 = _p0._0;
 					switch (_p1.ctor) {
 						case 'Mon':
-							return {arabic: 'Mon', english: 'Mon', hebrew: 'Mon'};
+							return {arabic: 'الإثنين', english: 'Mon', hebrew: 'שני'};
 						case 'Tue':
-							return {arabic: 'Tue', english: 'Tue', hebrew: 'Tue'};
+							return {arabic: 'الثلاثاء', english: 'Tue', hebrew: 'שלישי'};
 						case 'Wed':
-							return {arabic: 'Wed', english: 'Wed', hebrew: 'רביעי'};
+							return {arabic: 'الأربعاء', english: 'Wed', hebrew: 'רביעי'};
 						case 'Thu':
-							return {arabic: 'Thu', english: 'Thu', hebrew: 'חמישי'};
+							return {arabic: 'الخميس', english: 'Thu', hebrew: 'חמישי'};
 						case 'Fri':
-							return {arabic: 'Fri', english: 'Fri', hebrew: 'Fri'};
+							return {arabic: 'الجمعة', english: 'Fri', hebrew: 'שישי'};
 						case 'Sat':
-							return {arabic: 'Sat', english: 'Sat', hebrew: 'Sat'};
+							return {arabic: 'السبت', english: 'Sat', hebrew: 'שבת'};
 						default:
-							return {arabic: 'Sun', english: 'Sun', hebrew: 'Sun'};
+							return {arabic: 'الأحد', english: 'Sun', hebrew: 'ראשון'};
 					}
 				case 'DayAndDate':
 					var _p2 = _p0._0;
-					var formater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y');
+					var formater = _mgold$elm_date_format$Date_Format$format('%d.%m.%Y %H:%M');
 					var dateFormated = formater(_p2);
 					var allDatesFormated = A2(
 						_elm_lang$core$Maybe$withDefault,
@@ -13019,9 +13019,9 @@ var _gizra$municipality$Translate$translate = F2(
 							A2(_elm_lang$core$Basics_ops['++'], ' ,', dayTranslated))
 					};
 				case 'EventRecurringWeekly':
-					return {arabic: 'EventRecurringWeekly', english: 'Recurring every week', hebrew: 'מתקיים כל שבוע'};
+					return {arabic: 'حدث اسبوعي', english: 'Weekly event', hebrew: 'אירוע שבועי'};
 				case 'EventsNotFound':
-					return {arabic: 'لم يتم العثور على أية أحداث', english: 'No events found', hebrew: 'לא נמצאו אנשי קשר מתאימים'};
+					return {arabic: 'لم يتم العثور على أية أحداث', english: 'No events found', hebrew: 'לא נמצאו אירועים מתאימים'};
 				case 'FilterContactsPlaceholder':
 					return {arabic: 'ابحث عن اسم، موضوع أو فئة', english: 'Filter contacts', hebrew: 'חפשו שם, נושא או מחלקה'};
 				case 'FilterEventsPlaceholder':
@@ -13029,7 +13029,7 @@ var _gizra$municipality$Translate$translate = F2(
 				case 'MatchingResults':
 					return {arabic: 'نتائج البحث', english: 'Matching Results', hebrew: 'תוצאות מתאימות'};
 				case 'MoreDetailsText':
-					return {arabic: '', english: '', hebrew: ''};
+					return {arabic: 'لمزيد من التفاصيل', english: 'For more details', hebrew: 'לפרטים נוספים'};
 				default:
 					return {arabic: 'السعر', english: 'Price', hebrew: 'מחיר'};
 			}
@@ -13676,14 +13676,7 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 										_p2.description)),
 								_1: {
 									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$div,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('divider'),
-											_1: {ctor: '[]'}
-										},
-										{ctor: '[]'}),
+									_0: _gizra$municipality$Utils_Html$sectionDivider,
 									_1: {
 										ctor: '::',
 										_0: A2(
@@ -13734,6 +13727,16 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																_p2.recurringWeekly,
 																A2(
 																	_elm_lang$html$Html$span,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text(' ('),
+																		_1: {ctor: '[]'}
+																	})),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$span,
 																	{
 																		ctor: '::',
 																		_0: _elm_lang$html$Html_Attributes$class('recurring-weekly'),
@@ -13755,8 +13758,20 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																				A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EventRecurringWeekly)),
 																			_1: {ctor: '[]'}
 																		}
-																	})),
-															_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$span,
+																		{ctor: '[]'},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text(')'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
 														}
 													}),
 												_1: {
@@ -13836,51 +13851,55 @@ var _gizra$municipality$Event_View$viewEvent = F2(
 																_p2.ticketPrice)),
 														_1: {
 															ctor: '::',
-															_0: A2(
-																_elm_lang$html$Html$div,
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('ui four wide column center aligned'),
-																	_1: {ctor: '[]'}
-																},
-																{
-																	ctor: '::',
-																	_0: A2(
-																		_elm_lang$html$Html$a,
-																		{
-																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$class('ui button primary basic middle aligned'),
-																			_1: {
+															_0: _gizra$municipality$Utils_Html$sectionDivider,
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$div,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$class('ui four wide column center aligned'),
+																		_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$a,
+																			{
 																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																				_0: _elm_lang$html$Html_Attributes$class('ui button primary basic middle aligned'),
 																				_1: {
 																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$href(
-																						A2(_elm_lang$core$Basics_ops['++'], 'node/', _p1._0)),
+																					_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$href(
+																							A2(_elm_lang$core$Basics_ops['++'], 'node/', _p1._0)),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			},
+																			{
+																				ctor: '::',
+																				_0: A2(
+																					_elm_lang$html$Html$i,
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$class('add icon'),
+																						_1: {ctor: '[]'}
+																					},
+																					{ctor: '[]'}),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html$text(
+																						A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$MoreDetailsText)),
 																					_1: {ctor: '[]'}
 																				}
-																			}
-																		},
-																		{
-																			ctor: '::',
-																			_0: A2(
-																				_elm_lang$html$Html$i,
-																				{
-																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$class('add icon'),
-																					_1: {ctor: '[]'}
-																				},
-																				{ctor: '[]'}),
-																			_1: {
-																				ctor: '::',
-																				_0: _elm_lang$html$Html$text(
-																					A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$MoreDetailsText)),
-																				_1: {ctor: '[]'}
-																			}
-																		}),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
 														}
 													}
 												}
