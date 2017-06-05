@@ -24,6 +24,8 @@ $plugin = [
  * Render callback.
  */
 function hedley_municipality_promoted_content_content_type_render($subtype, $conf, $args, $context) {
+  global $language;
+
   if (empty($context->data->nid)) {
     return NULL;
   }
@@ -35,9 +37,47 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
     return NULL;
   }
 
-  $nodes = node_view_multiple($nodes, 'homepage_teaser');
+
+  $items = [];
+  foreach ($nodes as $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $wrapper->language($language->language);
+
+    // Ignore nodes without titles in the current language.
+    if (!$wrapper->label()) {
+      continue;
+    }
+
+    switch ($node->type) {
+      case 'action':
+        $items[] = [
+          'title' => hedley_action_get_action_title_link($wrapper),
+        ];
+
+        break;
+
+//      case 'event':
+//        $items[] = [
+//          'title' => l($wrapper->label(), url('node/' . $wrapper->getIdentifier(), ['absolute' => TRUE])),
+//          'image' => l($wrapper->label(), url('node/' . $wrapper->getIdentifier(), ['absolute' => TRUE])),
+//        ];
+
+        break;
+    }
+  }
+
+  // Declare the theme template and it's variables.
+  $items_variables = [
+    'items' => $items,
+  ];
+  $items_theme_template = 'hedley_municipality_promoted_content_' . $conf['bundle'];
+
+  // Get the themed items.
+  $content = theme($items_theme_template, $items_variables);
+
+  // Now we render the wrapping template.
   $variables = [
-    'nodes' => $nodes,
+    'content' => $content,
     'items_class' => $conf['items_class'],
   ];
 
@@ -55,7 +95,7 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
     $variables['all_nodes_link'] = l(t($conf['all_nodes_title']), $conf['all_nodes_url'], ['attributes' => ['class' => ['ui basic button']]]);
     // @codingStandardsIgnoreEnd
   }
-  $block->content = theme('hedley_municipality_promoted_content', $variables);
+  $block->content = theme('hedley_municipality_promoted_content_wrapper', $variables);
 
   return $block;
 }
@@ -117,12 +157,19 @@ function hedley_municipality_promoted_content_content_type_edit_form_submit($for
  * Delegated hook_theme().
  */
 function hedley_municipality_promoted_content_content_type_theme(&$theme, $plugin) {
-  $theme['hedley_municipality_promoted_content'] = [
+  $theme['hedley_municipality_promoted_content_wrapper'] = [
     'variables' => [
-      'nodes' => NULL,
+      'content' => NULL,
       'all_nodes_link' => NULL,
     ],
     'path' => $plugin['path'],
-    'template' => 'promoted-content',
+    'template' => 'promoted-content-wrapper',
+  ];
+  $theme['hedley_municipality_promoted_content_action'] = [
+    'variables' => [
+      'items' => NULL,
+    ],
+    'path' => $plugin['path'],
+    'template' => 'promoted-content-action',
   ];
 }

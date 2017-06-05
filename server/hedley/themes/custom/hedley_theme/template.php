@@ -23,26 +23,6 @@ function hedley_theme_preprocess_node(&$variables) {
 }
 
 /**
- * Preprocess action node.
- *
- * Alter the action node variables on "homepage_teaser" view mode.
- *
- * @todo: Replace this function with a design inside the promoted_content plugin, see https://github.com/Gizra/Municipality/issues/242.
- */
-function hedley_theme_preprocess_node__action__homepage_teaser(&$variables) {
-  $wrapper = entity_metadata_wrapper('node', $variables['nid']);
-
-  // Change the link to the one specified in the link field if there's one.
-  if ($link = $wrapper->field_link->value()) {
-    // Open external links in a new tab.
-    $target = url_is_external($link['url']) ? '_blank' : '';
-    $href = url($link['url']);
-    $variables['content']['title_field'][0]['#markup'] = '<h3><a href="' . $href . '" target="' . $target . '">' . $wrapper->label() . '</a></h3>';
-  }
-
-}
-
-/**
  * Theme override.
  *
  * Remove the default panel separators.
