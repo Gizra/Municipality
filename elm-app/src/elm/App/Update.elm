@@ -8,6 +8,7 @@ port module App.Update
 import App.Model exposing (..)
 import App.Types exposing (Language(..), Page(..))
 import Contact.Update
+import Event.Update
 
 
 init : Flags -> ( Model, Cmd Msg )
@@ -17,6 +18,9 @@ init flags =
             case flags.page of
                 "contact" ->
                     Contact
+
+                "event" ->
+                    Event
 
                 -- Fallback to page not found.
                 _ ->
@@ -57,12 +61,24 @@ update msg model =
                 , Cmd.map MsgPagesContact cmds
                 )
 
+        MsgPagesEvent subMsg ->
+            let
+                ( val, cmds ) =
+                    Event.Update.update subMsg model.pageEvent
+            in
+                ( { model | pageEvent = val }
+                , Cmd.map MsgPagesEvent cmds
+                )
+
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
     case model.page of
         Contact ->
             Sub.map MsgPagesContact <| Contact.Update.subscriptions
+
+        Event ->
+            Sub.map MsgPagesEvent <| Event.Update.subscriptions
 
         NotFound ->
             Sub.none
