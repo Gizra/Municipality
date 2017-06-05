@@ -1,12 +1,15 @@
 module Utils.Html
     exposing
-        ( divider
+        ( colorToString
+        , divider
         , emptyNode
         , sectionDivider
         , showIf
         , showMaybe
         )
 
+import String exposing (toLower)
+import Contact.Model exposing (Color)
 import Html exposing (Html, div, h5, text)
 import Html.Attributes exposing (class)
 
@@ -48,3 +51,8 @@ divider =
 sectionDivider : Html msg
 sectionDivider =
     div [ class "ui section divider" ] []
+
+
+colorToString : Color -> String
+colorToString =
+    toString >> toLower

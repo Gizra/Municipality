@@ -10,7 +10,7 @@ import Html.Attributes exposing (alt, class, classList, href, placeholder, src, 
 import Html.Events exposing (onClick, onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe, colorToString)
 
 
 view : Language -> Model -> Html Msg
@@ -86,23 +86,11 @@ viewContact language ( contactId, contact ) =
                             div [ class "ui small labels topic-wrapper" ]
                                 (List.map
                                     (\topic ->
-                                        {- Add the topic's color, if there's no
-                                           color then display "blue" color.
-                                        -}
-                                        case topic.color of
-                                            Just color ->
-                                                a
-                                                    [ href ("taxonomy/term/" ++ topic.id)
-                                                    , class ("ui label " ++ color)
-                                                    ]
-                                                    [ text topic.name ]
-
-                                            Nothing ->
-                                                a
-                                                    [ href ("taxonomy/term/" ++ topic.id)
-                                                    , class ("ui label blue")
-                                                    ]
-                                                    [ text topic.name ]
+                                        a
+                                            [ href ("taxonomy/term/" ++ topic.id)
+                                            , class ("ui label " ++ colorToString topic.color)
+                                            ]
+                                            [ text topic.name ]
                                     )
                                     topics
                                 )

@@ -21,6 +21,23 @@ type Msg
     | SetFilter String
 
 
+type Color
+    = White
+    | Red
+    | Orange
+    | Yellow
+    | Olive
+    | Green
+    | Teal
+    | Blue
+    | Violet
+    | Purple
+    | Pink
+    | Brown
+    | Grey
+    | Black
+
+
 type alias Name =
     String
 
@@ -32,7 +49,7 @@ type alias ContactId =
 type alias Topic =
     { id : String
     , name : Name
-    , color : Maybe String
+    , color : Color
     }
 
 

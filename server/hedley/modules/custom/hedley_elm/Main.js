@@ -8009,6 +8009,20 @@ var _Gizra$elm_spa_exmple$Contact_Model$SetFilter = function (a) {
 var _Gizra$elm_spa_exmple$Contact_Model$HandleContacts = function (a) {
 	return {ctor: 'HandleContacts', _0: a};
 };
+var _Gizra$elm_spa_exmple$Contact_Model$Black = {ctor: 'Black'};
+var _Gizra$elm_spa_exmple$Contact_Model$Grey = {ctor: 'Grey'};
+var _Gizra$elm_spa_exmple$Contact_Model$Brown = {ctor: 'Brown'};
+var _Gizra$elm_spa_exmple$Contact_Model$Pink = {ctor: 'Pink'};
+var _Gizra$elm_spa_exmple$Contact_Model$Purple = {ctor: 'Purple'};
+var _Gizra$elm_spa_exmple$Contact_Model$Violet = {ctor: 'Violet'};
+var _Gizra$elm_spa_exmple$Contact_Model$Blue = {ctor: 'Blue'};
+var _Gizra$elm_spa_exmple$Contact_Model$Teal = {ctor: 'Teal'};
+var _Gizra$elm_spa_exmple$Contact_Model$Green = {ctor: 'Green'};
+var _Gizra$elm_spa_exmple$Contact_Model$Olive = {ctor: 'Olive'};
+var _Gizra$elm_spa_exmple$Contact_Model$Yellow = {ctor: 'Yellow'};
+var _Gizra$elm_spa_exmple$Contact_Model$Orange = {ctor: 'Orange'};
+var _Gizra$elm_spa_exmple$Contact_Model$Red = {ctor: 'Red'};
+var _Gizra$elm_spa_exmple$Contact_Model$White = {ctor: 'White'};
 
 var _eeue56$elm_all_dict$EveryDict$foldr = F3(
 	function (f, acc, t) {
@@ -9115,6 +9129,45 @@ var _Gizra$elm_spa_exmple$Utils_Json$decodeEmptyArrayAs = function ($default) {
 		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value));
 };
 
+var _Gizra$elm_spa_exmple$Contact_Decoder$decodeColor = A2(
+	_elm_lang$core$Json_Decode$andThen,
+	function (color) {
+		var _p0 = color;
+		switch (_p0) {
+			case 'white':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$White);
+			case 'red':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Red);
+			case 'orange':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Orange);
+			case 'yellow':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Yellow);
+			case 'olive':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Olive);
+			case 'green':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Green);
+			case 'teal':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Teal);
+			case 'blue':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Blue);
+			case 'violet':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Violet);
+			case 'purple':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Purple);
+			case 'pink':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Pink);
+			case 'brown':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Brown);
+			case 'grey':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Grey);
+			case 'black':
+				return _elm_lang$core$Json_Decode$succeed(_Gizra$elm_spa_exmple$Contact_Model$Black);
+			default:
+				return _elm_lang$core$Json_Decode$fail(
+					A2(_elm_lang$core$Basics_ops['++'], 'Could not recognise color: ', color));
+		}
+	},
+	_elm_lang$core$Json_Decode$string);
 var _Gizra$elm_spa_exmple$Contact_Decoder$decodeReceptionTimes = _elm_lang$core$Json_Decode$list(
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
@@ -9126,11 +9179,10 @@ var _Gizra$elm_spa_exmple$Contact_Decoder$decodeReceptionTimes = _elm_lang$core$
 			_elm_lang$core$Json_Decode$string,
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_Gizra$elm_spa_exmple$Contact_Model$ReceptionTimes))));
 var _Gizra$elm_spa_exmple$Contact_Decoder$decodeTopic = _elm_lang$core$Json_Decode$list(
-	A4(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 		'color',
-		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
-		_elm_lang$core$Maybe$Nothing,
+		_Gizra$elm_spa_exmple$Contact_Decoder$decodeColor,
 		A3(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 			'name',
@@ -11859,6 +11911,10 @@ var _Gizra$elm_spa_exmple$Translate$MatchingResults = {ctor: 'MatchingResults'};
 var _Gizra$elm_spa_exmple$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
 var _Gizra$elm_spa_exmple$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
 
+var _Gizra$elm_spa_exmple$Utils_Html$colorToString = function (_p0) {
+	return _elm_lang$core$String$toLower(
+		_elm_lang$core$Basics$toString(_p0));
+};
 var _Gizra$elm_spa_exmple$Utils_Html$sectionDivider = A2(
 	_elm_lang$html$Html$div,
 	{
@@ -11885,7 +11941,7 @@ var _Gizra$elm_spa_exmple$Utils_Html$showMaybe = _elm_lang$core$Maybe$withDefaul
 var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 	function (language, _p0) {
 		var _p1 = _p0;
-		var _p3 = _p1._1;
+		var _p2 = _p1._1;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -11919,7 +11975,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 									_1: {ctor: '[]'}
 								});
 						},
-						_p3.imageUrl)),
+						_p2.imageUrl)),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -11945,7 +12001,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 										{ctor: '[]'},
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html$text(_p3.name),
+											_0: _elm_lang$html$Html$text(_p2.name),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -11962,7 +12018,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 									{
 										ctor: '::',
 										_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
-											A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p3.jobTitle)),
+											A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p2.jobTitle)),
 										_1: {
 											ctor: '::',
 											_0: _Gizra$elm_spa_exmple$Utils_Html$divider,
@@ -11982,49 +12038,31 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																A2(
 																	_elm_lang$core$List$map,
 																	function (topic) {
-																		var _p2 = topic.color;
-																		if (_p2.ctor === 'Just') {
-																			return A2(
-																				_elm_lang$html$Html$a,
-																				{
+																		return A2(
+																			_elm_lang$html$Html$a,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$href(
+																					A2(_elm_lang$core$Basics_ops['++'], 'taxonomy/term/', topic.id)),
+																				_1: {
 																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$href(
-																						A2(_elm_lang$core$Basics_ops['++'], 'taxonomy/term/', topic.id)),
-																					_1: {
-																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$class(
-																							A2(_elm_lang$core$Basics_ops['++'], 'ui label ', _p2._0)),
-																						_1: {ctor: '[]'}
-																					}
-																				},
-																				{
-																					ctor: '::',
-																					_0: _elm_lang$html$Html$text(topic.name),
+																					_0: _elm_lang$html$Html_Attributes$class(
+																						A2(
+																							_elm_lang$core$Basics_ops['++'],
+																							'ui label ',
+																							_Gizra$elm_spa_exmple$Utils_Html$colorToString(topic.color))),
 																					_1: {ctor: '[]'}
-																				});
-																		} else {
-																			return A2(
-																				_elm_lang$html$Html$a,
-																				{
-																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$href(
-																						A2(_elm_lang$core$Basics_ops['++'], 'taxonomy/term/', topic.id)),
-																					_1: {
-																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$class('ui label blue'),
-																						_1: {ctor: '[]'}
-																					}
-																				},
-																				{
-																					ctor: '::',
-																					_0: _elm_lang$html$Html$text(topic.name),
-																					_1: {ctor: '[]'}
-																				});
-																		}
+																				}
+																			},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text(topic.name),
+																				_1: {ctor: '[]'}
+																			});
 																	},
 																	topics));
 														},
-														_p3.topics)),
+														_p2.topics)),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -12087,7 +12125,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																	}
 																});
 														},
-														_p3.email)),
+														_p2.email)),
 												_1: {
 													ctor: '::',
 													_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
@@ -12130,7 +12168,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																		}
 																	});
 															},
-															_p3.phone)),
+															_p2.phone)),
 													_1: {
 														ctor: '::',
 														_0: _Gizra$elm_spa_exmple$Utils_Html$showMaybe(
@@ -12168,7 +12206,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																			}
 																		});
 																},
-																_p3.fax)),
+																_p2.fax)),
 														_1: {
 															ctor: '::',
 															_0: A2(
@@ -12196,7 +12234,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																							_1: {ctor: '[]'}
 																						});
 																				},
-																				_p3.address)),
+																				_p2.address)),
 																		_1: {ctor: '[]'}
 																	}
 																}),
@@ -12252,7 +12290,7 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 																					},
 																					receptionTimes));
 																		},
-																		_p3.receptionTimes)),
+																		_p2.receptionTimes)),
 																_1: {ctor: '[]'}
 															}
 														}
@@ -12273,9 +12311,9 @@ var _Gizra$elm_spa_exmple$Contact_View$viewContact = F2(
 			});
 	});
 var _Gizra$elm_spa_exmple$Contact_View$viewContacts = F2(
-	function (language, _p4) {
-		var _p5 = _p4;
-		var filteredContacts = A2(_Gizra$elm_spa_exmple$Contact_Utils$filterContacts, _p5.contacts, _p5.filterString);
+	function (language, _p3) {
+		var _p4 = _p3;
+		var filteredContacts = A2(_Gizra$elm_spa_exmple$Contact_Utils$filterContacts, _p4.contacts, _p4.filterString);
 		return _Gizra$elm_dictlist$DictList$isEmpty(filteredContacts) ? A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
