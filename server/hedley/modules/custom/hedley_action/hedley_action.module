@@ -38,3 +38,30 @@ function hedley_action_node_presave($node) {
     }
   }
 }
+
+/**
+ * Get the title of the action wrapped in a link.
+ *
+ * The link's logic is as follows:
+ * 1. The field link is NOT empty, return the link inside this field.
+ * 2. The field link is empty, return the link to the entity itself.
+ *
+ * @param object $wrapper
+ *   The action entity wrapper.
+ *
+ * @return string
+ *   The action's label wrapped in a link.
+ */
+function hedley_action_get_action_title_link($wrapper) {
+  // Default link of the action.
+  $href = url('node/' . $wrapper->getIdentifier(), ['absolute' => TRUE]);
+  $target = '';
+  // Change the link to the one specified in the link field if there's one.
+  if ($link = $wrapper->field_link->value()) {
+    // Open external links in a new tab.
+    $target = url_is_external($link['url']) ? '_blank' : '';
+    $href = url($link['url']);
+  }
+
+  return l($wrapper->label(), $href, ['attributes' => ['target' => $target]]);
+}

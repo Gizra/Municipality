@@ -45,17 +45,8 @@ function hedley_topic_topic_actions_content_type_render($subtype, $conf, $args, 
       continue;
     }
 
-    $href = '';
-    $target = '';
-    if ($link = $wrapper->field_link->value()) {
-      // Open external links in a new tab.
-      $target = url_is_external($link['url']) ? '_blank' : '';
-      $href = url($link['url']);
-    }
     $actions[] = [
-      'title' => $wrapper->label(),
-      'target' => $target,
-      'href' => $href,
+      'title' => hedley_action_get_action_title_link($wrapper),
     ];
   }
 
