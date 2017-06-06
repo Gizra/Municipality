@@ -16,10 +16,10 @@ init flags =
     let
         page =
             case flags.page of
-                "contact" ->
+                "contacts" ->
                     Contact
 
-                "event" ->
+                "events" ->
                     Event
 
                 -- Fallback to page not found.
