@@ -36,11 +36,11 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
 
   $values = [];
   switch ($page) {
-    case 'contact':
+    case 'contacts':
       $values = hedley_contact_get_contacts_by_group($node, $language->language);
       break;
 
-    case 'event':
+    case 'events':
       $values = hedley_event_get_events_by_group($node, $language->language);
       break;
 
@@ -71,7 +71,7 @@ function hedley_elm_elm_content_type_edit_form($form, &$form_state) {
     '#type' => 'select',
     '#title' => t('Page'),
     '#description' => t('The bundle of the displayed content.'),
-    '#options' => drupal_map_assoc(['contact', 'event']),
+    '#options' => drupal_map_assoc(['contacts', 'events']),
     '#default_value' => $conf['page'],
     '#required' => TRUE,
   ];

@@ -12722,9 +12722,9 @@ var _gizra$municipality$App_Update$init = function (flags) {
 	var page = function () {
 		var _p5 = flags.page;
 		switch (_p5) {
-			case 'contact':
+			case 'contacts':
 				return _gizra$municipality$App_Types$Contact;
-			case 'event':
+			case 'events':
 				return _gizra$municipality$App_Types$Event;
 			default:
 				return _gizra$municipality$App_Types$NotFound;
