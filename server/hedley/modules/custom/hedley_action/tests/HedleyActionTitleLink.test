@@ -1,0 +1,107 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyActionTitleLink.
+ */
+
+/**
+ * Class HedleyActionTitleLink.
+ */
+class HedleyActionTitleLink extends HedleyMunicipalityWebTestCase {
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Action title link',
+      'description' => 'Test getting the expected links for the title of the action.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Test link to the action's title.
+   */
+  public function testGetActionTitleLink() {
+    $he_language_code = 'he';
+
+    // Create a municipality group.
+    $user1 = $this->drupalCreateUser();
+    $municipality_settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+      'language' => $he_language_code,
+      // We need to set the default language field for the group because this
+      // determines the language for all the group content under this group.
+      'field_default_language' => [
+        LANGUAGE_NONE => [
+          ['value' => $he_language_code],
+        ],
+      ],
+    ];
+    $municipality = $this->drupalCreateNode($municipality_settings);
+
+    // Create 2 actions, one with a link field and one without a link field.
+    $action_link_settings = [
+      'type' => 'action',
+      'uid' => $user1->uid,
+      'language' => $he_language_code,
+      'title_field' => [
+        LANGUAGE_NONE => [
+          ['value' => 'Action1 title'],
+        ],
+      ],
+      'field_link' => [
+        LANGUAGE_NONE => [
+          ['url' => 'https://example.com'],
+        ],
+      ],
+      // Add the created group as the parent group for this entity.
+      OG_AUDIENCE_FIELD => [
+        LANGUAGE_NONE => [
+          ['target_id' => $municipality->nid],
+        ],
+      ],
+    ];
+
+    $action_no_link_settings = [
+      'type' => 'action',
+      'uid' => $user1->uid,
+      'language' => $he_language_code,
+      'title_field' => [
+        LANGUAGE_NONE => [
+          ['value' => 'Action2 title'],
+        ],
+      ],
+      // Add the created group as the parent group for this entity.
+      OG_AUDIENCE_FIELD => [
+        LANGUAGE_NONE => [
+          ['target_id' => $municipality->nid],
+        ],
+      ],
+    ];
+
+    // Create the actions.
+    $action_link = $this->drupalCreateNode($action_link_settings);
+    $action_no_link = $this->drupalCreateNode($action_no_link_settings);
+
+    // Get the action's wrappers (function expects wrappers).
+    $action_link_wrapper = entity_metadata_wrapper('node', $action_link->nid);
+    $action_no_link_wrapper = entity_metadata_wrapper('node', $action_no_link->nid);
+
+    // Define the expected links.
+    $action_link_expected_link = l($action_link_settings['title_field'][LANGUAGE_NONE][0]['value'], $action_link_settings['field_link'][LANGUAGE_NONE][0]['url'], ['attributes' => ['target' => '_blank']]);
+    $action_no_link_expected_link = l($action_no_link_settings['title_field'][LANGUAGE_NONE][0]['value'], url('node/' . $action_no_link->nid, ['absolute' => TRUE]), ['attributes' => ['target' => '']]);
+
+    // Get the links from the function.
+    $action_link_title_link = hedley_action_get_action_title_link($action_link_wrapper);
+    $action_no_link_title_link = hedley_action_get_action_title_link($action_no_link_wrapper);
+
+    // Check that the expected links are returned from the function.
+    $this->assertEqual($action_link_title_link, $action_link_expected_link, 'Expected link to an action with a filled link field');
+    $this->assertEqual($action_no_link_title_link, $action_no_link_expected_link, 'Expected link to an action with NO filled link field');
+  }
+
+}

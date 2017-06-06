@@ -290,7 +290,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
 
     // Check some text on the municipality page.
-    $text_element = $page->find('css', '.pane-promoted-content .news .content .header h3 a');
+    $text_element = $page->find('css', '.pane-promoted-content .content h3.header a');
     if ($text_element === null) {
       throw new \Exception('The required text element is missing.');
     }
