@@ -77,7 +77,6 @@ function hedley_freedom_of_information_strongarm() {
   $strongarm->name = 'node_options_freedom_of_information';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'promote',
   );
   $export['node_options_freedom_of_information'] = $strongarm;
 
