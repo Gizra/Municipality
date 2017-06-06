@@ -1,109 +1,99 @@
 ---
 layout: default
-label : מכרזים
+label: מכרזים פתוחים
 ---
+
 <div class="ui stackable grid">
-  <div class = "ui segment centered row">
-    <h2> מכרזים </h2>
+  <div class="ui segment centered row">
+    <h2> מכרזים פתוחים </h2>
   </div>
 
-<div class="ui segment stackable row">
-    <div class="two wide column">
-        <h4 class="ui header">כולל מכרזים שנסגרו</h4>
-        <label>
-        <span>
-          לא
-        </span>
-        <div class="ui toggle checkbox">
-          <input name="public" type="checkbox">
-          <label></label>
+  <div class="ui segment stackable centered row">
+    <div class="ui action input">
+      <input type="text" placeholder="נושא, שם או מחלקה...">
+      <div type="submit" class="ui button">חיפוש</div>
     </div>
-    <span>
-          כן
-        </span>
-    </label>
-</div>
-
-<div class="four wide column">
-    <h4 class="ui header">חיפוש מונח </h4>
-    <div class="ui category search">
-        <div class="ui icon input">
-            <input class="prompt" placeholder="נושא, שם, מחלקה" type="text">
-            <i class="search icon"></i>
-        </div>
-        <div class="results"></div>
-    </div>
-</div>
+  </div>
 
 
-<div class="three wide column">
-    <h4 class="ui header">לפי מחלקות ברשות</h4>
-    <select name="doc_types" multiple="" class="ui dropdown">
-        <option value="">מחלקות</option>
-        <option value="all">הכל</option>
-        <option value="reports">דוברות</option>
-        <option value="all">הנדסה</option>
-        <option value="protocols">חינוך</option>
-      </select>
-</div>
-<div class="three wide column">
-    <h4 class="ui header"> תאריכי פרסום </h4>
-    <div class="ui calendar">
-        <div class="ui input left icon">
-            <i class="calendar icon"></i>
-            <input type="text" placeholder="תאריכים" name="date1" id="date1">
-        </div>
-    </div>
-</div>
-
-<div class="three wide column">
-    <h4 class="ui header"> תאריכי הגשה</h4>
-    <div class="ui calendar">
-        <div class="ui input left icon">
-            <i class="calendar icon"></i>
-            <input type="text" placeholder="תאריכים" name="date1" id="date1">
-        </div>
-    </div>
-</div>
-</div>
-
-<div class="ui segment row">
-    <div class="sixteen wide center aligned column">
-        <h4 class="ui header">עדכנו אותי על מכרזים חדשים</h4>
-        <div class="ui input">
-            <input placeholder="דואר אלקטרוני" type="email">
-            <button class="ui button">
-            <i class = "mail icon"></i>
-          </button>
-        </div>
-    </div>
-</div>
 <div class="ui stackable segment row">
+  {% assign all_tenders = (site.data.topics.business.tenders | sort: 'deadline.date') | reverse %}
 
-    {% assign all_tenders = (site.data.topics.business.tenders | sort: 'deadline.date') | reverse %}
-    <div class="left aligned column">
-        <div class="ui list segments">
-            {% for tender in all_tenders %}
-            <div class="ui segment">
-                <div class="content">
-                    <div class="header">
-                        <a href="{{ tender.hebrew.link }}" target="_blank">
-                  {{ tender.title}}
-                </a>
-                    </div>
-                    <div class="desciprtion">
-                        {% if tender.hebrew.department %} מחלקה: <span class="ui label">{{ tender.hebrew.department }}</span>, {% endif %} {% if tender.hebrew.contacts %} אנשי קשר: {% for contact in tender.hebrew.contacts %}
-                        <span>
-                      <a>{{ contact }}</a>
-                    </span> {% endfor %} {% endif %} להגשה עד {{ tender.deadline.date }}, {{ tender.deadline.time }} {% if tender.deadline.extension %}
-                        <div class="ui horizontal red label">הארכה</div>
-                        {% endif %}
-
-
-                    </div>
-                </div>
+  <table class="ui selectable celled green compact table">
+    <thead>
+      <tr>
+        <th>כותרת המכרז</th>
+        <th>תאריך אחרון להגשה</th>
+        <th>מחלקה</th>
+        <th>אנשי קשר</th>
+        <th>דרישות סף</th>
+        <th>סכום נדרש</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tender in all_tenders %}
+      <tr>
+        <td>
+          <a href="#">
+            {{ tender.title }}    <i class="download icon"></i>
+          </a>
+        </td>
+        <td>
+          {% if tender.deadline %}
+            {{ tender.deadline.date }}
+          {% endif %}
+          {% if tender.deadline.extension %}
+            <div class="ui horizontal red label">
+              הארכה
             </div>
+          {% endif %}
+        </td>
+        <td>
+          {% if tender.hebrew.department %}
+            {{ tender.hebrew.department }}
+          {% endif %}
+        </td>
+        <td>
+          {% if tender.hebrew.contacts %}
+            {% for contact_name in tender.hebrew.contacts %}
+              {% for check_contact in site.data.contacts %}
+                {% if contact_name == check_contact.name %}
+                  {{ contact_name }}:
+                  {% if check_contact.phone %}
+                    <span><a href="#">{{ check_contact.phone}} <i class="phone icon"></i> </a></span>
+                  {% endif %}
+                  {% if check_contact.email %}
+                    <a href="#">{{ check_contact.email}} <i class="mail icon"></i> </a>
+                  {% endif %}
+                  {% if check_contact.openning %}
+                    , {{check_contact.openning}}
+                    , כתובת: {{check_contact.address}}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+              <br>
             {% endfor %}
-        </div>
-    </div>
+          {% endif %}
+        </td>
+        <td>
+          {% if tender.hebrew.basic_requirements %}
+            {% for requirement in tender.hebrew.basic_requirements %}
+              * {{ requirement }}
+            {% endfor %}
+          {% endif %}
+        </td>
+
+        <td>
+          {% if tender.hebrew.required_amount %}
+            {{ tender.hebrew.required_amount }}
+          {% endif %}
+        </td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+
 </div>
