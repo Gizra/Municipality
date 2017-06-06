@@ -3,31 +3,29 @@ layout: default
 label:  מכרזים קודמים
 ---
 
-<div class="ui stackable grid">
+<div class="ui stackable segment grid">
   <div class="ui segment centered row">
-    <h2> מכרזים </h2>
+    <h2> מכרזים קודמים </h2>
   </div>
 
-  <div class="ui segment stackable row">
-    <div class="four wide column centered">
-      <h4 class="ui header centered">חיפוש</h4>
-      <div class="ui category search">
-        <div class="ui icon input">
-          <input class="prompt" placeholder="נושא, שם, מחלקה" type="text">
-          <i class="search icon"></i>
-        </div>
-        <div class="results"></div>
+  <div class = "three column row">
+      <div class = "column">
       </div>
-    </div>
+      <div class = "column">
+        <div class="ui action input">
+          <input type="text" placeholder="נושא, שם או מחלקה...">
+          <div type="submit" class="ui button">חיפוש</div>
+        </div>
+      </div>
+      <div class = "column">
+        <button class="ui primary basic button"> לחיפוש מכרזים פתוחים</button>
+      </div>
   </div>
 
 
   <div class="ui stackable segment row">
     {% assign all_tenders = (site.data.topics.business.tenders | sort: 'deadline.date') | reverse %}
 
-    <h3 class = "ui header centered four wide column">
-      מכרזים קודמים
-    </h3>
     <table class="ui selectable celled red compact table">
       <thead>
         <tr>
