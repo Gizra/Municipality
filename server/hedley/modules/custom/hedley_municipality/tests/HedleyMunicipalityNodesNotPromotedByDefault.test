@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyMunicipalityNodesNotPromotedByDefault.
+ */
+
+/**
+ * Class HedleyMunicipalityNodesNotPromotedByDefault.
+ */
+class HedleyMunicipalityNodesNotPromotedByDefault extends HedleyMunicipalityWebTestCase {
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Nodes are not promoted by default',
+      'description' => 'Test that nodes from all content types are not promoted by default on creation.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Test nodes are not promoted by default.
+   */
+  public function testNodesNotPromotedByDefault() {
+    // Create a municipality group.
+    $user1 = $this->drupalCreateUser();
+    $municipality_settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+    ];
+    $municipality = $this->drupalCreateNode($municipality_settings);
+
+    // Check group is not promoted by default.
+    $this->assertEqual($municipality->promote, FALSE, 'Municipality is not promoted by default.');
+
+    // List of group content to check.
+    $group_content_types = [
+      'action',
+      'contact',
+      'faq',
+      'freedom_of_information',
+      'news',
+      'tender',
+    ];
+
+    foreach ($group_content_types as $content_type) {
+      // Create node.
+      $settings = [
+        'type' => $content_type,
+        OG_AUDIENCE_FIELD => [
+          LANGUAGE_NONE => [
+            ['target_id' => $municipality->nid],
+          ],
+        ],
+        'uid' => $user1->uid,
+      ];
+      $node = $this->drupalCreateNode($settings);
+
+      // Check group content is not promoted by default.
+      $this->assertEqual($node->promote, FALSE, "$content_type is not promoted by default.");
+    }
+  }
+
+}
