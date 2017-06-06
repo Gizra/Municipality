@@ -1,5 +1,6 @@
 module Contact.Model exposing (..)
 
+import Date exposing (Day)
 import DictList exposing (DictList)
 
 
@@ -21,6 +22,23 @@ type Msg
     | SetFilter String
 
 
+type Color
+    = White
+    | Red
+    | Orange
+    | Yellow
+    | Olive
+    | Green
+    | Teal
+    | Blue
+    | Violet
+    | Purple
+    | Pink
+    | Brown
+    | Grey
+    | Black
+
+
 type alias Name =
     String
 
@@ -32,11 +50,12 @@ type alias ContactId =
 type alias Topic =
     { id : String
     , name : Name
+    , color : Color
     }
 
 
 type alias ReceptionTimes =
-    { days : String
+    { days : List Day
     , hours : String
     }
 

@@ -3,13 +3,15 @@ module Contact.View exposing (..)
 import App.Types exposing (Language(..))
 import Contact.Model exposing (Contact, ContactId, DictListContact, Model, Msg(..))
 import Contact.Utils exposing (filterContacts)
+import Date exposing (dayOfWeek)
 import Debug exposing (log)
 import DictList
 import Html exposing (..)
 import Html.Attributes exposing (alt, class, classList, href, placeholder, src, style, target, type_, value)
 import Html.Events exposing (onClick, onInput)
+import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (colorToString, divider, sectionDivider, showIf, showMaybe)
 
 
 view : Language -> Model -> Html Msg
@@ -76,18 +78,20 @@ viewContact language ( contactId, contact ) =
                 contact.imageUrl
         , div [ class "content" ]
             [ div [ class "header" ]
-                [ h3 [] [ text <| contact.name ]
-                ]
+                [ h3 [] [ text <| contact.name ] ]
             , div [ class "description" ]
                 [ showMaybe <| Maybe.map text contact.jobTitle
                 , divider
                 , showMaybe <|
                     Maybe.map
                         (\topics ->
-                            div [ class "ui blue small labels topic-wrapper" ]
+                            div [ class "ui small labels topic-wrapper" ]
                                 (List.map
                                     (\topic ->
-                                        a [ href ("taxonomy/term/" ++ topic.id), class "ui label" ]
+                                        a
+                                            [ href ("taxonomy/term/" ++ topic.id)
+                                            , class ("ui label " ++ colorToString topic.color)
+                                            ]
                                             [ text topic.name ]
                                     )
                                     topics
@@ -120,7 +124,7 @@ viewContact language ( contactId, contact ) =
                         (\fax ->
                             p [ class "fax-wrapper" ]
                                 [ i [ class "fax icon" ] []
-                                , a [ href ("fax:" ++ fax) ] [ text fax ]
+                                , span [] [ text fax ]
                                 ]
                         )
                         contact.fax
@@ -137,16 +141,23 @@ viewContact language ( contactId, contact ) =
                 , showMaybe <|
                     Maybe.map
                         (\receptionTimes ->
-                            div []
+                            div [ class "reception-times-wrapper" ]
                                 (List.map
-                                    (\receptionTime ->
+                                    (\{ days, hours } ->
                                         div []
                                             [ i [ class "add to calendar icon" ]
                                                 []
-                                            , span []
-                                                [ text receptionTime.days ]
-                                            , span []
-                                                [ text receptionTime.hours ]
+                                            , span
+                                                [ class "reception-days" ]
+                                                (List.map
+                                                    (\day ->
+                                                        span []
+                                                            [ text <| translate language (DayTranslation day) ++ ", " ]
+                                                    )
+                                                    days
+                                                )
+                                            , span [ class "reception-hours" ]
+                                                [ text hours ]
                                             ]
                                     )
                                     receptionTimes
