@@ -228,6 +228,14 @@ function hedley_municipality_node_presave($node) {
   $municipality_wrapper = entity_metadata_wrapper('node', $municipality);
   $municipality_language = $municipality_wrapper->field_default_language->value();
 
+  // Update the municipality's last updated field.
+  $municipality_wrapper->field_last_update->set(REQUEST_TIME);
+  // Save the municipality, unless the node being saved is already the
+  // municipality.
+  if ($node->type != 'municipality') {
+    $municipality_wrapper->save();
+  }
+
   // For nodes with title_field, set the title property according to the
   // municipality's language, or the next available language.
   if ($language_code = hedley_municipality_get_non_empty_language_for_field($node->title_field, $municipality_language)) {
