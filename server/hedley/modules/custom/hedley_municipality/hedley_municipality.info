@@ -57,4 +57,5 @@ features[views_view][] = municipalities
 files[] = tests/HedleyMunicipalityWebTestCase.test
 
 ; Tests
+files[] = tests/HedleyMunicipalityCheckNodesContent.test
 files[] = tests/HedleyMunicipalityGetNodes.test

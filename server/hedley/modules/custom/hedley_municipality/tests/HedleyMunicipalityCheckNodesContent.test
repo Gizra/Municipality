@@ -1,0 +1,95 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyMunicipalityCheckNodesContent.
+ */
+
+/**
+ * Class HedleyMunicipalityCheckNodesContent.
+ */
+class HedleyMunicipalityCheckNodesContent extends HedleyMunicipalityWebTestCase {
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Check nodes content after creation',
+      'description' => 'Test that nodes that are created have content in the author\'s language.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Test node's fields have a value after a save.
+   */
+  public function testCheckNodesContent() {
+    // Language code.
+    $language_code = 'he';
+
+    // Create a user with the language hebrew.
+    $user1 = $this->drupalCreateUser();
+    $user1->language = $language_code;
+    user_save($user1);
+
+    // Create a municipality group.
+    $municipality_settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+    ];
+    $municipality = $this->drupalCreateNode($municipality_settings);
+
+    // Create faqs.
+    $faqs = [];
+    for ($i = 1; $i <= 3; $i++) {
+      $faq_settings = [
+        'type' => 'faq',
+        OG_AUDIENCE_FIELD => [
+          LANGUAGE_NONE => [
+            ['target_id' => $municipality->nid],
+          ],
+        ],
+        'field_question' => [
+          LANGUAGE_NONE => [
+            ['value' => "Hebrew Question $i"],
+          ],
+        ],
+        'field_answer' => [
+          LANGUAGE_NONE => [
+            ['value' => "Hebrew Answer $i"],
+          ],
+        ],
+        'uid' => $user1->uid,
+      ];
+      $node = $this->drupalCreateNode($faq_settings);
+
+      $faqs[] = entity_metadata_wrapper('node', $node);
+    }
+
+    // List the expected content that should be in the node.
+    $expected_faq_content = [
+      [
+        'question' => 'Hebrew Question 1',
+        'answer' => 'Hebrew Answer 1',
+      ],
+      [
+        'question' => 'Hebrew Question 2',
+        'answer' => 'Hebrew Answer 2',
+      ],
+      [
+        'question' => 'Hebrew Question 3',
+        'answer' => 'Hebrew Answer 3',
+      ],
+    ];
+
+    // Checking that the nodes actually have the values in the user's language.
+    foreach ($faqs as $index => $faq) {
+      $faq->language($language_code);
+      $this->assertEqual($faq->field_question->value(), $expected_faq_content[$index]['question'], 'Expected node\'s field value is returned.');
+      // Adding trim and strip tags because the answer is a long text.
+      $this->assertEqual(trim(strip_tags($faq->field_answer->value->value())), $expected_faq_content[$index]['answer'], 'Expected node\'s field value is returned.');
+    }
+  }
+
+}
