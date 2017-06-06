@@ -1,6 +1,6 @@
-id,name_ar,name_en,name_he
-1,Entire family AR,Entire family,כל המשפחה
-2,Adults AR,Adults,מבוגרים
-3,Youth AR,Youth,נוער
-4,Children AR,Children,ילדים
-5,Infants AR,Infants,פעוטות
+id,name_ar,name_en,name_he,municipality
+1,Entire family AR,Entire family,כל המשפחה,1
+2,Adults AR,Adults,מבוגרים,1
+3,Youth AR,Youth,נוער,2
+4,Children AR,Children,ילדים,2
+5,Infants AR,Infants,פעוטות,1
