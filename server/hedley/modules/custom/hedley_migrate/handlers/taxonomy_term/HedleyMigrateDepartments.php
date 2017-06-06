@@ -18,5 +18,8 @@ class HedleyMigrateDepartments extends HedleyMigrateBase {
     'name_field_en',
     'name_field_he',
   ];
+  protected $simpleMappings = [
+    'name_field',
+  ];
 
 }

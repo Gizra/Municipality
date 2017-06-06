@@ -12298,9 +12298,9 @@ var _gizra$municipality$Contact_Model$Model = F2(
 	function (a, b) {
 		return {contacts: a, filterString: b};
 	});
-var _gizra$municipality$Contact_Model$Topic = F2(
-	function (a, b) {
-		return {id: a, name: b};
+var _gizra$municipality$Contact_Model$Topic = F3(
+	function (a, b, c) {
+		return {id: a, name: b, color: c};
 	});
 var _gizra$municipality$Contact_Model$ReceptionTimes = F2(
 	function (a, b) {
@@ -12316,6 +12316,20 @@ var _gizra$municipality$Contact_Model$SetFilter = function (a) {
 var _gizra$municipality$Contact_Model$HandleContacts = function (a) {
 	return {ctor: 'HandleContacts', _0: a};
 };
+var _gizra$municipality$Contact_Model$Black = {ctor: 'Black'};
+var _gizra$municipality$Contact_Model$Grey = {ctor: 'Grey'};
+var _gizra$municipality$Contact_Model$Brown = {ctor: 'Brown'};
+var _gizra$municipality$Contact_Model$Pink = {ctor: 'Pink'};
+var _gizra$municipality$Contact_Model$Purple = {ctor: 'Purple'};
+var _gizra$municipality$Contact_Model$Violet = {ctor: 'Violet'};
+var _gizra$municipality$Contact_Model$Blue = {ctor: 'Blue'};
+var _gizra$municipality$Contact_Model$Teal = {ctor: 'Teal'};
+var _gizra$municipality$Contact_Model$Green = {ctor: 'Green'};
+var _gizra$municipality$Contact_Model$Olive = {ctor: 'Olive'};
+var _gizra$municipality$Contact_Model$Yellow = {ctor: 'Yellow'};
+var _gizra$municipality$Contact_Model$Orange = {ctor: 'Orange'};
+var _gizra$municipality$Contact_Model$Red = {ctor: 'Red'};
+var _gizra$municipality$Contact_Model$White = {ctor: 'White'};
 
 var _gizra$municipality$Event_Model$emptyModel = {events: _Gizra$elm_dictlist$DictList$empty, filterString: ''};
 var _gizra$municipality$Event_Model$Model = F2(
@@ -12390,6 +12404,71 @@ var _gizra$municipality$Utils_Json$decodeDate = _elm_lang$core$Json_Decode$oneOf
 		}
 	});
 
+var _gizra$municipality$Contact_Decoder$decodeDay = _elm_lang$core$Json_Decode$list(
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (day) {
+			var _p0 = day;
+			switch (_p0) {
+				case 'Monday':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Mon);
+				case 'Tuesday':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Tue);
+				case 'Wednesday':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Wed);
+				case 'Thursday':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Thu);
+				case 'Friday':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Fri);
+				case 'Saturday':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Sat);
+				case 'Sunday':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Sun);
+				default:
+					return _elm_lang$core$Json_Decode$fail(
+						A2(_elm_lang$core$Basics_ops['++'], 'Could not recognise day: ', day));
+			}
+		},
+		_elm_lang$core$Json_Decode$string));
+var _gizra$municipality$Contact_Decoder$decodeColor = A2(
+	_elm_lang$core$Json_Decode$andThen,
+	function (color) {
+		var _p1 = color;
+		switch (_p1) {
+			case 'white':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$White);
+			case 'red':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Red);
+			case 'orange':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Orange);
+			case 'yellow':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Yellow);
+			case 'olive':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Olive);
+			case 'green':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Green);
+			case 'teal':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Teal);
+			case 'blue':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Blue);
+			case 'violet':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Violet);
+			case 'purple':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Purple);
+			case 'pink':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Pink);
+			case 'brown':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Brown);
+			case 'grey':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Grey);
+			case 'black':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Black);
+			default:
+				return _elm_lang$core$Json_Decode$fail(
+					A2(_elm_lang$core$Basics_ops['++'], 'Could not recognise color: ', color));
+		}
+	},
+	_elm_lang$core$Json_Decode$string);
 var _gizra$municipality$Contact_Decoder$decodeReceptionTimes = _elm_lang$core$Json_Decode$list(
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
@@ -12398,18 +12477,22 @@ var _gizra$municipality$Contact_Decoder$decodeReceptionTimes = _elm_lang$core$Js
 		A3(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 			'days',
-			_elm_lang$core$Json_Decode$string,
+			_gizra$municipality$Contact_Decoder$decodeDay,
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Contact_Model$ReceptionTimes))));
 var _gizra$municipality$Contact_Decoder$decodeTopic = _elm_lang$core$Json_Decode$list(
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'name',
-		_elm_lang$core$Json_Decode$string,
+		'color',
+		_gizra$municipality$Contact_Decoder$decodeColor,
 		A3(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'id',
+			'name',
 			_elm_lang$core$Json_Decode$string,
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Contact_Model$Topic))));
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'id',
+				_elm_lang$core$Json_Decode$string,
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Contact_Model$Topic)))));
 var _gizra$municipality$Contact_Decoder$decodeContact = A4(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 	'reception_hours',
@@ -13052,6 +13135,10 @@ var _gizra$municipality$Translate$translate = F2(
 	});
 var _gizra$municipality$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
 
+var _gizra$municipality$Utils_Html$colorToString = function (_p0) {
+	return _elm_lang$core$String$toLower(
+		_elm_lang$core$Basics$toString(_p0));
+};
 var _gizra$municipality$Utils_Html$sectionDivider = A2(
 	_elm_lang$html$Html$div,
 	{
@@ -13078,7 +13165,7 @@ var _gizra$municipality$Utils_Html$showMaybe = _elm_lang$core$Maybe$withDefault(
 var _gizra$municipality$Contact_View$viewContact = F2(
 	function (language, _p0) {
 		var _p1 = _p0;
-		var _p2 = _p1._1;
+		var _p4 = _p1._1;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -13112,7 +13199,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 									_1: {ctor: '[]'}
 								});
 						},
-						_p2.imageUrl)),
+						_p4.imageUrl)),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -13138,7 +13225,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 										{ctor: '[]'},
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html$text(_p2.name),
+											_0: _elm_lang$html$Html$text(_p4.name),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -13155,7 +13242,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 									{
 										ctor: '::',
 										_0: _gizra$municipality$Utils_Html$showMaybe(
-											A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p2.jobTitle)),
+											A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p4.jobTitle)),
 										_1: {
 											ctor: '::',
 											_0: _gizra$municipality$Utils_Html$divider,
@@ -13169,7 +13256,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																_elm_lang$html$Html$div,
 																{
 																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('ui blue small labels topic-wrapper'),
+																	_0: _elm_lang$html$Html_Attributes$class('ui small labels topic-wrapper'),
 																	_1: {ctor: '[]'}
 																},
 																A2(
@@ -13183,7 +13270,11 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																					A2(_elm_lang$core$Basics_ops['++'], 'taxonomy/term/', topic.id)),
 																				_1: {
 																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$class('ui label'),
+																					_0: _elm_lang$html$Html_Attributes$class(
+																						A2(
+																							_elm_lang$core$Basics_ops['++'],
+																							'ui label ',
+																							_gizra$municipality$Utils_Html$colorToString(topic.color))),
 																					_1: {ctor: '[]'}
 																				}
 																			},
@@ -13195,7 +13286,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																	},
 																	topics));
 														},
-														_p2.topics)),
+														_p4.topics)),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -13258,7 +13349,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																	}
 																});
 														},
-														_p2.email)),
+														_p4.email)),
 												_1: {
 													ctor: '::',
 													_0: _gizra$municipality$Utils_Html$showMaybe(
@@ -13301,7 +13392,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																		}
 																	});
 															},
-															_p2.phone)),
+															_p4.phone)),
 													_1: {
 														ctor: '::',
 														_0: _gizra$municipality$Utils_Html$showMaybe(
@@ -13328,13 +13419,8 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																			_1: {
 																				ctor: '::',
 																				_0: A2(
-																					_elm_lang$html$Html$a,
-																					{
-																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$href(
-																							A2(_elm_lang$core$Basics_ops['++'], 'fax:', fax)),
-																						_1: {ctor: '[]'}
-																					},
+																					_elm_lang$html$Html$span,
+																					{ctor: '[]'},
 																					{
 																						ctor: '::',
 																						_0: _elm_lang$html$Html$text(fax),
@@ -13344,7 +13430,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																			}
 																		});
 																},
-																_p2.fax)),
+																_p4.fax)),
 														_1: {
 															ctor: '::',
 															_0: A2(
@@ -13372,7 +13458,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																							_1: {ctor: '[]'}
 																						});
 																				},
-																				_p2.address)),
+																				_p4.address)),
 																		_1: {ctor: '[]'}
 																	}
 																}),
@@ -13384,10 +13470,15 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																		function (receptionTimes) {
 																			return A2(
 																				_elm_lang$html$Html$div,
-																				{ctor: '[]'},
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$class('reception-times-wrapper'),
+																					_1: {ctor: '[]'}
+																				},
 																				A2(
 																					_elm_lang$core$List$map,
-																					function (receptionTime) {
+																					function (_p2) {
+																						var _p3 = _p2;
 																						return A2(
 																							_elm_lang$html$Html$div,
 																							{ctor: '[]'},
@@ -13405,20 +13496,43 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																									ctor: '::',
 																									_0: A2(
 																										_elm_lang$html$Html$span,
-																										{ctor: '[]'},
 																										{
 																											ctor: '::',
-																											_0: _elm_lang$html$Html$text(receptionTime.days),
+																											_0: _elm_lang$html$Html_Attributes$class('reception-days'),
 																											_1: {ctor: '[]'}
-																										}),
+																										},
+																										A2(
+																											_elm_lang$core$List$map,
+																											function (day) {
+																												return A2(
+																													_elm_lang$html$Html$span,
+																													{ctor: '[]'},
+																													{
+																														ctor: '::',
+																														_0: _elm_lang$html$Html$text(
+																															A2(
+																																_elm_lang$core$Basics_ops['++'],
+																																A2(
+																																	_gizra$municipality$Translate$translate,
+																																	language,
+																																	_gizra$municipality$Translate$DayTranslation(day)),
+																																', ')),
+																														_1: {ctor: '[]'}
+																													});
+																											},
+																											_p3.days)),
 																									_1: {
 																										ctor: '::',
 																										_0: A2(
 																											_elm_lang$html$Html$span,
-																											{ctor: '[]'},
 																											{
 																												ctor: '::',
-																												_0: _elm_lang$html$Html$text(receptionTime.hours),
+																												_0: _elm_lang$html$Html_Attributes$class('reception-hours'),
+																												_1: {ctor: '[]'}
+																											},
+																											{
+																												ctor: '::',
+																												_0: _elm_lang$html$Html$text(_p3.hours),
 																												_1: {ctor: '[]'}
 																											}),
 																										_1: {ctor: '[]'}
@@ -13428,7 +13542,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																					},
 																					receptionTimes));
 																		},
-																		_p2.receptionTimes)),
+																		_p4.receptionTimes)),
 																_1: {ctor: '[]'}
 															}
 														}
@@ -13449,9 +13563,9 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 			});
 	});
 var _gizra$municipality$Contact_View$viewContacts = F2(
-	function (language, _p3) {
-		var _p4 = _p3;
-		var filteredContacts = A2(_gizra$municipality$Contact_Utils$filterContacts, _p4.contacts, _p4.filterString);
+	function (language, _p5) {
+		var _p6 = _p5;
+		var filteredContacts = A2(_gizra$municipality$Contact_Utils$filterContacts, _p6.contacts, _p6.filterString);
 		return _Gizra$elm_dictlist$DictList$isEmpty(filteredContacts) ? A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},

@@ -1,0 +1,123 @@
+---
+layout: default
+label:  מכרזים קודמים
+---
+
+<div class="ui stackable segment grid">
+  <div class="ui segment centered row">
+    <h2> מכרזים קודמים </h2>
+  </div>
+
+  <div class = "three column row">
+      <div class = "column">
+      </div>
+      <div class = "column">
+        <div class="ui action input">
+          <input type="text" placeholder="נושא, שם או מחלקה...">
+          <div type="submit" class="ui button">חיפוש</div>
+        </div>
+      </div>
+      <div class = "column">
+        <button class="ui primary basic button"> לחיפוש מכרזים פתוחים</button>
+      </div>
+  </div>
+
+
+  <div class="ui stackable segment row">
+    {% assign all_tenders = (site.data.topics.business.tenders | sort: 'deadline.date') | reverse %}
+
+    <table class="ui selectable celled red compact table">
+      <thead>
+        <tr>
+          <th>כותרת המכרז</th>
+          <th>תאריך אחרון להגשה</th>
+          <th>מחלקה</th>
+          <th>אנשי קשר</th>
+          <th>דרישות סף</th>
+          <th>סכום נדרש</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tender in all_tenders %}
+        <tr>
+          <td>
+            <a href="#">
+              {{ tender.title }}    <i class="download icon"></i>
+            </a>
+          </td>
+          <td>
+            {% if tender.deadline %}
+              {{ tender.deadline.date }}
+            {% endif %}
+            {% if tender.deadline.extension %}
+              <div class="ui horizontal red label">
+                הארכה
+              </div>
+            {% endif %}
+          </td>
+          <td>
+            {% if tender.hebrew.department %}
+              {{ tender.hebrew.department }}
+            {% endif %}
+          </td>
+          <td>
+            {% if tender.hebrew.contacts %}
+              {% for contact_name in tender.hebrew.contacts %}
+                {% for check_contact in site.data.contacts %}
+                  {% if contact_name == check_contact.name %}
+                    {{ contact_name }}:
+                    {% if check_contact.phone %}
+                      <span><a href="#">{{ check_contact.phone}} <i class="phone icon"></i> </a></span>
+                    {% endif %}
+                    {% if check_contact.email %}
+                      <a href="#">{{ check_contact.email}} <i class="mail icon"></i> </a>
+                    {% endif %}
+                    {% if check_contact.openning %}
+                      , {{check_contact.openning}}
+                      , כתובת: {{check_contact.address}}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+                <br>
+              {% endfor %}
+            {% endif %}
+          </td>
+          <td>
+            {% if tender.hebrew.basic_requirements %}
+              {% for requirement in tender.hebrew.basic_requirements %}
+                * {{ requirement }}
+              {% endfor %}
+            {% endif %}
+          </td>
+
+          <td>
+            {% if tender.hebrew.required_amount %}
+              {{ tender.hebrew.required_amount }}
+            {% endif %}
+          </td>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <th colspan="6">
+            <div class="ui right floated pagination menu">
+              <a class="icon item">
+                <i class="left chevron icon"></i>
+              </a>
+              <a class="item">1</a>
+              <a class="item">2</a>
+              <a class="item">3</a>
+              <a class="item">4</a>
+              <a class="icon item">
+                <i class="right chevron icon"></i>
+              </a>
+            </div>
+          </th>
+        </tr>
+      </tfoot>
+
+    </table>
+</div>

@@ -42,3 +42,5 @@ features[variable][] = node_options_action
 features[variable][] = node_preview_action
 features[variable][] = node_submitted_action
 features[views_view][] = actions
+; Tests
+files[] = tests/HedleyActionTitleLink.test

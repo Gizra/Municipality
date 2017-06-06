@@ -4,13 +4,13 @@ import App.Types exposing (Language(..))
 import Contact.Model exposing (..)
 import Contact.Utils exposing (filterContacts)
 import Contact.View exposing (viewContact)
+import Date
 import DictList
 import Expect
 import Html
-import Html.Attributes exposing (class)
 import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
-import Test.Html.Selector as Selector exposing (class, text, tag)
+import Test.Html.Selector as Selector exposing (class, tag, text)
 
 
 filterContactsTest : Test
@@ -46,6 +46,16 @@ viewContactTest =
                 viewContact English contact1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "phone-wrapper" ]
+        , test "Contact without Topics" <|
+            \() ->
+                viewContact English contact1
+                    |> Query.fromHtml
+                    |> Query.hasNot [ Selector.class "topic-wrapper" ]
+        , test "Contact without ReceptionTimes" <|
+            \() ->
+                viewContact English contact1
+                    |> Query.fromHtml
+                    |> Query.hasNot [ Selector.class "reception-times-wrapper" ]
         , test "Contact with Email" <|
             \() ->
                 viewContact English contact2
@@ -60,18 +70,23 @@ viewContactTest =
                     |> Query.find [ Selector.class "phone-wrapper" ]
                     |> Query.children [ tag "a" ]
                     |> Query.each (Query.has [ text "1234" ])
-        , test "Contact without topics" <|
-            \() ->
-                viewContact English contact1
-                    |> Query.fromHtml
-                    |> Query.hasNot [ Selector.class "topic-wrapper" ]
-        , test "Contact with topics" <|
+        , test "Contact with Topics" <|
             \() ->
                 viewContact English contact2
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "topic-wrapper" ]
                     |> Query.children []
                     |> Query.each (Query.has [ tag "a" ])
+        , test "Contact with ReceptionTimes" <|
+            \() ->
+                viewContact English contact2
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "reception-times-wrapper" ]
+                    |> Query.findAll [ Selector.class "reception-days" ]
+                    |> Query.first
+                    |> Query.findAll [ tag "span" ]
+                    |> Query.first
+                    |> Query.has [ text "Mon" ]
         ]
 
 
@@ -113,9 +128,11 @@ contact2 =
             Just
                 [ { id = "1"
                   , name = "arnona"
+                  , color = Pink
                   }
                 , { id = "2"
-                  , name = "garbage"
+                  , name = "mayor"
+                  , color = Green
                   }
                 ]
       , phone = Just "1234"
@@ -124,10 +141,10 @@ contact2 =
       , address = Just "220b Baker Street, London"
       , receptionTimes =
             Just
-                [ { days = "Mon-Fri"
+                [ { days = [ Date.Mon, Date.Tue ]
                   , hours = "8:00-19:00"
                   }
-                , { days = "Sat"
+                , { days = [ Date.Sat ]
                   , hours = "8:00-12:00"
                   }
                 ]
@@ -145,9 +162,11 @@ contact3 =
             Just
                 [ { id = "1"
                   , name = "arnona"
+                  , color = Pink
                   }
                 , { id = "2"
                   , name = "garbage"
+                  , color = Red
                   }
                 ]
       , phone = Just "9012"
@@ -156,7 +175,7 @@ contact3 =
       , address = Just "221b Baker Street, London"
       , receptionTimes =
             Just
-                [ { days = "Mon-Fri"
+                [ { days = [ Date.Mon, Date.Fri ]
                   , hours = "8:00-14:00"
                   }
                 ]
