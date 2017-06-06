@@ -10,13 +10,7 @@
   <div class="ui basic primary buttons">
 
     <?php foreach ($actions as $action): ?>
-      <a
-        class="ui button"
-        href="<?php print $action['href']; ?>"
-        target="<?php print $action['target']; ?>"
-      >
-        <?php print $action['title']; ?>
-      </a>
+      <?php print $action['title']; ?>
     <?php endforeach; ?>
   </div>
 </div>
