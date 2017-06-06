@@ -26,7 +26,7 @@ class HedleyContactAccess extends HedleyMunicipalityWebTestCase {
    */
   public function testAccess() {
     // Access site-wide contact.
-    $this->drupalGet('contact');
+    $this->drupalGet('contacts');
     $this->assertResponse(403);
 
     // Create a group.
@@ -42,7 +42,7 @@ class HedleyContactAccess extends HedleyMunicipalityWebTestCase {
       'provider' => 'og_purl|node',
       'id' => $node->nid,
     ];
-    $this->drupalGet('contact', ['purl' => $purl]);
+    $this->drupalGet('contacts', ['purl' => $purl]);
     $this->assertResponse(200);
   }
 
