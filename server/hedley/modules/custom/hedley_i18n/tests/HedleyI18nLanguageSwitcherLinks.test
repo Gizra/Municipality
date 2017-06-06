@@ -45,7 +45,7 @@ class HedleyI18nLanguageSwitcherLinks extends HedleyMunicipalityWebTestCase {
     // Add translations to the node.
     $factory = EntityTranslationHandlerFactory::getInstance();
     $handler = $factory->getHandler('node', $source);
-    
+
     // Add Hebrew translation.
     $translation = [
       'translate' => 0,
