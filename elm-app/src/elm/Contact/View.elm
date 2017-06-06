@@ -141,23 +141,23 @@ viewContact language ( contactId, contact ) =
                 , showMaybe <|
                     Maybe.map
                         (\receptionTimes ->
-                            div []
+                            div [ class "reception-times-wrapper" ]
                                 (List.map
-                                    (\receptionTime ->
+                                    (\{ days, hours } ->
                                         div []
                                             [ i [ class "add to calendar icon" ]
                                                 []
                                             , span
-                                                []
+                                                [ class "reception-days" ]
                                                 (List.map
                                                     (\day ->
                                                         span []
-                                                            [ text <| translate language (DayTranslation (dayOfWeek day)) ]
+                                                            [ text <| translate language (DayTranslation day) ++ ", " ]
                                                     )
-                                                    receptionTime.days
+                                                    days
                                                 )
-                                            , span []
-                                                [ text receptionTime.hours ]
+                                            , span [ class "reception-hours" ]
+                                                [ text hours ]
                                             ]
                                     )
                                     receptionTimes
