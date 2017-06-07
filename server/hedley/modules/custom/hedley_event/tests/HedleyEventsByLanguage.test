@@ -22,9 +22,9 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
   }
 
   /**
-   * Test access to the Events page.
+   * Test get Events per language.
    */
-  public function testeventsByLanguage() {
+  public function testEventsByLanguage() {
     $ar_language_code = 'ar';
     $he_language_code = 'he';
 
