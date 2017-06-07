@@ -2,13 +2,13 @@
 
 /**
  * @file
- * Class HedleyMunicipalityCheckNodesContent.
+ * Class HedleyMunicipalityCheckNodeLangauge.
  */
 
 /**
- * Class HedleyMunicipalityCheckNodesContent.
+ * Class HedleyMunicipalityCheckNodeLangauge.
  */
-class HedleyMunicipalityCheckNodesContent extends HedleyMunicipalityWebTestCase {
+class HedleyMunicipalityCheckNodeLangauge extends HedleyMunicipalityWebTestCase {
 
   /**
    * Get info.
@@ -22,7 +22,8 @@ class HedleyMunicipalityCheckNodesContent extends HedleyMunicipalityWebTestCase 
   }
 
   /**
-   * Test node's fields have a value after a save.
+   * Test node's fields have a value, in the correct language, after the
+   * creation.
    */
   public function testCheckNodesContent() {
     // Language code.
@@ -41,7 +42,7 @@ class HedleyMunicipalityCheckNodesContent extends HedleyMunicipalityWebTestCase 
     $municipality = $this->drupalCreateNode($municipality_settings);
 
     // Create faqs.
-    $faqs = [];
+    $faq_wrappers = [];
     for ($i = 1; $i <= 3; $i++) {
       $faq_settings = [
         'type' => 'faq',
@@ -64,7 +65,7 @@ class HedleyMunicipalityCheckNodesContent extends HedleyMunicipalityWebTestCase 
       ];
       $node = $this->drupalCreateNode($faq_settings);
 
-      $faqs[] = entity_metadata_wrapper('node', $node);
+      $faq_wrappers[] = entity_metadata_wrapper('node', $node);
     }
 
     // List the expected content that should be in the node.
@@ -84,11 +85,11 @@ class HedleyMunicipalityCheckNodesContent extends HedleyMunicipalityWebTestCase 
     ];
 
     // Checking that the nodes actually have the values in the user's language.
-    foreach ($faqs as $index => $faq) {
-      $faq->language($language_code);
-      $this->assertEqual($faq->field_question->value(), $expected_faq_content[$index]['question'], 'Expected node\'s field value is returned.');
+    foreach ($faq_wrappers as $index => $wrapper) {
+      $wrapper->language($language_code);
+      $this->assertEqual($wrapper->field_question->value(), $expected_faq_content[$index]['question'], 'Expected node\'s field value is returned.');
       // Adding trim and strip tags because the answer is a long text.
-      $this->assertEqual(trim(strip_tags($faq->field_answer->value->value())), $expected_faq_content[$index]['answer'], 'Expected node\'s field value is returned.');
+      $this->assertEqual(trim(strip_tags($wrapper->field_answer->value->value())), $expected_faq_content[$index]['answer'], 'Expected node\'s field value is returned.');
     }
   }
 
