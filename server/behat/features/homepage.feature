@@ -78,14 +78,14 @@ Feature: Homepage
       | المجلس الإقليمي للالسحرية | he       | residents    | עסקים         |
 
   @api
-  Scenario: Verify that if admin adds a user type, the menu will be displayed in homepage
+  Scenario: Verify that if admin adds a user type, the menu will be displayed on homepage
     Given I login with user "admin"
     When  I "add" "Residents" user type to municipality "קריית מלאכי"
     And I am an anonymous user
     Then the user type menu should "appear" on municipality "קריית מלאכי" homepage
 
   @api
-  Scenario: Verify that if admin adds a user type, the menu will be displayed in homepage
+  Scenario: Verify that if admin removes a user type, when there are two, the menu will not be displayed on homepage
     Given I login with user "admin"
     When  I "remove" "Residents" user type to municipality "קריית מלאכי"
     And I am an anonymous user
