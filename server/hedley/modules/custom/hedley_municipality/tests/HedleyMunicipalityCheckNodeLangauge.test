@@ -22,8 +22,7 @@ class HedleyMunicipalityCheckNodeLangauge extends HedleyMunicipalityWebTestCase 
   }
 
   /**
-   * Test node's fields have a value, in the correct language, after the
-   * creation.
+   * Test node's fields have a value, in the correct language, after a save.
    */
   public function testCheckNodesContent() {
     // Language code.
