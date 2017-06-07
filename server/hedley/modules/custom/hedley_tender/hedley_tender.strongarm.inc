@@ -80,7 +80,6 @@ function hedley_tender_strongarm() {
   $strongarm->name = 'node_options_tender';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'promote',
   );
   $export['node_options_tender'] = $strongarm;
 
