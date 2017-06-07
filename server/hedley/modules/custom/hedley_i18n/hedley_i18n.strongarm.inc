@@ -33,9 +33,9 @@ function hedley_i18n_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_node__action';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 1,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 1,
     'shared_fields_original_only' => 0,
   );
@@ -46,9 +46,9 @@ function hedley_i18n_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_node__contact';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 1,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 1,
     'shared_fields_original_only' => 0,
   );
@@ -59,9 +59,9 @@ function hedley_i18n_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_node__event';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 1,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 1,
     'shared_fields_original_only' => 0,
   );
@@ -72,9 +72,9 @@ function hedley_i18n_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_node__faq';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 1,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 1,
     'shared_fields_original_only' => 0,
   );
@@ -83,11 +83,24 @@ function hedley_i18n_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_settings_node__freedom_of_information';
+  $strongarm->value = array(
+    'default_language' => 'xx-et-current',
+    'hide_language_selector' => 1,
+    'exclude_language_none' => 1,
+    'lock_language' => 1,
+    'shared_fields_original_only' => 0,
+  );
+  $export['entity_translation_settings_node__freedom_of_information'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_node__municipality';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 1,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 1,
     'shared_fields_original_only' => 0,
   );
@@ -98,9 +111,9 @@ function hedley_i18n_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_node__news';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 1,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 1,
     'shared_fields_original_only' => 0,
   );
@@ -111,13 +124,26 @@ function hedley_i18n_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_node__page';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 1,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 1,
     'shared_fields_original_only' => 0,
   );
   $export['entity_translation_settings_node__page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_settings_node__tender';
+  $strongarm->value = array(
+    'default_language' => 'xx-et-current',
+    'hide_language_selector' => 1,
+    'exclude_language_none' => 1,
+    'lock_language' => 1,
+    'shared_fields_original_only' => 0,
+  );
+  $export['entity_translation_settings_node__tender'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

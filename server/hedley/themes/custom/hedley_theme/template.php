@@ -68,7 +68,7 @@ function hedley_theme_preprocess_page(&$variables) {
     $variables['terms_url'] = url('node/' . $wrapper->field_terms_page->getIdentifier());
   }
   // Last updated date.
-  $variables['last_updated'] = format_date($wrapper->field_last_update->value(), 'short');
+  $variables['last_updated'] = $wrapper->field_last_update->value() ? format_date($wrapper->field_last_update->value(), 'short') : NULL;
   // Footer text.
   $variables['footer_text'] = $wrapper->field_footer_text->value() ? $wrapper->field_footer_text->value->value() : NULL;
   // Get first background image.
