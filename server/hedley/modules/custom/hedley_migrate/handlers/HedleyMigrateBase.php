@@ -151,6 +151,17 @@ abstract class HedleyMigrateBase extends Migration {
   }
 
   /**
+   * Promote all group content from migration to the homepage.
+   */
+  public function prepare($entity) {
+    $group_content_bundles = og_get_all_group_content_bundle();
+
+    if (in_array($entity->type, array_keys($group_content_bundles['node']))) {
+      $entity->promote = 1;
+    }
+  }
+
+  /**
    * Merge translated fields columns into arrays.
    *
    * @param object $row
