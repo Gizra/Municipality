@@ -18,11 +18,11 @@ Drupal.behaviors.elm = {
 
     // Inject the expected values to the right port based on the selected page.
     switch (page) {
-      case 'contact':
+      case 'contacts':
         var property = app.ports.contacts;
         break;
 
-      case 'event':
+      case 'events':
         var property = app.ports.events;
         break;
     }

@@ -216,16 +216,17 @@ function hedley_municipality_form_municipality_node_form_alter(&$form, &$form_st
  * Set nodes titles according to their municipality's default language.
  */
 function hedley_municipality_node_presave($node) {
+  if (!isset($node->title_field)) {
+    return;
+  }
+
   // No need to continue if for some reason there's no parent group.
   if (!$municipality = hedley_municipality_node_municipality($node)) {
     return;
   }
 
   $municipality_wrapper = entity_metadata_wrapper('node', $municipality);
-
-  // Set the node language according to the municipality's default.
   $municipality_language = $municipality_wrapper->field_default_language->value();
-  $node->language = $municipality_language;
 
   // Update the municipality's last updated field.
   $municipality_wrapper->field_last_update->set(REQUEST_TIME);
@@ -235,9 +236,6 @@ function hedley_municipality_node_presave($node) {
     $municipality_wrapper->save();
   }
 
-  if (!isset($node->title_field)) {
-    return;
-  }
   // For nodes with title_field, set the title property according to the
   // municipality's language, or the next available language.
   if ($language_code = hedley_municipality_get_non_empty_language_for_field($node->title_field, $municipality_language)) {
