@@ -26,10 +26,10 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    *   The use password.
    */
   protected function loginUser($name, $password) {
-    $this->getSession()->visit($this->locatePath('/#/login'));
+    $this->getSession()->visit($this->locatePath('/'));
     $element = $this->getSession()->getPage();
-    $element->fillField('username', $name);
-    $element->fillField('password', $password);
+    $element->fillField('name', $name);
+    $element->fillField('pass', $password);
     $submit = $element->findButton('Log in');
 
     if (empty($submit)) {
@@ -39,8 +39,6 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     // Log in.
     $submit->click();
 
-    // Wait for the dashboard's menu to load.
-    $this->iWaitForCssElement('.navbar-brand', 'appear');
   }
 
   /**
@@ -48,6 +46,37 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    */
   public function iLoginWithBadCredentials() {
     return $this->loginUser('wrong-foo', 'wrong-bar');
+  }
+
+  /**
+   * @When I :arg1 :arg2 user type to municipality :arg3
+   */
+  public function iUserTypeToMunicipality2($arg1, $arg2, $arg3) {
+    $user_types_fields = [
+      'Businesses' => 'edit-field-user-types-und-19',
+      'Residents' => 'edit-field-user-types-und-18',
+    ];
+
+    $municipality_url = [
+      'طوبا الزنغرية' => 'municipality-1',
+      'عرعرة' => 'municipality-2',
+      'المجلس الإقليمي للالسحرية' => 'municipality-3',
+      'קריית מלאכי' => 'municipality-4',
+      'Tel-Aviv' => 'municipality-5',
+    ];
+
+    $this->getSession()->visit($this->locatePath('/'. $municipality_url[$arg3] . '/node/4/edit'));
+    $form = $this->getSession()->getPage();
+    $field = $form->findField($user_types_fields[$arg2]);
+    if ($arg1 == 'add') {
+      $field->check();
+    }
+    else {
+      $field->uncheck();
+    }
+
+    $submit = $this->getSession()->getPage()->find('css', '#edit-submit');
+    $submit->click();
   }
 
   /**
@@ -64,6 +93,34 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $xpath = $this->getSession()->getSelectorsHandler()->selectorToXpath('css', $element);
     $this->waitForXpathNode($xpath, $appear == 'appear');
   }
+
+  /**
+   * @Then the user type menu should :arg1 on municipality :arg2 homepage
+   */
+  public function theUserTypeMenuShouldOnMunicipalityHomepage($arg1, $arg2) {
+
+    $municipality_url = [
+      'طوبا الزنغرية' => 'municipality-1',
+      'عرعرة' => 'municipality-2',
+      'المجلس الإقليمي للالسحرية' => 'municipality-3',
+      'קריית מלאכי' => 'municipality-4',
+      'Tel-Aviv' => 'municipality-5',
+    ];
+
+    $this->getSession()->visit($this->locatePath('/'. $municipality_url[$arg2]));
+
+    $condition = $arg1 == 'appear' ? FALSE : TRUE;
+
+    // Check if the language menu appears on homepage
+    if($this->getSession()->getPage()->find('css', '.ui.user-types') == $condition) {
+      $params = array(
+        '@municipality' => $arg1,
+        '@appears' => $condition ? 'appears' : 'Does not appear',
+      );
+      throw new \Exception(format_string('Language menu @appears on @municipality homepage for no reason', $params));
+    }
+  }
+
   /**
    * @AfterStep
    *

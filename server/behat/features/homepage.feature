@@ -76,3 +76,17 @@ Feature: Homepage
       | طوبا الزنغرية           | he       | businesses   | תושבים        |
       | عرعرة                   | ar       | residents    | Businesses AR |
       | المجلس الإقليمي للالسحرية | he       | residents    | עסקים         |
+
+  @api @user
+  Scenario: Verify that if admin adds a user type, the menu will be displayed in homepage
+    Given I login with user "admin"
+    When  I "add" "Residents" user type to municipality "קריית מלאכי"
+    And I am an anonymous user
+    Then the user type menu should "appear" on municipality "קריית מלאכי" homepage
+
+  @api @user
+  Scenario: Verify that if admin adds a user type, the menu will be displayed in homepage
+    Given I login with user "admin"
+    When  I "remove" "Residents" user type to municipality "קריית מלאכי"
+    And I am an anonymous user
+    Then the user type menu should "not appear" on municipality "קריית מלאכי" homepage
