@@ -37,17 +37,10 @@ class HedleyMunicipalityNodesNotPromotedByDefault extends HedleyMunicipalityWebT
     $this->assertEqual($municipality->promote, FALSE, 'Municipality is not promoted by default.');
 
     // List of group content to check.
-    $group_content_types = [
-      'action',
-      'contact',
-      'faq',
-      'freedom_of_information',
-      'news',
-      'tender',
-    ];
+    $group_content_bundles = og_get_all_group_content_bundle();
 
-    foreach ($group_content_types as $content_type) {
-      // Create node.
+    foreach (array_keys($group_content_bundles['node']) as $content_type) {
+      // Create group content.
       $settings = [
         'type' => $content_type,
         OG_AUDIENCE_FIELD => [
