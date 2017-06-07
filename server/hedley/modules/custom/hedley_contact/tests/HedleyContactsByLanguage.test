@@ -88,4 +88,118 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
     $this->assertEqual($ar_municipality_contact[0]['name'], $ar_expected_title, 'Expected Arabic title is correct.');
   }
 
+  /**
+   * Test all values for contact in a certain language.
+   */
+  public function testContactValuesByLanguage() {
+    $he_language_code = 'he';
+
+    // Create a municipality group.
+    $user1 = $this->drupalCreateUser();
+    $municipality_settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+      'language' => $he_language_code,
+      // We need to set the default language field for the group because this
+      // determines the language for all the group content under this group.
+      'field_default_language' => [
+        LANGUAGE_NONE => [
+          ['value' => $he_language_code],
+        ],
+      ],
+    ];
+    $municipality = $this->drupalCreateNode($municipality_settings);
+
+    // Create some Topics.
+    $topics_vocabulary = taxonomy_vocabulary_machine_name_load('topics');
+    $topic1 = $this->createTerm($topics_vocabulary);
+    $topic2 = $this->createTerm($topics_vocabulary);
+
+    // Create a Department.
+    $department_vocabulary = taxonomy_vocabulary_machine_name_load('departments');
+    $department = $this->createTerm($department_vocabulary);
+
+    // Create a contact group content.
+    $contact_settings = [
+      'type' => 'contact',
+      'uid' => $user1->uid,
+      'language' => $he_language_code,
+      'field_first_name' => [
+        $he_language_code => [
+          ['value' => 'First name Hebrew'],
+        ],
+      ],
+      'field_last_name' => [
+        $he_language_code => [
+          ['value' => 'Last name Hebrew'],
+        ],
+      ],
+      'field_department' => [
+        $he_language_code => [
+          ['tid' => $department->tid],
+        ],
+      ],
+      'field_email' => [
+        $he_language_code => [
+          ['value' => 'foo@bar.com'],
+        ],
+      ],
+      'field_fax' => [
+        $he_language_code => [
+          ['value' => '03-0000000'],
+        ],
+      ],
+      'field_phone' => [
+        $he_language_code => [
+          ['value' => '03-1111111'],
+        ],
+      ],
+      'field_job_title' => [
+        $he_language_code => [
+          ['value' => 'Job title'],
+        ],
+      ],
+      'field_reception_hours' => [
+        $he_language_code => [
+          [
+            'field_hours' => [
+              $he_language_code => [
+                ['value' => '14:30 - 18:00'],
+              ],
+            ],
+            'field_weekday' => [
+              $he_language_code => [
+                ['value' => '1'],
+              ],
+            ],
+          ],
+        ],
+      ],
+      'field_topics' => [
+        $he_language_code => [
+          ['tid' => $topic1->tid],
+          ['tid' => $topic2->tid],
+        ],
+      ],
+      // Add the created group as the parent group for this entity.
+      OG_AUDIENCE_FIELD => [
+        LANGUAGE_NONE => [
+          ['target_id' => $municipality->nid],
+        ],
+      ],
+    ];
+
+    // Create the contact node.
+    $contact = $this->drupalCreateNode($contact_settings);
+
+    debug($contact);
+
+    // Get the contacts from the function we want to test.
+    $he_contact = hedley_contact_get_contacts_by_group($municipality, $he_language_code);
+
+    debug($he_contact);
+
+    // $this->assertEqual($he_municipality_contact[0]['name'], $he_expected_title, 'Expected Arabic title is correct.');.
+  }
+
 }

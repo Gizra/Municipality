@@ -160,6 +160,13 @@ function hedley_contact_get_contacts_by_group($group, $language_code) {
     if (!empty($wrapper->field_topics->raw())) {
       foreach ($topics as $topic) {
         $topic_wrapper = entity_metadata_wrapper('taxonomy_term', $topic);
+        $topic_wrapper->language($language_code);
+        // Ignore any taxonomy that doesn't have a values in the current
+        // language.
+        if (!$topic_wrapper->label() || !$topic_wrapper->field_color->value()) {
+          continue;
+        }
+
         $topics_array[] = [
           'id' => $topic_wrapper->getIdentifier(),
           'name' => $topic_wrapper->label(),
@@ -191,6 +198,7 @@ function hedley_contact_get_contacts_by_group($group, $language_code) {
     // Remove empty values (elm expects the correct value or nothing).
     $contacts[] = array_filter($contact);
   }
+  dpm($contacts);
 
   return $contacts;
 
