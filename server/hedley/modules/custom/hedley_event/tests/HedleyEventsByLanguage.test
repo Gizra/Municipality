@@ -71,7 +71,23 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
     ];
 
     // Create the event node.
-    $this->drupalCreateNode($event_settings);
+    $node = $this->drupalCreateNode($event_settings);
+
+    // We need to load the node to get the correct object for translation.
+    $source = node_load($node->nid);
+
+    // Add translations to the node.
+    $factory = EntityTranslationHandlerFactory::getInstance();
+    $handler = $factory->getHandler('node', $source);
+
+    // Add Hebrew translation.
+    $translation = [
+      'translate' => 0,
+      'status' => 1,
+      'language' => 'he',
+      'source' => $source->language,
+    ];
+    $handler->setTranslation($translation, $source);
 
     // Set expected titles in each language.
     $he_expected_title = $event_settings['title_field'][$he_language_code][0]['value'];
