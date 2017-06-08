@@ -101,7 +101,6 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
   }
 
-
   /**
    * @BeforeScenario
    *
@@ -133,6 +132,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
     throw new \Exception('waitFor timed out.');
   }
+
   /**
    * Wait for an element by its XPath to appear or disappear.
    *
@@ -340,7 +340,10 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
 
     // Check if the site name is "Municipality".
     if($sitename != 'Municipality') {
-      throw new \Exception('Site name is different then Municipality');
+      $params = array(
+        '@sitename' => $sitename,
+      );
+      throw new \Exception(format_string('Site name is different then Municipality and equal to : @sitename', $params));
     }
   }
 
