@@ -198,7 +198,6 @@ function hedley_contact_get_contacts_by_group($group, $language_code) {
     // Remove empty values (elm expects the correct value or nothing).
     $contacts[] = array_filter($contact);
   }
-  dpm($contacts);
 
   return $contacts;
 
