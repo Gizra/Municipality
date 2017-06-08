@@ -79,5 +79,5 @@ class HedleyI18nLanguageSwitcherLinks extends HedleyMunicipalityWebTestCase {
 
     $this->assertEqual(array_keys($rendered_links), $expected_languages, 'Expected languages are displayed.');
   }
-  
+
 }
