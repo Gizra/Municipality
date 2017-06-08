@@ -343,7 +343,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
       $params = array(
         '@sitename' => $sitename,
       );
-      throw new \Exception(format_string('Site name is different then Municipality and equal to : @sitename', $params));
+      throw new \Exception(format_string('Site name is different then Municipality and equals to : @sitename', $params));
     }
   }
 
