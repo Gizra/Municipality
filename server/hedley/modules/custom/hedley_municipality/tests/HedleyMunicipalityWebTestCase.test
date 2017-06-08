@@ -43,10 +43,10 @@ class HedleyMunicipalityWebTestCase extends DrupalWebTestCase {
     $term->name = $this->randomName();
     $term->name_field = [
       LANGUAGE_NONE => [
-        ['value' => $term->name]
+        ['value' => $term->name],
       ],
       $language => [
-        ['value' => $term->name]
+        ['value' => $term->name],
       ],
     ];
     $term->description = $this->randomName();

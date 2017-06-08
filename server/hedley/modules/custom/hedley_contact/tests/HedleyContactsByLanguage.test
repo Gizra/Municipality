@@ -221,12 +221,11 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
       // Check that the property exists.
       $this->assertTrue(in_array($property, array_keys($contact)), format_string('The property @property exists in the contact item', ['@property' => $property]));
 
-
       // In topics we only going to check that the color exists, that's enough
       // to know that the whole thing is there.
       if ($property == 'topics') {
         // Check that we are getting the right amount of topics.
-        $this->assertTrue(count($contact['topics']) == 2,'The amount of topics is correct');
+        $this->assertTrue(count($contact['topics']) == 2, 'The amount of topics is correct');
 
         foreach ($contact['topics'] as $topic) {
           // Check that the expected value of the topic is in the contact item.
@@ -240,9 +239,8 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
     }
   }
 
-
   /**
-   *  Returns a new topic with a specific color.
+   * Returns a new topic with a specific color.
    *
    * @param object $vocabulary
    *   The vocabulary that we want to topic the term in.
