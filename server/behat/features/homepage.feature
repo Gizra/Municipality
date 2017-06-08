@@ -76,3 +76,9 @@ Feature: Homepage
       | طوبا الزنغرية           | he       | businesses   | תושבים        |
       | عرعرة                   | ar       | residents    | Businesses AR |
       | المجلس الإقليمي للالسحرية | he       | residents    | עסקים         |
+
+  @api @site
+  Scenario: Verify that site name is Municipality
+    Given I login with user "Admin"
+    When I visit the page "Homepage"
+    Then I should see the Municipality header
