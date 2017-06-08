@@ -49,26 +49,21 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * @When I :arg1 :arg2 user type to municipality :arg3
+   * @When I :add :type user type to municipality :municipality
    */
-  public function iUserTypeToMunicipality2($arg1, $arg2, $arg3) {
+  public function iUserTypeToMunicipality($add, $type, $municipality) {
     $user_types_fields = [
       'Businesses' => 'edit-field-user-types-und-19',
       'Residents' => 'edit-field-user-types-und-18',
     ];
 
-    $municipality_url = [
-      'طوبا الزنغرية' => 'municipality-1',
-      'عرعرة' => 'municipality-2',
-      'المجلس الإقليمي للالسحرية' => 'municipality-3',
-      'קריית מלאכי' => 'municipality-4',
-      'Tel-Aviv' => 'municipality-5',
-    ];
+    $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
+    $uri = $this->createUriWithGroupContext($group, 'node/' . $group->nid . '/edit') ;
+    $this->getSession()->visit($this->locatePath($uri));
 
-    $this->getSession()->visit($this->locatePath('/'. $municipality_url[$arg3] . '/node/4/edit'));
     $form = $this->getSession()->getPage();
-    $field = $form->findField($user_types_fields[$arg2]);
-    if ($arg1 == 'add') {
+    $field = $form->findField($user_types_fields[$type]);
+    if ($add == 'add') {
       $field->check();
     }
     else {
@@ -95,29 +90,21 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * @Then the user type menu should :arg1 on municipality :arg2 homepage
+   * @Then the user type menu should :appear on municipality :municipality homepage
    */
-  public function theUserTypeMenuShouldOnMunicipalityHomepage($arg1, $arg2) {
+  public function theUserTypeMenuShouldOnMunicipalityHomepage($appear, $municipality) {
+    $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
+    $uri = $this->createUriWithGroupContext($group) ;
+    $this->getSession()->visit($this->locatePath($uri));
+    $condition = $appear == 'appear' ? FALSE : TRUE;
 
-    $municipality_url = [
-      'طوبا الزنغرية' => 'municipality-1',
-      'عرعرة' => 'municipality-2',
-      'المجلس الإقليمي للالسحرية' => 'municipality-3',
-      'קריית מלאכי' => 'municipality-4',
-      'Tel-Aviv' => 'municipality-5',
-    ];
-
-    $this->getSession()->visit($this->locatePath('/'. $municipality_url[$arg2]));
-
-    $condition = $arg1 == 'appear' ? FALSE : TRUE;
-
-    // Check if the language menu appears on homepage
-    if($this->getSession()->getPage()->find('css', '.ui.user-types') == $condition) {
+    // Check if the user type menu appears on homepage
+    if($this->getSession()->getPage()->find('css', '.background .user-types a.active') == $condition) {
       $params = array(
-        '@municipality' => $arg1,
+        '@municipality' => $municipality,
         '@appears' => $condition ? 'appears' : 'Does not appear',
       );
-      throw new \Exception(format_string('Language menu @appears on @municipality homepage for no reason', $params));
+      throw new \Exception(format_string('User type menu @appears on @municipality homepage', $params));
     }
   }
 
