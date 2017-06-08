@@ -26,10 +26,10 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    *   The use password.
    */
   protected function loginUser($name, $password) {
-    $this->getSession()->visit($this->locatePath('/'));
+    $this->getSession()->visit($this->locatePath('/#/login'));
     $element = $this->getSession()->getPage();
-    $element->fillField('name', $name);
-    $element->fillField('pass', $password);
+    $element->fillField('username', $name);
+    $element->fillField('password', $password);
     $submit = $element->findButton('Log in');
 
     if (empty($submit)) {
@@ -38,7 +38,9 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
 
     // Log in.
     $submit->click();
-    
+
+    // Wait for the dashboard's menu to load.
+    $this->iWaitForCssElement('.navbar-brand', 'appear');
   }
 
   /**
@@ -186,17 +188,6 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $this->getSession()->visit($this->locatePath('node/' . $nid));
   }
 
-  /**
-   * @When I visit the page :page
-   */
-  public function iVisitThePage($page) {
-
-    $info = [
-      'Homepage' => '/',
-      ];
-
-    $this->getSession()->visit($this->locatePath($info[$page]));
-  }
 
   /**
    * @When I visit a :municipality website homepage with no parameters in URL
@@ -329,19 +320,6 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
 
     // Check if the given user type is the active one on the page.
     $this->checkActiveUserType($new_user_type, $page, 'text');
-  }
-
-  /**
-   * @Then I should see the Municipality header
-   */
-  public function iShouldSeeTheMunicipalityHeader() {
-
-    $sitename = $this->getSession()->getPage()->find('css', '.ui.header a')->getText();
-
-    // Check if the site name is "Municipality".
-    if($sitename != 'Municipality') {
-      throw new \Exception('Site name is different then Municipality');
-    }
   }
 
 
