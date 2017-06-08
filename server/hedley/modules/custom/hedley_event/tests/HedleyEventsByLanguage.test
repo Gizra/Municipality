@@ -82,10 +82,16 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
 
     // Add Hebrew translation.
     $translation = [
-      'translate' => 0,
-      'status' => 1,
+      'entity_type' => 'node',
+      'entity_id' => $source->nid,
+      'revision_id' => $source->vid,
+      'uid' => $source->uid,
+      'translate' => '0',
+      'status' => '1',
       'language' => 'he',
       'source' => $source->language,
+      'created' => $source->created,
+      'changed' => $source->changed,
     ];
     $handler->setTranslation($translation, $source);
 
