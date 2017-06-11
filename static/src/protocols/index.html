@@ -10,38 +10,39 @@ label : פרוטוקולים
 <div class = "ui stackable segment">
   <div class="ui cards">
   {% for protocol in all_protocols %}
-  <div class="card">
-    <div class="content">
-      <div class="header">
-        {% if protocol.department %}
-        <a class = "ui label"> {{ protocol.department }} </a>
-        <br><br>
-        {% endif %}
-        <div class = "center aligned">
-          {{ protocol.title}}.
-          <br>
-          תאריך:  {{ protocol.date }}
+    <div class="card">
+      <div class="content">
+        <div class="header">
+          {% if protocol.department %}
+          <p>
+            <a class = "ui label"> {{ protocol.department }} </a>
+          </p>
+          {% endif %}
+          <div class = "center aligned">
+            <p>
+            {{ protocol.title}}.
+            </p>
+            תאריך:  {{ protocol.date }}
+          </div>
         </div>
       </div>
-    </div>
 
       <a href="{{ protocol.link }}" target="_blank">
         <div class="ui bottom attached button">
-        <i class="download icon"></i>
-        להורדה
-      </div>
+          <i class="download icon"></i>
+          להורדה
+        </div>
       </a>
     </div>
   {% endfor %}
   </div>
 </div>
 
-
-    <div class = "ui segment row">
-        מאגרי מידע נוספים:
-        <div class="ui buttons">
-          <button href="#" class="ui red basic button">דו״חות</button></a>
-          <button href="#" class="ui blue basic button">תקנות וחוקי עזר</button>
-          <button href="#" class="ui green basic button">מכרזים</button>
-        </div>
-    </div>
+<div class = "ui segment row">
+  מאגרי מידע נוספים:
+  <div class="ui buttons">
+    <button href="#" class="ui red basic button">דו״חות</button></a>
+    <button href="#" class="ui blue basic button">תקנות וחוקי עזר</button>
+    <button href="#" class="ui green basic button">מכרזים</button>
+  </div>
+</div>
