@@ -245,6 +245,55 @@ function hedley_municipality_node_presave($node) {
 }
 
 /**
+ * Implements hook_node_insert().
+ *
+ * Automatically adds the Vocabulary "topics" to a newly created group.
+ */
+function hedley_municipality_node_insert($node) {
+  // Only for OG enabled content type.
+  if (!og_is_group_type('node', $node->type)) {
+    return;
+  }
+
+  // Run the code to create all the vocabularies
+  // and link it with the content types.
+  module_load_include('inc', 'c4m_og_vocab');
+  $vocab_name = 'Topics for ' . check_plain($node->title);
+
+  // Create a new vocab for this Municipality.
+  hedley_municipality_create_group_vocabulary($node, 'topics', $vocab_name);
+}
+
+/**
+ * Create a group vocabulary.
+ *
+ * @param object $group
+ *   The group node.
+ * @param string $machine_name
+ *   The machine name for the new vocabulary.
+ * @param string $name
+ *   The human readable name of the vocabulary.
+ *
+ * @return object
+ *   The created vocabulary.
+ */
+function hedley_municipality_create_group_vocabulary($group, $machine_name, $name) {
+  // Make sure that the machine name is unique.
+  // We do this by adding the nid to the machine name.
+  $machine_name .= '_' . $group->nid;
+
+  // Create the new vocabulary.
+  $vocab = new stdClass();
+  $vocab->name = $name;
+  $vocab->machine_name = $machine_name;
+  $vocab->hierarchy = 1;
+  taxonomy_vocabulary_save($vocab);
+  // Set up the relationship between the vocabulary and the group.
+  og_vocab_relation_save($vocab->vid, 'node', $group->nid);
+  return $vocab;
+}
+
+/**
  * Get the municipality of a node, or the node itself when it's a municipality.
  *
  * @param object $node
