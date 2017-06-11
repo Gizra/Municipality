@@ -25,9 +25,6 @@ class HedleyMunicipalityGetNodes extends HedleyMunicipalityWebTestCase {
    * Test group content returned from the general get nodes function.
    */
   public function testGetGroupContent() {
-    // Create the OG audience field.
-    og_create_field(OG_AUDIENCE_FIELD, 'node', 'action');
-
     // Create a municipality group.
     $user1 = $this->drupalCreateUser();
     $municipality_settings = [

@@ -22,7 +22,7 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
   }
 
   /**
-   * Test access to the Contact page.
+   * Test get Contacts per language.
    */
   public function testContactsByLanguage() {
     $ar_language_code = 'ar';
