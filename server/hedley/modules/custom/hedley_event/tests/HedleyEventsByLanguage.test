@@ -26,6 +26,7 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
    */
   public function testEventsByLanguage() {
     $en_language_code = 'en';
+    $he_language_code = 'he';
 
     // Create a municipality group.
     $user1 = $this->drupalCreateUser();
@@ -66,16 +67,27 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
       ],
     ];
 
-    // Create the event node.
+    // Create an English Event node.
+    $this->drupalCreateNode($event_settings);
+
+    // Create a Hebrew Event node.
+    $event_settings['language'] = $he_language_code;
+    $event_settings['title_field'] = [
+      $he_language_code => [
+        ['value' => 'Event name Hebrew'],
+      ],
+    ];
     $this->drupalCreateNode($event_settings);
 
     // Set expected title.
     $en_expected_title = $event_settings['title_field'][$en_language_code][0]['value'];
 
     // Get the events from the function we want to test.
-    $en_municipality_event = hedley_event_get_events_by_group($municipality, $en_language_code);
+    $municipality_events = hedley_event_get_events_by_group($municipality, $en_language_code);
 
-    $this->assertEqual($en_municipality_event[0]['name'], $en_expected_title, 'Expected English title is correct.');
+    $this->assertTrue(count($municipality_events) == 1, 'Expected number of events.');
+
+    $this->assertEqual($municipality_events[0]['name'], $en_expected_title, 'Expected English title is correct.');
   }
 
 }
