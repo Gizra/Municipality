@@ -294,6 +294,8 @@ function hedley_municipality_create_group_vocabulary($group, $machine_name, $nam
   $vocab->name = $name;
   $vocab->machine_name = $machine_name;
   $vocab->hierarchy = 1;
+  // Enable translation for the topics.
+  $vocab->i18n_mode = I18N_MODE_TRANSLATE;
   taxonomy_vocabulary_save($vocab);
   // Set up the relationship between the vocabulary and the group.
   og_vocab_relation_save($vocab->vid, 'node', $group->nid);
@@ -302,16 +304,19 @@ function hedley_municipality_create_group_vocabulary($group, $machine_name, $nam
   $instance = [
     'label' => 'Color',
     'widget' => [
-        'weight' => 3,
-        'type' => 'options_select',
-        'module' => 'options',
-        'active' => 1,
-      ],
+      'weight' => 3,
+      'type' => 'options_select',
+      'module' => 'options',
+      'active' => 1,
+    ],
     'field_name' => 'field_color',
     'entity_type' => 'taxonomy_term',
     'bundle' => $vocab->machine_name,
   ];
   field_create_instance($instance);
+
+  // Replace title field for the purpose of translation.
+  title_field_replacement_toggle('taxonomy_term', $vocab->machine_name, 'name');
 
   return $vocab;
 }
