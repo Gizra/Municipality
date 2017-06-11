@@ -112,10 +112,6 @@ function hedley_contact_views_default_views() {
   $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
   $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
   $handler->display->display_options['fields']['field_job_title']['field'] = 'field_job_title';
-  /* Field: Content: Topics */
-  $handler->display->display_options['fields']['field_topics']['id'] = 'field_topics';
-  $handler->display->display_options['fields']['field_topics']['table'] = 'field_data_field_topics';
-  $handler->display->display_options['fields']['field_topics']['field'] = 'field_topics';
   /* Field: Content: Address */
   $handler->display->display_options['fields']['field_address']['id'] = 'field_address';
   $handler->display->display_options['fields']['field_address']['table'] = 'field_data_field_address';
@@ -141,6 +137,15 @@ function hedley_contact_views_default_views() {
   $handler->display->display_options['fields']['field_reception_hours']['id'] = 'field_reception_hours';
   $handler->display->display_options['fields']['field_reception_hours']['table'] = 'field_data_field_reception_hours';
   $handler->display->display_options['fields']['field_reception_hours']['field'] = 'field_reception_hours';
+  /* Field: Content: OG vocabulary */
+  $handler->display->display_options['fields']['og_vocabulary']['id'] = 'og_vocabulary';
+  $handler->display->display_options['fields']['og_vocabulary']['table'] = 'field_data_og_vocabulary';
+  $handler->display->display_options['fields']['og_vocabulary']['field'] = 'og_vocabulary';
+  $handler->display->display_options['fields']['og_vocabulary']['label'] = 'Topics';
+  $handler->display->display_options['fields']['og_vocabulary']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['og_vocabulary']['delta_offset'] = '0';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -194,22 +199,20 @@ function hedley_contact_views_default_views() {
   );
   $handler->display->display_options['filters']['field_user_types_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_user_types_tid']['vocabulary'] = 'user_types';
-  /* Filter criterion: Content: Topics (field_topics) */
-  $handler->display->display_options['filters']['field_topics_tid']['id'] = 'field_topics_tid';
-  $handler->display->display_options['filters']['field_topics_tid']['table'] = 'field_data_field_topics';
-  $handler->display->display_options['filters']['field_topics_tid']['field'] = 'field_topics_tid';
-  $handler->display->display_options['filters']['field_topics_tid']['value'] = '';
-  $handler->display->display_options['filters']['field_topics_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_topics_tid']['expose']['operator_id'] = 'field_topics_tid_op';
-  $handler->display->display_options['filters']['field_topics_tid']['expose']['label'] = 'Topics (field_topics)';
-  $handler->display->display_options['filters']['field_topics_tid']['expose']['operator'] = 'field_topics_tid_op';
-  $handler->display->display_options['filters']['field_topics_tid']['expose']['identifier'] = 'field_topics_tid';
-  $handler->display->display_options['filters']['field_topics_tid']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: OG vocabulary (og_vocabulary) */
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['id'] = 'og_vocabulary_target_id';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['table'] = 'field_data_og_vocabulary';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['field'] = 'og_vocabulary_target_id';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['expose']['operator_id'] = 'og_vocabulary_target_id_op';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['expose']['label'] = 'Topics';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['expose']['operator'] = 'og_vocabulary_target_id_op';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['expose']['identifier'] = 'og_vocabulary_target_id';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
   );
-  $handler->display->display_options['filters']['field_topics_tid']['vocabulary'] = 'topics';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -242,16 +245,15 @@ function hedley_contact_views_default_views() {
     t('First name'),
     t('Last name'),
     t('Job title'),
-    t('Topics'),
     t('Address'),
     t('Email'),
     t('Fax'),
     t('Image'),
     t('Reception hours'),
+    t('Topics'),
     t('Edit link'),
     t('Groups audience (og_group_ref)'),
     t('User types (field_user_types)'),
-    t('Topics (field_topics)'),
     t('Page'),
   );
   $export['contacts'] = $view;
