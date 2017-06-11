@@ -1,0 +1,54 @@
+---
+layout: default
+label : פרוטוקולים
+---
+<div class = "ui segment centered row">
+  <h2> מאגר הפרוטוקולים </h2>
+</div>
+{% assign all_protocols = site.data.topics.protocols | sort: 'date' %}
+
+<div class = "ui stackable segment">
+  <div class="ui cards">
+  {% for protocol in all_protocols %}
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        {% if protocol.department %}
+        <a class = "ui label"> {{ protocol.department }} </a>
+        <br><br>
+        {% endif %}
+        <div class = "center aligned">
+          {{ protocol.title}}.
+          <br>
+          תאריך:  {{ protocol.date }}
+        </div>
+      </div>
+    </div>
+
+      <a href="{{ protocol.link }}" target="_blank">
+        <div class="ui bottom attached button">
+        <i class="download icon"></i>
+        להורדה
+      </div>
+      </a>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+
+    <div class = "ui segment row">
+      <div class = "three wide column">
+      </div>
+      <div class = "three wide column">
+      </div>
+      <div class = "three wide column">
+      </div>
+      <div class = "four wide column">
+        מאגרי מידע נוספים:
+        <div class="ui buttons">
+          <button href="#" class="ui red basic button">דו״חות</button>
+          <button href="#" class="ui blue basic button">תקנות וחוקי עזר</button>
+          <button href="#" class="ui green basic button">מכרזים</button>
+        </div>
+      </div>
+    </div>
