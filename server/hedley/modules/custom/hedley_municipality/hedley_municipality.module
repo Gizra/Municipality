@@ -257,11 +257,18 @@ function hedley_municipality_node_insert($node) {
 
   // Run the code to create all the vocabularies
   // and link it with the content types.
-  module_load_include('inc', 'c4m_og_vocab');
   $vocab_name = 'Topics for ' . check_plain($node->title);
+  $vocab = hedley_municipality_create_group_vocabulary($node, 'topics', $vocab_name);
 
-  // Create a new vocab for this Municipality.
-  hedley_municipality_create_group_vocabulary($node, 'topics', $vocab_name);
+  // Get all group content types.
+  $types = og_get_all_group_content_bundle();
+
+  // Only if we have group content types.
+  if (empty($types['node'])) {
+    return;
+  }
+
+  hedley_municipality_enable_group_vocabulary_on_group_content_types($types['node'], $vocab);
 }
 
 /**
@@ -290,7 +297,43 @@ function hedley_municipality_create_group_vocabulary($group, $machine_name, $nam
   taxonomy_vocabulary_save($vocab);
   // Set up the relationship between the vocabulary and the group.
   og_vocab_relation_save($vocab->vid, 'node', $group->nid);
+
+  // Add a color field to the newly created vocabulary.
+  $instance = [
+    'label' => 'Color',
+    'widget' => [
+        'weight' => 3,
+        'type' => 'options_select',
+        'module' => 'options',
+        'active' => 1,
+      ],
+    'field_name' => 'field_color',
+    'entity_type' => 'taxonomy_term',
+    'bundle' => $vocab->machine_name,
+  ];
+  field_create_instance($instance);
+
   return $vocab;
+}
+
+/**
+ * Create link between group content and group vocabularies.
+ *
+ * @param array $types
+ *   An array of settings per content type.
+ * @param object $vocab
+ *   The vocabulary object.
+ */
+function hedley_municipality_enable_group_vocabulary_on_group_content_types(array $types, $vocab) {
+  foreach ($types as $bundle => $type) {
+    // We do not support group taxonomies of non group content types.
+    if (!og_is_group_content_type('node', $bundle)) {
+      continue;
+    }
+    // Link the vocabulary to the content type.
+    $og_vocab = og_vocab_create_og_vocab($vocab->vid, 'node', $bundle, OG_VOCAB_FIELD);
+    $og_vocab->save();
+  }
 }
 
 /**
