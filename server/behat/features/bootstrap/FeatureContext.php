@@ -187,9 +187,9 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * @When I visit the page :page
+   * @When I visit the page :page_name
    */
-  public function iVisitThePage($page) {
+  public function iVisitThePage($page_name) {
 
     $info = [
       'Homepage' => '/',
@@ -335,15 +335,14 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @Then I should see the Municipality header
    */
   public function iShouldSeeTheMunicipalityHeader() {
-
     $sitename = $this->getSession()->getPage()->find('css', '.ui.header a')->getText();
 
     // Check if the site name is "Municipality".
-    if($sitename != 'Municipality') {
+    if ($sitename != 'Municipality') {
       $params = array(
         '@sitename' => $sitename,
       );
-      throw new \Exception(format_string('Site name is different then Municipality and equals to : @sitename', $params));
+      throw new \Exception(format_string('The expected site name is not displayed on the page, instead we see @sitename', $params));
     }
   }
 

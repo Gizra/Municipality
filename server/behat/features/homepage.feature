@@ -77,7 +77,7 @@ Feature: Homepage
       | عرعرة                   | ar       | residents    | Businesses AR |
       | المجلس الإقليمي للالسحرية | he       | residents    | עסקים         |
 
-  @api @site
+  @api
   Scenario: Verify that site name is Municipality
     Given I login with user "Admin"
     When I visit the page "Homepage"
