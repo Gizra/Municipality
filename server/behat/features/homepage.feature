@@ -82,11 +82,11 @@ Feature: Homepage
     Given I login with user "admin"
     When  I "add" "Residents" user type to municipality "קריית מלאכי"
     And I am an anonymous user
-    Then the user type menu should "appear" on municipality "קריית מלאכי" homepage
+    Then the user type menu should "appear" on municipality "קריית מלאכי" homepage for user types "עסקים,תושבים"
 
   @api
   Scenario: Verify that if admin removes a user type, when there are two, the menu will not be displayed on homepage
     Given I login with user "admin"
     When  I "remove" "Residents" user type to municipality "קריית מלאכי"
     And I am an anonymous user
-    Then the user type menu should "not appear" on municipality "קריית מלאכי" homepage
+    Then the user type menu should "not appear" on municipality "קריית מלאכי" homepage for user types "none"

@@ -90,22 +90,22 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * @Then the user type menu should :appear on municipality :municipality homepage
+   * @Then the user type menu should :appear on municipality :municipality homepage for user types :user_types
    */
-  public function theUserTypeMenuShouldOnMunicipalityHomepage($appear, $municipality) {
+  public function theUserTypeMenuShouldOnMunicipalityHomepageForUsertypes($appear, $municipality, $user_types) {
     $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
     $uri = $this->createUriWithGroupContext($group) ;
     $this->getSession()->visit($this->locatePath($uri));
-    $condition = $appear == 'appear' ? FALSE : TRUE;
+
+    // Get the user types switcher.
+    $user_type_element = $this->getSession()->getPage()->find('css', '.background .user-types');
+
+    // Sometimes we want to check that the links are not displayed therefor
+    // there will be an empty variable.
+    $user_types_array = $appear == 'appear' ? explode(',', $user_types) : [] ;
 
     // Check if the user type menu appears on homepage
-    if($this->getSession()->getPage()->find('css', '.background .user-types a.active') == $condition) {
-      $params = array(
-        '@municipality' => $municipality,
-        '@appears' => $condition ? 'appears' : 'Does not appear',
-      );
-      throw new \Exception(format_string('User type menu @appears on @municipality homepage', $params));
-    }
+    $this->checkLinksExistInElement($user_type_element, 'user type', $user_types_array);
   }
 
   /**
