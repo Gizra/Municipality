@@ -25,20 +25,19 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
    * Test get Events per language.
    */
   public function testEventsByLanguage() {
-    $ar_language_code = 'ar';
-    $he_language_code = 'he';
+    $en_language_code = 'en';
 
     // Create a municipality group.
     $user1 = $this->drupalCreateUser();
     $municipality_settings = [
       'type' => 'municipality',
       'uid' => $user1->uid,
-      'language' => $ar_language_code,
+      'language' => $en_language_code,
       // We need to set the default language field for the group because this
       // determines the language for all the group content under this group.
       'field_default_language' => [
         LANGUAGE_NONE => [
-          ['value' => $ar_language_code],
+          ['value' => $en_language_code],
         ],
       ],
     ];
@@ -48,13 +47,10 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
     $event_settings = [
       'type' => 'event',
       'uid' => $user1->uid,
-      'language' => $ar_language_code,
+      'language' => $en_language_code,
       'title_field' => [
-        $he_language_code => [
-          ['value' => 'Event name Hebrew'],
-        ],
-        $ar_language_code => [
-          ['value' => 'Event name Arabic'],
+        $en_language_code => [
+          ['value' => 'Event name English'],
         ],
       ],
       'field_date' => [
@@ -71,40 +67,15 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
     ];
 
     // Create the event node.
-    $node = $this->drupalCreateNode($event_settings);
+    $this->drupalCreateNode($event_settings);
 
-    // We need to load the node to get the correct object for translation.
-    $source = node_load($node->nid);
-
-    // Add translations to the node.
-    $factory = EntityTranslationHandlerFactory::getInstance();
-    $handler = $factory->getHandler('node', $source);
-
-    // Add Hebrew translation.
-    $translation = [
-      'entity_type' => 'node',
-      'entity_id' => $source->nid,
-      'revision_id' => $source->vid,
-      'uid' => $source->uid,
-      'translate' => '0',
-      'status' => '1',
-      'language' => 'he',
-      'source' => $source->language,
-      'created' => $source->created,
-      'changed' => $source->changed,
-    ];
-    $handler->setTranslation($translation, $source);
-
-    // Set expected titles in each language.
-    $he_expected_title = $event_settings['title_field'][$he_language_code][0]['value'];
-    $ar_expected_title = $event_settings['title_field'][$ar_language_code][0]['value'];
+    // Set expected title.
+    $en_expected_title = $event_settings['title_field'][$en_language_code][0]['value'];
 
     // Get the events from the function we want to test.
-    $he_municipality_event = hedley_event_get_events_by_group($municipality, $he_language_code);
-    $ar_municipality_event = hedley_event_get_events_by_group($municipality, $ar_language_code);
+    $en_municipality_event = hedley_event_get_events_by_group($municipality, $en_language_code);
 
-    $this->assertEqual($he_municipality_event[0]['name'], $he_expected_title, 'Expected Hebrew title is correct.');
-    $this->assertEqual($ar_municipality_event[0]['name'], $ar_expected_title, 'Expected Arabic title is correct.');
+    $this->assertEqual($en_municipality_event[0]['name'], $en_expected_title, 'Expected English title is correct.');
   }
 
 }
