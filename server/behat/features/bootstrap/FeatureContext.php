@@ -195,7 +195,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
       'Homepage' => '/',
     ];
 
-    $this->getSession()->visit($this->locatePath($info[$page]));
+    $this->getSession()->visit($this->locatePath($info[$page_name]));
   }
 
   /**
