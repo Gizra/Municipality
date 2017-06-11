@@ -13,7 +13,7 @@ GH_REPO="Gizra/Municipality"
 
 
 # The profile used to install the platform.
-PROFILE_NAME="municipality"
+PROFILE_NAME="hedley"
 # The human name of the install profile
 PROFILE_TITLE="Municipality"
 
