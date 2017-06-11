@@ -2,39 +2,23 @@
 layout: default
 label:  מכרזים קודמים
 ---
-
 <div class="ui stackable segment grid">
   <div class="ui segment centered row">
     <h2> מכרזים קודמים </h2>
   </div>
 
-  <div class = "three column row">
-      <div class = "column">
-      </div>
-      <div class = "column">
-        <div class="ui action input">
-          <input type="text" placeholder="נושא, שם או מחלקה...">
-          <div type="submit" class="ui button">חיפוש</div>
-        </div>
-      </div>
-      <div class = "column">
-        <button class="ui primary basic button"> לחיפוש מכרזים פתוחים</button>
-      </div>
-  </div>
-
-
   <div class="ui stackable segment row">
     {% assign all_tenders = (site.data.topics.business.tenders | sort: 'deadline.date') | reverse %}
 
-    <table class="ui selectable celled red compact table">
+    <table class="ui selectable celled red stackable table">
       <thead>
         <tr>
-          <th>כותרת המכרז</th>
-          <th>תאריך אחרון להגשה</th>
-          <th>מחלקה</th>
-          <th>אנשי קשר</th>
-          <th>דרישות סף</th>
-          <th>סכום נדרש</th>
+          <th class="three wide">כותרת המכרז</th>
+          <th class="one wide">תאריך אחרון להגשה</th>
+          <th class="one wide">מחלקה</th>
+          <th class="three wide">אנשי קשר</th>
+          <th class="seven wide">דרישות סף</th>
+          <th class="one wide">סכום נדרש</th>
         </tr>
       </thead>
       <tbody>
@@ -66,21 +50,23 @@ label:  מכרזים קודמים
                 {% for check_contact in site.data.contacts %}
                   {% if contact_name == check_contact.name %}
                     {{ contact_name }}:
-                    {% if check_contact.phone %}
-                      <span><a href="#">{{ check_contact.phone}} <i class="phone icon"></i> </a></span>
-                    {% endif %}
-                    {% if check_contact.email %}
-                      <a href="#">{{ check_contact.email}} <i class="mail icon"></i> </a>
-                    {% endif %}
-                    {% if check_contact.openning %}
-                      , {{check_contact.openning}}
-                      , כתובת: {{check_contact.address}}
-                    {% endif %}
-                  {% endif %}
+                    <div class = "ui list">
+                      {% if check_contact.phone %}
+                        <div class="item"><a href="#"><i class="phone icon"></i>{{ check_contact.phone}}</a></div>
+                          {% endif %}
+                          {% if check_contact.email %}
+                          <div class="item"><a href="#"><i class="mail icon"></i> {{ check_contact.email}} </a></div>
+                          {% endif %}
+                          {% if check_contact.openning %}
+                            <div class="item"> {{check_contact.openning}}</div>
+                            <div class="item"> כתובת: {{check_contact.address}}</div>
+                          {% endif %}
+                      {% endif %}
+                    </div>
                 {% endfor %}
                 <br>
               {% endfor %}
-            {% endif %}
+              {% endif %}
           </td>
           <td>
             {% if tender.hebrew.basic_requirements %}
@@ -120,4 +106,15 @@ label:  מכרזים קודמים
       </tfoot>
 
     </table>
+</div>
+
+<div class = "ui centered row">
+      מאגרי מידע נוספים:
+      <div class="ui buttons">
+        <button href="#" class="ui green basic button">מכרזים פתוחים</button>
+        <button href="#" class="ui red basic button">דו״חות</button></a>
+        <button href="#" class="ui blue basic button">פרוטוקולים</button>
+        <button href="#" class="ui purple basic button">תקנות וחוקי עזר</button>
+      </div>
+    </div>
 </div>
