@@ -161,10 +161,19 @@ function hedley_contact_get_contacts_by_group($group, $language_code) {
     if (!empty($wrapper->field_topics->raw())) {
       foreach ($topics as $topic) {
         $topic_wrapper = entity_metadata_wrapper('taxonomy_term', $topic);
+        $topic_wrapper->language($language_code);
+        // Ignore any term that isn't translated to the current language. In
+        // such case, the term's label would be empty.
+        if (!$topic_wrapper->label()) {
+          continue;
+        }
+
         $topics_array[] = [
           'id' => $topic_wrapper->getIdentifier(),
           'name' => $topic_wrapper->label(),
-          'color' => $topic_wrapper->field_color->value(),
+          // If the term doesn't have any color then default to white because
+          // elm expects a color here.
+          'color' => $topic_wrapper->field_color->value() ? $topic_wrapper->field_color->value() : 'white',
         ];
       }
     }
