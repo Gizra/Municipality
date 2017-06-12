@@ -157,8 +157,8 @@ function hedley_contact_get_contacts_by_group($group, $language_code) {
 
     // Get the topics related to the user, if not empty.
     $topics_array = array();
-    $topics = $wrapper->field_topics->value();
-    if (!empty($wrapper->field_topics->raw())) {
+    $topics = $wrapper->{OG_VOCAB_FIELD}->value();
+    if (!empty($wrapper->{OG_VOCAB_FIELD}->raw())) {
       foreach ($topics as $topic) {
         $topic_wrapper = entity_metadata_wrapper('taxonomy_term', $topic);
         $topic_wrapper->language($language_code);

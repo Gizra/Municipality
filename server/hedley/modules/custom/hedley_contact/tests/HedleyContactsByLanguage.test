@@ -111,7 +111,7 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
     $municipality = $this->drupalCreateNode($municipality_settings);
 
     // Create some Topics.
-    $topics_vocabulary = taxonomy_vocabulary_machine_name_load('topics');
+    $topics_vocabulary = taxonomy_vocabulary_machine_name_load('topics_' . $municipality->nid);
     $topic1 = $this->createTopic($topics_vocabulary, $he_language_code);
     $topic2 = $this->createTopic($topics_vocabulary, $he_language_code);
 
@@ -175,10 +175,10 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
           ],
         ],
       ],
-      'field_topics' => [
+      OG_VOCAB_FIELD => [
         LANGUAGE_NONE => [
-          ['tid' => $topic1->tid],
-          ['tid' => $topic2->tid],
+          ['target_id' => $topic1->tid],
+          ['target_id' => $topic2->tid],
         ],
       ],
       // Add the created group as the parent group for this entity.

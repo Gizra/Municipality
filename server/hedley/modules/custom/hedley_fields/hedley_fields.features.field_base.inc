@@ -1177,34 +1177,6 @@ function hedley_fields_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_topics'.
-  $field_bases['field_topics'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_topics',
-    'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'taxonomy',
-    'settings' => array(
-      'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'topics',
-          'parent' => 0,
-        ),
-      ),
-      'entity_translation_sync' => FALSE,
-      'options_list_callback' => 'i18n_taxonomy_allowed_values',
-    ),
-    'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
-  );
-
   // Exported field_base: 'field_user_types'.
   $field_bases['field_user_types'] = array(
     'active' => 1,
@@ -1318,6 +1290,40 @@ function hedley_fields_field_default_field_bases() {
       'target_type' => 'node',
     ),
     'target_type' => 'node',
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'og_vocabulary'.
+  $field_bases['og_vocabulary'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'og_vocabulary',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'og_vocab' => array(
+            'status' => TRUE,
+          ),
+          'taxonomy-index' => array(
+            'status' => TRUE,
+          ),
+        ),
+        'target_bundles' => array(),
+      ),
+      'target_type' => 'taxonomy_term',
+    ),
     'translatable' => 0,
     'type' => 'entityreference',
   );

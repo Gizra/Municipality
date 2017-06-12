@@ -57,5 +57,6 @@ files[] = tests/HedleyMunicipalityWebTestCase.test
 
 ; Tests
 files[] = tests/HedleyMunicipalityCheckNodeLangauge.test
+files[] = tests/HedleyMunicipalityCheckTopicsOgVocab.test
 files[] = tests/HedleyMunicipalityGetNodes.test
 files[] = tests/HedleyMunicipalityNodesNotPromotedByDefault.test

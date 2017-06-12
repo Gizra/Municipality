@@ -92,6 +92,9 @@ projects[og][version] = "2.9"
 projects[og_purl][subdir] = "contrib"
 projects[og_purl][version] = "1.2"
 
+projects[og_vocab][subdir] = "contrib"
+projects[og_vocab][version] = "1.2"
+
 projects[panels][subdir] = "contrib"
 projects[panels][version] = "3.9"
 
