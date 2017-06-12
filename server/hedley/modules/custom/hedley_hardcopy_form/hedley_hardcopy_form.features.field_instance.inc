@@ -55,7 +55,7 @@ function hedley_hardcopy_form_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 6,
+      'weight' => 4,
     ),
   );
 
@@ -99,7 +99,7 @@ function hedley_hardcopy_form_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -165,7 +165,7 @@ function hedley_hardcopy_form_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 0,
+      'weight' => 2,
     ),
   );
 
@@ -216,7 +216,7 @@ function hedley_hardcopy_form_field_default_field_instances() {
       'module' => 'og_vocab',
       'settings' => array(),
       'type' => 'og_vocab_complex',
-      'weight' => 7,
+      'weight' => 1,
     ),
   );
 
@@ -265,7 +265,7 @@ function hedley_hardcopy_form_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 

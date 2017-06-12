@@ -101,7 +101,7 @@ function hedley_hardcopy_form_views_default_views() {
   $handler->display->display_options['fields']['field_user_types']['table'] = 'field_data_field_user_types';
   $handler->display->display_options['fields']['field_user_types']['field'] = 'field_user_types';
   $handler->display->display_options['fields']['field_user_types']['delta_offset'] = '0';
-  /* Field: Content: Topics */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_topics']['id'] = 'field_topics';
   $handler->display->display_options['fields']['field_topics']['table'] = 'field_data_field_topics';
   $handler->display->display_options['fields']['field_topics']['field'] = 'field_topics';
@@ -163,11 +163,10 @@ function hedley_hardcopy_form_views_default_views() {
   );
   $handler->display->display_options['filters']['field_user_types_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_user_types_tid']['vocabulary'] = 'user_types';
-  /* Filter criterion: Content: Topics (field_topics) */
+  /* Filter criterion: Broken/missing handler */
   $handler->display->display_options['filters']['field_topics_tid']['id'] = 'field_topics_tid';
   $handler->display->display_options['filters']['field_topics_tid']['table'] = 'field_data_field_topics';
   $handler->display->display_options['filters']['field_topics_tid']['field'] = 'field_topics_tid';
-  $handler->display->display_options['filters']['field_topics_tid']['value'] = '';
   $handler->display->display_options['filters']['field_topics_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_topics_tid']['expose']['operator_id'] = 'field_topics_tid_op';
   $handler->display->display_options['filters']['field_topics_tid']['expose']['label'] = 'Topics (field_topics)';
@@ -178,7 +177,6 @@ function hedley_hardcopy_form_views_default_views() {
     1 => 0,
     3 => 0,
   );
-  $handler->display->display_options['filters']['field_topics_tid']['vocabulary'] = 'topics';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -208,7 +206,7 @@ function hedley_hardcopy_form_views_default_views() {
     t('Groups audience'),
     t('Title'),
     t('User types'),
-    t('Topics'),
+    t('Broken handler field_data_field_topics.field_topics'),
     t('File'),
     t('Edit link'),
     t('Groups audience (og_group_ref)'),
