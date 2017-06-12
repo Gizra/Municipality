@@ -183,8 +183,10 @@ function install_semantic_ui {
   cd "$ROOT"/hedley/libraries/semanticui/
   cp "$ROOT"/hedley/themes/custom/hedley_theme/semantic.json "$ROOT"/hedley/libraries/semanticui/semantic.json
 
-  # Install semantic-ui with our custom configuration.
-  npm install semantic-ui --save
+  # Install semantic-ui with our custom configuration but hide long output.
+  echo -e "${LMAGENTA}>> Starting semantic-ui installation...${RESTORE}"
+  npm install semantic-ui --save >/dev/null
+  echo -e "${LGREEN}>> Finished semantic-ui installation${RESTORE}"
 
   cd "$ROOT"
   echo

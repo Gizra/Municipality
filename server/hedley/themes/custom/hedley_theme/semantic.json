@@ -3,7 +3,7 @@
   "paths": {
     "source": {
       "config": "src/theme.config",
-      "definitions": "src/definitions/",
+      "definitions": "",
       "site": "src/site/",
       "themes": "src/themes/"
     },
