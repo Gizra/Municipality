@@ -196,7 +196,7 @@ function hedley_action_field_default_field_instances() {
       'module' => 'multifield',
       'settings' => array(),
       'type' => 'multifield_default',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -260,7 +260,7 @@ function hedley_action_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -304,7 +304,7 @@ function hedley_action_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -370,7 +370,7 @@ function hedley_action_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 
@@ -405,17 +405,23 @@ function hedley_action_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'og_vocabulary',
-    'label' => 'OG vocabulary',
-    'required' => FALSE,
+    'label' => 'Topics',
+    'required' => 0,
     'settings' => array(
+      'behaviors' => array(
+        'taxonomy-index' => array(
+          'status' => TRUE,
+        ),
+      ),
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 0,
       'module' => 'og_vocab',
       'settings' => array(),
       'type' => 'og_vocab_complex',
-      'weight' => 7,
+      'weight' => 2,
     ),
   );
 
@@ -469,7 +475,7 @@ function hedley_action_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 
@@ -478,12 +484,12 @@ function hedley_action_field_default_field_instances() {
   t('Action sections');
   t('Groups audience');
   t('Link');
-  t('OG vocabulary');
   t('Section description');
   t('Section hardcopy form');
   t('Section icon');
   t('Section title');
   t('Title');
+  t('Topics');
   t('User types');
 
   return $field_instances;

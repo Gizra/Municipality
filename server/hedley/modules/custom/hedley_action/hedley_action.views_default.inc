@@ -119,11 +119,10 @@ function hedley_action_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  /* Field: Content: OG vocabulary */
+  /* Field: Content: Topics */
   $handler->display->display_options['fields']['og_vocabulary']['id'] = 'og_vocabulary';
   $handler->display->display_options['fields']['og_vocabulary']['table'] = 'field_data_og_vocabulary';
   $handler->display->display_options['fields']['og_vocabulary']['field'] = 'og_vocabulary';
-  $handler->display->display_options['fields']['og_vocabulary']['label'] = 'Topics';
   $handler->display->display_options['fields']['og_vocabulary']['settings'] = array(
     'link' => 0,
   );
@@ -177,7 +176,7 @@ function hedley_action_views_default_views() {
   );
   $handler->display->display_options['filters']['field_user_types_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_user_types_tid']['vocabulary'] = 'user_types';
-  /* Filter criterion: Content: OG vocabulary (og_vocabulary) */
+  /* Filter criterion: Content: Topics (og_vocabulary) */
   $handler->display->display_options['filters']['og_vocabulary_target_id']['id'] = 'og_vocabulary_target_id';
   $handler->display->display_options['filters']['og_vocabulary_target_id']['table'] = 'field_data_og_vocabulary';
   $handler->display->display_options['filters']['og_vocabulary_target_id']['field'] = 'og_vocabulary_target_id';
