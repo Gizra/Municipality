@@ -268,6 +268,7 @@ function hedley_municipality_node_insert($node) {
     return;
   }
 
+  // Add the newly created vocabulary to all the group content.
   hedley_municipality_enable_group_vocabulary_on_group_content_types($types['node'], $vocab);
 }
 
