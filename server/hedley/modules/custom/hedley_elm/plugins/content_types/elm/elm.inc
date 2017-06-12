@@ -55,9 +55,9 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
       $app_id => [
         'page' => $page,
         'language' => $language->language,
-        'showAsBlock' => (bool)$conf['show_as_block'],
+        'showAsBlock' => (bool) $conf['show_as_block'],
         'values' => $values,
-      ]
+      ],
     ],
   ];
   drupal_add_js($settings, 'setting');

@@ -13,7 +13,7 @@ Drupal.behaviors.elm = {
     var elmApps = settings.elm;
 
     // Iterate over the apps.
-    Object.keys(elmApps).forEach(function(appName) {
+    Object.keys(elmApps).forEach(function (appName) {
 
       // The current app's settings.
       var appSettings = settings.elm[appName];
@@ -40,8 +40,6 @@ Drupal.behaviors.elm = {
 
       property.send(appSettings.values);
     });
-
-
 
   }
 };
