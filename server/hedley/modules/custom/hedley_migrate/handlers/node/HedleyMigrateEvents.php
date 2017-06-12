@@ -41,7 +41,6 @@ class HedleyMigrateEvents extends HedleyMigrateBase {
     'field_ticket_price',
   ];
   protected $simpleMultipleMappings = [
-    'field_topics',
     'field_user_types',
   ];
 
@@ -54,7 +53,6 @@ class HedleyMigrateEvents extends HedleyMigrateBase {
     $this->dependencies[] = 'HedleyMigrateMunicipalities';
     $this->dependencies[] = 'HedleyMigrateAudiences';
     $this->dependencies[] = 'HedleyMigrateUserTypes';
-    $this->dependencies[] = 'HedleyMigrateTopics';
 
     $this
       ->addFieldMapping(OG_AUDIENCE_FIELD, 'municipality')
