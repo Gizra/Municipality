@@ -26,10 +26,10 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    *   The use password.
    */
   protected function loginUser($name, $password) {
-    $this->getSession()->visit($this->locatePath('/#/login'));
+    $this->getSession()->visit($this->locatePath('/'));
     $element = $this->getSession()->getPage();
-    $element->fillField('username', $name);
-    $element->fillField('password', $password);
+    $element->fillField('name', $name);
+    $element->fillField('pass', $password);
     $submit = $element->findButton('Log in');
 
     if (empty($submit)) {
@@ -39,8 +39,6 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     // Log in.
     $submit->click();
 
-    // Wait for the dashboard's menu to load.
-    $this->iWaitForCssElement('.navbar-brand', 'appear');
   }
 
   /**
@@ -48,6 +46,32 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    */
   public function iLoginWithBadCredentials() {
     return $this->loginUser('wrong-foo', 'wrong-bar');
+  }
+
+  /**
+   * @When I :add :type user type to municipality :municipality
+   */
+  public function iUserTypeToMunicipality($add, $type, $municipality) {
+    $user_types_fields = [
+      'Businesses' => 'edit-field-user-types-und-19',
+      'Residents' => 'edit-field-user-types-und-18',
+    ];
+
+    $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
+    $uri = $this->createUriWithGroupContext($group, 'node/' . $group->nid . '/edit') ;
+    $this->getSession()->visit($this->locatePath($uri));
+
+    $form = $this->getSession()->getPage();
+    $field = $form->findField($user_types_fields[$type]);
+    if ($add == 'add') {
+      $field->check();
+    }
+    else {
+      $field->uncheck();
+    }
+
+    $submit = $this->getSession()->getPage()->find('css', '#edit-submit');
+    $submit->click();
   }
 
   /**
@@ -64,6 +88,26 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $xpath = $this->getSession()->getSelectorsHandler()->selectorToXpath('css', $element);
     $this->waitForXpathNode($xpath, $appear == 'appear');
   }
+
+  /**
+   * @Then the user type menu should :appear on municipality :municipality homepage for user types :user_types
+   */
+  public function theUserTypeMenuShouldOnMunicipalityHomepageForUsertypes($appear, $municipality, $user_types) {
+    $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
+    $uri = $this->createUriWithGroupContext($group) ;
+    $this->getSession()->visit($this->locatePath($uri));
+
+    // Get the user types switcher.
+    $user_type_element = $this->getSession()->getPage()->find('css', '.background .user-types');
+
+    // Sometimes we want to check that the links are not displayed therefor
+    // there will be an empty variable.
+    $user_types_array = $appear == 'appear' ? explode(',', $user_types) : [] ;
+
+    // Check if the user type menu appears on homepage
+    $this->checkLinksExistInElement($user_type_element, 'user type', $user_types_array);
+  }
+
   /**
    * @AfterStep
    *

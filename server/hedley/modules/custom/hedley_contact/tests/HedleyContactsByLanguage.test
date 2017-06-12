@@ -88,4 +88,176 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
     $this->assertEqual($ar_municipality_contact[0]['name'], $ar_expected_title, 'Expected Arabic title is correct.');
   }
 
+  /**
+   * Test all values for contact in a certain language.
+   */
+  public function testContactValuesByLanguage() {
+    $he_language_code = 'he';
+
+    // Create a municipality group.
+    $user1 = $this->drupalCreateUser();
+    $municipality_settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+      'language' => $he_language_code,
+      // We need to set the default language field for the group because this
+      // determines the language for all the group content under this group.
+      'field_default_language' => [
+        LANGUAGE_NONE => [
+          ['value' => $he_language_code],
+        ],
+      ],
+    ];
+    $municipality = $this->drupalCreateNode($municipality_settings);
+
+    // Create some Topics.
+    $topics_vocabulary = taxonomy_vocabulary_machine_name_load('topics');
+    $topic1 = $this->createTopic($topics_vocabulary, $he_language_code);
+    $topic2 = $this->createTopic($topics_vocabulary, $he_language_code);
+
+    // Create a Department.
+    $department_vocabulary = taxonomy_vocabulary_machine_name_load('departments');
+    $department = $this->createTerm($department_vocabulary, $he_language_code);
+
+    // Create a contact group content.
+    $contact_settings = [
+      'type' => 'contact',
+      'uid' => $user1->uid,
+      'language' => $he_language_code,
+      'field_first_name' => [
+        $he_language_code => [
+          ['value' => 'First name Hebrew'],
+        ],
+      ],
+      'field_last_name' => [
+        $he_language_code => [
+          ['value' => 'Last name Hebrew'],
+        ],
+      ],
+      'field_department' => [
+        LANGUAGE_NONE => [
+          ['tid' => $department->tid],
+        ],
+      ],
+      'field_email' => [
+        LANGUAGE_NONE => [
+          ['email' => 'foo@bar.com'],
+        ],
+      ],
+      'field_fax' => [
+        LANGUAGE_NONE => [
+          ['value' => '03-0000000'],
+        ],
+      ],
+      'field_phone' => [
+        LANGUAGE_NONE => [
+          ['value' => '03-1111111'],
+        ],
+      ],
+      'field_job_title' => [
+        LANGUAGE_NONE => [
+          ['value' => 'Job title'],
+        ],
+      ],
+      'field_reception_hours' => [
+        LANGUAGE_NONE => [
+          [
+            'field_hours' => [
+              LANGUAGE_NONE => [
+                ['value' => '14:30 - 18:00'],
+              ],
+            ],
+            'field_weekday' => [
+              LANGUAGE_NONE => [
+                ['value' => '1'],
+              ],
+            ],
+          ],
+        ],
+      ],
+      'field_topics' => [
+        LANGUAGE_NONE => [
+          ['tid' => $topic1->tid],
+          ['tid' => $topic2->tid],
+        ],
+      ],
+      // Add the created group as the parent group for this entity.
+      OG_AUDIENCE_FIELD => [
+        LANGUAGE_NONE => [
+          ['target_id' => $municipality->nid],
+        ],
+      ],
+    ];
+
+    // Create the contact node.
+    $this->drupalCreateNode($contact_settings);
+
+    // Get the contacts from the function we want to test.
+    $contacts = hedley_contact_get_contacts_by_group($municipality, $he_language_code);
+
+    // We are expecting only one contact to be returned.
+    $contact = reset($contacts);
+
+    // Set the expected values to be returned from the function.
+    $expected_values = [
+      'name' => 'First name Hebrew Last name Hebrew',
+      'phone' => '03-1111111',
+      'fax' => '03-0000000',
+      'email' => 'foo@bar.com',
+      'topics' => [
+        'color' => 'red',
+      ],
+      'reception_hours' => [
+        [
+          'days' => [
+            'Monday',
+          ],
+          'hours' => '14:30 - 18:00',
+        ],
+      ],
+    ];
+
+    foreach ($expected_values as $property => $expected_value) {
+      // Check that the property exists.
+      $this->assertTrue(in_array($property, array_keys($contact)), format_string('The property @property exists in the contact item', ['@property' => $property]));
+
+      // In topics we only going to check that the color exists, that's enough
+      // to know that the whole thing is there.
+      if ($property == 'topics') {
+        // Check that we are getting the right amount of topics.
+        $this->assertTrue(count($contact['topics']) == 2, 'The amount of topics is correct');
+
+        foreach ($contact['topics'] as $topic) {
+          // Check that the expected value of the topic is in the contact item.
+          $this->assertEqual($expected_value['color'], $topic['color'], format_string('The expected value for the property @property is in the contact item', ['@property' => $property]));
+        }
+      }
+      else {
+        // Check that the expected value is in the contact item.
+        $this->assertEqual($expected_value, $contact[$property], format_string('The expected value for the property @property is in the contact item', ['@property' => $property]));
+      }
+    }
+  }
+
+  /**
+   * Returns a new topic with a specific color.
+   *
+   * @param object $vocabulary
+   *   The vocabulary that we want to topic the term in.
+   * @param string $language
+   *   The language in which we want to create the topic.
+   *
+   * @return \stdClass
+   *   The created topic.
+   */
+  protected function createTopic($vocabulary, $language = LANGUAGE_NONE) {
+    $topic = $this->createTerm($vocabulary, $language);
+
+    // Add a specific color to all the created topics here.
+    $topic->field_color[LANGUAGE_NONE][0]['value'] = 'red';
+    taxonomy_term_save($topic);
+
+    return $topic;
+  }
+
 }
