@@ -160,11 +160,10 @@ function hedley_news_views_default_views() {
   $handler->display->display_options['fields']['field_subtitle']['id'] = 'field_subtitle';
   $handler->display->display_options['fields']['field_subtitle']['table'] = 'field_data_field_subtitle';
   $handler->display->display_options['fields']['field_subtitle']['field'] = 'field_subtitle';
-  /* Field: Content: OG vocabulary */
+  /* Field: Content: Topics */
   $handler->display->display_options['fields']['og_vocabulary']['id'] = 'og_vocabulary';
   $handler->display->display_options['fields']['og_vocabulary']['table'] = 'field_data_og_vocabulary';
   $handler->display->display_options['fields']['og_vocabulary']['field'] = 'og_vocabulary';
-  $handler->display->display_options['fields']['og_vocabulary']['label'] = 'Topics';
   $handler->display->display_options['fields']['og_vocabulary']['settings'] = array(
     'link' => 0,
   );

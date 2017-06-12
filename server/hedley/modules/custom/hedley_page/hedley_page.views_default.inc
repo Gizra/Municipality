@@ -93,11 +93,10 @@ function hedley_page_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: OG vocabulary */
+  /* Field: Content: Topics */
   $handler->display->display_options['fields']['og_vocabulary']['id'] = 'og_vocabulary';
   $handler->display->display_options['fields']['og_vocabulary']['table'] = 'field_data_og_vocabulary';
   $handler->display->display_options['fields']['og_vocabulary']['field'] = 'og_vocabulary';
-  $handler->display->display_options['fields']['og_vocabulary']['label'] = 'Topics';
   $handler->display->display_options['fields']['og_vocabulary']['settings'] = array(
     'link' => 0,
   );
@@ -146,7 +145,7 @@ function hedley_page_views_default_views() {
     1 => 0,
     3 => 0,
   );
-  /* Filter criterion: Content: OG vocabulary (og_vocabulary) */
+  /* Filter criterion: Content: Topics (og_vocabulary) */
   $handler->display->display_options['filters']['og_vocabulary_target_id']['id'] = 'og_vocabulary_target_id';
   $handler->display->display_options['filters']['og_vocabulary_target_id']['table'] = 'field_data_og_vocabulary';
   $handler->display->display_options['filters']['og_vocabulary_target_id']['field'] = 'og_vocabulary_target_id';
