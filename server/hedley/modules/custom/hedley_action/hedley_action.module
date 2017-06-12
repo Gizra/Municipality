@@ -65,8 +65,10 @@ function hedley_action_get_action_title_link($wrapper, array $class = []) {
     $href = url($link['url']);
   }
 
-  return l($wrapper->label(), $href, ['attributes' => [
-    'target' => $target,
-    'class' => $class,
-  ]]);
+  return l($wrapper->label(), $href, [
+    'attributes' => [
+      'target' => $target,
+      'class' => $class,
+    ],
+  ]);
 }
