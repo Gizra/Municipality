@@ -21,7 +21,6 @@ dependencies[] = views
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
-features[field_base][] = og_vocabulary
 features[field_instance][] = multifield-field_action_sections-field_section_description
 features[field_instance][] = multifield-field_action_sections-field_section_hardcopy_form
 features[field_instance][] = multifield-field_action_sections-field_section_icon
