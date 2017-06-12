@@ -82,6 +82,7 @@ function hedley_contact_default_page_manager_pages() {
     'override_title' => 0,
     'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'show_as_block' => 0,
   );
   $pane->cache = array();
   $pane->style = array(

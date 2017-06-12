@@ -44,6 +44,7 @@ init flags =
         ( { emptyModel
             | page = page
             , language = language
+            , showAsBlock = flags.showAsBlock
           }
         , Cmd.none
         )

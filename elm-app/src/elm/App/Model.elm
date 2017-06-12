@@ -9,8 +9,6 @@ module App.Model
 import App.Types exposing (Language(..), Page(..))
 import Contact.Model exposing (Model, Msg)
 import Event.Model exposing (Model, Msg)
-import DictList exposing (DictList)
-import EveryDict exposing (EveryDict)
 
 
 type Msg
@@ -21,6 +19,7 @@ type Msg
 type alias Flags =
     { page : String
     , language : String
+    , showAsBlock : Bool
     }
 
 
@@ -29,6 +28,7 @@ type alias Model =
     , page : Page
     , pageContact : Contact.Model.Model
     , pageEvent : Event.Model.Model
+    , showAsBlock : Bool
     }
 
 
@@ -38,4 +38,5 @@ emptyModel =
     , page = NotFound
     , pageContact = Contact.Model.emptyModel
     , pageEvent = Event.Model.emptyModel
+    , showAsBlock = False
     }
