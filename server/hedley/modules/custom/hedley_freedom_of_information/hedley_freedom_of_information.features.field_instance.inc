@@ -150,7 +150,7 @@ function hedley_freedom_of_information_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -194,7 +194,7 @@ function hedley_freedom_of_information_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -375,57 +375,6 @@ function hedley_freedom_of_information_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-freedom_of_information-og_vocabulary'.
-  $field_instances['node-freedom_of_information-og_vocabulary'] = array(
-    'bundle' => 'freedom_of_information',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'og_vocab',
-        'settings' => array(
-          'concatenate' => FALSE,
-        ),
-        'type' => 'og_vocab',
-        'weight' => 10,
-      ),
-      'homepage_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'og_vocabulary',
-    'label' => 'Topics',
-    'required' => 0,
-    'settings' => array(
-      'behaviors' => array(
-        'taxonomy-index' => array(
-          'status' => TRUE,
-        ),
-      ),
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'og_vocab',
-      'settings' => array(),
-      'type' => 'og_vocab_complex',
-      'weight' => 2,
-    ),
-  );
-
   // Exported field_instance: 'node-freedom_of_information-title_field'.
   $field_instances['node-freedom_of_information-title_field'] = array(
     'bundle' => 'freedom_of_information',
@@ -485,7 +434,6 @@ function hedley_freedom_of_information_field_default_field_instances() {
   t('Groups audience');
   t('Publish date');
   t('Title');
-  t('Topics');
 
   return $field_instances;
 }
