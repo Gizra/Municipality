@@ -53,8 +53,8 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    */
   public function iUserTypeToMunicipality($add, $type, $municipality) {
     $user_types_fields = [
-      'Businesses' => 'edit-field-user-types-und-19',
-      'Residents' => 'edit-field-user-types-und-18',
+      'Businesses' => 'edit-field-user-types-und-12',
+      'Residents' => 'edit-field-user-types-und-11',
     ];
 
     $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
