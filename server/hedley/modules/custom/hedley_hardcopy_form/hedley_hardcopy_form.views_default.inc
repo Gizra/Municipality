@@ -96,7 +96,7 @@ function hedley_hardcopy_form_views_default_views() {
   $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
   $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
-  /* Field: Content: user types */
+  /* Field: Content: User types */
   $handler->display->display_options['fields']['field_user_types']['id'] = 'field_user_types';
   $handler->display->display_options['fields']['field_user_types']['table'] = 'field_data_field_user_types';
   $handler->display->display_options['fields']['field_user_types']['field'] = 'field_user_types';
