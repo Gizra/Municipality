@@ -6,6 +6,20 @@
  */
 
 /**
+ * Preprocess html.
+ *
+ * Add semantic-ui-rtl support for languages that have a right to left
+ * direction.
+ */
+function hedley_theme_preprocess_html() {
+  global $language;
+
+  if ($language->direction == 1) {
+    drupal_add_css(libraries_get_path('semanticui') . '/dist/semantic.rtl.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -9));
+  }
+}
+
+/**
  * Preprocess node.
  *
  * Add a theme suggestion including the bundle and view mode.

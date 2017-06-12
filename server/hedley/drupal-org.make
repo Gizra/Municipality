@@ -137,7 +137,7 @@ projects[semanticui][type] = "theme"
 ; Libraries
 libraries[semanticui][type] = "libraries"
 libraries[semanticui][download][type] = "get"
-libraries[semanticui][download][url] = "https://github.com/Semantic-Org/Semantic-UI/archive/master.zip"
+libraries[semanticui][download][url] = "https://github.com/Semantic-Org/Semantic-UI-CSS/archive/master.zip"
 
 ; Development
 projects[devel][subdir] = "development"

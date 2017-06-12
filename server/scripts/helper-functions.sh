@@ -174,6 +174,24 @@ function drupal_make {
 
 
 ##
+# Install the base components of semantic-ui in both ltr & rtl.
+##
+function install_semantic_ui {
+  echo -e "${LBLUE}> Run the semantic-ui installation${RESTORE}"
+
+  # Copy the custom semantic.json to the library's root.
+  cd "$ROOT"/hedley/libraries/semanticui/
+  cp "$ROOT"/hedley/themes/custom/hedley_theme/semantic.json "$ROOT"/hedley/libraries/semanticui/semantic.json
+
+  # Install semantic-ui with our custom configuration.
+  npm install semantic-ui --save
+
+  cd "$ROOT"
+  echo
+}
+
+
+##
 # Install the profile as configured in the config.sh file.
 ##
 function install_drupal_profile {

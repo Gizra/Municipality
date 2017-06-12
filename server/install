@@ -134,6 +134,8 @@ drupal_make
 # Symlink extra modules (if any).
 symlink_externals
 
+# Install semantic-ui library.
+install_semantic_ui
 
 # Install the Drupal profile as defined in the config.sh file.
 install_drupal_profile
