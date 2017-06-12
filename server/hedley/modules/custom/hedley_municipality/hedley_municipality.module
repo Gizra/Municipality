@@ -71,7 +71,7 @@ function hedley_municipality_get_nodes_add_filters_to_query(EntityFieldQuery $qu
 
   // Filter by current topic.
   if ($topic_tid) {
-    $query->fieldCondition('field_topics', 'tid', $topic_tid);
+    $query->fieldCondition(OG_VOCAB_FIELD, 'target_id', $topic_tid);
   }
 
   // Order entities by node ID.
