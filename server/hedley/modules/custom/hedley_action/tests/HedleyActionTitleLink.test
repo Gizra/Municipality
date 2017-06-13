@@ -92,8 +92,18 @@ class HedleyActionTitleLink extends HedleyMunicipalityWebTestCase {
     $action_no_link_wrapper = entity_metadata_wrapper('node', $action_no_link->nid);
 
     // Define the expected links.
-    $action_link_expected_link = l($action_link_settings['title_field'][LANGUAGE_NONE][0]['value'], $action_link_settings['field_link'][LANGUAGE_NONE][0]['url'], ['attributes' => ['target' => '_blank']]);
-    $action_no_link_expected_link = l($action_no_link_settings['title_field'][LANGUAGE_NONE][0]['value'], url('node/' . $action_no_link->nid, ['absolute' => TRUE]), ['attributes' => ['target' => '']]);
+    $action_link_expected_link = l($action_link_settings['title_field'][LANGUAGE_NONE][0]['value'], $action_link_settings['field_link'][LANGUAGE_NONE][0]['url'], [
+      'attributes' => [
+        'target' => '_blank',
+        'class' => [],
+      ]
+    ]);
+    $action_no_link_expected_link = l($action_no_link_settings['title_field'][LANGUAGE_NONE][0]['value'], url('node/' . $action_no_link->nid, ['absolute' => TRUE]), [
+      'attributes' => [
+        'target' => '',
+        'class' => [],
+      ]
+    ]);
 
     // Get the links from the function.
     $action_link_title_link = hedley_action_get_action_title_link($action_link_wrapper);
