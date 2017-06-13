@@ -18,7 +18,7 @@ view language showAsBlock model =
         []
         [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "ui horizontal divider" ] [ text <| translate language MatchingResults ]
-        , div [ class "ui container center aligned" ] [ viewEvents language model ]
+        , div [ class "ui container center aligned" ] [ viewEvents language showAsBlock model ]
         , divider
         ]
 
@@ -40,8 +40,8 @@ viewEventFilter language filterString =
 
 {-| View all events.
 -}
-viewEvents : Language -> Model -> Html msg
-viewEvents language { events, filterString } =
+viewEvents : Language -> Bool -> Model -> Html msg
+viewEvents language showAsBlock { events, filterString } =
     let
         filteredEvents =
             filterEvents events filterString
@@ -53,7 +53,10 @@ viewEvents language { events, filterString } =
                 (filteredEvents
                     |> DictList.map
                         (\eventId event ->
-                            viewEvent language ( eventId, event )
+                            if showAsBlock then
+                                viewEventAsBlock language ( eventId, event )
+                            else
+                                viewEvent language ( eventId, event )
                         )
                     |> DictList.values
                 )
@@ -144,5 +147,29 @@ viewEvent language ( eventId, event ) =
                         ]
                     ]
                 ]
+            ]
+        ]
+
+
+{-| View a single event that will appear in a block (i.e. with less information).
+-}
+viewEventAsBlock : Language -> ( EventId, Event ) -> Html msg
+viewEventAsBlock language ( eventId, event ) =
+    div
+        [ class "card" ]
+        [ showMaybe <|
+            Maybe.map
+                (\imageUrl ->
+                    div [ class "image" ]
+                        [ img [ src imageUrl ]
+                            []
+                        ]
+                )
+                event.imageUrl
+        , div
+            [ class "content" ]
+            [ div
+                [ class "header" ]
+                [ text event.name ]
             ]
         ]
