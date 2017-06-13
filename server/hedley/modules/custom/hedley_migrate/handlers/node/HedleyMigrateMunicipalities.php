@@ -58,4 +58,15 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
       ->defaultValue($this->getMigrateDirectory() . '/files/');
   }
 
+  /**
+   * Add some new terms to each group (Municipality).
+   */
+  public function complete($entity) {
+    $terms_to_add = [
+      'Kindergarten',
+      'Culture',
+      'Arnona',
+    ];
+  }
+
 }
