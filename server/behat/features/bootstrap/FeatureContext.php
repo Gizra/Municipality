@@ -378,13 +378,13 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * @Then I should see the Municipality header
+   * @Then I should see the :header header
    */
-  public function iShouldSeeTheMunicipalityHeader() {
+  public function iShouldSeeTheMunicipalityHeader($header) {
     $sitename = $this->getSession()->getPage()->find('css', '.ui.header a')->getText();
 
     // Check if the site name is "Municipality".
-    if ($sitename != 'Municipality') {
+    if ($sitename != $header) {
       $params = array(
         '@sitename' => $sitename,
       );
