@@ -96,13 +96,13 @@ class HedleyActionTitleLink extends HedleyMunicipalityWebTestCase {
       'attributes' => [
         'target' => '_blank',
         'class' => [],
-      ]
+      ],
     ]);
     $action_no_link_expected_link = l($action_no_link_settings['title_field'][LANGUAGE_NONE][0]['value'], url('node/' . $action_no_link->nid, ['absolute' => TRUE]), [
       'attributes' => [
         'target' => '',
         'class' => [],
-      ]
+      ],
     ]);
 
     // Get the links from the function.
