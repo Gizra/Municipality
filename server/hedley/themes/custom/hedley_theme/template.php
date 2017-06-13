@@ -15,7 +15,11 @@ function hedley_theme_preprocess_html() {
   global $language;
 
   if ($language->direction == 1) {
-    drupal_add_css(libraries_get_path('semanticui') . '/dist/semantic.rtl.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -9));
+    drupal_add_css(libraries_get_path('semanticui') . '/dist/semantic.rtl.css', [
+      'group' => CSS_THEME,
+      'every_page' => TRUE,
+      'weight' => -9,
+    ]);
   }
 }
 
