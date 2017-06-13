@@ -13,7 +13,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    */
   public function iLoginWithUser($name) {
     // $password = $this->drupal_users[$name];
-    $password = 'admin';
+    $password = $name;
     $this->loginUser($name, $password);
   }
 

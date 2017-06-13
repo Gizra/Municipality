@@ -7,4 +7,4 @@ Feature: Edit entities pages.
   Scenario: Verify that as an admin I can see the WYSIWYG content editor.
     Given I login with user "admin"
     When I edit "סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה" node of type "Event"
-    Then I should see "Source"
+    Then I should see "Bold"
