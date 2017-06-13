@@ -232,6 +232,29 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $this->getSession()->visit($this->locatePath('node/' . $nid));
   }
 
+  /**
+   * @When I edit :title node of type :type
+   */
+  public function iEditNodeOfType($title, $type) {
+    $query = new \entityFieldQuery();
+    $result = $query
+      ->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', strtolower($type))
+      ->propertyCondition('title', $title)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->range(0, 1)
+      ->execute();
+    if (empty($result['node'])) {
+      $params = array(
+        '@title' => $title,
+        '@type' => $type,
+      );
+      throw new \Exception(format_string("Node @title of @type not found.", $params));
+    }
+    $nid = key($result['node']);
+    $this->getSession()->visit($this->locatePath('node/' . $nid . '/edit  '));
+  }
+
 
   /**
    * @When I visit a :municipality website homepage with no parameters in URL
