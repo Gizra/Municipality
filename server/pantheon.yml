@@ -1,4 +1,5 @@
 api_version: 1
+php_version: 7.0
 
 workflows:
   clone_database:

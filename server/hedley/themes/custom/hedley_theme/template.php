@@ -37,6 +37,8 @@ function hedley_theme_panels_default_style_render_region($variables) {
 function hedley_theme_preprocess_page(&$variables) {
   // Add the language switch links.
   $variables['language_switch_links'] = hedley_i18n_language_switch_links();
+  // The class depending on the amount of languages the municipality have.
+  $variables['language_switch_links_class'] = hedley_theme_number_as_word(count($variables['language_switch_links']));
 
   // Add user type links.
   $variables['user_type_links'] = hedley_terms_get_user_type_links();
@@ -66,7 +68,7 @@ function hedley_theme_preprocess_page(&$variables) {
     $variables['terms_url'] = url('node/' . $wrapper->field_terms_page->getIdentifier());
   }
   // Last updated date.
-  $variables['last_updated'] = format_date($wrapper->field_last_update->value(), 'short');
+  $variables['last_updated'] = $wrapper->field_last_update->value() ? format_date($wrapper->field_last_update->value(), 'short') : NULL;
   // Footer text.
   $variables['footer_text'] = $wrapper->field_footer_text->value() ? $wrapper->field_footer_text->value->value() : NULL;
   // Get first background image.

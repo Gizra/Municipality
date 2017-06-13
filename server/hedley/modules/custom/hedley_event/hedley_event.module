@@ -6,3 +6,75 @@
  */
 
 include_once 'hedley_event.features.inc';
+
+/**
+ * Return events by group.
+ *
+ * @param object $group
+ *   The group.
+ * @param string $language_code
+ *   The language code (e.g. "he", "ar").
+ *
+ * @return array
+ *   Array with the events list.
+ */
+function hedley_event_get_events_by_group($group, $language_code) {
+  // Get contact nodes by group.
+  $nodes = hedley_municipality_get_nodes('event', 100, $group);
+  if (!$nodes) {
+    // No contacts found.
+    return NULL;
+  }
+
+  $events = [];
+  foreach ($nodes as $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $wrapper->language($language_code);
+
+    // Ignore events without a title in the current language.
+    if (!$wrapper->label()) {
+      continue;
+    }
+
+    $image = $wrapper->field_image->value();
+    $date = $wrapper->field_date->value();
+
+    if (empty($date)) {
+      // Date is required but just in case date is missing in some translation.
+      continue;
+    }
+
+    $event = [
+      'id' => $wrapper->getIdentifier(),
+      'name' => check_plain($wrapper->label()),
+      'image_url' => !empty($image) ? image_style_url('medium', $image['uri']) : NULL,
+      'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : NULL,
+      'date' => hedley_event_timestamp_to_iso8601($date['value']),
+      // Make sure the end date isn't the same as the start date.
+      'end_date' => !empty($date) && $date['value2'] && $date['value'] != $date['value2'] ? hedley_event_timestamp_to_iso8601($date['value2']) : NULL,
+      'recurring_weekly' => $wrapper->field_recurring_weekly->value(),
+      'ticket_price' => $wrapper->field_ticket_price->value() ? $wrapper->field_ticket_price->value() : NULL,
+    ];
+
+    // Remove empty values (elm expects the correct value or nothing), but keep
+    // the values with `FALSE` value.
+    $events[] = array_filter($event, function ($value) {
+      return !is_null($value);
+    });
+  }
+
+  return $events;
+}
+
+/**
+ * Convert Unix timestamp to ISO8601.
+ *
+ * @param int $timestamp
+ *   The Unix timestamp.
+ *
+ * @return false|string
+ *   The converted timestamp.
+ */
+function hedley_event_timestamp_to_iso8601($timestamp) {
+  return date('c', $timestamp);
+}

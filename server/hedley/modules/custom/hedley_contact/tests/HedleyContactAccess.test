@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyContactAccess.
+ */
+
+/**
+ * Class HedleyContactAccess.
+ */
+class HedleyContactAccess extends HedleyMunicipalityWebTestCase {
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Contact access',
+      'description' => 'Test access to the Contact page.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Test access to the Contact page.
+   */
+  public function testAccess() {
+    // Access site-wide contact.
+    $this->drupalGet('contacts');
+    $this->assertResponse(403);
+
+    // Create a group.
+    $user1 = $this->drupalCreateUser();
+    $settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+    ];
+
+    $node = $this->drupalCreateNode($settings);
+
+    $purl = [
+      'provider' => 'og_purl|node',
+      'id' => $node->nid,
+    ];
+    $this->drupalGet('contacts', ['purl' => $purl]);
+    $this->assertResponse(200);
+  }
+
+}

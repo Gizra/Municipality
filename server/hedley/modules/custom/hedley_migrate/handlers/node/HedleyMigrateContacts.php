@@ -31,6 +31,7 @@ class HedleyMigrateContacts extends HedleyMigrateBase {
     'field_address',
     'field_topics',
     'field_user_types',
+    'field_department',
   ];
   protected $simpleMappings = [
     'field_first_name',
@@ -40,9 +41,9 @@ class HedleyMigrateContacts extends HedleyMigrateBase {
     'field_phone',
     'field_fax',
     'field_address',
+    'field_department',
   ];
   protected $simpleMultipleMappings = [
-    'field_topics',
     'field_user_types',
   ];
 
@@ -52,9 +53,9 @@ class HedleyMigrateContacts extends HedleyMigrateBase {
   public function __construct($arguments) {
     parent::__construct($arguments);
 
+    $this->dependencies[] = 'HedleyMigrateDepartments';
     $this->dependencies[] = 'HedleyMigrateMunicipalities';
     $this->dependencies[] = 'HedleyMigrateUserTypes';
-    $this->dependencies[] = 'HedleyMigrateTopics';
 
     $this
       ->addFieldMapping(OG_AUDIENCE_FIELD, 'municipality')

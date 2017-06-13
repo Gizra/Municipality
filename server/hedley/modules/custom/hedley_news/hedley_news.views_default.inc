@@ -151,7 +151,7 @@ function hedley_news_views_default_views() {
     'image_style' => 'thumbnail',
     'image_link' => '',
   );
-  /* Field: Content: user types */
+  /* Field: Content: User types */
   $handler->display->display_options['fields']['field_user_types']['id'] = 'field_user_types';
   $handler->display->display_options['fields']['field_user_types']['table'] = 'field_data_field_user_types';
   $handler->display->display_options['fields']['field_user_types']['field'] = 'field_user_types';
@@ -161,9 +161,13 @@ function hedley_news_views_default_views() {
   $handler->display->display_options['fields']['field_subtitle']['table'] = 'field_data_field_subtitle';
   $handler->display->display_options['fields']['field_subtitle']['field'] = 'field_subtitle';
   /* Field: Content: Topics */
-  $handler->display->display_options['fields']['field_topics']['id'] = 'field_topics';
-  $handler->display->display_options['fields']['field_topics']['table'] = 'field_data_field_topics';
-  $handler->display->display_options['fields']['field_topics']['field'] = 'field_topics';
+  $handler->display->display_options['fields']['og_vocabulary']['id'] = 'og_vocabulary';
+  $handler->display->display_options['fields']['og_vocabulary']['table'] = 'field_data_og_vocabulary';
+  $handler->display->display_options['fields']['og_vocabulary']['field'] = 'og_vocabulary';
+  $handler->display->display_options['fields']['og_vocabulary']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['og_vocabulary']['delta_offset'] = '0';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';

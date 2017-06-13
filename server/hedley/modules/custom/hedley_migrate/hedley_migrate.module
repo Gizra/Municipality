@@ -18,14 +18,16 @@ function hedley_migrate_migrate_api() {
     'HedleyMigrateContacts',
     'HedleyMigrateEvents',
     'HedleyMigrateFaqs',
+    'HedleyMigrateFoi',
     'HedleyMigrateHardcopyForms',
     'HedleyMigrateMunicipalities',
     'HedleyMigrateNews',
     'HedleyMigratePages',
+    'HedleyMigrateTenders',
     // Terms.
     'HedleyMigrateAudiences',
+    'HedleyMigrateDepartments',
     'HedleyMigrateUserTypes',
-    'HedleyMigrateTopics',
     // Users.
     'HedleyMigrateUsers',
   ];

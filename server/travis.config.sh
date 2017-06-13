@@ -8,11 +8,14 @@
 #
 #########################################################################################
 
+# GitHub Repository identifier
+GH_REPO="Gizra/Municipality"
+
 
 # The profile used to install the platform.
 PROFILE_NAME="hedley"
 # The human name of the install profile
-PROFILE_TITLE="Municipality"
+PROFILE_TITLE="Hedley"
 
 
 # Modify the URL below to match your local domain the site will be accessible on.

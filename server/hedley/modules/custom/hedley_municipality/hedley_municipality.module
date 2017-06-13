@@ -17,49 +17,151 @@ function hedley_municipality_ctools_plugin_directory($module, $plugin) {
 }
 
 /**
- * Get nodes of a municipality group, according to current user type.
+ * Get the base query for fetching nodes.
  *
  * @param string $bundle
  *   The wanted nodes bundle.
  * @param int $max_range
- *   Maximal amount of nodes to fetch.
- * @param int $municipality_node
- *   Optional municipality node to filter by.
- * @param bool $promoted_only
- *   Whether to get only promoted nodes.
- * @param int $topic_tid
- *   Optional filter by field_topics.
+ *   Maximal amount of nodes to fetch, defaults to 50.
  *
- * @return array
- *   Node objects.
+ * @return \EntityFieldQuery
+ *   The base query.
  */
-function hedley_municipality_get_nodes($bundle, $max_range, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0) {
-  // Get promoted FAQ nodes of the viewed municipality.
+function hedley_municipality_get_nodes_base_query($bundle, $max_range = 50) {
   $query = new EntityFieldQuery();
   $query
     ->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', $bundle)
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyOrderBy('created', 'DESC')
-    // Filter by current user type.
-    ->fieldCondition('field_user_types', 'tid', hedley_terms_get_current_user_type_tid())
+    // Set query range.
     ->range(0, $max_range);
 
+  return $query;
+
+}
+
+/**
+ * Add filters to the base query for fetching nodes.
+ *
+ * @param \EntityFieldQuery $query
+ *   The base query.
+ * @param object|null $municipality_node
+ *   Optional "Municipality" node to filter by.
+ * @param bool $promoted_only
+ *   Whether to get only promoted nodes, defaults to FALSE.
+ * @param int $topic_tid
+ *   Optional filter by topics.
+ * @param string $order_direction
+ *   Optional The direction of the order of the entities. (i.e. 'DESC', 'ASC')
+ *   Ordered by node ID.
+ *
+ * @return \EntityFieldQuery
+ *   The filtered query.
+ */
+function hedley_municipality_get_nodes_add_filters_to_query(EntityFieldQuery $query, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
   // Filter by municipality.
   if ($municipality_node) {
     $query->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $municipality_node->nid);
   }
+
   // Filter by promoted nodes.
   if ($promoted_only) {
     $query->propertyCondition('promote', NODE_PROMOTED);
   }
+
   // Filter by current topic.
   if ($topic_tid) {
-    $query->fieldCondition('field_topics', 'tid', $topic_tid);
+    $query->fieldCondition(OG_VOCAB_FIELD, 'target_id', $topic_tid);
   }
+
+  // Order entities by node ID.
+  $query->propertyOrderBy('nid', $order_direction);
+
+  return $query;
+}
+
+/**
+ * Get nodes of any content type.
+ *
+ * Has an option to get nodes by a group and then filter those nodes by more
+ * properties.
+ *
+ * @param string $bundle
+ *   The wanted nodes bundle.
+ * @param int $max_range
+ *   Maximal amount of nodes to fetch, defaults to 50.
+ * @param object|null $municipality_node
+ *   Optional "Municipality" node to filter by.
+ * @param bool $promoted_only
+ *   Whether to get only promoted nodes.
+ * @param int $topic_tid
+ *   Optional filter by topics.
+ * @param string $order_direction
+ *   Optional The direction of the order of the entities. (i.e. 'DESC', 'ASC')
+ *   Ordered by node ID.
+ *
+ * @return array
+ *   Node objects.
+ */
+function hedley_municipality_get_nodes($bundle, $max_range = 50, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
+  // Get the base node query for nodes.
+  $query = hedley_municipality_get_nodes_base_query($bundle, $max_range);
+
+  // Add filters to the query.
+  $query = hedley_municipality_get_nodes_add_filters_to_query($query, $municipality_node, $promoted_only, $topic_tid, $order_direction);
+
   $result = $query->execute();
 
-  return !empty($result['node']) ? node_load_multiple(array_keys($result['node'])) : [];
+  if (empty($result['node'])) {
+    // Return empty if there're no results.
+    return [];
+  }
+
+  $nodes_ids = array_keys($result['node']);
+
+  return node_load_multiple($nodes_ids);
+}
+
+/**
+ * Get nodes of a municipality group, according to current user type.
+ *
+ * @param string $bundle
+ *   The wanted nodes bundle.
+ * @param int $max_range
+ *   Maximal amount of nodes to fetch, defaults to 50.
+ * @param object|null $municipality_node
+ *   Optional "Municipality" node to filter by.
+ * @param bool $promoted_only
+ *   Whether to get only promoted nodes.
+ * @param int $topic_tid
+ *   Optional filter by topics.
+ * @param string $order_direction
+ *   Optional The direction of the order of the entities. (i.e. 'DESC', 'ASC')
+ *   Ordered by node ID.
+ *
+ * @return array
+ *   Node objects.
+ */
+function hedley_municipality_get_nodes_by_user_type($bundle, $max_range = 50, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
+  // Get the base node query for nodes.
+  $query = hedley_municipality_get_nodes_base_query($bundle, $max_range);
+
+  // Add filters to the query.
+  $query = hedley_municipality_get_nodes_add_filters_to_query($query, $municipality_node, $promoted_only, $topic_tid, $order_direction);
+
+  // Filter by current user type.
+  $query->fieldCondition('field_user_types', 'tid', hedley_terms_get_current_user_type_tid());
+
+  $result = $query->execute();
+
+  if (empty($result['node'])) {
+    // Return empty if there're no results.
+    return [];
+  }
+
+  $nodes_ids = array_keys($result['node']);
+
+  return node_load_multiple($nodes_ids);
 }
 
 /**
@@ -76,6 +178,9 @@ function hedley_municipality_entity_info_alter(&$entity_info) {
 
 /**
  * Get the current municipality context.
+ *
+ * @todo: This should be removed in favor of og_context(), which should get
+ * the answers.
  *
  * @return mixed
  *   The municipality node, when available.
@@ -111,11 +216,17 @@ function hedley_municipality_form_municipality_node_form_alter(&$form, &$form_st
  * Set nodes titles according to their municipality's default language.
  */
 function hedley_municipality_node_presave($node) {
-  $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_node_municipality($node));
+  if (!isset($node->title_field)) {
+    return;
+  }
 
-  // Set the node language according to the municipality's default.
+  // No need to continue if for some reason there's no parent group.
+  if (!$municipality = hedley_municipality_node_municipality($node)) {
+    return;
+  }
+
+  $municipality_wrapper = entity_metadata_wrapper('node', $municipality);
   $municipality_language = $municipality_wrapper->field_default_language->value();
-  $node->language = $municipality_language;
 
   // Update the municipality's last updated field.
   $municipality_wrapper->field_last_update->set(REQUEST_TIME);
@@ -125,14 +236,112 @@ function hedley_municipality_node_presave($node) {
     $municipality_wrapper->save();
   }
 
-  if (!isset($node->title_field)) {
-    return;
-  }
   // For nodes with title_field, set the title property according to the
   // municipality's language, or the next available language.
   if ($language_code = hedley_municipality_get_non_empty_language_for_field($node->title_field, $municipality_language)) {
     // Set the title to the title_field in an available language.
     $node->title = $node->title_field[$language_code][0]['value'];
+  }
+}
+
+/**
+ * Implements hook_node_insert().
+ *
+ * Automatically adds the Vocabulary "topics" to a newly created group.
+ */
+function hedley_municipality_node_insert($node) {
+  // Only for OG enabled content type.
+  if (!og_is_group_type('node', $node->type)) {
+    return;
+  }
+
+  // Run the code to create all the vocabularies and link it with the content
+  // types.
+  $vocab_name = 'Topics for ' . strip_tags($node->title);
+  $vocab = hedley_municipality_create_group_vocabulary($node, 'topics', $vocab_name);
+
+  // Get all group content types.
+  $types = og_get_all_group_content_bundle();
+
+  // Only if we have group content types.
+  if (empty($types['node'])) {
+    return;
+  }
+
+  // Add the newly created vocabulary to all the group content.
+  hedley_municipality_enable_group_vocabulary_on_group_content_types($types['node'], $vocab);
+}
+
+/**
+ * Create a group vocabulary.
+ *
+ * @param object $group
+ *   The group node.
+ * @param string $machine_name
+ *   The machine name for the new vocabulary.
+ * @param string $name
+ *   The human readable name of the vocabulary.
+ *
+ * @return object
+ *   The created vocabulary.
+ */
+function hedley_municipality_create_group_vocabulary($group, $machine_name, $name) {
+  // Make sure that the machine name is unique.
+  // We do this by adding the nid to the machine name.
+  $machine_name .= '_' . $group->nid;
+
+  // Create the new vocabulary.
+  $vocab = new stdClass();
+  $vocab->name = $name;
+  $vocab->machine_name = $machine_name;
+  $vocab->hierarchy = 1;
+  // Enable translation for the topics.
+  $vocab->i18n_mode = I18N_MODE_TRANSLATE;
+  taxonomy_vocabulary_save($vocab);
+  // Set up the relationship between the vocabulary and the group.
+  og_vocab_relation_save($vocab->vid, 'node', $group->nid);
+
+  // Add a color field to the newly created vocabulary.
+  $instance = [
+    'label' => 'Color',
+    'widget' => [
+      'weight' => 3,
+      'type' => 'options_select',
+      'module' => 'options',
+      'active' => 1,
+    ],
+    'field_name' => 'field_color',
+    'entity_type' => 'taxonomy_term',
+    'bundle' => $vocab->machine_name,
+  ];
+  field_create_instance($instance);
+
+  // Replace title field for the purpose of translation.
+  title_field_replacement_toggle('taxonomy_term', $vocab->machine_name, 'name');
+
+  return $vocab;
+}
+
+/**
+ * Create link between group content and group vocabularies.
+ *
+ * @param array $types
+ *   An array of settings per content type.
+ * @param object $vocab
+ *   The vocabulary object.
+ */
+function hedley_municipality_enable_group_vocabulary_on_group_content_types(array $types, $vocab) {
+  // Set excluded types that doesn't need a 'Topics' vocabulary reference.
+  $excluded_types = ['freedom_of_information', 'tender'];
+
+  foreach ($types as $bundle => $type) {
+    // We do not support group taxonomies of non group content types.
+    if (!og_is_group_content_type('node', $bundle) || in_array($bundle, $excluded_types)) {
+      continue;
+    }
+    // Link the vocabulary to the content type.
+    $og_vocab = og_vocab_create_og_vocab($vocab->vid, 'node', $bundle, OG_VOCAB_FIELD);
+    $og_vocab->save();
   }
 }
 

@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyEventsByLanguage.
+ */
+
+/**
+ * Class HedleyEventsByLanguage.
+ */
+class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Events by language',
+      'description' => 'Test getting the expected events per language.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Test get Events per language.
+   */
+  public function testEventsByLanguage() {
+    $en_language_code = 'en';
+    $he_language_code = 'he';
+
+    // Create a municipality group.
+    $user1 = $this->drupalCreateUser();
+    $municipality_settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+      'language' => $en_language_code,
+      // We need to set the default language field for the group because this
+      // determines the language for all the group content under this group.
+      'field_default_language' => [
+        LANGUAGE_NONE => [
+          ['value' => $en_language_code],
+        ],
+      ],
+    ];
+    $municipality = $this->drupalCreateNode($municipality_settings);
+
+    // Create a event group content.
+    $event_settings = [
+      'type' => 'event',
+      'uid' => $user1->uid,
+      'language' => $en_language_code,
+      'title_field' => [
+        $en_language_code => [
+          ['value' => 'Event name English'],
+        ],
+      ],
+      'field_date' => [
+        LANGUAGE_NONE => [
+          ['value' => time()],
+        ],
+      ],
+      // Add the created group as the parent group for this entity.
+      OG_AUDIENCE_FIELD => [
+        LANGUAGE_NONE => [
+          ['target_id' => $municipality->nid],
+        ],
+      ],
+    ];
+
+    // Create an English Event node.
+    $this->drupalCreateNode($event_settings);
+
+    // Create a Hebrew Event node under the same Muni and same settings, just
+    // different language and different title.
+    $event_settings['language'] = $he_language_code;
+    $event_settings['title_field'] = [
+      $he_language_code => [
+        ['value' => 'Event name Hebrew'],
+      ],
+    ];
+    $this->drupalCreateNode($event_settings);
+
+    // Get the events from the function we want to test.
+    $municipality_events = hedley_event_get_events_by_group($municipality, $en_language_code);
+
+    // Check that one event is returned.
+    $this->assertTrue(count($municipality_events) == 1, 'Expected number of events returned.');
+
+    // Check that this event is in the right language.
+    $this->assertEqual($municipality_events[0]['name'], 'Event name English', 'Expected English title is correct.');
+  }
+
+}

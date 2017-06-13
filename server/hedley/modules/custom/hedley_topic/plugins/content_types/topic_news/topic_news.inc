@@ -24,7 +24,12 @@ function hedley_topic_topic_news_content_type_render($subtype, $conf, $args, $co
   }
   $topic_wrapper = entity_metadata_wrapper('taxonomy_term', $context->data);
 
-  $nodes = hedley_municipality_get_nodes('news', 10, hedley_municipality_get_current_group(), FALSE, $topic_wrapper->getIdentifier());
+  if (!$municipality_node = hedley_municipality_get_current_group()) {
+    // Don't display news without municipality context.
+    return NULL;
+  }
+
+  $nodes = hedley_municipality_get_nodes_by_user_type('news', 10, $municipality_node, FALSE, $topic_wrapper->getIdentifier());
   if (!$nodes) {
     // No news found.
     return NULL;

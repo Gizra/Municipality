@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyMunicipalityCheckTopicsOgVocab.
+ */
+
+/**
+ * Class HedleyMunicipalityCheckTopicsOgVocab.
+ */
+class HedleyMunicipalityCheckTopicsOgVocab extends HedleyMunicipalityWebTestCase {
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Check Topics OG vocab',
+      'description' => 'Test that OG vocab (topic) are created.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Test that OG vocab (topic) are created when a new Municipality is created.
+   */
+  public function testOgVocabTopics() {
+    // Create a municipality group.
+    $user1 = $this->drupalCreateUser();
+    $municipality_settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+    ];
+    $municipality = $this->drupalCreateNode($municipality_settings);
+
+    // Create some Topics.
+    $topics_vocabulary = taxonomy_vocabulary_machine_name_load('topics_' . $municipality->nid);
+
+    // Check that the vocabulary has been created.
+    $this->assertTrue(is_object($topics_vocabulary), 'OG Vocab (Topics) have been created.');
+
+    $topic1 = $this->createTerm($topics_vocabulary);
+    $topic2 = $this->createTerm($topics_vocabulary);
+
+    // Check that we can create topics in the vocabulary.
+    $this->assertTrue(isset($topic1->tid), 'A new term has been added to Topics.');
+    $this->assertTrue(isset($topic2->tid), 'A new term has been added to Topics.');
+  }
+
+}

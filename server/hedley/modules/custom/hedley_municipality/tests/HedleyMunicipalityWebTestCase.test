@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyMunicipalityWebTestCase.
+ */
+
+/**
+ * Class HedleyMunicipalityWebTestCase.
+ */
+class HedleyMunicipalityWebTestCase extends DrupalWebTestCase {
+
+  /**
+   * The profile name.
+   *
+   * @var string
+   */
+  protected $profile = 'hedley';
+
+  /**
+   * Overrides DrupalWebTestCase::setUp().
+   */
+  protected function setUp() {
+    parent::setUp();
+
+    // Skip dealing with user ID 1.
+    $this->drupalCreateUser();
+  }
+
+  /**
+   * Returns a new term with random properties in vocabulary $vid.
+   *
+   * @param object $vocabulary
+   *   The vocabulary that we want to create the term in.
+   * @param string $language
+   *   The language in which we want to create the term.
+   *
+   * @return \stdClass
+   *   The created term.
+   */
+  protected function createTerm($vocabulary, $language = LANGUAGE_NONE) {
+    $term = new stdClass();
+    $term->name = $this->randomName();
+    $term->name_field = [
+      LANGUAGE_NONE => [
+        ['value' => $term->name],
+      ],
+      $language => [
+        ['value' => $term->name],
+      ],
+    ];
+    $term->description = $this->randomName();
+    $term->language = $language;
+    // Use the first available text format.
+    $term->format = db_query_range('SELECT format FROM {filter_format}', 0, 1)->fetchField();
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+    return $term;
+  }
+
+}

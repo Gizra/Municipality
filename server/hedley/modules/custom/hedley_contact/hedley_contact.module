@@ -27,7 +27,8 @@ function hedley_contact_node_presave($node) {
   }
 
   $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_node_municipality($node));
-  if ($language_code = hedley_municipality_get_non_empty_language_for_field($node->field_last_name, $municipality_wrapper->field_default_language->value())) {
+  // Set the node's title based on the group's default language.
+  if (($municipality_wrapper->field_default_language->value() && !empty($node->field_last_name)) && $language_code = hedley_municipality_get_non_empty_language_for_field($node->field_last_name, $municipality_wrapper->field_default_language->value())) {
     $node->title = trim($node->field_first_name[$language_code][0]['value'] . ' ' . $node->field_last_name[$language_code][0]['value']);
   }
 }
@@ -115,4 +116,92 @@ function hedley_contact_get_reception_hours($node) {
   }
 
   return $formatted_hours;
+}
+
+/**
+ * Return contacts by group.
+ *
+ * @param object $group
+ *   The group.
+ * @param string $language_code
+ *   The language code (e.g. "he", "ar").
+ *
+ * @return array
+ *   Array with the contacts list.
+ */
+function hedley_contact_get_contacts_by_group($group, $language_code) {
+  // Get contact nodes by group.
+  $nodes = hedley_municipality_get_nodes('contact', 100, $group, FALSE, 0, 'ASC');
+  if (!$nodes) {
+    // No contacts found.
+    return NULL;
+  }
+  $contacts = [];
+  foreach ($nodes as $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $wrapper->language($language_code);
+
+    // Ignore contacts without a name and a department in the current language.
+    if (!$wrapper->field_last_name->value() && !$wrapper->field_department->value()) {
+      continue;
+    }
+
+    $image = $wrapper->field_image->value();
+
+    $name = check_plain($wrapper->field_first_name->value()) . ' ' . check_plain($wrapper->field_last_name->value());
+    if (!trim($name) && $wrapper->field_department->value()) {
+      // If we have only the field department filled it means the contact card
+      // is a general department card, not a specific worker.
+      $name = $wrapper->field_department->label();
+    }
+
+    // Get the topics related to the user, if not empty.
+    $topics_array = array();
+    $topics = $wrapper->{OG_VOCAB_FIELD}->value();
+    if (!empty($wrapper->{OG_VOCAB_FIELD}->raw())) {
+      foreach ($topics as $topic) {
+        $topic_wrapper = entity_metadata_wrapper('taxonomy_term', $topic);
+        $topic_wrapper->language($language_code);
+        // Ignore any term that isn't translated to the current language. In
+        // such case, the term's label would be empty.
+        if (!$topic_wrapper->label()) {
+          continue;
+        }
+
+        $topics_array[] = [
+          'id' => $topic_wrapper->getIdentifier(),
+          'name' => $topic_wrapper->label(),
+          // If the term doesn't have any color then default to white because
+          // elm expects a color here.
+          'color' => $topic_wrapper->field_color->value() ? $topic_wrapper->field_color->value() : 'white',
+        ];
+      }
+    }
+
+    $contact = [
+      'id' => $wrapper->getIdentifier(),
+      'name' => $name,
+      'image_url' => $image ? image_style_url('medium', $image['uri']) : '',
+      'phone' => check_plain($wrapper->field_phone->value()),
+      'fax' => check_plain($wrapper->field_fax->value()),
+      'email' => check_plain($wrapper->field_email->value()),
+      'address' => check_plain($wrapper->field_address->value()),
+      'job_title' => check_plain($wrapper->field_job_title->value()),
+      'topics' => $topics_array,
+      'reception_hours' => hedley_contact_get_reception_hours($node),
+    ];
+
+    // Explode reception days to a list for elm.
+    if (!empty($contact['reception_hours'])) {
+      foreach ($contact['reception_hours'] as $index => $reception_hour) {
+        $contact['reception_hours'][$index]['days'] = isset($reception_hour['days']) && !empty($reception_hour['days']) ? explode(', ', $reception_hour['days']) : array();
+      }
+    }
+
+    // Remove empty values (elm expects the correct value or nothing).
+    $contacts[] = array_filter($contact);
+  }
+
+  return $contacts;
+
 }

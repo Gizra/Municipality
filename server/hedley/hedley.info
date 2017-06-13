@@ -34,14 +34,18 @@ dependencies[] = features
 dependencies[] = jquery_update
 dependencies[] = libraries
 dependencies[] = link
+dependencies[] = locale
 dependencies[] = message
 dependencies[] = module_filter
 dependencies[] = multifield
 dependencies[] = og
+dependencies[] = og_context
 dependencies[] = og_purl
 dependencies[] = og_ui
+dependencies[] = og_vocab
 dependencies[] = page_manager
 dependencies[] = panels
+dependencies[] = purl
 dependencies[] = restful
 dependencies[] = restful_token_auth
 dependencies[] = strongarm
@@ -51,11 +55,16 @@ dependencies[] = views
 dependencies[] = views_bulk_operations
 
 ; Hedley
+; The field bases should be installed first.
+dependencies[] = hedley_fields
+
 dependencies[] = hedley_action
 dependencies[] = hedley_contact
+dependencies[] = hedley_elm
 dependencies[] = hedley_event
 dependencies[] = hedley_faq
-dependencies[] = hedley_fields
+
+dependencies[] = hedley_freedom_of_information
 dependencies[] = hedley_hardcopy_form
 dependencies[] = hedley_i18n
 dependencies[] = hedley_municipality
@@ -63,6 +72,7 @@ dependencies[] = hedley_news
 dependencies[] = hedley_page
 dependencies[] = hedley_pusher
 dependencies[] = hedley_restful
+dependencies[] = hedley_tender
 dependencies[] = hedley_terms
 dependencies[] = hedley_topic
 dependencies[] = hedley_user

@@ -1,0 +1,120 @@
+---
+layout: default
+label:  מכרזים קודמים
+---
+<div class="ui stackable segment grid">
+  <div class="ui segment centered row">
+    <h2> מכרזים קודמים </h2>
+  </div>
+
+  <div class="ui stackable segment row">
+    {% assign all_tenders = (site.data.topics.business.tenders | sort: 'deadline.date') | reverse %}
+
+    <table class="ui selectable celled red stackable table">
+      <thead>
+        <tr>
+          <th class="three wide">כותרת המכרז</th>
+          <th class="one wide">תאריך אחרון להגשה</th>
+          <th class="one wide">מחלקה</th>
+          <th class="three wide">אנשי קשר</th>
+          <th class="seven wide">דרישות סף</th>
+          <th class="one wide">סכום נדרש</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tender in all_tenders %}
+        <tr>
+          <td>
+            <a href="#">
+              {{ tender.title }}    <i class="download icon"></i>
+            </a>
+          </td>
+          <td>
+            {% if tender.deadline %}
+              {{ tender.deadline.date }}
+            {% endif %}
+            {% if tender.deadline.extension %}
+              <div class="ui horizontal red label">
+                הארכה
+              </div>
+            {% endif %}
+          </td>
+          <td>
+            {% if tender.hebrew.department %}
+              {{ tender.hebrew.department }}
+            {% endif %}
+          </td>
+          <td>
+            {% if tender.hebrew.contacts %}
+              {% for contact_name in tender.hebrew.contacts %}
+                {% for check_contact in site.data.contacts %}
+                  {% if contact_name == check_contact.name %}
+                    {{ contact_name }}:
+                    <div class = "ui list">
+                      {% if check_contact.phone %}
+                        <div class="item"><a href="#"><i class="phone icon"></i>{{ check_contact.phone}}</a></div>
+                          {% endif %}
+                          {% if check_contact.email %}
+                          <div class="item"><a href="#"><i class="mail icon"></i> {{ check_contact.email}} </a></div>
+                          {% endif %}
+                          {% if check_contact.openning %}
+                            <div class="item"> {{check_contact.openning}}</div>
+                            <div class="item"> כתובת: {{check_contact.address}}</div>
+                          {% endif %}
+                      {% endif %}
+                    </div>
+                {% endfor %}
+                <br>
+              {% endfor %}
+              {% endif %}
+          </td>
+          <td>
+            {% if tender.hebrew.basic_requirements %}
+              {% for requirement in tender.hebrew.basic_requirements %}
+                * {{ requirement }}
+              {% endfor %}
+            {% endif %}
+          </td>
+
+          <td>
+            {% if tender.hebrew.required_amount %}
+              {{ tender.hebrew.required_amount }}
+            {% endif %}
+          </td>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <th colspan="6">
+            <div class="ui right floated pagination menu">
+              <a class="icon item">
+                <i class="left chevron icon"></i>
+              </a>
+              <a class="item">1</a>
+              <a class="item">2</a>
+              <a class="item">3</a>
+              <a class="item">4</a>
+              <a class="icon item">
+                <i class="right chevron icon"></i>
+              </a>
+            </div>
+          </th>
+        </tr>
+      </tfoot>
+
+    </table>
+</div>
+
+<div class = "ui centered row">
+      מאגרי מידע נוספים:
+      <div class="ui buttons">
+        <button href="#" class="ui green basic button">מכרזים פתוחים</button>
+        <button href="#" class="ui red basic button">דו״חות</button></a>
+        <button href="#" class="ui blue basic button">פרוטוקולים</button>
+        <button href="#" class="ui purple basic button">תקנות וחוקי עזר</button>
+      </div>
+    </div>
+</div>

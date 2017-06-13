@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyI18nLanguageSwitcherLinks.
+ */
+
+/**
+ * Class HedleyI18nLanguageSwitcherLinks.
+ */
+class HedleyI18nLanguageSwitcherLinks extends HedleyMunicipalityWebTestCase {
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Language switcher links',
+      'description' => 'Test language switcher links returned according to the groups translated languages.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Test getting language switcher links.
+   */
+  public function testLanguageSwitchLinks() {
+    // Create a dummy Arabic language object.
+    $language_object = new stdClass();
+    $language_object->language = 'ar';
+
+    // Set language negotiation options (necessary for
+    // `language_negotiation_get_switch_links` to work).
+    variable_set('language_types', drupal_language_types() + ['language_custom' => TRUE]);
+    variable_set('language_negotiation_' . LANGUAGE_TYPE_INTERFACE, locale_language_negotiation_info());
+    variable_set('language_negotiation_' . LANGUAGE_TYPE_CONTENT, locale_language_negotiation_info());
+    variable_set('language_negotiation_' . LANGUAGE_TYPE_URL, locale_language_negotiation_info());
+
+    // List the expected languages.
+    $expected_languages = ['ar', 'he'];
+
+    $user1 = $this->drupalCreateUser();
+    // Create a municipality with a specific language (Arabic).
+    $municipality_settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+      'language' => $language_object->language,
+      // We need to set the default language field for the group because this
+      // determines the language for all the group content under this group.
+      'field_default_language' => [
+        LANGUAGE_NONE => [
+          ['value' => $language_object->language],
+        ],
+      ],
+    ];
+    $node = $this->drupalCreateNode($municipality_settings);
+
+    // We need to load the node to get the correct object for translation.
+    $source = node_load($node->nid);
+
+    // Add translations to the node.
+    $factory = EntityTranslationHandlerFactory::getInstance();
+    $handler = $factory->getHandler('node', $source);
+
+    // Add Hebrew translation.
+    $translation = [
+      'translate' => 0,
+      'status' => 1,
+      'language' => 'he',
+      'source' => $source->language,
+    ];
+    $handler->setTranslation($translation, $source);
+
+    $path_node = 'node/' . $source->nid;
+
+    // Get the language switcher links (loading the node to get the
+    // translations we sat above.)
+    $rendered_links = hedley_i18n_language_get_switch_links($language_object, node_load($source->nid), $path_node);
+
+    $this->assertEqual(array_keys($rendered_links), $expected_languages, 'Expected languages are displayed.');
+  }
+
+}

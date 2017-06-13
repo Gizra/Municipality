@@ -1,0 +1,48 @@
+---
+layout: default
+label : תקנות וחוקי עזר
+---
+<div class = "ui segment centered row">
+  <h2>מאגר התקנות וחוקי העזר</h2>
+</div>
+
+{% assign all_topics = site.emptyArray %}
+  {% for rule in site.data.topics.rules %}
+    {% for rule_topic in rule.topics %}
+      {% unless all_topics contains rule_topic %}
+        {% assign all_topics = all_topics | push:rule_topic %}
+      {% endunless %}
+    {% endfor %}
+  {% endfor%}
+{% assign all_rules = site.data.topics.rules | sort: 'date' %}
+
+<div class = "ui stackable segment">
+  <div class="ui cards">
+  {% for rule in all_rules %}
+  <div class="card">
+    <div class="content">
+      <p>
+      {{ rule.title}}
+      </p>
+      תאריך:  {{ rule.date }}
+    </div>
+
+      <a href="{{ rule.link }}" target="_blank">
+        <div class="ui bottom attached button">
+        <i class="download icon"></i>
+        להורדה
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+
+
+<div class = "ui segment row">
+  מאגרי מידע נוספים:
+  <div class="ui buttons">
+    <button href="#" class="ui red basic button">דו״חות</button></a>
+    <button href="#" class="ui blue basic button">פרוטוקולים</button>
+    <button href="#" class="ui green basic button">מכרזים</button>
+  </div>
+</div>

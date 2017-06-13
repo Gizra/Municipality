@@ -23,6 +23,8 @@ abstract class HedleyMigrateBase extends Migration {
     'field_first_name',
     'field_job_title',
     'field_last_name',
+    'field_tender_requirements',
+    'field_tender_payment',
     'field_question',
     'field_subtitle',
   ];
@@ -112,7 +114,14 @@ abstract class HedleyMigrateBase extends Migration {
     }
 
     // Map file fields.
-    foreach (['field_file', 'field_image', 'field_logo'] as $file_field) {
+    $file_fields = [
+      'field_file',
+      'field_image',
+      'field_logo',
+      'field_files',
+      'field_audio',
+    ];
+    foreach ($file_fields as $file_field) {
       if (!in_array($file_field, $this->csvColumns)) {
         continue;
       }
@@ -138,6 +147,17 @@ abstract class HedleyMigrateBase extends Migration {
   public function prepareRow($row) {
     foreach ($this->translatableFields as $translated_field) {
       $this->mergeTranslatedColumns($row, $translated_field);
+    }
+  }
+
+  /**
+   * Promote all migrated group content to the homepage.
+   */
+  public function prepare($entity) {
+    $group_content_bundles = og_get_all_group_content_bundle();
+
+    if (in_array($entity->type, array_keys($group_content_bundles['node']))) {
+      $entity->promote = 1;
     }
   }
 

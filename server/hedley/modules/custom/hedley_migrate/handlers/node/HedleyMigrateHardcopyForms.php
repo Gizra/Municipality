@@ -26,7 +26,6 @@ class HedleyMigrateHardcopyForms extends HedleyMigrateBase {
     'title_field',
   ];
   protected $simpleMultipleMappings = [
-    'field_topics',
     'field_user_types',
   ];
 
@@ -38,7 +37,6 @@ class HedleyMigrateHardcopyForms extends HedleyMigrateBase {
 
     $this->dependencies[] = 'HedleyMigrateMunicipalities';
     $this->dependencies[] = 'HedleyMigrateUserTypes';
-    $this->dependencies[] = 'HedleyMigrateTopics';
 
     $this
       ->addFieldMapping(OG_AUDIENCE_FIELD, 'municipality')

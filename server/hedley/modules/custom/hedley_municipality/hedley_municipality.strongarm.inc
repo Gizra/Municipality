@@ -80,7 +80,6 @@ function hedley_municipality_strongarm() {
   $strongarm->name = 'node_options_municipality';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'promote',
   );
   $export['node_options_municipality'] = $strongarm;
 
