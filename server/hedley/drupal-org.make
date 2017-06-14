@@ -135,18 +135,9 @@ projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.4"
 
 ; Themes
-projects[semanticui][subdir] = "contrib"
-; Using 1.x-dev due to no stable release.
-projects[semanticui][version] = "1.x-dev"
-; https://www.drupal.org/node/2859537 .
-projects[semanticui][patch][] = "https://www.drupal.org/files/issues/use-semantic-library-as-is-2859537-1.patch"
-; Make sure it's downloaded as a theme.
+projects[bootstrap][subdir] = "contrib"
+projects[bootstrap][version] = "3.14"
 projects[semanticui][type] = "theme"
-
-; Libraries
-libraries[semanticui][type] = "libraries"
-libraries[semanticui][download][type] = "get"
-libraries[semanticui][download][url] = "https://github.com/Semantic-Org/Semantic-UI/archive/master.zip"
 
 ; Development
 projects[devel][subdir] = "development"
