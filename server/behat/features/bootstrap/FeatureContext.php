@@ -295,6 +295,13 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
+   * @When I visit the topic :topic under the municipality :municipality
+   */
+  public function iVisitTheTopicUnderTheMunicipality($topic, $municipality) {
+    $municipality = $this->loadGroupByTitleAndType($municipality, 'municipality');
+  }
+
+  /**
    * @Then I should see the home page in the default :language of the municipality and for :citizens user type
    */
   public function iShouldSeeTheHomePageInTheDefaultOfTheMunicipalityAndForCitizensUserType($language, $citizens) {
@@ -387,6 +394,13 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
 
     // Check if the given user type is the active one on the page.
     $this->checkActiveUserType($new_user_type, $page, 'text');
+  }
+
+  /**
+   * @Then I should see the action :action of the municipality
+   */
+  public function iShouldSeeTheActionOfTheMunicipality($action) {
+    throw new PendingException();
   }
 
 

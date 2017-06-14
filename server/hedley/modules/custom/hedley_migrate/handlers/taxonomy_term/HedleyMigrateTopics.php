@@ -52,11 +52,20 @@ class HedleyMigrateTopics extends HedleyMigrateBase {
 
     $mapped_id = $this->getMappedIds('HedleyMigrateMunicipalities', $row->municipality);
 
-    if (empty($mapped_id['destid1'])) {
+    if (!$mapped_id) {
       return FALSE;
     }
-    $name = $this->bundle . '_' . $mapped_id['destid1'];
-    $row->vocabulary_machine_name = $name;
+
+    // Change the bundle to the correct vocabulary ID.
+    $this->bundle = 'topics_' . $mapped_id;
+    // Create a new destination with the correct vocabulary ID.
+    $this->destination = new MigrateDestinationTerm(
+      $this->bundle,
+      [
+        'text_format' => 'plain_text',
+        'entity_type' => 'taxonomy_term',
+      ]
+    );
     return TRUE;
   }
 
@@ -72,12 +81,7 @@ class HedleyMigrateTopics extends HedleyMigrateBase {
    *   An array with destid1 and/or destid2.
    */
   protected function getMappedIds($source, $row_field) {
-    return $this->handleSourceMigration(
-      $source,
-      $row_field,
-      NULL,
-      $this
-    );
+    return $this->handleSourceMigration($source, $row_field, NULL, $this);
   }
 
 }
