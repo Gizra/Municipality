@@ -299,6 +299,11 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    */
   public function iVisitTheTopicUnderTheMunicipality($topic, $municipality) {
     $municipality = $this->loadGroupByTitleAndType($municipality, 'municipality');
+
+    $topic = $this->loadTaxonomyByTitleAndVocabulary($topic, 'topics_' . $municipality->nid);
+
+    $uri = $this->createUriWithGroupContext($municipality, 'taxonomy/term/' . $topic->tid) ;
+    $this->getSession()->visit($this->locatePath($uri));
   }
 
   /**
@@ -397,10 +402,23 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * @Then I should see the action :action of the municipality
+   * @Then I should see the action :action in the topic page
    */
   public function iShouldSeeTheActionOfTheMunicipality($action) {
-    throw new PendingException();
+    $page = $this->getSession()->getPage();
+
+    $nodes = $page->findAll('css', '.pane-topic-actions .buttons a');
+    foreach ($nodes as $node) {
+      if ($node->getText() === $action) {
+        if ($node->isVisible()) {
+          return;
+        }
+        else {
+          throw new \Exception("Action with label \"$action\" not visible.");
+        }
+      }
+    }
+    throw new \Behat\Mink\Exception\ElementNotFoundException($this->getSession(), 'action', 'label', $action);
   }
 
 
@@ -442,6 +460,45 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
       throw new \Exception(format_string('Group @title not found (type @type).', $params));
     }
     return $group;
+  }
+
+  /**
+   * Get the group based on the title and type.
+   *
+   * @param string $title
+   *   The group title.
+   * @param string $type
+   *   The group node type.
+   *
+   * @return object
+   *   The group (if any) or NULL.
+   * @throws \Exception
+   */
+  protected function loadTaxonomyByTitleAndVocabulary($title, $type) {
+    $query = new \entityFieldQuery();
+    $result = $query
+      ->entityCondition('entity_type', 'taxonomy_term')
+      ->entityCondition('bundle', $type)
+      ->propertyCondition('name', $title)
+      ->range(0, 1)
+      ->execute();
+    if (empty($result['taxonomy_term'])) {
+      $params = [
+        '@title' => $title,
+        '@type' => $type,
+      ];
+      throw new \Exception(format_string('Taxonomy term @title not found (type @type).', $params));
+    }
+    $tid = (int) key($result['taxonomy_term']);
+    $term = taxonomy_term_load($tid);
+    if (!$term) {
+      $params = [
+        '@title' => $title,
+        '@type' => $type,
+      ];
+      throw new \Exception(format_string('Taxonomy term @title not found (type @type).', $params));
+    }
+    return $term;
   }
 
   /**
