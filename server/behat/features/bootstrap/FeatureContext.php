@@ -26,7 +26,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    *   The use password.
    */
   protected function loginUser($name, $password) {
-    $this->getSession()->visit($this->locatePath('/'));
+    $this->getSession()->visit($this->locatePath('/user'));
     $element = $this->getSession()->getPage();
     $element->fillField('name', $name);
     $element->fillField('pass', $password);
