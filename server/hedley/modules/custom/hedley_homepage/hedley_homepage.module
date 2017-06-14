@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Hedley homepage feature.
+ */
+
+include_once 'hedley_homepage.features.inc';

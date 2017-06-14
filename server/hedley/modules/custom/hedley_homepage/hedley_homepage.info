@@ -1,0 +1,10 @@
+name = Hedley homepage
+description = The hedley homepage.
+core = 7.x
+package = Custom
+dependencies[] = ctools
+dependencies[] = hedley_municipality
+dependencies[] = page_manager
+features[ctools][] = page_manager:pages_default:1
+features[features_api][] = api:2
+features[page_manager_pages][] = home_page
