@@ -155,8 +155,8 @@ viewEvent language ( eventId, event ) =
 -}
 viewEventAsBlock : Language -> ( EventId, Event ) -> Html msg
 viewEventAsBlock language ( eventId, event ) =
-    div
-        [ class "card" ]
+    a
+        [ class "card", target "_blank", href ("/node/" ++ eventId) ]
         [ showMaybe <|
             Maybe.map
                 (\imageUrl ->
@@ -171,5 +171,26 @@ viewEventAsBlock language ( eventId, event ) =
             [ div
                 [ class "header" ]
                 [ text event.name ]
+            ]
+        , div
+            [ class "ui row" ]
+            [ div
+                [ class "ui four wide column event-date" ]
+                [ span
+                    []
+                    [ i
+                        [ class "calendar icon" ]
+                        []
+                    , text <| translate language (DayAndDate event.date event.endDate)
+                    ]
+                , showIf event.recurringWeekly <|
+                    span
+                        [ class "recurring-weekly" ]
+                        [ i
+                            [ class "refresh icon" ]
+                            []
+                        , text <| translate language EventRecurringWeekly
+                        ]
+                ]
             ]
         ]

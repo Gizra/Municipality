@@ -21,10 +21,10 @@ include_once 'hedley_event.features.inc';
  *   Array with the events list.
  */
 function hedley_event_get_events_by_group($group, $language_code, $show_as_block) {
-  // Get contact nodes by group.
-
+  // Detrmine the events setting depending on the block configuration.
   $range = $show_as_block ? 5 : 100;
 
+  // Get contact nodes by group.
   $nodes = hedley_municipality_get_nodes('event', $range, $group);
   if (!$nodes) {
     // No contacts found.
