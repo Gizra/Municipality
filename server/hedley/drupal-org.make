@@ -15,6 +15,9 @@ projects[admin_views][version] = "1.6"
 projects[auto_entitylabel][subdir] = "contrib"
 projects[auto_entitylabel][version] = "1.3"
 
+projects[ckeditor][subdir] = "contrib"
+projects[ckeditor][version] = "1.17"
+
 projects[coffee][subdir] = "contrib"
 projects[coffee][version] = "2.3"
 
@@ -58,6 +61,9 @@ projects[features][version] = "2.10"
 
 projects[i18n][subdir] = "contrib"
 projects[i18n][version] = "1.15"
+
+projects[imce][subdir] = "contrib"
+projects[imce][version] = "1.10"
 
 projects[jquery_update][subdir] = "contrib"
 projects[jquery_update][version] = "2.7"
