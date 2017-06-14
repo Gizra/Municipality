@@ -14,6 +14,28 @@
 	  <?php print render($page['before_content']); ?>
 	  <div id="content" class="content full">
 
+          <div class="row">
+            <?php if ($user_type_links): ?>
+              <div class="col-md-2">
+                <?php print $user_type_links; ?>
+              </div>
+            <?php endif; ?>
+
+            <div class="col-md-8">
+              <?php print render($social_links); ?>
+            </div>
+
+            <div class="col-md-2">
+              <?php if ($language_switch_links) : ?>
+                <div class="ui <?php print $language_switch_links_class?> item menu languages">
+                  <?php foreach ($language_switch_links as $link): ?>
+                    <?php print $link; ?>
+                  <?php endforeach; ?>
+                </div>
+              <?php endif; ?>
+            </div>
+          </div>
+
 		      <?php if ($messages): ?>  
 			      <div class="col-md-12">
 		          <?php print $messages; ?>
