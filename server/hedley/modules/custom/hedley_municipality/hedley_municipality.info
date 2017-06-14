@@ -55,11 +55,7 @@ features[variable][] = node_submitted_municipality
 features[variable][] = purl_method_og_purl|node
 features[variable][] = purl_types
 features[views_view][] = municipalities
-
-; Tests base class
 files[] = tests/HedleyMunicipalityWebTestCase.test
-
-; Tests
 files[] = tests/HedleyMunicipalityCheckNodeLangauge.test
 files[] = tests/HedleyMunicipalityCheckTopicsOgVocab.test
 files[] = tests/HedleyMunicipalityGetNodes.test
