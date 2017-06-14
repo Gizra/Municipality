@@ -28,6 +28,7 @@ files[] = handlers/node/HedleyMigrateTenders.php
 ; Taxonomies
 files[] = handlers/taxonomy_term/HedleyMigrateAudiences.php
 files[] = handlers/taxonomy_term/HedleyMigrateDepartments.php
+files[] = handlers/taxonomy_term/HedleyMigrateTopics.php
 files[] = handlers/taxonomy_term/HedleyMigrateUserTypes.php
 
 ; Users

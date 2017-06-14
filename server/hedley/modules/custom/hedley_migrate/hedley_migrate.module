@@ -27,6 +27,7 @@ function hedley_migrate_migrate_api() {
     // Terms.
     'HedleyMigrateAudiences',
     'HedleyMigrateDepartments',
+    'HedleyMigrateTopics',
     'HedleyMigrateUserTypes',
     // Users.
     'HedleyMigrateUsers',

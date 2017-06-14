@@ -295,6 +295,18 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
+   * @When I visit the topic :topic under the municipality :municipality
+   */
+  public function iVisitTheTopicUnderTheMunicipality($topic, $municipality) {
+    $municipality = $this->loadGroupByTitleAndType($municipality, 'municipality');
+
+    $topic = $this->loadTaxonomyByTitleAndVocabulary($topic, 'topics_' . $municipality->nid);
+
+    $uri = $this->createUriWithGroupContext($municipality, 'taxonomy/term/' . $topic->tid) ;
+    $this->getSession()->visit($this->locatePath($uri));
+  }
+
+  /**
    * @Then I should see the home page in the default :language of the municipality and for :citizens user type
    */
   public function iShouldSeeTheHomePageInTheDefaultOfTheMunicipalityAndForCitizensUserType($language, $citizens) {
@@ -389,6 +401,26 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $this->checkActiveUserType($new_user_type, $page, 'text');
   }
 
+  /**
+   * @Then I should see the action :action in the topic page
+   */
+  public function iShouldSeeTheActionInTheTopicPage($action) {
+    $page = $this->getSession()->getPage();
+
+    $nodes = $page->findAll('css', '.pane-topic-actions .buttons a');
+    foreach ($nodes as $node) {
+      if ($node->getText() === $action) {
+        if ($node->isVisible()) {
+          return;
+        }
+        else {
+          throw new \Exception("Action with label \"$action\" not visible.");
+        }
+      }
+    }
+    throw new \Behat\Mink\Exception\ElementNotFoundException($this->getSession(), 'action', 'label', $action);
+  }
+
 
   /**
    * Get the group based on the title and type.
@@ -428,6 +460,45 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
       throw new \Exception(format_string('Group @title not found (type @type).', $params));
     }
     return $group;
+  }
+
+  /**
+   * Get the group based on the title and type.
+   *
+   * @param string $title
+   *   The group title.
+   * @param string $type
+   *   The group node type.
+   *
+   * @return object
+   *   The group (if any) or NULL.
+   * @throws \Exception
+   */
+  protected function loadTaxonomyByTitleAndVocabulary($title, $type) {
+    $query = new \entityFieldQuery();
+    $result = $query
+      ->entityCondition('entity_type', 'taxonomy_term')
+      ->entityCondition('bundle', $type)
+      ->propertyCondition('name', $title)
+      ->range(0, 1)
+      ->execute();
+    if (empty($result['taxonomy_term'])) {
+      $params = [
+        '@title' => $title,
+        '@type' => $type,
+      ];
+      throw new \Exception(format_string('Taxonomy term @title not found (type @type).', $params));
+    }
+    $tid = (int) key($result['taxonomy_term']);
+    $term = taxonomy_term_load($tid);
+    if (!$term) {
+      $params = [
+        '@title' => $title,
+        '@type' => $type,
+      ];
+      throw new \Exception(format_string('Taxonomy term @title not found (type @type).', $params));
+    }
+    return $term;
   }
 
   /**
