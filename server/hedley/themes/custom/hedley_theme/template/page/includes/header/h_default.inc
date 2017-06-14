@@ -47,26 +47,18 @@
 
     <nav class="header-nav-top">
         <ul class="nav nav-pills">
-            <?php $about_us = theme_get_setting('about_us');
-            $contact_us = theme_get_setting('contact_us');
-            $phone_number = theme_get_setting('phone_number');
-
-            ?>
-            <?php if(isset($about_us)):?>
-                <li class="hidden-xs">
-                    <a href="<?php print theme_get_setting('about_us_link');?>"><i class="fa fa-angle-right"></i> <?php print $about_us;?></a>
-                </li>
-            <?php endif;?>
-            <?php if(isset($contact_us)):?>
-                <li class="hidden-xs">
-                    <a href="<?php print theme_get_setting('contact_us_link');?>"><i class="fa fa-angle-right"></i> <?php print $contact_us;?></a>
-                </li>
-            <?php endif;?>
-            <?php if(isset($phone_number)):?>
-                <li class="hidden-xs">
-                    <span class="ws-nowrap"><i class="fa fa-phone"></i> <?php print $phone_number;?></span>
-                </li>
-            <?php endif;?>
+          <?php if (isset($accessibility_url)): ?>
+            <li>
+              <a href="<?php print $accessibility_url; ?>">
+                <i class="fa fa-wheelchair fa-2"></i>
+              </a>
+            </li>
+          <?php endif; ?>
+          <li>
+            <a href="#" class="change-font-size plus"><i class="fa fa-plus"></i></a>
+            <i class="fa fa-font"></i>
+            <a href="#" class="change-font-size minus"><i class="fa fa-minus"></i></a>
+          </li>
         </ul>
     </nav>
 

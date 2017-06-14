@@ -71,3 +71,7 @@ settings[portfolio_columns] = span3
 settings[blog_image] = full
 settings[ribbon] = 1
 settings[ribbon_text] = "Get In Touch"
+
+; Fontsize accessblity.
+scripts[] = js/font-size-controls.js
+stylesheets[all][] = css/font-size.css

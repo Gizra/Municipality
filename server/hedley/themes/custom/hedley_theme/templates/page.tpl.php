@@ -23,34 +23,25 @@
       <div class="ui four wide center aligned middle aligned column">
         <div class="ui segments">
           <div class="ui segment center aligned middle aligned">
-            <?php if (isset($accessibility_url)): ?>
-              <a href="<?php print $accessibility_url; ?>">
-                <i class="large wheelchair icon"></i>
-              </a>
-            <?php endif; ?>
 
-            <a href="#" class="change-font-size plus"><i class="plus icon"></i></a>
-            <i class="font icon"></i>
-            <a href="#" class="change-font-size minus"><i class="minus icon"></i></a>
           </div>
 
         </div>
       </div>
     </div>
 
-    <div class="ui row">
-
+    <div class="row">
       <?php if ($user_type_links): ?>
-        <div class="ui four wide column user-types">
+        <div class="col-md-4">
           <?php print $user_type_links; ?>
         </div>
       <?php endif; ?>
 
-      <div class="ui eight wide center aligned column">
+      <div class="col-md-6">
         <?php print render($social_links); ?>
       </div>
 
-      <div class="ui four wide column">
+      <div class="col-md-4">
         <?php if ($language_switch_links) : ?>
           <div class="ui <?php print $language_switch_links_class?> item menu languages">
             <?php foreach ($language_switch_links as $link): ?>
