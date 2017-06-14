@@ -125,13 +125,19 @@ function hedley_contact_get_reception_hours($node) {
  *   The group.
  * @param string $language_code
  *   The language code (e.g. "he", "ar").
+ * @param bool $show_as_block
+ *   (optional) Determine if content will be shown as a block, defaults to
+ *   FALSE.
  *
  * @return array
  *   Array with the contacts list.
  */
-function hedley_contact_get_contacts_by_group($group, $language_code) {
+function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_block = FALSE) {
+  // Determine the events setting depending on the block configuration.
+  $range = $show_as_block ? 5 : 100;
+
   // Get contact nodes by group.
-  $nodes = hedley_municipality_get_nodes('contact', 100, $group, FALSE, 0, 'ASC');
+  $nodes = hedley_municipality_get_nodes('contact', $range, $group, FALSE, 0, 'ASC');
   if (!$nodes) {
     // No contacts found.
     return NULL;

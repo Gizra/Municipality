@@ -15,13 +15,14 @@ include_once 'hedley_event.features.inc';
  * @param string $language_code
  *   The language code (e.g. "he", "ar").
  * @param bool $show_as_block
- *   Determine if content will be shown as a block.
+ *   (optional) Determine if content will be shown as a block, defaults to
+ *   FALSE.
  *
  * @return array
  *   Array with the events list.
  */
-function hedley_event_get_events_by_group($group, $language_code, $show_as_block) {
-  // Detrmine the events setting depending on the block configuration.
+function hedley_event_get_events_by_group($group, $language_code, $show_as_block = FALSE) {
+  // Determine the events setting depending on the block configuration.
   $range = $show_as_block ? 5 : 100;
 
   // Get contact nodes by group.
