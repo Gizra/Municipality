@@ -404,7 +404,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   /**
    * @Then I should see the action :action in the topic page
    */
-  public function iShouldSeeTheActionOfTheMunicipality($action) {
+  public function iShouldSeeTheActionInTheTopicPage($action) {
     $page = $this->getSession()->getPage();
 
     $nodes = $page->findAll('css', '.pane-topic-actions .buttons a');
