@@ -1,5 +1,7 @@
-## Execute WebdriverIO tests
+## WebdriverIO tests
 
-1. Follow [steps 2-4](http://webdriver.io/guide.html)
-2. Edit `wdio.conf.js` if your local Drupal installation is not available via `http://municipality.local`, and update `baseUrl`
-3. Execute tests with `./node_modules/.bin/wdio wdio.conf.js`
+1. Download [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads)
+1. Execute `./chromedriver --url-base=/wd/hub --port=4444` from the directory ChromeDriver was downloaded to.
+1. Execute tests with `./node_modules/.bin/wdio wdio.conf.js`.
+
+Note: You will have 2 terminal tabs open: One with the ChromeDriver and the second with the executed tests.
