@@ -234,6 +234,33 @@ function hedley_topic_default_page_manager_handlers() {
   $pane->uuid = 'babebd25-9028-439f-8c3c-10f559efaf1b';
   $display->content['new-babebd25-9028-439f-8c3c-10f559efaf1b'] = $pane;
   $display->panels['main'][5] = 'new-babebd25-9028-439f-8c3c-10f559efaf1b';
+  $pane = new stdClass();
+  $pane->pid = 'new-462ee088-5038-46e2-906b-52523d9cae45';
+  $pane->panel = 'main';
+  $pane->type = 'topic_events';
+  $pane->subtype = 'topic_events';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'context' => 'argument_term_1',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array(
+    'css_id' => '',
+    'css_class' => 'ui segment row',
+  );
+  $pane->extras = array();
+  $pane->position = 6;
+  $pane->locks = array();
+  $pane->uuid = '462ee088-5038-46e2-906b-52523d9cae45';
+  $display->content['new-462ee088-5038-46e2-906b-52523d9cae45'] = $pane;
+  $display->panels['main'][6] = 'new-462ee088-5038-46e2-906b-52523d9cae45';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
