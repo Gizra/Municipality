@@ -68,7 +68,7 @@
         </aside>
       <?php endif; ?>
 
-      <section class="<?php print $main_grid; ?> main" role="main">
+      <section class="main" role="main">
         <?php if (!empty($page['highlighted'])): ?>
           <div class="highlighted ui massive message"><?php print render($page['highlighted']); ?></div>
         <?php endif; ?>

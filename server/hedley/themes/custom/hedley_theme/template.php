@@ -6,6 +6,23 @@
  */
 
 /**
+ * Preprocess HTML.
+ */
+function hedley_theme_preprocess_html(&$variables) {
+  // Add municipality variables.
+  if (!$node = hedley_municipality_get_current_group()) {
+    return;
+  }
+  $wrapper = entity_metadata_wrapper('node', $node);
+
+  // Get first background image.
+  if ($wrapper->field_background_images->value()) {
+    $background_image = $wrapper->field_background_images->get(0)->value();
+    $variables['background_image_url'] = file_create_url($background_image['uri']);
+  }
+}
+
+/**
  * Preprocess node.
  *
  * Add a theme suggestion including the bundle and view mode.
@@ -71,11 +88,6 @@ function hedley_theme_preprocess_page(&$variables) {
   $variables['last_updated'] = $wrapper->field_last_update->value() ? format_date($wrapper->field_last_update->value(), 'short') : NULL;
   // Footer text.
   $variables['footer_text'] = $wrapper->field_footer_text->value() ? $wrapper->field_footer_text->value->value() : NULL;
-  // Get first background image.
-  if ($wrapper->field_background_images->value()) {
-    $background_image = $wrapper->field_background_images->get(0)->value();
-    $variables['background_image_url'] = file_create_url($background_image['uri']);
-  }
 }
 
 /**
