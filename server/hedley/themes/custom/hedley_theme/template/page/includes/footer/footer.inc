@@ -1,22 +1,49 @@
-<?php
-$footer_layout = theme_get_setting('footer_layout');
-if(isset($footer_layout) && $footer_layout != 'none'):
-    include_once($footer_layout.'.inc');
-else:
-    if(arg(0) == 'index-footer-advanced'):
-        include_once('f_advanced.inc');
-    elseif(arg(0) == 'index-footer-simple' || arg(0) == 'index-corporate-3'):
-        include_once('f_simple.inc');
-    elseif(arg(0) == 'index-footer-latest-work'):
-        include_once('f_latest_work.inc');
-    elseif(arg(0) == 'index-footer-contact-form'):
-        include_once('f_contact_form.inc');
-    elseif(arg(0) == 'index-footer-narrow'):
-        include_once('f_narrow.inc');
-    else:
-        include_once('f_default.inc');
-    endif;
-endif;
-?>
-
-
+<?php $footer_color = theme_get_setting('footer_color');?>
+<footer class="short <?php if($footer_color == 'primary'): print 'color color-primary'; elseif($footer_color == 'secondary'): print 'color color-secondary'; elseif($footer_color == 'tertiary'): print 'color color-tertiary'; elseif($footer_color == 'quaternary'): print 'color-quaternary'; elseif($footer_color == 'light'): print 'light narrow'; endif;?>" id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+              <?php if($page['footer_top']):?>
+                <?php print render($page['footer_top']);?>
+              <?php endif;?>
+                <hr class="light">
+                <div class="row">
+                  <?php if($page['footer_21']):?>
+                      <div class="col-md-3">
+                        <?php print render($page['footer_21']);?>
+                      </div>
+                  <?php endif;?>
+                  <?php if($page['footer_22']):?>
+                      <div class="col-md-3">
+                        <?php print render($page['footer_22']);?>
+                      </div>
+                  <?php endif;?>
+                  <?php if($page['footer_23']):?>
+                      <div class="col-md-3">
+                        <?php print render($page['footer_23']);?>
+                      </div>
+                  <?php endif;?>
+                  <?php if($page['footer_24']):?>
+                      <div class="col-md-3">
+                        <?php print render($page['footer_24']);?>
+                      </div>
+                  <?php endif;?>
+                </div>
+            </div>
+          <?php if($page['footer_25']):?>
+              <div class="col-md-3">
+                <?php print render($page['footer_25']);?>
+              </div>
+          <?php endif;?>
+        </div>
+    </div>
+  <?php if($page['footer_bottom']):?>
+      <div class="footer-copyright">
+          <div class="container">
+              <div class="row">
+                <?php print render($page['footer_bottom']);?>
+              </div>
+          </div>
+      </div>
+  <?php endif;?>
+</footer>

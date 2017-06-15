@@ -48,7 +48,6 @@ function hedley_terms_get_user_type_links() {
 
   $variables = [
     'links' => $links,
-    'count_class' => hedley_theme_number_as_word(count($links)),
   ];
   return theme('hedley_terms_user_type_links', $variables);
 }

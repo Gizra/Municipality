@@ -56,7 +56,7 @@ plugins[panels][layouts] = layouts
 
 ; Define theme setting defaults.
 settings[breadcrumbs] = 1
-settings[logo_height] = "54"
+settings[logo_height] = ""
 settings[sticky_logo_height] = "40"
 settings[sticky_header] = 1
 settings[skin_color] = 0088cc
@@ -74,8 +74,8 @@ settings[ribbon_text] = "Get In Touch"
 
 ; Define theme settings custom.
 settings[header_layout] = h_default
-settings[footer_layout] = f_default
-settings[footer_color] = primary
+settings[footer_layout] = f_advanced
+settings[footer_color] = quaternary
 settings[page_header_option] = ph_default
 settings[page_header_color_option] = page-header-primary
 

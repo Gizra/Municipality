@@ -1,45 +1,86 @@
-<?php
+<header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
+  <div class="header-body">
+    <div class="header-container container">
+      <div class="header-row">
+        <div class="header-column">
+          <?php if (isset($page['branding'])) : ?>
+            <?php print render($page['branding']); ?>
+          <?php endif; ?>
+          <?php if ($logo): ?>
+            <div class="header-logo">
+              <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
+                <img alt="<?php print t('Home'); ?>" width="100" height="<?php print theme_get_setting('logo_height'); ?>" data-sticky-width="82" data-sticky-height="<?php print theme_get_setting('sticky_logo_height'); ?>" data-sticky-top="33" src="<?php print $logo; ?>">
+              </a>
+            </div>
+          <?php endif; ?>
+          <?php if ($site_name || $site_slogan): ?>
+            <div id="name-and-slogan"<?php if ($disable_site_name && $disable_site_slogan) { print ' class="hidden"'; } ?>>
 
-$header_layout = theme_get_setting('header_layout');
-if($header_layout != 'none'):
-    include_once($header_layout.'.inc');
-else:
-    if(arg(0) == 'index-header-language-dropdown'):
-        include_once('h_language_dropdown.inc');
-    elseif(arg(0) == 'index-header-flat'):
-        include_once('h_flat.inc');
-    elseif(arg(0) == 'index-header-flat-top-bar'):
-        include_once('h_flat_topbar.inc');
-    elseif(arg(0) == 'index-header-flat-colored-top-bar'):
-        include_once('h_flat_topbar_color.inc');
-    elseif(arg(0) == 'index-header-flat-top-bar-search' || arg(0) == 'index-corporate-5'):
-        include_once('h_flat_topbar_search.inc');
-    elseif(arg(0) == 'index-header-transparent'):
-        include_once('h_transparent.inc');
-    elseif(arg(0) == 'index-header-transparent-bottom-border' || arg(0) == 'index-corporate-7'):
-        include_once('h_transparent_border_bottom.inc');
-    elseif(arg(0) == 'index-header-semi-transparent'):
-        include_once('h_transparent_semi.inc');
-    elseif(arg(0) == 'index-header-semi-transparent-light'):
-        include_once('h_transparent_semi_light.inc');
-    elseif(arg(0) == 'index-header-center'):
-        include_once('h_center.inc');
-    elseif(arg(0) == 'index-header-narrow'):
-        include_once('h_narrow.inc');
-    elseif(arg(0) == 'index-header-full-width'):
-        include_once('h_fullwidth.inc');
-    elseif(arg(0) == 'index-header-navbar'):
-        include_once('h_navbar.inc');
-    elseif(arg(0) == 'index-header-navbar-extra-info' || arg(0) == 'index-corporate-3'):
-        include_once('h_navbar_extra_info.inc');
-    elseif(arg(0) == 'index-header-side-header-left'):
-        include_once('h_side_header_left.inc');
-    elseif(arg(0) == 'index-header-side-header-right'):
-        include_once('h_side_header_right.inc');
-    elseif(arg(0) == 'index-corporate-hosting'):
-        include_once('h_hosting.inc');
-    else:
-        include_once('h_default.inc');
-    endif;
-endif;
-?>
+              <?php if ($site_name): ?>
+                <?php if ($title): ?>
+                  <div id="site-name"<?php if ($disable_site_name) { print ' class="hidden"'; } ?>>
+                    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
+                  </div>
+                <?php else: ?>
+                  <h1 id="site-name"<?php if ($disable_site_name) { print ' class="hidden"'; } ?>>
+                    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
+                  </h1>
+                <?php endif; ?>
+              <?php endif; ?>
+
+              <?php if ($site_slogan): ?>
+                <div id="site-slogan"<?php if ( ($disable_site_slogan ) ) { print ' class="hidden"'; } if ( (!$disable_site_slogan ) AND ($disable_site_name) ) { print ' class="slogan-no-name"'; } ?>>
+                  <?php print $site_slogan; ?>
+                </div>
+              <?php endif; ?>
+
+            </div> <!-- /#name-and-slogan -->
+          <?php endif; ?>
+        </div>
+        <div class="header-column">
+          <div class="header-row">
+            <?php if (isset($page['header_search'])) : ?>
+              <div class="header-search hidden-xs">
+                <?php print render($page['header_search']); ?>
+              </div>
+            <?php endif; ?>
+
+            <nav class="header-nav-top">
+              <ul class="nav nav-pills">
+                <?php if (isset($accessibility_url)): ?>
+                  <li>
+                    <a href="<?php print $accessibility_url; ?>">
+                      <i class="fa fa-wheelchair fa-2"></i>
+                    </a>
+                  </li>
+                <?php endif; ?>
+                <li>
+                  <a href="#" class="change-font-size plus"><i class="fa fa-plus"></i></a>
+                  <i class="fa fa-font"></i>
+                  <a href="#" class="change-font-size minus"><i class="fa fa-minus"></i></a>
+                </li>
+              </ul>
+            </nav>
+
+            <?php print render($page['header_top']); ?>
+
+          </div>
+          <div class="header-row">
+            <div class="header-nav">
+              <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
+                <i class="fa fa-bars"></i>
+              </button>
+              <?php print render($page['header_icons']); ?>
+
+              <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
+                <nav>
+                  <?php print render($page['header_menu']); ?>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
