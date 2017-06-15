@@ -1,0 +1,115 @@
+name = Porto
+description = Responsive Drupal 7 Theme. 
+core = 7.x
+engine = phptemplate
+version = 3.0
+
+; Define theme CSS.
+stylesheets[all][] = vendor/owl.carousel/assets/owl.carousel.css
+stylesheets[all][] = vendor/font-awesome/css/font-awesome-legacy.css
+stylesheets[all][] = vendor/font-awesome/css/font-awesome.css
+stylesheets[all][] = vendor/simple-line-icons/css/simple-line-icons.css
+stylesheets[all][] = vendor/owl.carousel/assets/owl.theme.default.css
+stylesheets[all][] = vendor/prettyPhoto/css/prettyPhoto.css
+stylesheets[all][] = vendor/circle-flip-slideshow/css/component.css
+stylesheets[all][] = vendor/magnific-popup/magnific-popup.css
+stylesheets[all][] = vendor/isotope/jquery.isotope.css
+stylesheets[all][] = css/theme.css
+stylesheets[all][] = css/theme-elements.css
+stylesheets[all][] = css/theme-animate.css
+stylesheets[all][] = css/theme-blog.css
+stylesheets[all][] = css/theme-shop.css
+stylesheets[all][] = css/drupal-styles.css
+stylesheets[all][] = css/custom.css
+stylesheets[all][] = css/less/skin.less
+
+
+
+; Define theme JS libraries.
+scripts[] = vendor/modernizr/modernizr.min.js
+scripts[] = vendor/jquery.appear/jquery.appear.js
+scripts[] = vendor/jquery.easing/jquery.easing.js
+scripts[] = vendor/jquery-cookie/jquery-cookie.js
+;scripts[] = master/style-switcher/style.switcher.js
+scripts[] = vendor/bootstrap/js/bootstrap.min.js
+scripts[] = vendor/common/common.js
+scripts[] = vendor/jquery.validation/jquery.validation.js
+scripts[] = vendor/jquery.stellar/jquery.stellar.js
+scripts[] = vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js
+scripts[] = vendor/jquery.gmap/jquery.gmap.js
+scripts[] = vendor/jquery.lazyload/jquery.lazyload.js
+scripts[] = vendor/isotope/jquery.isotope.min.js
+scripts[] = vendor/owl.carousel/owl.carousel.js
+scripts[] = vendor/jflickrfeed/jflickrfeed.js
+scripts[] = vendor/magnific-popup/jquery.magnific-popup.js
+scripts[] = vendor/vide/vide.js
+scripts[] = vendor/circle-flip-slideshow/js/jquery.flipshow.js
+scripts[] = js/custom.js
+
+; Define theme block regions.
+regions[header_top] = Header Top
+regions[header_search] = Header Search
+regions[branding] = Branding
+regions[header_icons] = Header Icons
+regions[language] = Language
+regions[header_menu] = Header Menu
+regions[one_page] = One Page Content
+regions[before_content] = Before Content
+regions[content] = Content
+regions[sidebar_left] = Left Sidebar
+regions[sidebar_right] = Right Sidebar
+regions[after_content] = After Content
+regions[footer_top] = Footer Top
+
+regions[footer_11] = Footer Box 1.1
+regions[footer_12] = Footer Box 1.2
+regions[footer_13] = Footer Box 1.3
+regions[footer_14] = Footer Box 1.4
+
+regions[footer_21] = Footer Box 2.1
+regions[footer_22] = Footer Box 2.2
+regions[footer_23] = Footer Box 2.3
+regions[footer_24] = Footer Box 2.4
+regions[footer_25] = Footer Box 2.5
+
+regions[footer_31] = Footer Box 3.1
+
+regions[footer_41] = Footer Box 4.1
+regions[footer_42] = Footer Box 4.2
+regions[footer_43] = Footer Box 4.3
+regions[footer_44] = Footer Box 4.4
+
+regions[footer_51] = Footer Box 5.1
+regions[footer_52] = Footer Box 5.2
+regions[footer_53] = Footer Box 5.3
+regions[footer_54] = Footer Box 5.4
+
+regions[footer_61] = Footer Box 6.1
+regions[footer_62] = Footer Box 6.2
+
+regions[footer_bottom] = Footer Bottom
+
+; Define location for panels templates.
+plugins[panels][layouts] = layouts
+
+; Define theme setting defaults.
+settings[breadcrumbs] = 1
+settings[logo_height] = "54"
+settings[sticky_logo_height] = "40"
+settings[sticky_header] = 1
+settings[skin_color] = 0088cc
+settings[secondary_color] = E36159
+settings[tertiary_color] = 2BAAB1
+settings[quaternary_color] = 383f48
+settings[background_color] = light
+settings[site_layout] = wide
+settings[body_background] = porto_backgrounds
+settings[background_select] = az_subtle
+settings[background_select] = az_subtle
+settings[body_background_color] = CCCCCC
+settings[portfolio_columns] = span3
+settings[blog_image] = full
+settings[blog_image_slider] = 1
+settings[blog_share] = 1
+settings[ribbon] = 1
+settings[ribbon_text] = "Get In Touch"

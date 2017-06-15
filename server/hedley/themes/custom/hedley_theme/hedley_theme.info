@@ -72,6 +72,13 @@ settings[blog_image] = full
 settings[ribbon] = 1
 settings[ribbon_text] = "Get In Touch"
 
+; Define theme settings custom.
+settings[header_layout] = h_default
+settings[footer_layout] = f_default
+settings[footer_color] = primary
+settings[page_header_option] = ph_default
+settings[page_header_color_option] = page-header-primary
+
 ; Fontsize accessblity.
 scripts[] = js/font-size-controls.js
 stylesheets[all][] = css/font-size.css

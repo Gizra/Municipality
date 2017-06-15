@@ -134,11 +134,6 @@ projects[views][version] = "3.16"
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.4"
 
-; Themes
-projects[bootstrap][subdir] = "contrib"
-projects[bootstrap][version] = "3.14"
-projects[semanticui][type] = "theme"
-
 ; Development
 projects[devel][subdir] = "development"
 projects[devel][version] = "1.5"
