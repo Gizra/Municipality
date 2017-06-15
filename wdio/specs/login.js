@@ -1,4 +1,4 @@
-var assert = require('assert');
+const assert = require('assert');
 
 describe('login page', () => {
   it('should not allow an anonymous user with wrong credentials to login', () => {

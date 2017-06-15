@@ -1,4 +1,4 @@
-var assert = require('assert');
+const assert = require('assert');
 
 describe('Municipality homepage', () => {
   before(() => {
@@ -9,7 +9,7 @@ describe('Municipality homepage', () => {
     browser.waitForVisible('div.ui.eight.wide.center.aligned.middle.aligned.column > h2 > a');
 
     // Assert the page have the expected title.
-    var muniTitle = browser.getText('div.ui.eight.wide.center.aligned.middle.aligned.column > h2 > a');
+    const muniTitle = browser.getText('div.ui.eight.wide.center.aligned.middle.aligned.column > h2 > a');
     assert.equal('טובא-זנגריה', muniTitle);
   });
 
