@@ -27,6 +27,8 @@ class HedleyMigrateEvents extends HedleyMigrateBase {
     'field_audience',
     'field_date',
     'field_date:to',
+    'field_location:title',
+    'field_location:url',
     'field_ticket_price',
     'field_topics',
     'field_user_types',
@@ -38,6 +40,8 @@ class HedleyMigrateEvents extends HedleyMigrateBase {
     'field_audience',
     'field_date',
     'field_date:to',
+    'field_location:title',
+    'field_location:url',
     'field_ticket_price',
   ];
   protected $simpleMultipleMappings = [
