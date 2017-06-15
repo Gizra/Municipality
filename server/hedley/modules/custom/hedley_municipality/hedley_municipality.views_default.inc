@@ -24,8 +24,7 @@ function hedley_municipality_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Municipalities';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'administer nodes';
+  $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -33,46 +32,36 @@ function hedley_municipality_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '25';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-    'og_group_ref' => 'og_group_ref',
     'title_field' => 'title_field',
-    'field_action_sections' => 'field_action_sections',
-    'field_link' => 'field_link',
-    'field_user_types' => 'field_user_types',
-    'field_topics' => 'field_topics',
+    'field_default_language' => 'field_default_language',
+    'field_logo' => 'field_logo',
+    'field_social_links' => 'field_social_links',
     'edit_node' => 'edit_node',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
-    'og_group_ref' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'title_field' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_action_sections' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_link' => array(
-      'sortable' => 1,
+    'field_default_language' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_user_types' => array(
+    'field_logo' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_topics' => array(
+    'field_social_links' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -87,7 +76,7 @@ function hedley_municipality_views_default_views() {
   $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
   $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
-  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
   /* Field: Content: Default language */
   $handler->display->display_options['fields']['field_default_language']['id'] = 'field_default_language';
   $handler->display->display_options['fields']['field_default_language']['table'] = 'field_data_field_default_language';
@@ -132,6 +121,11 @@ function hedley_municipality_views_default_views() {
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
   $handler->display->display_options['tab_options']['weight'] = '0';
+
+  /* Display: View municipalities */
+  $handler = $view->new_display('block', 'View municipalities', 'block_1');
+  $handler->display->display_options['display_description'] = 'Offers a list of currently available municipalities.';
+  $handler->display->display_options['block_description'] = 'Municipalities';
   $translatables['municipalities'] = array(
     t('Master'),
     t('Municipalities'),
@@ -154,6 +148,8 @@ function hedley_municipality_views_default_views() {
     t('Social links'),
     t('Edit link'),
     t('Page'),
+    t('View municipalities'),
+    t('Offers a list of currently available municipalities.'),
   );
   $export['municipalities'] = $view;
 
