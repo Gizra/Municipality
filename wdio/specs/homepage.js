@@ -7,6 +7,8 @@ describe('Municipality homepage', () => {
 
   it('should show the name of the municipality', () => {
     browser.waitForVisible('div.ui.eight.wide.center.aligned.middle.aligned.column > h2 > a');
+    var title = browser.getText('div.ui.eight.wide.center.aligned.middle.aligned.column > h2 > a');
+    console.log(title.isEqual("טובא-זנגריה"));
   });
 
   it('should show the user types selector', () => {
