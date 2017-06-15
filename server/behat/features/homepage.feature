@@ -91,8 +91,8 @@ Feature: Homepage
     And I am an anonymous user
     Then the user type menu should "not appear" on municipality "קריית מלאכי" homepage for user types "none"
 
-  @api @site
+  @api
   Scenario: Verify that site name is Municipality
-    Given I login with user "Admin"
+    Given I login with user "liat"
     When I visit the page "Homepage"
     Then I should see the "Municipality" header
