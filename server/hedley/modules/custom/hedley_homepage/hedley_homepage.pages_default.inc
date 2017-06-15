@@ -60,29 +60,6 @@ function hedley_homepage_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
-  $pane->pid = 'new-439244c2-8f39-4993-a81a-408315b44daa';
-  $pane->panel = 'center';
-  $pane->type = 'block';
-  $pane->subtype = 'locale-language';
-  $pane->shown = TRUE;
-  $pane->access = array();
-  $pane->configuration = array(
-    'override_title' => 0,
-    'override_title_text' => '',
-    'override_title_heading' => 'h2',
-  );
-  $pane->cache = array();
-  $pane->style = array(
-    'settings' => NULL,
-  );
-  $pane->css = array();
-  $pane->extras = array();
-  $pane->position = 0;
-  $pane->locks = array();
-  $pane->uuid = '439244c2-8f39-4993-a81a-408315b44daa';
-  $display->content['new-439244c2-8f39-4993-a81a-408315b44daa'] = $pane;
-  $display->panels['center'][0] = 'new-439244c2-8f39-4993-a81a-408315b44daa';
-  $pane = new stdClass();
   $pane->pid = 'new-5ab34562-59a1-4c98-ac3a-c7f54f51a597';
   $pane->panel = 'center';
   $pane->type = 'block';
@@ -100,11 +77,11 @@ function hedley_homepage_default_page_manager_pages() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 1;
+  $pane->position = 0;
   $pane->locks = array();
   $pane->uuid = '5ab34562-59a1-4c98-ac3a-c7f54f51a597';
   $display->content['new-5ab34562-59a1-4c98-ac3a-c7f54f51a597'] = $pane;
-  $display->panels['center'][1] = 'new-5ab34562-59a1-4c98-ac3a-c7f54f51a597';
+  $display->panels['center'][0] = 'new-5ab34562-59a1-4c98-ac3a-c7f54f51a597';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-5ab34562-59a1-4c98-ac3a-c7f54f51a597';
   $handler->conf['display'] = $display;
