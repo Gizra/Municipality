@@ -34,7 +34,6 @@ class HedleyMigrateNews extends HedleyMigrateBase {
     'body',
   ];
   protected $simpleMultipleMappings = [
-    'field_topics',
     'field_user_types',
   ];
 
@@ -46,7 +45,6 @@ class HedleyMigrateNews extends HedleyMigrateBase {
 
     $this->dependencies[] = 'HedleyMigrateMunicipalities';
     $this->dependencies[] = 'HedleyMigrateUserTypes';
-    $this->dependencies[] = 'HedleyMigrateTopics';
 
     $this
       ->addFieldMapping(OG_AUDIENCE_FIELD, 'municipality')

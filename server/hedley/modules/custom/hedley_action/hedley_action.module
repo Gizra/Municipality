@@ -48,11 +48,13 @@ function hedley_action_node_presave($node) {
  *
  * @param object $wrapper
  *   The action entity wrapper.
+ * @param array $class
+ *   The CSS classes to add to the link, defaults to empty.
  *
  * @return string
  *   The action's label wrapped in a link.
  */
-function hedley_action_get_action_title_link($wrapper) {
+function hedley_action_get_action_title_link($wrapper, array $class = []) {
   // Default link of the action.
   $href = url('node/' . $wrapper->getIdentifier(), ['absolute' => TRUE]);
   $target = '';
@@ -63,5 +65,10 @@ function hedley_action_get_action_title_link($wrapper) {
     $href = url($link['url']);
   }
 
-  return l($wrapper->label(), $href, ['attributes' => ['target' => $target]]);
+  return l($wrapper->label(), $href, [
+    'attributes' => [
+      'target' => $target,
+      'class' => $class,
+    ],
+  ]);
 }

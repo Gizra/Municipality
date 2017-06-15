@@ -12,15 +12,13 @@ import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
 
-view : Language -> Model -> Html Msg
-view language model =
+view : Language -> Bool -> Model -> Html Msg
+view language showAsBlock model =
     div
         []
-        [ viewEventFilter language model.filterString
-        , div [ class "ui horizontal divider" ]
-            [ text <| translate language MatchingResults ]
-        , div [ class "ui container center aligned" ]
-            [ viewEvents language model ]
+        [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
+        , showIf (not showAsBlock) <| div [ class "ui horizontal divider" ] [ text <| translate language MatchingResults ]
+        , div [ class "ui container center aligned" ] [ viewEvents language model ]
         , divider
         ]
 

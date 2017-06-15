@@ -35,10 +35,17 @@ function hedley_topic_default_page_manager_handlers() {
           'name' => 'entity_bundle:taxonomy_term',
           'settings' => array(
             'type' => array(
-              'topics' => 'topics',
+              'audiences' => 'audiences',
+              'departments' => 'departments',
+              'user_types' => 'user_types',
             ),
           ),
           'context' => 'argument_term_1',
+          'not' => TRUE,
+        ),
+        1 => array(
+          'name' => 'og_context',
+          'settings' => NULL,
           'not' => FALSE,
         ),
       ),

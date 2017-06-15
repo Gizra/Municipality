@@ -96,15 +96,19 @@ function hedley_hardcopy_form_views_default_views() {
   $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
   $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
-  /* Field: Content: user types */
+  /* Field: Content: Topics */
+  $handler->display->display_options['fields']['og_vocabulary']['id'] = 'og_vocabulary';
+  $handler->display->display_options['fields']['og_vocabulary']['table'] = 'field_data_og_vocabulary';
+  $handler->display->display_options['fields']['og_vocabulary']['field'] = 'og_vocabulary';
+  $handler->display->display_options['fields']['og_vocabulary']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['og_vocabulary']['delta_offset'] = '0';
+  /* Field: Content: User types */
   $handler->display->display_options['fields']['field_user_types']['id'] = 'field_user_types';
   $handler->display->display_options['fields']['field_user_types']['table'] = 'field_data_field_user_types';
   $handler->display->display_options['fields']['field_user_types']['field'] = 'field_user_types';
   $handler->display->display_options['fields']['field_user_types']['delta_offset'] = '0';
-  /* Field: Content: Topics */
-  $handler->display->display_options['fields']['field_topics']['id'] = 'field_topics';
-  $handler->display->display_options['fields']['field_topics']['table'] = 'field_data_field_topics';
-  $handler->display->display_options['fields']['field_topics']['field'] = 'field_topics';
   /* Field: Content: File */
   $handler->display->display_options['fields']['field_file']['id'] = 'field_file';
   $handler->display->display_options['fields']['field_file']['table'] = 'field_data_field_file';
@@ -163,25 +167,73 @@ function hedley_hardcopy_form_views_default_views() {
   );
   $handler->display->display_options['filters']['field_user_types_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_user_types_tid']['vocabulary'] = 'user_types';
-  /* Filter criterion: Content: Topics (field_topics) */
-  $handler->display->display_options['filters']['field_topics_tid']['id'] = 'field_topics_tid';
-  $handler->display->display_options['filters']['field_topics_tid']['table'] = 'field_data_field_topics';
-  $handler->display->display_options['filters']['field_topics_tid']['field'] = 'field_topics_tid';
-  $handler->display->display_options['filters']['field_topics_tid']['value'] = '';
-  $handler->display->display_options['filters']['field_topics_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_topics_tid']['expose']['operator_id'] = 'field_topics_tid_op';
-  $handler->display->display_options['filters']['field_topics_tid']['expose']['label'] = 'Topics (field_topics)';
-  $handler->display->display_options['filters']['field_topics_tid']['expose']['operator'] = 'field_topics_tid_op';
-  $handler->display->display_options['filters']['field_topics_tid']['expose']['identifier'] = 'field_topics_tid';
-  $handler->display->display_options['filters']['field_topics_tid']['expose']['remember_roles'] = array(
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'hardcopy_form' => 'hardcopy_form',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Groups audience (og_group_ref) */
+  $handler->display->display_options['filters']['og_group_ref_target_id']['id'] = 'og_group_ref_target_id';
+  $handler->display->display_options['filters']['og_group_ref_target_id']['table'] = 'og_membership';
+  $handler->display->display_options['filters']['og_group_ref_target_id']['field'] = 'og_group_ref_target_id';
+  $handler->display->display_options['filters']['og_group_ref_target_id']['group'] = 1;
+  $handler->display->display_options['filters']['og_group_ref_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['operator_id'] = 'og_group_ref_target_id_op';
+  $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['label'] = 'Groups audience (og_group_ref)';
+  $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['operator'] = 'og_group_ref_target_id_op';
+  $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['identifier'] = 'og_group_ref_target_id';
+  $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
   );
-  $handler->display->display_options['filters']['field_topics_tid']['vocabulary'] = 'topics';
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  /* Filter criterion: Content: Topics (og_vocabulary) */
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['id'] = 'og_vocabulary_target_id';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['table'] = 'field_data_og_vocabulary';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['field'] = 'og_vocabulary_target_id';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['group'] = 1;
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['expose']['operator_id'] = 'og_vocabulary_target_id_op';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['expose']['label'] = 'Topics';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['expose']['operator'] = 'og_vocabulary_target_id_op';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['expose']['identifier'] = 'og_vocabulary_target_id';
+  $handler->display->display_options['filters']['og_vocabulary_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  /* Filter criterion: Content: User types (field_user_types) */
+  $handler->display->display_options['filters']['field_user_types_tid']['id'] = 'field_user_types_tid';
+  $handler->display->display_options['filters']['field_user_types_tid']['table'] = 'field_data_field_user_types';
+  $handler->display->display_options['filters']['field_user_types_tid']['field'] = 'field_user_types_tid';
+  $handler->display->display_options['filters']['field_user_types_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_user_types_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_user_types_tid']['expose']['operator_id'] = 'field_user_types_tid_op';
+  $handler->display->display_options['filters']['field_user_types_tid']['expose']['label'] = 'User types (field_user_types)';
+  $handler->display->display_options['filters']['field_user_types_tid']['expose']['operator'] = 'field_user_types_tid_op';
+  $handler->display->display_options['filters']['field_user_types_tid']['expose']['identifier'] = 'field_user_types_tid';
+  $handler->display->display_options['filters']['field_user_types_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_user_types_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_user_types_tid']['vocabulary'] = 'user_types';
   $handler->display->display_options['path'] = 'admin/content/hardcopy-forms';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Hardcopy forms';
@@ -207,13 +259,12 @@ function hedley_hardcopy_form_views_default_views() {
     t('last »'),
     t('Groups audience'),
     t('Title'),
-    t('User types'),
     t('Topics'),
+    t('User types'),
     t('File'),
     t('Edit link'),
     t('Groups audience (og_group_ref)'),
     t('User types (field_user_types)'),
-    t('Topics (field_topics)'),
     t('Page'),
   );
   $export['hardcopy_forms'] = $view;

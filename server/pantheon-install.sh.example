@@ -5,6 +5,7 @@
 #    for drush si to work.
 
 PROFILE="hedley"
+SITE_NAME="Municipality"
 
 MAKE_DIR="/var/www/municipality"
 PANTHEON_DIR="/var/www/municipality_pantheon"
@@ -42,7 +43,7 @@ printf "${GREEN}Drop existing DB and start a new installation.${NORMAL}\n"
 # Execute Pantheon install outside of the Pantheon Dir.
 drush $PANTHEON_ALIAS sql-drop -y
 
-drush $PANTHEON_ALIAS si -y $PROFILE --account-pass=admin
+drush $PANTHEON_ALIAS si -y $PROFILE --site-name="$SITE_NAME" --account-pass=admin
 
 printf "${GREEN}Migrate content.${NORMAL}\n"
 drush $PANTHEON_ALIAS en hedley_migrate --yes --strict=0

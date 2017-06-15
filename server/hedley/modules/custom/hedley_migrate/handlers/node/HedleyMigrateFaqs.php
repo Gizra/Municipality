@@ -29,7 +29,6 @@ class HedleyMigrateFaqs extends HedleyMigrateBase {
     'field_answer',
   ];
   protected $simpleMultipleMappings = [
-    'field_topics',
     'field_user_types',
   ];
 
@@ -41,7 +40,6 @@ class HedleyMigrateFaqs extends HedleyMigrateBase {
 
     $this->dependencies[] = 'HedleyMigrateMunicipalities';
     $this->dependencies[] = 'HedleyMigrateUserTypes';
-    $this->dependencies[] = 'HedleyMigrateTopics';
 
     $this
       ->addFieldMapping(OG_AUDIENCE_FIELD, 'municipality')

@@ -13,7 +13,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    */
   public function iLoginWithUser($name) {
     // $password = $this->drupal_users[$name];
-    $password = 'admin';
+    $password = $name;
     $this->loginUser($name, $password);
   }
 
@@ -26,7 +26,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    *   The use password.
    */
   protected function loginUser($name, $password) {
-    $this->getSession()->visit($this->locatePath('/'));
+    $this->getSession()->visit($this->locatePath('/user'));
     $element = $this->getSession()->getPage();
     $element->fillField('name', $name);
     $element->fillField('pass', $password);
@@ -53,8 +53,8 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    */
   public function iUserTypeToMunicipality($add, $type, $municipality) {
     $user_types_fields = [
-      'Businesses' => 'edit-field-user-types-und-19',
-      'Residents' => 'edit-field-user-types-und-18',
+      'Businesses' => 'edit-field-user-types-und-12',
+      'Residents' => 'edit-field-user-types-und-11',
     ];
 
     $group = $this->loadGroupByTitleAndType($municipality, 'municipality');
@@ -245,6 +245,30 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
+   * @When I edit :title node of type :type
+   */
+  public function iEditNodeOfType($title, $type) {
+    $query = new \entityFieldQuery();
+    $result = $query
+      ->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', strtolower($type))
+      ->propertyCondition('title', $title)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->range(0, 1)
+      ->execute();
+    if (empty($result['node'])) {
+      $params = array(
+        '@title' => $title,
+        '@type' => $type,
+      );
+      throw new \Exception(format_string("Node @title of @type not found.", $params));
+    }
+    $nid = key($result['node']);
+    $this->getSession()->visit($this->locatePath('node/' . $nid . '/edit  '));
+  }
+
+
+  /**
    * @When I visit a :municipality website homepage with no parameters in URL
    */
   public function iVisitAWebsiteHomepageWithNoParametersInUrl($municipality) {
@@ -280,6 +304,18 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
 
     $user_type_link->click();
+  }
+
+  /**
+   * @When I visit the topic :topic under the municipality :municipality
+   */
+  public function iVisitTheTopicUnderTheMunicipality($topic, $municipality) {
+    $municipality = $this->loadGroupByTitleAndType($municipality, 'municipality');
+
+    $topic = $this->loadTaxonomyByTitleAndVocabulary($topic, 'topics_' . $municipality->nid);
+
+    $uri = $this->createUriWithGroupContext($municipality, 'taxonomy/term/' . $topic->tid) ;
+    $this->getSession()->visit($this->locatePath($uri));
   }
 
   /**
@@ -378,6 +414,26 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
+   * @Then I should see the action :action in the topic page
+   */
+  public function iShouldSeeTheActionInTheTopicPage($action) {
+    $page = $this->getSession()->getPage();
+
+    $nodes = $page->findAll('css', '.pane-topic-actions .buttons a');
+    foreach ($nodes as $node) {
+      if ($node->getText() === $action) {
+        if ($node->isVisible()) {
+          return;
+        }
+        else {
+          throw new \Exception("Action with label \"$action\" not visible.");
+        }
+      }
+    }
+    throw new \Behat\Mink\Exception\ElementNotFoundException($this->getSession(), 'action', 'label', $action);
+  }
+
+  /**
    * @Then I should see the :header header
    */
   public function iShouldSeeTheMunicipalityHeader($header) {
@@ -431,6 +487,45 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
       throw new \Exception(format_string('Group @title not found (type @type).', $params));
     }
     return $group;
+  }
+
+  /**
+   * Get the group based on the title and type.
+   *
+   * @param string $title
+   *   The group title.
+   * @param string $type
+   *   The group node type.
+   *
+   * @return object
+   *   The group (if any) or NULL.
+   * @throws \Exception
+   */
+  protected function loadTaxonomyByTitleAndVocabulary($title, $type) {
+    $query = new \entityFieldQuery();
+    $result = $query
+      ->entityCondition('entity_type', 'taxonomy_term')
+      ->entityCondition('bundle', $type)
+      ->propertyCondition('name', $title)
+      ->range(0, 1)
+      ->execute();
+    if (empty($result['taxonomy_term'])) {
+      $params = [
+        '@title' => $title,
+        '@type' => $type,
+      ];
+      throw new \Exception(format_string('Taxonomy term @title not found (type @type).', $params));
+    }
+    $tid = (int) key($result['taxonomy_term']);
+    $term = taxonomy_term_load($tid);
+    if (!$term) {
+      $params = [
+        '@title' => $title,
+        '@type' => $type,
+      ];
+      throw new \Exception(format_string('Taxonomy term @title not found (type @type).', $params));
+    }
+    return $term;
   }
 
   /**
