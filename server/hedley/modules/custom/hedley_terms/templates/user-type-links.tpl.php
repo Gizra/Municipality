@@ -5,10 +5,10 @@
  * User type links template.
  */
 ?>
-<div class="ui <?php print $count_class; ?> item menu">
+<div class="btn-group user-types" role="group">
   <?php foreach ($links as $link): ?>
     <a
-      class="item <?php print $link['active'] ? 'active' : ''; ?>"
+      class="btn btn-default <?php print $link['active'] ? 'active' : ''; ?>"
       href="<?php print $link['url']; ?>"
     >
       <?php print $link['label']; ?>

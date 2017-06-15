@@ -1,11 +1,84 @@
 name = Hedley theme
-description = Municipality Semantic UI subtheme.
+description = Municipality Bootstrap subtheme.
 core = 7.x
-base theme = semanticui
+base theme = porto
+engine = phptemplate
 
-scripts[] = js/font-size-controls.js
-scripts[] = js/semanticui-inits.js
+; Call style sheets.
+stylesheets[all][] = css/custom.css
 
-stylesheets[all][] = css/font-size.css
+; Define theme block regions.
+regions[header_top] = Header Top
+regions[header_search] = Header Search
+regions[branding] = Branding
+regions[header_icons] = Header Icons
+regions[language] = Language
+regions[header_menu] = Header Menu
+regions[one_page] = One Page Content
+regions[before_content] = Before Content
+regions[content] = Content
+regions[sidebar_left] = Left Sidebar
+regions[sidebar_right] = Right Sidebar
+regions[after_content] = After Content
+regions[footer_top] = Footer Top
 
+regions[footer_11] = Footer Box 1.1
+regions[footer_12] = Footer Box 1.2
+regions[footer_13] = Footer Box 1.3
+regions[footer_14] = Footer Box 1.4
+
+regions[footer_21] = Footer Box 2.1
+regions[footer_22] = Footer Box 2.2
+regions[footer_23] = Footer Box 2.3
+regions[footer_24] = Footer Box 2.4
+regions[footer_25] = Footer Box 2.5
+
+regions[footer_31] = Footer Box 3.1
+
+regions[footer_41] = Footer Box 4.1
+regions[footer_42] = Footer Box 4.2
+regions[footer_43] = Footer Box 4.3
+regions[footer_44] = Footer Box 4.4
+
+regions[footer_51] = Footer Box 5.1
+regions[footer_52] = Footer Box 5.2
+regions[footer_53] = Footer Box 5.3
+regions[footer_54] = Footer Box 5.4
+
+regions[footer_61] = Footer Box 6.1
+regions[footer_62] = Footer Box 6.2
+
+regions[footer_bottom] = Footer Bottom
+
+
+; Define location for panels templates.
 plugins[panels][layouts] = layouts
+
+; Define theme setting defaults.
+settings[breadcrumbs] = 1
+settings[logo_height] = ""
+settings[sticky_logo_height] = "40"
+settings[sticky_header] = 1
+settings[skin_color] = 0088cc
+settings[gradient] = 1
+settings[background_color] = light
+settings[site_layout] = wide
+settings[body_background] = porto_backgrounds
+settings[background_select] = az_subtle
+settings[background_select] = az_subtle
+settings[body_background_color] = CCCCCC
+settings[portfolio_columns] = span3
+settings[blog_image] = full
+settings[ribbon] = 1
+settings[ribbon_text] = "Get In Touch"
+
+; Define theme settings custom.
+settings[header_layout] = h_default
+settings[footer_layout] = f_advanced
+settings[footer_color] = quaternary
+settings[page_header_option] = ph_default
+settings[page_header_color_option] = page-header-primary
+
+; Fontsize accessblity.
+scripts[] = js/font-size-controls.js
+stylesheets[all][] = css/font-size.css

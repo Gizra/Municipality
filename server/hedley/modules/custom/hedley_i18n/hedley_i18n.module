@@ -97,7 +97,7 @@ function hedley_i18n_language_get_switch_links($language_object, $node, $path) {
     // isn't added correctly according the global language.
     $active = $language_code == $language_object->language ? 'active' : '';
     $url = url($link['href'], $options);
-    $rendered_links[$language_code] = "<a class=\"item $active\" href=\"$url\">{$link['title']}</a>";
+    $rendered_links[$language_code] = "<a class=\"btn btn-default $active\" href=\"$url\">{$link['title']}</a>";
   }
 
   return $rendered_links;

@@ -6,14 +6,14 @@ describe('Municipality homepage', () => {
   })
 
   it('should show the correct name of the municipality', () => {
-    browser.waitForVisible('div.ui.eight.wide.center.aligned.middle.aligned.column > h2 > a');
+    browser.waitForVisible('header#header .header-container #site-name > h1');
 
     // Assert the page have the expected title.
-    var muniTitle = browser.getText('div.ui.eight.wide.center.aligned.middle.aligned.column > h2 > a');
+    var muniTitle = browser.getText('header#header .header-container #site-name > h1');
     assert.equal('טובא-זנגריה', muniTitle);
   });
 
   it('should show the user types selector', () => {
-    browser.waitForVisible('.ui.row > .ui.user-types');
+    browser.waitForVisible('.row .col-md-3 > .btn-group.user-types');
   });
 });

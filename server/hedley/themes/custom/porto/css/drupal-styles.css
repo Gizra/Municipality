@@ -1,0 +1,956 @@
+.form-select {
+    display: block;
+    
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.shop .form-item-quantity {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.shop-sidebar {
+	margin: 0;
+	padding: 0;
+}
+
+.shop-sidebar li {
+	list-style: none;
+	margin-bottom: 20px;
+}
+
+.shop-sidebar-icon {
+  color: #000000;
+  background: #ffffff;
+  border-style: solid;
+  border-color: #cccccc;
+  border-width: 2px;
+  width: 45px;
+  height: 45px;
+  line-height: 40px;
+  border-radius: 500px;
+  font-size: 25px;
+  display: inline-block;
+  text-align: center;
+  float: left;
+  margin-right: 15px;
+}
+
+.shop-sidebar-icon i {
+	text-align: center;
+}
+
+.shop-sidebar-title {
+  color: #222;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 8px;
+  display: block;
+  margin-top: 0px;
+  position: relative;
+  top: 10px;
+  margin-bottom: 10px;
+}
+
+.shop-sidebar-text {
+	font-size: 11px;
+}
+
+.shop-tags li {
+	display: inline-block;
+}
+
+.shop-tags li a {
+	color: #fff;
+}
+
+.shop .old-price {
+	text-decoration: line-through;
+}
+
+
+.product_meta {
+	margin-top: 5px;
+}
+
+.product_meta .posted_in {
+	display: block;
+}
+
+.product_meta .field-label {
+	display: inline-block;
+}
+
+.table > thead > tr > th, 
+.table > tbody > tr > th {
+	border-bottom: 0;
+}
+
+.mb-none.black {
+	color: #000 !important;
+}
+
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+  background-color: transparent;
+}
+
+#header .header-nav-main nav > ul > li.dropdown .dropdown-menu {
+  border-top-color: #0088CC;
+}
+
+.project-image-single {
+	border-radius: 50%;
+	position: relative;
+	top: 5px;
+	left: 5px;
+}
+
+.google-map img { 
+	max-width: none !important; 
+}
+
+.captcha {
+	max-width: 100%;
+}
+
+.breadcrumb a.active {
+  color: #777;
+}
+
+.post-meta-date i {
+	margin-right: 8px !important;
+}
+
+/* Image styles */
+
+.page-taxonomy .node-article {
+  border-bottom: 1px solid #DDD;
+  margin-bottom: 50px;
+  padding-bottom: 10px;
+}
+
+.page-taxonomy article:last-child {
+	border-bottom: none;
+}
+
+.timeline-date-heading {
+	font-size: 22px;
+	font-weight: bold;
+	margin: 15px 0px 5px 0px;
+	color: #000;
+}
+
+.content img {
+	max-width: 100%;
+	height: auto; 
+	display: block;
+}
+
+.home-concept .process-image img {
+  display: inline;	
+}
+
+/* FORUM STYLES */
+
+#forum {
+	border: 1px solid #eee;
+}
+
+#forum .icon {
+	display: table-cell;
+}
+
+#forum .icon div {
+	width: auto;
+}
+
+#forum table {
+	width: 100%;
+}
+
+#forum thead {
+  background: #eaeaea;
+	border-top: 1px solid #eee;
+	font-weight: bold;
+	text-align: center;
+}
+
+#forum thead th {
+	padding: 8px;
+}
+
+#forum tbody {
+	border-top: none;
+}
+
+#forum tbody td {
+	padding: 8px;
+}
+
+#forum tbody td.forum {
+  width: 60%;
+}
+
+#forum tbody td.topics, #forum tbody td.posts {
+	width: 15%;
+}
+
+#forum tbody tr.odd {
+	background-color: #fbfbfb;
+}
+
+#forum tbody tr.even {
+	background-color: #fff;
+}
+
+/* DRUPAL THEME STYLES */
+
+body.boxed.sticky-menu-active #header {
+  left: 0;
+  padding: 8px 0px;
+}
+
+
+.alert ul {
+	padding-left: 20px;
+}
+
+.latest-projects-content-image img {
+	max-width: 450px;
+}
+
+.clearfix {
+	display: block;
+}
+
+article.clearfix {
+  display: inline;
+}
+
+#block-user-login .pagination {
+	margin-top: 10px;
+}
+
+#block-user-login .pagination-lg>li>a {
+	border-radius: 6px;
+	font-size: 13px;
+}
+
+#block-user-login .pagination-lg>li:first-child>a {
+	margin-bottom: 10px;
+}
+
+.modal-body {
+	overflow: auto;
+}
+
+#toolbar.clearfix, .toolbar-menu.clearfix, .toolbar-drawer.clearfix {
+	display: block;
+}
+
+#user-login input, #user-register-form input, #user-pass input {
+	width: 35%;
+}
+
+#user-login input[type="submit"], #user-register-form input[type="submit"], #user-pass input[type="submit"] {
+	width: auto;
+}
+
+#profile-main-field-bio-add-more-wrapper .form-textarea-wrapper {
+	width: 75%;
+	height: 300px;
+}
+
+#profile-main-field-bio-add-more-wrapper textarea {
+	height: 300px;
+}
+
+.body .form-text, .body .form-textarea {
+	display: block;
+	width: 100%;
+	height: 34px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+	-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.team-item img, .portfolio-item img {
+	max-width: 100%;
+	height: auto;
+}
+
+#user-login label {
+	display: block;
+}
+
+.tweet-box {
+	margin-bottom: 20px;
+}
+
+#block-nivo-slider-nivo-slider {
+  max-width: 1110px;
+  margin: auto;
+}
+
+@media (max-width: 1199px) {
+  #block-nivo-slider-nivo-slider {
+    max-width: 910px;
+  }
+}
+
+@media (max-width: 991px) {
+  #block-nivo-slider-nivo-slider {
+    max-width: 690px;
+  }
+}
+
+@media (max-width: 767px) {
+  #block-nivo-slider-nivo-slider {
+    max-width: 100%;
+    margin: 0 30px;
+  }
+}
+
+.comment .img-thumbnail img {
+	height: 80px;
+	width: 80px;
+}
+
+#header.single-menu .social-icons {
+margin-top: 15px;
+}
+
+body.sticky-menu-active #header.single-menu .social-icons {
+margin-top: 27px;
+}
+
+
+
+.post-image img {
+	max-width: 100%;
+	height: auto;
+}
+
+.sort-source-wrapper .nav {
+	float: right;
+}
+
+.sort-destination.full-width {
+	top: -51px;
+}
+
+.portfolio-title .portfolio-nav-all .fa {
+  font-size: 2.7em;
+}
+
+.portfolio-title .fa {
+font-size: 2.5em;
+}
+
+.map-section {
+	margin-top: 10px;
+}
+
+header .content {
+	overflow: visible;
+}
+
+.owl-item li {
+	list-style: none;
+}
+
+.link-wrapper {
+	float: right;
+	padding: 20px 0px;
+}
+
+.region-sidebar-right h4, .region-sidebar-left h4 {
+	margin-top: 25px;
+}
+
+.region-sidebar-right h4:first-child, .region-sidebar-left h4:first-child {
+	margin-top: 0px;
+}
+
+#admin-menu li {
+	line-height: 1.4em !important;
+}
+
+.theme-default .nivoSlider {box-shadow: none !important;}
+
+#edit-checkout {
+	margin-left: 10px;
+}
+
+#block-views-header-cart-block {
+	display: inline-block;
+  position: relative;
+  float: right;
+  margin-top: 10px;
+  margin-left: 8px;
+  font-size: .9em;
+}
+
+#block-views-header-cart-block a {
+	color: #fff;
+	font-size: .9em;
+}
+
+#block-views-header-cart-block a:hover {
+	text-decoration: none;
+}
+
+#block-views-header-cart-block .view-content {
+	display: none;
+}
+
+#block-views-header-cart-block .line-item-summary {
+	margin-bottom: 0;
+}
+
+#block-views-header-cart-block .cart-head:before {
+	display: inline-block;
+  font-family: 'FontAwesome';
+  content: '\f07a' !important;
+  font-size: .9em;
+  margin-right: 5px;
+}
+
+#block-views-header-cart-block .cart-total-wrap {
+	display: none;
+}
+
+.view-commerce-cart-form .form-type-textfield {
+	margin-top: -5px !important;
+}
+
+.view-commerce-cart-form td,
+.view-commerce-cart-summary td,
+.view-commerce-line-item-table td {
+  width: 24% !important;
+  padding: 20px 15px 20px 15px !important;
+  border-top: 1px solid #DCDCDC !important;
+}
+
+.view-commerce-cart-form tr.even, .view-commerce-cart-form tr.odd,
+.view-commerce-cart-summary tr.even, .view-commerce-cart-summary tr.odd,
+.view-commerce-line-item-table tr.even, .view-commerce-line-item-table tr.odd  {
+  border-bottom: 1px solid #DCDCDC;
+  background-color: transparent !important;
+}
+
+.view-commerce-cart-form tbody,
+.view-commerce-cart-summary tbody,
+.view-commerce-line-item-table tbody {
+  border-top: 1px solid #DCDCDC;
+}
+
+.commerce-price-formatted-components .component-title, .commerce-price-formatted-components .component-total {
+	padding: 15px;
+}
+
+.checkout-continue {
+	margin-right: 10px;
+}
+
+.tabbed-title {
+  font-size: 12px;
+}
+
+.site-map-menus .title {
+	display: none;
+}
+
+div.home-intro {
+  background-color: #141414;
+}
+
+#name-and-slogan {
+	float: left;
+	margin: 22px 0px;
+}
+
+body.sticky-menu-active header #name-and-slogan {
+	float: left;
+	margin: 45px 0px 0px 0px;
+}
+
+body.sticky-menu-active header #site-slogan{
+  font-size: 12px;
+}
+
+body.sticky-menu-active header .logo {
+	position: relative;
+	margin: 45px 15px 0px 0px;
+}
+
+#site-name {
+	margin: 5px 0px 10px 0px;
+	font-size: 32px;
+}
+
+.slogan-no-name { 
+	margin-top: 25px;
+}
+
+body.sticky-menu-active header.single-menu .logo {
+	margin-top: 60px;
+}
+
+body.sticky-menu-active header #site-name {
+  margin: 2px 0px -10px 0px;
+  font-size: 22px;
+}
+
+.md-slide-wrap {
+  margin-bottom: 0px !important;
+}
+
+.md-object .main-button {
+	padding: 18px !important;
+}
+
+.mobile-menu {
+	display: none;
+	margin-top: 55px;
+  width: 100%;
+}
+
+header.flat-menu nav ul.nav-main li ul li a {
+	padding: 8px 10px 8px 5px;
+}
+
+.md-slide-wrap {
+  margin-bottom: 0px;
+}
+
+.md-objects p {
+	color: inherit;
+}
+
+.one-page-map {
+	margin-top: -70px !important;
+}
+
+#header-top { overflow: hidden; }
+
+span.thumb-info-caption p {
+  min-height: 60px;
+}
+
+.theme-default .nivo-controlNav {
+	margin-top: -57px;
+	padding: 20px 0;
+	z-index: 5;
+	position: absolute;
+}
+
+.theme-default .nivoSlider img {
+	-moz-border-radius: 10px 10px 0px 0px;
+	-webkit-border-radius: 10px 10px 0px 0px;
+	border-radius: 10px 10px 0px 0px;
+}
+
+#user-login .form-actions {
+	padding: 0px;
+	background-color: transparent;
+	border: none;
+}
+
+ul.primary li a {
+  background-color: transparent; 
+  border-color: none; 
+  border-style: none; 
+}  
+
+.block ul.primary {
+	border-bottom: 0px;
+	padding-left: 0px;
+}
+
+#block-search-form form {
+	margin-bottom: -10px;
+}
+
+.footer-logo {
+	float: left;
+	margin-right: 10px;
+}
+
+.footer-logo img {
+	height: 35px;
+}
+
+.contact-form .form-actions {
+	padding: 20px 0px;
+	background: transparent;
+	border-top: none;
+}
+
+.comment-form .form-actions {
+	padding: 20px 0px;
+	background: transparent;
+	border-top: none;
+}
+
+.comment-form .form-actions input[type="submit"] {
+  margin-right: 10px;
+}
+
+.comment-form .form-type-textfield {
+	margin-left: 0px;
+}
+
+.comment-form .form-item-name {
+	margin-right: 30px;
+}
+
+.comment-form .form-type-textfield input[type="text"] {
+	width: 100%;
+}
+
+.comment-form .form-textarea-wrapper {
+	width: 97%;
+}
+
+.comment-form .form-textarea-wrapper .text-full {
+	height: 250px;
+}
+
+.toggle label {
+	font-weight: normal;
+}
+
+label {
+	clear: both;
+}
+
+div.post-leave-comment h3 {
+  margin: 0 0 25px !important; 
+}
+
+.comment-form .filter-wrapper {
+	margin-left: -20px;
+  margin-top: 10px;
+}
+
+.comment .thumbnail img {
+	display: block;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+	height: 80px;
+	width: 80px;
+}
+
+.comment-block .pull-right {
+	margin-top: -10px;
+	margin-bottom: 5px;
+}
+
+.indented {
+  margin-left: 115px !important;
+}
+
+.post-medium-image .single-post-image {
+	overflow: hidden;
+}
+
+article.post-medium-image {
+	border-bottom: 1px solid #DDD;
+  margin-bottom: 50px;
+  padding-bottom: 10px;
+}
+
+.single-post-image li{
+	list-style: none;
+	margin-left: -60px;
+	margin-bottom: 30px;
+}
+
+ul.links.inline li {
+	padding-left: 10px;
+}
+
+.comment-content p {
+	clear: both;
+	margin-left: 30px !important;
+}
+
+.profile .user-picture { 
+	margin-top: 60px !important;
+}
+
+#branding {
+	display: inline-block;
+	float: left;
+}
+
+#header-top {
+	overflow: hidden;
+}
+
+.nav-top {
+	float: right;
+}
+
+.dropdown i {
+	margin-left: 5px;
+}
+
+.dropdown-menu {
+	margin-top: -3px;
+}
+
+footer h2 {
+	font-size: 1.8em;
+	margin-bottom: 14px;
+	line-height: 27px;
+}
+
+hr {
+	border: none !important;
+}
+
+div.testimonial-author div.thumbnail img {
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.contact-form .form-item-name, .contact-form .form-item-subject {
+	margin-left: 0px;
+}
+
+.contact-form .form-textarea-wrapper textarea {
+  height: 200px;
+}
+
+.span6 .portfolio-item img {
+	width: 560px;
+}
+
+.item-list ul li {
+  margin: 0px !important;
+}
+	
+/* TWITTER  WIDGET */ 
+.tweet_list{
+	font-size:12px;
+	color:rgb(180, 180, 180) !important;
+	-webkit-transition-duration:0.2s;
+	-moz-transition-duration:0.2s;
+	-ms-transition-duration:0.2s;
+	-o-transition-duration:0.2s;
+	margin: 20px 0px 0px 0px;
+}
+
+.tweet_list img {
+	margin-right: 10px;
+	float: left;
+	margin-bottom: 15px;
+}
+
+.tweet_list a{
+	color:#4dbce9;
+}
+
+.tweet_list li {
+	margin-bottom: 15px;
+	-webkit-transition-duration:0.2s;
+	-moz-transition-duration:0.2s;
+	-ms-transition-duration:0.2s;
+	-o-transition-duration:0.2s;
+	letter-spacing: 0.05em;
+	list-style: none;
+}
+.tweet_avatar {
+  margin-right:5px;
+}
+
+.tweet_list:hover li {
+	opacity:0.5;
+	-webkit-transition-duration:0.2s;
+	-moz-transition-duration:0.2s;
+	-ms-transition-duration:0.2s;
+	-o-transition-duration:0.2s;
+}
+
+.tweet_list li:hover {
+	opacity:1;
+	-webkit-transition-duration:0.2s;
+	-moz-transition-duration:0.2s;
+	-ms-transition-duration:0.2s;
+	-o-transition-duration:0.2s;
+}
+
+.region-content .progress {
+  overflow: visible;
+  height: 20px;
+  margin-bottom: 20px;
+  background-color: #f7f7f7;
+  background-image: -moz-linear-gradient(top, #f5f5f5, #f9f9f9);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f5f5f5), to(#f9f9f9));
+  background-image: -webkit-linear-gradient(top, #f5f5f5, #f9f9f9);
+  background-image: -o-linear-gradient(top, #f5f5f5, #f9f9f9);
+  background-image: linear-gradient(to bottom, #f5f5f5, #f9f9f9);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#fff9f9f9', GradientType=0);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.region-content .progress .bar {
+  width: 0%;
+  height: 100%;
+  color: #ffffff;
+  float: left;
+  font-size: 12px;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #0e90d2;
+  background-image: -moz-linear-gradient(top, #149bdf, #0480be);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#149bdf), to(#0480be));
+  background-image: -webkit-linear-gradient(top, #149bdf, #0480be);
+  background-image: -o-linear-gradient(top, #149bdf, #0480be);
+  background-image: linear-gradient(to bottom, #149bdf, #0480be);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff149bdf', endColorstr='#ff0480be', GradientType=0);
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: width 0.6s ease;
+  -moz-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
+  transition: width 0.6s ease;
+}
+.region-content .progress .bar + .bar {
+  -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.15);
+  -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.15);
+  box-shadow: inset 1px 0 0 rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.15);
+}
+.region-content .progress-striped .bar {
+  background-color: #149bdf;
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  -webkit-background-size: 40px 40px;
+  -moz-background-size: 40px 40px;
+  -o-background-size: 40px 40px;
+  background-size: 40px 40px;
+}
+.region-content .progress.active .bar {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+  -moz-animation: progress-bar-stripes 2s linear infinite;
+  -ms-animation: progress-bar-stripes 2s linear infinite;
+  -o-animation: progress-bar-stripes 2s linear infinite;
+  animation: progress-bar-stripes 2s linear infinite;
+}
+
+.progress-danger.progress-striped .bar,
+.progress-striped .bar-danger {
+  background-color: #ee5f5b;
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+.region-content  .progress-success .bar,
+.region-content  .progress .bar-success {
+  background-color: #5eb95e;
+  background-image: -moz-linear-gradient(top, #62c462, #57a957);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#57a957));
+  background-image: -webkit-linear-gradient(top, #62c462, #57a957);
+  background-image: -o-linear-gradient(top, #62c462, #57a957);
+  background-image: linear-gradient(to bottom, #62c462, #57a957);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff57a957', GradientType=0);
+}
+.region-content  .progress-success.progress-striped .bar,
+.region-content  .progress-striped .bar-success {
+  background-color: #62c462;
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+.region-content  .progress-info .bar,
+.region-content  .progress .bar-info {
+  background-color: #4bb1cf;
+  background-image: -moz-linear-gradient(top, #5bc0de, #339bb9);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#339bb9));
+  background-image: -webkit-linear-gradient(top, #5bc0de, #339bb9);
+  background-image: -o-linear-gradient(top, #5bc0de, #339bb9);
+  background-image: linear-gradient(to bottom, #5bc0de, #339bb9);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff339bb9', GradientType=0);
+}
+.region-content  .progress-info.progress-striped .bar,
+.region-content  .progress-striped .bar-info {
+  background-color: #5bc0de;
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+.region-content  .progress-warning .bar,
+.region-content  .progress .bar-warning {
+  background-color: #faa732;
+  background-image: -moz-linear-gradient(top, #fbb450, #f89406);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450), to(#f89406));
+  background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
+  background-image: -o-linear-gradient(top, #fbb450, #f89406);
+  background-image: linear-gradient(to bottom, #fbb450, #f89406);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffbb450', endColorstr='#fff89406', GradientType=0);
+}
+.region-content  .progress-warning.progress-striped .bar,
+.region-content  .progress-striped .bar-warning {
+  background-color: #fbb450;
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar {
+	overflow: visible !important;
+}
+
+.region-content .progress {
+  overflow: visible !important;
+}
+
