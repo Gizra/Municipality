@@ -27,7 +27,7 @@
 
           <div class="col-md-3">
             <?php if ($language_switch_links) : ?>
-              <div class="btn-group" role="group">
+              <div class="languages btn-group" role="group">
                 <?php foreach ($language_switch_links as $link): ?>
                   <?php print $link; ?>
                 <?php endforeach; ?>

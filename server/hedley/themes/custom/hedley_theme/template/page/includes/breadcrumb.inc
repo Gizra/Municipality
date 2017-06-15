@@ -47,7 +47,6 @@ $arg = drupal_lookup_path('alias',$path);
     <?php if($page_header_option == 'ph_light' or $arg == 'index-page-header-light' or $page_header_option == 'ph_parallax' or $arg == 'index-page-header-parallax' or $page_header_option == 'ph_center' or $arg == 'index-page-header-center' or $arg == 'index-page-header-color-primary' or $arg == 'index-page-header-color-quaternary' or $arg == 'index-page-header-color-secondary' or $arg == 'index-page-header-color-tertinary'): ?>
         <div class="row">
             <div class="col-md-12">
-                <h1><?php print drupal_get_title(); ?></h1>
                 <?php print $breadcrumb; ?>
             </div>
         </div>
@@ -55,11 +54,6 @@ $arg = drupal_lookup_path('alias',$path);
         <div class="row">
             <div class="col-md-12">
                 <?php print $breadcrumb; ?>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h1><?php print drupal_get_title(); ?></h1>
             </div>
         </div>
       <?php endif;?>
