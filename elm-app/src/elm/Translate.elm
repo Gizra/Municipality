@@ -24,6 +24,7 @@ type TranslationId
     | MatchingResults
     | MoreDetailsText
     | PriceText
+    | WhereText
 
 
 translate : Language -> TranslationId -> String
@@ -145,6 +146,12 @@ translate lang trans =
                     { arabic = "السعر"
                     , english = "Price"
                     , hebrew = "מחיר"
+                    }
+
+                WhereText ->
+                    { arabic = "أين"
+                    , english = "Where"
+                    , hebrew = "איפה"
                     }
     in
         case lang of

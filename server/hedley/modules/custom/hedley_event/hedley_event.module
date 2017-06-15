@@ -61,6 +61,7 @@ function hedley_event_get_events_by_group($group, $language_code) {
       'ticket_price' => $wrapper->field_ticket_price->value() ? $wrapper->field_ticket_price->value() : NULL,
       'location' => !empty($location) ? $location : NULL,
     ];
+
     // Remove empty values (elm expects the correct value or nothing), but keep
     // the values with `FALSE` value.
     $events[] = array_filter($event, function ($value) {

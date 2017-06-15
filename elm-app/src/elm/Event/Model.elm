@@ -29,6 +29,11 @@ type alias Name =
 type alias EventId =
     String
 
+type alias Location =
+  { title: String
+  , url: Maybe String
+  }
+
 
 type alias Event =
     { name : Name
@@ -38,6 +43,7 @@ type alias Event =
     , endDate : Maybe Date
     , recurringWeekly : Bool
     , ticketPrice : Maybe String
+    , location: Maybe Location
     }
 
 

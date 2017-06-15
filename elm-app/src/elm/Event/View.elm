@@ -110,16 +110,21 @@ viewEvent language ( eventId, event ) =
                             , text <| translate language EventRecurringWeekly
                             ]
                     ]
-                , div
-                    [ class "ui four wide column" ]
-                    [ a
-                        [ href "event.location_mapLink", target "_blank" ]
-                        [ i
-                            [ class "map icon" ]
-                            []
-                        , text "איפה: event.location"
-                        ]
-                    ]
+                , showMaybe <|
+                    Maybe.map
+                        (\location ->
+                            div
+                                [ class "ui four wide column" ]
+                                [ a
+                                    [ href <| Maybe.withDefault "" location.url, target "_blank" ]
+                                    [ i
+                                        [ class "map icon" ]
+                                        []
+                                    , text <| translate language WhereText ++ ": " ++ location.title
+                                    ]
+                                ]
+                        )
+                        event.location
                 , showMaybe <|
                     Maybe.map
                         (\ticketPrice ->

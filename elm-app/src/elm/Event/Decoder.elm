@@ -4,11 +4,10 @@ module Event.Decoder
         )
 
 import DictList exposing (DictList, decodeArray2, empty)
-import Event.Model exposing (DictListEvent, Event)
+import Event.Model exposing (DictListEvent, Event, Location)
 import Json.Decode exposing (Decoder, andThen, at, bool, dict, fail, field, float, index, keyValuePairs, list, map, map2, nullable, oneOf, string, succeed)
 import Json.Decode.Pipeline exposing (custom, decode, optional, optionalAt, required, requiredAt)
 import Utils.Json exposing (decodeDate, decodeEmptyArrayAs, decodeIntAsString)
-
 
 decodeEvents : Decoder DictListEvent
 decodeEvents =
@@ -16,6 +15,12 @@ decodeEvents =
         [ decodeArray2 (field "id" decodeIntAsString) decodeEvent
         , decodeEmptyArrayAs DictList.empty
         ]
+
+decodeLocation : Decoder Location
+decodeLocation =
+  decode Location
+    |> required "title" string
+    |> optional "url" (nullable string) Nothing
 
 
 decodeEvent : Decoder Event
@@ -28,3 +33,5 @@ decodeEvent =
         |> optional "end_date" (nullable decodeDate) Nothing
         |> required "recurring_weekly" bool
         |> optional "ticket_price" (nullable string) Nothing
+        |> optional "location" (nullable decodeLocation ) Nothing
+
