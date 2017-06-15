@@ -44,6 +44,11 @@ function hedley_event_get_events_by_group($group, $language_code) {
       continue;
     }
 
+    $location_unfiltered = $wrapper->field_location->value();
+    $location = array_filter(['url' => $location_unfiltered['url'], 'title' => $location_unfiltered['title']], function ($value) {
+      return !is_null($value);
+    });
+
     $event = [
       'id' => $wrapper->getIdentifier(),
       'name' => check_plain($wrapper->label()),
@@ -54,8 +59,8 @@ function hedley_event_get_events_by_group($group, $language_code) {
       'end_date' => !empty($date) && $date['value2'] && $date['value'] != $date['value2'] ? hedley_event_timestamp_to_iso8601($date['value2']) : NULL,
       'recurring_weekly' => $wrapper->field_recurring_weekly->value(),
       'ticket_price' => $wrapper->field_ticket_price->value() ? $wrapper->field_ticket_price->value() : NULL,
+      'location' => !empty($location) ? $location : NULL,
     ];
-
     // Remove empty values (elm expects the correct value or nothing), but keep
     // the values with `FALSE` value.
     $events[] = array_filter($event, function ($value) {
