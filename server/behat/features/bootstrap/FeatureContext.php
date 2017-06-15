@@ -147,7 +147,6 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
   }
 
-
   /**
    * @BeforeScenario
    *
@@ -179,6 +178,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
     throw new \Exception('waitFor timed out.');
   }
+
   /**
    * Wait for an element by its XPath to appear or disappear.
    *
@@ -191,21 +191,21 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    */
   private function waitForXpathNode($xpath, $appear = TRUE) {
     $this->waitFor(function($context) use ($xpath, $appear) {
-        try {
-          $nodes = $context->getSession()->getDriver()->find($xpath);
-          if (count($nodes) > 0) {
-            $visible = $nodes[0]->isVisible();
-            return $appear ? $visible : !$visible;
-          }
+      try {
+        $nodes = $context->getSession()->getDriver()->find($xpath);
+        if (count($nodes) > 0) {
+          $visible = $nodes[0]->isVisible();
+          return $appear ? $visible : !$visible;
+        }
+        return !$appear;
+      }
+      catch (WebDriver\Exception $e) {
+        if ($e->getCode() == WebDriver\Exception::NO_SUCH_ELEMENT) {
           return !$appear;
         }
-        catch (WebDriver\Exception $e) {
-          if ($e->getCode() == WebDriver\Exception::NO_SUCH_ELEMENT) {
-            return !$appear;
-          }
-          throw $e;
-        }
-      });
+        throw $e;
+      }
+    });
   }
 
   /**
@@ -230,6 +230,18 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
     $nid = key($result['node']);
     $this->getSession()->visit($this->locatePath('node/' . $nid));
+  }
+
+  /**
+   * @When I visit the page :page_name
+   */
+  public function iVisitThePage($page_name) {
+
+    $info = [
+      'Homepage' => '/',
+    ];
+
+    $this->getSession()->visit($this->locatePath($info[$page_name]));
   }
 
   /**
@@ -419,6 +431,21 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
       }
     }
     throw new \Behat\Mink\Exception\ElementNotFoundException($this->getSession(), 'action', 'label', $action);
+  }
+
+  /**
+   * @Then I should see the :header header
+   */
+  public function iShouldSeeTheMunicipalityHeader($header) {
+    $sitename = $this->getSession()->getPage()->find('css', '.ui.header a')->getText();
+
+    // Check if the site name is "Municipality".
+    if ($sitename != $header) {
+      $params = array(
+        '@sitename' => $sitename,
+      );
+      throw new \Exception(format_string('The expected site name is not displayed on the page, instead we see @sitename', $params));
+    }
   }
 
 
