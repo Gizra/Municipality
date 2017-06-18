@@ -14,12 +14,8 @@
 
 <div class="row text-center">
   <div class="col-xs-12">
-    <?php print $title; ?>
-  </div>
-</div>
+    <h3><?php print $title; ?></h3>
 
-<div class="row text-center">
-  <div class="col-xs-12">
     <small>
       <?php print t('Published on'); ?>
       :
