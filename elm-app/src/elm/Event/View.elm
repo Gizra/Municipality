@@ -19,7 +19,7 @@ view language showAsBlock baseUrl model =
         [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
         , div [ class "ui container center aligned" ] [ viewEvents language showAsBlock baseUrl model ]
-        , showIf showAsBlock <| a [ class "btn btn-default", href (baseUrl ++ "/events") ] [ text <| translate language SeeAll ]
+        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl ++ "/events") ] [ text <| translate language ShowAll ]
         ]
 
 

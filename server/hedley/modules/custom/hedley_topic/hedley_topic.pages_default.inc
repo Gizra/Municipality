@@ -253,8 +253,8 @@ function hedley_topic_default_page_manager_handlers() {
     'settings' => NULL,
   );
   $pane->css = array(
-    'css_id' => '',
-    'css_class' => 'ui segment row',
+    'css_id' => 'elm-events-block',
+    'css_class' => '',
   );
   $pane->extras = array();
   $pane->position = 6;

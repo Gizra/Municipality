@@ -12042,7 +12042,7 @@ var _gizra$municipality$Translate$TranslationSet = F3(
 	function (a, b, c) {
 		return {arabic: a, english: b, hebrew: c};
 	});
-var _gizra$municipality$Translate$SeeAll = {ctor: 'SeeAll'};
+var _gizra$municipality$Translate$ShowAll = {ctor: 'ShowAll'};
 var _gizra$municipality$Translate$PriceText = {ctor: 'PriceText'};
 var _gizra$municipality$Translate$MoreDetailsText = {ctor: 'MoreDetailsText'};
 var _gizra$municipality$Translate$MatchingResults = {ctor: 'MatchingResults'};
@@ -12135,7 +12135,7 @@ var _gizra$municipality$Translate$translate = F2(
 				case 'PriceText':
 					return {arabic: 'السعر', english: 'Price', hebrew: 'מחיר'};
 				default:
-					return {arabic: 'عرض الكل', english: 'See all', hebrew: 'ראה הכל'};
+					return {arabic: 'عرض الكل', english: 'Show all', hebrew: 'הצג הכל'};
 			}
 		}();
 		var _p3 = lang;
@@ -13335,7 +13335,7 @@ var _gizra$municipality$Event_View$view = F4(
 									_elm_lang$html$Html$a,
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('btn btn-default'),
+										_0: _elm_lang$html$Html_Attributes$class('btn btn-default btn-show-all'),
 										_1: {
 											ctor: '::',
 											_0: _elm_lang$html$Html_Attributes$href(
@@ -13346,7 +13346,7 @@ var _gizra$municipality$Event_View$view = F4(
 									{
 										ctor: '::',
 										_0: _elm_lang$html$Html$text(
-											A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$SeeAll)),
+											A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ShowAll)),
 										_1: {ctor: '[]'}
 									})),
 							_1: {ctor: '[]'}
