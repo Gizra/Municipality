@@ -6,7 +6,7 @@ describe('Municipality contacts page', () => {
   })
 
   it('should find contacts using the search input', () => {
-    var input = $('#elm-app > div > div > div.ui.icon.input > input[type="search"]');
+    const input = $('#elm-app > div > div > div.ui.icon.input > input[type="search"]');
     input.setValue('נ');
     browser.waitForVisible('h3=ניר שמואלי');
     browser.waitForVisible('h3=נסר בו סריחאן');
