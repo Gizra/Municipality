@@ -398,32 +398,32 @@ function hedley_municipality_get_non_empty_language_for_field(array $field_attri
  * Implements hook_date_format_types().
  */
 function hedley_municipality_date_format_types() {
-  return array('municipality_date' => t('Municipality Date'));
+  return ['municipality_date' => t('Municipality Date')];
 }
 
 /**
  * Implements hook_date_formats().
  */
 function hedley_municipality_date_formats() {
-  $formats = array();
+  $formats = [];
 
-  $formats[] = array(
+  $formats[] = [
     'type' => 'municipality_date',
     'format' => 'F j, Y',
-    'locales' => array('en'),
-  );
+    'locales' => ['en'],
+  ];
 
-  $formats[] = array(
+  $formats[] = [
     'type' => 'municipality_date',
     'format' => 'j בF Y',
-    'locales' => array('he'),
-  );
+    'locales' => ['he'],
+  ];
 
-  $formats[] = array(
+  $formats[] = [
     'type' => 'municipality_date',
     'format' => 'j فيF Y',
-    'locales' => array('ar'),
-  );
+    'locales' => ['ar'],
+  ];
 
   return $formats;
 }
