@@ -307,18 +307,6 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * @When I visit the topic :topic under the municipality :municipality
-   */
-  public function iVisitTheTopicUnderTheMunicipality($topic, $municipality) {
-    $municipality = $this->loadGroupByTitleAndType($municipality, 'municipality');
-
-    $topic = $this->loadTaxonomyByTitleAndVocabulary($topic, 'topics_' . $municipality->nid);
-
-    $uri = $this->createUriWithGroupContext($municipality, 'taxonomy/term/' . $topic->tid) ;
-    $this->getSession()->visit($this->locatePath($uri));
-  }
-
-  /**
    * @Then I should see the home page in the default :language of the municipality and for :citizens user type
    */
   public function iShouldSeeTheHomePageInTheDefaultOfTheMunicipalityAndForCitizensUserType($language, $citizens) {
@@ -411,26 +399,6 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
 
     // Check if the given user type is the active one on the page.
     $this->checkActiveUserType($new_user_type, $page, 'text');
-  }
-
-  /**
-   * @Then I should see the action :action in the topic page
-   */
-  public function iShouldSeeTheActionInTheTopicPage($action) {
-    $page = $this->getSession()->getPage();
-
-    $nodes = $page->findAll('css', '.pane-topic-actions .buttons a');
-    foreach ($nodes as $node) {
-      if ($node->getText() === $action) {
-        if ($node->isVisible()) {
-          return;
-        }
-        else {
-          throw new \Exception("Action with label \"$action\" not visible.");
-        }
-      }
-    }
-    throw new \Behat\Mink\Exception\ElementNotFoundException($this->getSession(), 'action', 'label', $action);
   }
 
   /**
