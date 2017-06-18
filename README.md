@@ -6,17 +6,9 @@
 * User Stories, Compliance, and Interviews Summaries: [link](https://docs.google.com/a/gizra.com/spreadsheets/d/1Sk3rJ8HDl3yyoF1r346e2vWPv2pLPOVAFyuNyycBZZE/edit?usp=sharing)
 
 
-# Dev Site:
-Http password: `gizra`/ `1234`
+## [Server documentation](https://github.com/Gizra/Municipality/blob/master/server/README.md)
 
-Municipality page:
-https://dev-municipality.pantheonsite.io/municipality-1/node/1?language=he
+## [Elm app documentation](https://github.com/Gizra/Municipality/blob/master/elm-app/README.md)
 
-Topic page:
-https://dev-municipality.pantheonsite.io/municipality-1/taxonomy/term/10?language=he
-
-
-# Test Site:
+## Test site:
 http://test-municipality.pantheonsite.io/?language=he
-
-admin/admin
