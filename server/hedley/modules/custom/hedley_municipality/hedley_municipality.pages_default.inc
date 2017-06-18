@@ -87,7 +87,7 @@ function hedley_municipality_default_page_manager_handlers() {
   );
   $pane->css = array(
     'css_id' => '',
-    'css_class' => 'ui segment nine wide column',
+    'css_class' => 'col-md-6',
   );
   $pane->extras = array();
   $pane->position = 0;
@@ -119,7 +119,7 @@ function hedley_municipality_default_page_manager_handlers() {
   );
   $pane->css = array(
     'css_id' => '',
-    'css_class' => 'ui segment seven wide column',
+    'css_class' => 'col-md-6',
   );
   $pane->extras = array();
   $pane->position = 1;
@@ -151,7 +151,7 @@ function hedley_municipality_default_page_manager_handlers() {
   );
   $pane->css = array(
     'css_id' => '',
-    'css_class' => 'ui segment nine wide column',
+    'css_class' => 'col-md-6',
   );
   $pane->extras = array();
   $pane->position = 2;
@@ -179,7 +179,7 @@ function hedley_municipality_default_page_manager_handlers() {
   );
   $pane->css = array(
     'css_id' => 'elm-events-block',
-    'css_class' => '',
+    'css_class' => 'col-md-6',
   );
   $pane->extras = array();
   $pane->position = 3;
