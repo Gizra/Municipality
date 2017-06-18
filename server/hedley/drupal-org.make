@@ -30,6 +30,8 @@ projects[composer_manager][version] = "1.8"
 
 projects[date][subdir] = "contrib"
 projects[date][version] = "2.10"
+; Fix notice in php7, https://www.drupal.org/node/2843367
+projects[date][patch][] = "https://www.drupal.org/files/issues/2843367-php71-string-offset-26.patch"
 
 projects[diff][subdir] = "contrib"
 projects[diff][version] = "3.3"
