@@ -29,13 +29,15 @@
           <?php print t('Published on: @date', ['@date' => $published_date]); ?>
         </small>
 
-        <div class="panel panel-default">
-          <div class="panel-body">
+        <?php if ($body): ?>
+          <div class="panel panel-default">
+            <div class="panel-body">
 
-            <?php print $body; ?>
+              <?php print $body; ?>
 
+            </div>
           </div>
-        </div>
+        <?php endif; ?>
 
       </div>
     </div>
