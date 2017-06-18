@@ -24,6 +24,7 @@ type TranslationId
     | MatchingResults
     | MoreDetailsText
     | PriceText
+    | SeeAll
 
 
 translate : Language -> TranslationId -> String
@@ -145,6 +146,12 @@ translate lang trans =
                     { arabic = "السعر"
                     , english = "Price"
                     , hebrew = "מחיר"
+                    }
+
+                SeeAll ->
+                    { arabic = "عرض الكل"
+                    , english = "See all"
+                    , hebrew = "ראה הכל"
                     }
     in
         case lang of

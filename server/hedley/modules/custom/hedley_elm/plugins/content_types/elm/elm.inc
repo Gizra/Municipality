@@ -58,6 +58,10 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
         'language' => $language->language,
         'showAsBlock' => $show_as_block,
         'values' => $values,
+        'baseUrl' => url('', [
+          'query' => [],
+          'absolute' => TRUE
+        ]),
       ],
     ],
   ];

@@ -12,14 +12,14 @@ import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
 
-view : Language -> Bool -> Model -> Html Msg
-view language showAsBlock model =
+view : Language -> Bool -> String -> Model -> Html Msg
+view language showAsBlock baseUrl model =
     div
         []
         [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
-        , showIf (not showAsBlock) <| div [ class "ui horizontal divider" ] [ text <| translate language MatchingResults ]
-        , div [ class "ui container center aligned" ] [ viewEvents language showAsBlock model ]
-        , divider
+        , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
+        , div [ class "ui container center aligned" ] [ viewEvents language showAsBlock baseUrl model ]
+        , showIf showAsBlock <| a [ class "btn btn-default", href (baseUrl ++ "/events") ] [ text <| translate language SeeAll ]
         ]
 
 
@@ -40,8 +40,8 @@ viewEventFilter language filterString =
 
 {-| View all events.
 -}
-viewEvents : Language -> Bool -> Model -> Html msg
-viewEvents language showAsBlock { events, filterString } =
+viewEvents : Language -> Bool -> String -> Model -> Html msg
+viewEvents language showAsBlock baseUrl { events, filterString } =
     let
         filteredEvents =
             filterEvents events filterString
@@ -49,14 +49,14 @@ viewEvents language showAsBlock { events, filterString } =
         if DictList.isEmpty filteredEvents then
             div [] [ text <| translate language EventsNotFound ]
         else
-            div [ class "ui link cards" ]
+            div [ class "row" ]
                 (filteredEvents
                     |> DictList.map
                         (\eventId event ->
                             if showAsBlock then
-                                viewEventAsBlock language ( eventId, event )
+                                viewEventAsBlock language baseUrl ( eventId, event )
                             else
-                                viewEvent language ( eventId, event )
+                                viewEvent language baseUrl ( eventId, event )
                         )
                     |> DictList.values
                 )
@@ -64,8 +64,8 @@ viewEvents language showAsBlock { events, filterString } =
 
 {-| View a single event.
 -}
-viewEvent : Language -> ( EventId, Event ) -> Html msg
-viewEvent language ( eventId, event ) =
+viewEvent : Language -> String -> ( EventId, Event ) -> Html msg
+viewEvent language baseUrl ( eventId, event ) =
     div
         [ class "card" ]
         [ showMaybe <|
@@ -139,7 +139,7 @@ viewEvent language ( eventId, event ) =
                 , div
                     [ class "ui four wide column center aligned" ]
                     [ a
-                        [ class "ui button primary basic middle aligned", target "_blank", href ("node/" ++ eventId) ]
+                        [ class "ui button primary basic middle aligned", target "_blank", href (baseUrl ++ "/node/" ++ eventId) ]
                         [ i
                             [ class "add icon" ]
                             []
@@ -153,44 +153,46 @@ viewEvent language ( eventId, event ) =
 
 {-| View a single event that will appear in a block (i.e. with less information).
 -}
-viewEventAsBlock : Language -> ( EventId, Event ) -> Html msg
-viewEventAsBlock language ( eventId, event ) =
-    a
-        [ class "card", target "_blank", href ("/node/" ++ eventId) ]
-        [ showMaybe <|
-            Maybe.map
-                (\imageUrl ->
-                    div [ class "image" ]
-                        [ img [ src imageUrl ]
-                            []
-                        ]
-                )
-                event.imageUrl
-        , div
-            [ class "content" ]
-            [ div
-                [ class "header" ]
-                [ text event.name ]
-            ]
-        , div
-            [ class "ui row" ]
-            [ div
-                [ class "ui four wide column event-date" ]
-                [ span
-                    []
-                    [ i
-                        [ class "calendar icon" ]
+viewEventAsBlock : Language -> String -> ( EventId, Event ) -> Html msg
+viewEventAsBlock language baseUrl ( eventId, event ) =
+    div [ class "col-md-4" ]
+        [ a
+            [ class "card", target "_blank", href (baseUrl ++ "/node/" ++ eventId) ]
+            [ showMaybe <|
+                Maybe.map
+                    (\imageUrl ->
+                        div [ class "card-img-top" ]
+                            [ img [ src imageUrl ]
+                                []
+                            ]
+                    )
+                    event.imageUrl
+            , div
+                [ class "card-block" ]
+                [ div
+                    [ class "card-title" ]
+                    [ text event.name ]
+                ]
+            , div
+                [ class "card-text" ]
+                [ div
+                    [ class "ui four wide column event-date" ]
+                    [ span
                         []
-                    , text <| translate language (DayAndDate event.date event.endDate)
-                    ]
-                , showIf event.recurringWeekly <|
-                    span
-                        [ class "recurring-weekly" ]
                         [ i
-                            [ class "refresh icon" ]
+                            [ class "calendar icon" ]
                             []
-                        , text <| translate language EventRecurringWeekly
+                        , text <| translate language (DayAndDate event.date event.endDate)
                         ]
+                    , showIf event.recurringWeekly <|
+                        span
+                            [ class "recurring-weekly" ]
+                            [ i
+                                [ class "refresh icon" ]
+                                []
+                            , text <| translate language EventRecurringWeekly
+                            ]
+                    ]
                 ]
             ]
         ]

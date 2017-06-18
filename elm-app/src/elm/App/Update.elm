@@ -45,6 +45,7 @@ init flags =
             | page = page
             , language = language
             , showAsBlock = flags.showAsBlock
+            , baseUrl = flags.baseUrl
           }
         , Cmd.none
         )

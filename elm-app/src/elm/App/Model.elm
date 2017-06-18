@@ -20,6 +20,7 @@ type alias Flags =
     { page : String
     , language : String
     , showAsBlock : Bool
+    , baseUrl : String
     }
 
 
@@ -29,6 +30,7 @@ type alias Model =
     , pageContact : Contact.Model.Model
     , pageEvent : Event.Model.Model
     , showAsBlock : Bool
+    , baseUrl : String
     }
 
 
@@ -39,4 +41,5 @@ emptyModel =
     , pageContact = Contact.Model.emptyModel
     , pageEvent = Event.Model.emptyModel
     , showAsBlock = False
+    , baseUrl = ""
     }
