@@ -26,7 +26,7 @@
         <h3 class="text-color-tertiary"><?php print $title; ?></h3>
 
         <small>
-          <?php print t('Published on: @date', ['@date' => $published_date]); ?>
+          <?php print $published_date; ?>
         </small>
 
         <?php if ($body): ?>
