@@ -26,6 +26,12 @@ function hedley_news_content_type_render($subtype, $conf, $args, $context) {
   global $language;
 
   $wrapper = entity_metadata_wrapper('node', $context->data);
+
+  // Validate the current content type is 'news'.
+  if ($wrapper->getBundle() != 'news') {
+    throw new Exception('This plugin can be use with "news" content type only.');
+  }
+
   $wrapper->language($language->language);
 
   $variables = [
