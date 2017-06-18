@@ -60,7 +60,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
         'values' => $values,
         'baseUrl' => url('', [
           'query' => [],
-          'absolute' => TRUE
+          'absolute' => TRUE,
         ]),
       ],
     ],
