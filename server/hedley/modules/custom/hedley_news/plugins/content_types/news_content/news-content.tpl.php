@@ -8,24 +8,36 @@
 
 <div class="row text-center">
   <div class="col-xs-12">
-    <h2><?php print t('News and Updates'); ?></h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <h2><?php print t('News and Updates'); ?></h2>
+
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="row text-center">
   <div class="col-xs-12">
-    <h3><?php print $title; ?></h3>
+    <div class="panel panel-default">
+      <div class="panel-body">
 
-    <small>
-      <?php print t('Published on: @date', ['@date' => $published_date]); ?>
-    </small>
-  </div>
-</div>
+        <h3><?php print $title; ?></h3>
 
-<div class="row">
-  <div class="col-xs-12">
-    <p>
-      <?php print $body; ?>
-    </p>
+        <small>
+          <?php print t('Published on: @date', ['@date' => $published_date]); ?>
+        </small>
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+
+            <?php print $body; ?>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
