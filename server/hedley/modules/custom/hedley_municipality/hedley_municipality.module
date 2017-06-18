@@ -421,7 +421,7 @@ function hedley_municipality_date_formats() {
 
   $formats[] = [
     'type' => 'municipality_date',
-    'format' => 'j فيF Y',
+    'format' => 'j F Y',
     'locales' => ['ar'],
   ];
 
