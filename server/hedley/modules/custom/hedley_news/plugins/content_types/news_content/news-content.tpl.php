@@ -17,9 +17,7 @@
     <h3><?php print $title; ?></h3>
 
     <small>
-      <?php print t('Published on'); ?>
-      :
-      <?php print $published_date; ?>
+      <?php print t('Published on: @date', ['@date' => $published_date]); ?>
     </small>
   </div>
 </div>
