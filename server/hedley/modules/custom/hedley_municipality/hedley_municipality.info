@@ -42,6 +42,7 @@ features[field_instance][] = node-municipality-group_group
 features[field_instance][] = node-municipality-title_field
 features[node][] = municipality
 features[page_manager_handlers][] = node_view__panel_context_70d5fb2a-fcbd-4c6c-8620-b04f8f6cbece
+features[page_manager_pages][] = home_page
 features[variable][] = diff_enable_revisions_page_node_municipality
 features[variable][] = diff_show_preview_changes_node_municipality
 features[variable][] = diff_view_mode_preview_node_municipality
@@ -54,12 +55,9 @@ features[variable][] = node_preview_municipality
 features[variable][] = node_submitted_municipality
 features[variable][] = purl_method_og_purl|node
 features[variable][] = purl_types
+features[variable][] = site_frontpage
 features[views_view][] = municipalities
-
-; Tests base class
 files[] = tests/HedleyMunicipalityWebTestCase.test
-
-; Tests
 files[] = tests/HedleyMunicipalityCheckNodeLangauge.test
 files[] = tests/HedleyMunicipalityCheckTopicsOgVocab.test
 files[] = tests/HedleyMunicipalityGetNodes.test

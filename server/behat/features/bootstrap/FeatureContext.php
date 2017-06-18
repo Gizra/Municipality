@@ -98,7 +98,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $this->getSession()->visit($this->locatePath($uri));
 
     // Get the user types switcher.
-    $user_type_element = $this->getSession()->getPage()->find('css', '.background .user-types');
+    $user_type_element = $this->getSession()->getPage()->find('css', '.container .user-types');
 
     // Sometimes we want to check that the links are not displayed therefor
     // there will be an empty variable.
@@ -147,7 +147,6 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
   }
 
-
   /**
    * @BeforeScenario
    *
@@ -179,6 +178,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
     throw new \Exception('waitFor timed out.');
   }
+
   /**
    * Wait for an element by its XPath to appear or disappear.
    *
@@ -191,21 +191,21 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    */
   private function waitForXpathNode($xpath, $appear = TRUE) {
     $this->waitFor(function($context) use ($xpath, $appear) {
-        try {
-          $nodes = $context->getSession()->getDriver()->find($xpath);
-          if (count($nodes) > 0) {
-            $visible = $nodes[0]->isVisible();
-            return $appear ? $visible : !$visible;
-          }
+      try {
+        $nodes = $context->getSession()->getDriver()->find($xpath);
+        if (count($nodes) > 0) {
+          $visible = $nodes[0]->isVisible();
+          return $appear ? $visible : !$visible;
+        }
+        return !$appear;
+      }
+      catch (WebDriver\Exception $e) {
+        if ($e->getCode() == WebDriver\Exception::NO_SUCH_ELEMENT) {
           return !$appear;
         }
-        catch (WebDriver\Exception $e) {
-          if ($e->getCode() == WebDriver\Exception::NO_SUCH_ELEMENT) {
-            return !$appear;
-          }
-          throw $e;
-        }
-      });
+        throw $e;
+      }
+    });
   }
 
   /**
@@ -230,6 +230,18 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
     $nid = key($result['node']);
     $this->getSession()->visit($this->locatePath('node/' . $nid));
+  }
+
+  /**
+   * @When I visit the page :page_name
+   */
+  public function iVisitThePage($page_name) {
+
+    $info = [
+      'Homepage' => '/',
+    ];
+
+    $this->getSession()->visit($this->locatePath($info[$page_name]));
   }
 
   /**
@@ -326,7 +338,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $page = $this->getSession()->getPage();
 
     // Get the languages switcher.
-    $languages_element = $page->find('css', '.background .languages');
+    $languages_element = $page->find('css', '.container .languages');
 
     // Sometimes we want to check that the links are not displayed therefor
     // there will be an empty variable.
@@ -343,7 +355,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $page = $this->getSession()->getPage();
 
     // Get the user types switcher.
-    $user_type_element = $page->find('css', '.background .user-types');
+    $user_type_element = $page->find('css', '.container .user-types');
 
     // Sometimes we want to check that the links are not displayed therefor
     // there will be an empty variable.
@@ -360,7 +372,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $page = $this->getSession()->getPage();
 
     // Check the title of the page.
-    $title_element = $page->find('css', '.background .center h2.header');
+    $title_element = $page->find('css', 'header#header .header-container #site-name > h1');
     if ($title_element === null) {
       throw new \Exception('The title element is missing.');
     }
@@ -419,6 +431,21 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
       }
     }
     throw new \Behat\Mink\Exception\ElementNotFoundException($this->getSession(), 'action', 'label', $action);
+  }
+
+  /**
+   * @Then I should see the :header header
+   */
+  public function iShouldSeeTheMunicipalityHeader($header) {
+    $sitename = $this->getSession()->getPage()->find('css', 'header#header .header-container #site-name > h1')->getText();
+
+    // Check if the site name is "Municipality".
+    if ($sitename != $header) {
+      $params = array(
+        '@sitename' => $sitename,
+      );
+      throw new \Exception(format_string('The expected site name is not displayed on the page, instead we see @sitename', $params));
+    }
   }
 
 
@@ -571,7 +598,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @throws \Exception
    */
   protected function checkActiveLanguage($language, $page, $selector) {
-    $language_active_link = $page->find('css', '.background .languages a.active');
+    $language_active_link = $page->find('css', '.container .languages a.active');
     if ($language_active_link === null) {
       throw new \Exception('The languages has no active items.');
     }
@@ -600,7 +627,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @throws \Exception
    */
   protected function checkActiveUserType($user_type, $page, $selector) {
-    $user_type_active_link = $page->find('css', '.background .user-types a.active');
+    $user_type_active_link = $page->find('css', '.container .user-types a.active');
     if ($user_type_active_link === null) {
       throw new \Exception('The user type has no active items.');
     }
