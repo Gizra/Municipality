@@ -12726,7 +12726,7 @@ var _gizra$municipality$Event_Utils$filterEvents = F2(
 	});
 
 var _gizra$municipality$Event_View$viewEventAsBlock = F3(
-	function (language, baseUrl, _p0) {
+	function (baseUrl, language, _p0) {
 		var _p1 = _p0;
 		var _p2 = _p1._1;
 		return A2(
@@ -12894,7 +12894,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 			});
 	});
 var _gizra$municipality$Event_View$viewEvent = F3(
-	function (language, baseUrl, _p3) {
+	function (baseUrl, language, _p3) {
 		var _p4 = _p3;
 		var _p5 = _p4._1;
 		return A2(
@@ -13198,7 +13198,7 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 			});
 	});
 var _gizra$municipality$Event_View$viewEvents = F4(
-	function (language, showAsBlock, baseUrl, _p6) {
+	function (baseUrl, language, showAsBlock, _p6) {
 		var _p7 = _p6;
 		var filteredEvents = A2(_gizra$municipality$Event_Utils$filterEvents, _p7.events, _p7.filterString);
 		return _Gizra$elm_dictlist$DictList$isEmpty(filteredEvents) ? A2(
@@ -13223,12 +13223,12 @@ var _gizra$municipality$Event_View$viewEvents = F4(
 						function (eventId, event) {
 							return showAsBlock ? A3(
 								_gizra$municipality$Event_View$viewEventAsBlock,
-								language,
 								baseUrl,
+								language,
 								{ctor: '_Tuple2', _0: eventId, _1: event}) : A3(
 								_gizra$municipality$Event_View$viewEvent,
-								language,
 								baseUrl,
+								language,
 								{ctor: '_Tuple2', _0: eventId, _1: event});
 						}),
 					filteredEvents)));
@@ -13284,7 +13284,7 @@ var _gizra$municipality$Event_View$viewEventFilter = F2(
 			});
 	});
 var _gizra$municipality$Event_View$view = F4(
-	function (language, showAsBlock, baseUrl, model) {
+	function (baseUrl, language, showAsBlock, model) {
 		return A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
@@ -13323,7 +13323,7 @@ var _gizra$municipality$Event_View$view = F4(
 							},
 							{
 								ctor: '::',
-								_0: A4(_gizra$municipality$Event_View$viewEvents, language, showAsBlock, baseUrl, model),
+								_0: A4(_gizra$municipality$Event_View$viewEvents, baseUrl, language, showAsBlock, model),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -13380,7 +13380,7 @@ var _gizra$municipality$App_View$view = function (model) {
 					_0: A2(
 						_elm_lang$html$Html$map,
 						_gizra$municipality$App_Model$MsgPagesEvent,
-						A4(_gizra$municipality$Event_View$view, model.language, model.showAsBlock, model.baseUrl, model.pageEvent)),
+						A4(_gizra$municipality$Event_View$view, model.baseUrl, model.language, model.showAsBlock, model.pageEvent)),
 					_1: {ctor: '[]'}
 				});
 		default:

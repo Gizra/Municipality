@@ -12,13 +12,13 @@ import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
 
-view : Language -> Bool -> String -> Model -> Html Msg
-view language showAsBlock baseUrl model =
+view : String -> Language -> Bool -> Model -> Html Msg
+view baseUrl language showAsBlock model =
     div
         []
         [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
-        , div [ class "ui container center aligned" ] [ viewEvents language showAsBlock baseUrl model ]
+        , div [ class "ui container center aligned" ] [ viewEvents baseUrl language showAsBlock model ]
         , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl ++ "/events") ] [ text <| translate language ShowAll ]
         ]
 
@@ -40,8 +40,8 @@ viewEventFilter language filterString =
 
 {-| View all events.
 -}
-viewEvents : Language -> Bool -> String -> Model -> Html msg
-viewEvents language showAsBlock baseUrl { events, filterString } =
+viewEvents : String -> Language -> Bool -> Model -> Html msg
+viewEvents baseUrl language showAsBlock { events, filterString } =
     let
         filteredEvents =
             filterEvents events filterString
@@ -54,9 +54,9 @@ viewEvents language showAsBlock baseUrl { events, filterString } =
                     |> DictList.map
                         (\eventId event ->
                             if showAsBlock then
-                                viewEventAsBlock language baseUrl ( eventId, event )
+                                viewEventAsBlock baseUrl language ( eventId, event )
                             else
-                                viewEvent language baseUrl ( eventId, event )
+                                viewEvent baseUrl language ( eventId, event )
                         )
                     |> DictList.values
                 )
@@ -64,8 +64,8 @@ viewEvents language showAsBlock baseUrl { events, filterString } =
 
 {-| View a single event.
 -}
-viewEvent : Language -> String -> ( EventId, Event ) -> Html msg
-viewEvent language baseUrl ( eventId, event ) =
+viewEvent : String -> Language -> ( EventId, Event ) -> Html msg
+viewEvent baseUrl language ( eventId, event ) =
     div
         [ class "card" ]
         [ showMaybe <|
@@ -153,8 +153,8 @@ viewEvent language baseUrl ( eventId, event ) =
 
 {-| View a single event that will appear in a block (i.e. with less information).
 -}
-viewEventAsBlock : Language -> String -> ( EventId, Event ) -> Html msg
-viewEventAsBlock language baseUrl ( eventId, event ) =
+viewEventAsBlock : String -> Language -> ( EventId, Event ) -> Html msg
+viewEventAsBlock baseUrl language ( eventId, event ) =
     div [ class "col-md-4" ]
         [ a
             [ class "card", target "_blank", href (baseUrl ++ "/node/" ++ eventId) ]
