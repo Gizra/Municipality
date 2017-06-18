@@ -98,7 +98,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $this->getSession()->visit($this->locatePath($uri));
 
     // Get the user types switcher.
-    $user_type_element = $this->getSession()->getPage()->find('css', '.background .user-types');
+    $user_type_element = $this->getSession()->getPage()->find('css', '.container .user-types');
 
     // Sometimes we want to check that the links are not displayed therefor
     // there will be an empty variable.
@@ -326,7 +326,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $page = $this->getSession()->getPage();
 
     // Get the languages switcher.
-    $languages_element = $page->find('css', '.background .languages');
+    $languages_element = $page->find('css', '.container .languages');
 
     // Sometimes we want to check that the links are not displayed therefor
     // there will be an empty variable.
@@ -343,7 +343,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $page = $this->getSession()->getPage();
 
     // Get the user types switcher.
-    $user_type_element = $page->find('css', '.background .user-types');
+    $user_type_element = $page->find('css', '.container .user-types');
 
     // Sometimes we want to check that the links are not displayed therefor
     // there will be an empty variable.
@@ -360,7 +360,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $page = $this->getSession()->getPage();
 
     // Check the title of the page.
-    $title_element = $page->find('css', '.background .center h2.header');
+    $title_element = $page->find('css', 'header#header .header-container #site-name > h1');
     if ($title_element === null) {
       throw new \Exception('The title element is missing.');
     }
@@ -405,7 +405,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @Then I should see the :header header
    */
   public function iShouldSeeTheMunicipalityHeader($header) {
-    $sitename = $this->getSession()->getPage()->find('css', '.ui.header a')->getText();
+    $sitename = $this->getSession()->getPage()->find('css', 'header#header .header-container #site-name > h1')->getText();
 
     // Check if the site name is "Municipality".
     if ($sitename != $header) {
@@ -566,7 +566,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @throws \Exception
    */
   protected function checkActiveLanguage($language, $page, $selector) {
-    $language_active_link = $page->find('css', '.background .languages a.active');
+    $language_active_link = $page->find('css', '.container .languages a.active');
     if ($language_active_link === null) {
       throw new \Exception('The languages has no active items.');
     }
@@ -595,7 +595,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @throws \Exception
    */
   protected function checkActiveUserType($user_type, $page, $selector) {
-    $user_type_active_link = $page->find('css', '.background .user-types a.active');
+    $user_type_active_link = $page->find('css', '.container .user-types a.active');
     if ($user_type_active_link === null) {
       throw new \Exception('The user type has no active items.');
     }

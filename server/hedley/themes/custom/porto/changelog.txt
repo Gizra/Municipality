@@ -1,0 +1,183 @@
+3.0 (10/05/15)
+  *Updated all theme vendor libraries.
+  *Removed gradient color option and added new secondary color options.
+  *Updated Drupal core in full install.
+  *Updated MD Slider to latest version.
+  *Added Drupal Commerce support.
+  *General style updates/improvements.
+
+2.1.1 (06/25/15)
+	*Updated prettyPhoto to 3.1.6.
+	*Improved menu functionality on touch devices with high resolutions.
+	*Updated Drupal core in full install.
+	*General style improvements and bug fixes.
+
+2.1 (04/18/15)
+  *New "Porto Views" style plugin module with new Portfolio and Blog view layouts.
+	*Language styles now controlled by Drupal language settings rather than theme setting.
+	*Responsive fix for Owl Carousel.
+	*Better support for taxonomy term pages.
+	*Updated Drupal core in full install.
+	*General style tweaks and bug fixes.
+	
+2.0.8 (03/12/15)
+  *Boxed layout sticky header functionality.
+  *Fixed isotope issue with periods inside taxonomy terms.
+  *Owl Carousel JS fix.
+  *Updated MD Slider to latest version.
+  *Fix for tooltips on progress bars.
+
+2.0.7 (01/08/15)
+  *Added RTL support.
+  *Updated Owl Carousel.
+  *Updated MD Slider.
+  
+2.0.6 (11/27/14)
+  *Fixed PHP timeout error on unpublished nodes utilizing theme pagination.
+  *Fixed issue in article template files related to disabling Comment module.
+  *Updated Drupal core in full install.
+  *Fixed portfolio pagination bug.
+
+2.0.5 (11/06/14)
+  *Fix for missing icons related to 2.0.4 update.
+  *Fixed issue with menu/button gradient.
+  *Fixed issue with search input text.
+  *Updated Drupal core in full install.
+
+2.0.4 (09/30/14)
+  *Added basic Drupal forum styles.
+  *Added "One Page" content type and page template for better "One Page" layout support.
+  *Added Bootstrap 3 alert classes to Drupal message wrappers.
+  *Improved mobile menu parent link functionality.
+  *Revised footer region markup.
+  *Updated MD Slider.
+
+2.0.3 (08/19/14)
+  *Removed all !important tags from .less files for better customization support.
+  *Updated Font Awesome to version 4.10.
+  *Max width for latest projects content image.
+  *Fixed issue with active class on portfolio filter buttons.
+  *Bootstrap.css now called in html.tpl.php to fix @import conflict with respond.js(IE8 fix).
+  *Updated Drupal core in full install.
+  *Updated documentation.
+
+2.0.2 (07/29/14)
+  *Added logo height setting for regular and sticky header layout.
+  *Removed extra </div> from contact template.
+  *Fixed issue with "latest posts" view and odd number of items.
+  *Modified output of body field in FAQ node template.
+  *Improved responsive appearance of NivoSlider.
+  *Updated Drupal core in full install.
+  *Updated MD Slider.
+  *Other minor fixes.
+
+2.0.1 (07/03/14)
+  *Fixed issue with sub-menu links in mobile navigation.
+  *Fixed issue with "Home Concept" circle URLs.
+  *Fixed minor layout issue with Bootstrap modal footer buttons.
+  *Fixed disappearing menu when last menu item has children.
+  *Fixed PHP error in porto_item_list function.
+
+2.0 (06/18/14)
+  *Updated Bootstrap to version 3.1.1.
+  *New "Dark" background color option.
+  *Replaced Flexslider with Owl Carousel.
+  *New sections/layouts including Video Background, Portfolio Full Width, Team Member etc. 
+  *Updated Drupal Core in full install.
+  *Updated "Mega Slider" module to latest version.
+  *Style and layout improvements.
+
+1.3 (04/01/14)
+  *Additional improvements for special characters in taxonomy terms.
+  *Updated Drupal Core in full demo install.
+  *Updated Mega Slider module to latest version.
+  *Fixed issue with pagination in Portfolio block.
+  *Fixed several missing translation function wrappers. 
+  *Renamed several view node templates to fix issue with adding additional displays.
+  *Fixed issue related to LESS errors on admin pages.
+  *CSS files no longer called in preprocess_html function.
+  *Porto navigation markup/style now only applies to menus in the "Header Menu" region.
+
+1.2.3 (11/11/13)
+  *Updated "Mega Slider" to latest 2.4 version.
+  *"About author" section will no longer display if Profile2 module is not activated.
+  *Added a couple missing t() wrappers to theme generated strings.
+  *Fixed search input issue.
+
+1.2.2 (11/1/13)
+  *Fixed issue with page title bottom border color/position.
+  *Fixed issue with DB export for full install.
+
+1.2.1 (10/31/13)
+  *Fixed missing call to Drupal links in node--article.tpl.
+  *Fixed custom color not working on search icon button.
+  *Fixed issue with header search input width.
+  *Removed hyphen from in between words on Portfolio/Team category display.
+  *"Comments" will now read "Comment" in post meta if there is only one comment.
+  *Fixed issue with hashtags in Twitter widget. 
+  *Site title will use H1 tag if page title is not present, otherwise page title will use H1.
+
+1.2 (10/15/13)
+  *Social icons in Team block will only display if URL is entered into field.
+  *Fixed bug where comment date was the same as the node date.
+  *Fixed issue with Drupal classes not being added to the body tag.
+  *Fixed location issue with maps pin.
+  *Fixed bug related to team filters and multiple terms on the same node.
+  *Added support for "Popular/Recent" posts view block.
+  *Basic styling for Drupal Commerce elements (shopping cart, checkout page, order review)
+  *Button styling applied to all submit buttons.
+
+1.1.3 (09/09/13)
+  *Fixed bug related to portfolio filters and multiple terms on the same node.
+  *Added theme setting for Footer ribbon.
+  *Added unique classes to post meta element wrappers.
+  *Fixed double class definition in branding element.
+  *Fixed issue with NivoSlider in IE.
+  *Improved handling of sitemap on full install.
+
+1.1.2 (08/28/13)
+  *Max height/width set for testimonial images.
+  *Fixed styling of "Log in" submit button on user login form.
+  *Parallax effect now properly disabled on touch devices.
+  *Fixed "zoom here" feature on Google Map.
+  *Fixed logo/sitename overlap with branding section.
+  *Added support for CSS3 animations.
+  *Fixed accordion bug on one page template.
+  *Reverted to previous version of Mega Slider for improved stability.
+  *Updated documentation.
+
+1.1.1 (08/14/13)
+  *Fixed a bug with the header/menu related to the 1.1 update.
+
+1.1 (08/14/13)
+  *Updated Drupal core in full installation.
+  *Added new templates for Testimonials, FAQ, Parallax and Carousel content type/View blocks.
+  *Fix for Portfolio/Team filter terms with multiple words.
+  *Support for "One Page" template.
+  *Fixed issue in IE10 related to search input button.
+  *New theme setting to toggle the use of the "sticky header".
+  *Updated Mega Slider to latest version.
+  *General bug and style fixes.
+
+1.0.3 (08/05/13)
+  *Re-organized branding section to clean up different configuration scenarios.
+  *Additional tweaks related to previous menu fix.
+  *Updated slider module.
+  *Fixed issue with search block at resolutions below 768px.
+
+1.0.2 (08/02/13)
+  *Tweaked menu preprocess functions to fix a menu depth issue.
+  *Fixed misnamed module folder in demo install.
+  *Ensure breadcrumb wrapper will never show on front page.
+  *Fixed a logic error in porto_fields causing certain field content to not display. 
+  *Lightbox on Flickr images now shows next/prev links. 
+  *Updated docs.
+  *Fixed weird permissions on Drupal folder in /licenses.
+
+1.0.1 (07/24/13)
+  *Updated Google Fonts and Maps links for SSL compatibility.
+  *Fixed PHP error on article nodes when Profile2 module is missing.
+  *Updated documentation.
+
+1.0 (07/20/13)
+  *Initial release.
