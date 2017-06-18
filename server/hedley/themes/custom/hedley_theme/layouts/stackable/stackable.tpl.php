@@ -5,6 +5,8 @@
  * Stackable template.
  */
 ?>
-<div class="ui stackable grid container">
-  <?php print $content['main']; ?>
+<div class="container">
+  <div class="row">
+    <?php print $content['main']; ?>
+  </div>
 </div>

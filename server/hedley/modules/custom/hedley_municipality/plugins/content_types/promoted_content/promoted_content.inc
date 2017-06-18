@@ -98,10 +98,11 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
 
   $block = new stdClass();
   $block->module = 'hedley_municipality';
+  $block->title = '';
   // Ignoring the "Only string literals should be passed to t()" validation,
   // because it doesn't make sense in this case.
   // @codingStandardsIgnoreStart
-  $block->title = t($conf['title'], ['@municipality' => $wrapper->label()]);
+  $variables['title'] = t($conf['title'], ['@municipality' => $wrapper->label()]);
   // @codingStandardsIgnoreEnd
 
   // Add the "View all nodes" link.
@@ -174,6 +175,7 @@ function hedley_municipality_promoted_content_content_type_edit_form_submit($for
 function hedley_municipality_promoted_content_content_type_theme(&$theme, $plugin) {
   $theme['hedley_municipality_promoted_content_wrapper'] = [
     'variables' => [
+      'title' => NULL,
       'content' => NULL,
       'all_nodes_link' => NULL,
     ],
