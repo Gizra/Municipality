@@ -23,7 +23,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
 
-        <h3><?php print $title; ?></h3>
+        <h3 class="text-color-tertiary"><?php print $title; ?></h3>
 
         <small>
           <?php print t('Published on: @date', ['@date' => $published_date]); ?>
