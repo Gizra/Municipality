@@ -29,7 +29,7 @@ function hedley_news_content_type_render($subtype, $conf, $args, $context) {
   $wrapper->language($language->language);
 
   $variables = [
-    'title' => $wrapper->title_field->value() ? $wrapper->title_field->value() : $wrapper->label(),
+    'title' => $wrapper->label(),
     'published_date' => format_date($wrapper->changed->value(), 'municipality_date'),
     'body' => $wrapper->body->value() ? $wrapper->body->value->value() : '',
   ];
