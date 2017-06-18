@@ -9,7 +9,7 @@ Feature: Edit entities pages.
     When I edit "סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה" node of type "Event"
     Then I should see "Bold"
 
-  @api @test
+  @api
   Scenario Outline: Verify that as an admin I don't see errors on the News' edit page.
     Given I login with user "admin"
     When I edit "<title>" node of type "<type>"
