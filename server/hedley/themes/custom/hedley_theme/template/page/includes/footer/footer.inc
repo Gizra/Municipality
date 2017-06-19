@@ -1,5 +1,4 @@
 <footer id="footer">
-    <div class="container">
       <?php if (!empty($footer_text)): ?>
         <div class="row">
           <div class="col-xs-12">
@@ -19,5 +18,4 @@
           </div>
         </div>
       <?php endif; ?>
-    </div>
 </footer>
