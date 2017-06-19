@@ -17,7 +17,7 @@ view model =
 
         Event ->
             div []
-                [ Html.map MsgPagesEvent <| Event.View.view model.language model.showAsBlock model.pageEvent
+                [ Html.map MsgPagesEvent <| Event.View.view model.baseUrl model.language model.showAsBlock model.pageEvent
                 ]
 
         NotFound ->

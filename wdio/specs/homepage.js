@@ -16,4 +16,12 @@ describe('Municipality homepage', () => {
   it('should show the user types selector', () => {
     browser.waitForVisible('.row .col-md-3 > .btn-group.user-types');
   });
+
+  it('should show the event\'s "show all" button', () => {
+    browser.waitForVisible('div#elm-events-block a.btn-show-all');
+
+    // Assert the page have the expected title.
+    const showAllLink = browser.getText('div#elm-events-block a.btn-show-all');
+    assert.equal('הצג הכל', showAllLink);
+  });
 });

@@ -45,12 +45,12 @@ showMaybe =
 
 divider : Html msg
 divider =
-    div [ class "ui horizontal divider" ] []
+    div [ class "divider" ] []
 
 
 sectionDivider : Html msg
 sectionDivider =
-    div [ class "ui section divider" ] []
+    div [ class "section divider" ] []
 
 
 colorToString : Color -> String

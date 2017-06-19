@@ -160,19 +160,15 @@ function hedley_municipality_default_page_manager_handlers() {
   $display->content['new-fb1c6e5e-f7b3-4fcc-821d-23a173bc173c'] = $pane;
   $display->panels['main'][2] = 'new-fb1c6e5e-f7b3-4fcc-821d-23a173bc173c';
   $pane = new stdClass();
-  $pane->pid = 'new-bff022db-6e50-4f7e-954b-3d694b9ef8d1';
+  $pane->pid = 'new-b2093586-b0a5-4a1f-9908-22f14c5d7d20';
   $pane->panel = 'main';
-  $pane->type = 'promoted_content';
-  $pane->subtype = 'promoted_content';
+  $pane->type = 'elm';
+  $pane->subtype = 'elm';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'all_nodes_title' => 'See all events',
-    'all_nodes_url' => '',
-    'bundle' => 'event',
-    'items_class' => 'ui divided items',
-    'title' => 'Upcoming events',
-    'context' => 'argument_entity_id:node_1',
+    'page' => 'events',
+    'show_as_block' => 1,
     'override_title' => 0,
     'override_title_text' => '',
     'override_title_heading' => 'h2',
@@ -182,15 +178,15 @@ function hedley_municipality_default_page_manager_handlers() {
     'settings' => NULL,
   );
   $pane->css = array(
-    'css_id' => '',
-    'css_class' => 'ui segment seven wide column',
+    'css_id' => 'elm-events-block',
+    'css_class' => '',
   );
   $pane->extras = array();
   $pane->position = 3;
   $pane->locks = array();
-  $pane->uuid = 'bff022db-6e50-4f7e-954b-3d694b9ef8d1';
-  $display->content['new-bff022db-6e50-4f7e-954b-3d694b9ef8d1'] = $pane;
-  $display->panels['main'][3] = 'new-bff022db-6e50-4f7e-954b-3d694b9ef8d1';
+  $pane->uuid = 'b2093586-b0a5-4a1f-9908-22f14c5d7d20';
+  $display->content['new-b2093586-b0a5-4a1f-9908-22f14c5d7d20'] = $pane;
+  $display->panels['main'][3] = 'new-b2093586-b0a5-4a1f-9908-22f14c5d7d20';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -211,7 +207,10 @@ function hedley_municipality_default_page_manager_pages() {
   $page->admin_title = 'Home page';
   $page->admin_description = 'The home page of the municipality platform.';
   $page->path = 'home';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(

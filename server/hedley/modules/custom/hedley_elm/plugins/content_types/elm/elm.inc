@@ -29,6 +29,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   drupal_add_js(drupal_get_path('module', 'hedley_elm') . '/elm.js');
 
   $page = $conf['page'];
+  $show_as_block = (bool) $conf['show_as_block'];
 
   if (!$node = hedley_municipality_get_current_group()) {
     // Don't display the elm app if not in the context of a municipality group.
@@ -38,11 +39,11 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   $values = [];
   switch ($page) {
     case 'contacts':
-      $values = hedley_contact_get_contacts_by_group($node, $language->language);
+      $values = hedley_contact_get_contacts_by_group($node, $language->language, $show_as_block);
       break;
 
     case 'events':
-      $values = hedley_event_get_events_by_group($node, $language->language);
+      $values = hedley_event_get_events_by_group($node, $language->language, $show_as_block);
       break;
   }
 
@@ -55,8 +56,12 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
       $app_id => [
         'page' => $page,
         'language' => $language->language,
-        'showAsBlock' => (bool) $conf['show_as_block'],
+        'showAsBlock' => $show_as_block,
         'values' => $values,
+        'baseUrl' => url('', [
+          'query' => [],
+          'absolute' => TRUE,
+        ]),
       ],
     ],
   ];

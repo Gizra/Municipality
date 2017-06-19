@@ -121,6 +121,11 @@ function hedley_i18n_url_outbound_alter(&$path, &$options, $original_path) {
     return;
   }
 
+  if (isset($options['query']) && empty($options['query'])) {
+    // Ignore a URL created specifically with an empty query.
+    return;
+  }
+
   // Set the language, unless it's already explicitly set.
   if (empty($options['query']['language'])) {
     $options['query']['language'] = $language->language;
