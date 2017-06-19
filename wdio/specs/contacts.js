@@ -16,7 +16,7 @@ describe('Municipality contacts page', () => {
     browser.waitForVisible('h3=ניר שמואלי');
     browser.waitForVisible('h3=סלאח אבו האני');
 
-    // Make sure other contacts dissappear when searching.
+    // Make sure other contacts disappear when searching.
     assert(!browser.isVisible('h3=נסר בו סריחאן'));
 
     input.setValue('ניר');
