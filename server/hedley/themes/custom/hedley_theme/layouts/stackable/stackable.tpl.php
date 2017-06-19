@@ -7,6 +7,9 @@
 ?>
 <div class="container">
   <div class="row">
-    <?php print $content['main']; ?>
+    <?php print $content['1st_row']; ?>
+  </div>
+  <div class="row">
+    <?php print $content['2nd_row']; ?>
   </div>
 </div>

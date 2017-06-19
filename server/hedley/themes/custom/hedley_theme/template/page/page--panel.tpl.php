@@ -20,17 +20,17 @@
       <?php endif; ?>
       <div class="container">
         <div class="row">
-          <?php if ($user_type_links): ?>
-            <div class="col-md-3">
-              <?php print $user_type_links; ?>
+            <div class="col-md-3 align-left">
+              <?php if ($user_type_links): ?>
+                <?php print $user_type_links; ?>
+              <?php endif; ?>
             </div>
-          <?php endif; ?>
 
-          <div class="col-md-6">
+          <div class="col-md-6 center">
             <?php print render($social_links); ?>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-3 align-right">
             <?php if ($language_switch_links) : ?>
               <div class="languages btn-group" role="group">
                 <?php foreach ($language_switch_links as $link): ?>
