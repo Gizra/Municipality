@@ -46,52 +46,52 @@ viewEventTest =
     describe "view single event"
         [ test "Event without Image" <|
             \() ->
-                viewEvent English event1
+                viewEvent "http://base-url" English event1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "image" ]
         , test "Event without Description" <|
             \() ->
-                viewEvent English event1
+                viewEvent "http://base-url" English event1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "description" ]
         , test "Event without Date" <|
             \() ->
-                viewEvent English event1
+                viewEvent "http://base-url" English event1
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "event-date" ]
                     |> Query.has [ text "" ]
         , test "Event without Weekly Recurring" <|
             \() ->
-                viewEvent English event2
+                viewEvent "http://base-url" English event2
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "recurring-weekly" ]
         , test "Event without Price" <|
             \() ->
-                viewEvent English event1
+                viewEvent "http://base-url" English event1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "ticket-price" ]
         , test "Event with Image" <|
             \() ->
-                viewEvent English event2
+                viewEvent "http://base-url" English event2
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "image" ]
                     |> Query.children [ tag "img" ]
                     |> Query.each (Query.has [ attribute "src" "https://placeholdit.imgix.net/~text?w=350&h=150" ])
         , test "Event with Description" <|
             \() ->
-                viewEvent English event2
+                viewEvent "http://base-url" English event2
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "description" ]
                     |> Query.has [ attribute "innerHTML" "Afternoon event description" ]
         , test "Event with Weekly Recurring" <|
             \() ->
-                viewEvent English event3
+                viewEvent "http://base-url" English event3
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "recurring-weekly" ]
                     |> Query.has [ text "Weekly event" ]
         , test "Event with Price" <|
             \() ->
-                viewEvent English event3
+                viewEvent "http://base-url" English event3
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "ticket-price" ]
                     |> Query.has [ text "Price: 180" ]
