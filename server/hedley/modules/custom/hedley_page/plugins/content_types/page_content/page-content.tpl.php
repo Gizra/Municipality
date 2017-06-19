@@ -2,7 +2,7 @@
 
 /**
  * @file
- * News content template.
+ * Page content template.
  */
 ?>
 
@@ -11,7 +11,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
 
-        <h2><?php print t('News and Updates'); ?></h2>
+        <h2><?php print $title; ?></h2>
 
       </div>
     </div>
@@ -22,8 +22,6 @@
   <div class="col-xs-12">
     <div class="panel panel-default">
       <div class="panel-body">
-
-        <h3 class="text-color-tertiary"><?php print $title; ?></h3>
 
         <small>
           <?php print $published_date; ?>
