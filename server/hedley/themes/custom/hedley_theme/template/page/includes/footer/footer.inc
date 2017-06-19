@@ -1,4 +1,4 @@
-<footer id="footer">
+<footer class="label-dark">
       <?php if (!empty($footer_text)): ?>
         <div class="row">
           <div class="col-xs-12">
