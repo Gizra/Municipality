@@ -14,13 +14,11 @@ import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
 view : String -> Language -> Bool -> Model -> Html Msg
 view baseUrl language showAsBlock model =
-    div [ class "featured-box featured-box-primary" ]
-        [ div [ class "box-content" ]
-            [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
-            , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
-            , div [] [ viewEvents baseUrl language showAsBlock model ]
-            , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl ++ "/events") ] [ text <| translate language ShowAll ]
-            ]
+    div []
+        [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
+        , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
+        , div [] [ viewEvents baseUrl language showAsBlock model ]
+        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl ++ "/events") ] [ text <| translate language ShowAll ]
         ]
 
 

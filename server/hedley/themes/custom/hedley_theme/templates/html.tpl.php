@@ -55,7 +55,7 @@ $header_layout = theme_get_setting('header_layout');
 
 <?php porto_user_css();?>  
 </head>
-<body <?php if (isset($background_image_url)): ?>style="background-image: url('<?php print $background_image_url; ?>'); background-size: cover;"<?php endif; ?> class="<?php print $classes; ?>"<?php print $attributes;?> <?php if(arg(0) == 'one-page'):?> class="one-page" <?php endif; ?> data-target="<?php if(arg(0) == 'index-corporate-hosting'):?> #navSecondary<?php else: ?>#header<?php endif; ?>" data-spy="scroll" data-offset="100">
+<body class="<?php print $classes; ?>"<?php print $attributes;?> <?php if(arg(0) == 'one-page'):?> class="one-page" <?php endif; ?> data-target="<?php if(arg(0) == 'index-corporate-hosting'):?> #navSecondary<?php else: ?>#header<?php endif; ?>" data-spy="scroll" data-offset="100">
 <?php print $page_top; ?>
 <?php print $page; ?>
 <?php print $page_bottom; ?>

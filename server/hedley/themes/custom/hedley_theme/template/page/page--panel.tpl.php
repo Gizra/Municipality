@@ -13,6 +13,11 @@
 	  
 	  <?php print render($page['before_content']); ?>
 	  <div id="content" class="content full">
+      <?php if (isset($background_image_url)): ?>
+        <section class="parallax section section-parallax section-center" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="<?php print $background_image_url; ?>" style="height: 300px; position: relative; overflow: hidden;">
+          <div class="container"></div>
+        </section>
+      <?php endif; ?>
       <div class="container">
         <div class="row">
           <?php if ($user_type_links): ?>

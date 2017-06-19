@@ -108,7 +108,7 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
   // Add the "View all nodes" link.
   if ($conf['all_nodes_title']) {
     // @codingStandardsIgnoreStart
-    $variables['all_nodes_link'] = l(t($conf['all_nodes_title']), $conf['all_nodes_url'], ['attributes' => ['class' => ['ui basic button']]]);
+    $variables['all_nodes_link'] = l(t($conf['all_nodes_title']), $conf['all_nodes_url'], ['attributes' => ['class' => ['btn btn-default btn-show-all']]]);
     // @codingStandardsIgnoreEnd
   }
   $block->content = theme('hedley_municipality_promoted_content_wrapper', $variables);

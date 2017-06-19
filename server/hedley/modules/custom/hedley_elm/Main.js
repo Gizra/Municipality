@@ -13272,83 +13272,68 @@ var _gizra$municipality$Event_View$view = F4(
 	function (baseUrl, language, showAsBlock, model) {
 		return A2(
 			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('featured-box featured-box-primary'),
-				_1: {ctor: '[]'}
-			},
+			{ctor: '[]'},
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('box-content'),
-						_1: {ctor: '[]'}
-					},
-					{
+					_gizra$municipality$Utils_Html$showIf,
+					!showAsBlock,
+					A2(_gizra$municipality$Event_View$viewEventFilter, language, model.filterString)),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gizra$municipality$Utils_Html$showIf,
+						!showAsBlock,
+						A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('divider'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(
+									A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$MatchingResults)),
+								_1: {ctor: '[]'}
+							})),
+					_1: {
 						ctor: '::',
 						_0: A2(
-							_gizra$municipality$Utils_Html$showIf,
-							!showAsBlock,
-							A2(_gizra$municipality$Event_View$viewEventFilter, language, model.filterString)),
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A4(_gizra$municipality$Event_View$viewEvents, baseUrl, language, showAsBlock, model),
+								_1: {ctor: '[]'}
+							}),
 						_1: {
 							ctor: '::',
 							_0: A2(
 								_gizra$municipality$Utils_Html$showIf,
-								!showAsBlock,
+								showAsBlock,
 								A2(
-									_elm_lang$html$Html$div,
+									_elm_lang$html$Html$a,
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('divider'),
-										_1: {ctor: '[]'}
+										_0: _elm_lang$html$Html_Attributes$class('btn btn-default btn-show-all'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$href(
+												A2(_elm_lang$core$Basics_ops['++'], baseUrl, '/events')),
+											_1: {ctor: '[]'}
+										}
 									},
 									{
 										ctor: '::',
 										_0: _elm_lang$html$Html$text(
-											A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$MatchingResults)),
+											A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ShowAll)),
 										_1: {ctor: '[]'}
 									})),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: A4(_gizra$municipality$Event_View$viewEvents, baseUrl, language, showAsBlock, model),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_gizra$municipality$Utils_Html$showIf,
-										showAsBlock,
-										A2(
-											_elm_lang$html$Html$a,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('btn btn-default btn-show-all'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$href(
-														A2(_elm_lang$core$Basics_ops['++'], baseUrl, '/events')),
-													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text(
-													A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ShowAll)),
-												_1: {ctor: '[]'}
-											})),
-									_1: {ctor: '[]'}
-								}
-							}
+							_1: {ctor: '[]'}
 						}
-					}),
-				_1: {ctor: '[]'}
+					}
+				}
 			});
 	});
 

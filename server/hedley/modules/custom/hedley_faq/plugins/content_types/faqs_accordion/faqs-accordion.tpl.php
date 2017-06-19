@@ -18,10 +18,10 @@
               </a>
             </h4>
           </div>
-        </div>
-        <div id="collapse-<?php print $index; ?>" class="accordion-body collapse">
-          <div class="panel-body">
-            <p><?php print $faq['answer']; ?></p>
+          <div id="collapse-<?php print $index; ?>" class="accordion-body collapse">
+            <div class="panel-body">
+              <p><?php print $faq['answer']; ?></p>
+            </div>
           </div>
         </div>
       <?php endforeach; ?>
