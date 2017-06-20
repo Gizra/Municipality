@@ -25,53 +25,90 @@ describe('Municipality homepage', () => {
     assert.equal('הצג הכל', showAllLink);
   });
 
-  it('should show user types labels in the selected language', () => {
+  it('should show user types labels in the selected language: hebrew', () => {
     browser.url('/municipality-1/node/1?language=he&user_type=residents');
     browser.waitForVisible('.btn-group.user-types');
-    var business = browser.getText('.btn-group.user-types a:nth-child(1)');
+    const business = browser.getText('.btn-group.user-types a:nth-child(1)');
     assert.equal('עסקים', business);
-    var residents = browser.getText('.btn-group.user-types a:nth-child(2)');
-    assert.equal('תושבים', residents);
 
+    const residents = browser.getText('.btn-group.user-types a:nth-child(2)');
+    assert.equal('תושבים', residents);
+  });
+
+  it('should show user types labels in the selected language: english', () => {
     browser.url('/municipality-1/node/1?language=en&user_type=residents');
     business = browser.getText('.btn-group.user-types a:nth-child(1)');
     assert.equal('Businesses', business);
+
     residents = browser.getText('.btn-group.user-types a:nth-child(2)');
     assert.equal('Residents', residents);
   });
 
-  it('Should show the user language and user type chosen in the language and user type menus', () => {
-    var user_type = browser.getText('.btn-group.user-types .btn.btn-default.active');
+  it('Should show "english" language and "residents" chosen in the language and user type menus', () => {
+    browser.url('/municipality-1/node/1?language=en&user_type=residents');
+    browser.waitForVisible('.btn-group.user-types');
+    browser.waitForVisible('.btn-group.languages');
+    const user_type = browser.getText('.btn-group.user-types .btn.btn-default.active');
     assert.equal('Residents', user_type);
 
-    var languague = browser.getText('.btn-group.languages .btn.btn-default.active');
+    const languague = browser.getText('.btn-group.languages .btn.btn-default.active');
     assert.equal('English', languague);
+  });
 
+  it('should show "hebrew" language and "residents" chosen in the language and user type menus', () => {
     browser.url('/municipality-1/node/1?language=he&user_type=residents');
     browser.waitForVisible('.btn-group.user-types');
     browser.waitForVisible('.btn-group.languages');
 
-    var user_type = browser.getText('.btn-group.user-types .btn.btn-default.active');
+    const user_type = browser.getText('.btn-group.user-types .btn.btn-default.active');
     assert.equal('תושבים', user_type);
 
-    var languague = browser.getText('.btn-group.languages .btn.btn-default.active');
+    const languague = browser.getText('.btn-group.languages .btn.btn-default.active');
     assert.equal('עברית', languague);
   });
 
-  it('Should show the "do now" for the elements which fits the current user type and the current language', () => {
+  it('should show the "Do now" elements which fits the current user type and the hebrew language', () => {
+    browser.url('/municipality-1/node/1?language=he&user_type=residents');
     browser.waitForVisible("h2=Do now");
-    browser.isVisible('a=לקבל אישור תושב');
-    browser.isVisible('a=לרשום חתונה');
+    browser.waitForVisible('a=לקבל אישור תושב');
+    browser.waitForVisible('a=לרשום חתונה');
+  });
 
+  it('Should show the "Do now" elements which fits the current user type and the arabic language', () => {
     browser.url('/municipality-1/node/1?language=ar&user_type=residents');
     browser.waitForVisible("h2=Do now");
-    browser.isVisible('a=الحصول على الإقامة');
-    browser.isVisible('a=السجل الزفاف');
+    browser.waitForVisible('a=الحصول على الإقامة');
+    browser.waitForVisible('a=السجل الزفاف');
+  });
 
-    // Check that content for one user type doesn't appear on other user type.
+  it('Should not show the "Do now" elements which fits for "residents" when "businesses" user type is selected', () => {
     browser.url('/municipality-1/node/1?user_type=businesses&language=he');
     browser.waitForVisible("h2=Do now");
     assert(!browser.isVisible('a=לקבל אישור תושב'));
     assert(!browser.isVisible('a=לרשום חתונה'));
+  });
+
+  it('should show the action page for action with content in the body field', () => {
+    browser.url('/municipality-1/node/1?language=he');
+    browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
+    browser.waitForVisible('h2=לקבל אישור תושב');
+  });
+
+  it('should show only events for the selected user type "residents" on hebrew language', () => {
+    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    browser.waitForVisible('a=מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17');
+  });
+
+  it('should not show "businesses" events on "residents" homepage', () => {
+    assert(!browser.isVisible('a=מבצע סגירת חובות ארנונה לעסקים'));
+  });
+
+  it('should show only events for the selected user type "businesses" on hebrew language', () => {
+    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
+    browser.waitForVisible('a=מבצע סגירת חובות ארנונה לעסקים');
+  });
+
+  it('should not show "residents" events on "businesses" homepage', () => {
+    assert(!browser.isVisible('a=מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17'));
   });
 });
