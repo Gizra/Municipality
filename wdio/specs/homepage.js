@@ -48,8 +48,8 @@ describe('Municipality homepage', () => {
     browser.url('/municipality-1/node/1?language=en&user_type=residents');
     browser.waitForVisible('.btn-group.user-types');
     browser.waitForVisible('.btn-group.languages');
-    const user_type = browser.getText('.btn-group.user-types .btn.btn-default.active');
-    assert.equal('Residents', user_type);
+    const userType = browser.getText('.btn-group.user-types .btn.btn-default.active');
+    assert.equal('Residents', userType);
 
     const languague = browser.getText('.btn-group.languages .btn.btn-default.active');
     assert.equal('English', languague);
@@ -60,8 +60,8 @@ describe('Municipality homepage', () => {
     browser.waitForVisible('.btn-group.user-types');
     browser.waitForVisible('.btn-group.languages');
 
-    const user_type = browser.getText('.btn-group.user-types .btn.btn-default.active');
-    assert.equal('תושבים', user_type);
+    const userType = browser.getText('.btn-group.user-types .btn.btn-default.active');
+    assert.equal('תושבים', userType);
 
     const languague = browser.getText('.btn-group.languages .btn.btn-default.active');
     assert.equal('עברית', languague);
