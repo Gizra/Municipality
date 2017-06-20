@@ -25,9 +25,9 @@ describe('Municipality events page', () => {
     input.setValue('סיור');
     browser.waitForVisible('div=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
 
-    // Make sure other contacts disappear when searching.
+    // Make sure other events disappear when searching.
     assert(!browser.isVisible('div=הצגת ילדים: שבת בבוקר'));
-    
+
   });
 
 });
