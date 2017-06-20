@@ -8,6 +8,15 @@
 include_once 'hedley_action.features.inc';
 
 /**
+ * Implements hook_ctools_plugin_directory().
+ */
+function hedley_action_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
  * Implements hook_node_presave().
  *
  * Fix empty entity references on the action's field_action_sections. For some
