@@ -111,4 +111,10 @@ describe('Municipality homepage', () => {
   it('should not show "residents" events on "businesses" homepage', () => {
     assert(!browser.isVisible('a=מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17'));
   });
+
+  it('should open an external "action" link in a new tab', () => {
+    browser.url('/municipality-1/node/1?language=he');
+    const target = browser.getAttribute('.item.action.homepage-teaser:nth-child(4) .content .header a', 'target');
+    assert(target == '_blank');
+  });
 });
