@@ -393,37 +393,3 @@ function hedley_municipality_get_non_empty_language_for_field(array $field_attri
     }
   }
 }
-
-/**
- * Implements hook_date_format_types().
- */
-function hedley_municipality_date_format_types() {
-  return ['municipality_date' => t('Municipality Date')];
-}
-
-/**
- * Implements hook_date_formats().
- */
-function hedley_municipality_date_formats() {
-  $formats = [];
-
-  $formats[] = [
-    'type' => 'municipality_date',
-    'format' => 'F j, Y',
-    'locales' => ['en'],
-  ];
-
-  $formats[] = [
-    'type' => 'municipality_date',
-    'format' => 'j בF Y',
-    'locales' => ['he'],
-  ];
-
-  $formats[] = [
-    'type' => 'municipality_date',
-    'format' => 'j F Y',
-    'locales' => ['ar'],
-  ];
-
-  return $formats;
-}
