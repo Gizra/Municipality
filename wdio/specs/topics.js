@@ -24,4 +24,13 @@ describe('Municipality topics', () => {
     });
 });
 
+  it('should show all the relevant events for this topic', () => {
+    browser.waitForVisible('div=הצגת ילדים: שבת בבוקר');
+    browser.waitForVisible('div=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+  });
+
+  it('should show event image if exists', () => {
+    browser.waitForVisible('.card-img-top img');
+  });
+
 });
