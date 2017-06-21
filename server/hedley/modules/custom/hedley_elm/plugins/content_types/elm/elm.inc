@@ -126,4 +126,3 @@ function hedley_elm_elm_content_type_theme(&$theme, $plugin) {
     'template' => 'elm',
   ];
 }
-

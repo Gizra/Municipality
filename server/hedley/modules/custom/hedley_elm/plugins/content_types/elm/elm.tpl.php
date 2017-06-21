@@ -1,4 +1,10 @@
-<?php if ($show_as_block) : ?>
+<?php
+
+/**
+ * @file
+ * Elm template for blocks.
+ */
+if ($show_as_block) : ?>
   <div class="featured-box featured-box-primary">
     <div class="box-content">
       <div class="row">
