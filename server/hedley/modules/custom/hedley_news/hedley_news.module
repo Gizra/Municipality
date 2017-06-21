@@ -6,3 +6,12 @@
  */
 
 include_once 'hedley_news.features.inc';
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function hedley_news_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools') {
+    return 'plugins/' . $plugin;
+  }
+}
