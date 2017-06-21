@@ -94,21 +94,21 @@ describe('Municipality homepage', () => {
     browser.waitForVisible('h2=לקבל אישור תושב');
   });
 
-  it('should show only events for the selected user type "residents" on hebrew language', () => {
+  it('should show only news for the selected user type "residents" on hebrew language', () => {
     browser.url('/municipality-1/node/1?user_type=residents&language=he');
     browser.waitForVisible('a=מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17');
   });
 
-  it('should not show "businesses" events on "residents" homepage', () => {
+  it('should not show "businesses" news on "residents" homepage', () => {
     assert(!browser.isVisible('a=מבצע סגירת חובות ארנונה לעסקים'));
   });
 
-  it('should show only events for the selected user type "businesses" on hebrew language', () => {
+  it('should show only news for the selected user type "businesses" on hebrew language', () => {
     browser.url('/municipality-1/node/1?user_type=businesses&language=he');
     browser.waitForVisible('a=מבצע סגירת חובות ארנונה לעסקים');
   });
 
-  it('should not show "residents" events on "businesses" homepage', () => {
+  it('should not show "residents" news on "businesses" homepage', () => {
     assert(!browser.isVisible('a=מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17'));
   });
 
@@ -117,4 +117,25 @@ describe('Municipality homepage', () => {
     const target = browser.getAttribute('.item.action.homepage-teaser:nth-child(4) .content .header a', 'target');
     assert(target == '_blank');
   });
+
+  it('should show QAs only for the chosen user type "residents" and the hebrew language', () => {
+    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    browser.waitForVisible('div=כמה סייעות יש בגן ילדים?');
+    browser.waitForVisible('div=באילו שעות מפנים את הזבל?');
+  });
+
+  it('should not show QAs for "businesses" when "residents" are the chosen user type ', () => {
+    assert(!browser.isVisible('div= האם גני ילדים זכאים לפטור מארנונה?'));
+  });
+
+  it('should show QAs only for the chosen user type "businesses" and the hebrew language', () => {
+    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
+    browser.waitForVisible('div=האם גני ילדים זכאים לפטור מארנונה?');
+    browser.waitForVisible('div=באילו שעות מפנים את הזבל?');
+  });
+
+  it('should not show QAs for "residents" when "businesses" are the chosen user type', () => {
+    assert(!browser.isVisible('div=כמה סייעות יש בגן ילדים?'));
+  });
+
 });
