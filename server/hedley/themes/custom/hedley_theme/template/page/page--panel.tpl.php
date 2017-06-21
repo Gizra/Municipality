@@ -6,18 +6,20 @@
 ?>
 
 <div class="body">
-    <?php include_once('includes/header/header.inc');?>
+  <?php include_once('includes/header/header.inc');?>
 
 	<div role="main" class="main">
-        <?php include_once('includes/breadcrumb.inc');?>
-	  
-	  <?php print render($page['before_content']); ?>
+    <?php include_once('includes/breadcrumb.inc');?>
+
+    <?php if (isset($background_image_url)): ?>
+      <div id="revolutionSlider" class="slider-container slider rev_slider revslider-initialised tp-simpleresponsive" data-plugin-revolution-slider="" data-plugin-options="{'delay': 9000, 'gridwidth': 1170, 'gridheight': 500, 'disableProgressBar': 'on'}" style="margin-top: -35px;">
+        <div class="tp-bgimg defaultimg" style="background-repeat: no-repeat; background-image: url(<?php print $background_image_url; ?>); background-size: cover; background-position: center center; width: 100%; height: 100%; opacity: 1; visibility: inherit; z-index: 20;" src="<?php print $background_image_url; ?>"></div>
+      </div>
+      <div class="divider"></div>
+    <?php endif; ?>
+
+    <?php print render($page['before_content']); ?>
 	  <div id="content" class="content full">
-      <?php if (isset($background_image_url)): ?>
-        <section class="parallax section section-parallax section-center" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="<?php print $background_image_url; ?>" style="height: 300px; position: relative; overflow: hidden;">
-          <div class="container"></div>
-        </section>
-      <?php endif; ?>
       <div class="container">
         <div class="row">
             <div class="col-md-3 align-left">
