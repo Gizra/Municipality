@@ -153,7 +153,7 @@ function hedley_municipality_default_page_manager_handlers() {
   );
   $pane->css = array(
     'css_id' => '',
-    'css_class' => 'col-md-6',
+    'css_class' => 'col-md-6 news-box',
   );
   $pane->extras = array();
   $pane->position = 0;

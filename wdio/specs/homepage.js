@@ -18,10 +18,10 @@ describe('Municipality homepage', () => {
   });
 
   it('should show the event\'s "show all" button', () => {
-    browser.waitForVisible('div#elm-events-block a.btn-show-all');
+    browser.waitForVisible('div#elm-app a.btn-show-all');
 
     // Assert the page have the expected title.
-    const showAllLink = browser.getText('div#elm-events-block a.btn-show-all');
+    const showAllLink = browser.getText('div#elm-app a.btn-show-all');
     assert.equal('הצג הכל', showAllLink);
   });
 });

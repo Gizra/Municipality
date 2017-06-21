@@ -1,5 +1,6 @@
 sudo: required
 language: php
+group: edge
 php:
 - 7.1
 env:

@@ -22,17 +22,17 @@
 	  <div id="content" class="content full">
       <div class="container">
         <div class="row">
-            <div class="col-md-3 align-left">
+            <div class="col-md-3 col-xs-12 mb-xs center">
               <?php if ($user_type_links): ?>
                 <?php print $user_type_links; ?>
               <?php endif; ?>
             </div>
 
-          <div class="col-md-6 center">
+          <div class="col-md-6 col-xs-12 mb-xs center">
             <?php print render($social_links); ?>
           </div>
 
-          <div class="col-md-3 align-right">
+          <div class="col-md-3 col-xs-12 mb-xs center">
             <?php if ($language_switch_links) : ?>
               <div class="languages btn-group" role="group">
                 <?php foreach ($language_switch_links as $link): ?>
