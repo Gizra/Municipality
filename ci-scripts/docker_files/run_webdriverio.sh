@@ -9,7 +9,9 @@ fi
 # Load helper functionality.
 source helper_functions.sh
 
+print_message "Test WebDriverIO."
 cd "$ROOT_DIR"/wdio
+npm install
 
 # Backup verbatim config.
 WDIO_CONF=wdio.conf.travis.js
@@ -24,7 +26,7 @@ for SPEC in specs/*js; do
   SPEC_BASENAME=$(echo "$SPEC" | cut -d '/' -f 2 | cut -d '.' -f 1)
   sed "s/<<SPEC_NAME>>/$SPEC_BASENAME/" < $WDIO_CONF.orig > "$WDIO_CONF"
   for i in $(seq 3); do
-    wdio "$WDIO_CONF" --spec "$SPEC"
+    ./node_modules/.bin/wdio "$WDIO_CONF" --spec "$SPEC"
     WDIO_RET=$?
     if [[ "$WDIO_RET" -eq 0 ]]; then
       # We give 3 chances to complete
