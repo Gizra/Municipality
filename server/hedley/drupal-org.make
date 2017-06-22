@@ -47,7 +47,7 @@ projects[entitycache][subdir] = "contrib"
 projects[entitycache][version] = "1.2"
 
 projects[entityreference][subdir] = "contrib"
-projects[entityreference][version] = "1.2"
+projects[entityreference][version] = "1.4"
 
 projects[entity_translation][subdir] = "contrib"
 projects[entity_translation][version] = "1.0-beta6"
@@ -62,10 +62,10 @@ projects[features][subdir] = "contrib"
 projects[features][version] = "2.10"
 
 projects[i18n][subdir] = "contrib"
-projects[i18n][version] = "1.15"
+projects[i18n][version] = "1.18"
 
 projects[imce][subdir] = "contrib"
-projects[imce][version] = "1.10"
+projects[imce][version] = "1.11"
 
 projects[jquery_update][subdir] = "contrib"
 projects[jquery_update][version] = "2.7"
@@ -89,7 +89,7 @@ projects[mimemail][subdir] = "contrib"
 projects[mimemail][version] = "1.0-beta3"
 
 projects[module_filter][subdir] = "contrib"
-projects[module_filter][version] = "2.0"
+projects[module_filter][version] = "2.1"
 
 projects[multifield][subdir] = "contrib"
 projects[multifield][version] = "1.0-alpha4"
