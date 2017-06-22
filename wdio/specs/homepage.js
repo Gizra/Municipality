@@ -88,12 +88,11 @@ describe('Municipality homepage', () => {
     assert(!browser.isVisible('a=לרשום חתונה'));
   });
 
-  // @todo: Fix this test after the action node is being themed.
-  // it('should show the action page for action with content in the body field', () => {
-  //   browser.url('/municipality-1/node/1?language=he');
-  //   browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
-  //   browser.waitForVisible('h2=לקבל אישור תושב');
-  // });
+  it('should show the action page for action with content in the body field', () => {
+    browser.url('/municipality-1/node/1?language=he');
+    browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
+    browser.waitForVisible('h2=לקבל אישור תושב');
+  });
 
   it('should show only news for the selected user type "residents" on hebrew language', () => {
     browser.url('/municipality-1/node/1?user_type=residents&language=he');
