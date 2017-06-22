@@ -29,17 +29,17 @@ cd ci-scripts/docker_files
 # Docker-compose up won't return with non-zero exit code if one of the
 # containers failed, we need to inspect it like this.
 # from http://blog.ministryofprogramming.com/docker-compose-and-exit-codes/
-docker-compose --file=docker-compose.yml ps -q server.local | xargs docker inspect -f '{{ .State.ExitCode }}' | while read code; do
+docker-compose --file=docker-compose.yml ps -q server.local | xargs docker inspect -f '{{ .State.ExitCode }}' | while read -r code; do
   if [ ! "$code" = "0" ]; then
     source "$TRAVIS_BUILD_DIR"/server/travis.config.sh
-    sudo chmod -R 777 /tmp/test_results
+    chmod -R 777 /tmp/test_results
 
     echo "One of the containers exited with $code"
     VID_COUNT=$(find "$VIDEO_DIR" -type f -name '*mp4'  -printf '.' | wc -c)
     echo "Detected $VID_COUNT videos"
     if [[ $VID_COUNT -eq 0 ]]; then
       echo "No videos, skipping upload"
-      continue
+      exit "$code"
     fi
     cd /tmp
     ! rm gdrive-linux-x64.zip
@@ -58,10 +58,6 @@ docker-compose --file=docker-compose.yml ps -q server.local | xargs docker inspe
       cp /tmp/test_results/failed_tests /tmp/test_results/failed_tests.tmp
       while IFS= read -r FAILED_SPEC
       do
-        if [ -z "$FAILED_SPEC" ]; then
-          continue
-        fi
-
         if [[ $VIDEO_FILE == *"$FAILED_SPEC"* ]]; then
           UPLOAD=1
           # Uploading one video per failed spec. Assuming that it failed
@@ -100,4 +96,5 @@ docker-compose --file=docker-compose.yml ps -q server.local | xargs docker inspe
     exit "$code"
   fi
 done
+
 exit 0
