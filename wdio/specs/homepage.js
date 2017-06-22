@@ -119,23 +119,23 @@ describe('Municipality homepage', () => {
     assert(target == '_blank');
   });
 
-  it('should show QAs only for the chosen user type "residents" and the hebrew language', () => {
+  it('should show FAQs only for the chosen user type "residents" and the hebrew language', () => {
     browser.url('/municipality-1/node/1?user_type=residents&language=he');
     browser.waitForVisible('label=כמה סייעות יש בגן ילדים?');
     browser.waitForVisible('label=באילו שעות מפנים את הזבל?');
   });
 
-  it('should not show QAs for "businesses" when "residents" are the chosen user type ', () => {
+  it('should not show FAQs for "businesses" when "residents" are the chosen user type ', () => {
     assert(!browser.isVisible('label= האם גני ילדים זכאים לפטור מארנונה?'));
   });
 
-  it('should show QAs only for the chosen user type "businesses" and the hebrew language', () => {
+  it('should show FAQs only for the chosen user type "businesses" and the hebrew language', () => {
     browser.url('/municipality-1/node/1?user_type=businesses&language=he');
     browser.waitForVisible('label=האם גני ילדים זכאים לפטור מארנונה?');
     browser.waitForVisible('label=באילו שעות מפנים את הזבל?');
   });
 
-  it('should not show QAs for "residents" when "businesses" are the chosen user type', () => {
+  it('should not show FAQs for "residents" when "businesses" are the chosen user type', () => {
     assert(!browser.isVisible('label=כמה סייעות יש בגן ילדים?'));
   });
 
