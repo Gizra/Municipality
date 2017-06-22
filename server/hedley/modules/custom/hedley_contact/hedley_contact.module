@@ -137,7 +137,7 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
   $range = $show_as_block ? 5 : 100;
 
   // Get contact nodes by group.
-  $nodes = hedley_municipality_get_nodes('contact', $range, $group, FALSE, 0, 'ASC');
+  $nodes = hedley_municipality_get_nodes_by_current_user_type('contact', $range, $group, FALSE, 0, 'ASC');
   if (!$nodes) {
     // No contacts found.
     return NULL;

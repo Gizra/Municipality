@@ -33,7 +33,7 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
     return NULL;
   }
 
-  $nodes = hedley_municipality_get_nodes_by_user_type('faq', 10, $municipality_node, $conf['promoted_only'], $topic_tid);
+  $nodes = hedley_municipality_get_nodes_by_current_user_type('faq', 10, $municipality_node, $conf['promoted_only'], $topic_tid);
   if (!$nodes) {
     return NULL;
   }

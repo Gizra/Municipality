@@ -33,7 +33,7 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
   $wrapper = entity_metadata_wrapper('node', $municipality_node);
 
   // Get promoted FAQ nodes of the viewed municipality.
-  if (!$nodes = hedley_municipality_get_nodes_by_user_type($conf['bundle'], 10, $municipality_node, TRUE)) {
+  if (!$nodes = hedley_municipality_get_nodes_by_current_user_type($conf['bundle'], 10, $municipality_node, TRUE)) {
     return NULL;
   }
 
