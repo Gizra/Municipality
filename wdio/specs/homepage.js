@@ -143,12 +143,8 @@ describe('Municipality homepage', () => {
     const news = $('#block-system-main .news-box > div > div > div:nth-child(2) > div:nth-child(1) > div > h3 > a');
     assert.equal('מבצע סגירת חובות ארנונה לתושבים', news.getText());
     news.click();
-    browser.waitForVisible('.user-types');
-    const userType = browser.getText('.btn-group.user-types .btn.btn-default.active');
-    assert.equal('תושבים', userType);
-    browser.waitForVisible('.languages');
-    const languague = browser.getText('.btn-group.languages .btn.btn-default.active');
-    assert.equal('עברית', languague);
+    browser.checkselectedcheckSelectedUserType('תושבים');
+    browser.checkSelectedLanguage('עברית');
     browser.waitForVisible('h3=מבצע סגירת חובות ארנונה לתושבים');
   });
 
@@ -157,12 +153,8 @@ describe('Municipality homepage', () => {
     const news = $('#block-system-main .news-box > div > div > div:nth-child(2) > div:nth-child(1) > div > h3 > a');
     assert.equal('מבצע סגירת חובות ארנונה לעסקים', news.getText());
     news.click();
-    browser.waitForVisible('.user-types');
-    const userType = browser.getText('.btn-group.user-types .btn.btn-default.active');
-    assert.equal('עסקים', userType);
-    browser.waitForVisible('.languages');
-    const languague = browser.getText('.btn-group.languages .btn.btn-default.active');
-    assert.equal('עברית', languague);
+    browser.checkselectedcheckSelectedUserType('עסקים');
+    browser.checkSelectedLanguage('עברית');
     browser.waitForVisible('h3=מבצע סגירת חובות ארנונה לעסקים');
   });
 
@@ -171,12 +163,8 @@ describe('Municipality homepage', () => {
     const news = $('#block-system-main .news-box > div > div > div:nth-child(2) > div:nth-child(1) > div > h3 > a');
     assert.equal('عملية إغلاق ديون ضريبة الأملاك للسكان', news.getText());
     news.click();
-    browser.waitForVisible('.user-types');
-    const userType = browser.getText('.btn-group.user-types .btn.btn-default.active');
-    assert.equal('Residents AR', userType);
-    browser.waitForVisible('.languages');
-    const languague = browser.getText('.btn-group.languages .btn.btn-default.active');
-    assert.equal('العربية', languague);
+    browser.checkselectedcheckSelectedUserType('Residents AR');
+    browser.checkSelectedLanguage('العربية');
     browser.waitForVisible('h3=عملية إغلاق ديون ضريبة الأملاك للسكان');
   });
 
@@ -185,12 +173,8 @@ describe('Municipality homepage', () => {
     const news = $('#block-system-main .news-box > div > div > div:nth-child(2) > div:nth-child(1) > div > h3 > a');
     assert.equal('عملية الإنتهاء الديون الضريبية الممتلكات التجارية', news.getText());
     news.click();
-    browser.waitForVisible('.user-types');
-    const userType = browser.getText('.btn-group.user-types .btn.btn-default.active');
-    assert.equal('Businesses AR', userType);
-    browser.waitForVisible('.languages');
-    const languague = browser.getText('.btn-group.languages .btn.btn-default.active');
-    assert.equal('العربية', languague);
+    browser.checkselectedcheckSelectedUserType('Businesses AR');
+    browser.checkSelectedLanguage('العربية');
     browser.waitForVisible('h3=عملية الإنتهاء الديون الضريبية الممتلكات التجارية');
   });
 });
