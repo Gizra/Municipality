@@ -116,7 +116,7 @@ function hedley_i18n_url_outbound_alter(&$path, &$options, $original_path) {
     return;
   }
 
-  if (strpos($path, 'autocomplete') || strpos($original_path, 'autocomplete') || strpos($path, 'ctools/context/ajax') === 0) {
+  if (strpos($path, 'autocomplete') || strpos($original_path, 'autocomplete') || strpos($path, 'ajax') || strpos($_GET['q'], 'ajax')) {
     // Ignore when building AJAX URLs.
     return;
   }
