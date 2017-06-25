@@ -51,7 +51,7 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
 
     $faqs[] = [
       'question' => $wrapper->field_question->value(),
-      'answer' => $wrapper->field_answer->value->value(),
+      'answer' => !empty($wrapper->field_answer->value()) ? $wrapper->field_answer->value->value() : '',
     ];
   }
 
