@@ -88,10 +88,16 @@ describe('Municipality homepage', () => {
     assert(!browser.isVisible('a=לרשום חתונה'));
   });
 
-  it('should show the action page for action with content in the body field', () => {
+  it('should show the internal action page when clicking on the action link in the same tab', () => {
     browser.url('/municipality-1/node/1?language=he');
     browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
     browser.waitForVisible('h2=לקבל אישור תושב');
+  });
+
+  it('should open an external "action" link in a new tab', () => {
+    browser.url('/municipality-1/node/1?language=he');
+    const target = browser.getAttribute('.item.action.homepage-teaser:nth-child(4) .content .header a', 'target');
+    assert(target == '_blank');
   });
 
   it('should show only news for the selected user type "residents" on hebrew language', () => {
@@ -110,12 +116,6 @@ describe('Municipality homepage', () => {
 
   it('should not show "residents" news on "businesses" homepage', () => {
     assert(!browser.isVisible('a=מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17'));
-  });
-
-  it('should open an external "action" link in a new tab', () => {
-    browser.url('/municipality-1/node/1?language=he');
-    const target = browser.getAttribute('.item.action.homepage-teaser:nth-child(4) .content .header a', 'target');
-    assert(target == '_blank');
   });
 
   it('should show FAQs only for the chosen user type "residents" and the hebrew language', () => {
