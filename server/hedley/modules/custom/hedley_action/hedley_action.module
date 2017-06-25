@@ -81,3 +81,26 @@ function hedley_action_get_action_title_link($wrapper, array $class = []) {
     ],
   ]);
 }
+
+/**
+ * A helper function to keep the icons classes of the 'action section icon'.
+ *
+ * @param $key
+ *   The key of the icon.
+ *
+ * @return mixed|null
+ *   The 'Font Awesome' class of the provided key.
+ */
+function _hedley_action_get_section_icon_class($key) {
+  $classes = [
+    'add_to_calendar' => 'calendar',
+    'alarm' => 'bell',
+    'check' => 'check-square-o',
+    'find' => 'search',
+    'handshake' => 'handshake-o',
+    'mail' => 'envelope-o',
+    'phone' => 'mobile',
+  ];
+
+  return isset($classes[$key]) ? $classes[$key] : NULL;
+}
