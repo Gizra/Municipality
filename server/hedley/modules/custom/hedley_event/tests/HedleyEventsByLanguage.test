@@ -44,10 +44,9 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
     ];
     $municipality = $this->drupalCreateNode($municipality_settings);
 
-
     // Create a User type.
     $user_types_vocabulary = taxonomy_vocabulary_machine_name_load('user_types');
-    $user_type = $this->createTerm($user_types_vocabulary,'residents', $he_language_code);
+    $user_type = $this->createTerm($user_types_vocabulary, 'residents', $he_language_code);
 
     // Create a event group content.
     $event_settings = [
