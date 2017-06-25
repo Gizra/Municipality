@@ -3,7 +3,7 @@ const assert = require('assert');
 describe('Municipality homepage', () => {
   before(() => {
     browser.url('/municipality-1/node/1?language=he');
-  })
+  });
 
   it('should show the correct name of the municipality', () => {
     browser.waitForVisible('header#header .header-container #site-name > h1');
@@ -88,11 +88,18 @@ describe('Municipality homepage', () => {
     assert(!browser.isVisible('a=לרשום חתונה'));
   });
 
-  it('should show the internal action page when clicking on the action link in the same tab', () => {
+  it('should show the internal action page when clicking on the action link in the same tab, in hebrew', () => {
     browser.url('/municipality-1/node/1?language=he');
     browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
     browser.waitForVisible('h2=לקבל אישור תושב');
   });
+
+  it('should show the internal action page when clicking on the action link in the same tab, in arabic', () => {
+    browser.url('/municipality-1/node/1?language=ar');
+    browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
+    browser.waitForVisible('h2=الحصول على الإقامة');
+  });
+
 
   it('should open an external "action" link in a new tab', () => {
     browser.url('/municipality-1/node/1?language=he');
