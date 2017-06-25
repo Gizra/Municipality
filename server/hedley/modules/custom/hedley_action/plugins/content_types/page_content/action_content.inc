@@ -39,7 +39,7 @@ function hedley_action_content_type_render($subtype, $conf, $args, $context) {
     $sections[] = [
       'title' => filter_xss($section->field_section_title->value()),
       'icon' => $section->field_section_icon->value(),
-      'description' => $section->field_section_description->value(),
+      'description' => $section->field_section_description->value() ? $section->field_section_description->value->value() : '',
     ];
   }
 
