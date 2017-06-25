@@ -307,6 +307,28 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
+   * @When I visit :name taxonomy of type :vocab_name
+   */
+  public function iVisitTaxonomyOfType($name, $vocab_name) {
+    $vocabulary = taxonomy_vocabulary_machine_name_load($vocab_name);
+    $term = $this->loadTaxonomyByTitleAndVocabulary($name, $vocabulary->vid);
+
+    $this->getSession()->visit($this->locatePath('taxonomy/term/' . $term->tid));
+  }
+
+  /**
+   * @When I visit :name taxonomy of the group :group_name
+   */
+  public function iVisitTaxonomyOfTypeInTheGroup($name, $group_name) {
+    $group = $this->loadGroupByTitleAndType($group_name, 'municipality');
+    $vocabulary = taxonomy_vocabulary_machine_name_load('topics_' . $group->nid);
+    $term = $this->loadTaxonomyByTitleAndVocabulary($name, $vocabulary->vid);
+
+    $uri = $this->createUriWithGroupContext($group, 'taxonomy/term/' . $term->tid);
+    $this->getSession()->visit($this->locatePath($uri));
+  }
+
+  /**
    * @Then I should see the home page in the default :language of the municipality and for :citizens user type
    */
   public function iShouldSeeTheHomePageInTheDefaultOfTheMunicipalityAndForCitizensUserType($language, $citizens) {
@@ -458,40 +480,38 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * Get the group based on the title and type.
+   * Get taxonomy term based on the name and vocabulary ID.
    *
-   * @param string $title
-   *   The group title.
-   * @param string $type
-   *   The group node type.
+   * @param string $name
+   *   The taxonomy name.
+   * @param string $vocab_id
+   *   The vocabulary ID.
    *
    * @return object
-   *   The group (if any) or NULL.
+   *   The term (if any) or NULL.
    * @throws \Exception
    */
-  protected function loadTaxonomyByTitleAndVocabulary($title, $type) {
+  protected function loadTaxonomyByTitleAndVocabulary($name, $vocab_id) {
     $query = new \entityFieldQuery();
     $result = $query
       ->entityCondition('entity_type', 'taxonomy_term')
-      ->entityCondition('bundle', $type)
-      ->propertyCondition('name', $title)
+      ->entityCondition('vid', $vocab_id)
+      ->propertyCondition('name', $name)
       ->range(0, 1)
       ->execute();
     if (empty($result['taxonomy_term'])) {
       $params = [
-        '@title' => $title,
-        '@type' => $type,
+        '@name' => $name,
       ];
-      throw new \Exception(format_string('Taxonomy term @title not found (type @type).', $params));
+      throw new \Exception(format_string('Taxonomy term @name not found.', $params));
     }
     $tid = (int) key($result['taxonomy_term']);
     $term = taxonomy_term_load($tid);
     if (!$term) {
       $params = [
-        '@title' => $title,
-        '@type' => $type,
+        '@name' => $name,
       ];
-      throw new \Exception(format_string('Taxonomy term @title not found (type @type).', $params));
+      throw new \Exception(format_string('Taxonomy term @name not found.', $params));
     }
     return $term;
   }
