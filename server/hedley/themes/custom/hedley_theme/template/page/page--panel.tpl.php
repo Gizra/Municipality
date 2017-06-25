@@ -6,26 +6,33 @@
 ?>
 
 <div class="body">
-    <?php include_once('includes/header/header.inc');?>
+  <?php include_once('includes/header/header.inc');?>
 
 	<div role="main" class="main">
-        <?php include_once('includes/breadcrumb.inc');?>
-	  
-	  <?php print render($page['before_content']); ?>
+    <?php include_once('includes/breadcrumb.inc');?>
+
+    <?php if (isset($background_image_url)): ?>
+      <div id="revolutionSlider" class="slider-container slider rev_slider revslider-initialised tp-simpleresponsive" data-plugin-revolution-slider="" data-plugin-options="{'delay': 9000, 'gridwidth': 1170, 'gridheight': 500, 'disableProgressBar': 'on'}" style="margin-top: -35px;">
+        <div class="tp-bgimg defaultimg" style="background-repeat: no-repeat; background-image: url(<?php print $background_image_url; ?>); background-size: cover; background-position: center center; width: 100%; height: 100%; opacity: 1; visibility: inherit; z-index: 20;" src="<?php print $background_image_url; ?>"></div>
+      </div>
+      <div class="divider"></div>
+    <?php endif; ?>
+
+    <?php print render($page['before_content']); ?>
 	  <div id="content" class="content full">
       <div class="container">
         <div class="row">
-          <?php if ($user_type_links): ?>
-            <div class="col-md-3">
-              <?php print $user_type_links; ?>
+            <div class="col-md-3 col-xs-12 mb-xs center">
+              <?php if ($user_type_links): ?>
+                <?php print $user_type_links; ?>
+              <?php endif; ?>
             </div>
-          <?php endif; ?>
 
-          <div class="col-md-6">
+          <div class="col-md-6 col-xs-12 mb-xs center">
             <?php print render($social_links); ?>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-3 col-xs-12 mb-xs center">
             <?php if ($language_switch_links) : ?>
               <div class="languages btn-group" role="group">
                 <?php foreach ($language_switch_links as $link): ?>

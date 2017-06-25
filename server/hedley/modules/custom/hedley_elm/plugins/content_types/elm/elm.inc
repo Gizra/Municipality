@@ -68,7 +68,11 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   drupal_add_js($settings, 'setting');
 
   // Inject the unique ID.
-  $block->content = '<div id="' . $app_id . '"></div>';
+  $block->content = theme('hedley_elm_elm', [
+    'show_as_block' => $show_as_block,
+    'title' => t('Upcoming events'),
+    'app_id' => $app_id,
+  ]);
 
   return $block;
 }
@@ -106,4 +110,19 @@ function hedley_elm_elm_content_type_edit_form_submit($form, &$form_state) {
   foreach (array_keys($form_state['plugin']['defaults']) as $key) {
     $form_state['conf'][$key] = $form_state['values'][$key];
   }
+}
+
+/**
+ * Delegated hook_theme().
+ */
+function hedley_elm_elm_content_type_theme(&$theme, $plugin) {
+  $theme['hedley_elm_elm'] = [
+    'variables' => [
+      'show_as_block' => NULL,
+      'title' => NULL,
+      'app_id' => NULL,
+    ],
+    'path' => $plugin['path'],
+    'template' => 'elm',
+  ];
 }

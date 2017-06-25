@@ -46,12 +46,14 @@ function hedley_action_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'stackable';
+  $display->layout = 'one-row-one-column';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'main' => NULL,
+      'middle' => NULL,
+      'main_content' => NULL,
     ),
   );
   $display->cache = array();
@@ -62,8 +64,8 @@ function hedley_action_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
-  $pane->pid = 'new-06005128-74cd-4f00-9c55-da9c69d6db21';
-  $pane->panel = 'main';
+  $pane->pid = 'new-a1ea9a38-9fde-40f6-af05-bcee6e34b746';
+  $pane->panel = 'main_content';
   $pane->type = 'action_content';
   $pane->subtype = 'action_content';
   $pane->shown = TRUE;
@@ -77,11 +79,11 @@ function hedley_action_default_page_manager_handlers() {
   $pane->extras = array();
   $pane->position = 0;
   $pane->locks = array();
-  $pane->uuid = '06005128-74cd-4f00-9c55-da9c69d6db21';
-  $display->content['new-06005128-74cd-4f00-9c55-da9c69d6db21'] = $pane;
-  $display->panels['main'][0] = 'new-06005128-74cd-4f00-9c55-da9c69d6db21';
+  $pane->uuid = 'a1ea9a38-9fde-40f6-af05-bcee6e34b746';
+  $display->content['new-a1ea9a38-9fde-40f6-af05-bcee6e34b746'] = $pane;
+  $display->panels['main_content'][0] = 'new-a1ea9a38-9fde-40f6-af05-bcee6e34b746';
   $display->hide_title = PANELS_TITLE_NONE;
-  $display->title_pane = 'new-06005128-74cd-4f00-9c55-da9c69d6db21';
+  $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $export['node_view__panel_context_3278800b-39a0-4034-918d-7109e7fff6da'] = $handler;
 

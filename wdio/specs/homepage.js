@@ -18,10 +18,10 @@ describe('Municipality homepage', () => {
   });
 
   it('should show the event\'s "show all" button', () => {
-    browser.waitForVisible('div#elm-events-block a.btn-show-all');
+    browser.waitForVisible('div#elm-app a.btn-show-all');
 
     // Assert the page have the expected title.
-    const showAllLink = browser.getText('div#elm-events-block a.btn-show-all');
+    const showAllLink = browser.getText('div#elm-app a.btn-show-all');
     assert.equal('הצג הכל', showAllLink);
   });
 
@@ -118,24 +118,24 @@ describe('Municipality homepage', () => {
     assert(target == '_blank');
   });
 
-  it('should show QAs only for the chosen user type "residents" and the hebrew language', () => {
+  it('should show FAQs only for the chosen user type "residents" and the hebrew language', () => {
     browser.url('/municipality-1/node/1?user_type=residents&language=he');
-    browser.waitForVisible('div=כמה סייעות יש בגן ילדים?');
-    browser.waitForVisible('div=באילו שעות מפנים את הזבל?');
+    browser.waitForVisible('label=כמה סייעות יש בגן ילדים?');
+    browser.waitForVisible('label=באילו שעות מפנים את הזבל?');
   });
 
-  it('should not show QAs for "businesses" when "residents" are the chosen user type ', () => {
-    assert(!browser.isVisible('div= האם גני ילדים זכאים לפטור מארנונה?'));
+  it('should not show FAQs for "businesses" when "residents" are the chosen user type ', () => {
+    assert(!browser.isVisible('label= האם גני ילדים זכאים לפטור מארנונה?'));
   });
 
-  it('should show QAs only for the chosen user type "businesses" and the hebrew language', () => {
+  it('should show FAQs only for the chosen user type "businesses" and the hebrew language', () => {
     browser.url('/municipality-1/node/1?user_type=businesses&language=he');
-    browser.waitForVisible('div=האם גני ילדים זכאים לפטור מארנונה?');
-    browser.waitForVisible('div=באילו שעות מפנים את הזבל?');
+    browser.waitForVisible('label=האם גני ילדים זכאים לפטור מארנונה?');
+    browser.waitForVisible('label=באילו שעות מפנים את הזבל?');
   });
 
-  it('should not show QAs for "residents" when "businesses" are the chosen user type', () => {
-    assert(!browser.isVisible('div=כמה סייעות יש בגן ילדים?'));
+  it('should not show FAQs for "residents" when "businesses" are the chosen user type', () => {
+    assert(!browser.isVisible('label=כמה סייעות יש בגן ילדים?'));
   });
 
 });

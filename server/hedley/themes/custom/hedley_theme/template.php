@@ -6,23 +6,6 @@
  */
 
 /**
- * Preprocess HTML.
- */
-function hedley_theme_preprocess_html(&$variables) {
-  // Add municipality variables.
-  if (!$node = hedley_municipality_get_current_group()) {
-    return;
-  }
-  $wrapper = entity_metadata_wrapper('node', $node);
-
-  // Get first background image.
-  if ($wrapper->field_background_images->value()) {
-    $background_image = $wrapper->field_background_images->get(0)->value();
-    $variables['background_image_url'] = file_create_url($background_image['uri']);
-  }
-}
-
-/**
  * Preprocess node.
  *
  * Add a theme suggestion including the bundle and view mode.
@@ -63,6 +46,12 @@ function hedley_theme_preprocess_page(&$variables) {
     return;
   }
   $wrapper = entity_metadata_wrapper('node', $node);
+
+  // Get first background image.
+  if ($wrapper->field_background_images->value()) {
+    $background_image = $wrapper->field_background_images->get(0)->value();
+    $variables['background_image_url'] = file_create_url($background_image['uri']);
+  }
 
   // Override the site name with the municipality's name.
   $variables['site_name'] = $wrapper->label();

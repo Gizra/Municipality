@@ -14,11 +14,10 @@ import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
 view : String -> Language -> Bool -> Model -> Html Msg
 view baseUrl language showAsBlock model =
-    div
-        []
+    div []
         [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
-        , div [ class "ui container center aligned" ] [ viewEvents baseUrl language showAsBlock model ]
+        , div [] [ viewEvents baseUrl language showAsBlock model ]
         , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl ++ "/events") ] [ text <| translate language ShowAll ]
         ]
 
@@ -155,9 +154,9 @@ viewEvent baseUrl language ( eventId, event ) =
 -}
 viewEventAsBlock : String -> Language -> ( EventId, Event ) -> Html msg
 viewEventAsBlock baseUrl language ( eventId, event ) =
-    div [ class "col-md-4" ]
+    div [ class "col-md-5" ]
         [ a
-            [ class "card", target "_blank", href (baseUrl ++ "/node/" ++ eventId) ]
+            [ class "thumbnail", target "_blank", href (baseUrl ++ "/node/" ++ eventId) ]
             [ showMaybe <|
                 Maybe.map
                     (\imageUrl ->
@@ -168,19 +167,16 @@ viewEventAsBlock baseUrl language ( eventId, event ) =
                     )
                     event.imageUrl
             , div
-                [ class "card-block" ]
-                [ div
+                [ class "caption" ]
+                [ h4
                     [ class "card-title" ]
                     [ text event.name ]
-                ]
-            , div
-                [ class "card-text" ]
-                [ div
-                    [ class "ui four wide column event-date" ]
+                , div
+                    []
                     [ span
                         []
                         [ i
-                            [ class "calendar icon" ]
+                            [ class "fa fa-calendar" ]
                             []
                         , text <| translate language (DayAndDate event.date event.endDate)
                         ]
@@ -188,7 +184,7 @@ viewEventAsBlock baseUrl language ( eventId, event ) =
                         span
                             [ class "recurring-weekly" ]
                             [ i
-                                [ class "refresh icon" ]
+                                [ class "fa fa-refresh" ]
                                 []
                             , text <| translate language EventRecurringWeekly
                             ]

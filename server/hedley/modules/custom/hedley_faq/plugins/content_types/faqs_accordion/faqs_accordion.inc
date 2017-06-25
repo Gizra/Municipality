@@ -57,7 +57,7 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
 
   $block = new stdClass();
   $block->module = 'hedley_faq';
-  $block->title = t('Frequently asked questions');
+  $block->title = '';
   $block->content = theme('hedley_faq_faqs_accordion', ['faqs' => $faqs]);
 
   return $block;

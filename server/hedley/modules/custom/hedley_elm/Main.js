@@ -12733,7 +12733,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('col-md-4'),
+				_0: _elm_lang$html$Html_Attributes$class('col-md-5'),
 				_1: {ctor: '[]'}
 			},
 			{
@@ -12742,7 +12742,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 					_elm_lang$html$Html$a,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('card'),
+						_0: _elm_lang$html$Html_Attributes$class('thumbnail'),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$target('_blank'),
@@ -12790,13 +12790,13 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('card-block'),
+									_0: _elm_lang$html$Html_Attributes$class('caption'),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
 									_0: A2(
-										_elm_lang$html$Html$div,
+										_elm_lang$html$Html$h4,
 										{
 											ctor: '::',
 											_0: _elm_lang$html$Html_Attributes$class('card-title'),
@@ -12807,26 +12807,11 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 											_0: _elm_lang$html$Html$text(_p2.name),
 											_1: {ctor: '[]'}
 										}),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('card-text'),
-										_1: {ctor: '[]'}
-									},
-									{
+									_1: {
 										ctor: '::',
 										_0: A2(
 											_elm_lang$html$Html$div,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('ui four wide column event-date'),
-												_1: {ctor: '[]'}
-											},
+											{ctor: '[]'},
 											{
 												ctor: '::',
 												_0: A2(
@@ -12838,7 +12823,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 															_elm_lang$html$Html$i,
 															{
 																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$class('calendar icon'),
+																_0: _elm_lang$html$Html_Attributes$class('fa fa-calendar'),
 																_1: {ctor: '[]'}
 															},
 															{ctor: '[]'}),
@@ -12870,7 +12855,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 																	_elm_lang$html$Html$i,
 																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$class('refresh icon'),
+																		_0: _elm_lang$html$Html_Attributes$class('fa fa-refresh'),
 																		_1: {ctor: '[]'}
 																	},
 																	{ctor: '[]'}),
@@ -12885,9 +12870,9 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 												}
 											}),
 										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
+									}
+								}),
+							_1: {ctor: '[]'}
 						}
 					}),
 				_1: {ctor: '[]'}
@@ -13316,11 +13301,7 @@ var _gizra$municipality$Event_View$view = F4(
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('ui container center aligned'),
-								_1: {ctor: '[]'}
-							},
+							{ctor: '[]'},
 							{
 								ctor: '::',
 								_0: A4(_gizra$municipality$Event_View$viewEvents, baseUrl, language, showAsBlock, model),
