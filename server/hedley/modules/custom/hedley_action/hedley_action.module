@@ -85,7 +85,7 @@ function hedley_action_get_action_title_link($wrapper, array $class = []) {
 /**
  * A helper function to keep the icons classes of the 'action section icon'.
  *
- * @param $key
+ * @param string $key
  *   The key of the icon.
  *
  * @return mixed|null
