@@ -22,6 +22,7 @@ describe('Municipality homepage', () => {
     assert.equal(item, newsItem.getText());
     assert((item == newsItem.getText()), `News item ${item} was not found in the page`);
     newsItem.click();
+    browser.waitForVisible('h3=' + item);
   };
 
   it('should show the correct name of the municipality', () => {
@@ -151,7 +152,6 @@ describe('Municipality homepage', () => {
     clickOnNewsItem('מבצע סגירת חובות ארנונה לתושבים');
     checkSelectedUserType('תושבים');
     checkSelectedLanguage('עברית');
-    browser.waitForVisible('h3=מבצע סגירת חובות ארנונה לתושבים');
   });
 
   it('should open a news element in the same tab, with the hebrew language and businesses user type', () => {
@@ -159,7 +159,6 @@ describe('Municipality homepage', () => {
     clickOnNewsItem('מבצע סגירת חובות ארנונה לעסקים');
     checkSelectedUserType('עסקים');
     checkSelectedLanguage('עברית');
-    browser.waitForVisible('h3=מבצע סגירת חובות ארנונה לעסקים');
   });
 
   it('should open a news element in the same tab, with the arabic language and residents user type', () => {
@@ -167,7 +166,6 @@ describe('Municipality homepage', () => {
     clickOnNewsItem('عملية إغلاق ديون ضريبة الأملاك للسكان');
     checkSelectedUserType('Residents AR');
     checkSelectedLanguage('العربية');
-    browser.waitForVisible('h3=عملية إغلاق ديون ضريبة الأملاك للسكان');
   });
 
   it('should open a news element in the same tab, with the arabic language and businesses user type', () => {
@@ -175,6 +173,5 @@ describe('Municipality homepage', () => {
     clickOnNewsItem('عملية الإنتهاء الديون الضريبية الممتلكات التجارية');
     checkSelectedUserType('Businesses AR');
     checkSelectedLanguage('العربية');
-    browser.waitForVisible('h3=عملية الإنتهاء الديون الضريبية الممتلكات التجارية');
   });
 });
