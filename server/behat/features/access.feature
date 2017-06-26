@@ -34,11 +34,13 @@ Feature: Verify that content is accessible.
     When  I edit "طوبا الزنغرية" node of type "municipality"
     Then  I should get a "200" HTTP response
 
+
   @api
   Scenario: Verify that authenticated user can't access their group edit.
     Given I login with user "itamar"
     When  I edit "المجلس الإقليمي للالسحرية" node of type "municipality"
     Then  I should get a "403" HTTP response
+
 
   @api
   Scenario: Verify that content editor can access their group content edit.
@@ -46,11 +48,13 @@ Feature: Verify that content is accessible.
     When  I edit "לפנות למוקד" node of type "action"
     Then  I should get a "200" HTTP response
 
+
   @api
   Scenario: Verify that authenticated user can't access their group content edit.
     Given I login with user "itamar"
     When  I edit "באילו שעות מפנים את הזבל?" node of type "faq"
     Then  I should get a "403" HTTP response
+
 
   @api
   Scenario: Verify that content editor can't access another group edit.
@@ -58,6 +62,7 @@ Feature: Verify that content is accessible.
     When  I edit "קריית מלאכי" node of type "municipality"
     Then  I should get a "403" HTTP response
 
+    
   @api
   Scenario: Verify that content editor can't access another group content edit.
     Given I login with user "liat"
