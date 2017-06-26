@@ -5,6 +5,25 @@ describe('Municipality homepage', () => {
     browser.url('/municipality-1/node/1?language=he');
   })
 
+  const checkSelectedLanguage = (language) => {
+    browser.waitForVisible('.btn-group.languages');
+    const activeLanguage= browser.getText('.btn-group.languages .btn.btn-default.active');
+    assert((language == activeLanguage), `Expected page language is ${language}, but instead it's ${activeLanguage}`);
+  };
+
+  const checkSelectedUserType = (userType) => {
+    browser.waitForVisible('.btn-group.user-types');
+    const user = browser.getText('.btn-group.user-types .btn.btn-default.active');
+    assert((user == userType), `Expected user type in the page is ${userType}, but instead it's ${user}`);
+  };
+
+  const clickOnNewsItem = (item) => {
+    const newsItem = $('#block-system-main .news-box > div > div > div:nth-child(2) > div:nth-child(1) > div > h3 > a');
+    assert.equal(item, newsItem.getText());
+    assert((item == newsItem.getText()), `News item ${item} was not found in the page`);
+    newsItem.click();
+  };
+
   it('should show the correct name of the municipality', () => {
     browser.waitForVisible('header#header .header-container #site-name > h1');
 
@@ -46,25 +65,14 @@ describe('Municipality homepage', () => {
 
   it('Should show "english" language and "residents" chosen in the language and user type menus', () => {
     browser.url('/municipality-1/node/1?language=en&user_type=residents');
-    browser.waitForVisible('.btn-group.user-types');
-    browser.waitForVisible('.btn-group.languages');
-    const userType = browser.getText('.btn-group.user-types .btn.btn-default.active');
-    assert.equal('Residents', userType);
-
-    const languague = browser.getText('.btn-group.languages .btn.btn-default.active');
-    assert.equal('English', languague);
+    checkSelectedLanguage('English');
+    checkSelectedUserType('Residents');
   });
 
   it('should show "hebrew" language and "residents" chosen in the language and user type menus', () => {
     browser.url('/municipality-1/node/1?language=he&user_type=residents');
-    browser.waitForVisible('.btn-group.user-types');
-    browser.waitForVisible('.btn-group.languages');
-
-    const userType = browser.getText('.btn-group.user-types .btn.btn-default.active');
-    assert.equal('תושבים', userType);
-
-    const languague = browser.getText('.btn-group.languages .btn.btn-default.active');
-    assert.equal('עברית', languague);
+    checkSelectedLanguage('עברית');
+    checkSelectedUserType('תושבים');
   });
 
   it('should show the "Do now" elements which fits the current user type and the hebrew language', () => {
@@ -140,41 +148,33 @@ describe('Municipality homepage', () => {
 
   it('should open a news element in the same tab, with the hebrew language and residents user type', () => {
     browser.url('/municipality-1/node/1?user_type=residents&language=he');
-    const news = $('#block-system-main .news-box > div > div > div:nth-child(2) > div:nth-child(1) > div > h3 > a');
-    assert.equal('מבצע סגירת חובות ארנונה לתושבים', news.getText());
-    news.click();
-    browser.checkselectedcheckSelectedUserType('תושבים');
-    browser.checkSelectedLanguage('עברית');
+    clickOnNewsItem('מבצע סגירת חובות ארנונה לתושבים');
+    checkSelectedUserType('תושבים');
+    checkSelectedLanguage('עברית');
     browser.waitForVisible('h3=מבצע סגירת חובות ארנונה לתושבים');
   });
 
   it('should open a news element in the same tab, with the hebrew language and businesses user type', () => {
     browser.url('/municipality-1/node/1?user_type=businesses&language=he');
-    const news = $('#block-system-main .news-box > div > div > div:nth-child(2) > div:nth-child(1) > div > h3 > a');
-    assert.equal('מבצע סגירת חובות ארנונה לעסקים', news.getText());
-    news.click();
-    browser.checkselectedcheckSelectedUserType('עסקים');
-    browser.checkSelectedLanguage('עברית');
+    clickOnNewsItem('מבצע סגירת חובות ארנונה לעסקים');
+    checkSelectedUserType('עסקים');
+    checkSelectedLanguage('עברית');
     browser.waitForVisible('h3=מבצע סגירת חובות ארנונה לעסקים');
   });
 
   it('should open a news element in the same tab, with the arabic language and residents user type', () => {
     browser.url('/municipality-1/node/1?user_type=residents&language=ar');
-    const news = $('#block-system-main .news-box > div > div > div:nth-child(2) > div:nth-child(1) > div > h3 > a');
-    assert.equal('عملية إغلاق ديون ضريبة الأملاك للسكان', news.getText());
-    news.click();
-    browser.checkselectedcheckSelectedUserType('Residents AR');
-    browser.checkSelectedLanguage('العربية');
+    clickOnNewsItem('عملية إغلاق ديون ضريبة الأملاك للسكان');
+    checkSelectedUserType('Residents AR');
+    checkSelectedLanguage('العربية');
     browser.waitForVisible('h3=عملية إغلاق ديون ضريبة الأملاك للسكان');
   });
 
   it('should open a news element in the same tab, with the arabic language and businesses user type', () => {
     browser.url('/municipality-1/node/1?user_type=businesses&language=ar');
-    const news = $('#block-system-main .news-box > div > div > div:nth-child(2) > div:nth-child(1) > div > h3 > a');
-    assert.equal('عملية الإنتهاء الديون الضريبية الممتلكات التجارية', news.getText());
-    news.click();
-    browser.checkselectedcheckSelectedUserType('Businesses AR');
-    browser.checkSelectedLanguage('العربية');
+    clickOnNewsItem('عملية الإنتهاء الديون الضريبية الممتلكات التجارية');
+    checkSelectedUserType('Businesses AR');
+    checkSelectedLanguage('العربية');
     browser.waitForVisible('h3=عملية الإنتهاء الديون الضريبية الممتلكات التجارية');
   });
 });

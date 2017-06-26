@@ -71,18 +71,6 @@ module.exports = function (browser, capabilities, specs) {
     }
   });
 
-  browser.addCommand('checkSelectedLanguage', (language) => {
-    browser.waitForVisible('.languages');
-    const activeLanguage= browser.getText('.btn-group.languages .btn.btn-default.active');
-    assert.equal(language, activeLanguage);
-  });
-
-  browser.addCommand('checkSelectedUserType', (userType) => {
-    browser.waitForVisible('.user-types');
-    const user = browser.getText('.btn-group.user-types .btn.btn-default.active');
-    assert.equal(userType, user);
-  });
-
   // Set the window size to avoid clipping things off.
   browser.windowHandleSize({
     width: 1500,
