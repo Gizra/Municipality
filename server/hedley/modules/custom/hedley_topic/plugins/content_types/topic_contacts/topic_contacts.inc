@@ -29,7 +29,7 @@ function hedley_topic_topic_contacts_content_type_render($subtype, $conf, $args,
     return NULL;
   }
 
-  $nodes = hedley_municipality_get_nodes_by_user_type('contact', 10, $municipality_node, FALSE, $topic_wrapper->getIdentifier());
+  $nodes = hedley_municipality_get_nodes_by_current_user_type('contact', 10, $municipality_node, FALSE, $topic_wrapper->getIdentifier());
   if (!$nodes) {
     // No contacts found.
     return NULL;

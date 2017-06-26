@@ -2,7 +2,7 @@ var assert = require('assert');
 
 describe('Municipality events page', () => {
   before(() => {
-    browser.url('/municipality-4/events?language=he');
+    browser.url('/municipality-1/events?language=he');
   })
 
   it('should show all events for the current municipality', () => {

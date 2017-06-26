@@ -26,7 +26,7 @@ function hedley_event_get_events_by_group($group, $language_code, $show_as_block
   $range = $show_as_block ? 5 : 100;
 
   // Get contact nodes by group.
-  $nodes = hedley_municipality_get_nodes('event', $range, $group);
+  $nodes = hedley_municipality_get_nodes_by_current_user_type('event', $range, $group);
   if (!$nodes) {
     // No contacts found.
     return NULL;

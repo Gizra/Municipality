@@ -128,7 +128,7 @@ function hedley_municipality_get_nodes($bundle, $max_range = 50, $municipality_n
  * @param string $bundle
  *   The wanted nodes bundle.
  * @param int $max_range
- *   Maximal amount of nodes to fetch, defaults to 50.
+ *   Optional Maximal amount of nodes to fetch, defaults to 50.
  * @param object|null $municipality_node
  *   Optional "Municipality" node to filter by.
  * @param bool $promoted_only
@@ -142,7 +142,7 @@ function hedley_municipality_get_nodes($bundle, $max_range = 50, $municipality_n
  * @return array
  *   Node objects.
  */
-function hedley_municipality_get_nodes_by_user_type($bundle, $max_range = 50, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
+function hedley_municipality_get_nodes_by_current_user_type($bundle, $max_range = 50, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
   // Get the base node query for nodes.
   $query = hedley_municipality_get_nodes_base_query($bundle, $max_range);
 

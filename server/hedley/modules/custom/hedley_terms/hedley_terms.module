@@ -71,6 +71,8 @@ function _hedley_terms_user_type_links_path() {
   // current page and only change the user.
   $menu_item = menu_get_item();
   switch ($menu_item['path']) {
+    case 'contacts':
+    case 'events':
     case 'taxonomy/term/%':
       return current_path();
 

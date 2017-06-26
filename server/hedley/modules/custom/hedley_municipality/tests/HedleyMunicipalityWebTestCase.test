@@ -32,15 +32,17 @@ class HedleyMunicipalityWebTestCase extends DrupalWebTestCase {
    *
    * @param object $vocabulary
    *   The vocabulary that we want to create the term in.
+   * @param string $term_name
+   *   The term name.
    * @param string $language
-   *   The language in which we want to create the term.
+   *   Optional The language in which we want to create the term.
    *
    * @return \stdClass
    *   The created term.
    */
-  protected function createTerm($vocabulary, $language = LANGUAGE_NONE) {
+  protected function createTerm($vocabulary, $term_name, $language = LANGUAGE_NONE) {
     $term = new stdClass();
-    $term->name = $this->randomName();
+    $term->name = $term_name;
     $term->name_field = [
       LANGUAGE_NONE => [
         ['value' => $term->name],
