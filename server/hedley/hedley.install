@@ -154,7 +154,6 @@ function hedley_standard_install() {
 
   // Set editor permissions.
   $permissions[] = filter_permission_name($filtered_html_format);
-  $permissions[] = 'access administration menu';
   $permissions[] = 'access administration pages';
   $permissions[] = 'access content overview';
   $permissions[] = 'view own unpublished content';
