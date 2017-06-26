@@ -129,10 +129,15 @@ function hedley_terms_theme($existing, $type, $theme, $path) {
  * Implements hook_url_outbound_alter().
  */
 function hedley_terms_url_outbound_alter(&$path, &$options, $original_path) {
-  if ($options['external']) {
-    // Ignore external URLs.
+  if ($options['external'] || drupal_is_cli()) {
+    // Ignore external URLs, or when creating a link with cli.
     return;
   }
+  if (isset($options['query']) && empty($options['query'])) {
+    // Ignore a URL created specifically with an empty query.
+    return;
+  }
+
   // When a specific user was set on the query, but the url doesn't define a
   // a user, then add the user to the url.
   if (!empty($_GET['user_type']) && empty($options['query']['user_type'])) {
