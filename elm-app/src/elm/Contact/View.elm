@@ -7,44 +7,57 @@ import Date exposing (dayOfWeek)
 import Debug exposing (log)
 import DictList
 import Html exposing (..)
-import Html.Attributes exposing (alt, class, classList, href, placeholder, src, style, target, type_, value)
+import Html.Attributes exposing (alt, id, class, classList, href, placeholder, src, style, target, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (colorToString, divider, sectionDivider, showIf, showMaybe)
 
 
-view : Language -> Model -> Html Msg
-view language model =
+view : String -> Language -> Bool -> Model -> Html Msg
+view baseUrl language showAsBlock model =
     div
         []
-        [ viewContactFilter language model.filterString
-        , div [ class "ui horizontal divider" ]
-            [ text <| translate language MatchingResults ]
+        [ showIf (not showAsBlock) <| viewContactFilter language model.filterString
+        , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
         , div [ class "ui container center aligned" ]
-            [ viewContacts language model ]
-        , divider
+            [ viewContacts baseUrl language showAsBlock model ]
+        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl ++ "/contacts") ] [ text <| translate language ShowAll ]
         ]
 
 
 viewContactFilter : Language -> String -> Html Msg
 viewContactFilter language filterString =
-    div [ class "ui icon input" ]
-        [ input
-            [ value filterString
-            , type_ "search"
-            , placeholder <| translate language FilterContactsPlaceholder
-            , onInput SetFilter
+    div [ class "row" ]
+        [ div [ class "col-md-4 col-xs-12" ]
+            [ div [ class "input-group" ]
+                [ input
+                    [ value filterString
+                    , id "search-contacts"
+                    , class "form-control"
+                    , type_ "search"
+                    , placeholder <| translate language FilterContactsPlaceholder
+                    , onInput SetFilter
+                    ]
+                    []
+                , span
+                    [ class "input-group-btn" ]
+                    [ button
+                        [ class "btn btn-default" ]
+                        [ i
+                            [ class "fa fa-search" ]
+                            []
+                        ]
+                    ]
+                ]
             ]
-            []
-        , i [ class "search icon" ] []
         ]
 
 
 {-| View all contacts.
 -}
-viewContacts : Language -> Model -> Html msg
-viewContacts language { contacts, filterString } =
+viewContacts : String -> Language -> Bool -> Model -> Html msg
+viewContacts baseUrl language showAsBlock { contacts, filterString } =
     let
         filteredContacts =
             filterContacts contacts filterString
@@ -52,11 +65,14 @@ viewContacts language { contacts, filterString } =
         if DictList.isEmpty filteredContacts then
             div [] [ text <| translate language ContactsNotFound ]
         else
-            div [ class "ui link cards" ]
+            div [ class "row" ]
                 (filteredContacts
                     |> DictList.map
                         (\contactId contact ->
-                            viewContact language ( contactId, contact )
+                            if showAsBlock then
+                                viewContactAsBlock baseUrl language ( contactId, contact )
+                            else
+                                viewContact baseUrl language ( contactId, contact )
                         )
                     |> DictList.values
                 )
@@ -64,8 +80,8 @@ viewContacts language { contacts, filterString } =
 
 {-| View a single contact.
 -}
-viewContact : Language -> ( ContactId, Contact ) -> Html msg
-viewContact language ( contactId, contact ) =
+viewContact : String -> Language -> ( ContactId, Contact ) -> Html msg
+viewContact baseUrl language ( contactId, contact ) =
     div [ class "card" ]
         [ showMaybe <|
             Maybe.map
@@ -89,7 +105,7 @@ viewContact language ( contactId, contact ) =
                                 (List.map
                                     (\topic ->
                                         a
-                                            [ href ("taxonomy/term/" ++ topic.id)
+                                            [ href (baseUrl ++ "/taxonomy/term/" ++ topic.id)
                                             , class ("ui label " ++ colorToString topic.color)
                                             ]
                                             [ text topic.name ]
@@ -166,5 +182,31 @@ viewContact language ( contactId, contact ) =
                         contact.receptionTimes
                 ]
             , sectionDivider
+            ]
+        ]
+
+
+{-| View a single event that will appear in a block (i.e. with less information).
+-}
+viewContactAsBlock : String -> Language -> ( ContactId, Contact ) -> Html msg
+viewContactAsBlock baseUrl language ( contactId, contact ) =
+    div [ class "col-md-5" ]
+        [ a
+            [ class "thumbnail", href (baseUrl ++ "/node/" ++ contactId) ]
+            [ showMaybe <|
+                Maybe.map
+                    (\imageUrl ->
+                        div [ class "card-img-top" ]
+                            [ img [ src imageUrl ]
+                                []
+                            ]
+                    )
+                    contact.imageUrl
+            , div
+                [ class "caption" ]
+                [ h4
+                    [ class "card-title" ]
+                    [ text contact.name ]
+                ]
             ]
         ]

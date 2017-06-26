@@ -12183,10 +12183,96 @@ var _gizra$municipality$Utils_Html$showIf = F2(
 	});
 var _gizra$municipality$Utils_Html$showMaybe = _elm_lang$core$Maybe$withDefault(_gizra$municipality$Utils_Html$emptyNode);
 
-var _gizra$municipality$Contact_View$viewContact = F2(
-	function (language, _p0) {
+var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
+	function (baseUrl, language, _p0) {
 		var _p1 = _p0;
-		var _p4 = _p1._1;
+		var _p2 = _p1._1;
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('col-md-5'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$a,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('thumbnail'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$href(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									baseUrl,
+									A2(_elm_lang$core$Basics_ops['++'], '/node/', _p1._0))),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _gizra$municipality$Utils_Html$showMaybe(
+							A2(
+								_elm_lang$core$Maybe$map,
+								function (imageUrl) {
+									return A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('card-img-top'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$img,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$src(imageUrl),
+													_1: {ctor: '[]'}
+												},
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
+										});
+								},
+								_p2.imageUrl)),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('caption'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$h4,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('card-title'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(_p2.name),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _gizra$municipality$Contact_View$viewContact = F3(
+	function (baseUrl, language, _p3) {
+		var _p4 = _p3;
+		var _p7 = _p4._1;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -12220,7 +12306,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 									_1: {ctor: '[]'}
 								});
 						},
-						_p4.imageUrl)),
+						_p7.imageUrl)),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -12246,7 +12332,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 										{ctor: '[]'},
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html$text(_p4.name),
+											_0: _elm_lang$html$Html$text(_p7.name),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -12263,7 +12349,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 									{
 										ctor: '::',
 										_0: _gizra$municipality$Utils_Html$showMaybe(
-											A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p4.jobTitle)),
+											A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p7.jobTitle)),
 										_1: {
 											ctor: '::',
 											_0: _gizra$municipality$Utils_Html$divider,
@@ -12288,7 +12374,10 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																			{
 																				ctor: '::',
 																				_0: _elm_lang$html$Html_Attributes$href(
-																					A2(_elm_lang$core$Basics_ops['++'], 'taxonomy/term/', topic.id)),
+																					A2(
+																						_elm_lang$core$Basics_ops['++'],
+																						baseUrl,
+																						A2(_elm_lang$core$Basics_ops['++'], '/taxonomy/term/', topic.id))),
 																				_1: {
 																					ctor: '::',
 																					_0: _elm_lang$html$Html_Attributes$class(
@@ -12307,7 +12396,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																	},
 																	topics));
 														},
-														_p4.topics)),
+														_p7.topics)),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -12370,7 +12459,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																	}
 																});
 														},
-														_p4.email)),
+														_p7.email)),
 												_1: {
 													ctor: '::',
 													_0: _gizra$municipality$Utils_Html$showMaybe(
@@ -12413,7 +12502,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																		}
 																	});
 															},
-															_p4.phone)),
+															_p7.phone)),
 													_1: {
 														ctor: '::',
 														_0: _gizra$municipality$Utils_Html$showMaybe(
@@ -12451,7 +12540,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																			}
 																		});
 																},
-																_p4.fax)),
+																_p7.fax)),
 														_1: {
 															ctor: '::',
 															_0: A2(
@@ -12479,7 +12568,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																							_1: {ctor: '[]'}
 																						});
 																				},
-																				_p4.address)),
+																				_p7.address)),
 																		_1: {ctor: '[]'}
 																	}
 																}),
@@ -12498,8 +12587,8 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																				},
 																				A2(
 																					_elm_lang$core$List$map,
-																					function (_p2) {
-																						var _p3 = _p2;
+																					function (_p5) {
+																						var _p6 = _p5;
 																						return A2(
 																							_elm_lang$html$Html$div,
 																							{ctor: '[]'},
@@ -12541,7 +12630,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																														_1: {ctor: '[]'}
 																													});
 																											},
-																											_p3.days)),
+																											_p6.days)),
 																									_1: {
 																										ctor: '::',
 																										_0: A2(
@@ -12553,7 +12642,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																											},
 																											{
 																												ctor: '::',
-																												_0: _elm_lang$html$Html$text(_p3.hours),
+																												_0: _elm_lang$html$Html$text(_p6.hours),
 																												_1: {ctor: '[]'}
 																											}),
 																										_1: {ctor: '[]'}
@@ -12563,7 +12652,7 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 																					},
 																					receptionTimes));
 																		},
-																		_p4.receptionTimes)),
+																		_p7.receptionTimes)),
 																_1: {ctor: '[]'}
 															}
 														}
@@ -12583,10 +12672,10 @@ var _gizra$municipality$Contact_View$viewContact = F2(
 				}
 			});
 	});
-var _gizra$municipality$Contact_View$viewContacts = F2(
-	function (language, _p5) {
-		var _p6 = _p5;
-		var filteredContacts = A2(_gizra$municipality$Contact_Utils$filterContacts, _p6.contacts, _p6.filterString);
+var _gizra$municipality$Contact_View$viewContacts = F4(
+	function (baseUrl, language, showAsBlock, _p8) {
+		var _p9 = _p8;
+		var filteredContacts = A2(_gizra$municipality$Contact_Utils$filterContacts, _p9.contacts, _p9.filterString);
 		return _Gizra$elm_dictlist$DictList$isEmpty(filteredContacts) ? A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
@@ -12599,7 +12688,7 @@ var _gizra$municipality$Contact_View$viewContacts = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('ui link cards'),
+				_0: _elm_lang$html$Html_Attributes$class('row'),
 				_1: {ctor: '[]'}
 			},
 			_Gizra$elm_dictlist$DictList$values(
@@ -12607,8 +12696,13 @@ var _gizra$municipality$Contact_View$viewContacts = F2(
 					_Gizra$elm_dictlist$DictList$map,
 					F2(
 						function (contactId, contact) {
-							return A2(
+							return showAsBlock ? A3(
+								_gizra$municipality$Contact_View$viewContactAsBlock,
+								baseUrl,
+								language,
+								{ctor: '_Tuple2', _0: contactId, _1: contact}) : A3(
 								_gizra$municipality$Contact_View$viewContact,
+								baseUrl,
 								language,
 								{ctor: '_Tuple2', _0: contactId, _1: contact});
 						}),
@@ -12620,69 +12714,127 @@ var _gizra$municipality$Contact_View$viewContactFilter = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('ui icon input'),
+				_0: _elm_lang$html$Html_Attributes$class('row'),
 				_1: {ctor: '[]'}
 			},
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$input,
+					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$value(filterString),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$type_('search'),
-							_1: {
+						_0: _elm_lang$html$Html_Attributes$class('col-md-4 col-xs-12'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$placeholder(
-									A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$FilterContactsPlaceholder)),
+								_0: _elm_lang$html$Html_Attributes$class('input-group'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$input,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$value(filterString),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$id('search-contacts'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('form-control'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$type_('search'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$placeholder(
+															A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$FilterContactsPlaceholder)),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Events$onInput(_gizra$municipality$Contact_Model$SetFilter),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									},
+									{ctor: '[]'}),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onInput(_gizra$municipality$Contact_Model$SetFilter),
+									_0: A2(
+										_elm_lang$html$Html$span,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('input-group-btn'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$button,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('btn btn-default'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$i,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('fa fa-search'),
+															_1: {ctor: '[]'}
+														},
+														{ctor: '[]'}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
 									_1: {ctor: '[]'}
 								}
-							}
-						}
-					},
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$i,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('search icon'),
-							_1: {ctor: '[]'}
-						},
-						{ctor: '[]'}),
-					_1: {ctor: '[]'}
-				}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
 			});
 	});
-var _gizra$municipality$Contact_View$view = F2(
-	function (language, model) {
+var _gizra$municipality$Contact_View$view = F4(
+	function (baseUrl, language, showAsBlock, model) {
 		return A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: A2(_gizra$municipality$Contact_View$viewContactFilter, language, model.filterString),
+				_0: A2(
+					_gizra$municipality$Utils_Html$showIf,
+					!showAsBlock,
+					A2(_gizra$municipality$Contact_View$viewContactFilter, language, model.filterString)),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('ui horizontal divider'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(
-								A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$MatchingResults)),
-							_1: {ctor: '[]'}
-						}),
+						_gizra$municipality$Utils_Html$showIf,
+						!showAsBlock,
+						A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('divider'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(
+									A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$MatchingResults)),
+								_1: {ctor: '[]'}
+							})),
 					_1: {
 						ctor: '::',
 						_0: A2(
@@ -12694,12 +12846,32 @@ var _gizra$municipality$Contact_View$view = F2(
 							},
 							{
 								ctor: '::',
-								_0: A2(_gizra$municipality$Contact_View$viewContacts, language, model),
+								_0: A4(_gizra$municipality$Contact_View$viewContacts, baseUrl, language, showAsBlock, model),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
 							ctor: '::',
-							_0: _gizra$municipality$Utils_Html$divider,
+							_0: A2(
+								_gizra$municipality$Utils_Html$showIf,
+								showAsBlock,
+								A2(
+									_elm_lang$html$Html$a,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn btn-default btn-show-all'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$href(
+												A2(_elm_lang$core$Basics_ops['++'], baseUrl, '/contacts')),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(
+											A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ShowAll)),
+										_1: {ctor: '[]'}
+									})),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -12745,16 +12917,12 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 						_0: _elm_lang$html$Html_Attributes$class('thumbnail'),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$target('_blank'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$href(
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										baseUrl,
-										A2(_elm_lang$core$Basics_ops['++'], '/node/', _p1._0))),
-								_1: {ctor: '[]'}
-							}
+							_0: _elm_lang$html$Html_Attributes$href(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									baseUrl,
+									A2(_elm_lang$core$Basics_ops['++'], '/node/', _p1._0))),
+							_1: {ctor: '[]'}
 						}
 					},
 					{
@@ -13224,48 +13392,96 @@ var _gizra$municipality$Event_View$viewEventFilter = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('ui icon input'),
+				_0: _elm_lang$html$Html_Attributes$class('row'),
 				_1: {ctor: '[]'}
 			},
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$input,
+					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$value(filterString),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$type_('search'),
-							_1: {
+						_0: _elm_lang$html$Html_Attributes$class('col-md-4 col-xs-12'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$id('search-events'),
+								_0: _elm_lang$html$Html_Attributes$class('input-group'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$input,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$value(filterString),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$type_('search'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$id('search-events'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('form-control'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$placeholder(
+															A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$FilterEventsPlaceholder)),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Events$onInput(_gizra$municipality$Event_Model$SetFilter),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									},
+									{ctor: '[]'}),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$placeholder(
-										A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$FilterEventsPlaceholder)),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onInput(_gizra$municipality$Event_Model$SetFilter),
-										_1: {ctor: '[]'}
-									}
+									_0: A2(
+										_elm_lang$html$Html$span,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('input-group-btn'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$button,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('btn btn-default'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$i,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('fa fa-search'),
+															_1: {ctor: '[]'}
+														},
+														{ctor: '[]'}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
 								}
-							}
-						}
-					},
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$i,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('search icon'),
-							_1: {ctor: '[]'}
-						},
-						{ctor: '[]'}),
-					_1: {ctor: '[]'}
-				}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
 			});
 	});
 var _gizra$municipality$Event_View$view = F4(
@@ -13349,7 +13565,7 @@ var _gizra$municipality$App_View$view = function (model) {
 					_0: A2(
 						_elm_lang$html$Html$map,
 						_gizra$municipality$App_Model$MsgPagesContact,
-						A2(_gizra$municipality$Contact_View$view, model.language, model.pageContact)),
+						A4(_gizra$municipality$Contact_View$view, model.baseUrl, model.language, model.showAsBlock, model.pageContact)),
 					_1: {ctor: '[]'}
 				});
 		case 'Event':
