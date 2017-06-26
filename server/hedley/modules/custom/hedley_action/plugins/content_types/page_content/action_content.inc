@@ -38,7 +38,7 @@ function hedley_action_content_type_render($subtype, $conf, $args, $context) {
   foreach ($wrapper->field_action_sections as $section) {
     $sections[] = [
       'title' => filter_xss($section->field_section_title->value()),
-      'icon' => $section->field_section_icon->value(),
+      'icon' => hedley_action_get_section_icon_class($section->field_section_icon->value()),
       'description' => $section->field_section_description->value() ? $section->field_section_description->value->value() : '',
     ];
   }

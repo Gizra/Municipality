@@ -2,6 +2,13 @@
 
 /**
  * @file
+ * Code for the Hedley Terms feature.
+ */
+
+include_once 'hedley_terms.features.inc';
+
+/**
+ * @file
  * Hedley Terms module.
  */
 
