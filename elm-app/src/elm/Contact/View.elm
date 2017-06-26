@@ -65,17 +65,21 @@ viewContacts baseUrl language showAsBlock { contacts, filterString } =
         if DictList.isEmpty filteredContacts then
             div [] [ text <| translate language ContactsNotFound ]
         else
-            div [ class "row" ]
-                (filteredContacts
-                    |> DictList.map
-                        (\contactId contact ->
-                            if showAsBlock then
-                                viewContactAsBlock baseUrl language ( contactId, contact )
-                            else
-                                viewContact baseUrl language ( contactId, contact )
-                        )
-                    |> DictList.values
-                )
+            div
+                [ class "sort-destination-loader sort-destination-loader-loaded" ]
+                [ ul
+                    [ class "team-list sort-destination" ]
+                    (filteredContacts
+                        |> DictList.map
+                            (\contactId contact ->
+                                if showAsBlock then
+                                    viewContactAsBlock baseUrl language ( contactId, contact )
+                                else
+                                    viewContact baseUrl language ( contactId, contact )
+                            )
+                        |> DictList.values
+                    )
+                ]
 
 
 {-| View a single contact.
@@ -190,23 +194,99 @@ viewContact baseUrl language ( contactId, contact ) =
 -}
 viewContactAsBlock : String -> Language -> ( ContactId, Contact ) -> Html msg
 viewContactAsBlock baseUrl language ( contactId, contact ) =
-    div [ class "col-md-5" ]
-        [ a
-            [ class "thumbnail", href (baseUrl ++ "/node/" ++ contactId) ]
-            [ showMaybe <|
-                Maybe.map
-                    (\imageUrl ->
-                        div [ class "card-img-top" ]
-                            [ img [ src imageUrl ]
-                                []
-                            ]
-                    )
-                    contact.imageUrl
-            , div
-                [ class "caption" ]
-                [ h4
-                    [ class "card-title" ]
-                    [ text contact.name ]
+    li [ class "col-md-3 col-sm-6 col-xs-12 isotope-item leadership" ]
+        [ span
+            [ class "thumb-info thumb-info-hide-wrapper-bg mb-xlg" ]
+            [ span
+                [ class "thumb-info-wrapper" ]
+                [ a
+                    [ href (baseUrl ++ "/node/" ++ contactId) ]
+                    [ showMaybe <|
+                        Maybe.map
+                            (\imageUrl ->
+                                div [ class "img-responsive" ]
+                                    [ img [ src imageUrl ]
+                                        []
+                                    ]
+                            )
+                            contact.imageUrl
+                    , span
+                        [ class "thumb-info-title" ]
+                        [ span
+                            [ class "thumb-info-inner" ]
+                            [ text contact.name ]
+                        , showMaybe <|
+                            Maybe.map
+                                (\jobTitle ->
+                                    span
+                                        [ class "thumb-info-type" ]
+                                        [ text jobTitle ]
+                                )
+                                contact.jobTitle
+                        ]
+                    ]
+                ]
+            , span
+                [ class "thumb-info-caption" ]
+                [ span
+                    [ class "thumb-info-caption-text" ]
+                    [ showMaybe <|
+                        Maybe.map
+                            (\receptionTimes ->
+                                div [ class "reception-times-wrapper" ]
+                                    (List.map
+                                        (\{ days, hours } ->
+                                            div []
+                                                [ i [ class "fa fa-calendar" ]
+                                                    []
+                                                , span
+                                                    [ class "reception-days" ]
+                                                    (List.map
+                                                        (\day ->
+                                                            span []
+                                                                [ text <| translate language (DayTranslation day) ++ ", " ]
+                                                        )
+                                                        days
+                                                    )
+                                                , span [ class "reception-hours" ]
+                                                    [ text hours ]
+                                                ]
+                                        )
+                                        receptionTimes
+                                    )
+                            )
+                            contact.receptionTimes
+                    ]
+                , span
+                    [ class "thumb-info-social-icons" ]
+                    [ showMaybe <|
+                        Maybe.map
+                            (\email ->
+                                a [ href ("mailto:" ++ email), target "_blank" ]
+                                    [ i [ class "fa fa-envelope" ] []
+                                    , span [] [ text email ]
+                                    ]
+                            )
+                            contact.email
+                    , showMaybe <|
+                        Maybe.map
+                            (\phone ->
+                                a [ href ("tel:" ++ phone), target "_blank" ]
+                                    [ i [ class "fa fa-phone" ] []
+                                    , span [] [ text phone ]
+                                    ]
+                            )
+                            contact.phone
+                    , showMaybe <|
+                        Maybe.map
+                            (\fax ->
+                                a [ href ("tel:" ++ fax), target "_blank" ]
+                                    [ i [ class "fa fa-fax" ] []
+                                    , span [] [ text fax ]
+                                    ]
+                            )
+                            contact.fax
+                    ]
                 ]
             ]
         ]
