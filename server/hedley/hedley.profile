@@ -126,9 +126,10 @@ function hedley_setup_og_permissions() {
   $rid = array_search('editor', $og_roles);
 
   $permissions = [
-    'administer taxonomy',
-    'delete terms',
-    'edit terms',
+    'update group' => TRUE,
+    'administer taxonomy' => TRUE,
+    'delete terms' => TRUE,
+    'edit terms' => TRUE,
   ];
   $types = [
     'action',
@@ -144,8 +145,8 @@ function hedley_setup_og_permissions() {
     $permissions["create $type content"] = TRUE;
     $permissions["update own $type content"] = TRUE;
     $permissions["update any $type content"] = TRUE;
-    $permissions["deleted own $type content"] = TRUE;
-    $permissions["deleted any $type content"] = TRUE;
+    $permissions["delete own $type content"] = TRUE;
+    $permissions["delete any $type content"] = TRUE;
   }
   og_role_change_permissions($rid, $permissions);
 }

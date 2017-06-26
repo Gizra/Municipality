@@ -90,11 +90,8 @@ abstract class HedleyMigrateBase extends Migration {
 
     if ($this->entityType == 'node') {
       // Set the first user as the author.
-      $this->dependencies = ['HedleyMigrateUsers'];
-
       $this
         ->addFieldMapping('uid', 'author')
-        ->sourceMigration('HedleyMigrateUsers')
         ->defaultValue(1);
 
       // Map the translated title field to the default title.
