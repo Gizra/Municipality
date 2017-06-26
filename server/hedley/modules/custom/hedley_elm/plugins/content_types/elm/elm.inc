@@ -26,6 +26,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   $block->module = 'hedley_elm';
   $block->title = '';
 
+  // Get the topic ID if there's a topic context.
   $topic_tid = 0;
   if (!empty($context->data) && isset($context->data->tid)) {
     $topic_tid = $context->data->tid;
