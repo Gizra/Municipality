@@ -78,9 +78,9 @@ class HedleyMigrateUsers extends HedleyMigrateBase {
    *   Success.
    */
   public function prepareRow($row) {
-    // User role.
     $role = user_role_load_by_name($row->role);
     if (!$role) {
+      // There's no role specified for the current user.
       return TRUE;
     }
 
@@ -105,19 +105,27 @@ class HedleyMigrateUsers extends HedleyMigrateBase {
     }
 
     $user_wrapper = entity_metadata_wrapper('user', $entity);
-    $group = reset($user_wrapper->og_user_node->value());
-    if (!$group) {
+    $groups = og_get_entity_groups('user', $entity, [OG_STATE_PENDING]);
+    if (empty($groups['node'])) {
       // No role granting required if the user doesn't have a group.
       return;
     }
-    $og_roles = og_roles('node', 'municipality', $group->nid);
-    $rid = array_search($row->og_role, $og_roles);
-    og_role_grant('node', $group->nid, $user_wrapper->getIdentifier(), $rid);
 
-    // Add active status for migrated members.
-    $og_membership = og_get_membership('node', $group->nid, 'user', $entity->uid);
-    $og_membership->state = OG_STATE_ACTIVE;
-    og_membership_save($og_membership);
+    // Grant the role for all the groups.
+    foreach ($groups['node'] as $gid) {
+      $og_roles = og_roles('node', 'municipality', $gid);
+      $rid = array_search($row->og_role, $og_roles);
+      og_role_grant('node', $gid, $user_wrapper->getIdentifier(), $rid);
+
+      // Add active status for migrated members.
+      $og_membership = og_get_membership('node', $gid, 'user', $entity->uid);
+      if (!$og_membership) {
+        // No membership was found for the current user.
+        return;
+      }
+      $og_membership->state = OG_STATE_ACTIVE;
+      og_membership_save($og_membership);
+    }
   }
 
 }

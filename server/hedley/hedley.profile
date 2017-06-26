@@ -131,17 +131,11 @@ function hedley_setup_og_permissions() {
     'delete terms' => TRUE,
     'edit terms' => TRUE,
   ];
-  $types = [
-    'action',
-    'contact',
-    'event',
-    'faq',
-    'freedom_of_information',
-    'news',
-    'page',
-    'tender',
-  ];
-  foreach ($types as $type) {
+  // Get all group content bundles and unset the ones that an editor should not
+  // manage.
+  $types = og_get_all_group_content_bundle();
+  unset($types['node']['hardcopy_form']);
+  foreach (array_keys($types['node']) as $type) {
     $permissions["create $type content"] = TRUE;
     $permissions["update own $type content"] = TRUE;
     $permissions["update any $type content"] = TRUE;
