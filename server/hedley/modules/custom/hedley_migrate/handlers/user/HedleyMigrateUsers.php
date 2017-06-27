@@ -124,7 +124,7 @@ class HedleyMigrateUsers extends HedleyMigrateBase {
         return;
       }
       $og_membership->state = OG_STATE_ACTIVE;
-      og_membership_save($og_membership);
+      $og_membership->save();
     }
   }
 
