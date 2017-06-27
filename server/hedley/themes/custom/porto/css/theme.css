@@ -26,6 +26,10 @@ li {
 	line-height: 24px;
 }
 
+i.fa {
+	margin-right: 3px;
+}
+
 /* Responsive */
 @media (max-width: 479px) {
 	body {
