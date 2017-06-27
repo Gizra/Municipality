@@ -141,23 +141,29 @@ function hedley_standard_install() {
   // Allow visitor account creation with administrative approval.
   variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
 
-  // Set anonymous permissions.
+  // Set anonymous and auth permissions.
   $permissions = ['access content'];
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, $permissions);
-
-  // Set user permissions.
-  $permissions[] = filter_permission_name($filtered_html_format);
-
-  // Add content permissions.
-  foreach (array_keys(node_type_get_types()) as $content_type) {
-    $permissions[] = "create $content_type content";
-    $permissions[] = "edit own $content_type content";
-    $permissions[] = "delete own $content_type content";
-  }
-
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, $permissions);
 
-  // Create a default role for site administrators, with all available permissions assigned.
+  // Create a default role for content editor, with all the permissions needed.
+  $content_editor = new stdClass();
+  $content_editor->name = 'editor';
+  $content_editor->weight = 2;
+  user_role_save($content_editor);
+
+  // Set editor permissions.
+  $permissions[] = filter_permission_name($filtered_html_format);
+  $permissions[] = 'access administration pages';
+  $permissions[] = 'access content overview';
+  $permissions[] = 'view own unpublished content';
+
+  // Grant permissions to the editors.
+  $editor_role = user_role_load_by_name('editor');
+  user_role_grant_permissions($editor_role->rid, $permissions);
+
+  // Create a default role for site administrators, with all available
+  // permissions assigned.
   $admin_role = new stdClass();
   $admin_role->name = 'administrator';
   $admin_role->weight = 2;

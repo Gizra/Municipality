@@ -31,6 +31,11 @@ function hedley_install_tasks() {
     'display' => FALSE,
   );
 
+  $tasks['hedley_setup_og_permissions'] = array(
+    'display_name' => st('Set OG permissions'),
+    'display' => FALSE,
+  );
+
   return $tasks;
 }
 
@@ -104,4 +109,38 @@ function hedley_setup_blocks() {
  */
 function hedley_setup_rebuild_permissions() {
   node_access_rebuild();
+}
+
+/**
+ * Task callback; Setup OG permissions.
+ *
+ * We do this here, late enough to make sure all group-content were
+ * created.
+ */
+function hedley_setup_og_permissions() {
+  // Create a default role for content editor, with all the permissions needed.
+  $og_editor = og_role_create('editor', 'node', 0, 'municipality');
+  og_role_save($og_editor);
+
+  $og_roles = og_roles('node', 'municipality');
+  $rid = array_search('editor', $og_roles);
+
+  $permissions = [
+    'update group' => TRUE,
+    'administer taxonomy' => TRUE,
+    'delete terms' => TRUE,
+    'edit terms' => TRUE,
+  ];
+  // Get all group content bundles and unset the ones that an editor should not
+  // manage.
+  $types = og_get_all_group_content_bundle();
+  unset($types['node']['hardcopy_form']);
+  foreach (array_keys($types['node']) as $type) {
+    $permissions["create $type content"] = TRUE;
+    $permissions["update own $type content"] = TRUE;
+    $permissions["update any $type content"] = TRUE;
+    $permissions["delete own $type content"] = TRUE;
+    $permissions["delete any $type content"] = TRUE;
+  }
+  og_role_change_permissions($rid, $permissions);
 }
