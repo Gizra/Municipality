@@ -1,7 +1,13 @@
-## WebdriverIO tests
+## Requirements
 
-1. Download [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads)
-1. Execute `./chromedriver --url-base=/wd/hub --port=4444` from the directory ChromeDriver was downloaded to.
-1. Execute tests with `npm test`.
+ - npm 2.x or newer
+ - Google Chrome stable channel
 
-Note: You will have 2 terminal tabs open: One with the ChromeDriver and the second with the executed tests.
+## Execute WebdriverIO tests
+
+1. `npm install`
+2. `cp wdio.local.conf.js.example wdio.local.conf.js` and set your local configurations.
+3. Execute tests with `./node_modules/.bin/wdio wdio.local.conf.js`
+
+Beware that you do not need to (should not) execute a standalone Selenium Server alongside WDIO to run the tests.
+To simulate Travis test execution, see `../ci-scripts/README.md`
