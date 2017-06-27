@@ -57,6 +57,7 @@ function hedley_municipality_default_page_manager_handlers() {
       'main' => NULL,
       '1st_row' => NULL,
       '2nd_row' => NULL,
+      '3rd_row' => NULL,
     ),
   );
   $display->cache = array();
@@ -174,6 +175,8 @@ function hedley_municipality_default_page_manager_handlers() {
     'override_title' => 0,
     'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'promoted_only' => 1,
+    'context' => 'empty',
   );
   $pane->cache = array();
   $pane->style = array(
