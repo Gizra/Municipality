@@ -24,6 +24,10 @@ li {
 	line-height: 24px;
 }
 
+i.fa {
+	margin-left: 3px;
+}
+
 /* Body */
 @media (max-width: 991px) {
 	body > .body {

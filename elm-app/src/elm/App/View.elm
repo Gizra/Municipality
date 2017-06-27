@@ -12,7 +12,7 @@ view model =
     case model.page of
         Contact ->
             div []
-                [ Html.map MsgPagesContact <| Contact.View.view model.language model.pageContact
+                [ Html.map MsgPagesContact <| Contact.View.view model.baseUrl model.language model.showAsBlock model.pageContact
                 ]
 
         Event ->

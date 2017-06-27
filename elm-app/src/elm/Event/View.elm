@@ -25,16 +25,29 @@ view baseUrl language showAsBlock model =
 
 viewEventFilter : Language -> String -> Html Msg
 viewEventFilter language filterString =
-    div [ class "ui icon input" ]
-        [ input
-            [ value filterString
-            , type_ "search"
-            , id "search-events"
-            , placeholder <| translate language FilterEventsPlaceholder
-            , onInput SetFilter
+    div [ class "row" ]
+        [ div [ class "col-md-4 col-xs-12" ]
+            [ div [ class "input-group" ]
+                [ input
+                    [ value filterString
+                    , type_ "search"
+                    , id "search-events"
+                    , class "form-control"
+                    , placeholder <| translate language FilterEventsPlaceholder
+                    , onInput SetFilter
+                    ]
+                    []
+                , span
+                    [ class "input-group-btn" ]
+                    [ button
+                        [ class "btn btn-default" ]
+                        [ i
+                            [ class "fa fa-search" ]
+                            []
+                        ]
+                    ]
+                ]
             ]
-            []
-        , i [ class "search icon" ] []
         ]
 
 
@@ -157,7 +170,7 @@ viewEventAsBlock : BaseUrl -> Language -> ( EventId, Event ) -> Html msg
 viewEventAsBlock baseUrl language ( eventId, event ) =
     div [ class "col-md-5" ]
         [ a
-            [ class "thumbnail", target "_blank", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
+            [ class "thumbnail", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
             [ showMaybe <|
                 Maybe.map
                     (\imageUrl ->
