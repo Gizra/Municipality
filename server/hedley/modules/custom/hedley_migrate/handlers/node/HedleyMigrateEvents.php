@@ -50,13 +50,19 @@ class HedleyMigrateEvents extends HedleyMigrateBase {
   public function __construct($arguments) {
     parent::__construct($arguments);
 
-    $this->dependencies[] = 'HedleyMigrateMunicipalities';
     $this->dependencies[] = 'HedleyMigrateAudiences';
+    $this->dependencies[] = 'HedleyMigrateMunicipalities';
+    $this->dependencies[] = 'HedleyMigrateTopics';
     $this->dependencies[] = 'HedleyMigrateUserTypes';
 
     $this
       ->addFieldMapping(OG_AUDIENCE_FIELD, 'municipality')
       ->sourceMigration('HedleyMigrateMunicipalities');
+
+    $this
+      ->addFieldMapping(OG_VOCAB_FIELD, 'field_topics')
+      ->separator('|')
+      ->sourceMigration('HedleyMigrateTopics');
   }
 
 }
