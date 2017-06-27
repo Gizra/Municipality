@@ -21,8 +21,10 @@
     <?php foreach ($sections as $section): ?>
       <div class="row">
         <div class="col-xs-12">
-          <i class="fa fa-<?php print $section['icon']; ?>"></i>
-          <?php print $section['title']; ?>
+          <h3>
+            <i class="fa fa-<?php print $section['icon']; ?>"></i>
+            <?php print $section['title']; ?>
+          </h3>
         </div>
       </div>
       <div class="row">

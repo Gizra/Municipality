@@ -55,12 +55,13 @@ function hedley_contact_default_page_manager_pages() {
     'name' => 'panel',
   );
   $display = new panels_display();
-  $display->layout = 'onecol';
+  $display->layout = 'one-row-one-column';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'middle' => NULL,
+      'main_content' => NULL,
     ),
   );
   $display->cache = array();
@@ -72,7 +73,7 @@ function hedley_contact_default_page_manager_pages() {
   $display->panels = array();
   $pane = new stdClass();
   $pane->pid = 'new-f3a8512e-4b73-4aa7-9e23-ab09a71a1bf5';
-  $pane->panel = 'middle';
+  $pane->panel = 'main_content';
   $pane->type = 'elm';
   $pane->subtype = 'elm';
   $pane->shown = TRUE;
@@ -83,6 +84,8 @@ function hedley_contact_default_page_manager_pages() {
     'override_title_text' => '',
     'override_title_heading' => 'h2',
     'show_as_block' => 0,
+    'promoted_only' => 0,
+    'context' => 'empty',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -94,7 +97,7 @@ function hedley_contact_default_page_manager_pages() {
   $pane->locks = array();
   $pane->uuid = 'f3a8512e-4b73-4aa7-9e23-ab09a71a1bf5';
   $display->content['new-f3a8512e-4b73-4aa7-9e23-ab09a71a1bf5'] = $pane;
-  $display->panels['middle'][0] = 'new-f3a8512e-4b73-4aa7-9e23-ab09a71a1bf5';
+  $display->panels['main_content'][0] = 'new-f3a8512e-4b73-4aa7-9e23-ab09a71a1bf5';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

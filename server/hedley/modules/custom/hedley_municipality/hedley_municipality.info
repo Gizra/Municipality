@@ -16,6 +16,7 @@ dependencies[] = list
 dependencies[] = og
 dependencies[] = og_purl
 dependencies[] = og_ui
+dependencies[] = og_vocab
 dependencies[] = options
 dependencies[] = page_manager
 dependencies[] = strongarm
