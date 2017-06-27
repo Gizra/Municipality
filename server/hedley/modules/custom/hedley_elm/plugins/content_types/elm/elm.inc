@@ -50,6 +50,11 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   // Getting a unique ID for the app.
   $app_id = drupal_html_id('elm-app');
 
+  // Getting a parsed URL for the app.
+  $parsed_url = drupal_parse_url(url('', ['absolute' => TRUE]));
+  // Imploding query for the app.
+  $parsed_url['query'] = isset($parsed_url['query']) ? drupal_http_build_query($parsed_url['query']) : '';
+
   // Add settings.
   $settings = [
     'elm' => [
@@ -58,10 +63,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
         'language' => $language->language,
         'showAsBlock' => $show_as_block,
         'values' => $values,
-        'baseUrl' => url('', [
-          'query' => [],
-          'absolute' => TRUE,
-        ]),
+        'baseUrl' => $parsed_url,
       ],
     ],
   ];

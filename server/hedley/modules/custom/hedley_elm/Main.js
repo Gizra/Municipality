@@ -11365,14 +11365,25 @@ var _gizra$municipality$Event_Model$HandleEvents = function (a) {
 	return {ctor: 'HandleEvents', _0: a};
 };
 
-var _gizra$municipality$App_Model$emptyModel = {language: _gizra$municipality$App_Types$Hebrew, page: _gizra$municipality$App_Types$NotFound, pageContact: _gizra$municipality$Contact_Model$emptyModel, pageEvent: _gizra$municipality$Event_Model$emptyModel, showAsBlock: false, baseUrl: ''};
+var _gizra$municipality$App_Model$emptyModel = {
+	baseUrl: {path: '', query: ''},
+	language: _gizra$municipality$App_Types$Hebrew,
+	page: _gizra$municipality$App_Types$NotFound,
+	pageContact: _gizra$municipality$Contact_Model$emptyModel,
+	pageEvent: _gizra$municipality$Event_Model$emptyModel,
+	showAsBlock: false
+};
 var _gizra$municipality$App_Model$Flags = F4(
 	function (a, b, c, d) {
 		return {page: a, language: b, showAsBlock: c, baseUrl: d};
 	});
 var _gizra$municipality$App_Model$Model = F6(
 	function (a, b, c, d, e, f) {
-		return {language: a, page: b, pageContact: c, pageEvent: d, showAsBlock: e, baseUrl: f};
+		return {baseUrl: a, language: b, page: c, pageContact: d, pageEvent: e, showAsBlock: f};
+	});
+var _gizra$municipality$App_Model$BaseUrl = F2(
+	function (a, b) {
+		return {path: a, query: b};
 	});
 var _gizra$municipality$App_Model$MsgPagesEvent = function (a) {
 	return {ctor: 'MsgPagesEvent', _0: a};
@@ -12751,8 +12762,14 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 								_0: _elm_lang$html$Html_Attributes$href(
 									A2(
 										_elm_lang$core$Basics_ops['++'],
-										baseUrl,
-										A2(_elm_lang$core$Basics_ops['++'], '/node/', _p1._0))),
+										baseUrl.path,
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											'/node/',
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												_p1._0,
+												A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query))))),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -13142,8 +13159,14 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 																						_0: _elm_lang$html$Html_Attributes$href(
 																							A2(
 																								_elm_lang$core$Basics_ops['++'],
-																								baseUrl,
-																								A2(_elm_lang$core$Basics_ops['++'], '/node/', _p4._0))),
+																								baseUrl.path,
+																								A2(
+																									_elm_lang$core$Basics_ops['++'],
+																									'/node/',
+																									A2(
+																										_elm_lang$core$Basics_ops['++'],
+																										_p4._0,
+																										A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query))))),
 																						_1: {ctor: '[]'}
 																					}
 																				}
@@ -13320,7 +13343,10 @@ var _gizra$municipality$Event_View$view = F4(
 										_1: {
 											ctor: '::',
 											_0: _elm_lang$html$Html_Attributes$href(
-												A2(_elm_lang$core$Basics_ops['++'], baseUrl, '/events')),
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													baseUrl.path,
+													A2(_elm_lang$core$Basics_ops['++'], '/events?', baseUrl.query))),
 											_1: {ctor: '[]'}
 										}
 									},
@@ -13399,7 +13425,21 @@ var _gizra$municipality$Main$main = _elm_lang$html$Html$programWithFlags(
 				},
 				A2(_elm_lang$core$Json_Decode$field, 'language', _elm_lang$core$Json_Decode$string));
 		},
-		A2(_elm_lang$core$Json_Decode$field, 'baseUrl', _elm_lang$core$Json_Decode$string)));
+		A2(
+			_elm_lang$core$Json_Decode$field,
+			'baseUrl',
+			A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (path) {
+					return A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (query) {
+							return _elm_lang$core$Json_Decode$succeed(
+								{path: path, query: query});
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'query', _elm_lang$core$Json_Decode$string));
+				},
+				A2(_elm_lang$core$Json_Decode$field, 'path', _elm_lang$core$Json_Decode$string)))));
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
