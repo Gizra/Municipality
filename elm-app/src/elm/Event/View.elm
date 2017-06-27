@@ -1,5 +1,6 @@
 module Event.View exposing (..)
 
+import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
 import DictList
 import Event.Model exposing (DictListEvent, Event, EventId, Model, Msg(..))
@@ -12,13 +13,13 @@ import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
 
-view : String -> Language -> Bool -> Model -> Html Msg
+view : BaseUrl -> Language -> Bool -> Model -> Html Msg
 view baseUrl language showAsBlock model =
     div []
         [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
         , div [] [ viewEvents baseUrl language showAsBlock model ]
-        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl ++ "/events") ] [ text <| translate language ShowAll ]
+        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/events?" ++ baseUrl.query) ] [ text <| translate language ShowAll ]
         ]
 
 
@@ -39,7 +40,7 @@ viewEventFilter language filterString =
 
 {-| View all events.
 -}
-viewEvents : String -> Language -> Bool -> Model -> Html msg
+viewEvents : BaseUrl -> Language -> Bool -> Model -> Html msg
 viewEvents baseUrl language showAsBlock { events, filterString } =
     let
         filteredEvents =
@@ -63,7 +64,7 @@ viewEvents baseUrl language showAsBlock { events, filterString } =
 
 {-| View a single event.
 -}
-viewEvent : String -> Language -> ( EventId, Event ) -> Html msg
+viewEvent : BaseUrl -> Language -> ( EventId, Event ) -> Html msg
 viewEvent baseUrl language ( eventId, event ) =
     div
         [ class "card" ]
@@ -138,7 +139,7 @@ viewEvent baseUrl language ( eventId, event ) =
                 , div
                     [ class "ui four wide column center aligned" ]
                     [ a
-                        [ class "ui button primary basic middle aligned", target "_blank", href (baseUrl ++ "/node/" ++ eventId) ]
+                        [ class "ui button primary basic middle aligned", target "_blank", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
                         [ i
                             [ class "add icon" ]
                             []
@@ -152,11 +153,11 @@ viewEvent baseUrl language ( eventId, event ) =
 
 {-| View a single event that will appear in a block (i.e. with less information).
 -}
-viewEventAsBlock : String -> Language -> ( EventId, Event ) -> Html msg
+viewEventAsBlock : BaseUrl -> Language -> ( EventId, Event ) -> Html msg
 viewEventAsBlock baseUrl language ( eventId, event ) =
     div [ class "col-md-5" ]
         [ a
-            [ class "thumbnail", target "_blank", href (baseUrl ++ "/node/" ++ eventId) ]
+            [ class "thumbnail", target "_blank", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
             [ showMaybe <|
                 Maybe.map
                     (\imageUrl ->
