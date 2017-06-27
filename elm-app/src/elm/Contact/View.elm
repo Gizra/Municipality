@@ -1,5 +1,6 @@
 module Contact.View exposing (..)
 
+import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
 import Contact.Model exposing (Contact, ContactId, DictListContact, Model, Msg(..))
 import Contact.Utils exposing (filterContacts)
@@ -7,14 +8,14 @@ import Date exposing (dayOfWeek)
 import Debug exposing (log)
 import DictList
 import Html exposing (..)
-import Html.Attributes exposing (alt, id, class, classList, href, placeholder, src, style, target, type_, value)
+import Html.Attributes exposing (alt, class, classList, href, id, placeholder, src, style, target, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (colorToString, divider, sectionDivider, showIf, showMaybe)
 
 
-view : String -> Language -> Bool -> Model -> Html Msg
+view : BaseUrl -> Language -> Bool -> Model -> Html Msg
 view baseUrl language showAsBlock model =
     div
         []
@@ -22,7 +23,7 @@ view baseUrl language showAsBlock model =
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
         , div [ class "ui container center aligned" ]
             [ viewContacts baseUrl language showAsBlock model ]
-        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl ++ "/contacts") ] [ text <| translate language ShowAll ]
+        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/contacts?" ++ baseUrl.query) ] [ text <| translate language ShowAll ]
         ]
 
 
@@ -56,7 +57,7 @@ viewContactFilter language filterString =
 
 {-| View all contacts.
 -}
-viewContacts : String -> Language -> Bool -> Model -> Html msg
+viewContacts : BaseUrl -> Language -> Bool -> Model -> Html msg
 viewContacts baseUrl language showAsBlock { contacts, filterString } =
     let
         filteredContacts =
@@ -84,7 +85,7 @@ viewContacts baseUrl language showAsBlock { contacts, filterString } =
 
 {-| View a single contact.
 -}
-viewContact : String -> Language -> ( ContactId, Contact ) -> Html msg
+viewContact : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContact baseUrl language ( contactId, contact ) =
     div [ class "card" ]
         [ showMaybe <|
@@ -109,7 +110,7 @@ viewContact baseUrl language ( contactId, contact ) =
                                 (List.map
                                     (\topic ->
                                         a
-                                            [ href (baseUrl ++ "/taxonomy/term/" ++ topic.id)
+                                            [ href (baseUrl.path ++ "/taxonomy/term/" ++ topic.id ++ "?" ++ baseUrl.query)
                                             , class ("ui label " ++ colorToString topic.color)
                                             ]
                                             [ text topic.name ]
@@ -192,7 +193,7 @@ viewContact baseUrl language ( contactId, contact ) =
 
 {-| View a single event that will appear in a block (i.e. with less information).
 -}
-viewContactAsBlock : String -> Language -> ( ContactId, Contact ) -> Html msg
+viewContactAsBlock : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContactAsBlock baseUrl language ( contactId, contact ) =
     li [ class "col-md-3 col-sm-6 col-xs-12 isotope-item leadership" ]
         [ span
@@ -200,7 +201,7 @@ viewContactAsBlock baseUrl language ( contactId, contact ) =
             [ span
                 [ class "thumb-info-wrapper" ]
                 [ a
-                    [ href (baseUrl ++ "/node/" ++ contactId) ]
+                    [ href (baseUrl.path ++ "/node/" ++ contactId ++ "?" ++ baseUrl.query) ]
                     [ showMaybe <|
                         Maybe.map
                             (\imageUrl ->
