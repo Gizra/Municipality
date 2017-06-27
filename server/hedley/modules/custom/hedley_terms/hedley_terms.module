@@ -135,14 +135,11 @@ function hedley_terms_url_outbound_alter(&$path, &$options, $original_path) {
     // Ignore external URLs, or when creating a link with cli.
     return;
   }
-  if (isset($options['query']) && empty($options['query'])) {
-    // Ignore a URL created specifically with an empty query.
-    return;
-  }
 
   // When a specific user was set on the query, but the url doesn't define a
   // a user, then add the user to the url.
-  if (!empty($_GET['user_type']) && empty($options['query']['user_type'])) {
-    $options['query']['user_type'] = check_plain($_GET['user_type']);
+  $query_params = drupal_get_query_parameters();
+  if (isset($query_params['user_type']) && !empty($query_params['user_type']) && empty($options['query']['user_type'])) {
+    $options['query']['user_type'] = check_plain($query_params['user_type']);
   }
 }
