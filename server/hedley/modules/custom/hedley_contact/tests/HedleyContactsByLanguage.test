@@ -44,6 +44,10 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
     ];
     $municipality = $this->drupalCreateNode($municipality_settings);
 
+    // Create a User type.
+    $user_types_vocabulary = taxonomy_vocabulary_machine_name_load('user_types');
+    $user_type = $this->createTerm($user_types_vocabulary, 'residents', $he_language_code);
+
     // Create a contact group content.
     $contact_settings = [
       'type' => 'contact',
@@ -63,6 +67,11 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
         ],
         $ar_language_code => [
           ['value' => 'Last name Arabic'],
+        ],
+      ],
+      'field_user_types' => [
+        LANGUAGE_NONE => [
+          ['tid' => $user_type->tid],
         ],
       ],
       // Add the created group as the parent group for this entity.
@@ -117,7 +126,11 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
 
     // Create a Department.
     $department_vocabulary = taxonomy_vocabulary_machine_name_load('departments');
-    $department = $this->createTerm($department_vocabulary, $he_language_code);
+    $department = $this->createTerm($department_vocabulary, $this->randomName(), $he_language_code);
+
+    // Create a User type.
+    $user_types_vocabulary = taxonomy_vocabulary_machine_name_load('user_types');
+    $user_type = $this->createTerm($user_types_vocabulary, 'residents', $he_language_code);
 
     // Create a contact group content.
     $contact_settings = [
@@ -137,6 +150,11 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
       'field_department' => [
         LANGUAGE_NONE => [
           ['tid' => $department->tid],
+        ],
+      ],
+      'field_user_types' => [
+        LANGUAGE_NONE => [
+          ['tid' => $user_type->tid],
         ],
       ],
       'field_email' => [
@@ -251,7 +269,7 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
    *   The created topic.
    */
   protected function createTopic($vocabulary, $language = LANGUAGE_NONE) {
-    $topic = $this->createTerm($vocabulary, $language);
+    $topic = $this->createTerm($vocabulary, $this->randomName(), $language);
 
     // Add a specific color to all the created topics here.
     $topic->field_color[LANGUAGE_NONE][0]['value'] = 'red';

@@ -1,4 +1,4 @@
-name,pass,email,avatar
-noam,noam,noam@gizra.com,
-liat,liat,liat@gizra.com,
-itamar,Itamar,itamar@gizra.com,
+name,pass,email,role,municipality,avatar
+noam,noam,noam@gizra.com,editor,1,
+liat,liat,liat@gizra.com,editor,4,
+itamar,Itamar,itamar@gizra.com,,3,

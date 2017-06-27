@@ -39,8 +39,8 @@ class HedleyMunicipalityCheckTopicsOgVocab extends HedleyMunicipalityWebTestCase
     // Check that the vocabulary has been created.
     $this->assertTrue(is_object($topics_vocabulary), 'OG Vocab (Topics) have been created.');
 
-    $topic1 = $this->createTerm($topics_vocabulary);
-    $topic2 = $this->createTerm($topics_vocabulary);
+    $topic1 = $this->createTerm($topics_vocabulary, $this->randomName());
+    $topic2 = $this->createTerm($topics_vocabulary, $this->randomName());
 
     // Check that we can create topics in the vocabulary.
     $this->assertTrue(isset($topic1->tid), 'A new term has been added to Topics.');

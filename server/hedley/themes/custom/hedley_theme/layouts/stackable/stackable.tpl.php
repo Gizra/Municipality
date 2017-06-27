@@ -12,4 +12,7 @@
   <div class="row">
     <?php print $content['2nd_row']; ?>
   </div>
+  <div class="row">
+    <?php print $content['3rd_row']; ?>
+  </div>
 </div>

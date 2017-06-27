@@ -4,6 +4,7 @@ module App.Model
         , Flags
         , Msg(..)
         , Model
+        , BaseUrl
         )
 
 import App.Types exposing (Language(..), Page(..))
@@ -20,26 +21,35 @@ type alias Flags =
     { page : String
     , language : String
     , showAsBlock : Bool
-    , baseUrl : String
+    , baseUrl : BaseUrl
     }
 
 
 type alias Model =
-    { language : Language
+    { baseUrl : BaseUrl
+    , language : Language
     , page : Page
     , pageContact : Contact.Model.Model
     , pageEvent : Event.Model.Model
     , showAsBlock : Bool
-    , baseUrl : String
+    }
+
+
+type alias BaseUrl =
+    { path : String
+    , query : String
     }
 
 
 emptyModel : Model
 emptyModel =
-    { language = Hebrew
+    { baseUrl =
+        { path = ""
+        , query = ""
+        }
+    , language = Hebrew
     , page = NotFound
     , pageContact = Contact.Model.emptyModel
     , pageEvent = Event.Model.emptyModel
     , showAsBlock = False
-    , baseUrl = ""
     }
