@@ -21,7 +21,7 @@ view baseUrl language showAsBlock model =
         []
         [ showIf (not showAsBlock) <| viewContactFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
-        , div [ class "ui container center aligned" ]
+        , div []
             [ viewContacts baseUrl language showAsBlock model ]
         , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/contacts?" ++ baseUrl.query) ] [ text <| translate language ShowAll ]
         ]

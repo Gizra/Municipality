@@ -13159,11 +13159,7 @@ var _gizra$municipality$Contact_View$view = F4(
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('ui container center aligned'),
-								_1: {ctor: '[]'}
-							},
+							{ctor: '[]'},
 							{
 								ctor: '::',
 								_0: A4(_gizra$municipality$Contact_View$viewContacts, baseUrl, language, showAsBlock, model),
