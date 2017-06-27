@@ -393,25 +393,3 @@ function hedley_municipality_get_non_empty_language_for_field(array $field_attri
     }
   }
 }
-
-/**
- * Implements hook_form_alter().
- */
-function hedley_municipality_form_alter(&$form, &$form_state, $form_id) {
-  if (!strpos($form_id, '_node_form')) {
-    // This is a not node create/edit form.
-    return;
-  }
-
-  $ajax_fields = [
-    'field_background_images'
-  ];
-
-  foreach($ajax_fields as $ajax_field) {
-    //$form[$ajax_field]['#pre_render'][] = 'hedley_municipality_prerender_node_form';
-  }
-}
-
-function hedley_municipality_prerender_node_form($element) {
-  //dpm($element);
-}
