@@ -38,7 +38,7 @@ function hedley_municipality_topics_list_content_type_render($subtype, $conf, $a
     }
 
     $topics[] = [
-      'title' => $wrapper->label(),
+      'label' => $wrapper->label(),
       'link' => url('taxonomy/term/' . $wrapper->getIdentifier()),
       'color' => $wrapper->field_color->value(),
     ];
