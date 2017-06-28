@@ -223,6 +223,41 @@ describe('Municipality homepage', () => {
     checkSelectedLanguage('arabic');
   });
 
+  it('should show events for the municiality 1 with the default language: arabic and user type: residents', () => {
+    IvisitHomepage('1');
+    browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
+    browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
+  });
+
+  it('should show events by the municiality 4 with the default language: hebrew', () => {
+    IvisitHomepage('4');
+    browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
+  });
+
+  it('should show only events for residents user type in hebrew', () => {
+    IvisitHomepage('1', 'hebrew', 'residents');
+    browser.waitForVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+    browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
+  });
+
+  it('should show only events for residents user type in arabic', () => {
+    IvisitHomepage('1', 'arabic', 'residents');
+    browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
+    browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
+  });
+
+  it('should show only events for businesses user type in hebrew', () => {
+    IvisitHomepage('1', 'hebrew', 'businesses');
+    browser.waitForVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+    assert(!browser.isVisible('h4=הצגת ילדים: שבת בבוקר'));
+  });
+
+  it('should show only events for businesses user type in arabic', () => {
+    IvisitHomepage('1', 'arabic', 'businesses');
+    browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
+    assert(!browser.isVisible('h4=مسرحية للأطفال: صباح السبت'));
+  });
+
   it('should show the events page with the hebrew language and residents user type, when clicking on see all events button', () => {
     IvisitHomepage('1', 'hebrew', 'residents');
     const eventsButton = $('.pane-elm .btn-show-all');
