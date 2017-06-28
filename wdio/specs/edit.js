@@ -2,17 +2,8 @@ const assert = require('assert');
 
 describe('edit page', () => {
 
-  const loginWithUserNoam = () => {
-    browser.url('/user/login');
-
-    browser.waitForVisible('#edit-name');
-    browser.setValueSafe('#edit-name', 'noam');
-    browser.setValueSafe('#edit-pass', 'noam');
-    browser.submitForm('#user-login');
-  };
-
   it('should be able to use ajax on the edit page', () => {
-    loginWithUserNoam();
+    browser.login('noam');
 
     browser.url('/municipality-1/node/1/edit?language=he');
 
