@@ -60,7 +60,25 @@ viewEventTest =
                 viewEvent baseUrl English event1
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "event-date" ]
-                    |> Query.has [ text "" ]
+                    |> Query.children [ tag "span" ]
+                    |> Query.first
+                    |> Query.has [ text "Thu, 01/01/1970 02:00" ]
+        , test "Event with the same Date and different Time" <|
+            \() ->
+                viewEvent baseUrl English event2
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "event-date" ]
+                    |> Query.children [ tag "span" ]
+                    |> Query.first
+                    |> Query.has [ text "Sat, 20/10/1973 23:20 - 23:20" ]
+        , test "Event with the different Date and different Time" <|
+            \() ->
+                viewEvent baseUrl English event3
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "event-date" ]
+                    |> Query.children [ tag "span" ]
+                    |> Query.first
+                    |> Query.has [ text "Thu, 01/01/1970 02:00 - 20/10/1973 23:20" ]
         , test "Event without Weekly Recurring" <|
             \() ->
                 viewEvent baseUrl English event2
@@ -138,8 +156,8 @@ event2 =
     , { name = "Afternoon event"
       , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
       , description = Just "Afternoon event description"
-      , date = Date.fromTime 0
-      , endDate = Just (Date.fromTime 120000000000)
+      , date = Date.fromTime 120000000000
+      , endDate = Just (Date.fromTime 120000000100)
       , recurringWeekly = False
       , ticketPrice = Just "120"
       }
@@ -153,7 +171,7 @@ event3 =
       , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
       , description = Just "Evening event description"
       , date = Date.fromTime 0
-      , endDate = Just (Date.fromTime 120000000000000)
+      , endDate = Just (Date.fromTime 120000000000)
       , recurringWeekly = True
       , ticketPrice = Just "180"
       }
