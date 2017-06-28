@@ -16,6 +16,12 @@ describe('Municipality basic page', () => {
     browser.waitForVisible('p=Terms page body english');
   });
 
+  it('should show the base page title and body with the selected language: arabic', () => {
+    browser.url('/municipality-1/node/66?language=ar');
+    browser.waitForVisible('h2=Terms page arabic');
+    browser.waitForVisible('p=Terms page body arabic');
+  });
+
   it('should show the base page title and body with the selected language: hebrew', () => {
     browser.url('/municipality-1/node/66?language=he');
     browser.waitForVisible('h2=תנאי שימוש');
