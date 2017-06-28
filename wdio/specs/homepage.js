@@ -153,7 +153,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show the municipality title for the news', () => {
-    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    IvisitHomepage('1', 'hebrew', 'residents');
     browser.waitForVisible("h2=What's happening in טובא-זנגריה?");
   });
 
