@@ -229,21 +229,27 @@ describe('Municipality homepage', () => {
     browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
   });
 
+  it('should show events for the municiality 2 with the default language: arabic and user type: residents', () => {
+    IvisitHomepage('2');
+    browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
+    assert(!browser.isVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة'));
+  });
+
   it('should show events by the municiality 4 with the default language: hebrew', () => {
     IvisitHomepage('4');
     browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
   });
 
   it('should show only events for residents user type in hebrew', () => {
-    IvisitHomepage('1', 'hebrew', 'residents');
-    browser.waitForVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+    IvisitHomepage('2', 'hebrew', 'residents');
     browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
+    assert(!browser.isVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה'));
   });
 
   it('should show only events for residents user type in arabic', () => {
-    IvisitHomepage('1', 'arabic', 'residents');
-    browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
+    IvisitHomepage('2', 'arabic', 'residents');
     browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
+    assert(!browser.isVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة'));
   });
 
   it('should show only events for businesses user type in hebrew', () => {
