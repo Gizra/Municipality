@@ -11,10 +11,6 @@ $plugin = [
   'category' => t('Hedley'),
   'hook theme' => 'hedley_municipality_topics_list_content_type_theme',
   'required context' => new ctools_context_required(t('Municipality'), 'node'),
-  'defaults' => [
-    'title' => NULL,
-    'topics' => NULL,
-  ],
 ];
 
 /**
@@ -67,16 +63,6 @@ function hedley_municipality_topics_list_content_type_render($subtype, $conf, $a
  */
 function hedley_municipality_topics_list_content_type_edit_form($form, &$form_state) {
   return $form;
-}
-
-/**
- * Submit handler.
- */
-function hedley_municipality_topics_list_content_type_edit_form_submit($form, &$form_state) {
-  // Copy submitted form values according to the defined defaults.
-  foreach (array_keys($form_state['plugin']['defaults']) as $key) {
-    $form_state['conf'][$key] = $form_state['values'][$key];
-  }
 }
 
 /**
