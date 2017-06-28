@@ -13175,7 +13175,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('col-md-5'),
+				_0: _elm_lang$html$Html_Attributes$class('col-md-6'),
 				_1: {ctor: '[]'}
 			},
 			{
@@ -13184,7 +13184,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 					_elm_lang$html$Html$a,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('thumbnail'),
+						_0: _elm_lang$html$Html_Attributes$class('thumbnail search-results'),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$href(
@@ -13220,8 +13220,12 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 												_elm_lang$html$Html$img,
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$src(imageUrl),
-													_1: {ctor: '[]'}
+													_0: _elm_lang$html$Html_Attributes$class('img-responsive'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$src(imageUrl),
+														_1: {ctor: '[]'}
+													}
 												},
 												{ctor: '[]'}),
 											_1: {ctor: '[]'}
@@ -13287,7 +13291,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 														_gizra$municipality$Utils_Html$showIf,
 														_p2.recurringWeekly,
 														A2(
-															_elm_lang$html$Html$span,
+															_elm_lang$html$Html$div,
 															{
 																ctor: '::',
 																_0: _elm_lang$html$Html_Attributes$class('recurring-weekly'),
