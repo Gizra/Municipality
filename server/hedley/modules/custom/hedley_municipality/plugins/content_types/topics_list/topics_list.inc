@@ -7,7 +7,7 @@
 
 $plugin = [
   'title' => t('Topics list'),
-  'description' => t('The municipality\'s topics displayed in colored buttons'),
+  'description' => t("The municipality's topics displayed in colored buttons"),
   'category' => t('Hedley'),
   'hook theme' => 'hedley_municipality_topics_list_content_type_theme',
   'required context' => new ctools_context_required(t('Municipality'), 'node'),

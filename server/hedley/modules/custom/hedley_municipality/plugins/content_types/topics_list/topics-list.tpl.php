@@ -1,3 +1,10 @@
+<?php
+
+/**
+ * @file
+ * Topics list template.
+ */
+?>
 <div class="row">
   <div class="col-md-12">
     <div class="divider"></div>
