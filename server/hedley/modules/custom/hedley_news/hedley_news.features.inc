@@ -24,6 +24,30 @@ function hedley_news_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function hedley_news_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: fixed_thumbnail.
+  $styles['fixed_thumbnail'] = array(
+    'label' => 'Fixed thumbnail',
+    'effects' => array(
+      4 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 100,
+          'height' => 100,
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function hedley_news_node_info() {
