@@ -1,10 +1,7 @@
 'use strict';
-const assert = require('assert');
-
 module.exports = function (browser, capabilities, specs) {
 
   browser.addCommand('login', (user) => {
-    assert(user, "login command must be passed a username");
     browser.url('/user/login');
     browser.waitForVisible('#edit-name');
     browser.setValueSafe('#edit-name', user);
