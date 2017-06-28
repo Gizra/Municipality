@@ -5,6 +5,20 @@ describe('Municipality homepage', () => {
     browser.url('/municipality-1/node/1?language=he');
   });
 
+  const IvisitHomepage = (municipality, language = false, userType = false) => {
+    const languageText = {
+      'hebrew': 'he',
+      'arabic': 'ar',
+      'english':'en',
+    };
+
+    var url = '/municipality-'+ municipality + '/node/' + municipality + ((userType || language) ? '/?' : '') ;
+    url = url + ((userType) ? 'user_type=' + userType : '');
+    url = url + ((userType && language) ? '&' : '');
+    url = url + ((language) ? 'language=' + languageText[language] : '');
+    browser.url(url);
+  };
+
   const checkSelectedLanguage = (language) => {
     browser.waitForVisible('.btn-group.languages');
     const activeLanguage= browser.getText('.btn-group.languages .btn.btn-default.active');
@@ -65,7 +79,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show user types labels in the selected language: hebrew', () => {
-    browser.url('/municipality-1/node/1?language=he&user_type=residents');
+    IvisitHomepage('1', 'hebrew', 'residents');
     browser.waitForVisible('.btn-group.user-types');
     const business = browser.getText('.btn-group.user-types a:nth-child(1)');
     assert.equal('עסקים', business);
@@ -75,7 +89,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show user types labels in the selected language: english', () => {
-    browser.url('/municipality-1/node/1?language=en&user_type=residents');
+    IvisitHomepage('1', 'english', 'residents');
     business = browser.getText('.btn-group.user-types a:nth-child(1)');
     assert.equal('Businesses', business);
 
@@ -84,59 +98,62 @@ describe('Municipality homepage', () => {
   });
 
   it('Should show "english" language and "residents" chosen in the language and user type menus', () => {
-    browser.url('/municipality-1/node/1?language=en&user_type=residents');
+    IvisitHomepage('1','english', 'residents');
     checkSelectedLanguage('english');
     checkSelectedUserType('residents', 'english');
   });
 
   it('should show "hebrew" language and "residents" chosen in the language and user type menus', () => {
-    browser.url('/municipality-1/node/1?language=he&user_type=residents');
+    IvisitHomepage('1', 'hebrew', 'residents');
     checkSelectedLanguage('hebrew');
     checkSelectedUserType('residents', 'hebrew');
   });
 
   it('should show the "Do now" elements which fits the current user type and the hebrew language', () => {
-    browser.url('/municipality-1/node/1?language=he&user_type=residents');
+    IvisitHomepage('1', 'hebrew', 'residents');
     browser.waitForVisible("h2=Do now");
     browser.waitForVisible('a=לקבל אישור תושב');
     browser.waitForVisible('a=לרשום חתונה');
   });
 
   it('Should show the "Do now" elements which fits the current user type and the arabic language', () => {
-    browser.url('/municipality-1/node/1?language=ar&user_type=residents');
+    IvisitHomepage('1', 'arabic', 'residents');
     browser.waitForVisible("h2=Do now");
     browser.waitForVisible('a=الحصول على الإقامة');
     browser.waitForVisible('a=السجل الزفاف');
   });
 
   it('Should not show the "Do now" elements which fits for "residents" when "businesses" user type is selected', () => {
-    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
+    IvisitHomepage('1', 'hebrew', 'businesses');
     browser.waitForVisible("h2=Do now");
     assert(!browser.isVisible('a=לקבל אישור תושב'));
     assert(!browser.isVisible('a=לרשום חתונה'));
   });
 
   it('should show the internal action page when clicking on the action link in the same tab, in hebrew', () => {
-    browser.url('/municipality-1/node/1?language=he');
+    IvisitHomepage('1', 'hebrew');
+    // browser.url('/municipality-1/node/1?language=he');
     browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
     browser.waitForVisible('h2=לקבל אישור תושב');
   });
 
   it('should show the internal action page when clicking on the action link in the same tab, in arabic', () => {
-    browser.url('/municipality-1/node/1?language=ar');
+    IvisitHomepage('1', 'arabic');
+    // browser.url('/municipality-1/node/1?language=ar');
     browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
     browser.waitForVisible('h2=الحصول على الإقامة');
   });
 
 
   it('should open an external "action" link in a new tab', () => {
-    browser.url('/municipality-1/node/1?language=he');
+    IvisitHomepage('1', 'hebrew');
+    // browser.url('/municipality-1/node/1?language=he');
     const target = browser.getAttribute('.item.action.homepage-teaser:nth-child(4) .content .header a', 'target');
     assert(target == '_blank');
   });
 
   it('should show only news for the selected user type "residents" on hebrew language', () => {
-    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    IvisitHomepage('1', 'hebrew', 'residents');
     browser.waitForVisible('a=מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17');
   });
 
@@ -145,7 +162,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show only news for the selected user type "businesses" on hebrew language', () => {
-    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
+    IvisitHomepage('1', 'hebrew', 'businesses');
     browser.waitForVisible('a=מבצע סגירת חובות ארנונה לעסקים');
   });
 
@@ -154,7 +171,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show FAQs only for the chosen user type "residents" and the hebrew language', () => {
-    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    IvisitHomepage('1', 'hebrew', 'residents');
     browser.waitForVisible('label=כמה סייעות יש בגן ילדים?');
     browser.waitForVisible('label=באילו שעות מפנים את הזבל?');
   });
@@ -164,7 +181,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show FAQs only for the chosen user type "businesses" and the hebrew language', () => {
-    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
+    IvisitHomepage('1', 'hebrew', 'businesses');
     browser.waitForVisible('label=האם גני ילדים זכאים לפטור מארנונה?');
     browser.waitForVisible('label=באילו שעות מפנים את הזבל?');
   });
@@ -174,29 +191,67 @@ describe('Municipality homepage', () => {
   });
 
   it('should open a news element in the same tab, with the hebrew language and residents user type', () => {
-    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    IvisitHomepage('1', 'hebrew', 'residents');
     clickOnNewsItem('מבצע סגירת חובות ארנונה לתושבים');
     checkSelectedUserType('residents', 'hebrew');
     checkSelectedLanguage('hebrew');
   });
 
   it('should open a news element in the same tab, with the hebrew language and businesses user type', () => {
-    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
+    IvisitHomepage('1', 'hebrew', 'businesses');
     clickOnNewsItem('מבצע סגירת חובות ארנונה לעסקים');
     checkSelectedUserType('businesses', 'hebrew');
     checkSelectedLanguage('hebrew');
   });
 
   it('should open a news element in the same tab, with the arabic language and residents user type', () => {
-    browser.url('/municipality-1/node/1?user_type=residents&language=ar');
+    IvisitHomepage('1', 'arabic', 'residents');
     clickOnNewsItem('عملية إغلاق ديون ضريبة الأملاك للسكان');
     checkSelectedUserType('residents', 'arabic');
     checkSelectedLanguage('arabic');
   });
 
   it('should open a news element in the same tab, with the arabic language and businesses user type', () => {
-    browser.url('/municipality-1/node/1?user_type=businesses&language=ar');
+    IvisitHomepage('1', 'arabic', 'businesses');
     clickOnNewsItem('عملية الإنتهاء الديون الضريبية الممتلكات التجارية');
+    checkSelectedUserType('businesses', 'arabic');
+    checkSelectedLanguage('arabic');
+  });
+
+  it('should show the events page with the hebrew language and residents user type, when clicking on see all events button', () => {
+    IvisitHomepage('1', 'hebrew', 'residents');
+    const eventsButton = $('.pane-elm .btn-show-all');
+    eventsButton.click();
+    browser.waitForVisible('div=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+    browser.waitForVisible('div=הצגת ילדים: שבת בבוקר');
+    checkSelectedUserType('residents', 'hebrew');
+    checkSelectedLanguage('hebrew');
+  });
+
+  it('should show the events page with the arabic language and residents user type, when clicking on see all events button', () => {
+    IvisitHomepage('1', 'arabic', 'residents');
+    const eventsButton = $('.pane-elm .btn-show-all');
+    eventsButton.click();
+    browser.waitForVisible('div=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
+    browser.waitForVisible('div=مسرحية للأطفال: صباح السبت');
+    checkSelectedUserType('residents', 'arabic');
+    checkSelectedLanguage('arabic');
+  });
+
+  it('should show the events page with the hebrew language and businesses user type, when clicking on see all events button', () => {
+    IvisitHomepage('1', 'hebrew', 'businesses');
+    const eventsButton = $('.pane-elm .btn-show-all');
+    eventsButton.click();
+    browser.waitForVisible('div=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+    checkSelectedUserType('businesses', 'hebrew');
+    checkSelectedLanguage('hebrew');
+  });
+
+  it('should show the events page with the arabic language and businesses user type, when clicking on see all events button', () => {
+    IvisitHomepage('1', 'arabic', 'businesses');
+    const eventsButton = $('.pane-elm .btn-show-all');
+    eventsButton.click();
+    browser.waitForVisible('div=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
     checkSelectedUserType('businesses', 'arabic');
     checkSelectedLanguage('arabic');
   });
