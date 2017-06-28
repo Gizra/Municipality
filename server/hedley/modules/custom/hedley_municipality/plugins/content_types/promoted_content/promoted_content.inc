@@ -30,7 +30,7 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
     return NULL;
   }
   $municipality_node = $context->data;
-  $wrapper = entity_metadata_wrapper('node', $municipality_node);
+  $municipality_wrapper = entity_metadata_wrapper('node', $municipality_node);
 
   // Get promoted FAQ nodes of the viewed municipality.
   if (!$nodes = hedley_municipality_get_nodes_by_current_user_type($conf['bundle'], 10, $municipality_node, TRUE)) {
@@ -102,7 +102,7 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
   // Ignoring the "Only string literals should be passed to t()" validation,
   // because it doesn't make sense in this case.
   // @codingStandardsIgnoreStart
-  $variables['title'] = t($conf['title'], ['@municipality' => $wrapper->label()]);
+  $variables['title'] = t($conf['title'], ['@municipality' => $municipality_wrapper->label()]);
   // @codingStandardsIgnoreEnd
 
   // Add the "View all nodes" link.

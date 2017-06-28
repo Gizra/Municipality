@@ -135,8 +135,12 @@ describe('Municipality homepage', () => {
     assert(target == '_blank');
   });
 
-  it('should show only news for the selected user type "residents" on hebrew language', () => {
+  it('should show the municipality title for the news', () => {
     browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    browser.waitForVisible("h2=What's happening in טובא-זנגריה?");
+  });
+
+  it('should show only news for the selected user type "residents" on hebrew language', () => {
     browser.waitForVisible('a=מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17');
   });
 

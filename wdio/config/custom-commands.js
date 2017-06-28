@@ -1,6 +1,18 @@
 'use strict';
-
 module.exports = function (browser, capabilities, specs) {
+
+  browser.addCommand('login', (user) => {
+    browser.url('/user/login');
+    browser.waitForVisible('#edit-name');
+    browser.setValueSafe('#edit-name', user);
+    browser.setValueSafe('#edit-pass', user);
+    browser.submitForm('#user-login');
+  });
+
+  browser.addCommand('logout', () => {
+    browser.url('/user/logout');
+    browser.waitForVisible('#site-name');
+  });
 
   /**
    * Recursive function to ensure the correct text.
