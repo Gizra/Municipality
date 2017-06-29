@@ -20,12 +20,4 @@ describe('Municipality news item page', () => {
     browser.waitForVisible('p=إدارة مجموعات تعلن: الفرصة الأخيرة لإغلاق ديون ضريبة الأملاك للسكان. عجل تسوية الديون الخاصة بك وتجنب العقوبات. يسري هذا العرض حتى -8.4.17.');
   });
 
-  it('should show the news item with titles, date and body content in the default language arabic, when english language is selected', () => {
-    browser.url('/municipality-1/node/54?language=en');
-    browser.waitForVisible('h2=News and Updates');
-    browser.waitForVisible('h3=عملية إغلاق ديون ضريبة الأملاك للسكان');
-    browser.waitForVisible('small');
-    browser.waitForVisible('p=إدارة مجموعات تعلن: الفرصة الأخيرة لإغلاق ديون ضريبة الأملاك للسكان. عجل تسوية الديون الخاصة بك وتجنب العقوبات. يسري هذا العرض حتى -8.4.17.');
-  });
-
 });
