@@ -55,14 +55,14 @@ viewEventTest =
                 viewEvent baseUrl English event1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "description" ]
-        , test "Event without Date" <|
+        , test "Event without endDate" <|
             \() ->
                 viewEvent baseUrl English event1
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "event-date" ]
                     |> Query.children [ tag "span" ]
                     |> Query.first
-                    |> Query.has [ text "Thu, 01/01/1970 02:00" ]
+                    |> Query.has [ text "Thu, 01/01/1970" ]
         , test "Event with the same Date and different Time" <|
             \() ->
                 viewEvent baseUrl English event2
@@ -70,7 +70,10 @@ viewEventTest =
                     |> Query.find [ Selector.class "event-date" ]
                     |> Query.children [ tag "span" ]
                     |> Query.first
-                    |> Query.has [ text "Sat, 20/10/1973 23:20 - 23:20" ]
+                    |> Expect.all
+                        [ Query.has [ text "Sat, 20/10/1973" ]
+                        , Query.hasNot [ text "- 20/10/1973" ]
+                        ]
         , test "Event with the different Date and different Time" <|
             \() ->
                 viewEvent baseUrl English event3
@@ -78,7 +81,10 @@ viewEventTest =
                     |> Query.find [ Selector.class "event-date" ]
                     |> Query.children [ tag "span" ]
                     |> Query.first
-                    |> Query.has [ text "Thu, 01/01/1970 02:00 - 20/10/1973 23:20" ]
+                    |> Expect.all
+                        [ Query.has [ text "Thu, 01/01/1970" ]
+                        , Query.has [ text "- 20/10/1973" ]
+                        ]
         , test "Event without Weekly Recurring" <|
             \() ->
                 viewEvent baseUrl English event2
