@@ -29,9 +29,9 @@ function hedley_news_views_api($module = NULL, $api = NULL) {
 function hedley_news_image_default_styles() {
   $styles = array();
 
-  // Exported image style: fixed_thumbnail.
-  $styles['fixed_thumbnail'] = array(
-    'label' => 'Fixed thumbnail',
+  // Exported image style: square_thumbnail.
+  $styles['square_thumbnail'] = array(
+    'label' => 'Square (cropped) thumbnail',
     'effects' => array(
       4 => array(
         'name' => 'image_scale_and_crop',
