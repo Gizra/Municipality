@@ -74,7 +74,7 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
 
         $items[] = [
           'title' => l($wrapper->label(), url('node/' . $wrapper->getIdentifier(), ['absolute' => TRUE])),
-          'image_url' => !empty($image) ? image_style_url('thumbnail', $image['uri']) : NULL,
+          'image_url' => !empty($image) ? image_style_url('square_thumbnail', $image['uri']) : NULL,
         ];
 
         break;
