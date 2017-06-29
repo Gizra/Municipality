@@ -55,12 +55,36 @@ viewEventTest =
                 viewEvent baseUrl English event1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "description" ]
-        , test "Event without Date" <|
+        , test "Event without endDate" <|
             \() ->
                 viewEvent baseUrl English event1
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "event-date" ]
-                    |> Query.has [ text "" ]
+                    |> Query.children [ tag "span" ]
+                    |> Query.first
+                    |> Query.has [ text "Thu, 01/01/1970" ]
+        , test "Event with the same Date and different Time" <|
+            \() ->
+                viewEvent baseUrl English event2
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "event-date" ]
+                    |> Query.children [ tag "span" ]
+                    |> Query.first
+                    |> Expect.all
+                        [ Query.has [ text "Sat, 20/10/1973" ]
+                        , Query.hasNot [ text "- 20/10/1973" ]
+                        ]
+        , test "Event with the different Date and different Time" <|
+            \() ->
+                viewEvent baseUrl English event3
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "event-date" ]
+                    |> Query.children [ tag "span" ]
+                    |> Query.first
+                    |> Expect.all
+                        [ Query.has [ text "Thu, 01/01/1970" ]
+                        , Query.has [ text "- 20/10/1973" ]
+                        ]
         , test "Event without Weekly Recurring" <|
             \() ->
                 viewEvent baseUrl English event2
@@ -138,8 +162,8 @@ event2 =
     , { name = "Afternoon event"
       , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
       , description = Just "Afternoon event description"
-      , date = Date.fromTime 0
-      , endDate = Just (Date.fromTime 120000000000)
+      , date = Date.fromTime 120000000000
+      , endDate = Just (Date.fromTime 120000000100)
       , recurringWeekly = False
       , ticketPrice = Just "120"
       }
@@ -153,7 +177,7 @@ event3 =
       , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
       , description = Just "Evening event description"
       , date = Date.fromTime 0
-      , endDate = Just (Date.fromTime 120000000000000)
+      , endDate = Just (Date.fromTime 120000000000)
       , recurringWeekly = True
       , ticketPrice = Just "180"
       }
