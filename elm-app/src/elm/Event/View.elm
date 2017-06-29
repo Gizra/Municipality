@@ -168,14 +168,14 @@ viewEvent baseUrl language ( eventId, event ) =
 -}
 viewEventAsBlock : BaseUrl -> Language -> ( EventId, Event ) -> Html msg
 viewEventAsBlock baseUrl language ( eventId, event ) =
-    div [ class "col-md-5" ]
+    div [ class "col-md-6" ]
         [ a
-            [ class "thumbnail", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
+            [ class "thumbnail search-results", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
             [ showMaybe <|
                 Maybe.map
                     (\imageUrl ->
                         div [ class "card-img-top" ]
-                            [ img [ src imageUrl ]
+                            [ img [ class "img-responsive", src imageUrl ]
                                 []
                             ]
                     )
@@ -195,7 +195,7 @@ viewEventAsBlock baseUrl language ( eventId, event ) =
                         , text <| translate language (DayAndDate event.date event.endDate)
                         ]
                     , showIf event.recurringWeekly <|
-                        span
+                        div
                             [ class "recurring-weekly" ]
                             [ i
                                 [ class "fa fa-refresh" ]

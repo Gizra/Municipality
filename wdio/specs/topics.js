@@ -48,10 +48,10 @@ describe('Municipality topics', () => {
   it('should show all the relevant events for this topic', () => {
     browser.waitForVisible('h2=Upcoming events');
 
-    const first_event_title = browser.getText('div.featured-box .col-md-5:nth-child(1) h4.card-title');
+    const first_event_title = browser.getText('div.featured-box .col-md-6:nth-child(1) h4.card-title');
     assert.equal('סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה', first_event_title);
 
-    const second_event_title = browser.getText('div.featured-box .col-md-5:nth-child(2) h4.card-title');
+    const second_event_title = browser.getText('div.featured-box .col-md-6:nth-child(2) h4.card-title');
     assert.equal('הצגת ילדים: שבת בבוקר', second_event_title);
   });
 
