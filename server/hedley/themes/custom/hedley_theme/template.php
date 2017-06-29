@@ -35,6 +35,10 @@ function hedley_theme_panels_default_style_render_region($variables) {
  * Preprocess page.
  */
 function hedley_theme_preprocess_page(&$variables) {
+  if (drupal_is_front_page()) {
+    // Redirect user from homepage to the group node view when on homepage.
+    hedley_municipality_redirect_user_to_group_view();
+  }
   // Add the language switch links.
   $variables['language_switch_links'] = hedley_i18n_language_switch_links();
 

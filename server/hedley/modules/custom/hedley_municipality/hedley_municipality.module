@@ -17,6 +17,18 @@ function hedley_municipality_ctools_plugin_directory($module, $plugin) {
 }
 
 /**
+ * Redirect users to the group node view when inside `og_context`.
+ */
+function hedley_municipality_redirect_user_to_group_view() {
+  if(!$group = hedley_municipality_get_current_group()) {
+    // No need to redirect if user is not inside a group context.
+    return;
+  }
+
+  drupal_goto('node/' . $group->nid);
+}
+
+/**
  * Get the base query for fetching nodes.
  *
  * @param string $bundle
