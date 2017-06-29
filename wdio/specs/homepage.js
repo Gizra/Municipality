@@ -132,14 +132,12 @@ describe('Municipality homepage', () => {
 
   it('should show the internal action page when clicking on the action link in the same tab, in hebrew', () => {
     IvisitHomepage('1', 'hebrew');
-    // browser.url('/municipality-1/node/1?language=he');
     browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
     browser.waitForVisible('h2=לקבל אישור תושב');
   });
 
   it('should show the internal action page when clicking on the action link in the same tab, in arabic', () => {
     IvisitHomepage('1', 'arabic');
-    // browser.url('/municipality-1/node/1?language=ar');
     browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
     browser.waitForVisible('h2=الحصول على الإقامة');
   });
@@ -147,7 +145,6 @@ describe('Municipality homepage', () => {
 
   it('should open an external "action" link in a new tab', () => {
     IvisitHomepage('1', 'hebrew');
-    // browser.url('/municipality-1/node/1?language=he');
     const target = browser.getAttribute('.item.action.homepage-teaser:nth-child(4) .content .header a', 'target');
     assert(target == '_blank');
   });
@@ -221,6 +218,12 @@ describe('Municipality homepage', () => {
     clickOnNewsItem('عملية الإنتهاء الديون الضريبية الممتلكات التجارية');
     checkSelectedUserType('businesses', 'arabic');
     checkSelectedLanguage('arabic');
+  });
+
+  it('should show topics list for the current municipality', () => {
+    IvisitHomepage('1', 'hebrew', 'residents');
+    browser.waitForVisible('button=איסוף אשפה');
+    browser.waitForVisible('button=גני ילדים');
   });
 
   it('should show events for the municiality 1 with the default language: arabic and user type: residents', () => {
