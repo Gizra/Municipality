@@ -15,8 +15,15 @@ describe('Municipality topics', () => {
   it('should show the correct FAQs', () => {
     browser.waitForVisible('div.pane-faqs-accordion .box-content');
 
-    const faq_answer = browser.getText('div.pane-faqs-accordion .box-content section.toggle:nth-child(1) > p');
-    assert.equal('בכל גן של עד 30 ילדים, גננת אחת ושתי סייעות', faq_answer);
+    const faq_question = browser.getText('div.pane-faqs-accordion .box-content .panel-group div.panel:nth-child(1) .panel-title > a');
+    assert.equal('כמה סייעות יש בגן ילדים?', faq_question);
+  });
+
+  it('should hide the FAQs answer', () => {
+    browser.waitForVisible('div.pane-faqs-accordion .box-content');
+
+    const faq_answer = browser.getText('div.pane-faqs-accordion .box-content .panel-group div.panel:nth-child(1) .panel-body > p');
+    assert.equal('', faq_answer);
   });
 
   it('should show the correct topics', () => {
