@@ -12328,7 +12328,11 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 												function (email) {
 													return A2(
 														_elm_lang$html$Html$p,
-														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('mail-wrapper'),
+															_1: {ctor: '[]'}
+														},
 														{
 															ctor: '::',
 															_0: A2(
@@ -12371,7 +12375,11 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 													function (phone) {
 														return A2(
 															_elm_lang$html$Html$p,
-															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class('phone-wrapper'),
+																_1: {ctor: '[]'}
+															},
 															{
 																ctor: '::',
 																_0: A2(
@@ -12389,7 +12397,7 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 																		{
 																			ctor: '::',
 																			_0: _elm_lang$html$Html_Attributes$href(
-																				A2(_elm_lang$core$Basics_ops['++'], 'mailto:', phone)),
+																				A2(_elm_lang$core$Basics_ops['++'], 'tel:', phone)),
 																			_1: {
 																				ctor: '::',
 																				_0: _elm_lang$html$Html_Attributes$target('_blank'),
