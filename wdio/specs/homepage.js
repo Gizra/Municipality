@@ -204,4 +204,10 @@ describe('Municipality homepage', () => {
     checkSelectedUserType('businesses', 'arabic');
     checkSelectedLanguage('arabic');
   });
+
+  it('should show topics list for the current municipality', () => {
+    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    browser.waitForVisible('button=איסוף אשפה');
+    browser.waitForVisible('button=גני ילדים');
+  });
 });

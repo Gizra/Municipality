@@ -90,13 +90,22 @@ translate lang trans =
                         formater =
                             format "%d/%m/%Y %H:%M"
 
+                        compareFormater =
+                            format "%d/%m/%Y"
+
                         dateFormated =
                             formater date
+
+                        timeFormater =
+                            format "%H:%M"
 
                         allDatesFormated =
                             Maybe.map
                                 (\endDate ->
-                                    dateFormated ++ " - " ++ (formater endDate)
+                                    if compareFormater date == compareFormater endDate then
+                                        dateFormated ++ " - " ++ (timeFormater endDate)
+                                    else
+                                        dateFormated ++ " - " ++ (formater endDate)
                                 )
                                 mEndDate
                                 |> Maybe.withDefault dateFormated

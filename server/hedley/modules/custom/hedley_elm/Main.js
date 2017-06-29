@@ -12095,6 +12095,8 @@ var _gizra$municipality$Translate$translate = F2(
 					}
 				case 'DayAndDate':
 					var _p2 = _p0._0;
+					var timeFormater = _mgold$elm_date_format$Date_Format$format('%H:%M');
+					var compareFormater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y');
 					var formater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y %H:%M');
 					var dateFormated = formater(_p2);
 					var allDatesFormated = A2(
@@ -12103,7 +12105,15 @@ var _gizra$municipality$Translate$translate = F2(
 						A2(
 							_elm_lang$core$Maybe$map,
 							function (endDate) {
-								return A2(
+								return _elm_lang$core$Native_Utils.eq(
+									compareFormater(_p2),
+									compareFormater(endDate)) ? A2(
+									_elm_lang$core$Basics_ops['++'],
+									dateFormated,
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										' - ',
+										timeFormater(endDate))) : A2(
 									_elm_lang$core$Basics_ops['++'],
 									dateFormated,
 									A2(
