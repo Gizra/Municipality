@@ -17,10 +17,20 @@ function hedley_municipality_ctools_plugin_directory($module, $plugin) {
 }
 
 /**
+ * Implements hook_init().
+ */
+function hedley_municipality_init() {
+  if (drupal_is_front_page() && !drupal_is_cli()) {
+    // Redirect user from homepage to the group node view when on homepage.
+    hedley_municipality_redirect_user_to_group_view();
+  }
+}
+
+/**
  * Redirect users to the group node view when inside `og_context`.
  */
 function hedley_municipality_redirect_user_to_group_view() {
-  if(!$group = hedley_municipality_get_current_group()) {
+  if (!$group = hedley_municipality_get_current_group()) {
     // No need to redirect if user is not inside a group context.
     return;
   }
