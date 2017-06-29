@@ -22,15 +22,22 @@ function hedley_municipality_ctools_plugin_directory($module, $plugin) {
  * Redirect to the group node view when inside `og_context`.
  */
 function hedley_municipality_init() {
-  if (drupal_is_front_page() && !drupal_is_cli()) {
-    // Redirect from homepage to the group node view when on homepage.
-    if (!$group = hedley_municipality_get_current_group()) {
-      // No need to redirect if user is not inside a group context.
-      return;
-    }
-
-    drupal_goto('node/' . $group->nid);
+  if (!drupal_is_front_page()) {
+    // Not the homepage.
+    return;
   }
+
+  if (drupal_is_cli()) {
+    // Ignore requests from cli.
+    return;
+  }
+
+  if (!$group = hedley_municipality_get_current_group()) {
+    // No need to redirect if user is not inside a group context.
+    return;
+  }
+
+  drupal_goto('node/' . $group->nid);
 }
 
 /**
