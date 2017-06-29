@@ -205,6 +205,12 @@ describe('Municipality homepage', () => {
     checkSelectedLanguage('arabic');
   });
 
+  it('should show topics list for the current municipality', () => {
+    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    browser.waitForVisible('button=איסוף אשפה');
+    browser.waitForVisible('button=גני ילדים');
+  });
+
   it('should redirect user to the group view page', () => {
     browser.url('/municipality-1');
     browser.waitForVisible('h2=Frequently asked questions');

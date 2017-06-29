@@ -1,8 +1,8 @@
 id,name_ar,name_en,name_he,field_color,municipality
-1, روضة أطفال,Kindergarten,גני ילדים,olive,1
-2,جمع القمامة,Garbage collection,איסוף אשפה,green,1
-3,الأرنونا,Arnona,ארנונה,pink,2
-4,رخصة أعمال,Business license,רישיון עסק,blue,2
-5,خدمة المقيمين,Resident service,שירות לתושב,red,3
-6,حضاره,Culture,תרבות,purple,3
-7,المناقصات,Tenders,מכרזים,brown,4
+1, روضة أطفال,Kindergarten,גני ילדים,quaternary,1
+2,جمع القمامة,Garbage collection,איסוף אשפה,success,1
+3,الأرنونا,Arnona,ארנונה,secondary,2
+4,رخصة أعمال,Business license,רישיון עסק,info,2
+5,خدمة المقيمين,Resident service,שירות לתושב,danger,3
+6,حضاره,Culture,תרבות,warning,3
+7,المناقصات,Tenders,מכרזים,tertiary,4
