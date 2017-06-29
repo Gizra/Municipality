@@ -13,9 +13,9 @@ describe('Municipality homepage', () => {
     };
 
     var url = '/municipality-'+ municipality + '/node/' + municipality + ((userType || language) ? '/?' : '') ;
-    url = url + ((userType) ? 'user_type=' + userType : '');
+    url = url + ((userType) ? ('user_type=' + userType) : '');
     url = url + ((userType && language) ? '&' : '');
-    url = url + ((language) ? 'language=' + languageText[language] : '');
+    url = url + ((language) ? ('language=' + languageText[language]) : '');
     browser.url(url);
   };
 
