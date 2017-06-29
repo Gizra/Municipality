@@ -210,4 +210,13 @@ describe('Municipality homepage', () => {
     browser.waitForVisible('button=איסוף אשפה');
     browser.waitForVisible('button=גני ילדים');
   });
+
+  it('should redirect user to the group view page', () => {
+    browser.url('/municipality-1');
+    browser.waitForVisible('h2=Frequently asked questions');
+
+    // Click on logo and expect to be on the same page.
+    browser.click('#logo');
+    browser.waitForVisible('h2=Frequently asked questions');
+  });
 });
