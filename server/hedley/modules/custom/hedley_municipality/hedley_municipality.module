@@ -32,6 +32,7 @@ function hedley_municipality_init() {
     return;
   }
 
+  // Redirect from homepage to the group node view when on homepage.
   if (!$group = hedley_municipality_get_current_group()) {
     // No need to redirect if user is not inside a group context.
     return;
