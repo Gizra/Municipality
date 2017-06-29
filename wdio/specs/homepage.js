@@ -5,7 +5,7 @@ describe('Municipality homepage', () => {
     browser.url('/municipality-1/node/1?language=he');
   });
 
-  const IvisitHomepage = (municipality, language = false, userType = false) => {
+  const IvisitHomepage = (municipality, language, userType) => {
     const languageText = {
       'hebrew': 'he',
       'arabic': 'ar',
@@ -137,14 +137,14 @@ describe('Municipality homepage', () => {
   });
 
   it('should show the internal action page when clicking on the action link in the same tab, in arabic', () => {
-    IvisitHomepage('1', 'arabic');
+    IvisitHomepage('1', 'arabic','');
     browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
     browser.waitForVisible('h2=الحصول على الإقامة');
   });
 
 
   it('should open an external "action" link in a new tab', () => {
-    IvisitHomepage('1', 'hebrew');
+    IvisitHomepage('1', 'hebrew','');
     const target = browser.getAttribute('.item.action.homepage-teaser:nth-child(4) .content .header a', 'target');
     assert(target == '_blank');
   });
@@ -227,19 +227,19 @@ describe('Municipality homepage', () => {
   });
 
   it('should show events for the municiality 1 with the default language: arabic and user type: residents', () => {
-    IvisitHomepage('1');
+    IvisitHomepage('1','','');
     browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
     browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
   });
 
   it('should show events for the municiality 2 with the default language: arabic and user type: residents', () => {
-    IvisitHomepage('2');
+    IvisitHomepage('2','','');
     browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
     assert(!browser.isVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة'));
   });
 
   it('should show events by the municiality 4 with the default language: hebrew', () => {
-    IvisitHomepage('4');
+    IvisitHomepage('4','','');
     browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
   });
 
