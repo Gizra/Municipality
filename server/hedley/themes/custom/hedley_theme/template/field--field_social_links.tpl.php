@@ -7,13 +7,13 @@
 ?>
 <ul class="header-social-icons social-icons">
   <?php foreach ($items as $item): ?>
-    <li class="social-icons-<?php if(!empty($item['#element']['attributes']['class'])): ?><?php print $item['#element']['attributes']['class']; ?><?php endif; ?>">
+    <li class="social-icons-<?php if(!empty($item['#element']['title'])): ?><?php print strtolower($item['#element']['title']); ?><?php endif; ?>">
       <a
-        class="ui circular button "
         title="<?php print $item['#element']['title']; ?>"
+        class="ui circular button "
         href="<?php print $item['#element']['url']; ?>"
       >
-        <i class="fa fa-<?php if(!empty($item['#element']['attributes']['class'])): ?><?php print $item['#element']['attributes']['class']; ?><?php endif; ?>"></i>
+        <i class="fa fa-<?php if(!empty($item['#element']['title'])): ?><?php print strtolower($item['#element']['title']); ?><?php endif; ?>"></i>
       </a>
     </li>
   <?php endforeach; ?>
