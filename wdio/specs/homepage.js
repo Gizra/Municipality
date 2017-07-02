@@ -221,7 +221,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should see the social link icons after saving the municipality', () => {
-    browser.url('/municipality-1');
+    browser.url('/tuba-zangariyye');
     browser.waitForVisible('.header-social-icons.social-icons');
 
     const fbClass = browser.getAttribute('ul.header-social-icons li:nth-child(1)', 'class');
@@ -231,7 +231,7 @@ describe('Municipality homepage', () => {
     browser.login('noam');
 
     // Save the municipality and expect to see the same class.
-    browser.url('/municipality-1/node/1/edit');
+    browser.url('/tuba-zangariyye/node/1/edit');
     browser.click('#edit-submit');
 
     browser.waitForVisible('.header-social-icons.social-icons');
