@@ -45,7 +45,7 @@ describe('Municipality homepage', () => {
   };
 
   it('should show the correct name of the municipality', () => {
-    browser.waitForVisible('header#header .header-container #site-name > h1');
+    browser.waitForVisible('header#header .container #site-name > h1');
 
     // Assert the page have the expected title.
     const muniTitle = browser.getText('header#header .header-container #site-name > h1');
