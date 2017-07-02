@@ -85,20 +85,6 @@ when you run the upgrade script.
 
   $ ./upgrade -l
 
-
-## Theme
-
-Please make sure [Compass](http://compass-style.org/install/) is installed on your machine.
-
-Navigate to the theme directory.
-`cd ./hedley/themes/custom/hedley_theme`
-
-Run the following command:
- 
-    $ compass watch 
-
-Adding any custom CSS to theme is done in `sass/custom.scss`.
-
 #### The upgrade script will perform following steps:
 
 1. Create a backup of the sites/default folder.
