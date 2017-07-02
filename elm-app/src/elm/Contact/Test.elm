@@ -4,14 +4,14 @@ import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
 import Contact.Model exposing (..)
 import Contact.Utils exposing (filterContacts)
-import Contact.View exposing (viewContact)
+import Contact.View exposing (viewContact, viewContactAsBlock)
 import Date
 import DictList
 import Expect
 import Html
 import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
-import Test.Html.Selector as Selector exposing (class, tag, text)
+import Test.Html.Selector as Selector exposing (class, tag, text, attribute)
 
 
 filterContactsTest : Test
@@ -88,6 +88,20 @@ viewContactTest =
                     |> Query.findAll [ tag "span" ]
                     |> Query.first
                     |> Query.has [ text "Mon" ]
+        , test "Contact block with phone" <|
+            \() ->
+                viewContactAsBlock baseUrl English contact2
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "phone-wrapper" ]
+                    |> Query.children [ tag "a" ]
+                    |> Query.each (Query.has [ attribute "href" "tel:1234" ])
+        , test "Contact block with email" <|
+            \() ->
+                viewContactAsBlock baseUrl English contact2
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "email-wrapper" ]
+                    |> Query.children [ tag "a" ]
+                    |> Query.each (Query.has [ attribute "href" "mailto:carl@example.com" ])
         ]
 
 

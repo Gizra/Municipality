@@ -171,22 +171,22 @@ describe('Municipality homepage', () => {
 
   it('should show FAQs only for the chosen user type "residents" and the hebrew language', () => {
     IvisitHomepage('1', 'hebrew', 'residents');
-    browser.waitForVisible('label=כמה סייעות יש בגן ילדים?');
-    browser.waitForVisible('label=באילו שעות מפנים את הזבל?');
+    browser.waitForVisible('a=כמה סייעות יש בגן ילדים?');
+    browser.waitForVisible('a=באילו שעות מפנים את הזבל?');
   });
 
   it('should not show FAQs for "businesses" when "residents" are the chosen user type ', () => {
-    assert(!browser.isVisible('label= האם גני ילדים זכאים לפטור מארנונה?'));
+    assert(!browser.isVisible('a= האם גני ילדים זכאים לפטור מארנונה?'));
   });
 
   it('should show FAQs only for the chosen user type "businesses" and the hebrew language', () => {
     IvisitHomepage('1', 'hebrew', 'businesses');
-    browser.waitForVisible('label=האם גני ילדים זכאים לפטור מארנונה?');
-    browser.waitForVisible('label=באילו שעות מפנים את הזבל?');
+    browser.waitForVisible('a=האם גני ילדים זכאים לפטור מארנונה?');
+    browser.waitForVisible('a=באילו שעות מפנים את הזבל?');
   });
 
   it('should not show FAQs for "residents" when "businesses" are the chosen user type', () => {
-    assert(!browser.isVisible('label=כמה סייעות יש בגן ילדים?'));
+    assert(!browser.isVisible('a=כמה סייעות יש בגן ילדים?'));
   });
 
   it('should open a news element in the same tab, with the hebrew language and residents user type', () => {
