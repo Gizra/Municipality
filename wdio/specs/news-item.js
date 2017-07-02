@@ -16,7 +16,7 @@ describe('Municipality news item page', () => {
     browser.waitForVisible('h2=News and Updates');
     browser.waitForVisible('h3=عملية إغلاق ديون ضريبة الأملاك للسكان');
     // Check that the date HTML tag exists on the page.
-    browser.waitForVisible('small');
+    browser.waitForVisible('.pane-news-content .panel-body small');
     browser.waitForVisible('p=إدارة مجموعات تعلن: الفرصة الأخيرة لإغلاق ديون ضريبة الأملاك للسكان. عجل تسوية الديون الخاصة بك وتجنب العقوبات. يسري هذا العرض حتى -8.4.17.');
   });
 
