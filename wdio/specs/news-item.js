@@ -7,7 +7,7 @@ describe('Municipality news item page', () => {
     browser.waitForVisible('h2=News and Updates');
     browser.waitForVisible('h3=מבצע סגירת חובות ארנונה לתושבים');
     // Check that the date HTML tag exists on the page.
-    browser.waitForVisible('small');
+    browser.waitForVisible('.pane-news-content .panel-body small');
     browser.waitForVisible('p=מחלקת הגבייה מודיעה: הזדמנות אחרונה לסגירת חובות הארנונה לתושבים. הזדרזו להסדיר את חובותיכם, והמנעו מקנסות. המבצע בתוקף עד ה-8.4.17.');
   });
 
