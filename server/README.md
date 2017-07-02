@@ -85,6 +85,7 @@ when you run the upgrade script.
 
   $ ./upgrade -l
 
+
 #### The upgrade script will perform following steps:
 
 1. Create a backup of the sites/default folder.
