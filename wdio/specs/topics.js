@@ -2,7 +2,7 @@ const assert = require('assert');
 
 describe('Municipality topics', () => {
   before(() => {
-    browser.url('/municipality-1/taxonomy/term/13?user_type=residents&language=he');
+    browser.url('/tuba-zangariyye/taxonomy/term/13?user_type=residents&language=he');
   });
 
   it('should show the correct news', () => {
