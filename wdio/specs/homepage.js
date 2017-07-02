@@ -2,7 +2,7 @@ const assert = require('assert');
 
 describe('Municipality homepage', () => {
   before(() => {
-    browser.url('/tuba-zangariyye/node/1?language=he');
+    browser.url('/municipality-1/node/1?language=he');
   });
 
   const checkSelectedLanguage = (language) => {
@@ -65,7 +65,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show user types labels in the selected language: hebrew', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew', 'residents');
+    browser.url('/municipality-1/node/1?language=he&user_type=residents');
     browser.waitForVisible('.btn-group.user-types');
     const business = browser.getText('.btn-group.user-types a:nth-child(1)');
     assert.equal('עסקים', business);
@@ -75,7 +75,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show user types labels in the selected language: english', () => {
-    IvisitHomepage('tuba-zangariyye', 'english', 'residents');
+    browser.url('/municipality-1/node/1?language=en&user_type=residents');
     business = browser.getText('.btn-group.user-types a:nth-child(1)');
     assert.equal('Businesses', business);
 
@@ -84,64 +84,64 @@ describe('Municipality homepage', () => {
   });
 
   it('Should show "english" language and "residents" chosen in the language and user type menus', () => {
-    IvisitHomepage('tuba-zangariyye','english', 'residents');
+    browser.url('/municipality-1/node/1?language=en&user_type=residents');
     checkSelectedLanguage('english');
     checkSelectedUserType('residents', 'english');
   });
 
   it('should show "hebrew" language and "residents" chosen in the language and user type menus', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew', 'residents');
+    browser.url('/municipality-1/node/1?language=he&user_type=residents');
     checkSelectedLanguage('hebrew');
     checkSelectedUserType('residents', 'hebrew');
   });
 
   it('should show the "Do now" elements which fits the current user type and the hebrew language', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew', 'residents');
+    browser.url('/municipality-1/node/1?language=he&user_type=residents');
     browser.waitForVisible("h2=Do now");
     browser.waitForVisible('a=לקבל אישור תושב');
     browser.waitForVisible('a=לרשום חתונה');
   });
 
   it('Should show the "Do now" elements which fits the current user type and the arabic language', () => {
-    IvisitHomepage('tuba-zangariyye', 'arabic', 'residents');
+    browser.url('/municipality-1/node/1?language=ar&user_type=residents');
     browser.waitForVisible("h2=Do now");
     browser.waitForVisible('a=الحصول على الإقامة');
     browser.waitForVisible('a=السجل الزفاف');
   });
 
   it('Should not show the "Do now" elements which fits for "residents" when "businesses" user type is selected', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew', 'businesses');
+    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
     browser.waitForVisible("h2=Do now");
     assert(!browser.isVisible('a=לקבל אישור תושב'));
     assert(!browser.isVisible('a=לרשום חתונה'));
   });
 
   it('should show the internal action page when clicking on the action link in the same tab, in hebrew', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew');
+    browser.url('/municipality-1/node/1?language=he');
     browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
     browser.waitForVisible('h2=לקבל אישור תושב');
   });
 
   it('should show the internal action page when clicking on the action link in the same tab, in arabic', () => {
-    IvisitHomepage('tuba-zangariyye', 'arabic');
+    browser.url('/municipality-1/node/1?language=ar');
     browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
     browser.waitForVisible('h2=الحصول على الإقامة');
   });
 
 
   it('should open an external "action" link in a new tab', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew');
+    browser.url('/municipality-1/node/1?language=he');
     const target = browser.getAttribute('.item.action.homepage-teaser:nth-child(4) .content .header a', 'target');
     assert(target == '_blank');
   });
 
   it('should show the municipality title for the news', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew', 'residents');
+    browser.url('/municipality-1/node/1?user_type=residents&language=he');
     browser.waitForVisible("h2=What's happening in טובא-זנגריה?");
   });
 
   it('should show only news for the selected user type "residents" on hebrew language', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew', 'residents');
+    browser.url('/municipality-1/node/1?user_type=residents&language=he');
     browser.waitForVisible('a=מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17');
   });
 
@@ -150,7 +150,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show only news for the selected user type "businesses" on hebrew language', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew', 'businesses');
+    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
     browser.waitForVisible('a=מבצע סגירת חובות ארנונה לעסקים');
   });
 
@@ -159,7 +159,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show FAQs only for the chosen user type "residents" and the hebrew language', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew', 'residents');
+    browser.url('/municipality-1/node/1?user_type=residents&language=he');
     browser.waitForVisible('a=כמה סייעות יש בגן ילדים?');
     browser.waitForVisible('a=באילו שעות מפנים את הזבל?');
   });
@@ -169,7 +169,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show FAQs only for the chosen user type "businesses" and the hebrew language', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew', 'businesses');
+    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
     browser.waitForVisible('a=האם גני ילדים זכאים לפטור מארנונה?');
     browser.waitForVisible('a=באילו שעות מפנים את הזבל?');
   });
@@ -179,64 +179,64 @@ describe('Municipality homepage', () => {
   });
 
   it('should open a news element in the same tab, with the hebrew language and residents user type', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew', 'residents');
+    browser.url('/municipality-1/node/1?user_type=residents&language=he');
     clickOnNewsItem('מבצע סגירת חובות ארנונה לתושבים');
     checkSelectedUserType('residents', 'hebrew');
     checkSelectedLanguage('hebrew');
   });
 
   it('should open a news element in the same tab, with the hebrew language and businesses user type', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew', 'businesses');
+    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
     clickOnNewsItem('מבצע סגירת חובות ארנונה לעסקים');
     checkSelectedUserType('businesses', 'hebrew');
     checkSelectedLanguage('hebrew');
   });
 
   it('should open a news element in the same tab, with the arabic language and residents user type', () => {
-    IvisitHomepage('tuba-zangariyye', 'arabic', 'residents');
+    browser.url('/municipality-1/node/1?user_type=residents&language=ar');
     clickOnNewsItem('عملية إغلاق ديون ضريبة الأملاك للسكان');
     checkSelectedUserType('residents', 'arabic');
     checkSelectedLanguage('arabic');
   });
 
   it('should open a news element in the same tab, with the arabic language and businesses user type', () => {
-    IvisitHomepage('tuba-zangariyye', 'arabic', 'businesses');
+    browser.url('/municipality-1/node/1?user_type=businesses&language=ar');
     clickOnNewsItem('عملية الإنتهاء الديون الضريبية الممتلكات التجارية');
     checkSelectedUserType('businesses', 'arabic');
     checkSelectedLanguage('arabic');
   });
 
   it('should show topics list for the current municipality', () => {
-    IvisitHomepage('tuba-zangariyye', 'hebrew', 'residents');
+    browser.url('/municipality-1/node/1?user_type=residents&language=he');
     browser.waitForVisible('button=איסוף אשפה');
     browser.waitForVisible('button=גני ילדים');
   });
 
   it('should show events for the municiality 1 with the default language: arabic and user type: residents', () => {
-    IvisitHomepage('tuba-zangariyye');
+    browser.url('/municipality-1/node/1);
     browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
     browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
   });
 
   it('should show events for the municiality 2 with the default language: arabic and user type: residents', () => {
-    IvisitHomepage('2');
+    browser.url('/municipality-2/node/2);
     browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
     assert(!browser.isVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة'));
   });
 
   it('should show events by the municiality 4 with the default language: hebrew', () => {
-    IvisitHomepage('kiryat-malakhi');
+    browser.url('/municipality-4/node/4);
     browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
   });
 
   it('should show only events for residents user type in hebrew', () => {
-    IvisitHomepage('ar-ara', 'hebrew', 'residents');
+    browser.url('/municipality-2/node/2?user_type=residents&language=he');
     browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
     assert(!browser.isVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה'));
   });
 
   it('should show only events for residents user type in arabic', () => {
-    IvisitHomepage('ar-ara', 'arabic', 'residents');
+    browser.url('/municipality-2/node/2?user_type=residents&language=ar');
     browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
     assert(!browser.isVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة'));
   });
@@ -283,7 +283,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show the events page with the arabic language and businesses user type, when clicking on see all events button', () => {
-    IvisitHomepage('tuba-zangariyye', 'arabic', 'businesses');
+    browser.url('/municipality-1/node/1?user_type=businesses&language=ar');
     const eventsButton = $('.pane-elm .btn-show-all');
     eventsButton.click();
     browser.waitForVisible('div=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
