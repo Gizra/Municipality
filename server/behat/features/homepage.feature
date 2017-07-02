@@ -11,9 +11,9 @@ Feature: Homepage
 
     Examples:
       | municipality            | language | citizens     |
-      | طوبا الزنغرية           | العربية  | Residents AR |
-      | عرعرة                   | العربية  | Residents AR |
-      | المجلس الإقليمي للالسحرية | العربية  | Residents AR |
+      | Tuba-Zangariyye         | العربية  | Residents AR |
+      | Ar'ara                  | العربية  | Residents AR |
+      | Al-Kasom                | العربية  | Residents AR |
 
 
   @api
@@ -24,10 +24,10 @@ Feature: Homepage
 
     Examples:
       | municipality            | languages     |
-      | طوبا الزنغرية           | العربية,עברית |
-      | عرعرة                   | العربية,עברית |
-      | المجلس الإقليمي للالسحرية | العربية,עברית |
-      | קריית מלאכי              | English,עברית |
+      | Tuba-Zangariyye         | العربية,עברית |
+      | Ar'ara                  | العربية,עברית |
+      | Al-Kasom                | العربية,עברית |
+      | Kiryat Malakhi          | English,עברית |
       | Tel-Aviv                |               |
 
 
@@ -38,11 +38,11 @@ Feature: Homepage
     Then I should see "<user types>" menu only for user types with content for the current Municipality
 
     Examples:
-      | municipality            | user types                 |
-      | طوبا الزنغرية           | Residents AR,Businesses AR |
-      | عرعرة                   | Residents AR,Businesses AR |
-      | المجلس الإقليمي للالسحرية | Residents AR,Businesses AR |
-      | קריית מלאכי              |                            |
+      | municipality    | user types                 |
+      | Tuba-Zangariyye | Residents AR,Businesses AR |
+      | Ar'ara          | Residents AR,Businesses AR |
+      | Al-Kasom        | Residents AR,Businesses AR |
+      | Kiryat Malakhi  |                            |
 
 
   @api
@@ -52,13 +52,13 @@ Feature: Homepage
      Then I should see page "<title>" and "<text>" in the chosen "<language>" and for the chosen "<user type>" only
 
     Examples:
-      | municipality            | language | user type    | title                   | text                                                                                  |
-      | طوبا الزنغرية           | ar       | residents    | طوبا الزنغرية           | سوف تبدأ التعقيم محايد القطط الضالة يوم الاحد 05/03/17                                 |
-      | طوبا الزنغرية           | ar       | businesses   | طوبا الزنغرية           | عملية الإنتهاء الديون الضريبية الممتلكات التجارية                                      |
-      | طوبا الزنغرية           | he       | residents    | טובא-זנגריה              | מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17                                         |
-      | طوبا الزنغرية           | he       | businesses   | טובא-זנגריה              | מבצע סגירת חובות ארנונה לעסקים                                                        |
-      | عرعرة                   | ar       | residents    | عرعرة                   | ​إعلان من الشرطة                                                                        |
-      | المجلس الإقليمي للالسحرية | he       | residents    | אל-קסום                 | הצלחה למרכז המדעים בקריית מלאכי                                                      |
+      | municipality    | language | user type    | title                   | text                                                                                  |
+      | Tuba-Zangariyye | ar       | residents    | طوبا الزنغرية           | سوف تبدأ التعقيم محايد القطط الضالة يوم الاحد 05/03/17                                 |
+      | Tuba-Zangariyye | ar       | businesses   | طوبا الزنغرية           | عملية الإنتهاء الديون الضريبية الممتلكات التجارية                                      |
+      | Tuba-Zangariyye | he       | residents    | טובא-זנגריה              | מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17                                         |
+      | Tuba-Zangariyye | he       | businesses   | טובא-זנגריה              | מבצע סגירת חובות ארנונה לעסקים                                                        |
+      | Ar'ara          | ar       | residents    | عرعرة                   | ​إعلان من الشرطة                                                                        |
+      | Al-Kasom        | he       | residents    | אל-קסום                 | הצלחה למרכז המדעים בקריית מלאכי                                                      |
 
 
   @api
@@ -69,27 +69,27 @@ Feature: Homepage
      Then I should see the homepage in the current "<language>" and the "<new user type>"
 
     Examples:
-      | municipality            | language | user type    | new user type |
-      | طوبا الزنغرية           | ar       | residents    | Businesses AR |
-      | طوبا الزنغرية           | ar       | businesses   | Residents AR  |
-      | طوبا الزنغرية           | he       | residents    | עסקים         |
-      | طوبا الزنغرية           | he       | businesses   | תושבים        |
-      | عرعرة                   | ar       | residents    | Businesses AR |
-      | المجلس الإقليمي للالسحرية | he       | residents    | עסקים         |
+      | municipality    | language | user type    | new user type |
+      | Tuba-Zangariyye | ar       | residents    | Businesses AR |
+      | Tuba-Zangariyye | ar       | businesses   | Residents AR  |
+      | Tuba-Zangariyye | he       | residents    | עסקים         |
+      | Tuba-Zangariyye | he       | businesses   | תושבים        |
+      | Ar'ara          | ar       | residents    | Businesses AR |
+      | Al-Kasom        | he       | residents    | עסקים         |
 
   @api
   Scenario: Verify that if admin adds a user type, the menu will be displayed on homepage
     Given I login with user "liat"
-    When I "add" "Residents" user type to municipality "קריית מלאכי"
+    When I "add" "Residents" user type to municipality "Kiryat Malakhi"
     And I am an anonymous user
-    Then the user type menu should "appear" on municipality "קריית מלאכי" homepage for user types "עסקים,תושבים"
+    Then the user type menu should "appear" on municipality "Kiryat Malakhi" homepage for user types "עסקים,תושבים"
 
   @api
   Scenario: Verify that if admin removes a user type, when there are two, the menu will not be displayed on homepage
     Given I login with user "liat"
-    When I "remove" "Residents" user type to municipality "קריית מלאכי"
+    When I "remove" "Residents" user type to municipality "Kiryat Malakhi"
     And I am an anonymous user
-    Then the user type menu should "not appear" on municipality "קריית מלאכי" homepage for user types "none"
+    Then the user type menu should "not appear" on municipality "Kiryat Malakhi" homepage for user types "none"
 
   @api
   Scenario: Verify that site name is Municipality
