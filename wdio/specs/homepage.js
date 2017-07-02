@@ -224,8 +224,11 @@ describe('Municipality homepage', () => {
     browser.url('/municipality-1');
     browser.waitForVisible('.header-social-icons.social-icons');
 
-    const fbClass = browser.getClassNames('ul.header-social-icons li:nth-child(1)');
+    const fbClass = browser.getAttribute('ul.header-social-icons li:nth-child(1)', 'class');
     assert.equal('social-icons-facebook', fbClass);
+
+    // Login as a content editor.
+    browser.login('noam');
 
     // Save the municipality and expect to see the same class.
     browser.url('/municipality-1/node/1/edit');
@@ -233,7 +236,7 @@ describe('Municipality homepage', () => {
 
     browser.waitForVisible('.header-social-icons.social-icons');
 
-    const fbClassAfterSave = browser.getClassNames('ul.header-social-icons li:nth-child(1)');
+    const fbClassAfterSave = browser.getAttribute('ul.header-social-icons li:nth-child(1)', 'class');
     assert.equal('social-icons-facebook', fbClassAfterSave);
   });
 });
