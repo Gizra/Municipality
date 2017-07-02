@@ -8,7 +8,7 @@ Feature: Verify that content is accessible.
 
     Examples:
       | Title                                         | Type           |
-      | طوبا الزنغرية                                 | municipality   |
+      | Tuba-Zangariyye                               | municipality   |
       | مسرحية للأطفال: صباح السبت                     | event          |
       | כמה סייעות יש בגן ילדים?                        | faq            |
       | לשלם ארנונה                                   | action         |
@@ -24,21 +24,21 @@ Feature: Verify that content is accessible.
   @api
   Scenario: Verify that taxonomy terms are accessible with group context.
     Given I am an anonymous user
-    When  I visit "Tenders" taxonomy of the group "קריית מלאכי"
+    When  I visit "Tenders" taxonomy of the group "Kiryat Malakhi"
     Then  I should get a "200" HTTP response
 
 
   @api
   Scenario: Verify that content editor can access their group edit.
     Given I login with user "noam"
-    When  I edit "طوبا الزنغرية" node of type "municipality"
+    When  I edit "Tuba-Zangariyye" node of type "municipality"
     Then  I should get a "200" HTTP response
 
 
   @api
   Scenario: Verify that authenticated user can't access their group edit.
     Given I login with user "itamar"
-    When  I edit "المجلس الإقليمي للالسحرية" node of type "municipality"
+    When  I edit "Al-Kasom" node of type "municipality"
     Then  I should get a "403" HTTP response
 
 
@@ -59,7 +59,7 @@ Feature: Verify that content is accessible.
   @api
   Scenario: Verify that content editor can't access another group edit.
     Given I login with user "noam"
-    When  I edit "קריית מלאכי" node of type "municipality"
+    When  I edit "Kiryat Malakhi" node of type "municipality"
     Then  I should get a "403" HTTP response
 
     

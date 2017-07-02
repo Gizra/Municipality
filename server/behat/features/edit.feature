@@ -24,7 +24,7 @@ Feature: Edit entities pages.
     | באילו שעות מפנים את הזבל?                        | faq                    |
     | تقرير مراقب المدينة ومفوض الشكاوى العامة، رقم 3. | freedom_of_information |
     | طلب للحصول على تصريح الإقامة                      | hardcopy_form          |
-    | קריית מלאכי                                       | municipality           |
+    | Kiryat Malakhi                                   | municipality           |
     | ביקור שר התחבורה                                 | news                   |
-    | Terms page                                       | page                   |
+    | Terms page english                               | page                   |
     | פינוי אשפה                                        | tender                 |

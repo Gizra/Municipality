@@ -2,3 +2,4 @@ node_modules
 
 # Local config file.
 wdio.local.conf.js
+errorShots
