@@ -1,4 +1,4 @@
 id,municipality,set_as_special_page,title_field_ar,title_field_en,title_field_he,body_ar,body_en,body_he,field_topics,field_user_types
 1,1,,Title AR,Title,כותרת,Body AR,Body,בודי,Garbage collection,Residents|Businesses
 2,1,accessibility,Accessibility page,,,Accessibility page,,,,Residents|Businesses
-3,1,terms,Terms page,,,Terms page,,,,Residents|Businesses
+3,1,terms,Terms page arabic,Terms page english,תנאי שימוש,Terms page body arabic,Terms page body english,תנאי שימוש עברית,,Residents|Businesses

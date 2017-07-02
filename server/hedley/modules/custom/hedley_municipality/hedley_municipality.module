@@ -241,6 +241,8 @@ function hedley_municipality_form_municipality_node_form_alter(&$form, &$form_st
  * Set nodes titles according to their municipality's default language.
  */
 function hedley_municipality_node_presave($node) {
+  global $language;
+
   if (!isset($node->title_field)) {
     return;
   }
@@ -251,7 +253,6 @@ function hedley_municipality_node_presave($node) {
   }
 
   $municipality_wrapper = entity_metadata_wrapper('node', $municipality);
-  $municipality_language = $municipality_wrapper->field_default_language->value();
 
   // Update the municipality's last updated field.
   $municipality_wrapper->field_last_update->set(REQUEST_TIME);
@@ -262,8 +263,8 @@ function hedley_municipality_node_presave($node) {
   }
 
   // For nodes with title_field, set the title property according to the
-  // municipality's language, or the next available language.
-  if ($language_code = hedley_municipality_get_non_empty_language_for_field($node->title_field, $municipality_language)) {
+  // user's language, or the next available language.
+  if ($language_code = hedley_municipality_get_non_empty_language_for_field($node->title_field, $language->language)) {
     // Set the title to the title_field in an available language.
     $node->title = $node->title_field[$language_code][0]['value'];
   }
@@ -397,15 +398,15 @@ function hedley_municipality_node_municipality($node) {
  *
  * @param array $field_attribute
  *   The field attribute from the node object.
- * @param string $municipality_language
- *   The municipality's default language.
+ * @param string $language
+ *   The user's language.
  *
  * @return string
  *   The first available language for the field.
  */
-function hedley_municipality_get_non_empty_language_for_field(array $field_attribute, $municipality_language) {
-  if (!empty($field_attribute[$municipality_language][0]['value'])) {
-    return $municipality_language;
+function hedley_municipality_get_non_empty_language_for_field(array $field_attribute, $language) {
+  if (!empty($field_attribute[$language][0]['value'])) {
+    return $language;
   }
 
   // If the field isn't available in the default language, try another non empty
