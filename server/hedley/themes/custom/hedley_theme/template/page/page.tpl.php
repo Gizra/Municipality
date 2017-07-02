@@ -15,30 +15,6 @@
 
 	  <?php print render($page['before_content']); ?>
 	  <div id="content" class="content full">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3 col-xs-12 mb-xs center">
-            <?php if ($user_type_links): ?>
-              <?php print $user_type_links; ?>
-            <?php endif; ?>
-          </div>
-
-          <div class="col-md-6 col-xs-12 mb-xs center">
-            <?php print render($social_links); ?>
-          </div>
-
-          <div class="col-md-3 col-xs-12 mb-xs center">
-            <?php if ($language_switch_links) : ?>
-              <div class="languages btn-group" role="group">
-                <?php foreach ($language_switch_links as $link): ?>
-                  <?php print $link; ?>
-                <?php endforeach; ?>
-              </div>
-            <?php endif; ?>
-          </div>
-        </div>
-        <div class="divider"></div>
-      </div>
 	    <div class="container">
 		      <?php if ($messages): ?>
 			      <div class="col-md-12">

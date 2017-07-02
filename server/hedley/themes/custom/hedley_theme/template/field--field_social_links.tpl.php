@@ -5,7 +5,7 @@
  * Social links field template.
  */
 ?>
-<ul class="header-social-icons social-icons">
+<ul class="social-icons">
   <?php foreach ($items as $item): ?>
     <li class="social-icons-<?php if(!empty($item['#element']['attributes']['class'])): ?><?php print $item['#element']['attributes']['class']; ?><?php endif; ?>">
       <a
