@@ -14,7 +14,7 @@
     <div class="row">
       <?php foreach ($news_items as $item): ?>
         <section class="call-to-action with-borders mb-xl">
-          <div class="call-to-action-content">
+          <div class="call-to-action-content align-left">
             <h3><?php print $item['title']; ?></h3>
           </div>
           <div class="call-to-action-btn">

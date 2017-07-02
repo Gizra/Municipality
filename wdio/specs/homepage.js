@@ -159,22 +159,22 @@ describe('Municipality homepage', () => {
 
   it('should show FAQs only for the chosen user type "residents" and the hebrew language', () => {
     browser.url('/municipality-1/node/1?user_type=residents&language=he');
-    browser.waitForVisible('label=כמה סייעות יש בגן ילדים?');
-    browser.waitForVisible('label=באילו שעות מפנים את הזבל?');
+    browser.waitForVisible('a=כמה סייעות יש בגן ילדים?');
+    browser.waitForVisible('a=באילו שעות מפנים את הזבל?');
   });
 
   it('should not show FAQs for "businesses" when "residents" are the chosen user type ', () => {
-    assert(!browser.isVisible('label= האם גני ילדים זכאים לפטור מארנונה?'));
+    assert(!browser.isVisible('a= האם גני ילדים זכאים לפטור מארנונה?'));
   });
 
   it('should show FAQs only for the chosen user type "businesses" and the hebrew language', () => {
     browser.url('/municipality-1/node/1?user_type=businesses&language=he');
-    browser.waitForVisible('label=האם גני ילדים זכאים לפטור מארנונה?');
-    browser.waitForVisible('label=באילו שעות מפנים את הזבל?');
+    browser.waitForVisible('a=האם גני ילדים זכאים לפטור מארנונה?');
+    browser.waitForVisible('a=באילו שעות מפנים את הזבל?');
   });
 
   it('should not show FAQs for "residents" when "businesses" are the chosen user type', () => {
-    assert(!browser.isVisible('label=כמה סייעות יש בגן ילדים?'));
+    assert(!browser.isVisible('a=כמה סייעות יש בגן ילדים?'));
   });
 
   it('should open a news element in the same tab, with the hebrew language and residents user type', () => {
@@ -203,5 +203,20 @@ describe('Municipality homepage', () => {
     clickOnNewsItem('عملية الإنتهاء الديون الضريبية الممتلكات التجارية');
     checkSelectedUserType('businesses', 'arabic');
     checkSelectedLanguage('arabic');
+  });
+
+  it('should show topics list for the current municipality', () => {
+    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    browser.waitForVisible('button=איסוף אשפה');
+    browser.waitForVisible('button=גני ילדים');
+  });
+
+  it('should redirect user to the group view page', () => {
+    browser.url('/municipality-1');
+    browser.waitForVisible('h2=Frequently asked questions');
+
+    // Click on logo and expect to be on the same page.
+    browser.click('#logo');
+    browser.waitForVisible('h2=Frequently asked questions');
   });
 });

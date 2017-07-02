@@ -12095,6 +12095,8 @@ var _gizra$municipality$Translate$translate = F2(
 					}
 				case 'DayAndDate':
 					var _p2 = _p0._0;
+					var timeFormater = _mgold$elm_date_format$Date_Format$format('%H:%M');
+					var compareFormater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y');
 					var formater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y %H:%M');
 					var dateFormated = formater(_p2);
 					var allDatesFormated = A2(
@@ -12103,7 +12105,15 @@ var _gizra$municipality$Translate$translate = F2(
 						A2(
 							_elm_lang$core$Maybe$map,
 							function (endDate) {
-								return A2(
+								return _elm_lang$core$Native_Utils.eq(
+									compareFormater(_p2),
+									compareFormater(endDate)) ? A2(
+									_elm_lang$core$Basics_ops['++'],
+									dateFormated,
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										' - ',
+										timeFormater(endDate))) : A2(
 									_elm_lang$core$Basics_ops['++'],
 									dateFormated,
 									A2(
@@ -12318,7 +12328,11 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 												function (email) {
 													return A2(
 														_elm_lang$html$Html$p,
-														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('mail-wrapper'),
+															_1: {ctor: '[]'}
+														},
 														{
 															ctor: '::',
 															_0: A2(
@@ -12361,7 +12375,11 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 													function (phone) {
 														return A2(
 															_elm_lang$html$Html$p,
-															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class('phone-wrapper'),
+																_1: {ctor: '[]'}
+															},
 															{
 																ctor: '::',
 																_0: A2(
@@ -12379,7 +12397,7 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 																		{
 																			ctor: '::',
 																			_0: _elm_lang$html$Html_Attributes$href(
-																				A2(_elm_lang$core$Basics_ops['++'], 'mailto:', phone)),
+																				A2(_elm_lang$core$Basics_ops['++'], 'tel:', phone)),
 																			_1: {
 																				ctor: '::',
 																				_0: _elm_lang$html$Html_Attributes$target('_blank'),
@@ -13175,7 +13193,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('col-md-5'),
+				_0: _elm_lang$html$Html_Attributes$class('col-md-6'),
 				_1: {ctor: '[]'}
 			},
 			{
@@ -13184,7 +13202,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 					_elm_lang$html$Html$a,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('thumbnail'),
+						_0: _elm_lang$html$Html_Attributes$class('thumbnail search-results'),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$href(
@@ -13220,8 +13238,12 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 												_elm_lang$html$Html$img,
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$src(imageUrl),
-													_1: {ctor: '[]'}
+													_0: _elm_lang$html$Html_Attributes$class('img-responsive'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$src(imageUrl),
+														_1: {ctor: '[]'}
+													}
 												},
 												{ctor: '[]'}),
 											_1: {ctor: '[]'}
@@ -13287,7 +13309,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 														_gizra$municipality$Utils_Html$showIf,
 														_p2.recurringWeekly,
 														A2(
-															_elm_lang$html$Html$span,
+															_elm_lang$html$Html$div,
 															{
 																ctor: '::',
 																_0: _elm_lang$html$Html_Attributes$class('recurring-weekly'),

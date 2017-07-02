@@ -223,7 +223,7 @@ viewContactAsBlock baseUrl language ( contactId, contact ) =
                     Maybe.map
                         (\email ->
                             p
-                                []
+                                [ class "email-wrapper" ]
                                 [ i
                                     [ class "fa fa-envelope" ]
                                     []
@@ -236,11 +236,11 @@ viewContactAsBlock baseUrl language ( contactId, contact ) =
                     Maybe.map
                         (\phone ->
                             p
-                                []
+                                [ class "phone-wrapper" ]
                                 [ i
                                     [ class "fa fa-phone" ]
                                     []
-                                , a [ href ("mailto:" ++ phone), target "_blank" ]
+                                , a [ href ("tel:" ++ phone), target "_blank" ]
                                     [ text phone ]
                                 ]
                         )
