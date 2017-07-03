@@ -48,7 +48,7 @@ describe('Municipality homepage', () => {
     browser.waitForVisible('header#header .container #site-name > h1');
 
     // Assert the page have the expected title.
-    const muniTitle = browser.getText('header#header .header-container #site-name > h1');
+    const muniTitle = browser.getText('header#header .container #site-name > h1');
     assert.equal('טובא-זנגריה', muniTitle);
   });
 
