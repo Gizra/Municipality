@@ -3,7 +3,7 @@ const assert = require('assert');
 describe('Municipality news item page', () => {
 
   it('should show the news item with titles, date and body content in hebrew', () => {
-    browser.url('/municipality-1/node/54?language=he');
+    browser.url('/tuba-zangariyye/node/54?language=he');
     browser.waitForVisible('h2=News and Updates');
     browser.waitForVisible('h3=מבצע סגירת חובות ארנונה לתושבים');
     // Check that the date HTML tag exists on the page.
@@ -12,7 +12,7 @@ describe('Municipality news item page', () => {
   });
 
   it('should show the news item with titles, date and body content in arabic', () => {
-    browser.url('/municipality-1/node/54?language=ar');
+    browser.url('/tuba-zangariyye/node/54?language=ar');
     browser.waitForVisible('h2=News and Updates');
     browser.waitForVisible('h3=عملية إغلاق ديون ضريبة الأملاك للسكان');
     // Check that the date HTML tag exists on the page.
