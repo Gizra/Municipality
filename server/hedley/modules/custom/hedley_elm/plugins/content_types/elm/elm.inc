@@ -32,10 +32,6 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
     $topic_tid = $context->data->tid;
   }
 
-  // Add application.
-  drupal_add_js(drupal_get_path('module', 'hedley_elm') . '/Main.js');
-  drupal_add_js(drupal_get_path('module', 'hedley_elm') . '/elm.js');
-
   $page = $conf['page'];
   $show_as_block = (bool) $conf['show_as_block'];
   $promoted_only = (bool) $conf['promoted_only'];
@@ -60,6 +56,10 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   if (empty($values) && $show_as_block) {
     return FALSE;
   }
+
+  // Add application after we make sure we need it.
+  drupal_add_js(drupal_get_path('module', 'hedley_elm') . '/Main.js');
+  drupal_add_js(drupal_get_path('module', 'hedley_elm') . '/elm.js');
 
   // Getting a unique ID for the app.
   $app_id = drupal_html_id('elm-app');
