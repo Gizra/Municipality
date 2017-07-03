@@ -2,7 +2,7 @@ var assert = require('assert');
 
 describe('Municipality contacts page', () => {
   before(() => {
-    browser.url('/municipality-4/contacts?language=he');
+    browser.url('/kiryat-malakhi/contacts?language=he');
   })
 
   it('should find contacts using the search input', () => {

@@ -5,7 +5,7 @@ describe('edit page', () => {
   it('should be able to use ajax on the edit page', () => {
     browser.login('noam');
 
-    browser.url('/municipality-1/node/1/edit?language=he');
+    browser.url('/tuba-zangariyye/node/1/edit?language=he');
 
     browser.waitForVisible('#edit-purl-value');
 

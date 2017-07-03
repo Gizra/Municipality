@@ -2,7 +2,7 @@ const assert = require('assert');
 
 describe('Municipality homepage', () => {
   before(() => {
-    browser.url('/municipality-1/node/1?language=he');
+    browser.url('/tuba-zangariyye/node/1?language=he');
   });
 
   const checkSelectedLanguage = (language) => {
@@ -65,7 +65,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show user types labels in the selected language: hebrew', () => {
-    browser.url('/municipality-1/node/1?language=he&user_type=residents');
+    browser.url('/tuba-zangariyye/node/1?language=he&user_type=residents');
     browser.waitForVisible('.btn-group.user-types');
     const business = browser.getText('.btn-group.user-types a:nth-child(1)');
     assert.equal('עסקים', business);
@@ -75,7 +75,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show user types labels in the selected language: english', () => {
-    browser.url('/municipality-1/node/1?language=en&user_type=residents');
+    browser.url('/tuba-zangariyye/node/1?language=en&user_type=residents');
     business = browser.getText('.btn-group.user-types a:nth-child(1)');
     assert.equal('Businesses', business);
 
@@ -84,59 +84,59 @@ describe('Municipality homepage', () => {
   });
 
   it('Should show "english" language and "residents" chosen in the language and user type menus', () => {
-    browser.url('/municipality-1/node/1?language=en&user_type=residents');
+    browser.url('/tuba-zangariyye/node/1?language=en&user_type=residents');
     checkSelectedLanguage('english');
     checkSelectedUserType('residents', 'english');
   });
 
   it('should show "hebrew" language and "residents" chosen in the language and user type menus', () => {
-    browser.url('/municipality-1/node/1?language=he&user_type=residents');
+    browser.url('/tuba-zangariyye/node/1?language=he&user_type=residents');
     checkSelectedLanguage('hebrew');
     checkSelectedUserType('residents', 'hebrew');
   });
 
   it('should show the "Do now" elements which fits the current user type and the hebrew language', () => {
-    browser.url('/municipality-1/node/1?language=he&user_type=residents');
+    browser.url('/tuba-zangariyye/node/1?language=he&user_type=residents');
     browser.waitForVisible("h2=Do now");
     browser.waitForVisible('a=לקבל אישור תושב');
     browser.waitForVisible('a=לרשום חתונה');
   });
 
   it('Should show the "Do now" elements which fits the current user type and the arabic language', () => {
-    browser.url('/municipality-1/node/1?language=ar&user_type=residents');
+    browser.url('/tuba-zangariyye/node/1?language=ar&user_type=residents');
     browser.waitForVisible("h2=Do now");
     browser.waitForVisible('a=الحصول على الإقامة');
     browser.waitForVisible('a=السجل الزفاف');
   });
 
   it('Should not show the "Do now" elements which fits for "residents" when "businesses" user type is selected', () => {
-    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
+    browser.url('/tuba-zangariyye/node/1?user_type=businesses&language=he');
     browser.waitForVisible("h2=Do now");
     assert(!browser.isVisible('a=לקבל אישור תושב'));
     assert(!browser.isVisible('a=לרשום חתונה'));
   });
 
   it('should show the internal action page when clicking on the action link in the same tab, in hebrew', () => {
-    browser.url('/municipality-1/node/1?language=he');
+    browser.url('/tuba-zangariyye/node/1?language=he');
     browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
     browser.waitForVisible('h2=לקבל אישור תושב');
   });
 
   it('should show the internal action page when clicking on the action link in the same tab, in arabic', () => {
-    browser.url('/municipality-1/node/1?language=ar');
+    browser.url('/tuba-zangariyye/node/1?language=ar');
     browser.click(".item.action.homepage-teaser:nth-child(1) .content .header a");
     browser.waitForVisible('h2=الحصول على الإقامة');
   });
 
 
   it('should open an external "action" link in a new tab', () => {
-    browser.url('/municipality-1/node/1?language=he');
+    browser.url('/tuba-zangariyye/node/1?language=he');
     const target = browser.getAttribute('.item.action.homepage-teaser:nth-child(4) .content .header a', 'target');
     assert(target == '_blank');
   });
 
   it('should show the municipality title for the news', () => {
-    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    browser.url('/tuba-zangariyye/node/1?user_type=residents&language=he');
     browser.waitForVisible("h2=What's happening in טובא-זנגריה?");
   });
 
@@ -150,7 +150,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show only news for the selected user type "businesses" on hebrew language', () => {
-    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
+    browser.url('/tuba-zangariyye/node/1?user_type=businesses&language=he');
     browser.waitForVisible('a=מבצע סגירת חובות ארנונה לעסקים');
   });
 
@@ -159,7 +159,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show FAQs only for the chosen user type "residents" and the hebrew language', () => {
-    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    browser.url('/tuba-zangariyye/node/1?user_type=residents&language=he');
     browser.waitForVisible('a=כמה סייעות יש בגן ילדים?');
     browser.waitForVisible('a=באילו שעות מפנים את הזבל?');
   });
@@ -169,7 +169,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show FAQs only for the chosen user type "businesses" and the hebrew language', () => {
-    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
+    browser.url('/tuba-zangariyye/node/1?user_type=businesses&language=he');
     browser.waitForVisible('a=האם גני ילדים זכאים לפטור מארנונה?');
     browser.waitForVisible('a=באילו שעות מפנים את הזבל?');
   });
@@ -179,35 +179,35 @@ describe('Municipality homepage', () => {
   });
 
   it('should open a news element in the same tab, with the hebrew language and residents user type', () => {
-    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    browser.url('/tuba-zangariyye/node/1?user_type=residents&language=he');
     clickOnNewsItem('מבצע סגירת חובות ארנונה לתושבים');
     checkSelectedUserType('residents', 'hebrew');
     checkSelectedLanguage('hebrew');
   });
 
   it('should open a news element in the same tab, with the hebrew language and businesses user type', () => {
-    browser.url('/municipality-1/node/1?user_type=businesses&language=he');
+    browser.url('/tuba-zangariyye/node/1?user_type=businesses&language=he');
     clickOnNewsItem('מבצע סגירת חובות ארנונה לעסקים');
     checkSelectedUserType('businesses', 'hebrew');
     checkSelectedLanguage('hebrew');
   });
 
   it('should open a news element in the same tab, with the arabic language and residents user type', () => {
-    browser.url('/municipality-1/node/1?user_type=residents&language=ar');
+    browser.url('/tuba-zangariyye/node/1?user_type=residents&language=ar');
     clickOnNewsItem('عملية إغلاق ديون ضريبة الأملاك للسكان');
     checkSelectedUserType('residents', 'arabic');
     checkSelectedLanguage('arabic');
   });
 
   it('should open a news element in the same tab, with the arabic language and businesses user type', () => {
-    browser.url('/municipality-1/node/1?user_type=businesses&language=ar');
+    browser.url('/tuba-zangariyye/node/1?user_type=businesses&language=ar');
     clickOnNewsItem('عملية الإنتهاء الديون الضريبية الممتلكات التجارية');
     checkSelectedUserType('businesses', 'arabic');
     checkSelectedLanguage('arabic');
   });
 
   it('should show topics list for the current municipality', () => {
-    browser.url('/municipality-1/node/1?user_type=residents&language=he');
+    browser.url('/tuba-zangariyye/node/1?user_type=residents&language=he');
     browser.waitForVisible('button=איסוף אשפה');
     browser.waitForVisible('button=גני ילדים');
   });
@@ -292,11 +292,31 @@ describe('Municipality homepage', () => {
   });
 
   it('should redirect user to the group view page', () => {
-    browser.url('/municipality-1');
+    browser.url('/tuba-zangariyye');
     browser.waitForVisible('h2=Frequently asked questions');
 
     // Click on logo and expect to be on the same page.
     browser.click('#logo');
     browser.waitForVisible('h2=Frequently asked questions');
+  });
+
+  it('should see the social link icons after saving the municipality', () => {
+    browser.url('/tuba-zangariyye');
+    browser.waitForVisible('.header-social-icons.social-icons');
+
+    const fbClass = browser.getAttribute('ul.header-social-icons li:nth-child(1)', 'class');
+    assert.equal('social-icons-facebook', fbClass);
+
+    // Login as a content editor.
+    browser.login('noam');
+
+    // Save the municipality and expect to see the same class.
+    browser.url('/tuba-zangariyye/node/1/edit');
+    browser.click('#edit-submit');
+
+    browser.waitForVisible('.header-social-icons.social-icons');
+
+    const fbClassAfterSave = browser.getAttribute('ul.header-social-icons li:nth-child(1)', 'class');
+    assert.equal('social-icons-facebook', fbClassAfterSave);
   });
 });

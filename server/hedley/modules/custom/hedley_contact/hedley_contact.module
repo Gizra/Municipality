@@ -22,13 +22,15 @@ function hedley_contact_form_contact_node_form_alter(&$form, &$form_state) {
  * Set contact node title according to the municipality's default language.
  */
 function hedley_contact_node_presave($node) {
+  global $language;
   if ($node->type != 'contact') {
     return;
   }
 
   $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_node_municipality($node));
-  // Set the node's title based on the group's default language.
-  if (($municipality_wrapper->field_default_language->value() && !empty($node->field_last_name)) && $language_code = hedley_municipality_get_non_empty_language_for_field($node->field_last_name, $municipality_wrapper->field_default_language->value())) {
+  // Set the node's title based on the user's language, or the next available
+  // language.
+  if (($municipality_wrapper->field_default_language->value() && !empty($node->field_last_name)) && $language_code = hedley_municipality_get_non_empty_language_for_field($node->field_last_name, $language->language)) {
     $node->title = trim($node->field_first_name[$language_code][0]['value'] . ' ' . $node->field_last_name[$language_code][0]['value']);
   }
 }
