@@ -141,6 +141,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show only news for the selected user type "residents" on hebrew language', () => {
+    browser.url('/tuba-zangariyye/node/1?user_type=residents&language=he');
     browser.waitForVisible('a=מבצע עיקור סירוס חתולי רחוב יתחיל ביום א 5.3.17');
   });
 
@@ -209,6 +210,85 @@ describe('Municipality homepage', () => {
     browser.url('/tuba-zangariyye/node/1?user_type=residents&language=he');
     browser.waitForVisible('button=איסוף אשפה');
     browser.waitForVisible('button=גני ילדים');
+  });
+
+  it('should show events for the municiality 1 with the default language: arabic and user type: residents', () => {
+    browser.url('/tuba-zangariyye/node/1');
+    browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
+    browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
+  });
+
+  it('should show events for the municiality 2 with the default language: arabic and user type: residents', () => {
+    browser.url('/ar-ara/node/2');
+    browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
+    assert(!browser.isVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة'));
+  });
+
+  it('should show events by the municiality 4 with the default language: hebrew', () => {
+    browser.url('/kiryat-malakhi/node/4');
+    browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
+  });
+
+  it('should show only events for residents user type in hebrew', () => {
+    browser.url('/ar-ara/node/2?user_type=residents&language=he');
+    browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
+    assert(!browser.isVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה'));
+  });
+
+  it('should show only events for residents user type in arabic', () => {
+    browser.url('/ar-ara/node/2?user_type=residents&language=ar');
+    browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
+    assert(!browser.isVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة'));
+  });
+
+  it('should show only events for businesses user type in hebrew', () => {
+    browser.url('/tuba-zangariyye/?user_type=businesses&language=he');
+    browser.waitForVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+    assert(!browser.isVisible('h4=הצגת ילדים: שבת בבוקר'));
+  });
+
+  it('should show only events for businesses user type in arabic', () => {
+    browser.url('/tuba-zangariyye/?user_type=businesses&language=arabic');
+    browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
+    assert(!browser.isVisible('h4=مسرحية للأطفال: صباح السبت'));
+  });
+
+  it('should show the events page with the hebrew language and residents user type, when clicking on see all events button', () => {
+    browser.url('/tuba-zangariyye/?user_type=residents&language=he');
+    const eventsButton = $('.pane-elm .btn-show-all');
+    eventsButton.click();
+    browser.waitForVisible('div=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+    browser.waitForVisible('div=הצגת ילדים: שבת בבוקר');
+    checkSelectedUserType('residents', 'hebrew');
+    checkSelectedLanguage('hebrew');
+  });
+
+  it('should show the events page with the arabic language and residents user type, when clicking on see all events button', () => {
+    browser.url('/tuba-zangariyye/?user_type=residents&language=ar');
+    const eventsButton = $('.pane-elm .btn-show-all');
+    eventsButton.click();
+    browser.waitForVisible('div=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
+    browser.waitForVisible('div=مسرحية للأطفال: صباح السبت');
+    checkSelectedUserType('residents', 'arabic');
+    checkSelectedLanguage('arabic');
+  });
+
+  it('should show the events page with the hebrew language and businesses user type, when clicking on see all events button', () => {
+    browser.url('/tuba-zangariyye/?user_type=businesses&language=he');
+    const eventsButton = $('.pane-elm .btn-show-all');
+    eventsButton.click();
+    browser.waitForVisible('div=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+    checkSelectedUserType('businesses', 'hebrew');
+    checkSelectedLanguage('hebrew');
+  });
+
+  it('should show the events page with the arabic language and businesses user type, when clicking on see all events button', () => {
+    browser.url('/tuba-zangariyye/node/1?user_type=businesses&language=ar');
+    const eventsButton = $('.pane-elm .btn-show-all');
+    eventsButton.click();
+    browser.waitForVisible('div=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
+    checkSelectedUserType('businesses', 'arabic');
+    checkSelectedLanguage('arabic');
   });
 
   it('should redirect user to the group view page', () => {
