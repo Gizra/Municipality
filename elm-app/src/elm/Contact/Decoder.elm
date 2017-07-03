@@ -58,47 +58,29 @@ decodeColor =
         |> andThen
             (\color ->
                 case color of
-                    "white" ->
-                        succeed White
-
-                    "red" ->
+                    "danger" ->
                         succeed Red
 
-                    "orange" ->
+                    "warning" ->
                         succeed Orange
 
-                    "yellow" ->
-                        succeed Yellow
-
-                    "olive" ->
+                    "quaternary" ->
                         succeed Olive
 
-                    "green" ->
+                    "success" ->
                         succeed Green
 
-                    "teal" ->
+                    "tertiary" ->
                         succeed Teal
 
-                    "blue" ->
+                    "primary" ->
                         succeed Blue
 
-                    "violet" ->
-                        succeed Violet
-
-                    "purple" ->
-                        succeed Purple
-
-                    "pink" ->
+                    "secondary" ->
                         succeed Pink
 
-                    "brown" ->
-                        succeed Brown
-
-                    "grey" ->
-                        succeed Grey
-
-                    "black" ->
-                        succeed Black
+                    "info" ->
+                        succeed Turquoise
 
                     _ ->
                         fail <| "Could not recognise color: " ++ color

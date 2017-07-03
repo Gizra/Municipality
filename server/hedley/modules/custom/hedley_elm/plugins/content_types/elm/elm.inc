@@ -56,6 +56,11 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
       break;
   }
 
+  // Don't display anything if list is empty on blocks.
+  if (empty($values) && $show_as_block) {
+    return FALSE;
+  }
+
   // Getting a unique ID for the app.
   $app_id = drupal_html_id('elm-app');
 

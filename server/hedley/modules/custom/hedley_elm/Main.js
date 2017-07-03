@@ -11334,20 +11334,14 @@ var _gizra$municipality$Contact_Model$SetFilter = function (a) {
 var _gizra$municipality$Contact_Model$HandleContacts = function (a) {
 	return {ctor: 'HandleContacts', _0: a};
 };
-var _gizra$municipality$Contact_Model$Black = {ctor: 'Black'};
-var _gizra$municipality$Contact_Model$Grey = {ctor: 'Grey'};
-var _gizra$municipality$Contact_Model$Brown = {ctor: 'Brown'};
+var _gizra$municipality$Contact_Model$Turquoise = {ctor: 'Turquoise'};
 var _gizra$municipality$Contact_Model$Pink = {ctor: 'Pink'};
-var _gizra$municipality$Contact_Model$Purple = {ctor: 'Purple'};
-var _gizra$municipality$Contact_Model$Violet = {ctor: 'Violet'};
 var _gizra$municipality$Contact_Model$Blue = {ctor: 'Blue'};
 var _gizra$municipality$Contact_Model$Teal = {ctor: 'Teal'};
 var _gizra$municipality$Contact_Model$Green = {ctor: 'Green'};
 var _gizra$municipality$Contact_Model$Olive = {ctor: 'Olive'};
-var _gizra$municipality$Contact_Model$Yellow = {ctor: 'Yellow'};
 var _gizra$municipality$Contact_Model$Orange = {ctor: 'Orange'};
 var _gizra$municipality$Contact_Model$Red = {ctor: 'Red'};
-var _gizra$municipality$Contact_Model$White = {ctor: 'White'};
 
 var _gizra$municipality$Event_Model$emptyModel = {events: _Gizra$elm_dictlist$DictList$empty, filterString: ''};
 var _gizra$municipality$Event_Model$Model = F2(
@@ -11464,34 +11458,22 @@ var _gizra$municipality$Contact_Decoder$decodeColor = A2(
 	function (color) {
 		var _p1 = color;
 		switch (_p1) {
-			case 'white':
-				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$White);
-			case 'red':
+			case 'danger':
 				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Red);
-			case 'orange':
+			case 'warning':
 				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Orange);
-			case 'yellow':
-				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Yellow);
-			case 'olive':
+			case 'quaternary':
 				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Olive);
-			case 'green':
+			case 'success':
 				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Green);
-			case 'teal':
+			case 'tertiary':
 				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Teal);
-			case 'blue':
+			case 'primary':
 				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Blue);
-			case 'violet':
-				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Violet);
-			case 'purple':
-				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Purple);
-			case 'pink':
+			case 'secondary':
 				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Pink);
-			case 'brown':
-				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Brown);
-			case 'grey':
-				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Grey);
-			case 'black':
-				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Black);
+			case 'info':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Turquoise);
 			default:
 				return _elm_lang$core$Json_Decode$fail(
 					A2(_elm_lang$core$Basics_ops['++'], 'Could not recognise color: ', color));
@@ -12330,7 +12312,7 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 														_elm_lang$html$Html$p,
 														{
 															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$class('mail-wrapper'),
+															_0: _elm_lang$html$Html_Attributes$class('email-wrapper'),
 															_1: {ctor: '[]'}
 														},
 														{
