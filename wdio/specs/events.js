@@ -16,13 +16,13 @@ describe('Municipality events page', () => {
     browser.waitForVisible('div=הצגת ילדים: שבת בבוקר');
     browser.waitForVisible('div=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
 
-    input.setValue('הצג');
+    browser.setValueSafe('#search-events', 'הצג');
     browser.waitForVisible('div=הצגת ילדים: שבת בבוקר');
 
     // Make sure other events disappear when searching.
     assert(!browser.isVisible('div=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה'));
 
-    input.setValue('סיור');
+    browser.setValueSafe('#search-events', 'סיור');
     browser.waitForVisible('div=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
 
     // Make sure other events disappear when searching.
