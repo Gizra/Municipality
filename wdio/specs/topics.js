@@ -59,4 +59,24 @@ describe('Municipality topics', () => {
     browser.waitForVisible('.card-img-top img');
   });
 
+  it('should show all the relevant contacts for this topic', () => {
+    browser.waitForVisible('h2=People who can help you');
+
+    const firstContactTitle = browser.getText('div.featured-box ul.list-primary li:nth-child(1) strong.name a');
+    assert.equal('ויקטור סבן', firstContactTitle);
+
+    const secondContactTitle = browser.getText('div.featured-box ul.list-primary li:nth-child(2) strong.name a');
+    assert.equal('סמאהר סועאד', secondContactTitle);
+
+    const thirdContactTitle = browser.getText('div.featured-box ul.list-primary li:nth-child(3) strong.name a');
+    assert.equal('איאד סולימאן', thirdContactTitle);
+  });
+
+  it('Should not show the "Events" and "Contacts" boxes when they are empty', () => {
+    browser.url('/al-kasom/taxonomy/term/18?language=en');
+    browser.waitForVisible("h1=Culture");
+    assert(!browser.isVisible('h2=Upcoming events'));
+    assert(!browser.isVisible('a=People who can help you'));
+  });
+
 });
