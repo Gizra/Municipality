@@ -52,12 +52,12 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
       break;
   }
 
-  // Don't display anything if list is empty on blocks.
+  // Don't display anything if there's no values on a block.
   if (empty($values) && $show_as_block) {
     return FALSE;
   }
 
-  // Add application after we make sure we need it.
+  // Add application only when there's values.
   drupal_add_js(drupal_get_path('module', 'hedley_elm') . '/Main.js');
   drupal_add_js(drupal_get_path('module', 'hedley_elm') . '/elm.js');
 
