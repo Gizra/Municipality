@@ -12,7 +12,7 @@ import Html.Attributes exposing (alt, class, classList, href, id, placeholder, s
 import Html.Events exposing (onClick, onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (colorToString, divider, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (colorToString, divider, sectionDivider, showIf, showMaybe, formatReceptionDays)
 
 
 view : BaseUrl -> Language -> Bool -> Model -> Html Msg
@@ -169,7 +169,7 @@ viewContact baseUrl language ( contactId, contact ) =
                                                 (List.map
                                                     (\day ->
                                                         span []
-                                                            [ text <| translate language (DayTranslation day) ++ ", " ]
+                                                            [ text <| translate language (DayTranslation day) ]
                                                     )
                                                     days
                                                 )
@@ -271,17 +271,11 @@ viewContactAsBlock baseUrl language ( contactId, contact ) =
                                     []
                                 , span []
                                     (List.map
-                                        (\{ days, hours } ->
+                                        (\{ days, hours, daysDelimiter } ->
                                             span [ class "mr-xs" ]
                                                 [ span
                                                     [ class "reception-days" ]
-                                                    (List.map
-                                                        (\day ->
-                                                            span []
-                                                                [ text <| translate language (DayTranslation day) ++ ", " ]
-                                                        )
-                                                        days
-                                                    )
+                                                    [ text <| formatReceptionDays language days daysDelimiter ]
                                                 , span [ class "reception-hours" ]
                                                     [ text hours ]
                                                 ]

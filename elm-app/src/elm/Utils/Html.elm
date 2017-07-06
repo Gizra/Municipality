@@ -6,12 +6,16 @@ module Utils.Html
         , sectionDivider
         , showIf
         , showMaybe
+        , formatReceptionDays
         )
 
-import String exposing (toLower)
+import App.Types exposing (Language(..))
 import Contact.Model exposing (Color)
+import Date exposing (Day)
 import Html exposing (Html, div, h5, text)
 import Html.Attributes exposing (class)
+import String exposing (toLower)
+import Translate exposing (TranslationId(..), translate)
 
 
 {-| Produces an empty text node in the DOM.
@@ -56,3 +60,28 @@ sectionDivider =
 colorToString : Color -> String
 colorToString =
     toString >> toLower
+
+
+formatReceptionDays : Language -> List Day -> String -> String
+formatReceptionDays language days daysDelimiter =
+    if daysDelimiter == "-" then
+        let
+            firstDay =
+                case List.head days of
+                    Just val ->
+                        val
+
+                    Nothing ->
+                        Debug.crash "error: contact reception days are corrupted."
+
+            lastDay =
+                case List.head <| List.reverse days of
+                    Just val ->
+                        val
+
+                    Nothing ->
+                        Debug.crash "error: contact reception days are corrupted."
+        in
+            translate language (DayTranslation firstDay) ++ " - " ++ translate language (DayTranslation lastDay) ++ ", "
+    else
+        "hello"

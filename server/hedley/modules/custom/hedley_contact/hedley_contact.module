@@ -84,38 +84,24 @@ function hedley_contact_get_reception_hours($node) {
 
   // Format the hours.
   $formatted_hours = [];
-  // Day names, for converting the day indices to names.
-  $day_names = [
-    t('Sunday'),
-    t('Monday'),
-    t('Tuesday'),
-    t('Wednesday'),
-    t('Thursday'),
-    t('Friday'),
-    t('Saturday'),
-  ];
   foreach ($reception_hours_grouped as $hours => $days) {
     $days = explode('|', $days);
-    $days_text = '';
+    $days_delimiter = ',';
     foreach ($days as $delta => $day_index) {
       // In case the current day is is between two consecutive days, then add a
       // dash instead of listing it. E.g. "Monday - Thursday".
       if (isset($days[$delta - 1]) && $days[$delta - 1] == $day_index - 1 && isset($days[$delta + 1]) && $days[$delta + 1] == $day_index + 1) {
-        // Remove the previous dash if any, and re-add the dash.
-        $days_text = rtrim($days_text, ', - ');
-        $days_text .= ' - ';
-      }
-      else {
-        $days_text .= $day_names[$day_index] . ', ';
+        $days_delimiter = '-';
       }
     }
-    // Remove the trailing comma.
-    $days_text = rtrim($days_text, ', ');
     $formatted_hours[] = [
-      'days' => $days_text,
+      'days' => $days,
       'hours' => $hours,
+      'days_delimiter' => $days_delimiter,
     ];
   }
+
+  dpm($formatted_hours);
 
   return $formatted_hours;
 }
@@ -202,14 +188,6 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
       'topics' => $topics_array,
       'reception_hours' => hedley_contact_get_reception_hours($node),
     ];
-
-    // Explode reception days to a list for elm.
-    if (!empty($contact['reception_hours'])) {
-      foreach ($contact['reception_hours'] as $index => $reception_hour) {
-        $delimiter = isset($reception_hour['days']) && !empty($reception_hour['days']) && strpos($reception_hour['days'], '-') ? ' - ' : ', ';
-        $contact['reception_hours'][$index]['days'] = isset($reception_hour['days']) && !empty($reception_hour['days']) ? explode($delimiter, $reception_hour['days']) : [];
-      }
-    }
 
     // Remove empty values (elm expects the correct value or nothing).
     $contacts[] = array_filter($contact);

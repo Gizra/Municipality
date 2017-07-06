@@ -51,6 +51,7 @@ type alias Topic =
 type alias ReceptionTimes =
     { days : List Day
     , hours : String
+    , daysDelimiter : String
     }
 
 

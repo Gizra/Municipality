@@ -1,6 +1,7 @@
 module Contact.Decoder
     exposing
         ( decodeContacts
+        , decodeDay
         )
 
 import Contact.Model exposing (Color(..), Contact, DictListContact, ReceptionTimes, Topic)
@@ -49,6 +50,7 @@ decodeReceptionTimes =
         (decode ReceptionTimes
             |> required "days" decodeDay
             |> required "hours" string
+            |> required "days_delimiter" string
         )
 
 
@@ -94,26 +96,26 @@ decodeDay =
             |> andThen
                 (\day ->
                     case day of
-                        "Monday" ->
+                        "0" ->
+                            succeed Date.Sun
+
+                        "1" ->
                             succeed Date.Mon
 
-                        "Tuesday" ->
+                        "2" ->
                             succeed Date.Tue
 
-                        "Wednesday" ->
+                        "3" ->
                             succeed Date.Wed
 
-                        "Thursday" ->
+                        "4" ->
                             succeed Date.Thu
 
-                        "Friday" ->
+                        "5" ->
                             succeed Date.Fri
 
-                        "Saturday" ->
+                        "6" ->
                             succeed Date.Sat
-
-                        "Sunday" ->
-                            succeed Date.Sun
 
                         _ ->
                             fail <| "Could not recognise day: " ++ day
