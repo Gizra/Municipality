@@ -65,7 +65,10 @@ colorToString =
 formatReceptionDays : Language -> List Day -> String -> String
 formatReceptionDays language days daysDelimiter =
     if daysDelimiter == "-" then
+        -- Get the first and last day because the "daysDelimiter" tells us that
+        -- the times for all the days are the same.
         let
+            -- Need to use "case" because List.head returns a Maybe.
             firstDay =
                 case List.head days of
                     Just val ->
@@ -84,4 +87,14 @@ formatReceptionDays language days daysDelimiter =
         in
             translate language (DayTranslation firstDay) ++ " - " ++ translate language (DayTranslation lastDay) ++ ", "
     else
-        "hello"
+        -- Joing the days together but go through them first and convert from a
+        -- list of Day to list of String, add a comma at the end.
+        (String.join ", "
+            (List.map
+                (\day ->
+                    translate language (DayTranslation day)
+                )
+                days
+            )
+        )
+            ++ ", "

@@ -78,16 +78,22 @@ viewContactTest =
                     |> Query.find [ Selector.class "topic-wrapper" ]
                     |> Query.children []
                     |> Query.each (Query.has [ tag "a" ])
-        , test "Contact with ReceptionTimes" <|
+        , test "Contact with ReceptionTimes and specific days" <|
             \() ->
                 viewContact baseUrl English contact2
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "reception-times-wrapper" ]
                     |> Query.findAll [ Selector.class "reception-days" ]
                     |> Query.first
-                    |> Query.findAll [ tag "span" ]
+                    |> Query.has [ text "Mon, Tue," ]
+        , test "Contact with ReceptionTimes and multiple days" <|
+            \() ->
+                viewContact baseUrl English contact3
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "reception-times-wrapper" ]
+                    |> Query.findAll [ Selector.class "reception-days" ]
                     |> Query.first
-                    |> Query.has [ text "Mon" ]
+                    |> Query.has [ text "Mon - Fri," ]
         , test "Contact block with phone" <|
             \() ->
                 viewContactAsBlock baseUrl English contact2
@@ -165,9 +171,11 @@ contact2 =
             Just
                 [ { days = [ Date.Mon, Date.Tue ]
                   , hours = "8:00-19:00"
+                  , daysDelimiter = ","
                   }
                 , { days = [ Date.Sat ]
                   , hours = "8:00-12:00"
+                  , daysDelimiter = ","
                   }
                 ]
       }
@@ -199,6 +207,7 @@ contact3 =
             Just
                 [ { days = [ Date.Mon, Date.Fri ]
                   , hours = "8:00-14:00"
+                  , daysDelimiter = "-"
                   }
                 ]
       }
