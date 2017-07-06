@@ -235,7 +235,7 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
             '3',
           ],
           'hours' => '14:30 - 18:00',
-          'days_delimiter' => '-'
+          'days_delimiter' => '-',
         ],
       ],
     ];
