@@ -188,7 +188,29 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
             'field_weekday' => [
               LANGUAGE_NONE => [
                 ['value' => '1'],
+              ],
+            ],
+          ],
+          [
+            'field_hours' => [
+              LANGUAGE_NONE => [
+                ['value' => '14:30 - 18:00'],
+              ],
+            ],
+            'field_weekday' => [
+              LANGUAGE_NONE => [
                 ['value' => '2'],
+              ],
+            ],
+          ],
+          [
+            'field_hours' => [
+              LANGUAGE_NONE => [
+                ['value' => '14:30 - 18:00'],
+              ],
+            ],
+            'field_weekday' => [
+              LANGUAGE_NONE => [
                 ['value' => '3'],
               ],
             ],
