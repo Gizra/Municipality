@@ -20,7 +20,6 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
     'field_logo',
     'field_social_links',
     'field_social_links:title',
-    'field_social_links:attributes',
     'field_default_language',
     'field_footer_text',
     'field_background_images',
@@ -35,7 +34,6 @@ class HedleyMigrateMunicipalities extends HedleyMigrateBase {
     'field_user_types',
     'field_social_links',
     'field_social_links:title',
-    'field_social_links:attributes',
   ];
 
   /**

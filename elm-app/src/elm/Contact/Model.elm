@@ -23,20 +23,14 @@ type Msg
 
 
 type Color
-    = White
-    | Red
+    = Red
     | Orange
-    | Yellow
     | Olive
     | Green
     | Teal
     | Blue
-    | Violet
-    | Purple
     | Pink
-    | Brown
-    | Grey
-    | Black
+    | Turquoise
 
 
 type alias Name =
