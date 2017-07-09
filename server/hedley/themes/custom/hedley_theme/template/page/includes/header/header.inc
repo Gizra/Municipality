@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-3">
-          <?php if (isset($page['branding'])) : ?>
+          <?php if (isset($page['branding'])): ?>
             <?php print render($page['branding']); ?>
           <?php endif; ?>
           <?php if ($logo): ?>
@@ -40,7 +40,7 @@
           <?php endif; ?>
         </div>
         <div class="col-sm-3 align-right">
-            <?php if (isset($page['header_search'])) : ?>
+            <?php if (isset($page['header_search'])): ?>
               <div class="header-search hidden-xs">
                 <?php print render($page['header_search']); ?>
               </div>
@@ -82,7 +82,7 @@
       </div>
 
       <div class="col-md-3 col-xs-12 mb-md align-right align-xs-center">
-        <?php if ($language_switch_links) : ?>
+        <?php if ($language_switch_links): ?>
           <div class="languages btn-group" role="group">
             <?php foreach ($language_switch_links as $link): ?>
               <?php print $link; ?>
@@ -91,7 +91,7 @@
         <?php endif; ?>
       </div>
     </div>
-    <?php if ($about_url): ?>
+    <?php if (isset($about_url)): ?>
     <div class="row">
       <div class="col-md-12 center">
         <a href="<?php print $about_url; ?>">

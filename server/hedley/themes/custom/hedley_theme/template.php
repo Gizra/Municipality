@@ -70,7 +70,7 @@ function hedley_theme_preprocess_page(&$variables) {
 
   // About page link.
   if ($wrapper->field_about_page->value()) {
-    $variables['about_url'] = url('node/' . $wrapper->field_accessibility_page->getIdentifier());
+    $variables['about_url'] = url('node/' . $wrapper->field_about_page->getIdentifier());
   }
   // Terms page link.
   if ($wrapper->field_terms_page->value()) {
