@@ -91,5 +91,14 @@
         <?php endif; ?>
       </div>
     </div>
+    <?php if ($about_url): ?>
+    <div class="row">
+      <div class="col-md-12 center">
+        <a href="<?php print $about_url; ?>">
+          <h5><?php print t('My Municipality'); ?></h5>
+        </a>
+      </div>
+    </div>
+    <?php endif; ?>
   </div>
 </header>

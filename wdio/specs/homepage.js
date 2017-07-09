@@ -330,4 +330,9 @@ describe('Municipality homepage', () => {
     // We should see this class added to the "html" tag.
     browser.waitForVisible('html.sticky-header-active');
   });
+
+  it('should have about page link', () => {
+    browser.url('/tuba-zangariyye?language=he');
+    browser.waitForVisible('h5=My Municipality');
+  });
 });
