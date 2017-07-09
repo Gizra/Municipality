@@ -12,7 +12,7 @@ import Html.Attributes exposing (alt, class, classList, href, id, placeholder, s
 import Html.Events exposing (onClick, onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (colorToString, divider, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (colorToString, divider, sectionDivider, showIf, showMaybe, formatReceptionDays)
 
 
 view : BaseUrl -> Language -> Bool -> Model -> Html Msg
@@ -155,34 +155,35 @@ viewContact baseUrl language ( contactId, contact ) =
                             )
                             contact.address
                     ]
-                , showMaybe <|
-                    Maybe.map
-                        (\receptionTimes ->
-                            div [ class "reception-times-wrapper" ]
-                                (List.map
-                                    (\{ days, hours } ->
-                                        div []
-                                            [ i [ class "add to calendar icon" ]
-                                                []
-                                            , span
-                                                [ class "reception-days" ]
-                                                (List.map
-                                                    (\day ->
-                                                        span []
-                                                            [ text <| translate language (DayTranslation day) ++ ", " ]
-                                                    )
-                                                    days
+                , p
+                    []
+                    [ span
+                        []
+                        [ showMaybe <|
+                            Maybe.map
+                                (\receptionTimes ->
+                                    div [ class "reception-times-wrapper" ]
+                                        [ span []
+                                            (List.map
+                                                (\{ days, hours, multipleDays } ->
+                                                    div [ class "mr-xs" ]
+                                                        [ i [ class "fa fa-calendar" ]
+                                                            []
+                                                        , span
+                                                            [ class "reception-days" ]
+                                                            [ text <| formatReceptionDays language days multipleDays ]
+                                                        , span [ class "reception-hours" ]
+                                                            [ text hours ]
+                                                        ]
                                                 )
-                                            , span [ class "reception-hours" ]
-                                                [ text hours ]
-                                            ]
-                                    )
-                                    receptionTimes
+                                                receptionTimes
+                                            )
+                                        ]
                                 )
-                        )
-                        contact.receptionTimes
+                                contact.receptionTimes
+                        ]
+                    ]
                 ]
-            , sectionDivider
             ]
         ]
 
@@ -267,21 +268,15 @@ viewContactAsBlock baseUrl language ( contactId, contact ) =
                     Maybe.map
                         (\receptionTimes ->
                             div [ class "reception-times-wrapper" ]
-                                [ i [ class "fa fa-calendar" ]
-                                    []
-                                , span []
+                                [ span []
                                     (List.map
-                                        (\{ days, hours } ->
-                                            span [ class "mr-xs" ]
-                                                [ span
+                                        (\{ days, hours, multipleDays } ->
+                                            div [ class "mr-xs" ]
+                                                [ i [ class "fa fa-calendar" ]
+                                                    []
+                                                , span
                                                     [ class "reception-days" ]
-                                                    (List.map
-                                                        (\day ->
-                                                            span []
-                                                                [ text <| translate language (DayTranslation day) ++ ", " ]
-                                                        )
-                                                        days
-                                                    )
+                                                    [ text <| formatReceptionDays language days multipleDays ]
                                                 , span [ class "reception-hours" ]
                                                     [ text hours ]
                                                 ]

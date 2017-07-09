@@ -1,12 +1,13 @@
 module Contact.Decoder
     exposing
         ( decodeContacts
+        , decodeDay
         )
 
 import Contact.Model exposing (Color(..), Contact, DictListContact, ReceptionTimes, Topic)
 import Date exposing (Day)
 import DictList exposing (DictList, decodeArray2, empty)
-import Json.Decode exposing (Decoder, andThen, at, dict, fail, field, float, index, int, keyValuePairs, list, map, map2, nullable, oneOf, string, succeed)
+import Json.Decode exposing (Decoder, andThen, at, bool, dict, fail, field, float, index, int, keyValuePairs, list, map, map2, nullable, oneOf, string, succeed)
 import Json.Decode.Pipeline exposing (custom, decode, optional, optionalAt, required, requiredAt)
 import Utils.Json exposing (decodeEmptyArrayAs, decodeIntAsString)
 
@@ -49,6 +50,7 @@ decodeReceptionTimes =
         (decode ReceptionTimes
             |> required "days" decodeDay
             |> required "hours" string
+            |> required "multiple_days" bool
         )
 
 
@@ -94,26 +96,26 @@ decodeDay =
             |> andThen
                 (\day ->
                     case day of
-                        "Monday" ->
+                        "0" ->
+                            succeed Date.Sun
+
+                        "1" ->
                             succeed Date.Mon
 
-                        "Tuesday" ->
+                        "2" ->
                             succeed Date.Tue
 
-                        "Wednesday" ->
+                        "3" ->
                             succeed Date.Wed
 
-                        "Thursday" ->
+                        "4" ->
                             succeed Date.Thu
 
-                        "Friday" ->
+                        "5" ->
                             succeed Date.Fri
 
-                        "Saturday" ->
+                        "6" ->
                             succeed Date.Sat
-
-                        "Sunday" ->
-                            succeed Date.Sun
 
                         _ ->
                             fail <| "Could not recognise day: " ++ day
