@@ -165,13 +165,13 @@ viewContact baseUrl language ( contactId, contact ) =
                                     div [ class "reception-times-wrapper" ]
                                         [ span []
                                             (List.map
-                                                (\{ days, hours, daysDelimiter } ->
+                                                (\{ days, hours, multipleDays } ->
                                                     div [ class "mr-xs" ]
                                                         [ i [ class "fa fa-calendar" ]
                                                             []
                                                         , span
                                                             [ class "reception-days" ]
-                                                            [ text <| formatReceptionDays language days daysDelimiter ]
+                                                            [ text <| formatReceptionDays language days multipleDays ]
                                                         , span [ class "reception-hours" ]
                                                             [ text hours ]
                                                         ]
@@ -270,13 +270,13 @@ viewContactAsBlock baseUrl language ( contactId, contact ) =
                             div [ class "reception-times-wrapper" ]
                                 [ span []
                                     (List.map
-                                        (\{ days, hours, daysDelimiter } ->
+                                        (\{ days, hours, multipleDays } ->
                                             div [ class "mr-xs" ]
                                                 [ i [ class "fa fa-calendar" ]
                                                     []
                                                 , span
                                                     [ class "reception-days" ]
-                                                    [ text <| formatReceptionDays language days daysDelimiter ]
+                                                    [ text <| formatReceptionDays language days multipleDays ]
                                                 , span [ class "reception-hours" ]
                                                     [ text hours ]
                                                 ]

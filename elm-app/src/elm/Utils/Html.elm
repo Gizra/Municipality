@@ -62,28 +62,19 @@ colorToString =
     toString >> toLower
 
 
-formatReceptionDays : Language -> List Day -> String -> String
-formatReceptionDays language days daysDelimiter =
-    if daysDelimiter == "-" then
-        -- Get the first and last day because the "daysDelimiter" tells us that
-        -- the times for all the days are the same.
+formatReceptionDays : Language -> List Day -> Bool -> String
+formatReceptionDays language days multipleDays =
+    if multipleDays then
+        -- Get the first and last day because the "multipleDays" means more than
+        -- 2 days have the same hours and should be grouped together.
         let
-            -- Need to use "case" because List.head returns a Maybe.
             firstDay =
-                case List.head days of
-                    Just val ->
-                        val
-
-                    Nothing ->
-                        Debug.crash "error: contact reception days are corrupted."
+                Maybe.map identity (List.head days)
+                    |> Maybe.withDefault Date.Sun
 
             lastDay =
-                case List.head <| List.reverse days of
-                    Just val ->
-                        val
-
-                    Nothing ->
-                        Debug.crash "error: contact reception days are corrupted."
+                Maybe.map identity (List.head <| List.reverse days)
+                    |> Maybe.withDefault Date.Sat
         in
             translate language (DayTranslation firstDay) ++ " - " ++ translate language (DayTranslation lastDay) ++ ", "
     else

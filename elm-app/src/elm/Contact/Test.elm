@@ -171,11 +171,11 @@ contact2 =
             Just
                 [ { days = [ Date.Mon, Date.Tue ]
                   , hours = "8:00-19:00"
-                  , daysDelimiter = ","
+                  , multipleDays = False
                   }
                 , { days = [ Date.Sat ]
                   , hours = "8:00-12:00"
-                  , daysDelimiter = ","
+                  , multipleDays = False
                   }
                 ]
       }
@@ -207,7 +207,7 @@ contact3 =
             Just
                 [ { days = [ Date.Mon, Date.Fri ]
                   , hours = "8:00-14:00"
-                  , daysDelimiter = "-"
+                  , multipleDays = True
                   }
                 ]
       }

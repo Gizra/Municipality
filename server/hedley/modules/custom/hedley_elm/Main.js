@@ -11322,7 +11322,7 @@ var _gizra$municipality$Contact_Model$Topic = F3(
 	});
 var _gizra$municipality$Contact_Model$ReceptionTimes = F3(
 	function (a, b, c) {
-		return {days: a, hours: b, daysDelimiter: c};
+		return {days: a, hours: b, multipleDays: c};
 	});
 var _gizra$municipality$Contact_Model$Contact = F9(
 	function (a, b, c, d, e, f, g, h, i) {
@@ -11483,8 +11483,8 @@ var _gizra$municipality$Contact_Decoder$decodeColor = A2(
 var _gizra$municipality$Contact_Decoder$decodeReceptionTimes = _elm_lang$core$Json_Decode$list(
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'days_delimiter',
-		_elm_lang$core$Json_Decode$string,
+		'multiple_days',
+		_elm_lang$core$Json_Decode$bool,
 		A3(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 			'hours',
@@ -12164,37 +12164,23 @@ var _gizra$municipality$Translate$translate = F2(
 var _gizra$municipality$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
 
 var _gizra$municipality$Utils_Html$formatReceptionDays = F3(
-	function (language, days, daysDelimiter) {
-		if (_elm_lang$core$Native_Utils.eq(daysDelimiter, '-')) {
-			var lastDay = function () {
-				var _p0 = _elm_lang$core$List$head(
-					_elm_lang$core$List$reverse(days));
-				if (_p0.ctor === 'Just') {
-					return _p0._0;
-				} else {
-					return _elm_lang$core$Native_Utils.crashCase(
-						'Utils.Html',
-						{
-							start: {line: 81, column: 17},
-							end: {line: 86, column: 83}
-						},
-						_p0)('error: contact reception days are corrupted.');
-				}
-			}();
-			var firstDay = function () {
-				var _p2 = _elm_lang$core$List$head(days);
-				if (_p2.ctor === 'Just') {
-					return _p2._0;
-				} else {
-					return _elm_lang$core$Native_Utils.crashCase(
-						'Utils.Html',
-						{
-							start: {line: 73, column: 17},
-							end: {line: 78, column: 83}
-						},
-						_p2)('error: contact reception days are corrupted.');
-				}
-			}();
+	function (language, days, multipleDays) {
+		if (multipleDays) {
+			var lastDay = A2(
+				_elm_lang$core$Maybe$withDefault,
+				_elm_lang$core$Date$Sat,
+				A2(
+					_elm_lang$core$Maybe$map,
+					_elm_lang$core$Basics$identity,
+					_elm_lang$core$List$head(
+						_elm_lang$core$List$reverse(days))));
+			var firstDay = A2(
+				_elm_lang$core$Maybe$withDefault,
+				_elm_lang$core$Date$Sun,
+				A2(
+					_elm_lang$core$Maybe$map,
+					_elm_lang$core$Basics$identity,
+					_elm_lang$core$List$head(days)));
 			return A2(
 				_elm_lang$core$Basics_ops['++'],
 				A2(
@@ -12229,9 +12215,9 @@ var _gizra$municipality$Utils_Html$formatReceptionDays = F3(
 				', ');
 		}
 	});
-var _gizra$municipality$Utils_Html$colorToString = function (_p4) {
+var _gizra$municipality$Utils_Html$colorToString = function (_p0) {
 	return _elm_lang$core$String$toLower(
-		_elm_lang$core$Basics$toString(_p4));
+		_elm_lang$core$Basics$toString(_p0));
 };
 var _gizra$municipality$Utils_Html$sectionDivider = A2(
 	_elm_lang$html$Html$div,
@@ -12560,7 +12546,7 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 																							{
 																								ctor: '::',
 																								_0: _elm_lang$html$Html$text(
-																									A3(_gizra$municipality$Utils_Html$formatReceptionDays, language, _p3.days, _p3.daysDelimiter)),
+																									A3(_gizra$municipality$Utils_Html$formatReceptionDays, language, _p3.days, _p3.multipleDays)),
 																								_1: {ctor: '[]'}
 																							}),
 																						_1: {
@@ -12967,7 +12953,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																																{
 																																	ctor: '::',
 																																	_0: _elm_lang$html$Html$text(
-																																		A3(_gizra$municipality$Utils_Html$formatReceptionDays, language, _p9.days, _p9.daysDelimiter)),
+																																		A3(_gizra$municipality$Utils_Html$formatReceptionDays, language, _p9.days, _p9.multipleDays)),
 																																	_1: {ctor: '[]'}
 																																}),
 																															_1: {

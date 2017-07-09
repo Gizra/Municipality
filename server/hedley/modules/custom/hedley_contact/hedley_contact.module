@@ -86,7 +86,7 @@ function hedley_contact_get_reception_hours($node) {
   $formatted_hours = [];
   foreach ($reception_hours_grouped as $hours => $days) {
     // Determine the default delimiter which the app will use to show the days.
-    $days_delimiter = ',';
+    $multiple_days = FALSE;
     $days = explode('|', $days);
     foreach ($days as $delta => $day_index) {
       // In case we have more than two consecutive days in which the hours are
@@ -94,13 +94,13 @@ function hedley_contact_get_reception_hours($node) {
       // the app uses to hide all the middle days and show only the fist and
       // last days.
       if (isset($days[$delta - 1]) && $days[$delta - 1] == $day_index - 1 && isset($days[$delta + 1]) && $days[$delta + 1] == $day_index + 1) {
-        $days_delimiter = '-';
+        $multiple_days = TRUE;
       }
     }
     $formatted_hours[] = [
       'days' => $days,
       'hours' => $hours,
-      'days_delimiter' => $days_delimiter,
+      'multiple_days' => $multiple_days,
     ];
   }
 

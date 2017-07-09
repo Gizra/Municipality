@@ -7,7 +7,7 @@ module Contact.Decoder
 import Contact.Model exposing (Color(..), Contact, DictListContact, ReceptionTimes, Topic)
 import Date exposing (Day)
 import DictList exposing (DictList, decodeArray2, empty)
-import Json.Decode exposing (Decoder, andThen, at, dict, fail, field, float, index, int, keyValuePairs, list, map, map2, nullable, oneOf, string, succeed)
+import Json.Decode exposing (Decoder, andThen, at, bool, dict, fail, field, float, index, int, keyValuePairs, list, map, map2, nullable, oneOf, string, succeed)
 import Json.Decode.Pipeline exposing (custom, decode, optional, optionalAt, required, requiredAt)
 import Utils.Json exposing (decodeEmptyArrayAs, decodeIntAsString)
 
@@ -50,7 +50,7 @@ decodeReceptionTimes =
         (decode ReceptionTimes
             |> required "days" decodeDay
             |> required "hours" string
-            |> required "days_delimiter" string
+            |> required "multiple_days" bool
         )
 
 
