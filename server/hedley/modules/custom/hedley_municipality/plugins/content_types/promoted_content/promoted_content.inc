@@ -55,20 +55,6 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
 
         break;
 
-      case 'event':
-        $image = $wrapper->field_image->value();
-        $date = $wrapper->field_date->value();
-        $start_date = !empty($date) ? format_date($date['value'], 'custom', 'd/m/Y H:i') : NULL;
-        $end_date = !empty($date) && $date['value2'] && $date['value'] != $date['value2'] ? format_date($date['value2'], 'custom', 'd/m/Y H:i') : NULL;
-
-        $items[] = [
-          'title' => l($wrapper->label(), url('node/' . $wrapper->getIdentifier(), ['absolute' => TRUE])),
-          'image_url' => !empty($image) ? image_style_url('thumbnail', $image['uri']) : NULL,
-          'date' => $end_date ? $start_date . ' - ' . $end_date : $start_date,
-        ];
-
-        break;
-
       case 'news':
         $image = $wrapper->field_image->value();
 
@@ -78,6 +64,10 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
         ];
 
         break;
+
+      default:
+        drupal_set_message(t('The selected bundle "@bundle" is not supported by the "Promoted municipality content" plugin', ['@bundle' => $node->type]), 'warning');
+        return FALSE;
     }
   }
 
