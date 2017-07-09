@@ -2,7 +2,7 @@
   <div class="header-body">
     <div class="container">
       <div class="row">
-        <div class="col-md-3 col-xs-12">
+        <div class="col-sm-3">
           <?php if (isset($page['branding'])) : ?>
             <?php print render($page['branding']); ?>
           <?php endif; ?>
@@ -14,7 +14,7 @@
             </div>
           <?php endif; ?>
         </div>
-        <div class="col-md-6 col-xs-12 center">
+        <div class="col-sm-6 center">
           <?php if ($site_name || $site_slogan): ?>
             <div id="name-and-slogan"<?php if ($disable_site_name && $disable_site_slogan) { print ' class="hidden"'; } ?>>
 
@@ -39,7 +39,7 @@
             </div> <!-- /#name-and-slogan -->
           <?php endif; ?>
         </div>
-        <div class="col-md-3 col-xs-12 align-right">
+        <div class="col-sm-3 align-right">
             <?php if (isset($page['header_search'])) : ?>
               <div class="header-search hidden-xs">
                 <?php print render($page['header_search']); ?>
@@ -64,20 +64,6 @@
             </nav>
 
             <?php print render($page['header_top']); ?>
-          <div class="header-row">
-            <div class="header-nav">
-              <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
-                <i class="fa fa-bars"></i>
-              </button>
-              <?php print render($page['header_icons']); ?>
-
-              <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
-                <nav>
-                  <?php print render($page['header_menu']); ?>
-                </nav>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -85,7 +71,7 @@
   <div class="container">
     <div class="divider divider-small dashed"></div>
     <div class="row">
-      <div class="col-md-3 col-xs-12 mb-md align-left">
+      <div class="col-md-3 col-xs-12 mb-md align-left align-xs-center">
         <?php if ($user_type_links): ?>
           <?php print $user_type_links; ?>
         <?php endif; ?>
@@ -95,7 +81,7 @@
         <?php print render($social_links); ?>
       </div>
 
-      <div class="col-md-3 col-xs-12 mb-md align-right">
+      <div class="col-md-3 col-xs-12 mb-md align-right align-xs-center">
         <?php if ($language_switch_links) : ?>
           <div class="languages btn-group" role="group">
             <?php foreach ($language_switch_links as $link): ?>

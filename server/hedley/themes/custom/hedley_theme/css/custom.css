@@ -27,10 +27,55 @@
   margin-top: 33px;
 }
 
+@media (max-width: 767px) {
+  .sticky-header-active #site-name {
+    margin-top: 60px;
+  }
+}
+
 #site-name h1 {
   line-height: normal;
   margin-bottom: 0;
-  font-size: 530%;
+}
+
+@media (max-width: 767px) {
+  #site-name h1 {
+    font-size: 230%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #site-name h1 {
+    font-size: 330%;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  #site-name h1 {
+    font-size: 430%;
+  }
+}
+
+@media (min-width: 1200px) {
+  #site-name h1 {
+    font-size: 530%;
+  }
+}
+
+@media (max-width: 767px) {
+  .align-xs-center {
+    text-align: center !important;
+  }
+}
+
+.sticky-header-active #header .header-nav-top {
+  margin-top: 70px;
+}
+
+@media (max-width: 767px) {
+  .sticky-header-active #header .header-nav-top {
+    margin-top: 10px;
+  }
 }
 
 .page-header {
