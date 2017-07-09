@@ -304,7 +304,7 @@ describe('Municipality homepage', () => {
     browser.url('/tuba-zangariyye');
     browser.waitForVisible('.social-icons');
 
-    const fbClass = browser.getAttribute('ul.header-social-icons li:nth-child(1)', 'class');
+    const fbClass = browser.getAttribute('ul.social-icons li:nth-child(1)', 'class');
     assert.equal('social-icons-facebook', fbClass);
 
     // Login as a content editor.
@@ -316,7 +316,18 @@ describe('Municipality homepage', () => {
 
     browser.waitForVisible('.social-icons');
 
-    const fbClassAfterSave = browser.getAttribute('ul.header-social-icons li:nth-child(1)', 'class');
+    const fbClassAfterSave = browser.getAttribute('ul.social-icons li:nth-child(1)', 'class');
     assert.equal('social-icons-facebook', fbClassAfterSave);
+  });
+
+  it('should have sticky header on scroll', () => {
+    browser.url('/tuba-zangariyye?language=he');
+    browser.waitForVisible('h1=טובא-זנגריה');
+
+    // Scroll a bit into the page.
+    browser.scroll('.panel-pane.pane-faqs-accordion');
+
+    // We should see this class added to the "html" tag.
+    browser.waitForVisible('html.sticky-header-active');
   });
 });
