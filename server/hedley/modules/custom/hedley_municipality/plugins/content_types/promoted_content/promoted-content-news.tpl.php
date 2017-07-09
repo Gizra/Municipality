@@ -12,7 +12,7 @@
         <div class="testimonial-author-thumbnail img-thumbnail">
           <img src="<?php print $item['image_url']; ?>">
         </div>
-    <?php endif; ?>
+      <?php endif; ?>
       <h3 class="header"><?php print $item['title']; ?></h3>
     </div>
   </div>
