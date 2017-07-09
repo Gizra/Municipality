@@ -49,9 +49,12 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
       continue;
     }
 
+    // Calling the value directly on the wrapper doesn't get the custom style
+    // added by the content editor.
+    $answer = $wrapper->field_answer->value();
     $faqs[] = [
       'question' => $wrapper->field_question->value(),
-      'answer' => !empty($wrapper->field_answer->value()) ? $wrapper->field_answer->value->value() : '',
+      'answer' => !empty($answer) ? $answer['value'] : '',
     ];
   }
 

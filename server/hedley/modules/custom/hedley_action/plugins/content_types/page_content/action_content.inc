@@ -36,17 +36,21 @@ function hedley_action_content_type_render($subtype, $conf, $args, $context) {
 
   $sections = [];
   foreach ($wrapper->field_action_sections as $section) {
+    // Calling the value directly on the wrapper doesn't get the custom style
+    // added by the content editor.
+    $description = $section->field_section_description->value();
     $sections[] = [
       'title' => filter_xss($section->field_section_title->value()),
       'icon' => hedley_action_get_section_icon_class($section->field_section_icon->value()),
-      'description' => $section->field_section_description->value() ? $section->field_section_description->value->value() : '',
+      'description' => !empty($description) ? $description['value'] : '',
     ];
   }
 
+  $body = $wrapper->body->value();
   $variables = [
     'title' => filter_xss($wrapper->label()),
     'sections' => $sections,
-    'body' => $wrapper->body->value() ? $wrapper->body->value->value() : '',
+    'body' => !empty($body) ? $body['value'] : '',
   ];
 
   $block = new stdClass();
