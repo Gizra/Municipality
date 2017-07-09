@@ -85,17 +85,17 @@
   <div class="container">
     <div class="divider divider-small dashed"></div>
     <div class="row">
-      <div class="col-md-3 col-xs-12 mb-sm align-left">
+      <div class="col-md-3 col-xs-12 mb-md align-left">
         <?php if ($user_type_links): ?>
           <?php print $user_type_links; ?>
         <?php endif; ?>
       </div>
 
-      <div class="col-md-6 col-xs-12 mb-sm center">
+      <div class="col-md-6 col-xs-12 mb-md center">
         <?php print render($social_links); ?>
       </div>
 
-      <div class="col-md-3 col-xs-12 mb-sm align-right">
+      <div class="col-md-3 col-xs-12 mb-md align-right">
         <?php if ($language_switch_links) : ?>
           <div class="languages btn-group" role="group">
             <?php foreach ($language_switch_links as $link): ?>

@@ -20,6 +20,10 @@
   margin-bottom: 0;
 }
 
+.page-header {
+  margin: 0;
+}
+
 .content img {
   display: inline-block;
 }
