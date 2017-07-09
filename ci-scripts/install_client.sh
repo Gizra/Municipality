@@ -12,7 +12,7 @@ if [ -z "${BUILD_CLIENT+x}" ] || [ "$BUILD_CLIENT" -ne 1 ]; then
  exit 0;
 fi
 
-echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+echo -e "Host github.com\\n\\tStrictHostKeyChecking no\\n" >> ~/.ssh/config
 
 # Install global packages.
 npm install -g elm@~0.18.0
