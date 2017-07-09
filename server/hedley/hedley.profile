@@ -127,6 +127,7 @@ function hedley_setup_og_permissions() {
 
   $permissions = [
     'update group' => TRUE,
+    'administer nodes' => TRUE,
     'administer taxonomy' => TRUE,
     'delete terms' => TRUE,
     'edit terms' => TRUE,
