@@ -335,4 +335,11 @@ describe('Municipality homepage', () => {
     browser.url('/tuba-zangariyye?language=he');
     browser.waitForVisible('h5=My Municipality');
   });
+
+  it('should not see image borders when the "news" entity does not have an image', () => {
+    browser.url('/ar-ara/node/2?language=he');
+    browser.waitForVisible('h2=What\'s happening in ערערה?');
+
+    assert(!browser.isVisible('.news-box .testimonial:nth-child(1) .testimonial-author .testimonial-author-thumbnail'));
+  });
 });
