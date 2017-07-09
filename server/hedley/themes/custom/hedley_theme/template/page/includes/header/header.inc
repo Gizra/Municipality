@@ -9,7 +9,7 @@
           <?php if ($logo): ?>
             <div class="header-logo logo">
               <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-                <img alt="<?php print t('Home'); ?>" height="<?php print theme_get_setting('logo_height'); ?>" data-sticky-width="100" data-sticky-height="<?php print theme_get_setting('sticky_logo_height'); ?>" data-sticky-top="33" src="<?php print $logo; ?>">
+                <img alt="<?php print t('Home'); ?>" height="<?php print theme_get_setting('logo_height'); ?>" width="150" data-sticky-width="100" data-sticky-height="<?php print theme_get_setting('sticky_logo_height'); ?>" data-sticky-top="33" src="<?php print $logo; ?>">
               </a>
             </div>
           <?php endif; ?>

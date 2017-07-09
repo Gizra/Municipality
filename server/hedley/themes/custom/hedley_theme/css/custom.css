@@ -1,8 +1,16 @@
 /*=======================================================================
 *** PORTO_SUB CUSTOM STYLE SHEET***
 ========================================================================*/
+.sticky-header-active .admin-menu .header-body {
+  margin-top: 29px;
+}
+
 #logo img {
   width: 150px;
+}
+
+#header .header-logo img {
+  margin: 24px 0 0 24px;
 }
 
 #name-and-slogan {
@@ -12,15 +20,24 @@
 
 #site-name {
   margin: 10px 0 0;
+  font-size: inherit;
+}
+
+.sticky-header-active #site-name {
+  margin-top: 33px;
 }
 
 #site-name h1 {
-  font-size: 2.4em;
   line-height: normal;
   margin-bottom: 0;
+  font-size: 530%;
 }
 
 .page-header {
+  margin: 0;
+}
+
+.social-icons i.fa {
   margin: 0;
 }
 
