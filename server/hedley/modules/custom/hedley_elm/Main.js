@@ -11320,9 +11320,9 @@ var _gizra$municipality$Contact_Model$Topic = F3(
 	function (a, b, c) {
 		return {id: a, name: b, color: c};
 	});
-var _gizra$municipality$Contact_Model$ReceptionTimes = F2(
-	function (a, b) {
-		return {days: a, hours: b};
+var _gizra$municipality$Contact_Model$ReceptionTimes = F3(
+	function (a, b, c) {
+		return {days: a, hours: b, multipleDays: c};
 	});
 var _gizra$municipality$Contact_Model$Contact = F9(
 	function (a, b, c, d, e, f, g, h, i) {
@@ -11433,20 +11433,20 @@ var _gizra$municipality$Contact_Decoder$decodeDay = _elm_lang$core$Json_Decode$l
 		function (day) {
 			var _p0 = day;
 			switch (_p0) {
-				case 'Monday':
-					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Mon);
-				case 'Tuesday':
-					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Tue);
-				case 'Wednesday':
-					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Wed);
-				case 'Thursday':
-					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Thu);
-				case 'Friday':
-					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Fri);
-				case 'Saturday':
-					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Sat);
-				case 'Sunday':
+				case '0':
 					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Sun);
+				case '1':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Mon);
+				case '2':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Tue);
+				case '3':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Wed);
+				case '4':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Thu);
+				case '5':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Fri);
+				case '6':
+					return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Date$Sat);
 				default:
 					return _elm_lang$core$Json_Decode$fail(
 						A2(_elm_lang$core$Basics_ops['++'], 'Could not recognise day: ', day));
@@ -11483,13 +11483,17 @@ var _gizra$municipality$Contact_Decoder$decodeColor = A2(
 var _gizra$municipality$Contact_Decoder$decodeReceptionTimes = _elm_lang$core$Json_Decode$list(
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'hours',
-		_elm_lang$core$Json_Decode$string,
+		'multiple_days',
+		_elm_lang$core$Json_Decode$bool,
 		A3(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'days',
-			_gizra$municipality$Contact_Decoder$decodeDay,
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Contact_Model$ReceptionTimes))));
+			'hours',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'days',
+				_gizra$municipality$Contact_Decoder$decodeDay,
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Contact_Model$ReceptionTimes)))));
 var _gizra$municipality$Contact_Decoder$decodeTopic = _elm_lang$core$Json_Decode$list(
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
@@ -12159,6 +12163,58 @@ var _gizra$municipality$Translate$translate = F2(
 	});
 var _gizra$municipality$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
 
+var _gizra$municipality$Utils_Html$formatReceptionDays = F3(
+	function (language, days, multipleDays) {
+		if (multipleDays) {
+			var lastDay = A2(
+				_elm_lang$core$Maybe$withDefault,
+				_elm_lang$core$Date$Sat,
+				A2(
+					_elm_lang$core$Maybe$map,
+					_elm_lang$core$Basics$identity,
+					_elm_lang$core$List$head(
+						_elm_lang$core$List$reverse(days))));
+			var firstDay = A2(
+				_elm_lang$core$Maybe$withDefault,
+				_elm_lang$core$Date$Sun,
+				A2(
+					_elm_lang$core$Maybe$map,
+					_elm_lang$core$Basics$identity,
+					_elm_lang$core$List$head(days)));
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				A2(
+					_gizra$municipality$Translate$translate,
+					language,
+					_gizra$municipality$Translate$DayTranslation(firstDay)),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					' - ',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						A2(
+							_gizra$municipality$Translate$translate,
+							language,
+							_gizra$municipality$Translate$DayTranslation(lastDay)),
+						', ')));
+		} else {
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				A2(
+					_elm_lang$core$String$join,
+					', ',
+					A2(
+						_elm_lang$core$List$map,
+						function (day) {
+							return A2(
+								_gizra$municipality$Translate$translate,
+								language,
+								_gizra$municipality$Translate$DayTranslation(day));
+						},
+						days)),
+				', ');
+		}
+	});
 var _gizra$municipality$Utils_Html$colorToString = function (_p0) {
 	return _elm_lang$core$String$toLower(
 		_elm_lang$core$Basics$toString(_p0));
@@ -12455,30 +12511,30 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 															{
 																ctor: '::',
 																_0: A2(
-																	_elm_lang$html$Html$i,
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$class('fa fa-calendar'),
-																		_1: {ctor: '[]'}
-																	},
-																	{ctor: '[]'}),
-																_1: {
-																	ctor: '::',
-																	_0: A2(
-																		_elm_lang$html$Html$span,
-																		{ctor: '[]'},
-																		A2(
-																			_elm_lang$core$List$map,
-																			function (_p2) {
-																				var _p3 = _p2;
-																				return A2(
-																					_elm_lang$html$Html$span,
-																					{
-																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$class('mr-xs'),
-																						_1: {ctor: '[]'}
-																					},
-																					{
+																	_elm_lang$html$Html$span,
+																	{ctor: '[]'},
+																	A2(
+																		_elm_lang$core$List$map,
+																		function (_p2) {
+																			var _p3 = _p2;
+																			return A2(
+																				_elm_lang$html$Html$div,
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$class('mr-xs'),
+																					_1: {ctor: '[]'}
+																				},
+																				{
+																					ctor: '::',
+																					_0: A2(
+																						_elm_lang$html$Html$i,
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$class('fa fa-calendar'),
+																							_1: {ctor: '[]'}
+																						},
+																						{ctor: '[]'}),
+																					_1: {
 																						ctor: '::',
 																						_0: A2(
 																							_elm_lang$html$Html$span,
@@ -12487,26 +12543,12 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 																								_0: _elm_lang$html$Html_Attributes$class('reception-days'),
 																								_1: {ctor: '[]'}
 																							},
-																							A2(
-																								_elm_lang$core$List$map,
-																								function (day) {
-																									return A2(
-																										_elm_lang$html$Html$span,
-																										{ctor: '[]'},
-																										{
-																											ctor: '::',
-																											_0: _elm_lang$html$Html$text(
-																												A2(
-																													_elm_lang$core$Basics_ops['++'],
-																													A2(
-																														_gizra$municipality$Translate$translate,
-																														language,
-																														_gizra$municipality$Translate$DayTranslation(day)),
-																													', ')),
-																											_1: {ctor: '[]'}
-																										});
-																								},
-																								_p3.days)),
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html$text(
+																									A3(_gizra$municipality$Utils_Html$formatReceptionDays, language, _p3.days, _p3.multipleDays)),
+																								_1: {ctor: '[]'}
+																							}),
 																						_1: {
 																							ctor: '::',
 																							_0: A2(
@@ -12523,11 +12565,11 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 																								}),
 																							_1: {ctor: '[]'}
 																						}
-																					});
-																			},
-																			receptionTimes)),
-																	_1: {ctor: '[]'}
-																}
+																					}
+																				});
+																		},
+																		receptionTimes)),
+																_1: {ctor: '[]'}
 															});
 													},
 													_p4.receptionTimes)),
@@ -12852,96 +12894,103 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																}),
 															_1: {
 																ctor: '::',
-																_0: _gizra$municipality$Utils_Html$showMaybe(
-																	A2(
-																		_elm_lang$core$Maybe$map,
-																		function (receptionTimes) {
-																			return A2(
-																				_elm_lang$html$Html$div,
-																				{
-																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$class('reception-times-wrapper'),
-																					_1: {ctor: '[]'}
-																				},
-																				A2(
-																					_elm_lang$core$List$map,
-																					function (_p8) {
-																						var _p9 = _p8;
-																						return A2(
-																							_elm_lang$html$Html$div,
-																							{ctor: '[]'},
-																							{
-																								ctor: '::',
-																								_0: A2(
-																									_elm_lang$html$Html$i,
-																									{
-																										ctor: '::',
-																										_0: _elm_lang$html$Html_Attributes$class('add to calendar icon'),
-																										_1: {ctor: '[]'}
-																									},
-																									{ctor: '[]'}),
-																								_1: {
+																_0: A2(
+																	_elm_lang$html$Html$p,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$span,
+																			{ctor: '[]'},
+																			{
+																				ctor: '::',
+																				_0: _gizra$municipality$Utils_Html$showMaybe(
+																					A2(
+																						_elm_lang$core$Maybe$map,
+																						function (receptionTimes) {
+																							return A2(
+																								_elm_lang$html$Html$div,
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$class('reception-times-wrapper'),
+																									_1: {ctor: '[]'}
+																								},
+																								{
 																									ctor: '::',
 																									_0: A2(
 																										_elm_lang$html$Html$span,
-																										{
-																											ctor: '::',
-																											_0: _elm_lang$html$Html_Attributes$class('reception-days'),
-																											_1: {ctor: '[]'}
-																										},
+																										{ctor: '[]'},
 																										A2(
 																											_elm_lang$core$List$map,
-																											function (day) {
+																											function (_p8) {
+																												var _p9 = _p8;
 																												return A2(
-																													_elm_lang$html$Html$span,
-																													{ctor: '[]'},
+																													_elm_lang$html$Html$div,
 																													{
 																														ctor: '::',
-																														_0: _elm_lang$html$Html$text(
-																															A2(
-																																_elm_lang$core$Basics_ops['++'],
-																																A2(
-																																	_gizra$municipality$Translate$translate,
-																																	language,
-																																	_gizra$municipality$Translate$DayTranslation(day)),
-																																', ')),
+																														_0: _elm_lang$html$Html_Attributes$class('mr-xs'),
 																														_1: {ctor: '[]'}
+																													},
+																													{
+																														ctor: '::',
+																														_0: A2(
+																															_elm_lang$html$Html$i,
+																															{
+																																ctor: '::',
+																																_0: _elm_lang$html$Html_Attributes$class('fa fa-calendar'),
+																																_1: {ctor: '[]'}
+																															},
+																															{ctor: '[]'}),
+																														_1: {
+																															ctor: '::',
+																															_0: A2(
+																																_elm_lang$html$Html$span,
+																																{
+																																	ctor: '::',
+																																	_0: _elm_lang$html$Html_Attributes$class('reception-days'),
+																																	_1: {ctor: '[]'}
+																																},
+																																{
+																																	ctor: '::',
+																																	_0: _elm_lang$html$Html$text(
+																																		A3(_gizra$municipality$Utils_Html$formatReceptionDays, language, _p9.days, _p9.multipleDays)),
+																																	_1: {ctor: '[]'}
+																																}),
+																															_1: {
+																																ctor: '::',
+																																_0: A2(
+																																	_elm_lang$html$Html$span,
+																																	{
+																																		ctor: '::',
+																																		_0: _elm_lang$html$Html_Attributes$class('reception-hours'),
+																																		_1: {ctor: '[]'}
+																																	},
+																																	{
+																																		ctor: '::',
+																																		_0: _elm_lang$html$Html$text(_p9.hours),
+																																		_1: {ctor: '[]'}
+																																	}),
+																																_1: {ctor: '[]'}
+																															}
+																														}
 																													});
 																											},
-																											_p9.days)),
-																									_1: {
-																										ctor: '::',
-																										_0: A2(
-																											_elm_lang$html$Html$span,
-																											{
-																												ctor: '::',
-																												_0: _elm_lang$html$Html_Attributes$class('reception-hours'),
-																												_1: {ctor: '[]'}
-																											},
-																											{
-																												ctor: '::',
-																												_0: _elm_lang$html$Html$text(_p9.hours),
-																												_1: {ctor: '[]'}
-																											}),
-																										_1: {ctor: '[]'}
-																									}
-																								}
-																							});
-																					},
-																					receptionTimes));
-																		},
-																		_p10.receptionTimes)),
+																											receptionTimes)),
+																									_1: {ctor: '[]'}
+																								});
+																						},
+																						_p10.receptionTimes)),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}),
 																_1: {ctor: '[]'}
 															}
 														}
 													}
 												}
 											}),
-										_1: {
-											ctor: '::',
-											_0: _gizra$municipality$Utils_Html$sectionDivider,
-											_1: {ctor: '[]'}
-										}
+										_1: {ctor: '[]'}
 									}
 								}
 							}

@@ -6111,6 +6111,7 @@ html .scroll-to-top {
 	padding: 13px 10px 35px;
 	position: fixed;
 	left: 10px;
+	right: auto;
 	text-align: center;
 	text-decoration: none;
 	min-width: 49px;
