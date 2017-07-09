@@ -66,8 +66,7 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
         break;
 
       default:
-        drupal_set_message(t('The selected bundle "@bundle" is not supported by the "Promoted municipality content" plugin', ['@bundle' => $node->type]), 'warning');
-        return FALSE;
+        throw new \Exception(format_string('The selected bundle "@bundle" is not supported by the "Promoted municipality content" plugin.', ['@bundle' => $node->type]));
     }
   }
 
