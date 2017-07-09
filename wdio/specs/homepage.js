@@ -319,4 +319,11 @@ describe('Municipality homepage', () => {
     const fbClassAfterSave = browser.getAttribute('ul.header-social-icons li:nth-child(1)', 'class');
     assert.equal('social-icons-facebook', fbClassAfterSave);
   });
+
+  it('should not see image borders when the "news" entity does not have an image', () => {
+    browser.url('/ar-ara/node/2?language=he');
+    browser.waitForVisible('h2=What\'s happening in ערערה?');
+
+    assert(!browser.isVisible('.news-box .testimonial:nth-child(1) .testimonial-author .testimonial-author-thumbnail'));
+  });
 });
