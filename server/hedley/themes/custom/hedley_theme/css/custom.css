@@ -1,6 +1,95 @@
 /*=======================================================================
 *** PORTO_SUB CUSTOM STYLE SHEET***
 ========================================================================*/
+.sticky-header-active .admin-menu .header-body {
+  margin-top: 29px;
+}
+
+#logo img {
+  width: 150px;
+}
+
+#header .header-logo img {
+  margin: 24px 0 0 24px;
+}
+
+#name-and-slogan {
+  float: none;
+  margin: 0;
+}
+
+#site-name {
+  margin: 10px 0 0;
+  font-size: inherit;
+}
+
+.sticky-header-active #site-name {
+  margin-top: 33px;
+}
+
+@media (max-width: 767px) {
+  .sticky-header-active #site-name {
+    margin-top: 60px;
+  }
+}
+
+#site-name h1 {
+  line-height: normal;
+  margin-bottom: 0;
+}
+
+#site-name a:hover,
+#site-name a:active {
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  #site-name h1 {
+    font-size: 230%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #site-name h1 {
+    font-size: 330%;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  #site-name h1 {
+    font-size: 430%;
+  }
+}
+
+@media (min-width: 1200px) {
+  #site-name h1 {
+    font-size: 530%;
+  }
+}
+
+@media (max-width: 767px) {
+  .align-xs-center {
+    text-align: center !important;
+  }
+}
+
+.sticky-header-active #header .header-nav-top {
+  margin-top: 70px;
+}
+
+@media (max-width: 767px) {
+  .sticky-header-active #header .header-nav-top {
+    margin-top: 10px;
+  }
+}
+
+.page-header {
+  margin: 0;
+}
+
+.social-icons i.fa {
+  margin: 0;
+}
 
 .content img {
   display: inline-block;

@@ -45,10 +45,10 @@ describe('Municipality homepage', () => {
   };
 
   it('should show the correct name of the municipality', () => {
-    browser.waitForVisible('header#header .header-container #site-name > h1');
+    browser.waitForVisible('header#header .container #site-name > h1');
 
     // Assert the page have the expected title.
-    const muniTitle = browser.getText('header#header .header-container #site-name > h1');
+    const muniTitle = browser.getText('header#header .container #site-name > h1');
     assert.equal('טובא-זנגריה', muniTitle);
   });
 
@@ -302,9 +302,9 @@ describe('Municipality homepage', () => {
 
   it('should see the social link icons after saving the municipality', () => {
     browser.url('/tuba-zangariyye');
-    browser.waitForVisible('.header-social-icons.social-icons');
+    browser.waitForVisible('.social-icons');
 
-    const fbClass = browser.getAttribute('ul.header-social-icons li:nth-child(1)', 'class');
+    const fbClass = browser.getAttribute('ul.social-icons li:nth-child(1)', 'class');
     assert.equal('social-icons-facebook', fbClass);
 
     // Login as a content editor.
@@ -314,10 +314,26 @@ describe('Municipality homepage', () => {
     browser.url('/tuba-zangariyye/node/1/edit');
     browser.click('#edit-submit');
 
-    browser.waitForVisible('.header-social-icons.social-icons');
+    browser.waitForVisible('.social-icons');
 
-    const fbClassAfterSave = browser.getAttribute('ul.header-social-icons li:nth-child(1)', 'class');
+    const fbClassAfterSave = browser.getAttribute('ul.social-icons li:nth-child(1)', 'class');
     assert.equal('social-icons-facebook', fbClassAfterSave);
+  });
+
+  it('should have sticky header on scroll', () => {
+    browser.url('/tuba-zangariyye?language=he');
+    browser.waitForVisible('h1=טובא-זנגריה');
+
+    // Scroll a bit into the page.
+    browser.scroll('.panel-pane.pane-faqs-accordion');
+
+    // We should see this class added to the "html" tag.
+    browser.waitForVisible('html.sticky-header-active');
+  });
+
+  it('should have about page link', () => {
+    browser.url('/tuba-zangariyye?language=he');
+    browser.waitForVisible('h5=My Municipality');
   });
 
   it('should not see image borders when the "news" entity does not have an image', () => {

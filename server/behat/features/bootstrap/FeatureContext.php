@@ -382,7 +382,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $page = $this->getSession()->getPage();
 
     // Check the title of the page.
-    $title_element = $page->find('css', 'header#header .header-container #site-name > h1');
+    $title_element = $page->find('css', 'header#header .container #site-name > h1');
     if ($title_element === null) {
       throw new \Exception('The title element is missing.');
     }
@@ -427,7 +427,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @Then I should see the :header header
    */
   public function iShouldSeeTheMunicipalityHeader($header) {
-    $sitename = $this->getSession()->getPage()->find('css', 'header#header .header-container #site-name > h1')->getText();
+    $sitename = $this->getSession()->getPage()->find('css', 'header#header .container #site-name > h1')->getText();
 
     // Check if the site name is "Municipality".
     if ($sitename != $header) {
