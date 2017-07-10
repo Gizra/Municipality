@@ -10,6 +10,57 @@
 function hedley_municipality_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-municipality-field_about_page'.
+  $field_instances['node-municipality-field_about_page'] = array(
+    'bundle' => 'municipality',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 12,
+      ),
+      'homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_about_page',
+    'label' => 'About page',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-municipality-field_accessibility_page'.
   $field_instances['node-municipality-field_accessibility_page'] = array(
     'bundle' => 'municipality',
@@ -57,7 +108,7 @@ function hedley_municipality_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -114,7 +165,7 @@ function hedley_municipality_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -205,7 +256,7 @@ function hedley_municipality_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -267,7 +318,7 @@ function hedley_municipality_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -439,7 +490,7 @@ function hedley_municipality_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -603,6 +654,7 @@ function hedley_municipality_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('About page');
   t('Accessibility page');
   t('Background images');
   t('Default language');
