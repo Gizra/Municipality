@@ -97,7 +97,13 @@ function hedley_event_timestamp_to_iso8601($timestamp) {
  */
 function hedley_event_get_default_image() {
   $path = drupal_get_path('theme', 'hedley_theme') . '/images/default_event_image.png';
-  // Adding "base_path" in the beginning of the path to make sure it's always
-  // absolute.
-  return file_exists($path) ? base_path() . $path : NULL;
+  // Set the URL options to be a full URL and without group context.
+  $options = [
+    'absolute' => TRUE,
+    'purl' => [
+      'disabled' => TRUE,
+    ],
+  ];
+
+  return file_exists($path) ? url($path, $options) : NULL;
 }
