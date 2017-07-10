@@ -57,6 +57,7 @@ class HedleyMigratePages extends HedleyMigrateBase {
 
     $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_node_municipality($node));
     $fields = [
+      'about' => 'field_about_page',
       'accessibility' => 'field_accessibility_page',
       'terms' => 'field_terms_page',
     ];

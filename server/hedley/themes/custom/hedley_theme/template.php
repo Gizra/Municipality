@@ -67,6 +67,11 @@ function hedley_theme_preprocess_page(&$variables) {
   if ($wrapper->field_accessibility_page->value()) {
     $variables['accessibility_url'] = url('node/' . $wrapper->field_accessibility_page->getIdentifier());
   }
+
+  // About page link.
+  if ($wrapper->field_about_page->value()) {
+    $variables['about_url'] = url('node/' . $wrapper->field_about_page->getIdentifier());
+  }
   // Terms page link.
   if ($wrapper->field_terms_page->value()) {
     $variables['terms_url'] = url('node/' . $wrapper->field_terms_page->getIdentifier());
