@@ -13,8 +13,8 @@ jQuery(document).ready(function ($) {
 		logoWidth = logo.attr("width"),
 		logoHeight = logo.attr("height"),
 		logoPaddingTop = parseInt(logo.attr("data-sticky-padding") ? logo.attr("data-sticky-padding") : "28"),
-		logoSmallWidth = parseInt(logo.attr("data-sticky-width") ? logo.attr("data-sticky-width") : "82"),
-		logoSmallHeight = parseInt(logo.attr("data-sticky-height") ? logo.attr("data-sticky-height") : "40");
+		logoSmallWidth = parseInt(logo.attr("data-sticky-width") ? logo.attr("data-sticky-width") : "auto"),
+		logoSmallHeight = parseInt(logo.attr("data-sticky-height") ? logo.attr("data-sticky-height") : "54");
 
 	if(menuAfterHeader) {
 		headerContainer.css("min-height", header.height());

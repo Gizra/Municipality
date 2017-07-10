@@ -12,38 +12,15 @@
     <?php include_once('includes/breadcrumb.inc');?>
 
     <?php if (isset($background_image_url)): ?>
-      <div id="revolutionSlider" class="slider-container slider rev_slider revslider-initialised tp-simpleresponsive" data-plugin-revolution-slider="" data-plugin-options="{'delay': 9000, 'gridwidth': 1170, 'gridheight': 500, 'disableProgressBar': 'on'}" style="margin-top: -35px;">
+      <div id="revolutionSlider" class="slider-container slider rev_slider revslider-initialised tp-simpleresponsive" data-plugin-revolution-slider="" data-plugin-options="{'delay': 9000, 'gridwidth': 1170, 'gridheight': 500, 'disableProgressBar': 'on'}">
         <div class="tp-bgimg defaultimg" style="background-repeat: no-repeat; background-image: url(<?php print $background_image_url; ?>); background-size: cover; background-position: center center; width: 100%; height: 100%; opacity: 1; visibility: inherit; z-index: 20;" src="<?php print $background_image_url; ?>"></div>
       </div>
-      <div class="divider"></div>
     <?php endif; ?>
+
+    <div class="divider"></div>
 
     <?php print render($page['before_content']); ?>
 	  <div id="content" class="content full">
-      <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-xs-12 mb-xs center">
-              <?php if ($user_type_links): ?>
-                <?php print $user_type_links; ?>
-              <?php endif; ?>
-            </div>
-
-          <div class="col-md-6 col-xs-12 mb-xs center">
-            <?php print render($social_links); ?>
-          </div>
-
-          <div class="col-md-3 col-xs-12 mb-xs center">
-            <?php if ($language_switch_links) : ?>
-              <div class="languages btn-group" role="group">
-                <?php foreach ($language_switch_links as $link): ?>
-                  <?php print $link; ?>
-                <?php endforeach; ?>
-              </div>
-            <?php endif; ?>
-          </div>
-        </div>
-        <div class="divider"></div>
-      </div>
       <?php if ($messages): ?>
         <div class="col-md-12">
           <?php print $messages; ?>
