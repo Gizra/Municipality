@@ -8,13 +8,13 @@ describe('Municipality action page', () => {
   it('should show the action page with content in the body field, in hebrew', () => {
     browser.waitForVisible('h2=לקבל אישור תושב');
     browser.waitForVisible('h3=קבלת אישור תושבות');
-    browser.waitForVisible('p=יש למלא את הטופס ולהגישו במשרדי המועצה');
+    browser.waitForVisible('div=יש למלא את הטופס ולהגישו במשרדי המועצה');
   });
 
   it('should show the action page with content in the body field, in arabic', () => {
     browser.url('/tuba-zangariyye/node/12?user_type=residents&language=ar');
     browser.waitForVisible('h2=الحصول على الإقامة');
     browser.waitForVisible('h3=الحصول على تصريح الإقامة');
-    browser.waitForVisible('p=ملء النموذج وتقديمه إلى مكاتب المجلس');
+    browser.waitForVisible('div=ملء النموذج وتقديمه إلى مكاتب المجلس');
   });
 });

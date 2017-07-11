@@ -22,7 +22,7 @@
       <div class="panel-body">
         <small><?php print $published_date; ?></small>
         <?php if ($body): ?>
-          <div class="panel panel-default">
+          <div class="panel panel-default text-right">
             <div class="panel-body">
               <?php print $body; ?>
             </div>

@@ -33,11 +33,13 @@ function hedley_page_content_type_render($subtype, $conf, $args, $context) {
   }
 
   $wrapper->language($language->language);
-
+  // Calling the value directly on the wrapper doesn't get the custom style
+  // added by the content editor.
+  $body = $wrapper->body->value();
   $variables = [
     'title' => filter_xss($wrapper->label()),
     'published_date' => format_date($wrapper->changed->value(), 'custom', 'd.m.y'),
-    'body' => $wrapper->body->value() ? $wrapper->body->value->value() : '',
+    'body' => !empty($body) ? $body['value'] : '',
   ];
 
   $block = new stdClass();

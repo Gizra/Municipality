@@ -22,7 +22,7 @@ describe('Municipality topics', () => {
   it('should hide the FAQs answer', () => {
     browser.waitForVisible('div.pane-faqs-accordion .box-content');
 
-    const faqAnswer = browser.getText('div.pane-faqs-accordion .box-content .panel-group div.panel:nth-child(1) .panel-body > p');
+    const faqAnswer = browser.getText('div.pane-faqs-accordion .box-content .panel-group div.panel:nth-child(1) .panel-body');
     assert.equal('', faqAnswer);
   });
 
