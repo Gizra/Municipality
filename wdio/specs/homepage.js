@@ -291,6 +291,15 @@ describe('Municipality homepage', () => {
     checkSelectedLanguage('arabic');
   });
 
+  it('should see default image for events without an image', () => {
+    browser.url('/tuba-zangariyye');
+    browser.waitForVisible('h2=Upcoming events');
+
+    // First event entity doesn't have an image and should get the default
+    // image.
+    assert(browser.isVisible('#elm-app .row div:nth-child(1) .card-img-top img'));
+  });
+
   it('should redirect user to the group view page', () => {
     browser.url('/tuba-zangariyye');
     browser.waitForVisible('h2=Frequently asked questions');

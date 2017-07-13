@@ -13260,7 +13260,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 										_elm_lang$html$Html$div,
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('card-img-top'),
+											_0: _elm_lang$html$Html_Attributes$class('card-img-top center'),
 											_1: {ctor: '[]'}
 										},
 										{

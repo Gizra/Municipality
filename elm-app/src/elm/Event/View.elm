@@ -174,7 +174,7 @@ viewEventAsBlock baseUrl language ( eventId, event ) =
             [ showMaybe <|
                 Maybe.map
                     (\imageUrl ->
-                        div [ class "card-img-top" ]
+                        div [ class "card-img-top center" ]
                             [ img [ class "img-responsive", src imageUrl ]
                                 []
                             ]
