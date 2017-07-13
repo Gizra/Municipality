@@ -92,7 +92,7 @@ function hedley_event_timestamp_to_iso8601($timestamp) {
 /**
  * Get the default image for events.
  *
- * @return string
+ * @return string|null
  *   The image path, or nothing if the image does not exist.
  */
 function hedley_event_get_default_image() {
