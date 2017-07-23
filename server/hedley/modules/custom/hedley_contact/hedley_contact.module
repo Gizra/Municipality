@@ -180,7 +180,7 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
     $contact = [
       'id' => $wrapper->getIdentifier(),
       'name' => $name,
-      'image_url' => $image ? image_style_url('medium', $image['uri']) : '',
+      'image_url' => $image ? image_style_url('square_large_image', $image['uri']) : hedley_municipality_get_default_image($wrapper->getBundle()),
       'phone' => check_plain($wrapper->field_phone->value()),
       'fax' => check_plain($wrapper->field_fax->value()),
       'email' => check_plain($wrapper->field_email->value()),

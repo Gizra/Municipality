@@ -57,7 +57,7 @@ function hedley_event_get_events_by_group($group, $language_code, $show_as_block
     $event = [
       'id' => $wrapper->getIdentifier(),
       'name' => check_plain($wrapper->label()),
-      'image_url' => !empty($image) ? image_style_url('square_large_image', $image['uri']) : hedley_event_get_default_image(),
+      'image_url' => !empty($image) ? image_style_url('square_large_image', $image['uri']) : hedley_municipality_get_default_image($wrapper->getBundle()),
       'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : NULL,
       'date' => hedley_event_timestamp_to_iso8601($date['value']),
       // Make sure the end date isn't the same as the start date.
@@ -87,23 +87,4 @@ function hedley_event_get_events_by_group($group, $language_code, $show_as_block
  */
 function hedley_event_timestamp_to_iso8601($timestamp) {
   return date('c', $timestamp);
-}
-
-/**
- * Get the default image for events.
- *
- * @return string|null
- *   The image path, or nothing if the image does not exist.
- */
-function hedley_event_get_default_image() {
-  $path = drupal_get_path('theme', 'hedley_theme') . '/images/default_event_image.png';
-  // Set the URL options to be a full URL and without group context.
-  $options = [
-    'absolute' => TRUE,
-    'purl' => [
-      'disabled' => TRUE,
-    ],
-  ];
-
-  return file_exists($path) ? url($path, $options) : NULL;
 }
