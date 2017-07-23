@@ -162,6 +162,7 @@ translate lang trans =
                     { arabic = "أين"
                     , english = "Where"
                     , hebrew = "איפה"
+                    }
 
                 ShowAll ->
                     { arabic = "عرض الكل"

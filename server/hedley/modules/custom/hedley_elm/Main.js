@@ -12058,11 +12058,8 @@ var _gizra$municipality$Translate$TranslationSet = F3(
 	function (a, b, c) {
 		return {arabic: a, english: b, hebrew: c};
 	});
-<<<<<<< HEAD
-var _gizra$municipality$Translate$WhereText = {ctor: 'WhereText'};
-=======
 var _gizra$municipality$Translate$ShowAll = {ctor: 'ShowAll'};
->>>>>>> origin/master
+var _gizra$municipality$Translate$WhereText = {ctor: 'WhereText'};
 var _gizra$municipality$Translate$PriceText = {ctor: 'PriceText'};
 var _gizra$municipality$Translate$MoreDetailsText = {ctor: 'MoreDetailsText'};
 var _gizra$municipality$Translate$MatchingResults = {ctor: 'MatchingResults'};
@@ -12164,12 +12161,10 @@ var _gizra$municipality$Translate$translate = F2(
 					return {arabic: 'لمزيد من التفاصيل', english: 'For more details', hebrew: 'לפרטים נוספים'};
 				case 'PriceText':
 					return {arabic: 'السعر', english: 'Price', hebrew: 'מחיר'};
-				default:
-<<<<<<< HEAD
+				case 'WhereText':
 					return {arabic: 'أين', english: 'Where', hebrew: 'איפה'};
-=======
+				default:
 					return {arabic: 'عرض الكل', english: 'Show all', hebrew: 'הצג הכל'};
->>>>>>> origin/master
 			}
 		}();
 		var _p3 = lang;
@@ -13614,7 +13609,7 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 																		_1: {ctor: '[]'}
 																	});
 															},
-															_p2.location)),
+															_p5.location)),
 													_1: {
 														ctor: '::',
 														_0: _gizra$municipality$Utils_Html$showMaybe(
