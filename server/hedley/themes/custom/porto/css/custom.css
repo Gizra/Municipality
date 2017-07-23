@@ -1,0 +1,111 @@
+/* Add here all your CSS customizations */
+.panel-separator{display: none;}
+.img-border img{border-radius: 50%;}
+.bg-testimonials{
+    background-image: url("../img/parallax-3.jpg") !important;
+    background-size: cover !important;
+    background-attachment: scroll !important;
+}
+.portfolio-top .sort-destination.full-width{top:0;}
+.img-display img{display: inline-block;}
+.panel-center h2.mt-xl{text-align: center;}
+.panel-color .heading-dark,.panel-color .mb-xs{color: #fff !important;}
+.mg-top-80{margin-top: 80px;}
+.mg-top-50{margin-top: 50px;}
+.mg-top-25{margin-top: 25px;}
+.mg-top-40{margin-top: 40px;}
+.mg-top-30{margin-top: 30px;}
+.m-bt-30{margin-bottom: -30px;}
+.mg-top-20{margin-top: 20px;}
+.mg-top-10{margin-top: 10px;}
+.mg-bt-50{margin-bottom: 50px;}
+.pd-tb-50{padding: 50px 0;}
+.google-map.small iframe{width: 100%;height: 100%;}
+.bg-search-domain{background-image: url("../img/parallax-4.jpg") !important;}
+.section.section-custom-map-2{background: transparent url(../img/map-2.png) center 0 no-repeat;}
+ul.language-switcher-locale-url{padding: 10px;}
+ul.language-switcher-locale-url li img{display: inline-block;margin-right: 5px;}
+html.sticky-header-active.side-header #header .header-body{position: static;}
+.portfolio-item.img-thumbnail {display: block;}
+.portfolio-item.img-thumbnail .thumb-info-type {line-height: 24px;}
+#footer .webform-client-form textarea{height: 54px;}
+#footer .webform-client-form .grippie{display: none;}
+/*[role="main"]{overflow: hidden;}*/
+.page-node-140 .google-map{margin-top: 0;}
+.page-header-light .breadcrumb{
+    position: absolute;
+    top: 26%;
+    right: 20px;
+}
+.page-header-reverse .breadcrumb{
+    right: auto;
+    margin-top: 7px;
+}
+#webform-client-form-143 textarea{
+    min-height: 215px;
+}
+#webform-client-form-143 .form-actions{float: right;margin-right: 15px;margin-top: 0;}
+#webform-client-form-143 #webform-component-subject select{width: 100%;}
+#webform-client-form-143 .form-item.form-type-radio,#webform-client-form-143 .form-checkboxes .form-item{float: left;margin-right: 5px;}
+#webform-client-form-143 .form-item.form-type-radio label.option,#webform-client-form-143 .form-checkboxes .form-item label.option{
+    margin: 0 5px;
+}
+#webform-client-form-143 .form-item{margin-top: 0;}
+#webform-client-form-143 .form-item.webform-component-textarea{margin-top: 10px;}
+#webform-client-form-143 .form-submit,.contact-form .form-submit{padding: 10px 16px;font-size: 18px;border-radius: 6px;}
+.contact-form .form-actions{padding-top: 0;}
+.simplenews-subscribe input[type="submit"]{
+    background: none;
+    outline: none;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+}
+.simplenews-subscribe{position: relative;}
+.simplenews-subscribe input[type="text"]{
+    position: absolute;
+    bottom: 0;
+}
+.simplenews-subscribe input[type="submit"]{position: absolute;bottom: 0;right: 0;}
+.simplenews-subscribe input[type="submit"]:hover {
+    color: #333;
+    background-color: #C4C4C4;
+    border-color: #adadad;
+}
+.mg-img img{
+    margin-bottom: 25px;
+}
+#footer h2{letter-spacing: normal;}
+.simplenews-subscribe{margin-top: 30px;}
+.region-footer-bottom{margin-bottom: 25px;overflow: hidden;}
+.page-node-15 .page-header{margin-bottom: 0;}
+#mainMenu .dropdown-menu .active-trail{
+    background: #f5f5f5;
+}
+.language-switcher-locale-url{list-style: none;}
+.page-search .search-form input[type="submit"]{margin: 20px 0;}
+.alert{position: relative;}
+.icon-cancel.message-close{position: absolute;right: 20px;top: 50%;margin-top: -9px;}
+.icon-cancel.message-close:hover{cursor: pointer;}
+@media (min-width: 992px) {
+    .view-porto-portfolio .col-md-3.isotope-item:nth-child(4n+1){clear: none;}
+    .ie #header .header-nav-main nav > ul > li > a.dropdown-toggle:after{
+       display: none;
+
+    }
+}
+@media (max-width: 768px) {
+    .dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover{
+        color: #262626;
+    }
+}

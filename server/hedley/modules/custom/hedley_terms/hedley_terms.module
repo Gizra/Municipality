@@ -2,6 +2,13 @@
 
 /**
  * @file
+ * Code for the Hedley Terms feature.
+ */
+
+include_once 'hedley_terms.features.inc';
+
+/**
+ * @file
  * Hedley Terms module.
  */
 
@@ -48,7 +55,6 @@ function hedley_terms_get_user_type_links() {
 
   $variables = [
     'links' => $links,
-    'count_class' => hedley_theme_number_as_word(count($links)),
   ];
   return theme('hedley_terms_user_type_links', $variables);
 }
@@ -65,6 +71,8 @@ function _hedley_terms_user_type_links_path() {
   // current page and only change the user.
   $menu_item = menu_get_item();
   switch ($menu_item['path']) {
+    case 'contacts':
+    case 'events':
     case 'taxonomy/term/%':
       return current_path();
 
@@ -123,13 +131,15 @@ function hedley_terms_theme($existing, $type, $theme, $path) {
  * Implements hook_url_outbound_alter().
  */
 function hedley_terms_url_outbound_alter(&$path, &$options, $original_path) {
-  if ($options['external']) {
-    // Ignore external URLs.
+  if ($options['external'] || drupal_is_cli()) {
+    // Ignore external URLs, or when creating a link with cli.
     return;
   }
+
   // When a specific user was set on the query, but the url doesn't define a
   // a user, then add the user to the url.
-  if (!empty($_GET['user_type']) && empty($options['query']['user_type'])) {
-    $options['query']['user_type'] = check_plain($_GET['user_type']);
+  $query_params = drupal_get_query_parameters();
+  if (isset($query_params['user_type']) && !empty($query_params['user_type']) && empty($options['query']['user_type'])) {
+    $options['query']['user_type'] = check_plain($query_params['user_type']);
   }
 }

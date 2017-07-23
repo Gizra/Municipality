@@ -24,7 +24,8 @@ Drupal.behaviors.elm = {
       var app = Elm.Main.embed(node, {
         page: page,
         language : appSettings.language,
-        showAsBlock : appSettings.showAsBlock
+        showAsBlock : appSettings.showAsBlock,
+        baseUrl : appSettings.baseUrl
       });
 
       // Inject the expected values to the right port based on the selected page.

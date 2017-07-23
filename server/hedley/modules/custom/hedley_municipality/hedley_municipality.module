@@ -17,6 +17,31 @@ function hedley_municipality_ctools_plugin_directory($module, $plugin) {
 }
 
 /**
+ * Implements hook_init().
+ *
+ * Redirect to the group node view when inside `og_context`.
+ */
+function hedley_municipality_init() {
+  if (!drupal_is_front_page()) {
+    // Not the homepage.
+    return;
+  }
+
+  if (drupal_is_cli()) {
+    // Ignore requests from cli.
+    return;
+  }
+
+  // Redirect from homepage to the group node view when on homepage.
+  if (!$group = hedley_municipality_get_current_group()) {
+    // No need to redirect if user is not inside a group context.
+    return;
+  }
+
+  drupal_goto('node/' . $group->nid);
+}
+
+/**
  * Get the base query for fetching nodes.
  *
  * @param string $bundle
@@ -128,7 +153,7 @@ function hedley_municipality_get_nodes($bundle, $max_range = 50, $municipality_n
  * @param string $bundle
  *   The wanted nodes bundle.
  * @param int $max_range
- *   Maximal amount of nodes to fetch, defaults to 50.
+ *   Optional Maximal amount of nodes to fetch, defaults to 50.
  * @param object|null $municipality_node
  *   Optional "Municipality" node to filter by.
  * @param bool $promoted_only
@@ -142,7 +167,7 @@ function hedley_municipality_get_nodes($bundle, $max_range = 50, $municipality_n
  * @return array
  *   Node objects.
  */
-function hedley_municipality_get_nodes_by_user_type($bundle, $max_range = 50, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
+function hedley_municipality_get_nodes_by_current_user_type($bundle, $max_range = 50, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
   // Get the base node query for nodes.
   $query = hedley_municipality_get_nodes_base_query($bundle, $max_range);
 
@@ -216,6 +241,8 @@ function hedley_municipality_form_municipality_node_form_alter(&$form, &$form_st
  * Set nodes titles according to their municipality's default language.
  */
 function hedley_municipality_node_presave($node) {
+  global $language;
+
   if (!isset($node->title_field)) {
     return;
   }
@@ -226,7 +253,6 @@ function hedley_municipality_node_presave($node) {
   }
 
   $municipality_wrapper = entity_metadata_wrapper('node', $municipality);
-  $municipality_language = $municipality_wrapper->field_default_language->value();
 
   // Update the municipality's last updated field.
   $municipality_wrapper->field_last_update->set(REQUEST_TIME);
@@ -237,8 +263,8 @@ function hedley_municipality_node_presave($node) {
   }
 
   // For nodes with title_field, set the title property according to the
-  // municipality's language, or the next available language.
-  if ($language_code = hedley_municipality_get_non_empty_language_for_field($node->title_field, $municipality_language)) {
+  // user's language, or the next available language.
+  if ($language_code = hedley_municipality_get_non_empty_language_for_field($node->title_field, $language->language)) {
     // Set the title to the title_field in an available language.
     $node->title = $node->title_field[$language_code][0]['value'];
   }
@@ -372,15 +398,15 @@ function hedley_municipality_node_municipality($node) {
  *
  * @param array $field_attribute
  *   The field attribute from the node object.
- * @param string $municipality_language
- *   The municipality's default language.
+ * @param string $language
+ *   The user's language.
  *
  * @return string
  *   The first available language for the field.
  */
-function hedley_municipality_get_non_empty_language_for_field(array $field_attribute, $municipality_language) {
-  if (!empty($field_attribute[$municipality_language][0]['value'])) {
-    return $municipality_language;
+function hedley_municipality_get_non_empty_language_for_field(array $field_attribute, $language) {
+  if (!empty($field_attribute[$language][0]['value'])) {
+    return $language;
   }
 
   // If the field isn't available in the default language, try another non empty

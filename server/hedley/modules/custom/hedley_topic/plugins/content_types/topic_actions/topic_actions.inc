@@ -28,7 +28,7 @@ function hedley_topic_topic_actions_content_type_render($subtype, $conf, $args, 
     return NULL;
   }
 
-  $nodes = hedley_municipality_get_nodes_by_user_type('action', 10, $municipality_node, FALSE, $topic_wrapper->getIdentifier());
+  $nodes = hedley_municipality_get_nodes_by_current_user_type('action', 10, $municipality_node, FALSE, $topic_wrapper->getIdentifier());
   if (!$nodes) {
     // No actions found.
     return NULL;
@@ -46,7 +46,7 @@ function hedley_topic_topic_actions_content_type_render($subtype, $conf, $args, 
     }
 
     $actions[] = [
-      'title' => hedley_action_get_action_title_link($wrapper, ['ui', 'button']),
+      'title' => hedley_action_get_action_title_link($wrapper, ['btn btn-borders btn-primary mr-xs mb-sm']),
     ];
   }
 

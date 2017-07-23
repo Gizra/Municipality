@@ -33,6 +33,7 @@ features[field_instance][] = node-event-field_user_types
 features[field_instance][] = node-event-og_group_ref
 features[field_instance][] = node-event-og_vocabulary
 features[field_instance][] = node-event-title_field
+features[image][] = square_large_image
 features[node][] = event
 features[page_manager_pages][] = events
 features[variable][] = entity_translation_hide_translation_links_event

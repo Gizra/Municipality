@@ -98,7 +98,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $this->getSession()->visit($this->locatePath($uri));
 
     // Get the user types switcher.
-    $user_type_element = $this->getSession()->getPage()->find('css', '.background .user-types');
+    $user_type_element = $this->getSession()->getPage()->find('css', '.container .user-types');
 
     // Sometimes we want to check that the links are not displayed therefor
     // there will be an empty variable.
@@ -307,14 +307,24 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * @When I visit the topic :topic under the municipality :municipality
+   * @When I visit :name taxonomy of type :vocab_name
    */
-  public function iVisitTheTopicUnderTheMunicipality($topic, $municipality) {
-    $municipality = $this->loadGroupByTitleAndType($municipality, 'municipality');
+  public function iVisitTaxonomyOfType($name, $vocab_name) {
+    $vocabulary = taxonomy_vocabulary_machine_name_load($vocab_name);
+    $term = $this->loadTaxonomyByTitleAndVocabulary($name, $vocabulary->vid);
 
-    $topic = $this->loadTaxonomyByTitleAndVocabulary($topic, 'topics_' . $municipality->nid);
+    $this->getSession()->visit($this->locatePath('taxonomy/term/' . $term->tid));
+  }
 
-    $uri = $this->createUriWithGroupContext($municipality, 'taxonomy/term/' . $topic->tid) ;
+  /**
+   * @When I visit :name taxonomy of the group :group_name
+   */
+  public function iVisitTaxonomyOfTypeInTheGroup($name, $group_name) {
+    $group = $this->loadGroupByTitleAndType($group_name, 'municipality');
+    $vocabulary = taxonomy_vocabulary_machine_name_load('topics_' . $group->nid);
+    $term = $this->loadTaxonomyByTitleAndVocabulary($name, $vocabulary->vid);
+
+    $uri = $this->createUriWithGroupContext($group, 'taxonomy/term/' . $term->tid);
     $this->getSession()->visit($this->locatePath($uri));
   }
 
@@ -338,7 +348,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $page = $this->getSession()->getPage();
 
     // Get the languages switcher.
-    $languages_element = $page->find('css', '.background .languages');
+    $languages_element = $page->find('css', '.container .languages');
 
     // Sometimes we want to check that the links are not displayed therefor
     // there will be an empty variable.
@@ -355,7 +365,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $page = $this->getSession()->getPage();
 
     // Get the user types switcher.
-    $user_type_element = $page->find('css', '.background .user-types');
+    $user_type_element = $page->find('css', '.container .user-types');
 
     // Sometimes we want to check that the links are not displayed therefor
     // there will be an empty variable.
@@ -372,7 +382,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $page = $this->getSession()->getPage();
 
     // Check the title of the page.
-    $title_element = $page->find('css', '.background .center h2.header');
+    $title_element = $page->find('css', 'header#header .container #site-name > h1');
     if ($title_element === null) {
       throw new \Exception('The title element is missing.');
     }
@@ -381,7 +391,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     }
 
     // Check some text on the municipality page.
-    $text_element = $page->find('css', '.pane-promoted-content .content h3.header a');
+    $text_element = $page->find('css', '.pane-promoted-content.news-box h3.header a');
     if ($text_element === null) {
       throw new \Exception('The required text element is missing.');
     }
@@ -414,30 +424,10 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * @Then I should see the action :action in the topic page
-   */
-  public function iShouldSeeTheActionInTheTopicPage($action) {
-    $page = $this->getSession()->getPage();
-
-    $nodes = $page->findAll('css', '.pane-topic-actions .buttons a');
-    foreach ($nodes as $node) {
-      if ($node->getText() === $action) {
-        if ($node->isVisible()) {
-          return;
-        }
-        else {
-          throw new \Exception("Action with label \"$action\" not visible.");
-        }
-      }
-    }
-    throw new \Behat\Mink\Exception\ElementNotFoundException($this->getSession(), 'action', 'label', $action);
-  }
-
-  /**
    * @Then I should see the :header header
    */
   public function iShouldSeeTheMunicipalityHeader($header) {
-    $sitename = $this->getSession()->getPage()->find('css', '.ui.header a')->getText();
+    $sitename = $this->getSession()->getPage()->find('css', 'header#header .container #site-name > h1')->getText();
 
     // Check if the site name is "Municipality".
     if ($sitename != $header) {
@@ -490,40 +480,38 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
   }
 
   /**
-   * Get the group based on the title and type.
+   * Get taxonomy term based on the name and vocabulary ID.
    *
-   * @param string $title
-   *   The group title.
-   * @param string $type
-   *   The group node type.
+   * @param string $name
+   *   The taxonomy name.
+   * @param string $vocab_id
+   *   The vocabulary ID.
    *
    * @return object
-   *   The group (if any) or NULL.
+   *   The term (if any) or NULL.
    * @throws \Exception
    */
-  protected function loadTaxonomyByTitleAndVocabulary($title, $type) {
+  protected function loadTaxonomyByTitleAndVocabulary($name, $vocab_id) {
     $query = new \entityFieldQuery();
     $result = $query
       ->entityCondition('entity_type', 'taxonomy_term')
-      ->entityCondition('bundle', $type)
-      ->propertyCondition('name', $title)
+      ->entityCondition('vid', $vocab_id)
+      ->propertyCondition('name', $name)
       ->range(0, 1)
       ->execute();
     if (empty($result['taxonomy_term'])) {
       $params = [
-        '@title' => $title,
-        '@type' => $type,
+        '@name' => $name,
       ];
-      throw new \Exception(format_string('Taxonomy term @title not found (type @type).', $params));
+      throw new \Exception(format_string('Taxonomy term @name not found.', $params));
     }
     $tid = (int) key($result['taxonomy_term']);
     $term = taxonomy_term_load($tid);
     if (!$term) {
       $params = [
-        '@title' => $title,
-        '@type' => $type,
+        '@name' => $name,
       ];
-      throw new \Exception(format_string('Taxonomy term @title not found (type @type).', $params));
+      throw new \Exception(format_string('Taxonomy term @name not found.', $params));
     }
     return $term;
   }
@@ -598,7 +586,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @throws \Exception
    */
   protected function checkActiveLanguage($language, $page, $selector) {
-    $language_active_link = $page->find('css', '.background .languages a.active');
+    $language_active_link = $page->find('css', '.container .languages a.active');
     if ($language_active_link === null) {
       throw new \Exception('The languages has no active items.');
     }
@@ -627,7 +615,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @throws \Exception
    */
   protected function checkActiveUserType($user_type, $page, $selector) {
-    $user_type_active_link = $page->find('css', '.background .user-types a.active');
+    $user_type_active_link = $page->find('css', '.container .user-types a.active');
     if ($user_type_active_link === null) {
       throw new \Exception('The user type has no active items.');
     }

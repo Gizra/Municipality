@@ -13,7 +13,7 @@ projects[admin_views][subdir] = "contrib"
 projects[admin_views][version] = "1.6"
 
 projects[auto_entitylabel][subdir] = "contrib"
-projects[auto_entitylabel][version] = "1.3"
+projects[auto_entitylabel][version] = "1.4"
 
 projects[ckeditor][subdir] = "contrib"
 projects[ckeditor][version] = "1.17"
@@ -30,6 +30,8 @@ projects[composer_manager][version] = "1.8"
 
 projects[date][subdir] = "contrib"
 projects[date][version] = "2.10"
+; Fix notice in php7, https://www.drupal.org/node/2843367
+projects[date][patch][] = "https://www.drupal.org/files/issues/2843367-php71-string-offset-26.patch"
 
 projects[diff][subdir] = "contrib"
 projects[diff][version] = "3.3"
@@ -45,7 +47,7 @@ projects[entitycache][subdir] = "contrib"
 projects[entitycache][version] = "1.2"
 
 projects[entityreference][subdir] = "contrib"
-projects[entityreference][version] = "1.2"
+projects[entityreference][version] = "1.4"
 
 projects[entity_translation][subdir] = "contrib"
 projects[entity_translation][version] = "1.0-beta6"
@@ -60,10 +62,10 @@ projects[features][subdir] = "contrib"
 projects[features][version] = "2.10"
 
 projects[i18n][subdir] = "contrib"
-projects[i18n][version] = "1.15"
+projects[i18n][version] = "1.18"
 
 projects[imce][subdir] = "contrib"
-projects[imce][version] = "1.10"
+projects[imce][version] = "1.11"
 
 projects[jquery_update][subdir] = "contrib"
 projects[jquery_update][version] = "2.7"
@@ -87,10 +89,11 @@ projects[mimemail][subdir] = "contrib"
 projects[mimemail][version] = "1.0-beta3"
 
 projects[module_filter][subdir] = "contrib"
-projects[module_filter][version] = "2.0"
+projects[module_filter][version] = "2.1"
 
 projects[multifield][subdir] = "contrib"
 projects[multifield][version] = "1.0-alpha4"
+projects[multifield][patch][] = "https://www.drupal.org/files/issues/2041531-23-entity-api-support.patch"
 
 projects[og][subdir] = "contrib"
 projects[og][version] = "2.9"
@@ -133,20 +136,6 @@ projects[views][version] = "3.16"
 
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.4"
-
-; Themes
-projects[semanticui][subdir] = "contrib"
-; Using 1.x-dev due to no stable release.
-projects[semanticui][version] = "1.x-dev"
-; https://www.drupal.org/node/2859537 .
-projects[semanticui][patch][] = "https://www.drupal.org/files/issues/use-semantic-library-as-is-2859537-1.patch"
-; Make sure it's downloaded as a theme.
-projects[semanticui][type] = "theme"
-
-; Libraries
-libraries[semanticui][type] = "libraries"
-libraries[semanticui][download][type] = "get"
-libraries[semanticui][download][url] = "https://github.com/Semantic-Org/Semantic-UI/archive/master.zip"
 
 ; Development
 projects[devel][subdir] = "development"

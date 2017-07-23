@@ -5,15 +5,23 @@
  * Topic news.
  */
 ?>
-<div class="ui grid container">
-  <div class="centered row"">
-    <h3 class="ui purple header"><?php print t('News regarding @topic', ['@topic' => $title]); ?></h3>
-  </div>
 
-  <?php foreach ($news_items as $item): ?>
-    <div class="ui positive message row">
-      <?php print $item['title']; ?>
-      <?php print $item['read_more']; ?>
+<div class="featured-box featured-box-primary">
+  <div class="box-content">
+    <div class="row">
+      <h2><?php print t('News regarding @topic', ['@topic' => $title]); ?></h2>
     </div>
-  <?php endforeach; ?>
+    <div class="row">
+      <?php foreach ($news_items as $item): ?>
+        <section class="call-to-action with-borders mb-xl">
+          <div class="call-to-action-content align-left">
+            <h3><?php print $item['title']; ?></h3>
+          </div>
+          <div class="call-to-action-btn">
+            <?php print $item['read_more']; ?>
+          </div>
+        </section>
+      <?php endforeach; ?>
+    </div>
+  </div>
 </div>

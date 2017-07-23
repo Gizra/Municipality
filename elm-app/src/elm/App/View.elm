@@ -12,12 +12,12 @@ view model =
     case model.page of
         Contact ->
             div []
-                [ Html.map MsgPagesContact <| Contact.View.view model.language model.pageContact
+                [ Html.map MsgPagesContact <| Contact.View.view model.baseUrl model.language model.showAsBlock model.pageContact
                 ]
 
         Event ->
             div []
-                [ Html.map MsgPagesEvent <| Event.View.view model.language model.showAsBlock model.pageEvent
+                [ Html.map MsgPagesEvent <| Event.View.view model.baseUrl model.language model.showAsBlock model.pageEvent
                 ]
 
         NotFound ->

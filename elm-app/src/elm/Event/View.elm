@@ -1,5 +1,6 @@
 module Event.View exposing (..)
 
+import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
 import DictList
 import Event.Model exposing (DictListEvent, Event, EventId, Model, Msg(..))
@@ -12,36 +13,48 @@ import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
 
-view : Language -> Bool -> Model -> Html Msg
-view language showAsBlock model =
-    div
-        []
+view : BaseUrl -> Language -> Bool -> Model -> Html Msg
+view baseUrl language showAsBlock model =
+    div []
         [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
-        , showIf (not showAsBlock) <| div [ class "ui horizontal divider" ] [ text <| translate language MatchingResults ]
-        , div [ class "ui container center aligned" ] [ viewEvents language model ]
-        , divider
+        , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
+        , div [] [ viewEvents baseUrl language showAsBlock model ]
+        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/events?" ++ baseUrl.query) ] [ text <| translate language ShowAll ]
         ]
 
 
 viewEventFilter : Language -> String -> Html Msg
 viewEventFilter language filterString =
-    div [ class "ui icon input" ]
-        [ input
-            [ value filterString
-            , type_ "search"
-            , id "search-events"
-            , placeholder <| translate language FilterEventsPlaceholder
-            , onInput SetFilter
+    div [ class "row" ]
+        [ div [ class "col-md-4 col-xs-12" ]
+            [ div [ class "input-group" ]
+                [ input
+                    [ value filterString
+                    , type_ "search"
+                    , id "search-events"
+                    , class "form-control"
+                    , placeholder <| translate language FilterEventsPlaceholder
+                    , onInput SetFilter
+                    ]
+                    []
+                , span
+                    [ class "input-group-btn" ]
+                    [ button
+                        [ class "btn btn-default" ]
+                        [ i
+                            [ class "fa fa-search" ]
+                            []
+                        ]
+                    ]
+                ]
             ]
-            []
-        , i [ class "search icon" ] []
         ]
 
 
 {-| View all events.
 -}
-viewEvents : Language -> Model -> Html msg
-viewEvents language { events, filterString } =
+viewEvents : BaseUrl -> Language -> Bool -> Model -> Html msg
+viewEvents baseUrl language showAsBlock { events, filterString } =
     let
         filteredEvents =
             filterEvents events filterString
@@ -49,11 +62,14 @@ viewEvents language { events, filterString } =
         if DictList.isEmpty filteredEvents then
             div [] [ text <| translate language EventsNotFound ]
         else
-            div [ class "ui link cards" ]
+            div [ class "row" ]
                 (filteredEvents
                     |> DictList.map
                         (\eventId event ->
-                            viewEvent language ( eventId, event )
+                            if showAsBlock then
+                                viewEventAsBlock baseUrl language ( eventId, event )
+                            else
+                                viewEvent baseUrl language ( eventId, event )
                         )
                     |> DictList.values
                 )
@@ -61,8 +77,8 @@ viewEvents language { events, filterString } =
 
 {-| View a single event.
 -}
-viewEvent : Language -> ( EventId, Event ) -> Html msg
-viewEvent language ( eventId, event ) =
+viewEvent : BaseUrl -> Language -> ( EventId, Event ) -> Html msg
+viewEvent baseUrl language ( eventId, event ) =
     div
         [ class "card" ]
         [ showMaybe <|
@@ -141,12 +157,56 @@ viewEvent language ( eventId, event ) =
                 , div
                     [ class "ui four wide column center aligned" ]
                     [ a
-                        [ class "ui button primary basic middle aligned", target "_blank", href ("node/" ++ eventId) ]
+                        [ class "ui button primary basic middle aligned", target "_blank", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
                         [ i
                             [ class "add icon" ]
                             []
                         , text <| translate language MoreDetailsText
                         ]
+                    ]
+                ]
+            ]
+        ]
+
+
+{-| View a single event that will appear in a block (i.e. with less information).
+-}
+viewEventAsBlock : BaseUrl -> Language -> ( EventId, Event ) -> Html msg
+viewEventAsBlock baseUrl language ( eventId, event ) =
+    div [ class "col-md-6" ]
+        [ a
+            [ class "thumbnail search-results", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
+            [ showMaybe <|
+                Maybe.map
+                    (\imageUrl ->
+                        div [ class "card-img-top center" ]
+                            [ img [ class "img-responsive", src imageUrl ]
+                                []
+                            ]
+                    )
+                    event.imageUrl
+            , div
+                [ class "caption" ]
+                [ h4
+                    [ class "card-title" ]
+                    [ text event.name ]
+                , div
+                    []
+                    [ span
+                        []
+                        [ i
+                            [ class "fa fa-calendar" ]
+                            []
+                        , text <| translate language (DayAndDate event.date event.endDate)
+                        ]
+                    , showIf event.recurringWeekly <|
+                        div
+                            [ class "recurring-weekly" ]
+                            [ i
+                                [ class "fa fa-refresh" ]
+                                []
+                            , text <| translate language EventRecurringWeekly
+                            ]
                     ]
                 ]
             ]

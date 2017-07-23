@@ -29,7 +29,7 @@ function hedley_topic_topic_news_content_type_render($subtype, $conf, $args, $co
     return NULL;
   }
 
-  $nodes = hedley_municipality_get_nodes_by_user_type('news', 10, $municipality_node, FALSE, $topic_wrapper->getIdentifier());
+  $nodes = hedley_municipality_get_nodes_by_current_user_type('news', 10, $municipality_node, FALSE, $topic_wrapper->getIdentifier());
   if (!$nodes) {
     // No news found.
     return NULL;
@@ -52,7 +52,7 @@ function hedley_topic_topic_news_content_type_render($subtype, $conf, $args, $co
     $news_items[] = [
       'title' => $wrapper->label(),
       // Add a read more link when the news has a body.
-      'read_more' => $wrapper->body->value() ? l(t('Read more'), 'node/' . $node->nid) : '',
+      'read_more' => $wrapper->body->value() ? l(t('Read more'), 'node/' . $node->nid, ['attributes' => ['class' => 'btn btn-lg btn-primary']]) : '',
     ];
   }
 

@@ -8,6 +8,15 @@
 include_once 'hedley_action.features.inc';
 
 /**
+ * Implements hook_ctools_plugin_directory().
+ */
+function hedley_action_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
  * Implements hook_node_presave().
  *
  * Fix empty entity references on the action's field_action_sections. For some
@@ -71,4 +80,27 @@ function hedley_action_get_action_title_link($wrapper, array $class = []) {
       'class' => $class,
     ],
   ]);
+}
+
+/**
+ * A helper function to keep the icons classes of the 'action section icon'.
+ *
+ * @param string $key
+ *   The key of the icon.
+ *
+ * @return mixed|null
+ *   The 'Font Awesome' class of the provided key.
+ */
+function hedley_action_get_section_icon_class($key) {
+  $classes = [
+    'add_to_calendar' => 'calendar',
+    'alarm' => 'bell',
+    'check' => 'check-square-o',
+    'find' => 'search',
+    'handshake' => 'handshake-o',
+    'mail' => 'envelope-o',
+    'phone' => 'mobile',
+  ];
+
+  return isset($classes[$key]) ? $classes[$key] : NULL;
 }

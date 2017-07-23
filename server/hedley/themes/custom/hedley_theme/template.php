@@ -37,8 +37,6 @@ function hedley_theme_panels_default_style_render_region($variables) {
 function hedley_theme_preprocess_page(&$variables) {
   // Add the language switch links.
   $variables['language_switch_links'] = hedley_i18n_language_switch_links();
-  // The class depending on the amount of languages the municipality have.
-  $variables['language_switch_links_class'] = hedley_theme_number_as_word(count($variables['language_switch_links']));
 
   // Add user type links.
   $variables['user_type_links'] = hedley_terms_get_user_type_links();
@@ -48,6 +46,12 @@ function hedley_theme_preprocess_page(&$variables) {
     return;
   }
   $wrapper = entity_metadata_wrapper('node', $node);
+
+  // Get first background image.
+  if ($wrapper->field_background_images->value()) {
+    $background_image = $wrapper->field_background_images->get(0)->value();
+    $variables['background_image_url'] = file_create_url($background_image['uri']);
+  }
 
   // Override the site name with the municipality's name.
   $variables['site_name'] = $wrapper->label();
@@ -63,6 +67,11 @@ function hedley_theme_preprocess_page(&$variables) {
   if ($wrapper->field_accessibility_page->value()) {
     $variables['accessibility_url'] = url('node/' . $wrapper->field_accessibility_page->getIdentifier());
   }
+
+  // About page link.
+  if ($wrapper->field_about_page->value()) {
+    $variables['about_url'] = url('node/' . $wrapper->field_about_page->getIdentifier());
+  }
   // Terms page link.
   if ($wrapper->field_terms_page->value()) {
     $variables['terms_url'] = url('node/' . $wrapper->field_terms_page->getIdentifier());
@@ -71,23 +80,4 @@ function hedley_theme_preprocess_page(&$variables) {
   $variables['last_updated'] = $wrapper->field_last_update->value() ? format_date($wrapper->field_last_update->value(), 'short') : NULL;
   // Footer text.
   $variables['footer_text'] = $wrapper->field_footer_text->value() ? $wrapper->field_footer_text->value->value() : NULL;
-  // Get first background image.
-  if ($wrapper->field_background_images->value()) {
-    $background_image = $wrapper->field_background_images->get(0)->value();
-    $variables['background_image_url'] = file_create_url($background_image['uri']);
-  }
-}
-
-/**
- * Get a small number as a word, for semantic ui list classes.
- *
- * @param $number
- *   A number between 0 and 9.
- *
- * @return string
- *   The number as a word.
- */
-function hedley_theme_number_as_word($number) {
-  $numbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-  return $numbers[$number];
 }

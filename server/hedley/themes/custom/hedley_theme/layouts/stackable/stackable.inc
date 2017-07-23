@@ -9,5 +9,9 @@ $plugin = [
   'category' => t('Hedley'),
   'icon' => 'stackable.png',
   'theme' => 'stackable',
-  'regions' => ['main' => t('Main content')],
+  'regions' => [
+    '1st_row' => t('Main content 1st row'),
+    '2nd_row' => t('Main content 2nd row'),
+    '3rd_row' => t('Main content 3rd row'),
+  ],
 ];

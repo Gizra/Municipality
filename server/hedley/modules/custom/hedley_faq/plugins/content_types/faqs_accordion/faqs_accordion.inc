@@ -33,7 +33,7 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
     return NULL;
   }
 
-  $nodes = hedley_municipality_get_nodes_by_user_type('faq', 10, $municipality_node, $conf['promoted_only'], $topic_tid);
+  $nodes = hedley_municipality_get_nodes_by_current_user_type('faq', 10, $municipality_node, $conf['promoted_only'], $topic_tid);
   if (!$nodes) {
     return NULL;
   }
@@ -49,15 +49,18 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
       continue;
     }
 
+    // Calling the value directly on the wrapper doesn't get the custom style
+    // added by the content editor.
+    $answer = $wrapper->field_answer->value();
     $faqs[] = [
       'question' => $wrapper->field_question->value(),
-      'answer' => $wrapper->field_answer->value->value(),
+      'answer' => !empty($answer) ? $answer['value'] : '',
     ];
   }
 
   $block = new stdClass();
   $block->module = 'hedley_faq';
-  $block->title = t('Frequently asked questions');
+  $block->title = '';
   $block->content = theme('hedley_faq_faqs_accordion', ['faqs' => $faqs]);
 
   return $block;
