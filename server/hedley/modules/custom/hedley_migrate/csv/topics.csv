@@ -1,8 +1,8 @@
-id,name_ar,name_en,name_he,field_color,municipality
-1, روضة أطفال,Kindergarten,גני ילדים,quaternary,1
-2,جمع القمامة,Garbage collection,איסוף אשפה,success,1
-3,الأرنونا,Arnona,ארנונה,secondary,2
-4,رخصة أعمال,Business license,רישיון עסק,info,2
-5,خدمة المقيمين,Resident service,שירות לתושב,danger,3
-6,حضاره,Culture,תרבות,warning,3
-7,المناقصات,Tenders,מכרזים,tertiary,4
+id,name_ar,name_en,name_he,field_color,municipality,description_field_en,description_field_he,description_field_ar
+1, روضة أطفال,Kindergarten,גני ילדים,quaternary,1,Kindergarten description,תיאור גן הילדים,وصف روضة الأطفال
+2,جمع القمامة,Garbage collection,איסוף אשפה,success,1,Garbage collection description,תיאור אשפה,وصف جمع القمامة
+3,الأرنونا,Arnona,ארנונה,secondary,2,Arnona description,תיאור ארנונה,وصف أرنونا
+4,رخصة أعمال,Business license,רישיון עסק,info,2,Business license description,תיאור רישיון עסק,وصف الرخصة التجارية
+5,خدمة المقيمين,Resident service,שירות לתושב,danger,3,Resident service description,תיאור שירות תושב,وصف الخدمة المقيم
+6,حضاره,Culture,תרבות,warning,3,Culture description,תיאור התרבות,وصف الثقافة
+7,المناقصات,Tenders,מכרזים,tertiary,4,Tenders description,תיאור המכרזים,وصف المناقصات

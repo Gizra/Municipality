@@ -345,6 +345,9 @@ function hedley_municipality_create_group_vocabulary($group, $machine_name, $nam
   // Replace title field for the purpose of translation.
   title_field_replacement_toggle('taxonomy_term', $vocab->machine_name, 'name');
 
+  // Replace description field for the purpose of translation.
+  title_field_replacement_toggle('taxonomy_term', $vocab->machine_name, 'description');
+
   return $vocab;
 }
 

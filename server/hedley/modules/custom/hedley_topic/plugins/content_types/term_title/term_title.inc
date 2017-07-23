@@ -6,8 +6,8 @@
  */
 
 $plugin = [
-  'title' => t('Term title'),
-  'description' => t('Term title for term page.'),
+  'title' => t('Term title and description'),
+  'description' => t('Term title and description for topic page.'),
   'category' => t('Hedley'),
   'hook theme' => 'hedley_topic_term_title_content_type_theme',
   'required context' => new ctools_context_required(t('Topic'), 'taxonomy_term'),
@@ -25,7 +25,11 @@ function hedley_topic_term_title_content_type_render($subtype, $conf, $args, $co
 
   $block = new stdClass();
   $block->module = 'hedley_topic';
-  $block->content = theme('hedley_topic_term_title', ['title' => $wrapper->label()]);
+  $block->content = theme('hedley_topic_term_title', [
+    'title' => $wrapper->label(),
+    'description' => $wrapper->description->value(),
+    ]
+  );
 
   return $block;
 }
