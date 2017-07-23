@@ -28,8 +28,7 @@ function hedley_topic_term_title_content_type_render($subtype, $conf, $args, $co
   $block->content = theme('hedley_topic_term_title', [
     'title' => $wrapper->label(),
     'description' => $wrapper->description->value(),
-  ]
-  );
+  ]);
 
   return $block;
 }
