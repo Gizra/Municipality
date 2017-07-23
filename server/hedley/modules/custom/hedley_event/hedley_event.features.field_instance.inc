@@ -275,7 +275,7 @@ function hedley_event_field_default_field_instances() {
         'configurable_class' => 0,
         'configurable_title' => 0,
         'rel' => '',
-        'target' => 'user',
+        'target' => '_blank',
         'title' => '',
       ),
       'display' => array(
