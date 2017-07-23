@@ -13568,7 +13568,7 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 																	_elm_lang$html$Html$div,
 																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$class('ui four wide column'),
+																		_0: _elm_lang$html$Html_Attributes$class('ui four wide column location-wrapper'),
 																		_1: {ctor: '[]'}
 																	},
 																	{

@@ -130,7 +130,7 @@ viewEvent baseUrl language ( eventId, event ) =
                     Maybe.map
                         (\location ->
                             div
-                                [ class "ui four wide column" ]
+                                [ class "ui four wide column location-wrapper" ]
                                 [ a
                                     [ href location.url, target "_blank" ]
                                     [ i
