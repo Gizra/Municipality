@@ -61,28 +61,28 @@ decodeColor =
             (\color ->
                 case color of
                     "danger" ->
-                        succeed Red
+                        succeed Danger
 
                     "warning" ->
-                        succeed Orange
+                        succeed Warning
 
                     "quaternary" ->
-                        succeed Olive
+                        succeed Quaternary
 
                     "success" ->
-                        succeed Green
+                        succeed Success
 
                     "tertiary" ->
-                        succeed Teal
+                        succeed Tertiary
 
                     "primary" ->
-                        succeed Blue
+                        succeed Primary
 
                     "secondary" ->
-                        succeed Pink
+                        succeed Secondary
 
                     "info" ->
-                        succeed Turquoise
+                        succeed Info
 
                     _ ->
                         fail <| "Could not recognise color: " ++ color

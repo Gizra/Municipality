@@ -23,14 +23,14 @@ type Msg
 
 
 type Color
-    = Red
-    | Orange
-    | Olive
-    | Green
-    | Teal
-    | Blue
-    | Pink
-    | Turquoise
+    = Danger
+    | Warning
+    | Quaternary
+    | Success
+    | Tertiary
+    | Primary
+    | Secondary
+    | Info
 
 
 type alias Name =

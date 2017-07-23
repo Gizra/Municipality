@@ -14,7 +14,8 @@ type alias TranslationSet =
 
 
 type TranslationId
-    = ContactsNotFound
+    = ContactHeaderText
+    | ContactsNotFound
     | DayTranslation Day
     | DayAndDate Date (Maybe Date)
     | EventRecurringWeekly
@@ -24,6 +25,7 @@ type TranslationId
     | MatchingResults
     | MoreDetailsText
     | PriceText
+    | ReceptionText
     | ShowAll
 
 
@@ -32,6 +34,12 @@ translate lang trans =
     let
         translationSet =
             case trans of
+                ContactHeaderText ->
+                    { arabic = "اتصالات والموظفين الشبكة"
+                    , english = "Contacts and network employees"
+                    , hebrew = "אנשי קשר ועובדי רשת"
+                    }
+
                 ContactsNotFound ->
                     { arabic = "لم يتم العثور على جهات اتصال"
                     , english = "No contacts found"
@@ -155,6 +163,12 @@ translate lang trans =
                     { arabic = "السعر"
                     , english = "Price"
                     , hebrew = "מחיר"
+                    }
+
+                ReceptionText ->
+                    { arabic = "استقبال"
+                    , english = "Reception"
+                    , hebrew = "קבלת קהל"
                     }
 
                 ShowAll ->
