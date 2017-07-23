@@ -24,7 +24,7 @@ type TranslationId
     | MatchingResults
     | MoreDetailsText
     | PriceText
-    | WhereText
+    | LocationText
     | ShowAll
 
 
@@ -158,7 +158,7 @@ translate lang trans =
                     , hebrew = "מחיר"
                     }
 
-                WhereText ->
+                LocationText ->
                     { arabic = "أين"
                     , english = "Where"
                     , hebrew = "איפה"

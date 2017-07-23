@@ -55,6 +55,9 @@ function hedley_event_get_events_by_group($group, $language_code, $show_as_block
     }
 
     $location_unfiltered = $wrapper->field_location->value();
+    // Keep only "url" and "title" sub properties and remove any value that is
+    // missing one of those properties, although they are required but just in
+    // case.
     $location = array_filter(['url' => $location_unfiltered['url'], 'title' => $location_unfiltered['title']], function ($value) {
       return !is_null($value);
     });

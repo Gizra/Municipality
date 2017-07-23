@@ -11605,11 +11605,10 @@ var _gizra$municipality$Contact_Update$subscriptions = _gizra$municipality$Conta
 			A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Contact_Decoder$decodeContacts, _p2));
 	});
 
-var _gizra$municipality$Event_Decoder$decodeLocation = A4(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+var _gizra$municipality$Event_Decoder$decodeLocation = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 	'url',
-	_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
-	_elm_lang$core$Maybe$Nothing,
+	_elm_lang$core$Json_Decode$string,
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 		'title',
@@ -12059,7 +12058,7 @@ var _gizra$municipality$Translate$TranslationSet = F3(
 		return {arabic: a, english: b, hebrew: c};
 	});
 var _gizra$municipality$Translate$ShowAll = {ctor: 'ShowAll'};
-var _gizra$municipality$Translate$WhereText = {ctor: 'WhereText'};
+var _gizra$municipality$Translate$LocationText = {ctor: 'LocationText'};
 var _gizra$municipality$Translate$PriceText = {ctor: 'PriceText'};
 var _gizra$municipality$Translate$MoreDetailsText = {ctor: 'MoreDetailsText'};
 var _gizra$municipality$Translate$MatchingResults = {ctor: 'MatchingResults'};
@@ -12161,7 +12160,7 @@ var _gizra$municipality$Translate$translate = F2(
 					return {arabic: 'لمزيد من التفاصيل', english: 'For more details', hebrew: 'לפרטים נוספים'};
 				case 'PriceText':
 					return {arabic: 'السعر', english: 'Price', hebrew: 'מחיר'};
-				case 'WhereText':
+				case 'LocationText':
 					return {arabic: 'أين', english: 'Where', hebrew: 'איפה'};
 				default:
 					return {arabic: 'عرض الكل', english: 'Show all', hebrew: 'הצג הכל'};
@@ -13578,8 +13577,7 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 																			_elm_lang$html$Html$a,
 																			{
 																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$href(
-																					A2(_elm_lang$core$Maybe$withDefault, '', location.url)),
+																				_0: _elm_lang$html$Html_Attributes$href(location.url),
 																				_1: {
 																					ctor: '::',
 																					_0: _elm_lang$html$Html_Attributes$target('_blank'),
@@ -13601,7 +13599,7 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 																					_0: _elm_lang$html$Html$text(
 																						A2(
 																							_elm_lang$core$Basics_ops['++'],
-																							A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$WhereText),
+																							A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$LocationText),
 																							A2(_elm_lang$core$Basics_ops['++'], ': ', location.title))),
 																					_1: {ctor: '[]'}
 																				}

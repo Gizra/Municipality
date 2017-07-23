@@ -132,11 +132,11 @@ viewEvent baseUrl language ( eventId, event ) =
                             div
                                 [ class "ui four wide column" ]
                                 [ a
-                                    [ href <| Maybe.withDefault "" location.url, target "_blank" ]
+                                    [ href location.url, target "_blank" ]
                                     [ i
                                         [ class "map icon" ]
                                         []
-                                    , text <| translate language WhereText ++ ": " ++ location.title
+                                    , text <| translate language LocationText ++ ": " ++ location.title
                                     ]
                                 ]
                         )
