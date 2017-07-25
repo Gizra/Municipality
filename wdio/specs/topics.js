@@ -72,6 +72,15 @@ describe('Municipality topics', () => {
     assert.equal('איאד סולימאן', thirdContactTitle);
   });
 
+  it('should see default image for contacts without an image', () => {
+    browser.waitForVisible('h2=People who can help you');
+
+    // First contact entity doesn't have an image and should get the default
+    // image.
+    assert(browser.isVisible('.post-author:nth-child(1) .img-thumbnail img'));
+  });
+
+
   it('Should not show the "Events" and "Contacts" boxes when they are empty', () => {
     browser.url('/al-kasom/taxonomy/term/18?language=en');
     browser.waitForVisible("h1=Culture");
