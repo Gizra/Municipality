@@ -14,7 +14,7 @@ function hedley_municipality_ckeditor_profile_defaults() {
       'settings' => array(
         'ss' => 2,
         'toolbar' => '[
-    [\'Format\',\'Bold\',\'Italic\',\'-\',\'NumberedList\',\'BulletedList\',\'-\',\'Link\',\'Unlink\',\'Image\',\'BidiLtr\',\'BidiRtl\',\'JustifyLeft\',\'JustifyCenter\',\'JustifyRight\',\'JustifyBlock\']
+    [\'Format\',\'FontSize\',\'Font\',\'Styles\',\'Bold\',\'Italic\',\'-\',\'NumberedList\',\'BulletedList\',\'-\',\'Link\',\'Unlink\',\'Image\',\'BidiLtr\',\'BidiRtl\',\'JustifyLeft\',\'JustifyCenter\',\'JustifyRight\',\'JustifyBlock\',\'PasteText\',\'PasteFromWord\']
 ]',
         'expand' => 't',
         'default' => 't',

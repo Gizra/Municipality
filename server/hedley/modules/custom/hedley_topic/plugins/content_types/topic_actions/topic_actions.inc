@@ -46,7 +46,7 @@ function hedley_topic_topic_actions_content_type_render($subtype, $conf, $args, 
     }
 
     $actions[] = [
-      'title' => hedley_action_get_action_title_link($wrapper, ['ui', 'button']),
+      'title' => hedley_action_get_action_title_link($wrapper, ['btn btn-borders btn-primary mr-xs mb-sm']),
     ];
   }
 

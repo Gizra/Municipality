@@ -17,8 +17,6 @@ projects[auto_entitylabel][version] = "1.4"
 
 projects[ckeditor][subdir] = "contrib"
 projects[ckeditor][version] = "1.17"
-; Fix xss filter URL with Purl module.
-projects[ckeditor][patch][] = "https://www.drupal.org/files/issues/ckeditor-purl_module_xss_url-2889429-4.patch"
 
 projects[coffee][subdir] = "contrib"
 projects[coffee][version] = "2.3"

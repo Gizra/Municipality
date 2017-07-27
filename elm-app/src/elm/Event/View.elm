@@ -1,5 +1,6 @@
 module Event.View exposing (..)
 
+import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
 import DictList
 import Event.Model exposing (DictListEvent, Event, EventId, Model, Msg(..))
@@ -12,34 +13,47 @@ import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
 
-view : String -> Language -> Bool -> Model -> Html Msg
+view : BaseUrl -> Language -> Bool -> Model -> Html Msg
 view baseUrl language showAsBlock model =
     div []
         [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
         , div [] [ viewEvents baseUrl language showAsBlock model ]
-        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl ++ "/events") ] [ text <| translate language ShowAll ]
+        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/events?" ++ baseUrl.query) ] [ text <| translate language ShowAll ]
         ]
 
 
 viewEventFilter : Language -> String -> Html Msg
 viewEventFilter language filterString =
-    div [ class "ui icon input" ]
-        [ input
-            [ value filterString
-            , type_ "search"
-            , id "search-events"
-            , placeholder <| translate language FilterEventsPlaceholder
-            , onInput SetFilter
+    div [ class "row" ]
+        [ div [ class "col-md-4 col-xs-12" ]
+            [ div [ class "input-group" ]
+                [ input
+                    [ value filterString
+                    , type_ "search"
+                    , id "search-events"
+                    , class "form-control"
+                    , placeholder <| translate language FilterEventsPlaceholder
+                    , onInput SetFilter
+                    ]
+                    []
+                , span
+                    [ class "input-group-btn" ]
+                    [ button
+                        [ class "btn btn-default" ]
+                        [ i
+                            [ class "fa fa-search" ]
+                            []
+                        ]
+                    ]
+                ]
             ]
-            []
-        , i [ class "search icon" ] []
         ]
 
 
 {-| View all events.
 -}
-viewEvents : String -> Language -> Bool -> Model -> Html msg
+viewEvents : BaseUrl -> Language -> Bool -> Model -> Html msg
 viewEvents baseUrl language showAsBlock { events, filterString } =
     let
         filteredEvents =
@@ -63,7 +77,7 @@ viewEvents baseUrl language showAsBlock { events, filterString } =
 
 {-| View a single event.
 -}
-viewEvent : String -> Language -> ( EventId, Event ) -> Html msg
+viewEvent : BaseUrl -> Language -> ( EventId, Event ) -> Html msg
 viewEvent baseUrl language ( eventId, event ) =
     div
         [ class "card" ]
@@ -138,7 +152,7 @@ viewEvent baseUrl language ( eventId, event ) =
                 , div
                     [ class "ui four wide column center aligned" ]
                     [ a
-                        [ class "ui button primary basic middle aligned", target "_blank", href (baseUrl ++ "/node/" ++ eventId) ]
+                        [ class "ui button primary basic middle aligned", target "_blank", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
                         [ i
                             [ class "add icon" ]
                             []
@@ -152,16 +166,16 @@ viewEvent baseUrl language ( eventId, event ) =
 
 {-| View a single event that will appear in a block (i.e. with less information).
 -}
-viewEventAsBlock : String -> Language -> ( EventId, Event ) -> Html msg
+viewEventAsBlock : BaseUrl -> Language -> ( EventId, Event ) -> Html msg
 viewEventAsBlock baseUrl language ( eventId, event ) =
-    div [ class "col-md-5" ]
+    div [ class "col-md-6" ]
         [ a
-            [ class "thumbnail", target "_blank", href (baseUrl ++ "/node/" ++ eventId) ]
+            [ class "thumbnail search-results", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
             [ showMaybe <|
                 Maybe.map
                     (\imageUrl ->
-                        div [ class "card-img-top" ]
-                            [ img [ src imageUrl ]
+                        div [ class "card-img-top center" ]
+                            [ img [ class "img-responsive", src imageUrl ]
                                 []
                             ]
                     )
@@ -181,7 +195,7 @@ viewEventAsBlock baseUrl language ( eventId, event ) =
                         , text <| translate language (DayAndDate event.date event.endDate)
                         ]
                     , showIf event.recurringWeekly <|
-                        span
+                        div
                             [ class "recurring-weekly" ]
                             [ i
                                 [ class "fa fa-refresh" ]

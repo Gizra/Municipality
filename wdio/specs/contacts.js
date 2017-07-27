@@ -2,11 +2,11 @@ var assert = require('assert');
 
 describe('Municipality contacts page', () => {
   before(() => {
-    browser.url('/municipality-4/contacts?language=he');
+    browser.url('/kiryat-malakhi/contacts?language=he');
   })
 
   it('should find contacts using the search input', () => {
-    const input = $('#elm-app > div > div > div.ui.icon.input > input[type="search"]');
+    const input = $('#search-contacts');
     input.setValue('נ');
     browser.waitForVisible('h3=ניר שמואלי');
     browser.waitForVisible('h3=נסר בו סריחאן');

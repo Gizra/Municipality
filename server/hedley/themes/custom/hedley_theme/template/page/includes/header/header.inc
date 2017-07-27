@@ -1,18 +1,20 @@
 <header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
   <div class="header-body">
-    <div class="header-container container">
-      <div class="header-row">
-        <div class="header-column">
-          <?php if (isset($page['branding'])) : ?>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <?php if (isset($page['branding'])): ?>
             <?php print render($page['branding']); ?>
           <?php endif; ?>
           <?php if ($logo): ?>
-            <div class="header-logo">
+            <div class="header-logo logo">
               <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-                <img alt="<?php print t('Home'); ?>" width="100" height="<?php print theme_get_setting('logo_height'); ?>" data-sticky-width="82" data-sticky-height="<?php print theme_get_setting('sticky_logo_height'); ?>" data-sticky-top="33" src="<?php print $logo; ?>">
+                <img alt="<?php print t('Home'); ?>" height="<?php print theme_get_setting('logo_height'); ?>" width="150" data-sticky-width="100" data-sticky-height="<?php print theme_get_setting('sticky_logo_height'); ?>" data-sticky-top="33" src="<?php print $logo; ?>">
               </a>
             </div>
           <?php endif; ?>
+        </div>
+        <div class="col-sm-6 center">
           <?php if ($site_name || $site_slogan): ?>
             <div id="name-and-slogan"<?php if ($disable_site_name && $disable_site_slogan) { print ' class="hidden"'; } ?>>
 
@@ -37,9 +39,8 @@
             </div> <!-- /#name-and-slogan -->
           <?php endif; ?>
         </div>
-        <div class="header-column">
-          <div class="header-row">
-            <?php if (isset($page['header_search'])) : ?>
+        <div class="col-sm-3 align-right">
+            <?php if (isset($page['header_search'])): ?>
               <div class="header-search hidden-xs">
                 <?php print render($page['header_search']); ?>
               </div>
@@ -63,24 +64,41 @@
             </nav>
 
             <?php print render($page['header_top']); ?>
-
-          </div>
-          <div class="header-row">
-            <div class="header-nav">
-              <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
-                <i class="fa fa-bars"></i>
-              </button>
-              <?php print render($page['header_icons']); ?>
-
-              <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
-                <nav>
-                  <?php print render($page['header_menu']); ?>
-                </nav>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="container">
+    <div class="divider divider-small dashed"></div>
+    <div class="row">
+      <div class="col-md-3 col-xs-12 mb-md align-left align-xs-center">
+        <?php if ($user_type_links): ?>
+          <?php print $user_type_links; ?>
+        <?php endif; ?>
+      </div>
+
+      <div class="col-md-6 col-xs-12 mb-md center">
+        <?php print render($social_links); ?>
+      </div>
+
+      <div class="col-md-3 col-xs-12 mb-md align-right align-xs-center">
+        <?php if ($language_switch_links): ?>
+          <div class="languages btn-group" role="group">
+            <?php foreach ($language_switch_links as $link): ?>
+              <?php print $link; ?>
+            <?php endforeach; ?>
+          </div>
+        <?php endif; ?>
+      </div>
+    </div>
+    <?php if (isset($about_url)): ?>
+    <div class="row">
+      <div class="col-md-12 center">
+        <a href="<?php print $about_url; ?>">
+          <h5><?php print t('My Municipality'); ?></h5>
+        </a>
+      </div>
+    </div>
+    <?php endif; ?>
   </div>
 </header>

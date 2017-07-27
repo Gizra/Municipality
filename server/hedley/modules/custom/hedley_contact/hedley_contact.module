@@ -22,13 +22,15 @@ function hedley_contact_form_contact_node_form_alter(&$form, &$form_state) {
  * Set contact node title according to the municipality's default language.
  */
 function hedley_contact_node_presave($node) {
+  global $language;
   if ($node->type != 'contact') {
     return;
   }
 
   $municipality_wrapper = entity_metadata_wrapper('node', hedley_municipality_node_municipality($node));
-  // Set the node's title based on the group's default language.
-  if (($municipality_wrapper->field_default_language->value() && !empty($node->field_last_name)) && $language_code = hedley_municipality_get_non_empty_language_for_field($node->field_last_name, $municipality_wrapper->field_default_language->value())) {
+  // Set the node's title based on the user's language, or the next available
+  // language.
+  if (($municipality_wrapper->field_default_language->value() && !empty($node->field_last_name)) && $language_code = hedley_municipality_get_non_empty_language_for_field($node->field_last_name, $language->language)) {
     $node->title = trim($node->field_first_name[$language_code][0]['value'] . ' ' . $node->field_last_name[$language_code][0]['value']);
   }
 }
@@ -82,36 +84,23 @@ function hedley_contact_get_reception_hours($node) {
 
   // Format the hours.
   $formatted_hours = [];
-  // Day names, for converting the day indices to names.
-  $day_names = [
-    t('Sunday'),
-    t('Monday'),
-    t('Tuesday'),
-    t('Wednesday'),
-    t('Thursday'),
-    t('Friday'),
-    t('Saturday'),
-  ];
   foreach ($reception_hours_grouped as $hours => $days) {
+    // Determine the default delimiter which the app will use to show the days.
+    $multiple_days = FALSE;
     $days = explode('|', $days);
-    $days_text = '';
     foreach ($days as $delta => $day_index) {
-      // In case the current day is is between two consecutive days, then add a
-      // dash instead of listing it. E.g. "Monday - Thursday".
+      // In case we have more than two consecutive days in which the hours are
+      // the same (same hours group) then change the delimiter to a dash which
+      // the app uses to hide all the middle days and show only the fist and
+      // last days.
       if (isset($days[$delta - 1]) && $days[$delta - 1] == $day_index - 1 && isset($days[$delta + 1]) && $days[$delta + 1] == $day_index + 1) {
-        // Remove the previous dash if any, and re-add the dash.
-        $days_text = rtrim($days_text, ', - ');
-        $days_text .= ' - ';
-      }
-      else {
-        $days_text .= $day_names[$day_index] . ', ';
+        $multiple_days = TRUE;
       }
     }
-    // Remove the trailing comma.
-    $days_text = rtrim($days_text, ', ');
     $formatted_hours[] = [
-      'days' => $days_text,
+      'days' => $days,
       'hours' => $hours,
+      'multiple_days' => $multiple_days,
     ];
   }
 
@@ -128,16 +117,20 @@ function hedley_contact_get_reception_hours($node) {
  * @param bool $show_as_block
  *   (optional) Determine if content will be shown as a block, defaults to
  *   FALSE.
+ * @param bool $promoted_only
+ *   (optional) Determine if content should be promoted only, defaults to FALSE.
+ * @param int $topic_tid
+ *   (optional) The topic id, defaults to 0.
  *
  * @return array
  *   Array with the contacts list.
  */
-function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_block = FALSE) {
+function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_block = FALSE, $promoted_only = FALSE, $topic_tid = 0) {
   // Determine the events setting depending on the block configuration.
   $range = $show_as_block ? 5 : 100;
 
   // Get contact nodes by group.
-  $nodes = hedley_municipality_get_nodes_by_current_user_type('contact', $range, $group, FALSE, 0, 'ASC');
+  $nodes = hedley_municipality_get_nodes_by_current_user_type('contact', $range, $group, $promoted_only, $topic_tid, 'ASC');
   if (!$nodes) {
     // No contacts found.
     return NULL;
@@ -187,7 +180,7 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
     $contact = [
       'id' => $wrapper->getIdentifier(),
       'name' => $name,
-      'image_url' => $image ? image_style_url('medium', $image['uri']) : '',
+      'image_url' => $image ? image_style_url('square_large_image', $image['uri']) : hedley_municipality_get_default_image($wrapper->getBundle()),
       'phone' => check_plain($wrapper->field_phone->value()),
       'fax' => check_plain($wrapper->field_fax->value()),
       'email' => check_plain($wrapper->field_email->value()),
@@ -196,13 +189,6 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
       'topics' => $topics_array,
       'reception_hours' => hedley_contact_get_reception_hours($node),
     ];
-
-    // Explode reception days to a list for elm.
-    if (!empty($contact['reception_hours'])) {
-      foreach ($contact['reception_hours'] as $index => $reception_hour) {
-        $contact['reception_hours'][$index]['days'] = isset($reception_hour['days']) && !empty($reception_hour['days']) ? explode(', ', $reception_hour['days']) : array();
-      }
-    }
 
     // Remove empty values (elm expects the correct value or nothing).
     $contacts[] = array_filter($contact);

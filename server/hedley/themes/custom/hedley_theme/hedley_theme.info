@@ -57,7 +57,7 @@ plugins[panels][layouts] = layouts
 ; Define theme setting defaults.
 settings[breadcrumbs] = 1
 settings[logo_height] = ""
-settings[sticky_logo_height] = "40"
+settings[sticky_logo_height] = "54"
 settings[sticky_header] = 1
 settings[skin_color] = 0088cc
 settings[gradient] = 1

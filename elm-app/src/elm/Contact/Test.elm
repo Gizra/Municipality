@@ -1,16 +1,17 @@
 module Contact.Test exposing (all)
 
+import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
 import Contact.Model exposing (..)
 import Contact.Utils exposing (filterContacts)
-import Contact.View exposing (viewContact)
+import Contact.View exposing (viewContact, viewContactAsBlock)
 import Date
 import DictList
 import Expect
 import Html
 import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
-import Test.Html.Selector as Selector exposing (class, tag, text)
+import Test.Html.Selector as Selector exposing (class, tag, text, attribute)
 
 
 filterContactsTest : Test
@@ -38,55 +39,75 @@ viewContactTest =
     describe "view single contact"
         [ test "Contact without Email" <|
             \() ->
-                viewContact English contact1
+                viewContact baseUrl English contact1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "email-wrapper" ]
         , test "Contact without Phone" <|
             \() ->
-                viewContact English contact1
+                viewContact baseUrl English contact1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "phone-wrapper" ]
         , test "Contact without Topics" <|
             \() ->
-                viewContact English contact1
+                viewContact baseUrl English contact1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "topic-wrapper" ]
         , test "Contact without ReceptionTimes" <|
             \() ->
-                viewContact English contact1
+                viewContact baseUrl English contact1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "reception-times-wrapper" ]
         , test "Contact with Email" <|
             \() ->
-                viewContact English contact2
+                viewContact baseUrl English contact2
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "email-wrapper" ]
                     |> Query.children [ tag "a" ]
                     |> Query.each (Query.has [ text "carl@example.com" ])
         , test "Contact with Phone" <|
             \() ->
-                viewContact English contact2
+                viewContact baseUrl English contact2
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "phone-wrapper" ]
                     |> Query.children [ tag "a" ]
                     |> Query.each (Query.has [ text "1234" ])
         , test "Contact with Topics" <|
             \() ->
-                viewContact English contact2
+                viewContact baseUrl English contact2
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "topic-wrapper" ]
                     |> Query.children []
                     |> Query.each (Query.has [ tag "a" ])
-        , test "Contact with ReceptionTimes" <|
+        , test "Contact with ReceptionTimes and specific days" <|
             \() ->
-                viewContact English contact2
+                viewContact baseUrl English contact2
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "reception-times-wrapper" ]
                     |> Query.findAll [ Selector.class "reception-days" ]
                     |> Query.first
-                    |> Query.findAll [ tag "span" ]
+                    |> Query.has [ text "Mon, Tue," ]
+        , test "Contact with ReceptionTimes and multiple days" <|
+            \() ->
+                viewContact baseUrl English contact3
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "reception-times-wrapper" ]
+                    |> Query.findAll [ Selector.class "reception-days" ]
                     |> Query.first
-                    |> Query.has [ text "Mon" ]
+                    |> Query.has [ text "Mon - Fri," ]
+        , test "Contact block with phone" <|
+            \() ->
+                viewContactAsBlock baseUrl English contact2
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "phone-wrapper" ]
+                    |> Query.children [ tag "a" ]
+                    |> Query.each (Query.has [ attribute "href" "tel:1234" ])
+        , test "Contact block with email" <|
+            \() ->
+                viewContactAsBlock baseUrl English contact2
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "email-wrapper" ]
+                    |> Query.children [ tag "a" ]
+                    |> Query.each (Query.has [ attribute "href" "mailto:carl@example.com" ])
         ]
 
 
@@ -96,6 +117,13 @@ all =
         [ filterContactsTest
         , viewContactTest
         ]
+
+
+baseUrl : BaseUrl
+baseUrl =
+    { path = "http://base-url"
+    , query = "language=en"
+    }
 
 
 
@@ -143,9 +171,11 @@ contact2 =
             Just
                 [ { days = [ Date.Mon, Date.Tue ]
                   , hours = "8:00-19:00"
+                  , multipleDays = False
                   }
                 , { days = [ Date.Sat ]
                   , hours = "8:00-12:00"
+                  , multipleDays = False
                   }
                 ]
       }
@@ -177,6 +207,7 @@ contact3 =
             Just
                 [ { days = [ Date.Mon, Date.Fri ]
                   , hours = "8:00-14:00"
+                  , multipleDays = True
                   }
                 ]
       }

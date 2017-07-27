@@ -57,6 +57,7 @@ function hedley_municipality_default_page_manager_handlers() {
       'main' => NULL,
       '1st_row' => NULL,
       '2nd_row' => NULL,
+      '3rd_row' => NULL,
     ),
   );
   $display->cache = array();
@@ -174,6 +175,8 @@ function hedley_municipality_default_page_manager_handlers() {
     'override_title' => 0,
     'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'promoted_only' => 1,
+    'context' => 'empty',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -189,6 +192,32 @@ function hedley_municipality_default_page_manager_handlers() {
   $pane->uuid = 'f8795f8f-2ebf-4cc9-bd28-4ee7c75f4d1a';
   $display->content['new-f8795f8f-2ebf-4cc9-bd28-4ee7c75f4d1a'] = $pane;
   $display->panels['2nd_row'][1] = 'new-f8795f8f-2ebf-4cc9-bd28-4ee7c75f4d1a';
+  $pane = new stdClass();
+  $pane->pid = 'new-c29a0964-4685-40a7-b7ac-2dbd9841a364';
+  $pane->panel = '3rd_row';
+  $pane->type = 'topics_list';
+  $pane->subtype = 'topics_list';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'title' => NULL,
+    'topics' => NULL,
+    'context' => 'argument_entity_id:node_1',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 0;
+  $pane->locks = array();
+  $pane->uuid = 'c29a0964-4685-40a7-b7ac-2dbd9841a364';
+  $display->content['new-c29a0964-4685-40a7-b7ac-2dbd9841a364'] = $pane;
+  $display->panels['3rd_row'][0] = 'new-c29a0964-4685-40a7-b7ac-2dbd9841a364';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

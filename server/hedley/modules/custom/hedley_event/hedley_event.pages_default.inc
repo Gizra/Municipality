@@ -55,7 +55,7 @@ function hedley_event_default_page_manager_pages() {
     'name' => 'panel',
   );
   $display = new panels_display();
-  $display->layout = 'onecol';
+  $display->layout = 'one-row-one-column';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -72,7 +72,7 @@ function hedley_event_default_page_manager_pages() {
   $display->panels = array();
   $pane = new stdClass();
   $pane->pid = 'new-daf16a4b-fe3d-4ea4-9376-dca466d59962';
-  $pane->panel = 'middle';
+  $pane->panel = 'main_content';
   $pane->type = 'elm';
   $pane->subtype = 'elm';
   $pane->shown = TRUE;
@@ -83,6 +83,8 @@ function hedley_event_default_page_manager_pages() {
     'override_title_text' => '',
     'override_title_heading' => 'h2',
     'show_as_block' => 0,
+    'promoted_only' => 0,
+    'context' => 'empty',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -94,7 +96,7 @@ function hedley_event_default_page_manager_pages() {
   $pane->locks = array();
   $pane->uuid = 'daf16a4b-fe3d-4ea4-9376-dca466d59962';
   $display->content['new-daf16a4b-fe3d-4ea4-9376-dca466d59962'] = $pane;
-  $display->panels['middle'][0] = 'new-daf16a4b-fe3d-4ea4-9376-dca466d59962';
+  $display->panels['main_content'][0] = 'new-daf16a4b-fe3d-4ea4-9376-dca466d59962';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-daf16a4b-fe3d-4ea4-9376-dca466d59962';
   $handler->conf['display'] = $display;

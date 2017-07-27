@@ -30,11 +30,9 @@
         </small>
 
         <?php if ($body): ?>
-          <div class="panel panel-default">
+          <div class="panel panel-default text-right">
             <div class="panel-body">
-
               <?php print $body; ?>
-
             </div>
           </div>
         <?php endif; ?>
