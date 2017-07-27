@@ -136,7 +136,7 @@ viewEvent baseUrl language ( eventId, event ) =
                                     [ i
                                         [ class "map icon" ]
                                         []
-                                    , text <| translate language LocationText ++ ": " ++ location.title
+                                    , text <| translate language (LocationText location.title)
                                     ]
                                 ]
                         )

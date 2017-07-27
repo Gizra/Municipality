@@ -12058,7 +12058,9 @@ var _gizra$municipality$Translate$TranslationSet = F3(
 		return {arabic: a, english: b, hebrew: c};
 	});
 var _gizra$municipality$Translate$ShowAll = {ctor: 'ShowAll'};
-var _gizra$municipality$Translate$LocationText = {ctor: 'LocationText'};
+var _gizra$municipality$Translate$LocationText = function (a) {
+	return {ctor: 'LocationText', _0: a};
+};
 var _gizra$municipality$Translate$PriceText = {ctor: 'PriceText'};
 var _gizra$municipality$Translate$MoreDetailsText = {ctor: 'MoreDetailsText'};
 var _gizra$municipality$Translate$MatchingResults = {ctor: 'MatchingResults'};
@@ -12161,13 +12163,18 @@ var _gizra$municipality$Translate$translate = F2(
 				case 'PriceText':
 					return {arabic: 'السعر', english: 'Price', hebrew: 'מחיר'};
 				case 'LocationText':
-					return {arabic: 'أين', english: 'Where', hebrew: 'איפה'};
+					var _p3 = _p0._0;
+					return {
+						arabic: A2(_elm_lang$core$Basics_ops['++'], 'أين: ', _p3),
+						english: A2(_elm_lang$core$Basics_ops['++'], 'Where: ', _p3),
+						hebrew: A2(_elm_lang$core$Basics_ops['++'], 'איפה: ', _p3)
+					};
 				default:
 					return {arabic: 'عرض الكل', english: 'Show all', hebrew: 'הצג הכל'};
 			}
 		}();
-		var _p3 = lang;
-		switch (_p3.ctor) {
+		var _p4 = lang;
+		switch (_p4.ctor) {
 			case 'Arabic':
 				return function (_) {
 					return _.arabic;
@@ -13598,9 +13605,9 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 																					ctor: '::',
 																					_0: _elm_lang$html$Html$text(
 																						A2(
-																							_elm_lang$core$Basics_ops['++'],
-																							A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$LocationText),
-																							A2(_elm_lang$core$Basics_ops['++'], ': ', location.title))),
+																							_gizra$municipality$Translate$translate,
+																							language,
+																							_gizra$municipality$Translate$LocationText(location.title))),
 																					_1: {ctor: '[]'}
 																				}
 																			}),
