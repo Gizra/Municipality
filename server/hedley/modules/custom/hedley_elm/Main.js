@@ -11324,10 +11324,29 @@ var _gizra$municipality$Contact_Model$ReceptionTimes = F3(
 	function (a, b, c) {
 		return {days: a, hours: b, multipleDays: c};
 	});
-var _gizra$municipality$Contact_Model$Contact = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {name: a, jobTitle: b, imageUrl: c, topics: d, phone: e, fax: f, email: g, address: h, receptionTimes: i};
-	});
+var _gizra$municipality$Contact_Model$Contact = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return {name: a, department: b, jobTitle: c, imageUrl: d, topics: e, phone: f, fax: g, email: h, address: i, receptionTimes: j, edit: k};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var _gizra$municipality$Contact_Model$SetFilter = function (a) {
 	return {ctor: 'SetFilter', _0: a};
 };
@@ -11512,51 +11531,60 @@ var _gizra$municipality$Contact_Decoder$decodeTopic = _elm_lang$core$Json_Decode
 				'id',
 				_elm_lang$core$Json_Decode$string,
 				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Contact_Model$Topic)))));
-var _gizra$municipality$Contact_Decoder$decodeContact = A4(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-	'reception_hours',
-	_elm_lang$core$Json_Decode$nullable(_gizra$municipality$Contact_Decoder$decodeReceptionTimes),
-	_elm_lang$core$Maybe$Nothing,
+var _gizra$municipality$Contact_Decoder$decodeContact = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'edit',
+	_elm_lang$core$Json_Decode$bool,
 	A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-		'address',
-		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+		'reception_hours',
+		_elm_lang$core$Json_Decode$nullable(_gizra$municipality$Contact_Decoder$decodeReceptionTimes),
 		_elm_lang$core$Maybe$Nothing,
 		A4(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-			'email',
+			'address',
 			_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 			_elm_lang$core$Maybe$Nothing,
 			A4(
 				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-				'fax',
+				'email',
 				_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 				_elm_lang$core$Maybe$Nothing,
 				A4(
 					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-					'phone',
+					'fax',
 					_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 					_elm_lang$core$Maybe$Nothing,
 					A4(
 						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-						'topics',
-						_elm_lang$core$Json_Decode$nullable(_gizra$municipality$Contact_Decoder$decodeTopic),
+						'phone',
+						_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 						_elm_lang$core$Maybe$Nothing,
 						A4(
 							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-							'image_url',
-							_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+							'topics',
+							_elm_lang$core$Json_Decode$nullable(_gizra$municipality$Contact_Decoder$decodeTopic),
 							_elm_lang$core$Maybe$Nothing,
 							A4(
 								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-								'job_title',
+								'image_url',
 								_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 								_elm_lang$core$Maybe$Nothing,
-								A3(
-									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-									'name',
-									_elm_lang$core$Json_Decode$string,
-									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Contact_Model$Contact))))))))));
+								A4(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+									'job_title',
+									_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+									_elm_lang$core$Maybe$Nothing,
+									A4(
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+										'department',
+										_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+										_elm_lang$core$Maybe$Nothing,
+										A3(
+											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+											'name',
+											_elm_lang$core$Json_Decode$string,
+											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Contact_Model$Contact))))))))))));
 var _gizra$municipality$Contact_Decoder$decodeContacts = _elm_lang$core$Json_Decode$oneOf(
 	{
 		ctor: '::',
@@ -12069,6 +12097,7 @@ var _gizra$municipality$Translate$FilterEventsPlaceholder = {ctor: 'FilterEvents
 var _gizra$municipality$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
 var _gizra$municipality$Translate$EventsNotFound = {ctor: 'EventsNotFound'};
 var _gizra$municipality$Translate$EventRecurringWeekly = {ctor: 'EventRecurringWeekly'};
+var _gizra$municipality$Translate$EditText = {ctor: 'EditText'};
 var _gizra$municipality$Translate$DayAndDate = F2(
 	function (a, b) {
 		return {ctor: 'DayAndDate', _0: a, _1: b};
@@ -12151,6 +12180,8 @@ var _gizra$municipality$Translate$translate = F2(
 							allDatesFormated,
 							A2(_elm_lang$core$Basics_ops['++'], ' ,', dayTranslated))
 					};
+				case 'EditText':
+					return {arabic: 'تحرير', english: 'Edit', hebrew: 'עריכה'};
 				case 'EventRecurringWeekly':
 					return {arabic: 'حدث اسبوعي', english: 'Weekly event', hebrew: 'אירוע שבועי'};
 				case 'EventsNotFound':
@@ -12173,7 +12204,7 @@ var _gizra$municipality$Translate$translate = F2(
 				case 'PriceText':
 					return {arabic: 'السعر', english: 'Price', hebrew: 'מחיר'};
 				case 'ReceptionText':
-					return {arabic: 'استقبال', english: 'Reception', hebrew: 'קבלת קהל'};
+					return {arabic: 'استقبال: ', english: 'Reception: ', hebrew: 'קבלת קהל: '};
 				default:
 					return {arabic: 'عرض الكل', english: 'Show all', hebrew: 'הצג הכל'};
 			}
@@ -12630,248 +12661,204 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 			},
 			{
 				ctor: '::',
-				_0: _gizra$municipality$Utils_Html$showMaybe(
+				_0: A2(
+					_gizra$municipality$Utils_Html$showIf,
+					_p10.edit,
 					A2(
-						_elm_lang$core$Maybe$map,
-						function (imageUrl) {
-							return A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('card-img-top center'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$img,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('img-responsive'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$src(imageUrl),
-												_1: {ctor: '[]'}
-											}
-										},
-										{ctor: '[]'}),
-									_1: {ctor: '[]'}
-								});
-						},
-						_p10.imageUrl)),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
+						_elm_lang$html$Html$a,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('caption center'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$h4,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('card-title'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(_p10.name),
-									_1: {ctor: '[]'}
-								}),
+							_0: _elm_lang$html$Html_Attributes$class('btn btn-xs btn-primary pull-right btn-edit'),
 							_1: {
 								ctor: '::',
-								_0: A2(
+								_0: _elm_lang$html$Html_Attributes$href(
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										baseUrl.path,
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											'/node/',
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												_p7._0,
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													'/edit',
+													A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query)))))),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EditText)),
+							_1: {ctor: '[]'}
+						})),
+				_1: {
+					ctor: '::',
+					_0: _gizra$municipality$Utils_Html$showMaybe(
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (imageUrl) {
+								return A2(
 									_elm_lang$html$Html$div,
-									{ctor: '[]'},
 									{
 										ctor: '::',
-										_0: _gizra$municipality$Utils_Html$showMaybe(
-											A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p10.jobTitle)),
-										_1: {
+										_0: _elm_lang$html$Html_Attributes$class('card-img-top center'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$img,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('img-responsive'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$src(imageUrl),
+													_1: {ctor: '[]'}
+												}
+											},
+											{ctor: '[]'}),
+										_1: {ctor: '[]'}
+									});
+							},
+							_p10.imageUrl)),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('caption center'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$h4,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('card-title'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(_p10.name),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$p,
+										{ctor: '[]'},
+										{
 											ctor: '::',
-											_0: _gizra$municipality$Utils_Html$divider,
-											_1: {
+											_0: _gizra$municipality$Utils_Html$showMaybe(
+												A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p10.department)),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{ctor: '[]'},
+											{
 												ctor: '::',
 												_0: _gizra$municipality$Utils_Html$showMaybe(
-													A2(
-														_elm_lang$core$Maybe$map,
-														function (topics) {
-															return A2(
-																_elm_lang$html$Html$div,
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('labels topic-wrapper'),
-																	_1: {ctor: '[]'}
-																},
-																A2(
-																	_elm_lang$core$List$map,
-																	function (topic) {
-																		return A2(
-																			_elm_lang$html$Html$a,
-																			{
-																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$href(
-																					A2(
-																						_elm_lang$core$Basics_ops['++'],
-																						baseUrl.path,
-																						A2(
-																							_elm_lang$core$Basics_ops['++'],
-																							'/taxonomy/term/',
-																							A2(
-																								_elm_lang$core$Basics_ops['++'],
-																								topic.id,
-																								A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query))))),
-																				_1: {
-																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$title(topic.name),
-																					_1: {ctor: '[]'}
-																				}
-																			},
-																			{
-																				ctor: '::',
-																				_0: A2(
-																					_elm_lang$html$Html$button,
+													A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p10.jobTitle)),
+												_1: {
+													ctor: '::',
+													_0: _gizra$municipality$Utils_Html$divider,
+													_1: {
+														ctor: '::',
+														_0: _gizra$municipality$Utils_Html$showMaybe(
+															A2(
+																_elm_lang$core$Maybe$map,
+																function (topics) {
+																	return A2(
+																		_elm_lang$html$Html$div,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('labels topic-wrapper'),
+																			_1: {ctor: '[]'}
+																		},
+																		A2(
+																			_elm_lang$core$List$map,
+																			function (topic) {
+																				return A2(
+																					_elm_lang$html$Html$a,
 																					{
 																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$type_('button'),
-																						_1: {
-																							ctor: '::',
-																							_0: _elm_lang$html$Html_Attributes$class(
+																						_0: _elm_lang$html$Html_Attributes$href(
+																							A2(
+																								_elm_lang$core$Basics_ops['++'],
+																								baseUrl.path,
 																								A2(
 																									_elm_lang$core$Basics_ops['++'],
-																									'btn mr-xs btn-borders btn-primary btn-sm btn-',
-																									_gizra$municipality$Utils_Html$colorToString(topic.color))),
+																									'/taxonomy/term/',
+																									A2(
+																										_elm_lang$core$Basics_ops['++'],
+																										topic.id,
+																										A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query))))),
+																						_1: {
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$title(topic.name),
 																							_1: {ctor: '[]'}
 																						}
 																					},
 																					{
 																						ctor: '::',
-																						_0: _elm_lang$html$Html$text(topic.name),
-																						_1: {ctor: '[]'}
-																					}),
-																				_1: {ctor: '[]'}
-																			});
-																	},
-																	topics));
-														},
-														_p10.topics)),
-												_1: {
-													ctor: '::',
-													_0: _gizra$municipality$Utils_Html$sectionDivider,
-													_1: {
-														ctor: '::',
-														_0: A2(
-															_elm_lang$html$Html$div,
-															{
-																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$class('contact-details center'),
-																_1: {ctor: '[]'}
-															},
-															{
-																ctor: '::',
-																_0: _gizra$municipality$Utils_Html$showMaybe(
-																	A2(
-																		_elm_lang$core$Maybe$map,
-																		function (email) {
-																			return A2(
-																				_elm_lang$html$Html$p,
-																				{
-																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$class('email-wrapper'),
-																					_1: {ctor: '[]'}
-																				},
-																				{
-																					ctor: '::',
-																					_0: A2(
-																						_elm_lang$html$Html$i,
-																						{
-																							ctor: '::',
-																							_0: _elm_lang$html$Html_Attributes$class('mail icon'),
-																							_1: {ctor: '[]'}
-																						},
-																						{ctor: '[]'}),
-																					_1: {
-																						ctor: '::',
 																						_0: A2(
-																							_elm_lang$html$Html$a,
+																							_elm_lang$html$Html$button,
 																							{
 																								ctor: '::',
-																								_0: _elm_lang$html$Html_Attributes$href(
-																									A2(_elm_lang$core$Basics_ops['++'], 'mailto:', email)),
+																								_0: _elm_lang$html$Html_Attributes$type_('button'),
 																								_1: {
 																									ctor: '::',
-																									_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																									_0: _elm_lang$html$Html_Attributes$class(
+																										A2(
+																											_elm_lang$core$Basics_ops['++'],
+																											'btn mr-xs btn-borders btn-primary btn-sm btn-',
+																											_gizra$municipality$Utils_Html$colorToString(topic.color))),
 																									_1: {ctor: '[]'}
 																								}
 																							},
 																							{
 																								ctor: '::',
-																								_0: _elm_lang$html$Html$text(email),
+																								_0: _elm_lang$html$Html$text(topic.name),
 																								_1: {ctor: '[]'}
 																							}),
 																						_1: {ctor: '[]'}
-																					}
-																				});
-																		},
-																		_p10.email)),
-																_1: {
-																	ctor: '::',
-																	_0: _gizra$municipality$Utils_Html$showMaybe(
-																		A2(
-																			_elm_lang$core$Maybe$map,
-																			function (phone) {
-																				return A2(
-																					_elm_lang$html$Html$p,
-																					{
-																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$class('phone-wrapper'),
-																						_1: {ctor: '[]'}
-																					},
-																					{
-																						ctor: '::',
-																						_0: A2(
-																							_elm_lang$html$Html$i,
-																							{
-																								ctor: '::',
-																								_0: _elm_lang$html$Html_Attributes$class('phone icon'),
-																								_1: {ctor: '[]'}
-																							},
-																							{ctor: '[]'}),
-																						_1: {
-																							ctor: '::',
-																							_0: A2(
-																								_elm_lang$html$Html$a,
-																								{
-																									ctor: '::',
-																									_0: _elm_lang$html$Html_Attributes$href(
-																										A2(_elm_lang$core$Basics_ops['++'], 'tel:', phone)),
-																									_1: {ctor: '[]'}
-																								},
-																								{
-																									ctor: '::',
-																									_0: _elm_lang$html$Html$text(phone),
-																									_1: {ctor: '[]'}
-																								}),
-																							_1: {ctor: '[]'}
-																						}
 																					});
 																			},
-																			_p10.phone)),
-																	_1: {
+																			topics));
+																},
+																_p10.topics)),
+														_1: {
+															ctor: '::',
+															_0: _gizra$municipality$Utils_Html$sectionDivider,
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$div,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$class('contact-details center'),
+																		_1: {ctor: '[]'}
+																	},
+																	{
 																		ctor: '::',
 																		_0: _gizra$municipality$Utils_Html$showMaybe(
 																			A2(
 																				_elm_lang$core$Maybe$map,
-																				function (fax) {
+																				function (email) {
 																					return A2(
 																						_elm_lang$html$Html$p,
 																						{
 																							ctor: '::',
-																							_0: _elm_lang$html$Html_Attributes$class('fax-wrapper'),
+																							_0: _elm_lang$html$Html_Attributes$class('email-wrapper'),
 																							_1: {ctor: '[]'}
 																						},
 																						{
@@ -12880,172 +12867,261 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																								_elm_lang$html$Html$i,
 																								{
 																									ctor: '::',
-																									_0: _elm_lang$html$Html_Attributes$class('fax icon'),
+																									_0: _elm_lang$html$Html_Attributes$class('mail icon'),
 																									_1: {ctor: '[]'}
 																								},
 																								{ctor: '[]'}),
 																							_1: {
 																								ctor: '::',
 																								_0: A2(
-																									_elm_lang$html$Html$span,
-																									{ctor: '[]'},
+																									_elm_lang$html$Html$a,
 																									{
 																										ctor: '::',
-																										_0: _elm_lang$html$Html$text(fax),
+																										_0: _elm_lang$html$Html_Attributes$href(
+																											A2(_elm_lang$core$Basics_ops['++'], 'mailto:', email)),
+																										_1: {
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																											_1: {ctor: '[]'}
+																										}
+																									},
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html$text(email),
 																										_1: {ctor: '[]'}
 																									}),
 																								_1: {ctor: '[]'}
 																							}
 																						});
 																				},
-																				_p10.fax)),
+																				_p10.email)),
 																		_1: {
 																			ctor: '::',
-																			_0: A2(
-																				_elm_lang$html$Html$div,
-																				{ctor: '[]'},
-																				{
-																					ctor: '::',
-																					_0: _gizra$municipality$Utils_Html$sectionDivider,
-																					_1: {
-																						ctor: '::',
-																						_0: _gizra$municipality$Utils_Html$showMaybe(
-																							A2(
-																								_elm_lang$core$Maybe$map,
-																								function (address) {
-																									return A2(
-																										_elm_lang$html$Html$p,
+																			_0: _gizra$municipality$Utils_Html$showMaybe(
+																				A2(
+																					_elm_lang$core$Maybe$map,
+																					function (phone) {
+																						return A2(
+																							_elm_lang$html$Html$p,
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$class('phone-wrapper'),
+																								_1: {ctor: '[]'}
+																							},
+																							{
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$i,
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$class('phone icon'),
+																										_1: {ctor: '[]'}
+																									},
+																									{ctor: '[]'}),
+																								_1: {
+																									ctor: '::',
+																									_0: A2(
+																										_elm_lang$html$Html$a,
 																										{
 																											ctor: '::',
-																											_0: _elm_lang$html$Html_Attributes$class('address-wrapper'),
+																											_0: _elm_lang$html$Html_Attributes$href(
+																												A2(_elm_lang$core$Basics_ops['++'], 'tel:', phone)),
 																											_1: {ctor: '[]'}
 																										},
 																										{
 																											ctor: '::',
-																											_0: _elm_lang$html$Html$text(address),
+																											_0: _elm_lang$html$Html$text(phone),
 																											_1: {ctor: '[]'}
-																										});
-																								},
-																								_p10.address)),
-																						_1: {ctor: '[]'}
-																					}
-																				}),
+																										}),
+																									_1: {ctor: '[]'}
+																								}
+																							});
+																					},
+																					_p10.phone)),
 																			_1: {
 																				ctor: '::',
-																				_0: A2(
-																					_elm_lang$html$Html$p,
-																					{ctor: '[]'},
-																					{
-																						ctor: '::',
-																						_0: A2(
-																							_elm_lang$html$Html$span,
-																							{ctor: '[]'},
-																							{
+																				_0: _gizra$municipality$Utils_Html$showMaybe(
+																					A2(
+																						_elm_lang$core$Maybe$map,
+																						function (fax) {
+																							return A2(
+																								_elm_lang$html$Html$p,
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$class('fax-wrapper'),
+																									_1: {ctor: '[]'}
+																								},
+																								{
+																									ctor: '::',
+																									_0: A2(
+																										_elm_lang$html$Html$i,
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$class('fax icon'),
+																											_1: {ctor: '[]'}
+																										},
+																										{ctor: '[]'}),
+																									_1: {
+																										ctor: '::',
+																										_0: A2(
+																											_elm_lang$html$Html$span,
+																											{ctor: '[]'},
+																											{
+																												ctor: '::',
+																												_0: _elm_lang$html$Html$text(fax),
+																												_1: {ctor: '[]'}
+																											}),
+																										_1: {ctor: '[]'}
+																									}
+																								});
+																						},
+																						_p10.fax)),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_elm_lang$html$Html$div,
+																						{ctor: '[]'},
+																						{
+																							ctor: '::',
+																							_0: _gizra$municipality$Utils_Html$sectionDivider,
+																							_1: {
 																								ctor: '::',
 																								_0: _gizra$municipality$Utils_Html$showMaybe(
 																									A2(
 																										_elm_lang$core$Maybe$map,
-																										function (receptionTimes) {
+																										function (address) {
 																											return A2(
-																												_elm_lang$html$Html$div,
+																												_elm_lang$html$Html$p,
 																												{
 																													ctor: '::',
-																													_0: _elm_lang$html$Html_Attributes$class('reception-times-wrapper'),
+																													_0: _elm_lang$html$Html_Attributes$class('address-wrapper'),
 																													_1: {ctor: '[]'}
 																												},
 																												{
 																													ctor: '::',
-																													_0: _elm_lang$html$Html$text(
-																														A2(
-																															_elm_lang$core$Basics_ops['++'],
-																															A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ReceptionText),
-																															': ')),
-																													_1: {
-																														ctor: '::',
-																														_0: A2(
-																															_elm_lang$html$Html$span,
-																															{ctor: '[]'},
-																															A2(
-																																_elm_lang$core$List$map,
-																																function (_p8) {
-																																	var _p9 = _p8;
-																																	return A2(
-																																		_elm_lang$html$Html$div,
-																																		{
-																																			ctor: '::',
-																																			_0: _elm_lang$html$Html_Attributes$class('mr-xs'),
-																																			_1: {ctor: '[]'}
-																																		},
-																																		{
-																																			ctor: '::',
-																																			_0: A2(
-																																				_elm_lang$html$Html$i,
-																																				{
-																																					ctor: '::',
-																																					_0: _elm_lang$html$Html_Attributes$class('fa fa-calendar'),
-																																					_1: {ctor: '[]'}
-																																				},
-																																				{ctor: '[]'}),
-																																			_1: {
-																																				ctor: '::',
-																																				_0: A2(
-																																					_elm_lang$html$Html$span,
-																																					{
-																																						ctor: '::',
-																																						_0: _elm_lang$html$Html_Attributes$class('reception-days'),
-																																						_1: {ctor: '[]'}
-																																					},
-																																					{
-																																						ctor: '::',
-																																						_0: _elm_lang$html$Html$text(
-																																							A3(_gizra$municipality$Utils_Html$formatReceptionDays, language, _p9.days, _p9.multipleDays)),
-																																						_1: {ctor: '[]'}
-																																					}),
-																																				_1: {
-																																					ctor: '::',
-																																					_0: A2(
-																																						_elm_lang$html$Html$span,
-																																						{
-																																							ctor: '::',
-																																							_0: _elm_lang$html$Html_Attributes$class('reception-hours'),
-																																							_1: {ctor: '[]'}
-																																						},
-																																						{
-																																							ctor: '::',
-																																							_0: _elm_lang$html$Html$text(_p9.hours),
-																																							_1: {ctor: '[]'}
-																																						}),
-																																					_1: {ctor: '[]'}
-																																				}
-																																			}
-																																		});
-																																},
-																																receptionTimes)),
-																														_1: {ctor: '[]'}
-																													}
+																													_0: _elm_lang$html$Html$text(address),
+																													_1: {ctor: '[]'}
 																												});
 																										},
-																										_p10.receptionTimes)),
+																										_p10.address)),
+																								_1: {ctor: '[]'}
+																							}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_elm_lang$html$Html$p,
+																							{ctor: '[]'},
+																							{
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$span,
+																									{ctor: '[]'},
+																									{
+																										ctor: '::',
+																										_0: _gizra$municipality$Utils_Html$showMaybe(
+																											A2(
+																												_elm_lang$core$Maybe$map,
+																												function (receptionTimes) {
+																													return A2(
+																														_elm_lang$html$Html$div,
+																														{
+																															ctor: '::',
+																															_0: _elm_lang$html$Html_Attributes$class('reception-times-wrapper'),
+																															_1: {ctor: '[]'}
+																														},
+																														{
+																															ctor: '::',
+																															_0: _elm_lang$html$Html$text(
+																																A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ReceptionText)),
+																															_1: {
+																																ctor: '::',
+																																_0: A2(
+																																	_elm_lang$html$Html$span,
+																																	{ctor: '[]'},
+																																	A2(
+																																		_elm_lang$core$List$map,
+																																		function (_p8) {
+																																			var _p9 = _p8;
+																																			return A2(
+																																				_elm_lang$html$Html$div,
+																																				{
+																																					ctor: '::',
+																																					_0: _elm_lang$html$Html_Attributes$class('mr-xs'),
+																																					_1: {ctor: '[]'}
+																																				},
+																																				{
+																																					ctor: '::',
+																																					_0: A2(
+																																						_elm_lang$html$Html$i,
+																																						{
+																																							ctor: '::',
+																																							_0: _elm_lang$html$Html_Attributes$class('fa fa-calendar'),
+																																							_1: {ctor: '[]'}
+																																						},
+																																						{ctor: '[]'}),
+																																					_1: {
+																																						ctor: '::',
+																																						_0: A2(
+																																							_elm_lang$html$Html$span,
+																																							{
+																																								ctor: '::',
+																																								_0: _elm_lang$html$Html_Attributes$class('reception-days'),
+																																								_1: {ctor: '[]'}
+																																							},
+																																							{
+																																								ctor: '::',
+																																								_0: _elm_lang$html$Html$text(
+																																									A3(_gizra$municipality$Utils_Html$formatReceptionDays, language, _p9.days, _p9.multipleDays)),
+																																								_1: {ctor: '[]'}
+																																							}),
+																																						_1: {
+																																							ctor: '::',
+																																							_0: A2(
+																																								_elm_lang$html$Html$span,
+																																								{
+																																									ctor: '::',
+																																									_0: _elm_lang$html$Html_Attributes$class('reception-hours'),
+																																									_1: {ctor: '[]'}
+																																								},
+																																								{
+																																									ctor: '::',
+																																									_0: _elm_lang$html$Html$text(_p9.hours),
+																																									_1: {ctor: '[]'}
+																																								}),
+																																							_1: {ctor: '[]'}
+																																						}
+																																					}
+																																				});
+																																		},
+																																		receptionTimes)),
+																																_1: {ctor: '[]'}
+																															}
+																														});
+																												},
+																												_p10.receptionTimes)),
+																										_1: {ctor: '[]'}
+																									}),
 																								_1: {ctor: '[]'}
 																							}),
 																						_1: {ctor: '[]'}
-																					}),
-																				_1: {ctor: '[]'}
+																					}
+																				}
 																			}
 																		}
-																	}
-																}
-															}),
-														_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}
 													}
 												}
-											}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
 				}
 			});
 	});

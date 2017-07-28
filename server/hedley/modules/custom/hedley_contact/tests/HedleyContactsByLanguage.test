@@ -260,6 +260,7 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
           'multiple_days' => TRUE,
         ],
       ],
+      'edit' => TRUE,
     ];
 
     foreach ($expected_values as $property => $expected_value) {

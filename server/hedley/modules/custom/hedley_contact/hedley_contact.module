@@ -126,6 +126,8 @@ function hedley_contact_get_reception_hours($node) {
  *   Array with the contacts list.
  */
 function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_block = FALSE, $promoted_only = FALSE, $topic_tid = 0) {
+  global $user;
+
   // Determine the events setting depending on the block configuration.
   $range = $show_as_block ? 5 : 100;
 
@@ -148,10 +150,15 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
     $image = $wrapper->field_image->value();
 
     $name = check_plain($wrapper->field_first_name->value()) . ' ' . check_plain($wrapper->field_last_name->value());
+    $department = '';
     if (!trim($name) && $wrapper->field_department->value()) {
       // If we have only the field department filled it means the contact card
-      // is a general department card, not a specific worker.
+      // is a general department card, not a specific person.
       $name = $wrapper->field_department->label();
+    }
+    else {
+      // This is a person and we need to display the department separately.
+      $department = $wrapper->field_department->label();
     }
 
     // Get the topics related to the user, if not empty.
@@ -180,6 +187,7 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
     $contact = [
       'id' => $wrapper->getIdentifier(),
       'name' => $name,
+      'department' => check_plain($department),
       'image_url' => $image ? image_style_url('square_large_image', $image['uri']) : hedley_municipality_get_default_image($wrapper->getBundle()),
       'phone' => check_plain($wrapper->field_phone->value()),
       'fax' => check_plain($wrapper->field_fax->value()),
@@ -188,10 +196,14 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
       'job_title' => check_plain($wrapper->field_job_title->value()),
       'topics' => $topics_array,
       'reception_hours' => hedley_contact_get_reception_hours($node),
+      'edit' => og_node_access($node, 'update', $user) == 'allow' ? TRUE : FALSE,
     ];
 
-    // Remove empty values (elm expects the correct value or nothing).
-    $contacts[] = array_filter($contact);
+    // Remove empty values (elm expects the correct value or nothing), unless
+    // we have a bool FALSE value, we want to keep that.
+    $contacts[] = array_filter($contact, function ($value) {
+      return !is_null($value);
+    });
   }
 
   return $contacts;

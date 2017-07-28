@@ -57,6 +57,7 @@ type alias ReceptionTimes =
 
 type alias Contact =
     { name : Name
+    , department : Maybe String
     , jobTitle : Maybe String
     , imageUrl : Maybe String
     , topics : Maybe (List Topic)
@@ -65,6 +66,7 @@ type alias Contact =
     , email : Maybe String
     , address : Maybe String
     , receptionTimes : Maybe (List ReceptionTimes)
+    , edit : Bool
     }
 
 

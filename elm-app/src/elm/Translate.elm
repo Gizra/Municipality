@@ -18,6 +18,7 @@ type TranslationId
     | ContactsNotFound
     | DayTranslation Day
     | DayAndDate Date (Maybe Date)
+    | EditText
     | EventRecurringWeekly
     | EventsNotFound
     | FilterContactsPlaceholder
@@ -124,6 +125,12 @@ translate lang trans =
                         , hebrew = allDatesFormated ++ " ," ++ dayTranslated
                         }
 
+                EditText ->
+                    { arabic = "تحرير"
+                    , english = "Edit"
+                    , hebrew = "עריכה"
+                    }
+
                 EventRecurringWeekly ->
                     { arabic = "حدث اسبوعي"
                     , english = "Weekly event"
@@ -173,9 +180,9 @@ translate lang trans =
                     }
 
                 ReceptionText ->
-                    { arabic = "استقبال"
-                    , english = "Reception"
-                    , hebrew = "קבלת קהל"
+                    { arabic = "استقبال: "
+                    , english = "Reception: "
+                    , hebrew = "קבלת קהל: "
                     }
 
                 ShowAll ->

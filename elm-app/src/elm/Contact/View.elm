@@ -105,7 +105,13 @@ viewContact : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContact baseUrl language ( contactId, contact ) =
     div
         [ class "thumbnail search-results contact-search-result" ]
-        [ showMaybe <|
+        [ showIf contact.edit <|
+            a
+                [ class "btn btn-xs btn-primary pull-right btn-edit"
+                , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
+                ]
+                [ text <| translate language EditText ]
+        , showMaybe <|
             Maybe.map
                 (\imageUrl ->
                     div [ class "card-img-top center" ]
@@ -119,6 +125,8 @@ viewContact baseUrl language ( contactId, contact ) =
             [ h4
                 [ class "card-title" ]
                 [ text contact.name ]
+            , p []
+                [ showMaybe <| Maybe.map text contact.department ]
             , div
                 []
                 [ showMaybe <| Maybe.map text contact.jobTitle
@@ -186,7 +194,7 @@ viewContact baseUrl language ( contactId, contact ) =
                                 Maybe.map
                                     (\receptionTimes ->
                                         div [ class "reception-times-wrapper" ]
-                                            [ text <| translate language ReceptionText ++ ": "
+                                            [ text <| translate language ReceptionText
                                             , span []
                                                 (List.map
                                                     (\{ days, hours, multipleDays } ->
