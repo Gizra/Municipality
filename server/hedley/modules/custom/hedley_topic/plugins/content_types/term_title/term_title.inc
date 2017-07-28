@@ -26,8 +26,8 @@ function hedley_topic_term_title_content_type_render($subtype, $conf, $args, $co
   $block = new stdClass();
   $block->module = 'hedley_topic';
   $block->content = theme('hedley_topic_term_title', [
-    'title' => $wrapper->label(),
-    'description' => $wrapper->description->value(),
+    'title' => filter_xss($wrapper->label()),
+    'description' => filter_xss($wrapper->description->value()),
   ]);
 
   return $block;
