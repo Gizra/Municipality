@@ -8,23 +8,23 @@ describe('Municipality contacts page', () => {
   it('should find contacts using the search input', () => {
     const input = $('#search-contacts');
     input.setValue('נ');
-    browser.waitForVisible('h3=ניר שמואלי');
-    browser.waitForVisible('h3=נסר בו סריחאן');
-    browser.waitForVisible('h3=סלאח אבו האני');
+    browser.waitForVisible('h4=ניר שמואלי');
+    browser.waitForVisible('h4=נסר בו סריחאן');
+    browser.waitForVisible('h4=סלאח אבו האני');
 
     input.setValue('ני');
-    browser.waitForVisible('h3=ניר שמואלי');
-    browser.waitForVisible('h3=סלאח אבו האני');
+    browser.waitForVisible('h4=ניר שמואלי');
+    browser.waitForVisible('h4=סלאח אבו האני');
 
     // Make sure other contacts disappear when searching.
-    assert(!browser.isVisible('h3=נסר בו סריחאן'));
+    assert(!browser.isVisible('h4=נסר בו סריחאן'));
 
     input.setValue('ניר');
-    browser.waitForVisible('h3=ניר שמואלי');
+    browser.waitForVisible('h4=ניר שמואלי');
 
     // Make sure other contacts disappear when searching.
-    assert(!browser.isVisible('h3=נסר בו סריחאן'));
-    assert(!browser.isVisible('h3=סלאח אבו האני'));
+    assert(!browser.isVisible('h4=נסר בו סריחאן'));
+    assert(!browser.isVisible('h4=סלאח אבו האני'));
   });
 
   it('should be able to edit contacts in editor\'s municipality', () => {

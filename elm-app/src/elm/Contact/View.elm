@@ -12,7 +12,7 @@ import Html.Attributes exposing (alt, class, classList, href, id, placeholder, s
 import Html.Events exposing (onClick, onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (colorToString, divider, formatReceptionDays, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (colorToString, divider, formatReceptionDays, sectionDivider, showIf, showIfWithDefault, showMaybe)
 
 
 view : BaseUrl -> Language -> Bool -> Model -> Html Msg
@@ -76,26 +76,32 @@ viewContacts baseUrl language showAsBlock { contacts, filterString } =
         if DictList.isEmpty filteredContacts then
             div [] [ text <| translate language ContactsNotFound ]
         else
-            div [ class "row" ]
-                (filteredContacts
-                    |> DictList.map
-                        (\contactId contact ->
-                            if showAsBlock then
-                                ul [ class "list list-primary list-borders" ]
-                                    [ viewContactAsBlock
-                                        baseUrl
-                                        language
-                                        ( contactId, contact )
-                                    ]
-                            else
+            showIfWithDefault showAsBlock
+                (ul [ class "list list-primary list-borders" ]
+                    (filteredContacts
+                        |> DictList.map
+                            (\contactId contact ->
+                                viewContactAsBlock
+                                    baseUrl
+                                    language
+                                    ( contactId, contact )
+                            )
+                        |> DictList.values
+                    )
+                )
+                (div [ class "row" ]
+                    (filteredContacts
+                        |> DictList.map
+                            (\contactId contact ->
                                 div [ class "col-md-4 col-sm-6 col-xs-12" ]
                                     [ viewContact
                                         baseUrl
                                         language
                                         ( contactId, contact )
                                     ]
-                        )
-                    |> DictList.values
+                            )
+                        |> DictList.values
+                    )
                 )
 
 

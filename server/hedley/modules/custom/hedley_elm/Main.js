@@ -12300,6 +12300,10 @@ var _gizra$municipality$Utils_Html$divider = A2(
 		_1: {ctor: '[]'}
 	},
 	{ctor: '[]'});
+var _gizra$municipality$Utils_Html$showIfWithDefault = F3(
+	function (condition, html, defaultHtml) {
+		return condition ? html : defaultHtml;
+	});
 var _gizra$municipality$Utils_Html$emptyNode = _elm_lang$html$Html$text('');
 var _gizra$municipality$Utils_Html$showIf = F2(
 	function (condition, html) {
@@ -13137,51 +13141,58 @@ var _gizra$municipality$Contact_View$viewContacts = F4(
 				_0: _elm_lang$html$Html$text(
 					A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ContactsNotFound)),
 				_1: {ctor: '[]'}
-			}) : A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('row'),
-				_1: {ctor: '[]'}
-			},
-			_Gizra$elm_dictlist$DictList$values(
-				A2(
-					_Gizra$elm_dictlist$DictList$map,
-					F2(
-						function (contactId, contact) {
-							return showAsBlock ? A2(
-								_elm_lang$html$Html$ul,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('list list-primary list-borders'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A3(
-										_gizra$municipality$Contact_View$viewContactAsBlock,
-										baseUrl,
-										language,
-										{ctor: '_Tuple2', _0: contactId, _1: contact}),
-									_1: {ctor: '[]'}
-								}) : A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('col-md-4 col-sm-6 col-xs-12'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A3(
-										_gizra$municipality$Contact_View$viewContact,
-										baseUrl,
-										language,
-										{ctor: '_Tuple2', _0: contactId, _1: contact}),
-									_1: {ctor: '[]'}
-								});
-						}),
-					filteredContacts)));
+			}) : A3(
+			_gizra$municipality$Utils_Html$showIfWithDefault,
+			showAsBlock,
+			A2(
+				_elm_lang$html$Html$ul,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('list list-primary list-borders'),
+					_1: {ctor: '[]'}
+				},
+				_Gizra$elm_dictlist$DictList$values(
+					A2(
+						_Gizra$elm_dictlist$DictList$map,
+						F2(
+							function (contactId, contact) {
+								return A3(
+									_gizra$municipality$Contact_View$viewContactAsBlock,
+									baseUrl,
+									language,
+									{ctor: '_Tuple2', _0: contactId, _1: contact});
+							}),
+						filteredContacts))),
+			A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('row'),
+					_1: {ctor: '[]'}
+				},
+				_Gizra$elm_dictlist$DictList$values(
+					A2(
+						_Gizra$elm_dictlist$DictList$map,
+						F2(
+							function (contactId, contact) {
+								return A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('col-md-4 col-sm-6 col-xs-12'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A3(
+											_gizra$municipality$Contact_View$viewContact,
+											baseUrl,
+											language,
+											{ctor: '_Tuple2', _0: contactId, _1: contact}),
+										_1: {ctor: '[]'}
+									});
+							}),
+						filteredContacts))));
 	});
 var _gizra$municipality$Contact_View$viewContactFilter = F2(
 	function (language, filterString) {
