@@ -22,14 +22,11 @@ type TranslationId
     | EventsNotFound
     | FilterContactsPlaceholder
     | FilterEventsPlaceholder
+    | LocationText String
     | MatchingResults
     | MoreDetailsText
     | PriceText
-<<<<<<< HEAD
     | ReceptionText
-=======
-    | LocationText String
->>>>>>> origin/master
     | ShowAll
 
 
@@ -151,6 +148,12 @@ translate lang trans =
                     , hebrew = "חפשו אירועים לטעמכם"
                     }
 
+                LocationText locationTitle ->
+                    { arabic = "أين: " ++ locationTitle
+                    , english = "Where: " ++ locationTitle
+                    , hebrew = "איפה: " ++ locationTitle
+                    }
+
                 MatchingResults ->
                     { arabic = "نتائج البحث"
                     , english = "Matching Results"
@@ -173,12 +176,6 @@ translate lang trans =
                     { arabic = "استقبال"
                     , english = "Reception"
                     , hebrew = "קבלת קהל"
-                    }
-
-                LocationText locationTitle ->
-                    { arabic = "أين: " ++ locationTitle
-                    , english = "Where: " ++ locationTitle
-                    , hebrew = "איפה: " ++ locationTitle
                     }
 
                 ShowAll ->
