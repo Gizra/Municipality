@@ -25,7 +25,11 @@ type TranslationId
     | MatchingResults
     | MoreDetailsText
     | PriceText
+<<<<<<< HEAD
     | ReceptionText
+=======
+    | LocationText String
+>>>>>>> origin/master
     | ShowAll
 
 
@@ -169,6 +173,12 @@ translate lang trans =
                     { arabic = "استقبال"
                     , english = "Reception"
                     , hebrew = "קבלת קהל"
+                    }
+
+                LocationText locationTitle ->
+                    { arabic = "أين: " ++ locationTitle
+                    , english = "Where: " ++ locationTitle
+                    , hebrew = "איפה: " ++ locationTitle
                     }
 
                 ShowAll ->

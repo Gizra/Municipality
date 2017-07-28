@@ -68,6 +68,14 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
           ['tid' => $user_type->tid],
         ],
       ],
+      'field_location' => [
+        $en_language_code => [
+          [
+            'title' => 'Test location',
+            'url' => 'http://maps.google.com/test',
+          ],
+        ],
+      ],
       // Add the created group as the parent group for this entity.
       OG_AUDIENCE_FIELD => [
         LANGUAGE_NONE => [
@@ -97,6 +105,10 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
 
     // Check that this event is in the right language.
     $this->assertEqual($municipality_events[0]['name'], 'Event name English', 'Expected English title is correct.');
+
+    // Check that this event has the right location properties.
+    $this->assertEqual($municipality_events[0]['location']['title'], 'Test location', 'Expected event location title is correct.');
+    $this->assertEqual($municipality_events[0]['location']['url'], 'http://maps.google.com/test', 'Expected event location url is correct.');
   }
 
 }

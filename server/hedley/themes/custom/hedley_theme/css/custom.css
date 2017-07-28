@@ -98,3 +98,7 @@
 .content img {
   display: inline-block;
 }
+
+.post-author img {
+  max-height: 120px;
+}
