@@ -95,6 +95,11 @@ viewEventTest =
                 viewEvent baseUrl English event1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "ticket-price" ]
+        , test "Event without Location" <|
+            \() ->
+                viewEvent baseUrl English event1
+                    |> Query.fromHtml
+                    |> Query.hasNot [ Selector.class "location-wrapper" ]
         , test "Event with Image" <|
             \() ->
                 viewEvent baseUrl English event2
@@ -120,6 +125,18 @@ viewEventTest =
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "ticket-price" ]
                     |> Query.has [ text "Price: 180" ]
+        , test "Event with Location" <|
+            \() ->
+                viewEvent baseUrl English event3
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "location-wrapper" ]
+                    |> Query.findAll [ tag "a" ]
+                    |> Query.first
+                    |> Query.has
+                        [ attribute "href" "http://maps.google.com/test2"
+                        , attribute "target" "_blank"
+                        , text "Where: Test location 2"
+                        ]
         ]
 
 
@@ -152,6 +169,7 @@ event1 =
       , endDate = Nothing
       , recurringWeekly = False
       , ticketPrice = Nothing
+      , location = Nothing
       }
     )
 
@@ -166,6 +184,11 @@ event2 =
       , endDate = Just (Date.fromTime 120000000100)
       , recurringWeekly = False
       , ticketPrice = Just "120"
+      , location =
+            Just
+                { title = "Test location"
+                , url = "http://maps.google.com/test"
+                }
       }
     )
 
@@ -180,6 +203,11 @@ event3 =
       , endDate = Just (Date.fromTime 120000000000)
       , recurringWeekly = True
       , ticketPrice = Just "180"
+      , location =
+            Just
+                { title = "Test location 2"
+                , url = "http://maps.google.com/test2"
+                }
       }
     )
 

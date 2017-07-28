@@ -24,6 +24,7 @@ type TranslationId
     | MatchingResults
     | MoreDetailsText
     | PriceText
+    | LocationText String
     | ShowAll
 
 
@@ -155,6 +156,12 @@ translate lang trans =
                     { arabic = "السعر"
                     , english = "Price"
                     , hebrew = "מחיר"
+                    }
+
+                LocationText locationTitle ->
+                    { arabic = "أين: " ++ locationTitle
+                    , english = "Where: " ++ locationTitle
+                    , hebrew = "איפה: " ++ locationTitle
                     }
 
                 ShowAll ->

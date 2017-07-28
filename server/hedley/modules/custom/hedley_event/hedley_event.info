@@ -26,6 +26,7 @@ features[field_instance][] = node-event-body
 features[field_instance][] = node-event-field_audience
 features[field_instance][] = node-event-field_date
 features[field_instance][] = node-event-field_image
+features[field_instance][] = node-event-field_location
 features[field_instance][] = node-event-field_recurring_weekly
 features[field_instance][] = node-event-field_ticket_price
 features[field_instance][] = node-event-field_user_types
@@ -45,5 +46,4 @@ features[variable][] = menu_parent_event
 features[variable][] = node_options_event
 features[variable][] = node_preview_event
 features[variable][] = node_submitted_event
-; Tests
 files[] = tests/HedleyEventsByLanguage.test

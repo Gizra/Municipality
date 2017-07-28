@@ -422,3 +422,25 @@ function hedley_municipality_get_non_empty_language_for_field(array $field_attri
     }
   }
 }
+
+/**
+ * Get the default image by content type.
+ *
+ * @param string $type
+ *   The content type.
+ *
+ * @return string|null
+ *   The image path, or nothing if the image does not exist.
+ */
+function hedley_municipality_get_default_image($type) {
+  $path = drupal_get_path('theme', 'hedley_theme') . "/images/default_{$type}_image.png";
+  // Set the URL options to be a full URL and without group context.
+  $options = [
+    'absolute' => TRUE,
+    'purl' => [
+      'disabled' => TRUE,
+    ],
+  ];
+
+  return file_exists($path) ? url($path, $options) : NULL;
+}
