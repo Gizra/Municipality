@@ -5,6 +5,13 @@ describe('Municipality topics', () => {
     browser.url('/tuba-zangariyye/taxonomy/term/13?user_type=residents&language=he');
   });
 
+  it('should show the correct description', () => {
+    browser.waitForVisible('div.pane-term-title');
+
+    const topicDescription = browser.getText('div.pane-term-title .pane-content > h2 > p');
+    assert.equal('תיאור גן הילדים', topicDescription);
+  });
+
   it('should show the correct news', () => {
     browser.waitForVisible('div.pane-topic-news .box-content');
 
