@@ -73,6 +73,16 @@
   }
 }
 
+@media (max-width: 767px) {
+  .float-xs-none {
+    float: none !important;
+  }
+}
+
+#header .header-nav-top {
+  margin: 43px 0 0 0;
+}
+
 .sticky-header-active #header .header-nav-top {
   margin-top: 70px;
 }
