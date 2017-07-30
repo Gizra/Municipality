@@ -2,17 +2,15 @@ module Contact.View exposing (..)
 
 import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
-import Contact.Model exposing (Contact, ContactId, DictListContact, Model, Msg(..))
+import Contact.Model exposing (Contact, ContactId, Model, Msg(..))
 import Contact.Utils exposing (filterContacts)
-import Date exposing (dayOfWeek)
-import Debug exposing (log)
 import DictList
 import Html exposing (..)
-import Html.Attributes exposing (alt, class, classList, href, id, placeholder, src, style, target, title, type_, value)
-import Html.Events exposing (onClick, onInput)
-import Json.Encode exposing (string)
+import Html.Attributes exposing (alt, class, href, id, placeholder, src, target, title, type_, value)
+import Html.Events exposing (onInput)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (colorToString, divider, formatReceptionDays, sectionDivider, showIf, showIfWithDefault, showMaybe)
+import Utils.Html exposing (colorToString, divider, formatReceptionDays, sectionDivider, showIf, showMaybe)
+import View.Extra exposing (viewMaybe)
 
 
 view : BaseUrl -> Language -> Bool -> Model -> Html Msg
@@ -23,7 +21,10 @@ view baseUrl language showAsBlock model =
         , showIf (not showAsBlock) <| viewContactFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
         , viewContacts baseUrl language showAsBlock model
-        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/contacts?" ++ baseUrl.query) ] [ text <| translate language ShowAll ]
+        , showIf showAsBlock <|
+            a
+                [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/contacts?" ++ baseUrl.query) ]
+                [ text <| translate language ShowAll ]
         ]
 
 
@@ -76,32 +77,41 @@ viewContacts baseUrl language showAsBlock { contacts, filterString } =
         if DictList.isEmpty filteredContacts then
             div [] [ text <| translate language ContactsNotFound ]
         else
-            showIfWithDefault showAsBlock
-                (ul [ class "list list-primary list-borders" ]
-                    (filteredContacts
-                        |> DictList.map
-                            (\contactId contact ->
-                                viewContactAsBlock
-                                    baseUrl
-                                    language
-                                    ( contactId, contact )
-                            )
-                        |> DictList.values
-                    )
-                )
-                (div [ class "row" ]
-                    (filteredContacts
-                        |> DictList.map
-                            (\contactId contact ->
-                                div [ class "col-md-4 col-sm-6 col-xs-12" ]
-                                    [ viewContact
+            viewMaybe
+                (always <|
+                    ul [ class "list list-primary list-borders" ]
+                        (filteredContacts
+                            |> DictList.map
+                                (\contactId contact ->
+                                    viewContactAsBlock
                                         baseUrl
                                         language
                                         ( contactId, contact )
-                                    ]
-                            )
-                        |> DictList.values
-                    )
+                                )
+                            |> DictList.values
+                        )
+                )
+                (always <|
+                    div [ class "row" ]
+                        (filteredContacts
+                            |> DictList.map
+                                (\contactId contact ->
+                                    div [ class "col-md-4 col-sm-6 col-xs-12" ]
+                                        [ viewContact
+                                            baseUrl
+                                            language
+                                            ( contactId, contact )
+                                        ]
+                                )
+                            |> DictList.values
+                        )
+                )
+                (case showAsBlock of
+                    True ->
+                        Just 1
+
+                    False ->
+                        Nothing
                 )
 
 
@@ -145,7 +155,9 @@ viewContact baseUrl language ( contactId, contact ) =
                                     (\topic ->
                                         a [ href (baseUrl.path ++ "/taxonomy/term/" ++ topic.id ++ "?" ++ baseUrl.query), title topic.name ]
                                             [ button
-                                                [ type_ "button", class ("btn mr-xs btn-borders btn-primary btn-sm btn-" ++ colorToString topic.color) ]
+                                                [ type_ "button"
+                                                , class ("btn mr-xs btn-borders btn-primary btn-sm btn-" ++ colorToString topic.color)
+                                                ]
                                                 [ text topic.name ]
                                             ]
                                     )

@@ -5,7 +5,6 @@ module Utils.Html
         , emptyNode
         , sectionDivider
         , showIf
-        , showIfWithDefault
         , showMaybe
         , formatReceptionDays
         )
@@ -39,20 +38,6 @@ showIf condition html =
         html
     else
         emptyNode
-
-
-{-| Conditionally show Html with a default Html if the condition doesn't pass
-A bit cleaner than using if expressions in middle of an html block:
-
-    showIfWithDefault True (text "I'm shown") (text "I'm default")
-
--}
-showIfWithDefault : Bool -> Html msg -> Html msg -> Html msg
-showIfWithDefault condition html defaultHtml =
-    if condition then
-        html
-    else
-        defaultHtml
 
 
 {-| Show Maybe Html if Just, or empty node if Nothing.
