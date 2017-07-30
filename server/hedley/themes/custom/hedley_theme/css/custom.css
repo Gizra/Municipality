@@ -45,25 +45,25 @@
 
 @media (max-width: 767px) {
   #site-name h1 {
-    font-size: 230%;
+    font-size: 110%;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
   #site-name h1 {
-    font-size: 330%;
+    font-size: 210%;
   }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
   #site-name h1 {
-    font-size: 430%;
+    font-size: 310%;
   }
 }
 
 @media (min-width: 1200px) {
   #site-name h1 {
-    font-size: 530%;
+    font-size: 410%;
   }
 }
 
