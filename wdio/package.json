@@ -12,6 +12,6 @@
     "node": ">0.10.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/wdio wdio.conf.js"
+    "test": "./node_modules/.bin/wdio wdio.local.conf.js"
   }
 }

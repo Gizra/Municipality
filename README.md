@@ -13,3 +13,5 @@
 * #### [Live site](http://live-municipality.pantheonsite.io/)
 
 * #### [Test site](http://test-municipality.pantheonsite.io/)
+
+* #### [Sanity/Automatic Tests Lists](https://github.com/Gizra/Municipality/labels/Sanity%20%2F%20Automatic%20Tests)

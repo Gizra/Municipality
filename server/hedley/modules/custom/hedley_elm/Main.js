@@ -12170,7 +12170,7 @@ var _gizra$municipality$Translate$translate = F2(
 						arabic: A2(
 							_elm_lang$core$Basics_ops['++'],
 							allDatesFormated,
-							A2(_elm_lang$core$Basics_ops['++'], ' ,', dayTranslated)),
+							A2(_elm_lang$core$Basics_ops['++'], ', ', dayTranslated)),
 						english: A2(
 							_elm_lang$core$Basics_ops['++'],
 							dayTranslated,
@@ -12178,7 +12178,7 @@ var _gizra$municipality$Translate$translate = F2(
 						hebrew: A2(
 							_elm_lang$core$Basics_ops['++'],
 							allDatesFormated,
-							A2(_elm_lang$core$Basics_ops['++'], ' ,', dayTranslated))
+							A2(_elm_lang$core$Basics_ops['++'], ', ', dayTranslated))
 					};
 				case 'EditText':
 					return {arabic: 'تحرير', english: 'Edit', hebrew: 'עריכה'};
