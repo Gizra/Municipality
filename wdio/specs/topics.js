@@ -5,6 +5,13 @@ describe('Municipality topics', () => {
     browser.url('/tuba-zangariyye/taxonomy/term/13?user_type=residents&language=he');
   });
 
+  it('should show the correct description', () => {
+    browser.waitForVisible('div.pane-term-title');
+
+    const topicDescription = browser.getText('div.pane-term-title .pane-content > h2 > p');
+    assert.equal('תיאור גן הילדים', topicDescription);
+  });
+
   it('should show the correct news', () => {
     browser.waitForVisible('div.pane-topic-news .box-content');
 
@@ -57,6 +64,16 @@ describe('Municipality topics', () => {
 
   it('should show event image if exists', () => {
     browser.waitForVisible('.card-img-top img');
+  });
+
+  it('should show the correct format for event\'s date', () => {
+    browser.waitForVisible('h2=Upcoming events');
+
+    const firstEventDate = browser.getText('div.featured-box .col-md-6:nth-child(1) .caption > div span');
+    assert.equal('12/04/2017 14:00 - 17:00, רביעי', firstEventDate);
+
+    const secondEventDate = browser.getText('div.featured-box .col-md-6:nth-child(2) .caption > div span');
+    assert.equal('29/03/2017 11:00 - 13:00, רביעי', secondEventDate);
   });
 
   it('should show all the relevant contacts for this topic', () => {

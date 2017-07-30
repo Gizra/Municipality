@@ -12138,7 +12138,7 @@ var _gizra$municipality$Translate$translate = F2(
 						arabic: A2(
 							_elm_lang$core$Basics_ops['++'],
 							allDatesFormated,
-							A2(_elm_lang$core$Basics_ops['++'], ' ,', dayTranslated)),
+							A2(_elm_lang$core$Basics_ops['++'], ', ', dayTranslated)),
 						english: A2(
 							_elm_lang$core$Basics_ops['++'],
 							dayTranslated,
@@ -12146,7 +12146,7 @@ var _gizra$municipality$Translate$translate = F2(
 						hebrew: A2(
 							_elm_lang$core$Basics_ops['++'],
 							allDatesFormated,
-							A2(_elm_lang$core$Basics_ops['++'], ' ,', dayTranslated))
+							A2(_elm_lang$core$Basics_ops['++'], ', ', dayTranslated))
 					};
 				case 'EventRecurringWeekly':
 					return {arabic: 'حدث اسبوعي', english: 'Weekly event', hebrew: 'אירוע שבועי'};

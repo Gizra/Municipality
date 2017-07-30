@@ -17,6 +17,7 @@ abstract class HedleyMigrateBase extends Migration {
   protected $simpleMultipleMappings = [];
   protected $translatableFields = [
     'body',
+    'description_field',
     'name_field',
     'title_field',
     'field_answer',
@@ -153,7 +154,7 @@ abstract class HedleyMigrateBase extends Migration {
   public function prepare($entity) {
     $group_content_bundles = og_get_all_group_content_bundle();
 
-    if (in_array($entity->type, array_keys($group_content_bundles['node']))) {
+    if (isset($entity->type) && in_array($entity->type, array_keys($group_content_bundles['node']))) {
       $entity->promote = 1;
     }
   }
