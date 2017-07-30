@@ -111,9 +111,9 @@ translate lang trans =
                                 mEndDate
                                 |> Maybe.withDefault dateFormated
                     in
-                        { arabic = allDatesFormated ++ " ," ++ dayTranslated
+                        { arabic = allDatesFormated ++ ", " ++ dayTranslated
                         , english = dayTranslated ++ ", " ++ allDatesFormated
-                        , hebrew = allDatesFormated ++ " ," ++ dayTranslated
+                        , hebrew = allDatesFormated ++ ", " ++ dayTranslated
                         }
 
                 EventRecurringWeekly ->
