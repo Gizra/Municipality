@@ -37,7 +37,7 @@ translate lang trans =
         translationSet =
             case trans of
                 ContactHeaderText ->
-                    { arabic = "اتصالات والموظفين الشبكة"
+                    { arabic = "اتصالات وموظفي الشبكة"
                     , english = "Contacts and network employees"
                     , hebrew = "אנשי קשר ועובדי רשת"
                     }

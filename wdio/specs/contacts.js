@@ -5,6 +5,10 @@ describe('Municipality contacts page', () => {
     browser.url('/kiryat-malakhi/contacts?language=he');
   });
 
+  it('should see the contacts static header', () => {
+    browser.waitForVisible('h1=אנשי קשר ועובדי רשת');
+  });
+
   it('should find contacts using the search input', () => {
     const input = $('#search-contacts');
     input.setValue('נ');

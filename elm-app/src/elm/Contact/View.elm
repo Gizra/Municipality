@@ -10,7 +10,6 @@ import Html.Attributes exposing (alt, class, href, id, placeholder, src, target,
 import Html.Events exposing (onInput)
 import Translate exposing (TranslationId(..), translate)
 import Utils.Html exposing (colorToString, divider, formatReceptionDays, sectionDivider, showIf, showMaybe)
-import View.Extra exposing (viewMaybe)
 
 
 view : BaseUrl -> Language -> Bool -> Model -> Html Msg
@@ -77,160 +76,150 @@ viewContacts baseUrl language showAsBlock { contacts, filterString } =
         if DictList.isEmpty filteredContacts then
             div [] [ text <| translate language ContactsNotFound ]
         else
-            viewMaybe
-                (always <|
-                    ul [ class "list list-primary list-borders" ]
-                        (filteredContacts
-                            |> DictList.map
-                                (\contactId contact ->
-                                    viewContactAsBlock
-                                        baseUrl
-                                        language
-                                        ( contactId, contact )
-                                )
-                            |> DictList.values
+            let
+                ( wrappingElement, classes, viewFunction ) =
+                    if showAsBlock then
+                        ( ul
+                        , "list list-primary list-borders"
+                        , viewContactAsBlock
                         )
-                )
-                (always <|
-                    div [ class "row" ]
-                        (filteredContacts
-                            |> DictList.map
-                                (\contactId contact ->
-                                    div [ class "col-md-4 col-sm-6 col-xs-12" ]
-                                        [ viewContact
-                                            baseUrl
-                                            language
-                                            ( contactId, contact )
-                                        ]
-                                )
-                            |> DictList.values
+                    else
+                        ( div
+                        , "row"
+                        , viewContact
                         )
-                )
-                (case showAsBlock of
-                    True ->
-                        Just 1
-
-                    False ->
-                        Nothing
-                )
+            in
+                wrappingElement [ class classes ]
+                    (filteredContacts
+                        |> DictList.map
+                            (\contactId contact ->
+                                viewFunction
+                                    baseUrl
+                                    language
+                                    ( contactId, contact )
+                            )
+                        |> DictList.values
+                    )
 
 
 {-| View a single contact.
 -}
 viewContact : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContact baseUrl language ( contactId, contact ) =
-    div
-        [ class "thumbnail search-results contact-search-result" ]
-        [ showIf contact.edit <|
-            a
-                [ class "btn btn-xs btn-primary pull-right btn-edit"
-                , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
-                ]
-                [ text <| translate language EditText ]
-        , showMaybe <|
-            Maybe.map
-                (\imageUrl ->
-                    div [ class "card-img-top center" ]
-                        [ img [ class "img-responsive", src imageUrl ]
-                            []
-                        ]
-                )
-                contact.imageUrl
-        , div
-            [ class "caption center" ]
-            [ h4
-                [ class "card-title" ]
-                [ text contact.name ]
-            , p []
-                [ showMaybe <| Maybe.map text contact.department ]
+    div [ class "col-md-4 col-sm-6 col-xs-12" ]
+        [ div
+            [ class "thumbnail search-results contact-search-result" ]
+            [ showIf contact.edit <|
+                a
+                    [ class "btn btn-xs btn-primary pull-right btn-edit"
+                    , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
+                    ]
+                    [ text <| translate language EditText ]
+            , showMaybe <|
+                Maybe.map
+                    (\imageUrl ->
+                        div [ class "card-img-top center" ]
+                            [ img [ class "img-responsive", src imageUrl ]
+                                []
+                            ]
+                    )
+                    contact.imageUrl
             , div
-                []
-                [ showMaybe <| Maybe.map text contact.jobTitle
-                , divider
-                , showMaybe <|
-                    Maybe.map
-                        (\topics ->
-                            div [ class "labels topic-wrapper" ]
-                                (List.map
-                                    (\topic ->
-                                        a [ href (baseUrl.path ++ "/taxonomy/term/" ++ topic.id ++ "?" ++ baseUrl.query), title topic.name ]
-                                            [ button
-                                                [ type_ "button"
-                                                , class ("btn mr-xs btn-borders btn-primary btn-sm btn-" ++ colorToString topic.color)
+                [ class "caption center" ]
+                [ h4
+                    [ class "card-title" ]
+                    [ text contact.name ]
+                , p []
+                    [ showMaybe <| Maybe.map text contact.department ]
+                , div
+                    []
+                    [ showMaybe <| Maybe.map text contact.jobTitle
+                    , divider
+                    , showMaybe <|
+                        Maybe.map
+                            (\topics ->
+                                div [ class "labels topic-wrapper" ]
+                                    (List.map
+                                        (\topic ->
+                                            a [ href (baseUrl.path ++ "/taxonomy/term/" ++ topic.id ++ "?" ++ baseUrl.query), title topic.name ]
+                                                [ button
+                                                    [ type_ "button"
+                                                    , class ("btn mr-xs btn-borders btn-primary btn-sm btn-" ++ colorToString topic.color)
+                                                    ]
+                                                    [ text topic.name ]
                                                 ]
-                                                [ text topic.name ]
-                                            ]
+                                        )
+                                        topics
                                     )
-                                    topics
+                            )
+                            contact.topics
+                    , sectionDivider
+                    , div [ class "contact-details center" ]
+                        [ showMaybe <|
+                            Maybe.map
+                                (\email ->
+                                    p [ class "email-wrapper" ]
+                                        [ i [ class "mail icon" ] []
+                                        , a [ href ("mailto:" ++ email), target "_blank" ] [ text email ]
+                                        ]
                                 )
-                        )
-                        contact.topics
-                , sectionDivider
-                , div [ class "contact-details center" ]
-                    [ showMaybe <|
-                        Maybe.map
-                            (\email ->
-                                p [ class "email-wrapper" ]
-                                    [ i [ class "mail icon" ] []
-                                    , a [ href ("mailto:" ++ email), target "_blank" ] [ text email ]
-                                    ]
-                            )
-                            contact.email
-                    , showMaybe <|
-                        Maybe.map
-                            (\phone ->
-                                p [ class "phone-wrapper" ]
-                                    [ i [ class "phone icon" ] []
-                                    , a [ href ("tel:" ++ phone) ] [ text phone ]
-                                    ]
-                            )
-                            contact.phone
-                    , showMaybe <|
-                        Maybe.map
-                            (\fax ->
-                                p [ class "fax-wrapper" ]
-                                    [ i [ class "fax icon" ] []
-                                    , span [] [ text fax ]
-                                    ]
-                            )
-                            contact.fax
-                    , div []
-                        [ sectionDivider
+                                contact.email
                         , showMaybe <|
                             Maybe.map
-                                (\address ->
-                                    p [ class "address-wrapper" ]
-                                        [ text address ]
+                                (\phone ->
+                                    p [ class "phone-wrapper" ]
+                                        [ i [ class "phone icon" ] []
+                                        , a [ href ("tel:" ++ phone) ] [ text phone ]
+                                        ]
                                 )
-                                contact.address
-                        ]
-                    , p
-                        []
-                        [ span
-                            []
-                            [ showMaybe <|
+                                contact.phone
+                        , showMaybe <|
+                            Maybe.map
+                                (\fax ->
+                                    p [ class "fax-wrapper" ]
+                                        [ i [ class "fax icon" ] []
+                                        , span [] [ text fax ]
+                                        ]
+                                )
+                                contact.fax
+                        , div []
+                            [ sectionDivider
+                            , showMaybe <|
                                 Maybe.map
-                                    (\receptionTimes ->
-                                        div [ class "reception-times-wrapper" ]
-                                            [ text <| translate language ReceptionText
-                                            , span []
-                                                (List.map
-                                                    (\{ days, hours, multipleDays } ->
-                                                        div [ class "mr-xs" ]
-                                                            [ i [ class "fa fa-calendar" ]
-                                                                []
-                                                            , span
-                                                                [ class "reception-days" ]
-                                                                [ text <| formatReceptionDays language days multipleDays ]
-                                                            , span [ class "reception-hours" ]
-                                                                [ text hours ]
-                                                            ]
-                                                    )
-                                                    receptionTimes
-                                                )
-                                            ]
+                                    (\address ->
+                                        p [ class "address-wrapper" ]
+                                            [ text address ]
                                     )
-                                    contact.receptionTimes
+                                    contact.address
+                            ]
+                        , p
+                            []
+                            [ span
+                                []
+                                [ showMaybe <|
+                                    Maybe.map
+                                        (\receptionTimes ->
+                                            div [ class "reception-times-wrapper" ]
+                                                [ text <| translate language ReceptionText
+                                                , span []
+                                                    (List.map
+                                                        (\{ days, hours, multipleDays } ->
+                                                            div [ class "mr-xs" ]
+                                                                [ i [ class "fa fa-calendar" ]
+                                                                    []
+                                                                , span
+                                                                    [ class "reception-days" ]
+                                                                    [ text <| formatReceptionDays language days multipleDays ]
+                                                                , span [ class "reception-hours" ]
+                                                                    [ text hours ]
+                                                                ]
+                                                        )
+                                                        receptionTimes
+                                                    )
+                                                ]
+                                        )
+                                        contact.receptionTimes
+                                ]
                             ]
                         ]
                     ]
