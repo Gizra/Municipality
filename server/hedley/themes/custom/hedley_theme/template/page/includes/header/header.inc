@@ -2,19 +2,19 @@
   <div class="header-body">
     <div class="container">
       <div class="row">
-        <div class="col-sm-3 col-xs-12 align-xs-center">
+        <div class="col-sm-3">
           <?php if (isset($page['branding'])): ?>
             <?php print render($page['branding']); ?>
           <?php endif; ?>
           <?php if ($logo): ?>
-            <div class="header-logo logo float-xs-none">
+            <div class="header-logo logo">
               <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
                 <img alt="<?php print t('Home'); ?>" height="<?php print theme_get_setting('logo_height'); ?>" width="150" data-sticky-width="100" data-sticky-height="<?php print theme_get_setting('sticky_logo_height'); ?>" data-sticky-top="33" src="<?php print $logo; ?>">
               </a>
             </div>
           <?php endif; ?>
         </div>
-        <div class="col-sm-6 col-xs-12 center">
+        <div class="col-sm-6 center">
           <?php if ($site_name || $site_slogan): ?>
             <div id="name-and-slogan"<?php if ($disable_site_name && $disable_site_slogan) { print ' class="hidden"'; } ?>>
 
@@ -39,7 +39,7 @@
             </div> <!-- /#name-and-slogan -->
           <?php endif; ?>
         </div>
-        <div class="col-sm-3 col-xs-12 align-right">
+        <div class="col-sm-3 align-right">
             <?php if (isset($page['header_search'])): ?>
               <div class="header-search hidden-xs">
                 <?php print render($page['header_search']); ?>
