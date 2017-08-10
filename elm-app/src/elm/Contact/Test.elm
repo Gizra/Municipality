@@ -42,6 +42,18 @@ viewContactTest =
                 viewContact baseUrl English contact1
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "email-wrapper" ]
+        , test "Contact without Edit link" <|
+            \() ->
+                viewContact baseUrl English contact2
+                    |> Query.fromHtml
+                    |> Query.hasNot [ Selector.class "btn-edit" ]
+        , test "Contact without Department" <|
+            \() ->
+                viewContact baseUrl English contact1
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "caption" ]
+                    |> Query.children [ tag "p" ]
+                    |> Query.each (Query.hasNot [ text "Budget" ])
         , test "Contact without Phone" <|
             \() ->
                 viewContact baseUrl English contact1
@@ -64,6 +76,19 @@ viewContactTest =
                     |> Query.find [ Selector.class "email-wrapper" ]
                     |> Query.children [ tag "a" ]
                     |> Query.each (Query.has [ text "carl@example.com" ])
+        , test "Contact with Edit link" <|
+            \() ->
+                viewContact baseUrl English contact3
+                    |> Query.fromHtml
+                    |> Query.has [ Selector.class "btn-edit" ]
+        , test "Contact with Department" <|
+            \() ->
+                viewContact baseUrl English contact2
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "caption" ]
+                    |> Query.findAll [ tag "p" ]
+                    |> Query.first
+                    |> Query.has [ text "Budget" ]
         , test "Contact with Phone" <|
             \() ->
                 viewContact baseUrl English contact2
@@ -134,6 +159,7 @@ contact1 : ( ContactId, Contact )
 contact1 =
     ( "100"
     , { name = "alice"
+      , department = Nothing
       , jobTitle = Nothing
       , imageUrl = Nothing
       , topics = Nothing
@@ -142,6 +168,7 @@ contact1 =
       , email = Nothing
       , address = Nothing
       , receptionTimes = Nothing
+      , edit = False
       }
     )
 
@@ -150,17 +177,18 @@ contact2 : ( ContactId, Contact )
 contact2 =
     ( "200"
     , { name = "carl"
+      , department = Just "Budget"
       , jobTitle = Just "director"
       , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
       , topics =
             Just
                 [ { id = "1"
                   , name = "arnona"
-                  , color = Pink
+                  , color = Secondary
                   }
                 , { id = "2"
                   , name = "mayor"
-                  , color = Green
+                  , color = Info
                   }
                 ]
       , phone = Just "1234"
@@ -178,6 +206,7 @@ contact2 =
                   , multipleDays = False
                   }
                 ]
+      , edit = False
       }
     )
 
@@ -186,17 +215,18 @@ contact3 : ( ContactId, Contact )
 contact3 =
     ( "300"
     , { name = "john"
+      , department = Just "Budget"
       , jobTitle = Just "assistant"
       , imageUrl = Nothing
       , topics =
             Just
                 [ { id = "1"
                   , name = "arnona"
-                  , color = Pink
+                  , color = Secondary
                   }
                 , { id = "2"
                   , name = "garbage"
-                  , color = Red
+                  , color = Info
                   }
                 ]
       , phone = Just "9012"
@@ -210,6 +240,7 @@ contact3 =
                   , multipleDays = True
                   }
                 ]
+      , edit = True
       }
     )
 
