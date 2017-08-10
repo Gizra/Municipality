@@ -170,6 +170,7 @@ event1 =
       , recurringWeekly = False
       , ticketPrice = Nothing
       , location = Nothing
+      , edit = False
       }
     )
 
@@ -189,6 +190,7 @@ event2 =
                 { title = "Test location"
                 , url = "http://maps.google.com/test"
                 }
+      , edit = False
       }
     )
 
@@ -208,6 +210,7 @@ event3 =
                 { title = "Test location 2"
                 , url = "http://maps.google.com/test2"
                 }
+      , edit = True
       }
     )
 
