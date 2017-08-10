@@ -1,9 +1,9 @@
 module Utils.Html
     exposing
         ( colorToString
-        , createRowsGrid
         , divider
         , emptyNode
+        , renderBootstrapGrid
         , sectionDivider
         , showIf
         , showMaybe
@@ -53,14 +53,14 @@ renderRow columnClass row =
     div [ class "row" ] (List.map (renderColumn columnClass) <| row)
 
 
-{-| Add rows to a given number of columns. Gives the ability to wrap a list og
+{-| Renders rows to a given number of columns. Gives the ability to wrap a list og
 Html msg with columns and rows:
 
-    createRowsGrid 2 "col-md-6" List (div [] [], div [] [])
+    renderBootstrapGrid 2 "col-md-6" List (div [] [], div [] [])
 
 -}
-createRowsGrid : Int -> String -> List (Html msg) -> Html msg
-createRowsGrid columnsInRow columnClass colHtmlMsgList =
+renderBootstrapGrid : Int -> String -> List (Html msg) -> Html msg
+renderBootstrapGrid columnsInRow columnClass colHtmlMsgList =
     let
         listOfRows =
             split columnsInRow colHtmlMsgList

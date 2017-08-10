@@ -12379,7 +12379,7 @@ var _gizra$municipality$Utils_Html$split = F2(
 			};
 		}
 	});
-var _gizra$municipality$Utils_Html$createRowsGrid = F3(
+var _gizra$municipality$Utils_Html$renderBootstrapGrid = F3(
 	function (columnsInRow, columnClass, colHtmlMsgList) {
 		var listOfRows = A2(_gizra$municipality$Utils_Html$split, columnsInRow, colHtmlMsgList);
 		return A2(
@@ -13913,7 +13913,7 @@ var _gizra$municipality$Event_View$viewEvents = F4(
 			var itemsInOneRow = _p7._0;
 			var columnClass = _p7._1;
 			return A3(
-				_gizra$municipality$Utils_Html$createRowsGrid,
+				_gizra$municipality$Utils_Html$renderBootstrapGrid,
 				itemsInOneRow,
 				columnClass,
 				_Gizra$elm_dictlist$DictList$values(
