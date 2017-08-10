@@ -43,27 +43,21 @@
   text-decoration: none;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   #site-name h1 {
-    font-size: 230%;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  #site-name h1 {
-    font-size: 330%;
+    font-size: 210%;
   }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
   #site-name h1 {
-    font-size: 430%;
+    font-size: 310%;
   }
 }
 
 @media (min-width: 1200px) {
   #site-name h1 {
-    font-size: 530%;
+    font-size: 410%;
   }
 }
 
@@ -71,6 +65,10 @@
   .align-xs-center {
     text-align: center !important;
   }
+}
+
+#header .header-nav-top {
+  margin: 43px 0 0 0;
 }
 
 .sticky-header-active #header .header-nav-top {
