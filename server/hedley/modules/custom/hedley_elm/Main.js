@@ -13249,39 +13249,80 @@ var _gizra$municipality$Event_Utils$filterEvents = F2(
 		}
 	});
 
-var _gizra$municipality$Event_View$viewEventAsBlock = F3(
-	function (baseUrl, language, _p0) {
+var _gizra$municipality$Event_View$viewEvent = F4(
+	function (showAsBlock, baseUrl, language, _p0) {
 		var _p1 = _p0;
-		var _p2 = _p1._1;
+		var _p4 = _p1._0;
+		var _p3 = _p1._1;
+		var _p2 = showAsBlock ? {
+			ctor: '_Tuple2',
+			_0: 'col-md-6',
+			_1: A2(
+				_elm_lang$html$Html$a,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$href(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							baseUrl.path,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'/node/',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_p4,
+									A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query))))),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h4,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('card-title'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(_p3.name),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				})
+		} : {
+			ctor: '_Tuple2',
+			_0: 'col-md-4',
+			_1: A2(
+				_elm_lang$html$Html$h4,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('card-title'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(_p3.name),
+					_1: {ctor: '[]'}
+				})
+		};
+		var mainClass = _p2._0;
+		var titleElement = _p2._1;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('col-md-6'),
+				_0: _elm_lang$html$Html_Attributes$class(mainClass),
 				_1: {ctor: '[]'}
 			},
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$a,
+					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$class('thumbnail search-results'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$href(
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									baseUrl.path,
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										'/node/',
-										A2(
-											_elm_lang$core$Basics_ops['++'],
-											_p1._0,
-											A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query))))),
-							_1: {ctor: '[]'}
-						}
+						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
@@ -13313,7 +13354,7 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 											_1: {ctor: '[]'}
 										});
 								},
-								_p2.imageUrl)),
+								_p3.imageUrl)),
 						_1: {
 							ctor: '::',
 							_0: A2(
@@ -13325,192 +13366,43 @@ var _gizra$municipality$Event_View$viewEventAsBlock = F3(
 								},
 								{
 									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$h4,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('card-title'),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(_p2.name),
-											_1: {ctor: '[]'}
-										}),
+									_0: titleElement,
 									_1: {
 										ctor: '::',
 										_0: A2(
-											_elm_lang$html$Html$div,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$span,
-													{ctor: '[]'},
-													{
-														ctor: '::',
-														_0: A2(
-															_elm_lang$html$Html$i,
-															{
-																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$class('fa fa-calendar'),
-																_1: {ctor: '[]'}
-															},
-															{ctor: '[]'}),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html$text(
-																A2(
-																	_gizra$municipality$Translate$translate,
-																	language,
-																	A2(_gizra$municipality$Translate$DayAndDate, _p2.date, _p2.endDate))),
-															_1: {ctor: '[]'}
-														}
-													}),
-												_1: {
-													ctor: '::',
-													_0: A2(
-														_gizra$municipality$Utils_Html$showIf,
-														_p2.recurringWeekly,
-														A2(
+											_gizra$municipality$Utils_Html$showIf,
+											!showAsBlock,
+											_gizra$municipality$Utils_Html$showMaybe(
+												A2(
+													_elm_lang$core$Maybe$map,
+													function (description) {
+														return A2(
 															_elm_lang$html$Html$div,
 															{
 																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$class('recurring-weekly'),
-																_1: {ctor: '[]'}
-															},
-															{
-																ctor: '::',
-																_0: A2(
-																	_elm_lang$html$Html$i,
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$class('fa fa-refresh'),
-																		_1: {ctor: '[]'}
-																	},
-																	{ctor: '[]'}),
+																_0: _elm_lang$html$Html_Attributes$class('description'),
 																_1: {
 																	ctor: '::',
-																	_0: _elm_lang$html$Html$text(
-																		A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EventRecurringWeekly)),
+																	_0: A2(
+																		_elm_lang$html$Html_Attributes$property,
+																		'innerHTML',
+																		_elm_lang$core$Json_Encode$string(description)),
 																	_1: {ctor: '[]'}
 																}
-															})),
-													_1: {ctor: '[]'}
-												}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {ctor: '[]'}
-			});
-	});
-var _gizra$municipality$Event_View$viewEvent = F3(
-	function (baseUrl, language, _p3) {
-		var _p4 = _p3;
-		var _p5 = _p4._1;
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('card'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _gizra$municipality$Utils_Html$showMaybe(
-					A2(
-						_elm_lang$core$Maybe$map,
-						function (imageUrl) {
-							return A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('image'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$img,
-										{
+															},
+															{ctor: '[]'});
+													},
+													_p3.description))),
+										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$src(imageUrl),
-											_1: {ctor: '[]'}
-										},
-										{ctor: '[]'}),
-									_1: {ctor: '[]'}
-								});
-						},
-						_p5.imageUrl)),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('content'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('header'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(_p5.name),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: _gizra$municipality$Utils_Html$showMaybe(
-									A2(
-										_elm_lang$core$Maybe$map,
-										function (description) {
-											return A2(
-												_elm_lang$html$Html$div,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('description'),
-													_1: {
-														ctor: '::',
-														_0: A2(
-															_elm_lang$html$Html_Attributes$property,
-															'innerHTML',
-															_elm_lang$core$Json_Encode$string(description)),
-														_1: {ctor: '[]'}
-													}
-												},
-												{ctor: '[]'});
-										},
-										_p5.description)),
-								_1: {
-									ctor: '::',
-									_0: _gizra$municipality$Utils_Html$sectionDivider,
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$div,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('ui row'),
-												_1: {ctor: '[]'}
-											},
-											{
+											_0: A2(_gizra$municipality$Utils_Html$showIf, !showAsBlock, _gizra$municipality$Utils_Html$sectionDivider),
+											_1: {
 												ctor: '::',
 												_0: A2(
 													_elm_lang$html$Html$div,
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('ui four wide column event-date'),
+														_0: _elm_lang$html$Html_Attributes$class('event-date'),
 														_1: {ctor: '[]'}
 													},
 													{
@@ -13524,7 +13416,7 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 																	_elm_lang$html$Html$i,
 																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$class('calendar icon'),
+																		_0: _elm_lang$html$Html_Attributes$class('fa fa-calendar'),
 																		_1: {ctor: '[]'}
 																	},
 																	{ctor: '[]'}),
@@ -13534,7 +13426,7 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 																		A2(
 																			_gizra$municipality$Translate$translate,
 																			language,
-																			A2(_gizra$municipality$Translate$DayAndDate, _p5.date, _p5.endDate))),
+																			A2(_gizra$municipality$Translate$DayAndDate, _p3.date, _p3.endDate))),
 																	_1: {ctor: '[]'}
 																}
 															}),
@@ -13542,9 +13434,9 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 															ctor: '::',
 															_0: A2(
 																_gizra$municipality$Utils_Html$showIf,
-																_p5.recurringWeekly,
+																_p3.recurringWeekly,
 																A2(
-																	_elm_lang$html$Html$span,
+																	_elm_lang$html$Html$div,
 																	{
 																		ctor: '::',
 																		_0: _elm_lang$html$Html_Attributes$class('recurring-weekly'),
@@ -13556,7 +13448,7 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 																			_elm_lang$html$Html$i,
 																			{
 																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$class('refresh icon'),
+																				_0: _elm_lang$html$Html_Attributes$class('fa fa-refresh'),
 																				_1: {ctor: '[]'}
 																			},
 																			{ctor: '[]'}),
@@ -13572,29 +13464,72 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 													}),
 												_1: {
 													ctor: '::',
-													_0: _gizra$municipality$Utils_Html$showMaybe(
-														A2(
-															_elm_lang$core$Maybe$map,
-															function (location) {
-																return A2(
-																	_elm_lang$html$Html$div,
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$class('ui four wide column location-wrapper'),
-																		_1: {ctor: '[]'}
-																	},
-																	{
-																		ctor: '::',
-																		_0: A2(
-																			_elm_lang$html$Html$a,
+													_0: A2(
+														_gizra$municipality$Utils_Html$showIf,
+														!showAsBlock,
+														_gizra$municipality$Utils_Html$showMaybe(
+															A2(
+																_elm_lang$core$Maybe$map,
+																function (location) {
+																	return A2(
+																		_elm_lang$html$Html$div,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('location-wrapper'),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$a,
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$href(location.url),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																						_1: {ctor: '[]'}
+																					}
+																				},
+																				{
+																					ctor: '::',
+																					_0: A2(
+																						_elm_lang$html$Html$i,
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$class('fa fa-map-marker'),
+																							_1: {ctor: '[]'}
+																						},
+																						{ctor: '[]'}),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html$text(
+																							A2(
+																								_gizra$municipality$Translate$translate,
+																								language,
+																								_gizra$municipality$Translate$LocationText(location.title))),
+																						_1: {ctor: '[]'}
+																					}
+																				}),
+																			_1: {ctor: '[]'}
+																		});
+																},
+																_p3.location))),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_gizra$municipality$Utils_Html$showIf,
+															!showAsBlock,
+															_gizra$municipality$Utils_Html$showMaybe(
+																A2(
+																	_elm_lang$core$Maybe$map,
+																	function (ticketPrice) {
+																		return A2(
+																			_elm_lang$html$Html$div,
 																			{
 																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$href(location.url),
-																				_1: {
-																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$target('_blank'),
-																					_1: {ctor: '[]'}
-																				}
+																				_0: _elm_lang$html$Html_Attributes$class('ticket-price'),
+																				_1: {ctor: '[]'}
 																			},
 																			{
 																				ctor: '::',
@@ -13602,7 +13537,7 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 																					_elm_lang$html$Html$i,
 																					{
 																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$class('map icon'),
+																						_0: _elm_lang$html$Html_Attributes$class('fa fa-ils'),
 																						_1: {ctor: '[]'}
 																					},
 																					{ctor: '[]'}),
@@ -13610,128 +13545,94 @@ var _gizra$municipality$Event_View$viewEvent = F3(
 																					ctor: '::',
 																					_0: _elm_lang$html$Html$text(
 																						A2(
-																							_gizra$municipality$Translate$translate,
-																							language,
-																							_gizra$municipality$Translate$LocationText(location.title))),
+																							_elm_lang$core$Basics_ops['++'],
+																							A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$PriceText),
+																							A2(_elm_lang$core$Basics_ops['++'], ': ', ticketPrice))),
 																					_1: {ctor: '[]'}
 																				}
-																			}),
-																		_1: {ctor: '[]'}
-																	});
-															},
-															_p5.location)),
-													_1: {
-														ctor: '::',
-														_0: _gizra$municipality$Utils_Html$showMaybe(
-															A2(
-																_elm_lang$core$Maybe$map,
-																function (ticketPrice) {
-																	return A2(
+																			});
+																	},
+																	_p3.ticketPrice))),
+														_1: {
+															ctor: '::',
+															_0: A2(_gizra$municipality$Utils_Html$showIf, !showAsBlock, _gizra$municipality$Utils_Html$sectionDivider),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_gizra$municipality$Utils_Html$showIf,
+																	!showAsBlock,
+																	A2(
 																		_elm_lang$html$Html$div,
 																		{
 																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$class('ui four wide column ticket-price'),
+																			_0: _elm_lang$html$Html_Attributes$class('center'),
 																			_1: {ctor: '[]'}
 																		},
 																		{
 																			ctor: '::',
 																			_0: A2(
-																				_elm_lang$html$Html$i,
+																				_elm_lang$html$Html$a,
 																				{
 																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$class('shekel icon'),
-																					_1: {ctor: '[]'}
-																				},
-																				{ctor: '[]'}),
-																			_1: {
-																				ctor: '::',
-																				_0: _elm_lang$html$Html$text(
-																					A2(
-																						_elm_lang$core$Basics_ops['++'],
-																						A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$PriceText),
-																						A2(_elm_lang$core$Basics_ops['++'], ': ', ticketPrice))),
-																				_1: {ctor: '[]'}
-																			}
-																		});
-																},
-																_p5.ticketPrice)),
-														_1: {
-															ctor: '::',
-															_0: _gizra$municipality$Utils_Html$sectionDivider,
-															_1: {
-																ctor: '::',
-																_0: A2(
-																	_elm_lang$html$Html$div,
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$class('ui four wide column center aligned'),
-																		_1: {ctor: '[]'}
-																	},
-																	{
-																		ctor: '::',
-																		_0: A2(
-																			_elm_lang$html$Html$a,
-																			{
-																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$class('ui button primary basic middle aligned'),
-																				_1: {
-																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																					_0: _elm_lang$html$Html_Attributes$class('btn btn-primary middle'),
 																					_1: {
 																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$href(
-																							A2(
-																								_elm_lang$core$Basics_ops['++'],
-																								baseUrl.path,
+																						_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																						_1: {
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$href(
 																								A2(
 																									_elm_lang$core$Basics_ops['++'],
-																									'/node/',
+																									baseUrl.path,
 																									A2(
 																										_elm_lang$core$Basics_ops['++'],
-																										_p4._0,
-																										A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query))))),
+																										'/node/',
+																										A2(
+																											_elm_lang$core$Basics_ops['++'],
+																											_p4,
+																											A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query))))),
+																							_1: {ctor: '[]'}
+																						}
+																					}
+																				},
+																				{
+																					ctor: '::',
+																					_0: A2(
+																						_elm_lang$html$Html$i,
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$class('fa fa-plus'),
+																							_1: {ctor: '[]'}
+																						},
+																						{ctor: '[]'}),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html$text(
+																							A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$MoreDetailsText)),
 																						_1: {ctor: '[]'}
 																					}
-																				}
-																			},
-																			{
-																				ctor: '::',
-																				_0: A2(
-																					_elm_lang$html$Html$i,
-																					{
-																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$class('add icon'),
-																						_1: {ctor: '[]'}
-																					},
-																					{ctor: '[]'}),
-																				_1: {
-																					ctor: '::',
-																					_0: _elm_lang$html$Html$text(
-																						A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$MoreDetailsText)),
-																					_1: {ctor: '[]'}
-																				}
-																			}),
-																		_1: {ctor: '[]'}
-																	}),
+																				}),
+																			_1: {ctor: '[]'}
+																		})),
 																_1: {ctor: '[]'}
 															}
 														}
 													}
 												}
-											}),
-										_1: {ctor: '[]'}
+											}
+										}
 									}
-								}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
 			});
 	});
 var _gizra$municipality$Event_View$viewEvents = F4(
-	function (baseUrl, language, showAsBlock, _p6) {
-		var _p7 = _p6;
-		var filteredEvents = A2(_gizra$municipality$Event_Utils$filterEvents, _p7.events, _p7.filterString);
+	function (baseUrl, language, showAsBlock, _p5) {
+		var _p6 = _p5;
+		var filteredEvents = A2(_gizra$municipality$Event_Utils$filterEvents, _p6.events, _p6.filterString);
 		return _Gizra$elm_dictlist$DictList$isEmpty(filteredEvents) ? A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
@@ -13752,12 +13653,9 @@ var _gizra$municipality$Event_View$viewEvents = F4(
 					_Gizra$elm_dictlist$DictList$map,
 					F2(
 						function (eventId, event) {
-							return showAsBlock ? A3(
-								_gizra$municipality$Event_View$viewEventAsBlock,
-								baseUrl,
-								language,
-								{ctor: '_Tuple2', _0: eventId, _1: event}) : A3(
+							return A4(
 								_gizra$municipality$Event_View$viewEvent,
+								showAsBlock,
 								baseUrl,
 								language,
 								{ctor: '_Tuple2', _0: eventId, _1: event});
