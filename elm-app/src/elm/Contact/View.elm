@@ -252,7 +252,10 @@ viewContactAsBlock baseUrl language ( contactId, contact ) =
             []
             [ strong
                 [ class "name" ]
-                [ text contact.name ]
+                [ a
+                    [ href (baseUrl.path ++ "/node/" ++ contactId ++ "?" ++ baseUrl.query) ]
+                    [ text contact.name ]
+                ]
             ]
         , p []
             [ div

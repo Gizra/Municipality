@@ -3,14 +3,14 @@ module Event.View exposing (..)
 import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
 import DictList
-import Event.Model exposing (Event, EventId, Model, Msg(..))
+import Event.Model exposing (DictListEvent, Event, EventId, Model, Msg(..))
 import Event.Utils exposing (filterEvents)
 import Html exposing (..)
-import Html.Attributes exposing (class, href, id, placeholder, property, src, target, type_, value)
-import Html.Events exposing (onInput)
+import Html.Attributes exposing (alt, class, classList, href, id, placeholder, property, src, style, target, type_, value)
+import Html.Events exposing (onClick, onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
 
 
 view : BaseUrl -> Language -> Bool -> Model -> Html Msg
@@ -19,10 +19,7 @@ view baseUrl language showAsBlock model =
         [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
         , div [] [ viewEvents baseUrl language showAsBlock model ]
-        , showIf showAsBlock <|
-            a
-                [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/events?" ++ baseUrl.query) ]
-                [ text <| translate language ShowAll ]
+        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/events?" ++ baseUrl.query) ] [ text <| translate language ShowAll ]
         ]
 
 
@@ -65,68 +62,66 @@ viewEvents baseUrl language showAsBlock { events, filterString } =
         if DictList.isEmpty filteredEvents then
             div [] [ text <| translate language EventsNotFound ]
         else
-            let
-                viewFunction =
-                    if showAsBlock then
-                        viewEventAsBlock
-                    else
-                        viewEvent
-            in
-                div [ class "row" ]
-                    (filteredEvents
-                        |> DictList.map
-                            (\eventId event ->
-                                viewFunction baseUrl language ( eventId, event )
-                            )
-                        |> DictList.values
-                    )
+            div [ class "row" ]
+                (filteredEvents
+                    |> DictList.map
+                        (\eventId event ->
+                            if showAsBlock then
+                                viewEventAsBlock baseUrl language ( eventId, event )
+                            else
+                                viewEvent baseUrl language ( eventId, event )
+                        )
+                    |> DictList.values
+                )
 
 
 {-| View a single event.
 -}
 viewEvent : BaseUrl -> Language -> ( EventId, Event ) -> Html msg
 viewEvent baseUrl language ( eventId, event ) =
-    div [ class "col-md-4" ]
-        [ div [ class "thumbnail search-results" ]
-            [ showMaybe <|
+    div
+        [ class "card" ]
+        [ showMaybe <|
+            Maybe.map
+                (\imageUrl ->
+                    div [ class "image" ]
+                        [ img [ src imageUrl ]
+                            []
+                        ]
+                )
+                event.imageUrl
+        , div
+            [ class "content" ]
+            [ div
+                [ class "header" ]
+                [ text event.name ]
+            , showMaybe <|
                 Maybe.map
-                    (\imageUrl ->
-                        div [ class "card-img-top center" ]
-                            [ img [ class "img-responsive", src imageUrl ]
-                                []
+                    (\description ->
+                        div
+                            [ class "description"
+                            , property "innerHTML" <| string description
                             ]
+                            []
                     )
-                    event.imageUrl
+                    event.description
+            , sectionDivider
             , div
-                [ class "caption" ]
-                [ h4
-                    [ class "card-title" ]
-                    [ text event.name ]
-                , showMaybe <|
-                    Maybe.map
-                        (\description ->
-                            div
-                                [ class "description"
-                                , property "innerHTML" <| string description
-                                ]
-                                []
-                        )
-                        event.description
-                , sectionDivider
-                , div
-                    []
+                [ class "ui row" ]
+                [ div
+                    [ class "ui four wide column event-date" ]
                     [ span
                         []
                         [ i
-                            [ class "fa fa-calendar" ]
+                            [ class "calendar icon" ]
                             []
                         , text <| translate language (DayAndDate event.date event.endDate)
                         ]
                     , showIf event.recurringWeekly <|
-                        div
+                        span
                             [ class "recurring-weekly" ]
                             [ i
-                                [ class "fa fa-refresh" ]
+                                [ class "refresh icon" ]
                                 []
                             , text <| translate language EventRecurringWeekly
                             ]
@@ -135,11 +130,11 @@ viewEvent baseUrl language ( eventId, event ) =
                     Maybe.map
                         (\location ->
                             div
-                                [ class "location-wrapper" ]
+                                [ class "ui four wide column location-wrapper" ]
                                 [ a
                                     [ href location.url, target "_blank" ]
                                     [ i
-                                        [ class "fa fa-map-marker" ]
+                                        [ class "map icon" ]
                                         []
                                     , text <| translate language (LocationText location.title)
                                     ]
@@ -150,9 +145,9 @@ viewEvent baseUrl language ( eventId, event ) =
                     Maybe.map
                         (\ticketPrice ->
                             div
-                                [ class "ticket-price" ]
+                                [ class "ui four wide column ticket-price" ]
                                 [ i
-                                    [ class "fa fa-ils" ]
+                                    [ class "shekel icon" ]
                                     []
                                 , text <| translate language PriceText ++ ": " ++ ticketPrice
                                 ]
@@ -160,14 +155,11 @@ viewEvent baseUrl language ( eventId, event ) =
                         event.ticketPrice
                 , sectionDivider
                 , div
-                    [ class "center" ]
+                    [ class "ui four wide column center aligned" ]
                     [ a
-                        [ class "btn btn-primary middle"
-                        , target "_blank"
-                        , href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query)
-                        ]
+                        [ class "ui button primary basic middle aligned", target "_blank", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
                         [ i
-                            [ class "fa fa-plus" ]
+                            [ class "add icon" ]
                             []
                         , text <| translate language MoreDetailsText
                         ]
@@ -183,9 +175,7 @@ viewEventAsBlock : BaseUrl -> Language -> ( EventId, Event ) -> Html msg
 viewEventAsBlock baseUrl language ( eventId, event ) =
     div [ class "col-md-6" ]
         [ a
-            [ class "thumbnail search-results"
-            , href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query)
-            ]
+            [ class "thumbnail search-results", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
             [ showMaybe <|
                 Maybe.map
                     (\imageUrl ->

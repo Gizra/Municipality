@@ -79,13 +79,13 @@ describe('Municipality topics', () => {
   it('should show all the relevant contacts for this topic', () => {
     browser.waitForVisible('h2=People who can help you');
 
-    const firstContactTitle = browser.getText('div.featured-box ul.list-primary > li:nth-child(1) p strong.name');
+    const firstContactTitle = browser.getText('div.featured-box ul.list-primary > li:nth-child(1) p strong.name a');
     assert.equal('ויקטור סבן', firstContactTitle);
 
-    const secondContactTitle = browser.getText('div.featured-box ul.list-primary > li:nth-child(2) p strong.name');
+    const secondContactTitle = browser.getText('div.featured-box ul.list-primary > li:nth-child(2) p strong.name a');
     assert.equal('סמאהר סועאד', secondContactTitle);
 
-    const thirdContactTitle = browser.getText('div.featured-box ul.list-primary > li:nth-child(3) p strong.name');
+    const thirdContactTitle = browser.getText('div.featured-box ul.list-primary > li:nth-child(3) p strong.name a');
     assert.equal('איאד סולימאן', thirdContactTitle);
   });
 
