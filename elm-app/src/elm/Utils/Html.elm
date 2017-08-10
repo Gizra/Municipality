@@ -1,6 +1,7 @@
 module Utils.Html
     exposing
         ( colorToString
+        , createRowsGrid
         , divider
         , emptyNode
         , sectionDivider
@@ -16,6 +17,7 @@ import Html exposing (Html, div, h5, text)
 import Html.Attributes exposing (class)
 import String exposing (toLower)
 import Translate exposing (TranslationId(..), translate)
+import List exposing (..)
 
 
 {-| Produces an empty text node in the DOM.
@@ -23,6 +25,47 @@ import Translate exposing (TranslationId(..), translate)
 emptyNode : Html msg
 emptyNode =
     text ""
+
+
+{-| Splits a list into sub lists containing a given number of children.
+-}
+split : Int -> List a -> List (List a)
+split numberOfChildren list =
+    case take numberOfChildren list of
+        [] ->
+            []
+
+        listHead ->
+            listHead :: split numberOfChildren (drop numberOfChildren list)
+
+
+{-| Render the column with a given class.
+-}
+renderColumn : String -> Html msg -> Html msg
+renderColumn columnClass column =
+    div [ class columnClass ] [ column ]
+
+
+{-| Render the row with a list of columns.
+-}
+renderRow : String -> List (Html msg) -> Html msg
+renderRow columnClass row =
+    div [ class "row" ] (List.map (renderColumn columnClass) <| row)
+
+
+{-| Add rows to a given number of columns. Gives the ability to wrap a list og
+Html msg with columns and rows:
+
+    createRowsGrid 2 "col-md-6" List (div [] [], div [] [])
+
+-}
+createRowsGrid : Int -> String -> List (Html msg) -> Html msg
+createRowsGrid columnsInRow columnClass colHtmlMsgList =
+    let
+        listOfRows =
+            split columnsInRow colHtmlMsgList
+    in
+        div [] (map (renderRow columnClass) <| listOfRows)
 
 
 {-| Conditionally show Html. A bit cleaner than using if expressions in middle
