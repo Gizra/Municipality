@@ -25,7 +25,7 @@
                   </div>
                 <?php else: ?>
                   <h1 id="site-name"<?php if ($disable_site_name) { print ' class="hidden"'; } ?>>
-                    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><h1 class="text-primary"><?php print $site_name; ?></h1></a>
+                    <a href="<?php print $front_page; ?>" title="<?php print t('Homepage'); ?>" rel="home"><h1 class="text-primary"><?php print $site_name; ?></h1></a>
                   </h1>
                 <?php endif; ?>
               <?php endif; ?>
