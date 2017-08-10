@@ -24,6 +24,7 @@ decodeContact : Decoder Contact
 decodeContact =
     decode Contact
         |> required "name" string
+        |> optional "department" (nullable string) Nothing
         |> optional "job_title" (nullable string) Nothing
         |> optional "image_url" (nullable string) Nothing
         |> optional "topics" (nullable decodeTopic) Nothing
@@ -32,6 +33,7 @@ decodeContact =
         |> optional "email" (nullable string) Nothing
         |> optional "address" (nullable string) Nothing
         |> optional "reception_hours" (nullable decodeReceptionTimes) Nothing
+        |> required "edit" bool
 
 
 decodeTopic : Decoder (List Topic)
@@ -61,28 +63,28 @@ decodeColor =
             (\color ->
                 case color of
                     "danger" ->
-                        succeed Red
+                        succeed Danger
 
                     "warning" ->
-                        succeed Orange
+                        succeed Warning
 
                     "quaternary" ->
-                        succeed Olive
+                        succeed Quaternary
 
                     "success" ->
-                        succeed Green
+                        succeed Success
 
                     "tertiary" ->
-                        succeed Teal
+                        succeed Tertiary
 
                     "primary" ->
-                        succeed Blue
+                        succeed Primary
 
                     "secondary" ->
-                        succeed Pink
+                        succeed Secondary
 
                     "info" ->
-                        succeed Turquoise
+                        succeed Info
 
                     _ ->
                         fail <| "Could not recognise color: " ++ color

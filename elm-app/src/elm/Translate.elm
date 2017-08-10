@@ -14,17 +14,20 @@ type alias TranslationSet =
 
 
 type TranslationId
-    = ContactsNotFound
+    = ContactHeaderText
+    | ContactsNotFound
     | DayTranslation Day
     | DayAndDate Date (Maybe Date)
+    | EditText
     | EventRecurringWeekly
     | EventsNotFound
     | FilterContactsPlaceholder
     | FilterEventsPlaceholder
+    | LocationText String
     | MatchingResults
     | MoreDetailsText
     | PriceText
-    | LocationText String
+    | ReceptionText
     | ShowAll
 
 
@@ -33,6 +36,12 @@ translate lang trans =
     let
         translationSet =
             case trans of
+                ContactHeaderText ->
+                    { arabic = "اتصالات وموظفي الشبكة"
+                    , english = "Contacts and network employees"
+                    , hebrew = "אנשי קשר ועובדי רשת"
+                    }
+
                 ContactsNotFound ->
                     { arabic = "لم يتم العثور على جهات اتصال"
                     , english = "No contacts found"
@@ -116,6 +125,12 @@ translate lang trans =
                         , hebrew = allDatesFormated ++ ", " ++ dayTranslated
                         }
 
+                EditText ->
+                    { arabic = "تحرير"
+                    , english = "Edit"
+                    , hebrew = "עריכה"
+                    }
+
                 EventRecurringWeekly ->
                     { arabic = "حدث اسبوعي"
                     , english = "Weekly event"
@@ -140,6 +155,12 @@ translate lang trans =
                     , hebrew = "חפשו אירועים לטעמכם"
                     }
 
+                LocationText locationTitle ->
+                    { arabic = "أين: " ++ locationTitle
+                    , english = "Where: " ++ locationTitle
+                    , hebrew = "איפה: " ++ locationTitle
+                    }
+
                 MatchingResults ->
                     { arabic = "نتائج البحث"
                     , english = "Matching Results"
@@ -158,10 +179,10 @@ translate lang trans =
                     , hebrew = "מחיר"
                     }
 
-                LocationText locationTitle ->
-                    { arabic = "أين: " ++ locationTitle
-                    , english = "Where: " ++ locationTitle
-                    , hebrew = "איפה: " ++ locationTitle
+                ReceptionText ->
+                    { arabic = "استقبال: "
+                    , english = "Reception: "
+                    , hebrew = "קבלת קהל: "
                     }
 
                 ShowAll ->
