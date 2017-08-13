@@ -12379,9 +12379,13 @@ var _gizra$municipality$Utils_Html$split = F2(
 			};
 		}
 	});
-var _gizra$municipality$Utils_Html$renderBootstrapGrid = F3(
-	function (columnsInRow, columnClass, colHtmlMsgList) {
-		var listOfRows = A2(_gizra$municipality$Utils_Html$split, columnsInRow, colHtmlMsgList);
+var _gizra$municipality$Utils_Html$renderBootstrapGrid = F2(
+	function (columnsInOneRow, colHtmlMsgList) {
+		var columnClass = A2(
+			_elm_lang$core$Basics_ops['++'],
+			'col-md-',
+			_elm_lang$core$Basics$toString((12 / columnsInOneRow) | 0));
+		var listOfRows = A2(_gizra$municipality$Utils_Html$split, columnsInOneRow, colHtmlMsgList);
 		return A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
@@ -13909,13 +13913,10 @@ var _gizra$municipality$Event_View$viewEvents = F4(
 					_1: {ctor: '[]'}
 				});
 		} else {
-			var _p7 = showAsBlock ? {ctor: '_Tuple2', _0: 2, _1: 'col-md-6'} : {ctor: '_Tuple2', _0: 3, _1: 'col-md-4'};
-			var itemsInOneRow = _p7._0;
-			var columnClass = _p7._1;
-			return A3(
+			var itemsInOneRow = showAsBlock ? 2 : 3;
+			return A2(
 				_gizra$municipality$Utils_Html$renderBootstrapGrid,
 				itemsInOneRow,
-				columnClass,
 				_Gizra$elm_dictlist$DictList$values(
 					A2(
 						_Gizra$elm_dictlist$DictList$map,

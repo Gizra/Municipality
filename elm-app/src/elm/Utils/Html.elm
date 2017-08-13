@@ -53,17 +53,20 @@ renderRow columnClass row =
     div [ class "row" ] (List.map (renderColumn columnClass) <| row)
 
 
-{-| Renders rows to a given number of columns. Gives the ability to wrap a list og
-Html msg with columns and rows:
+{-| Renders rows to a given number of columns. Gives the ability to wrap a list
+of Html msg with columns and rows:
 
-    renderBootstrapGrid 2 "col-md-6" List (div [] [], div [] [])
+    renderBootstrapGrid 2 List (div [] [], div [] [])
 
 -}
-renderBootstrapGrid : Int -> String -> List (Html msg) -> Html msg
-renderBootstrapGrid columnsInRow columnClass colHtmlMsgList =
+renderBootstrapGrid : Int -> List (Html msg) -> Html msg
+renderBootstrapGrid columnsInOneRow colHtmlMsgList =
     let
         listOfRows =
-            split columnsInRow colHtmlMsgList
+            split columnsInOneRow colHtmlMsgList
+
+        columnClass =
+            "col-md-" ++ (toString <| 12 // columnsInOneRow)
     in
         div [] (map (renderRow columnClass) <| listOfRows)
 

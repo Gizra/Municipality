@@ -77,19 +77,14 @@ viewEvents baseUrl language showAsBlock { events, filterString } =
             div [] [ text <| translate language EventsNotFound ]
         else
             let
-                ( itemsInOneRow, columnClass ) =
+                itemsInOneRow =
                     if showAsBlock then
-                        ( 2
-                        , "col-md-6"
-                        )
+                        2
                     else
-                        ( 3
-                        , "col-md-4"
-                        )
+                        3
             in
                 renderBootstrapGrid
                     itemsInOneRow
-                    columnClass
                     (filteredEvents
                         |> DictList.map
                             (\eventId event ->
