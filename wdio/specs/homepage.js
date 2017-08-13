@@ -257,8 +257,8 @@ describe('Municipality homepage', () => {
     browser.url('/tuba-zangariyye/?user_type=residents&language=he');
     const eventsButton = $('.pane-elm .btn-show-all');
     eventsButton.click();
-    browser.waitForVisible('div=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
-    browser.waitForVisible('div=הצגת ילדים: שבת בבוקר');
+    browser.waitForVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+    browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
     checkSelectedUserType('residents', 'hebrew');
     checkSelectedLanguage('hebrew');
   });
@@ -267,8 +267,8 @@ describe('Municipality homepage', () => {
     browser.url('/tuba-zangariyye/?user_type=residents&language=ar');
     const eventsButton = $('.pane-elm .btn-show-all');
     eventsButton.click();
-    browser.waitForVisible('div=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
-    browser.waitForVisible('div=مسرحية للأطفال: صباح السبت');
+    browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
+    browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
     checkSelectedUserType('residents', 'arabic');
     checkSelectedLanguage('arabic');
   });
@@ -277,7 +277,7 @@ describe('Municipality homepage', () => {
     browser.url('/tuba-zangariyye/?user_type=businesses&language=he');
     const eventsButton = $('.pane-elm .btn-show-all');
     eventsButton.click();
-    browser.waitForVisible('div=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+    browser.waitForVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
     checkSelectedUserType('businesses', 'hebrew');
     checkSelectedLanguage('hebrew');
   });
@@ -286,7 +286,7 @@ describe('Municipality homepage', () => {
     browser.url('/tuba-zangariyye/node/1?user_type=businesses&language=ar');
     const eventsButton = $('.pane-elm .btn-show-all');
     eventsButton.click();
-    browser.waitForVisible('div=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
+    browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
     checkSelectedUserType('businesses', 'arabic');
     checkSelectedLanguage('arabic');
   });
