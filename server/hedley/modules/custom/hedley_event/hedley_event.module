@@ -8,6 +8,15 @@
 include_once 'hedley_event.features.inc';
 
 /**
+ * Implements hook_ctools_plugin_directory().
+ */
+function hedley_event_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
  * Return events by group.
  *
  * @param object $group
