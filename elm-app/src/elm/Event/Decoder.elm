@@ -36,4 +36,4 @@ decodeEvent =
         |> required "recurring_weekly" bool
         |> optional "ticket_price" (nullable string) Nothing
         |> optional "location" (nullable decodeLocation) Nothing
-        |> required "edit" bool
+        |> required "showEditLink" bool

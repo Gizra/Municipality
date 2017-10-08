@@ -19,7 +19,7 @@ type TranslationId
     | ContactsNotFound
     | DayTranslation Day
     | DayAndDate Date (Maybe Date)
-    | EditText
+    | EditLinkText
     | EventRecurringWeekly
     | EventsNotFound
     | FilterContactsPlaceholder
@@ -132,7 +132,7 @@ translate lang trans =
                         , hebrew = allDatesFormated ++ ", " ++ dayTranslated
                         }
 
-                EditText ->
+                EditLinkText ->
                     { arabic = "تحرير"
                     , english = "Edit"
                     , hebrew = "עריכה"

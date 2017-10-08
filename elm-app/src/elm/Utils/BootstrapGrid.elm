@@ -10,12 +10,10 @@ import Html.Attributes exposing (class)
 
 split : Int -> List a -> List (List a)
 split numberOfChildren list =
-    case take numberOfChildren list of
-        [] ->
-            []
-
-        listHead ->
-            listHead :: split numberOfChildren (drop numberOfChildren list)
+    if List.isEmpty list then
+        []
+    else
+        take numberOfChildren list :: split numberOfChildren (drop numberOfChildren list)
 
 
 {-| Render the column with a given class.

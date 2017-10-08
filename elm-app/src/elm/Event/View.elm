@@ -89,7 +89,7 @@ viewEvents baseUrl language showAsBlock { events, filterString } =
                     (filteredEvents
                         |> DictList.map
                             (\eventId event ->
-                                viewEvent showAsBlock baseUrl language ( eventId, event )
+                                viewEvent baseUrl language ( eventId, event ) showAsBlock
                             )
                         |> DictList.values
                     )
@@ -97,8 +97,8 @@ viewEvents baseUrl language showAsBlock { events, filterString } =
 
 {-| View a single event.
 -}
-viewEvent : Bool -> BaseUrl -> Language -> ( EventId, Event ) -> Html msg
-viewEvent showAsBlock baseUrl language ( eventId, event ) =
+viewEvent : BaseUrl -> Language -> ( EventId, Event ) -> Bool -> Html msg
+viewEvent baseUrl language ( eventId, event ) showAsBlock =
     let
         ( titleElement, editEvent ) =
             if showAsBlock then
@@ -115,12 +115,12 @@ viewEvent showAsBlock baseUrl language ( eventId, event ) =
                     [ class "card-title" ]
                     [ text event.name ]
                 , Just <|
-                    showIf event.edit <|
+                    showIf event.showEditLink <|
                         a
                             [ class "btn btn-xs btn-primary pull-right btn-edit"
                             , href (baseUrl.path ++ "/node/" ++ eventId ++ "/edit" ++ "?" ++ baseUrl.query)
                             ]
-                            [ text <| translate language EditText ]
+                            [ text <| translate language EditLinkText ]
                 )
     in
         div [ class "thumbnail search-results" ]

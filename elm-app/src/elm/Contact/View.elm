@@ -114,7 +114,7 @@ viewContact baseUrl language ( contactId, contact ) =
                     [ class "btn btn-xs btn-primary pull-right btn-edit"
                     , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
                     ]
-                    [ text <| translate language EditText ]
+                    [ text <| translate language EditLinkText ]
             , showMaybe <|
                 Maybe.map
                     (\imageUrl ->

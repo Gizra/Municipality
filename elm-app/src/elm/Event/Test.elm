@@ -44,20 +44,20 @@ filterEventsTest =
 
 viewEventTest : Test
 viewEventTest =
-    describe "view single event"
+    describe "view single event card"
         [ test "Event without Image" <|
             \() ->
-                viewEvent False baseUrl English event1
+                viewEvent baseUrl English event1 False
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "image" ]
         , test "Event without Description" <|
             \() ->
-                viewEvent False baseUrl English event1
+                viewEvent baseUrl English event1 False
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "description" ]
         , test "Event without endDate" <|
             \() ->
-                viewEvent False baseUrl English event1
+                viewEvent baseUrl English event1 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "event-date" ]
                     |> Query.children [ tag "span" ]
@@ -65,7 +65,7 @@ viewEventTest =
                     |> Query.has [ text "Thu, 01/01/1970" ]
         , test "Event with the same Date and different Time" <|
             \() ->
-                viewEvent False baseUrl English event2
+                viewEvent baseUrl English event2 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "event-date" ]
                     |> Query.children [ tag "span" ]
@@ -76,7 +76,7 @@ viewEventTest =
                         ]
         , test "Event with the different Date and different Time" <|
             \() ->
-                viewEvent False baseUrl English event3
+                viewEvent baseUrl English event3 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "event-date" ]
                     |> Query.children [ tag "span" ]
@@ -87,47 +87,52 @@ viewEventTest =
                         ]
         , test "Event without Weekly Recurring" <|
             \() ->
-                viewEvent False baseUrl English event2
+                viewEvent baseUrl English event2 False
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "recurring-weekly" ]
+        , test "Event without Edit link" <|
+            \() ->
+                viewEvent baseUrl English event2 False
+                    |> Query.fromHtml
+                    |> Query.hasNot [ Selector.class "btn-edit" ]
         , test "Event without Price" <|
             \() ->
-                viewEvent False baseUrl English event1
+                viewEvent baseUrl English event1 False
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "ticket-price" ]
         , test "Event without Location" <|
             \() ->
-                viewEvent False baseUrl English event1
+                viewEvent baseUrl English event1 False
                     |> Query.fromHtml
                     |> Query.hasNot [ Selector.class "location-wrapper" ]
         , test "Event with Image" <|
             \() ->
-                viewEvent False baseUrl English event2
+                viewEvent baseUrl English event2 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "card-img-top" ]
                     |> Query.children [ tag "img" ]
                     |> Query.each (Query.has [ attribute "src" "https://placeholdit.imgix.net/~text?w=350&h=150" ])
         , test "Event with Description" <|
             \() ->
-                viewEvent False baseUrl English event2
+                viewEvent baseUrl English event2 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "description" ]
                     |> Query.has [ attribute "innerHTML" "Afternoon event description" ]
         , test "Event with Weekly Recurring" <|
             \() ->
-                viewEvent False baseUrl English event3
+                viewEvent baseUrl English event3 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "recurring-weekly" ]
                     |> Query.has [ text "Weekly event" ]
         , test "Event with Price" <|
             \() ->
-                viewEvent False baseUrl English event3
+                viewEvent baseUrl English event3 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "ticket-price" ]
                     |> Query.has [ text "Price: 180" ]
         , test "Event with Location" <|
             \() ->
-                viewEvent False baseUrl English event3
+                viewEvent baseUrl English event3 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "location-wrapper" ]
                     |> Query.findAll [ tag "a" ]
@@ -137,6 +142,12 @@ viewEventTest =
                         , attribute "target" "_blank"
                         , text "Where: Test location 2"
                         ]
+        , test "Event with Edit link" <|
+            \() ->
+                viewEvent baseUrl English event3 False
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "btn-edit" ]
+                    |> Query.has [ text "Edit" ]
         ]
 
 
@@ -170,7 +181,7 @@ event1 =
       , recurringWeekly = False
       , ticketPrice = Nothing
       , location = Nothing
-      , edit = False
+      , showEditLink = False
       }
     )
 
@@ -190,7 +201,7 @@ event2 =
                 { title = "Test location"
                 , url = "http://maps.google.com/test"
                 }
-      , edit = False
+      , showEditLink = False
       }
     )
 
@@ -210,7 +221,7 @@ event3 =
                 { title = "Test location 2"
                 , url = "http://maps.google.com/test2"
                 }
-      , edit = True
+      , showEditLink = True
       }
     )
 

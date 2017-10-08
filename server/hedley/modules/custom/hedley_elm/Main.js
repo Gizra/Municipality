@@ -11414,7 +11414,7 @@ var _gizra$municipality$Event_Model$Location = F2(
 	});
 var _gizra$municipality$Event_Model$Event = F9(
 	function (a, b, c, d, e, f, g, h, i) {
-		return {name: a, imageUrl: b, description: c, date: d, endDate: e, recurringWeekly: f, ticketPrice: g, location: h, edit: i};
+		return {name: a, imageUrl: b, description: c, date: d, endDate: e, recurringWeekly: f, ticketPrice: g, location: h, showEditLink: i};
 	});
 var _gizra$municipality$Event_Model$SetFilter = function (a) {
 	return {ctor: 'SetFilter', _0: a};
@@ -11685,7 +11685,7 @@ var _gizra$municipality$Event_Decoder$decodeLocation = A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_gizra$municipality$Event_Model$Location)));
 var _gizra$municipality$Event_Decoder$decodeEvent = A3(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'edit',
+	'showEditLink',
 	_elm_lang$core$Json_Decode$bool,
 	A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
@@ -12154,7 +12154,7 @@ var _gizra$municipality$Translate$FilterEventsPlaceholder = {ctor: 'FilterEvents
 var _gizra$municipality$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
 var _gizra$municipality$Translate$EventsNotFound = {ctor: 'EventsNotFound'};
 var _gizra$municipality$Translate$EventRecurringWeekly = {ctor: 'EventRecurringWeekly'};
-var _gizra$municipality$Translate$EditText = {ctor: 'EditText'};
+var _gizra$municipality$Translate$EditLinkText = {ctor: 'EditLinkText'};
 var _gizra$municipality$Translate$DayAndDate = F2(
 	function (a, b) {
 		return {ctor: 'DayAndDate', _0: a, _1: b};
@@ -12239,7 +12239,7 @@ var _gizra$municipality$Translate$translate = F2(
 							allDatesFormated,
 							A2(_elm_lang$core$Basics_ops['++'], ', ', dayTranslated))
 					};
-				case 'EditText':
+				case 'EditLinkText':
 					return {arabic: 'تحرير', english: 'Edit', hebrew: 'עריכה'};
 				case 'EventRecurringWeekly':
 					return {arabic: 'حدث اسبوعي', english: 'Weekly event', hebrew: 'אירוע שבועי'};
@@ -12760,7 +12760,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html$text(
-										A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EditText)),
+										A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EditLinkText)),
 									_1: {ctor: '[]'}
 								})),
 						_1: {
@@ -13492,19 +13492,14 @@ var _gizra$municipality$Utils_BootstrapGrid$renderRow = F2(
 	});
 var _gizra$municipality$Utils_BootstrapGrid$split = F2(
 	function (numberOfChildren, list) {
-		var _p0 = A2(_elm_lang$core$List$take, numberOfChildren, list);
-		if (_p0.ctor === '[]') {
-			return {ctor: '[]'};
-		} else {
-			return {
-				ctor: '::',
-				_0: _p0,
-				_1: A2(
-					_gizra$municipality$Utils_BootstrapGrid$split,
-					numberOfChildren,
-					A2(_elm_lang$core$List$drop, numberOfChildren, list))
-			};
-		}
+		return _elm_lang$core$List$isEmpty(list) ? {ctor: '[]'} : {
+			ctor: '::',
+			_0: A2(_elm_lang$core$List$take, numberOfChildren, list),
+			_1: A2(
+				_gizra$municipality$Utils_BootstrapGrid$split,
+				numberOfChildren,
+				A2(_elm_lang$core$List$drop, numberOfChildren, list))
+		};
 	});
 var _gizra$municipality$Utils_BootstrapGrid$renderBootstrapGrid = F2(
 	function (columnsInOneRow, colHtmlMsgList) {
@@ -13523,7 +13518,7 @@ var _gizra$municipality$Utils_BootstrapGrid$renderBootstrapGrid = F2(
 	});
 
 var _gizra$municipality$Event_View$viewEvent = F4(
-	function (showAsBlock, baseUrl, language, _p0) {
+	function (baseUrl, language, _p0, showAsBlock) {
 		var _p1 = _p0;
 		var _p4 = _p1._0;
 		var _p3 = _p1._1;
@@ -13580,7 +13575,7 @@ var _gizra$municipality$Event_View$viewEvent = F4(
 			_1: _elm_lang$core$Maybe$Just(
 				A2(
 					_gizra$municipality$Utils_Html$showIf,
-					_p3.edit,
+					_p3.showEditLink,
 					A2(
 						_elm_lang$html$Html$a,
 						{
@@ -13608,7 +13603,7 @@ var _gizra$municipality$Event_View$viewEvent = F4(
 						{
 							ctor: '::',
 							_0: _elm_lang$html$Html$text(
-								A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EditText)),
+								A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EditLinkText)),
 							_1: {ctor: '[]'}
 						})))
 		};
@@ -13951,10 +13946,10 @@ var _gizra$municipality$Event_View$viewEvents = F4(
 							function (eventId, event) {
 								return A4(
 									_gizra$municipality$Event_View$viewEvent,
-									showAsBlock,
 									baseUrl,
 									language,
-									{ctor: '_Tuple2', _0: eventId, _1: event});
+									{ctor: '_Tuple2', _0: eventId, _1: event},
+									showAsBlock);
 							}),
 						filteredEvents)));
 		}
