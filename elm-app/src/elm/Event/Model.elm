@@ -45,6 +45,7 @@ type alias Event =
     , recurringWeekly : Bool
     , ticketPrice : Maybe String
     , location : Maybe Location
+    , showEditLink : Bool
     }
 
 

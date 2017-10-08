@@ -16,7 +16,7 @@ view : BaseUrl -> Language -> Bool -> Model -> Html Msg
 view baseUrl language showAsBlock model =
     div
         []
-        [ showIf (not showAsBlock) <| viewContactHeader language
+        [ showIf (not showAsBlock) <| viewContactsHeader language
         , showIf (not showAsBlock) <| viewContactFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
         , viewContacts baseUrl language showAsBlock model
@@ -27,12 +27,12 @@ view baseUrl language showAsBlock model =
         ]
 
 
-viewContactHeader : Language -> Html Msg
-viewContactHeader language =
+viewContactsHeader : Language -> Html Msg
+viewContactsHeader language =
     div [ class "row" ]
         [ div [ class "col-xs-12" ]
             [ h1 [ class "center" ]
-                [ text <| translate language ContactHeaderText ]
+                [ text <| translate language ContactsHeaderText ]
             ]
         ]
 
@@ -114,7 +114,7 @@ viewContact baseUrl language ( contactId, contact ) =
                     [ class "btn btn-xs btn-primary pull-right btn-edit"
                     , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
                     ]
-                    [ text <| translate language EditText ]
+                    [ text <| translate language EditLinkText ]
             , showMaybe <|
                 Maybe.map
                     (\imageUrl ->

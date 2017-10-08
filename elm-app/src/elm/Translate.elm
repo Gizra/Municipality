@@ -14,11 +14,12 @@ type alias TranslationSet =
 
 
 type TranslationId
-    = ContactHeaderText
+    = ContactsHeaderText
+    | EventsHeaderText
     | ContactsNotFound
     | DayTranslation Day
     | DayAndDate Date (Maybe Date)
-    | EditText
+    | EditLinkText
     | EventRecurringWeekly
     | EventsNotFound
     | FilterContactsPlaceholder
@@ -36,10 +37,16 @@ translate lang trans =
     let
         translationSet =
             case trans of
-                ContactHeaderText ->
+                ContactsHeaderText ->
                     { arabic = "اتصالات وموظفي الشبكة"
                     , english = "Contacts and network employees"
                     , hebrew = "אנשי קשר ועובדי רשת"
+                    }
+
+                EventsHeaderText ->
+                    { arabic = "الفعاليات"
+                    , english = "Events"
+                    , hebrew = "אירועים"
                     }
 
                 ContactsNotFound ->
@@ -125,7 +132,7 @@ translate lang trans =
                         , hebrew = allDatesFormated ++ ", " ++ dayTranslated
                         }
 
-                EditText ->
+                EditLinkText ->
                     { arabic = "تحرير"
                     , english = "Edit"
                     , hebrew = "עריכה"

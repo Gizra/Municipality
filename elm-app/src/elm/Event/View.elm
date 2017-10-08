@@ -3,30 +3,45 @@ module Event.View exposing (..)
 import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
 import DictList
-import Event.Model exposing (DictListEvent, Event, EventId, Model, Msg(..))
+import Event.Model exposing (Event, EventId, Model, Msg(..))
 import Event.Utils exposing (filterEvents)
 import Html exposing (..)
-import Html.Attributes exposing (alt, class, classList, href, id, placeholder, property, src, style, target, type_, value)
-import Html.Events exposing (onClick, onInput)
+import Html.Attributes exposing (class, href, id, placeholder, property, src, target, type_, value)
+import Html.Events exposing (onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (divider, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (sectionDivider, showIf, showMaybe)
+import Utils.BootstrapGrid exposing (renderBootstrapGrid)
 
 
 view : BaseUrl -> Language -> Bool -> Model -> Html Msg
 view baseUrl language showAsBlock model =
     div []
-        [ showIf (not showAsBlock) <| viewEventFilter language model.filterString
+        [ showIf (not showAsBlock) <| viewEventsHeader language
+        , showIf (not showAsBlock) <| viewEventFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
-        , div [] [ viewEvents baseUrl language showAsBlock model ]
-        , showIf showAsBlock <| a [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/events?" ++ baseUrl.query) ] [ text <| translate language ShowAll ]
+        , viewEvents baseUrl language showAsBlock model
+        , showIf showAsBlock <|
+            a
+                [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/events?" ++ baseUrl.query) ]
+                [ text <| translate language ShowAll ]
+        ]
+
+
+viewEventsHeader : Language -> Html Msg
+viewEventsHeader language =
+    div [ class "row" ]
+        [ div [ class "col-xs-12" ]
+            [ h1 [ class "center" ]
+                [ text <| translate language EventsHeaderText ]
+            ]
         ]
 
 
 viewEventFilter : Language -> String -> Html Msg
 viewEventFilter language filterString =
     div [ class "row" ]
-        [ div [ class "col-md-4 col-xs-12" ]
+        [ div [ class "col-sm-4 col-sm-push-4 col-sm-pull-4 col-xs-12" ]
             [ div [ class "input-group" ]
                 [ input
                     [ value filterString
@@ -62,121 +77,55 @@ viewEvents baseUrl language showAsBlock { events, filterString } =
         if DictList.isEmpty filteredEvents then
             div [] [ text <| translate language EventsNotFound ]
         else
-            div [ class "row" ]
-                (filteredEvents
-                    |> DictList.map
-                        (\eventId event ->
-                            if showAsBlock then
-                                viewEventAsBlock baseUrl language ( eventId, event )
-                            else
-                                viewEvent baseUrl language ( eventId, event )
-                        )
-                    |> DictList.values
-                )
+            let
+                itemsInOneRow =
+                    if showAsBlock then
+                        2
+                    else
+                        3
+            in
+                renderBootstrapGrid
+                    itemsInOneRow
+                    (filteredEvents
+                        |> DictList.map
+                            (\eventId event ->
+                                viewEvent baseUrl language ( eventId, event ) showAsBlock
+                            )
+                        |> DictList.values
+                    )
 
 
 {-| View a single event.
 -}
-viewEvent : BaseUrl -> Language -> ( EventId, Event ) -> Html msg
-viewEvent baseUrl language ( eventId, event ) =
-    div
-        [ class "card" ]
-        [ showMaybe <|
-            Maybe.map
-                (\imageUrl ->
-                    div [ class "image" ]
-                        [ img [ src imageUrl ]
-                            []
-                        ]
+viewEvent : BaseUrl -> Language -> ( EventId, Event ) -> Bool -> Html msg
+viewEvent baseUrl language ( eventId, event ) showAsBlock =
+    let
+        ( titleElement, editEvent ) =
+            if showAsBlock then
+                ( a
+                    [ href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
+                    [ h4
+                        [ class "card-title" ]
+                        [ text event.name ]
+                    ]
+                , Nothing
                 )
-                event.imageUrl
-        , div
-            [ class "content" ]
-            [ div
-                [ class "header" ]
-                [ text event.name ]
+            else
+                ( h4
+                    [ class "card-title" ]
+                    [ text event.name ]
+                , Just <|
+                    showIf event.showEditLink <|
+                        a
+                            [ class "btn btn-xs btn-primary pull-right btn-edit"
+                            , href (baseUrl.path ++ "/node/" ++ eventId ++ "/edit" ++ "?" ++ baseUrl.query)
+                            ]
+                            [ text <| translate language EditLinkText ]
+                )
+    in
+        div [ class "thumbnail search-results" ]
+            [ showMaybe <| editEvent
             , showMaybe <|
-                Maybe.map
-                    (\description ->
-                        div
-                            [ class "description"
-                            , property "innerHTML" <| string description
-                            ]
-                            []
-                    )
-                    event.description
-            , sectionDivider
-            , div
-                [ class "ui row" ]
-                [ div
-                    [ class "ui four wide column event-date" ]
-                    [ span
-                        []
-                        [ i
-                            [ class "calendar icon" ]
-                            []
-                        , text <| translate language (DayAndDate event.date event.endDate)
-                        ]
-                    , showIf event.recurringWeekly <|
-                        span
-                            [ class "recurring-weekly" ]
-                            [ i
-                                [ class "refresh icon" ]
-                                []
-                            , text <| translate language EventRecurringWeekly
-                            ]
-                    ]
-                , showMaybe <|
-                    Maybe.map
-                        (\location ->
-                            div
-                                [ class "ui four wide column location-wrapper" ]
-                                [ a
-                                    [ href location.url, target "_blank" ]
-                                    [ i
-                                        [ class "map icon" ]
-                                        []
-                                    , text <| translate language (LocationText location.title)
-                                    ]
-                                ]
-                        )
-                        event.location
-                , showMaybe <|
-                    Maybe.map
-                        (\ticketPrice ->
-                            div
-                                [ class "ui four wide column ticket-price" ]
-                                [ i
-                                    [ class "shekel icon" ]
-                                    []
-                                , text <| translate language PriceText ++ ": " ++ ticketPrice
-                                ]
-                        )
-                        event.ticketPrice
-                , sectionDivider
-                , div
-                    [ class "ui four wide column center aligned" ]
-                    [ a
-                        [ class "ui button primary basic middle aligned", target "_blank", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
-                        [ i
-                            [ class "add icon" ]
-                            []
-                        , text <| translate language MoreDetailsText
-                        ]
-                    ]
-                ]
-            ]
-        ]
-
-
-{-| View a single event that will appear in a block (i.e. with less information).
--}
-viewEventAsBlock : BaseUrl -> Language -> ( EventId, Event ) -> Html msg
-viewEventAsBlock baseUrl language ( eventId, event ) =
-    div [ class "col-md-6" ]
-        [ a
-            [ class "thumbnail search-results", href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
-            [ showMaybe <|
                 Maybe.map
                     (\imageUrl ->
                         div [ class "card-img-top center" ]
@@ -187,11 +136,21 @@ viewEventAsBlock baseUrl language ( eventId, event ) =
                     event.imageUrl
             , div
                 [ class "caption" ]
-                [ h4
-                    [ class "card-title" ]
-                    [ text event.name ]
+                [ titleElement
+                , showIf (not showAsBlock) <|
+                    showMaybe <|
+                        Maybe.map
+                            (\description ->
+                                div
+                                    [ class "description"
+                                    , property "innerHTML" <| string description
+                                    ]
+                                    []
+                            )
+                            event.description
+                , showIf (not showAsBlock) <| sectionDivider
                 , div
-                    []
+                    [ class "event-date" ]
                     [ span
                         []
                         [ i
@@ -208,6 +167,48 @@ viewEventAsBlock baseUrl language ( eventId, event ) =
                             , text <| translate language EventRecurringWeekly
                             ]
                     ]
+                , showMaybe <|
+                    Maybe.map
+                        (\location ->
+                            div
+                                [ class "location-wrapper" ]
+                                [ a
+                                    [ href location.url, target "_blank" ]
+                                    [ i
+                                        [ class "fa fa-map-marker" ]
+                                        []
+                                    , text <| translate language (LocationText location.title)
+                                    ]
+                                ]
+                        )
+                        event.location
+                , showIf (not showAsBlock) <|
+                    showMaybe <|
+                        Maybe.map
+                            (\ticketPrice ->
+                                div
+                                    [ class "ticket-price" ]
+                                    [ i
+                                        [ class "fa fa-ils" ]
+                                        []
+                                    , text <| translate language PriceText ++ ": " ++ ticketPrice
+                                    ]
+                            )
+                            event.ticketPrice
+                , showIf (not showAsBlock) <| sectionDivider
+                , showIf (not showAsBlock) <|
+                    div
+                        [ class "center" ]
+                        [ a
+                            [ class "btn btn-primary middle"
+                            , target "_blank"
+                            , href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query)
+                            ]
+                            [ i
+                                [ class "fa fa-plus" ]
+                                []
+                            , text <| translate language MoreDetailsText
+                            ]
+                        ]
                 ]
             ]
-        ]
