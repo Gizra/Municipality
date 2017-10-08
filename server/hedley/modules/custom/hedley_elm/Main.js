@@ -11346,6 +11346,7 @@ var _elm_lang$html$Html_Events$Options = F2(
 	});
 
 var _gizra$municipality$App_Types$NotFound = {ctor: 'NotFound'};
+var _gizra$municipality$App_Types$EventPage = {ctor: 'EventPage'};
 var _gizra$municipality$App_Types$Event = {ctor: 'Event'};
 var _gizra$municipality$App_Types$Contact = {ctor: 'Contact'};
 var _gizra$municipality$App_Types$Hebrew = {ctor: 'Hebrew'};
@@ -11403,10 +11404,24 @@ var _gizra$municipality$Contact_Model$Quaternary = {ctor: 'Quaternary'};
 var _gizra$municipality$Contact_Model$Warning = {ctor: 'Warning'};
 var _gizra$municipality$Contact_Model$Danger = {ctor: 'Danger'};
 
-var _gizra$municipality$Event_Model$emptyModel = {events: _Gizra$elm_dictlist$DictList$empty, filterString: ''};
-var _gizra$municipality$Event_Model$Model = F2(
-	function (a, b) {
-		return {events: a, filterString: b};
+var _gizra$municipality$Event_Model$emptyModel = {
+	events: _Gizra$elm_dictlist$DictList$empty,
+	filterString: '',
+	singleEvent: {
+		name: '',
+		imageUrl: _elm_lang$core$Maybe$Nothing,
+		description: _elm_lang$core$Maybe$Nothing,
+		date: _elm_lang$core$Date$fromTime(0),
+		endDate: _elm_lang$core$Maybe$Nothing,
+		recurringWeekly: false,
+		ticketPrice: _elm_lang$core$Maybe$Nothing,
+		location: _elm_lang$core$Maybe$Nothing,
+		showEditLink: false
+	}
+};
+var _gizra$municipality$Event_Model$Model = F3(
+	function (a, b, c) {
+		return {events: a, filterString: b, singleEvent: c};
 	});
 var _gizra$municipality$Event_Model$Location = F2(
 	function (a, b) {
@@ -11418,6 +11433,9 @@ var _gizra$municipality$Event_Model$Event = F9(
 	});
 var _gizra$municipality$Event_Model$SetFilter = function (a) {
 	return {ctor: 'SetFilter', _0: a};
+};
+var _gizra$municipality$Event_Model$HandleEvent = function (a) {
+	return {ctor: 'HandleEvent', _0: a};
 };
 var _gizra$municipality$Event_Model$HandleEvents = function (a) {
 	return {ctor: 'HandleEvents', _0: a};
@@ -11742,35 +11760,65 @@ var _gizra$municipality$Event_Decoder$decodeEvents = _elm_lang$core$Json_Decode$
 var _gizra$municipality$Event_Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
-		if (_p0.ctor === 'HandleEvents') {
-			if (_p0._0.ctor === 'Ok') {
+		switch (_p0.ctor) {
+			case 'HandleEvents':
+				if (_p0._0.ctor === 'Ok') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{events: _p0._0._0}),
+						{ctor: '[]'});
+				} else {
+					var _p1 = A2(_elm_lang$core$Debug$log, 'HandleEvents', _p0._0._0);
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						model,
+						{ctor: '[]'});
+				}
+			case 'HandleEvent':
+				if (_p0._0.ctor === 'Ok') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{singleEvent: _p0._0._0}),
+						{ctor: '[]'});
+				} else {
+					var _p2 = A2(_elm_lang$core$Debug$log, 'HandleEvent', _p0._0._0);
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						model,
+						{ctor: '[]'});
+				}
+			default:
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{events: _p0._0._0}),
+						{filterString: _p0._0}),
 					{ctor: '[]'});
-			} else {
-				var _p1 = A2(_elm_lang$core$Debug$log, 'HandleEvents', _p0._0._0);
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
-					{ctor: '[]'});
-			}
-		} else {
-			return A2(
-				_elm_lang$core$Platform_Cmd_ops['!'],
-				_elm_lang$core$Native_Utils.update(
-					model,
-					{filterString: _p0._0}),
-				{ctor: '[]'});
 		}
 	});
+var _gizra$municipality$Event_Update$event = _elm_lang$core$Native_Platform.incomingPort('event', _elm_lang$core$Json_Decode$value);
 var _gizra$municipality$Event_Update$events = _elm_lang$core$Native_Platform.incomingPort('events', _elm_lang$core$Json_Decode$value);
-var _gizra$municipality$Event_Update$subscriptions = _gizra$municipality$Event_Update$events(
-	function (_p2) {
-		return _gizra$municipality$Event_Model$HandleEvents(
-			A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Event_Decoder$decodeEvents, _p2));
+var _gizra$municipality$Event_Update$subscriptions = _elm_lang$core$Platform_Sub$batch(
+	{
+		ctor: '::',
+		_0: _gizra$municipality$Event_Update$events(
+			function (_p3) {
+				return _gizra$municipality$Event_Model$HandleEvents(
+					A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Event_Decoder$decodeEvents, _p3));
+			}),
+		_1: {
+			ctor: '::',
+			_0: _gizra$municipality$Event_Update$event(
+				function (_p4) {
+					return _gizra$municipality$Event_Model$HandleEvent(
+						A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Event_Decoder$decodeEvent, _p4));
+				}),
+			_1: {ctor: '[]'}
+		}
 	});
 
 var _gizra$municipality$App_Update$subscriptions = function (model) {
@@ -11779,6 +11827,8 @@ var _gizra$municipality$App_Update$subscriptions = function (model) {
 		case 'Contact':
 			return A2(_elm_lang$core$Platform_Sub$map, _gizra$municipality$App_Model$MsgPagesContact, _gizra$municipality$Contact_Update$subscriptions);
 		case 'Event':
+			return A2(_elm_lang$core$Platform_Sub$map, _gizra$municipality$App_Model$MsgPagesEvent, _gizra$municipality$Event_Update$subscriptions);
+		case 'EventPage':
 			return A2(_elm_lang$core$Platform_Sub$map, _gizra$municipality$App_Model$MsgPagesEvent, _gizra$municipality$Event_Update$subscriptions);
 		default:
 			return _elm_lang$core$Platform_Sub$none;
@@ -11832,6 +11882,8 @@ var _gizra$municipality$App_Update$init = function (flags) {
 				return _gizra$municipality$App_Types$Contact;
 			case 'events':
 				return _gizra$municipality$App_Types$Event;
+			case 'event-page':
+				return _gizra$municipality$App_Types$EventPage;
 			default:
 				return _gizra$municipality$App_Types$NotFound;
 		}
@@ -13517,6 +13569,137 @@ var _gizra$municipality$Utils_BootstrapGrid$renderBootstrapGrid = F2(
 				listOfRows));
 	});
 
+var _gizra$municipality$Event_View$viewEventPage = F3(
+	function (baseUrl, language, event) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('row text-center'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('col-xs-12'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$h2,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Events'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('panel panel-default'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('row text-center'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('col-xs-12'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$h1,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text(event.name),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('panel-body text-center'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$span,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('img-thumbnail'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _gizra$municipality$Utils_Html$showMaybe(
+													A2(
+														_elm_lang$core$Maybe$map,
+														function (imageUrl) {
+															return A2(
+																_elm_lang$html$Html$img,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('img-responsive'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$src(imageUrl),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$alt(event.name),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																},
+																{ctor: '[]'});
+														},
+														event.imageUrl)),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
 var _gizra$municipality$Event_View$viewEvent = F4(
 	function (baseUrl, language, _p0, showAsBlock) {
 		var _p1 = _p0;
@@ -13642,7 +13825,11 @@ var _gizra$municipality$Event_View$viewEvent = F4(
 												_1: {
 													ctor: '::',
 													_0: _elm_lang$html$Html_Attributes$src(imageUrl),
-													_1: {ctor: '[]'}
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$alt(_p3.name),
+														_1: {ctor: '[]'}
+													}
 												}
 											},
 											{ctor: '[]'}),
@@ -14186,6 +14373,18 @@ var _gizra$municipality$App_View$view = function (model) {
 						_elm_lang$html$Html$map,
 						_gizra$municipality$App_Model$MsgPagesEvent,
 						A4(_gizra$municipality$Event_View$view, model.baseUrl, model.language, model.showAsBlock, model.pageEvent)),
+					_1: {ctor: '[]'}
+				});
+		case 'EventPage':
+			return A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$map,
+						_gizra$municipality$App_Model$MsgPagesEvent,
+						A3(_gizra$municipality$Event_View$viewEventPage, model.baseUrl, model.language, model.pageEvent.singleEvent)),
 					_1: {ctor: '[]'}
 				});
 		default:

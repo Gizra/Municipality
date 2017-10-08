@@ -8,6 +8,7 @@ module App.Types
 type Page
     = Contact
     | Event
+    | EventPage
     | NotFound
 
 

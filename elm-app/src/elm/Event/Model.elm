@@ -1,12 +1,13 @@
 module Event.Model exposing (..)
 
-import Date exposing (Day, Date)
+import Date exposing (Date, Day)
 import DictList exposing (DictList)
 
 
 type alias Model =
     { events : DictListEvent
     , filterString : String
+    , singleEvent : Event
     }
 
 
@@ -14,11 +15,23 @@ emptyModel : Model
 emptyModel =
     { events = DictList.empty
     , filterString = ""
+    , singleEvent =
+        { name = ""
+        , imageUrl = Nothing
+        , description = Nothing
+        , date = Date.fromTime 0
+        , endDate = Nothing
+        , recurringWeekly = False
+        , ticketPrice = Nothing
+        , location = Nothing
+        , showEditLink = False
+        }
     }
 
 
 type Msg
     = HandleEvents (Result String DictListEvent)
+    | HandleEvent (Result String Event)
     | SetFilter String
 
 

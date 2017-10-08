@@ -1,6 +1,7 @@
 module Event.Decoder
     exposing
         ( decodeEvents
+        , decodeEvent
         )
 
 import DictList exposing (DictList, decodeArray2, empty)

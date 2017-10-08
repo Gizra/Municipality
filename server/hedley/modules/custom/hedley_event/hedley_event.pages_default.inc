@@ -65,13 +65,24 @@ function hedley_event_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
-  $pane->pid = 'new-dfde7f64-7a4e-464f-b7e4-71c97e40e23c';
+  $pane->pid = 'new-21943754-4659-4562-927d-23ad5a3eebb3';
   $pane->panel = 'main_content';
-  $pane->type = 'event_page';
-  $pane->subtype = 'event_page';
+  $pane->type = 'elm';
+  $pane->subtype = 'elm';
   $pane->shown = TRUE;
   $pane->access = array();
-  $pane->configuration = array();
+  $pane->configuration = array(
+    'page' => 'event-page',
+    'show_as_block' => 0,
+    'promoted_only' => 0,
+    'context' => array(
+      0 => 'empty',
+      1 => 'argument_entity_id:node_1',
+    ),
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
   $pane->cache = array();
   $pane->style = array(
     'settings' => NULL,
@@ -80,9 +91,9 @@ function hedley_event_default_page_manager_handlers() {
   $pane->extras = array();
   $pane->position = 0;
   $pane->locks = array();
-  $pane->uuid = 'dfde7f64-7a4e-464f-b7e4-71c97e40e23c';
-  $display->content['new-dfde7f64-7a4e-464f-b7e4-71c97e40e23c'] = $pane;
-  $display->panels['main_content'][0] = 'new-dfde7f64-7a4e-464f-b7e4-71c97e40e23c';
+  $pane->uuid = '21943754-4659-4562-927d-23ad5a3eebb3';
+  $display->content['new-21943754-4659-4562-927d-23ad5a3eebb3'] = $pane;
+  $display->panels['main_content'][0] = 'new-21943754-4659-4562-927d-23ad5a3eebb3';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

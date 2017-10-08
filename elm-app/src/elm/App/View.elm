@@ -20,5 +20,10 @@ view model =
                 [ Html.map MsgPagesEvent <| Event.View.view model.baseUrl model.language model.showAsBlock model.pageEvent
                 ]
 
+        EventPage ->
+            div []
+                [ Html.map MsgPagesEvent <| Event.View.viewEventPage model.baseUrl model.language model.pageEvent.singleEvent
+                ]
+
         NotFound ->
             div [] [ text "Wrong page defined" ]

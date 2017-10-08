@@ -37,6 +37,10 @@ Drupal.behaviors.elm = {
         case 'events':
           var property = app.ports.events;
           break;
+
+        case 'event-page':
+          var property = app.ports.event;
+          break;
       }
 
       property.send(appSettings.values);

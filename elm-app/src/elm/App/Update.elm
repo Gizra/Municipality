@@ -22,6 +22,9 @@ init flags =
                 "events" ->
                     Event
 
+                "event-page" ->
+                    EventPage
+
                 -- Fallback to page not found.
                 _ ->
                     NotFound
@@ -80,6 +83,9 @@ subscriptions model =
             Sub.map MsgPagesContact <| Contact.Update.subscriptions
 
         Event ->
+            Sub.map MsgPagesEvent <| Event.Update.subscriptions
+
+        EventPage ->
             Sub.map MsgPagesEvent <| Event.Update.subscriptions
 
         NotFound ->

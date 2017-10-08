@@ -1,4 +1,8 @@
-module Event.View exposing (..)
+module Event.View
+    exposing
+        ( view
+        , viewEventPage
+        )
 
 import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
@@ -6,12 +10,12 @@ import DictList
 import Event.Model exposing (Event, EventId, Model, Msg(..))
 import Event.Utils exposing (filterEvents)
 import Html exposing (..)
-import Html.Attributes exposing (class, href, id, placeholder, property, src, target, type_, value)
+import Html.Attributes exposing (alt, class, href, id, placeholder, property, src, target, type_, value)
 import Html.Events exposing (onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (sectionDivider, showIf, showMaybe)
 import Utils.BootstrapGrid exposing (renderBootstrapGrid)
+import Utils.Html exposing (sectionDivider, showIf, showMaybe)
 
 
 view : BaseUrl -> Language -> Bool -> Model -> Html Msg
@@ -129,7 +133,11 @@ viewEvent baseUrl language ( eventId, event ) showAsBlock =
                 Maybe.map
                     (\imageUrl ->
                         div [ class "card-img-top center" ]
-                            [ img [ class "img-responsive", src imageUrl ]
+                            [ img
+                                [ class "img-responsive"
+                                , src imageUrl
+                                , alt event.name
+                                ]
                                 []
                             ]
                     )
@@ -212,3 +220,47 @@ viewEvent baseUrl language ( eventId, event ) showAsBlock =
                         ]
                 ]
             ]
+
+
+viewEventPage : BaseUrl -> Language -> Event -> Html Msg
+viewEventPage baseUrl language event =
+    div []
+        [ div
+            [ class "row text-center" ]
+            [ div
+                [ class "col-xs-12" ]
+                [ h2
+                    []
+                    [ text "Events" ]
+                ]
+            ]
+        , div
+            [ class "panel panel-default" ]
+            [ div
+                [ class "row text-center" ]
+                [ div
+                    [ class "col-xs-12" ]
+                    [ h1
+                        []
+                        [ text event.name ]
+                    ]
+                ]
+            , div
+                [ class "panel-body text-center" ]
+                [ span
+                    [ class "img-thumbnail" ]
+                    [ showMaybe <|
+                        Maybe.map
+                            (\imageUrl ->
+                                img
+                                    [ class "img-responsive"
+                                    , src imageUrl
+                                    , alt event.name
+                                    ]
+                                    []
+                            )
+                            event.imageUrl
+                    ]
+                ]
+            ]
+        ]

@@ -8,15 +8,6 @@
 include_once 'hedley_event.features.inc';
 
 /**
- * Implements hook_ctools_plugin_directory().
- */
-function hedley_event_ctools_plugin_directory($module, $plugin) {
-  if ($module == 'ctools') {
-    return 'plugins/' . $plugin;
-  }
-}
-
-/**
  * Return events by group.
  *
  * @param object $group
@@ -35,8 +26,6 @@ function hedley_event_ctools_plugin_directory($module, $plugin) {
  *   Array with the events list.
  */
 function hedley_event_get_events_by_group($group, $language_code, $show_as_block = FALSE, $promoted_only = FALSE, $topic_tid = 0) {
-  global $user;
-
   // Determine the events setting depending on the block configuration.
   $range = $show_as_block ? 5 : 100;
 
@@ -49,52 +38,70 @@ function hedley_event_get_events_by_group($group, $language_code, $show_as_block
 
   $events = [];
   foreach ($nodes as $node) {
-    $wrapper = entity_metadata_wrapper('node', $node);
-    $wrapper->language($language_code);
-
-    // Ignore events without a title in the current language.
-    if (!$wrapper->label()) {
+    if (!$event = hedley_event_get_event_item($node, $language_code)) {
       continue;
     }
-
-    $image = $wrapper->field_image->value();
-    $date = $wrapper->field_date->value();
-
-    if (empty($date)) {
-      // Date is required but just in case date is missing in some translation.
-      continue;
-    }
-
-    $location_unfiltered = $wrapper->field_location->value();
-    // Keep only "url" and "title" sub properties and remove any value that is
-    // missing one of those properties, although they are required but just in
-    // case.
-    $location = array_filter(['url' => $location_unfiltered['url'], 'title' => $location_unfiltered['title']], function ($value) {
-      return !is_null($value);
-    });
-
-    $event = [
-      'id' => $wrapper->getIdentifier(),
-      'name' => check_plain($wrapper->label()),
-      'image_url' => !empty($image) ? image_style_url('square_large_image', $image['uri']) : hedley_municipality_get_default_image($wrapper->getBundle()),
-      'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : NULL,
-      'date' => hedley_event_timestamp_to_iso8601($date['value']),
-      // Make sure the end date isn't the same as the start date.
-      'end_date' => !empty($date) && $date['value2'] && $date['value'] != $date['value2'] ? hedley_event_timestamp_to_iso8601($date['value2']) : NULL,
-      'recurring_weekly' => $wrapper->field_recurring_weekly->value(),
-      'ticket_price' => $wrapper->field_ticket_price->value() ? $wrapper->field_ticket_price->value() : NULL,
-      'location' => !empty($location) ? $location : NULL,
-      'showEditLink' => og_node_access($node, 'update', $user) == NODE_ACCESS_ALLOW,
-    ];
-
-    // Remove empty values (elm expects the correct value or nothing), but keep
-    // the values with `FALSE` value.
-    $events[] = array_filter($event, function ($value) {
-      return !is_null($value);
-    });
+    $events[] = $event;
   }
 
   return $events;
+}
+
+/**
+ * @param object $event
+ *   The event.
+ * @param $language_code
+ *   The language code (e.g. "he", "ar").
+ *
+ * @return array|bool
+ *   The event item or nothing if something is missing.
+ */
+function hedley_event_get_event_item($event, $language_code) {
+  global $user;
+
+  $wrapper = entity_metadata_wrapper('node', $event);
+  $wrapper->language($language_code);
+
+  // Ignore events without a title in the current language.
+  if (!$wrapper->label()) {
+    return FALSE;
+  }
+
+  $image = $wrapper->field_image->value();
+  $date = $wrapper->field_date->value();
+
+  if (empty($date)) {
+    // Date is required but just in case date is missing in some translation.
+    return FALSE;
+  }
+
+  $location_unfiltered = $wrapper->field_location->value();
+  // Keep only "url" and "title" sub properties and remove any value that is
+  // missing one of those properties, although they are required but just in
+  // case.
+  $location = array_filter(['url' => $location_unfiltered['url'], 'title' => $location_unfiltered['title']], function ($value) {
+    return !is_null($value);
+  });
+
+  // Remove empty values (elm expects the correct value or nothing), but keep
+  // the values with `FALSE` value.
+  $event = array_filter([
+    'id' => $wrapper->getIdentifier(),
+    'name' => check_plain($wrapper->label()),
+    'image_url' => !empty($image) ? image_style_url('square_large_image', $image['uri']) : hedley_municipality_get_default_image($wrapper->getBundle()),
+    'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : NULL,
+    'date' => hedley_event_timestamp_to_iso8601($date['value']),
+    // Make sure the end date isn't the same as the start date.
+    'end_date' => !empty($date) && $date['value2'] && $date['value'] != $date['value2'] ? hedley_event_timestamp_to_iso8601($date['value2']) : NULL,
+    'recurring_weekly' => $wrapper->field_recurring_weekly->value(),
+    'ticket_price' => $wrapper->field_ticket_price->value() ? $wrapper->field_ticket_price->value() : NULL,
+    'location' => !empty($location) ? $location : NULL,
+    'showEditLink' => og_node_access($event, 'update', $user) == NODE_ACCESS_ALLOW,
+  ], function ($value) {
+    return !is_null($value);
+  });
+
+  return $event;
 }
 
 /**
