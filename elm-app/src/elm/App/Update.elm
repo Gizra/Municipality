@@ -9,6 +9,7 @@ import App.Model exposing (..)
 import App.Types exposing (Language(..), Page(..))
 import Contact.Update
 import Event.Update
+import Events.Update
 
 
 init : Flags -> ( Model, Cmd Msg )
@@ -19,11 +20,11 @@ init flags =
                 "contacts" ->
                     Contact
 
-                "events" ->
+                "event" ->
                     Event
 
-                "event-page" ->
-                    EventPage
+                "events" ->
+                    Events
 
                 -- Fallback to page not found.
                 _ ->
@@ -75,6 +76,15 @@ update msg model =
                 , Cmd.map MsgPagesEvent cmds
                 )
 
+        MsgPagesEvents subMsg ->
+            let
+                ( val, cmds ) =
+                    Events.Update.update subMsg model.pageEvents
+            in
+                ( { model | pageEvents = val }
+                , Cmd.map MsgPagesEvents cmds
+                )
+
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
@@ -85,8 +95,8 @@ subscriptions model =
         Event ->
             Sub.map MsgPagesEvent <| Event.Update.subscriptions
 
-        EventPage ->
-            Sub.map MsgPagesEvent <| Event.Update.subscriptions
+        Events ->
+            Sub.map MsgPagesEvents <| Events.Update.subscriptions
 
         NotFound ->
             Sub.none

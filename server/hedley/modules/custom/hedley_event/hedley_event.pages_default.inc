@@ -72,7 +72,7 @@ function hedley_event_default_page_manager_handlers() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'page' => 'event-page',
+    'page' => 'event',
     'show_as_block' => 0,
     'promoted_only' => 0,
     'context' => array(

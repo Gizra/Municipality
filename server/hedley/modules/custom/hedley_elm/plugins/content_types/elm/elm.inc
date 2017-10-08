@@ -39,8 +39,8 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
 
   // Expected node pages.
   $node_pages = [
-    'contact-page',
-    'event-page',
+    'contact',
+    'event',
   ];
   $node_nid = 0;
   if (in_array($page, $node_pages)) {
@@ -62,22 +62,22 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   $values = [];
   $title = '';
   switch ($page) {
+    case 'contact':
+      $values = hedley_contact_get_contacts_by_group($node, $language->language, $show_as_block, $promoted_only, $topic_tid);
+      break;
+
     case 'contacts':
       $title = t('People who can help you');
       $values = hedley_contact_get_contacts_by_group($node, $language->language, $show_as_block, $promoted_only, $topic_tid);
       break;
 
+    case 'event':
+      $values = hedley_event_get_event_item(node_load($node_nid), $language->language);
+      break;
+
     case 'events':
       $title = t('Upcoming events');
       $values = hedley_event_get_events_by_group($node, $language->language, $show_as_block, $promoted_only, $topic_tid);
-      break;
-
-    case 'contact-page':
-      $values = hedley_contact_get_contacts_by_group($node, $language->language, $show_as_block, $promoted_only, $topic_tid);
-      break;
-
-    case 'event-page':
-      $values = hedley_event_get_event_item(node_load($node_nid), $language->language);
       break;
   }
 
@@ -132,7 +132,7 @@ function hedley_elm_elm_content_type_edit_form($form, &$form_state) {
     '#type' => 'select',
     '#title' => t('Page'),
     '#description' => t('The bundle of the displayed content.'),
-    '#options' => drupal_map_assoc(['contacts', 'events', 'contact-page', 'event-page']),
+    '#options' => drupal_map_assoc(['contact', 'contacts', 'event', 'events']),
     '#default_value' => $conf['page'],
     '#required' => TRUE,
   ];

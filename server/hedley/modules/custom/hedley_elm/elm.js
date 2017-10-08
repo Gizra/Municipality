@@ -34,12 +34,12 @@ Drupal.behaviors.elm = {
           var property = app.ports.contacts;
           break;
 
-        case 'events':
-          var property = app.ports.events;
+        case 'event':
+          var property = app.ports.event;
           break;
 
-        case 'event-page':
-          var property = app.ports.event;
+        case 'events':
+          var property = app.ports.events;
           break;
       }
 

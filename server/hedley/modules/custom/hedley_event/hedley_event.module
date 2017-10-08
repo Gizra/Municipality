@@ -38,7 +38,7 @@ function hedley_event_get_events_by_group($group, $language_code, $show_as_block
 
   $events = [];
   foreach ($nodes as $node) {
-    if (!$event = hedley_event_get_event_item($node, $language_code)) {
+    if (!$event = hedley_event_get_event_item($node, $language_code, 'square_large_image')) {
       continue;
     }
     $events[] = $event;
@@ -48,15 +48,19 @@ function hedley_event_get_events_by_group($group, $language_code, $show_as_block
 }
 
 /**
+ * Get the elm element for an Event.
+ *
  * @param object $event
  *   The event.
- * @param $language_code
+ * @param string $language_code
  *   The language code (e.g. "he", "ar").
+ * @param string $image_style
+ *   The image style for the event image, defaults to large.
  *
  * @return array|bool
  *   The event item or nothing if something is missing.
  */
-function hedley_event_get_event_item($event, $language_code) {
+function hedley_event_get_event_item($event, $language_code, $image_style = 'large') {
   global $user;
 
   $wrapper = entity_metadata_wrapper('node', $event);
@@ -88,7 +92,7 @@ function hedley_event_get_event_item($event, $language_code) {
   $event = array_filter([
     'id' => $wrapper->getIdentifier(),
     'name' => check_plain($wrapper->label()),
-    'image_url' => !empty($image) ? image_style_url('square_large_image', $image['uri']) : hedley_municipality_get_default_image($wrapper->getBundle()),
+    'image_url' => !empty($image) ? image_style_url($image_style, $image['uri']) : hedley_municipality_get_default_image($wrapper->getBundle()),
     'description' => !empty($wrapper->body->value()) ? $wrapper->body->value->value() : NULL,
     'date' => hedley_event_timestamp_to_iso8601($date['value']),
     // Make sure the end date isn't the same as the start date.

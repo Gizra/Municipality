@@ -4,7 +4,7 @@ port module Event.Update
         , update
         )
 
-import Event.Decoder exposing (decodeEvent, decodeEvents)
+import Event.Decoder exposing (decodeEvent)
 import Event.Model exposing (Model, Msg(..))
 import Json.Decode exposing (Value, decodeValue)
 
@@ -12,18 +12,8 @@ import Json.Decode exposing (Value, decodeValue)
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        HandleEvents (Ok values) ->
-            { model | events = values } ! []
-
-        HandleEvents (Err err) ->
-            let
-                _ =
-                    Debug.log "HandleEvents" err
-            in
-                model ! []
-
         HandleEvent (Ok event) ->
-            { model | singleEvent = event } ! []
+            { model | event = event } ! []
 
         HandleEvent (Err err) ->
             let
@@ -32,16 +22,10 @@ update msg model =
             in
                 model ! []
 
-        SetFilter filterString ->
-            { model | filterString = filterString } ! []
-
 
 subscriptions : Sub Msg
 subscriptions =
-    Sub.batch
-        [ events (decodeValue decodeEvents >> HandleEvents)
-        , event (decodeValue decodeEvent >> HandleEvent)
-        ]
+    event (decodeValue decodeEvent >> HandleEvent)
 
 
 
@@ -49,6 +33,3 @@ subscriptions =
 
 
 port event : (Value -> msg) -> Sub msg
-
-
-port events : (Value -> msg) -> Sub msg

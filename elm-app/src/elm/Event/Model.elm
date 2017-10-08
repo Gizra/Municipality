@@ -1,21 +1,16 @@
 module Event.Model exposing (..)
 
 import Date exposing (Date, Day)
-import DictList exposing (DictList)
 
 
 type alias Model =
-    { events : DictListEvent
-    , filterString : String
-    , singleEvent : Event
+    { event : Event
     }
 
 
 emptyModel : Model
 emptyModel =
-    { events = DictList.empty
-    , filterString = ""
-    , singleEvent =
+    { event =
         { name = ""
         , imageUrl = Nothing
         , description = Nothing
@@ -30,9 +25,7 @@ emptyModel =
 
 
 type Msg
-    = HandleEvents (Result String DictListEvent)
-    | HandleEvent (Result String Event)
-    | SetFilter String
+    = HandleEvent (Result String Event)
 
 
 type alias Name =
@@ -60,7 +53,3 @@ type alias Event =
     , location : Maybe Location
     , showEditLink : Bool
     }
-
-
-type alias DictListEvent =
-    DictList EventId Event

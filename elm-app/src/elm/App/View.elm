@@ -4,6 +4,7 @@ import App.Model exposing (..)
 import App.Types exposing (Page(..))
 import Contact.View exposing (view)
 import Event.View exposing (view)
+import Events.View
 import Html exposing (..)
 
 
@@ -17,12 +18,12 @@ view model =
 
         Event ->
             div []
-                [ Html.map MsgPagesEvent <| Event.View.view model.baseUrl model.language model.showAsBlock model.pageEvent
+                [ Html.map MsgPagesEvent <| Event.View.view model.baseUrl model.language model.pageEvent.event
                 ]
 
-        EventPage ->
+        Events ->
             div []
-                [ Html.map MsgPagesEvent <| Event.View.viewEventPage model.baseUrl model.language model.pageEvent.singleEvent
+                [ Html.map MsgPagesEvents <| Events.View.view model.baseUrl model.language model.showAsBlock model.pageEvents
                 ]
 
         NotFound ->
