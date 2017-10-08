@@ -75,7 +75,7 @@ function hedley_event_get_events_by_group($group, $language_code, $show_as_block
       'recurring_weekly' => $wrapper->field_recurring_weekly->value(),
       'ticket_price' => $wrapper->field_ticket_price->value() ? $wrapper->field_ticket_price->value() : NULL,
       'location' => !empty($location) ? $location : NULL,
-      'showEditLink' => og_node_access($node, 'update', $user) == 'allow',
+      'showEditLink' => og_node_access($node, 'update', $user) == NODE_ACCESS_ALLOW,
     ];
 
     // Remove empty values (elm expects the correct value or nothing), but keep
