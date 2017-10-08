@@ -12,7 +12,7 @@ module Utils.Html
 import App.Types exposing (Language(..))
 import Contact.Model exposing (Color)
 import Date exposing (Day)
-import Html exposing (Html, div, h5, text)
+import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)
 import String exposing (toLower)
 import Translate exposing (TranslationId(..), translate)
