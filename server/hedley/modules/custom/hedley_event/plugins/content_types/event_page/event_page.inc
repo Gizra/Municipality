@@ -35,10 +35,12 @@ function hedley_event_event_page_content_type_render($subtype, $conf, $args, $co
   $wrapper->language($language->language);
 
   $body = $wrapper->body->value();
+  $image = $wrapper->field_image->value();
+
   $variables = [
     'title' => filter_xss($wrapper->label()),
     'body' => !empty($body) ? $body['value'] : '',
-    'image' => NULL,
+    'image_url' => !empty($image) ? image_style_url('large', $image['uri']) : hedley_municipality_get_default_image($wrapper->getBundle()),
     'date' => NULL,
     'location' => NULL,
     'price' => NULL,
@@ -59,7 +61,7 @@ function hedley_event_event_page_content_type_theme(&$theme, $plugin) {
     'variables' => [
       'title' => NULL,
       'body' => NULL,
-      'image' => NULL,
+      'image_url' => NULL,
       'date' => NULL,
       'location' => NULL,
       'price' => NULL,

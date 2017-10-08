@@ -12,13 +12,15 @@
   </div>
 </div>
 
-<div class="row text-center">
-  <div class="col-xs-12">
-    <h1><?php print $title; ?></h1>
-  </div>
-</div>
-
 <div class="panel panel-default">
-  <div class="panel-body">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h1><?php print $title; ?></h1>
+    </div>
+  </div>
+  <div class="panel-body text-center">
+    <span class="img-thumbnail">
+      <img class="img-responsive" src="<?php print $image_url; ?>" alt="<?php print $title; ?>">
+    </span>
   </div>
 </div>
