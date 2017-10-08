@@ -3,7 +3,6 @@ module Utils.Html
         ( colorToString
         , divider
         , emptyNode
-        , renderBootstrapGrid
         , sectionDivider
         , showIf
         , showMaybe
@@ -13,11 +12,10 @@ module Utils.Html
 import App.Types exposing (Language(..))
 import Contact.Model exposing (Color)
 import Date exposing (Day)
-import Html exposing (Html, div, h5, text)
+import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)
 import String exposing (toLower)
 import Translate exposing (TranslationId(..), translate)
-import List exposing (..)
 
 
 {-| Produces an empty text node in the DOM.
@@ -25,50 +23,6 @@ import List exposing (..)
 emptyNode : Html msg
 emptyNode =
     text ""
-
-
-{-| Splits a list into sub lists containing a given number of children.
--}
-split : Int -> List a -> List (List a)
-split numberOfChildren list =
-    case take numberOfChildren list of
-        [] ->
-            []
-
-        listHead ->
-            listHead :: split numberOfChildren (drop numberOfChildren list)
-
-
-{-| Render the column with a given class.
--}
-renderColumn : String -> Html msg -> Html msg
-renderColumn columnClass column =
-    div [ class columnClass ] [ column ]
-
-
-{-| Render the row with a list of columns.
--}
-renderRow : String -> List (Html msg) -> Html msg
-renderRow columnClass row =
-    div [ class "row" ] (List.map (renderColumn columnClass) <| row)
-
-
-{-| Renders rows to a given number of columns. Gives the ability to wrap a list
-of Html msg with columns and rows:
-
-    renderBootstrapGrid 2 List (div [] [], div [] [])
-
--}
-renderBootstrapGrid : Int -> List (Html msg) -> Html msg
-renderBootstrapGrid columnsInOneRow colHtmlMsgList =
-    let
-        listOfRows =
-            split columnsInOneRow colHtmlMsgList
-
-        columnClass =
-            "col-md-" ++ (toString <| 12 // columnsInOneRow)
-    in
-        div [] (map (renderRow columnClass) <| listOfRows)
 
 
 {-| Conditionally show Html. A bit cleaner than using if expressions in middle

@@ -1,6 +1,6 @@
 module Utils.Test exposing (all)
 
-import Utils.Html exposing (..)
+import Utils.BootstrapGrid exposing (..)
 import Expect
 import Html exposing (..)
 import Html.Attributes exposing (class)

@@ -10,7 +10,8 @@ import Html.Attributes exposing (class, href, id, placeholder, property, src, ta
 import Html.Events exposing (onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (renderBootstrapGrid, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (sectionDivider, showIf, showMaybe)
+import Utils.BootstrapGrid exposing (renderBootstrapGrid)
 
 
 view : BaseUrl -> Language -> Bool -> Model -> Html Msg
