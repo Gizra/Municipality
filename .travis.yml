@@ -33,4 +33,3 @@ script:
 - "$TRAVIS_BUILD_DIR/ci-scripts/test_coder.sh"
 - "$TRAVIS_BUILD_DIR/ci-scripts/test_server.sh"
 - "$TRAVIS_BUILD_DIR/ci-scripts/test_shell.sh"
-
