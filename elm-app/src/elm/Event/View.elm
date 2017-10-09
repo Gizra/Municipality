@@ -12,13 +12,13 @@ import Utils.Html exposing (sectionDivider, showIf, showMaybe)
 
 view : BaseUrl -> Language -> Event -> Html Msg
 view baseUrl language event =
-    div []
+    div [ class "event-page" ]
         [ div
             [ class "row text-center" ]
             [ div
                 [ class "col-xs-12" ]
                 [ h2
-                    []
+                    [ class "page-title" ]
                     [ text <| translate language EventsHeaderText ]
                 ]
             ]
@@ -38,7 +38,7 @@ view baseUrl language event =
                 [ div
                     [ class "row text-center" ]
                     [ div
-                        [ class "col-md-4" ]
+                        [ class "col-md-4 event-date" ]
                         [ span
                             []
                             [ i
@@ -92,20 +92,20 @@ view baseUrl language event =
                 , div
                     [ class "row panel-body text-center" ]
                     [ div [ class "col-xs-12" ]
-                        [ span
-                            [ class "img-thumbnail" ]
-                            [ showMaybe <|
-                                Maybe.map
-                                    (\imageUrl ->
-                                        img
+                        [ showMaybe <|
+                            Maybe.map
+                                (\imageUrl ->
+                                    span
+                                        [ class "img-thumbnail" ]
+                                        [ img
                                             [ class "img-responsive"
                                             , src imageUrl
                                             , alt event.name
                                             ]
                                             []
-                                    )
-                                    event.imageUrl
-                            ]
+                                        ]
+                                )
+                                event.imageUrl
                         ]
                     ]
                 , sectionDivider

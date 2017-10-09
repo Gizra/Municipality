@@ -17,12 +17,12 @@ import Test.Html.Selector as Selector exposing (attribute, class, tag, text)
 
 viewTest : Test
 viewTest =
-    describe "view single event card"
+    describe "view event page"
         [ test "Event without Image" <|
             \() ->
                 view baseUrl English event1
                     |> Query.fromHtml
-                    |> Query.hasNot [ Selector.class "image" ]
+                    |> Query.hasNot [ Selector.class "img-thumbnail" ]
         , test "Event without Description" <|
             \() ->
                 view baseUrl English event1
@@ -82,7 +82,7 @@ viewTest =
             \() ->
                 view baseUrl English event2
                     |> Query.fromHtml
-                    |> Query.find [ Selector.class "card-img-top" ]
+                    |> Query.find [ Selector.class "img-thumbnail" ]
                     |> Query.children [ tag "img" ]
                     |> Query.each (Query.has [ attribute "src" "https://placeholdit.imgix.net/~text?w=350&h=150" ])
         , test "Event with Description" <|
@@ -115,18 +115,12 @@ viewTest =
                         , attribute "target" "_blank"
                         , text "Where: Test location 2"
                         ]
-        , test "Event with Edit link" <|
-            \() ->
-                view baseUrl English event3
-                    |> Query.fromHtml
-                    |> Query.find [ Selector.class "btn-edit" ]
-                    |> Query.has [ text "Edit" ]
         ]
 
 
 all : Test
 all =
-    describe "Events tests"
+    describe "Event page tests"
         [ viewTest
         ]
 

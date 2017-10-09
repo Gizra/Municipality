@@ -13514,7 +13514,11 @@ var _gizra$municipality$Event_View$view = F3(
 	function (baseUrl, language, event) {
 		return A2(
 			_elm_lang$html$Html$div,
-			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('event-page'),
+				_1: {ctor: '[]'}
+			},
 			{
 				ctor: '::',
 				_0: A2(
@@ -13537,7 +13541,11 @@ var _gizra$municipality$Event_View$view = F3(
 								ctor: '::',
 								_0: A2(
 									_elm_lang$html$Html$h2,
-									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('page-title'),
+										_1: {ctor: '[]'}
+									},
 									{
 										ctor: '::',
 										_0: _elm_lang$html$Html$text(
@@ -13617,7 +13625,7 @@ var _gizra$municipality$Event_View$view = F3(
 													_elm_lang$html$Html$div,
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('col-md-4'),
+														_0: _elm_lang$html$Html_Attributes$class('col-md-4 event-date'),
 														_1: {ctor: '[]'}
 													},
 													{
@@ -13808,20 +13816,20 @@ var _gizra$municipality$Event_View$view = F3(
 														},
 														{
 															ctor: '::',
-															_0: A2(
-																_elm_lang$html$Html$span,
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('img-thumbnail'),
-																	_1: {ctor: '[]'}
-																},
-																{
-																	ctor: '::',
-																	_0: _gizra$municipality$Utils_Html$showMaybe(
-																		A2(
-																			_elm_lang$core$Maybe$map,
-																			function (imageUrl) {
-																				return A2(
+															_0: _gizra$municipality$Utils_Html$showMaybe(
+																A2(
+																	_elm_lang$core$Maybe$map,
+																	function (imageUrl) {
+																		return A2(
+																			_elm_lang$html$Html$span,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$class('img-thumbnail'),
+																				_1: {ctor: '[]'}
+																			},
+																			{
+																				ctor: '::',
+																				_0: A2(
 																					_elm_lang$html$Html$img,
 																					{
 																						ctor: '::',
@@ -13836,11 +13844,11 @@ var _gizra$municipality$Event_View$view = F3(
 																							}
 																						}
 																					},
-																					{ctor: '[]'});
-																			},
-																			event.imageUrl)),
-																	_1: {ctor: '[]'}
-																}),
+																					{ctor: '[]'}),
+																				_1: {ctor: '[]'}
+																			});
+																	},
+																	event.imageUrl)),
 															_1: {ctor: '[]'}
 														}),
 													_1: {ctor: '[]'}
