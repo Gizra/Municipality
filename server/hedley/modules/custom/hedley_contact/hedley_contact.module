@@ -184,18 +184,21 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
       }
     }
 
+    // Get Reception hours formatted.
+    $reception_hours = hedley_contact_get_reception_hours($node);
+
     $contact = [
       'id' => $wrapper->getIdentifier(),
       'name' => $name,
       'department' => check_plain($department),
       'image_url' => $image ? image_style_url('square_large_image', $image['uri']) : hedley_municipality_get_default_image($wrapper->getBundle()),
-      'phone' => check_plain($wrapper->field_phone->value()),
-      'fax' => check_plain($wrapper->field_fax->value()),
-      'email' => check_plain($wrapper->field_email->value()),
-      'address' => check_plain($wrapper->field_address->value()),
-      'job_title' => check_plain($wrapper->field_job_title->value()),
+      'phone' => $wrapper->field_phone->value() ? check_plain($wrapper->field_phone->value()) : NULL,
+      'fax' => $wrapper->field_fax->value() ? check_plain($wrapper->field_fax->value()) : NULL,
+      'email' => $wrapper->field_email->value() ? check_plain($wrapper->field_email->value()) : NULL,
+      'address' => $wrapper->field_address->value() ? check_plain($wrapper->field_address->value()) : NULL,
+      'job_title' => $wrapper->field_job_title->value() ? check_plain($wrapper->field_job_title->value()) : NULL,
       'topics' => $topics_array,
-      'reception_hours' => hedley_contact_get_reception_hours($node),
+      'reception_hours' => $reception_hours ? $reception_hours : NULL,
       'edit' => og_node_access($node, 'update', $user) == 'allow' ? TRUE : FALSE,
     ];
 

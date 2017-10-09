@@ -43,6 +43,11 @@ renderBootstrapGrid columnsInOneRow colHtmlMsgList =
             split columnsInOneRow colHtmlMsgList
 
         columnClass =
-            "col-md-" ++ (toString <| 12 // columnsInOneRow)
+            "col-md-"
+                ++ (toString <| 12 // columnsInOneRow)
+                ++ " col-sm-"
+                ++ (toString <| 12 // (columnsInOneRow - 1))
+                ++ " col-xs-"
+                ++ (toString <| 12 // (columnsInOneRow - 2))
     in
         div [] (map (renderRow columnClass) <| listOfRows)

@@ -89,10 +89,6 @@
   margin: 0;
 }
 
-#elm-app .thumbnail.search-results.contact-search-result {
-  min-height: 910px;
-}
-
 .content img {
   display: inline-block;
 }
