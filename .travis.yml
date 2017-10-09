@@ -11,14 +11,15 @@ env:
   - CODE_REVIEW=1 REVIEW_STANDARD="DrupalPractice"
   - SHELL_REVIEW=1
   global:
-  - secure: yYJ+dW1dUxpDtAaRwlWVEFKy27dwW/28Nu9VRjodssfsoz+mphoDDx2kRcQXwXUD39mWSoZx9LWzpi2X3ca9jiE/kdfZKPg7N9ysHmAQDjoOd1Ju+asx40udU4uwiPncJkZ9iH/Cm/Wu7YE9yp3oRPO/OAwCmFY40FfJ1weALELsBx5QMIIz5NvrYIuleuYdt+MkY9XLEXbWzrOACRjmRQH4Hys0XHQo1BCIX9Wc8kOPKMJhlw7IrVhiZMvEXCU7w8R48TfM5kyogjp197TUSjD/47iBF8V9FueRX6Pzj+Pe0mg4lX0WyHln+YnqaVAVXG6+0e564WI9lLmP3n204r1Aw0WiN8GcBjcEUSqhiQ4NXwrvdkeMwdiTft5fYVyXylKJB6CeWscNKGiUcnhAOvctqmpe6Q7Xm58H7itxO94jwUpTZas0+6jMoBiyJiFnPdkcDDrTBvdyDxZ1re49nttjlXrqNFB6Qhu25Cuy+poTgSAVZlY0J5IuBgn5/Eg0qBucRBo/5+Wy74yT4/MH0N3I3X1OyWC3+2nmi/qSbl8ZYJ4zvRihk7HgmZJxR/TWaeCuygUWkWFX05CvUjee+JV6m4hqaWtub8ULBGp4ty1J8w990rMpeOg+ZFZRCoSEEXKKQgKiEHTaQdx70qY1CvOYVcIP34oHjA465ZDEJow=
+  - secure: PZrbjpYSMUZik/+pGvgQ6H4AlO1GB1QVX6WdnMTUePcVCcwTne+ePHtSCjeeJ7f+NELMZ5Rbmh2x9FscvAmDIkM/M5kXygzsRMU8O83mOq3Hw+m1mmXtX10kvE/V+QwFwiFIrSbLJI62gpbQUIdX8vZbSLwJGjvSqjBiPCKgQxFyBQ1HydNzc9qqmQSlICvY5eg7XVPd25RGq8VgKwWwWUyYkAA81vSrQyH6u+VJtuF6462NihO9UFIBbVGahSwCO0enWHvJAjf3GN4hrW5rM6ZAdZwlPgraLIwncqnG1oyQ/wZEVG3vd+ohZNNZIEQtYsUjNuOxuIie3g4p2CCiCqj6FVfZJYccPzSCj1IUBl3V1JdoQgYG94tM+VgMaPaXC8njyUdlRb1qZs1LjP+j1r5vx5f+zIvAIs1Ww6vtTSLyId2jKkqmGqhT/SEi1V9and8IvkN2euLK+l9tgCKQWF5DT8eiUBg2gcSqXDJvmjbN7cp0O8XsWNFPtSpyKQkejeWikpozmoyLeZyNOwgw7tflKlkYwtI7xnTnRB4vi1reM0+rLlrNTBH5M+65C1MBKJ8gR2loUYIXHAdjLu/w2uLXYTn8KQyt0t7+h1RQO485pMNth8F8uljPD6IgD80jFKjW4e4XUAcmDv1FlU7Qf/tZv0HKtAKUqCoEeab/Nxo=
 services:
 - docker
 before_install:
 - composer self-update
 - export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 - sudo pip install docker-compose
-- openssl aes-256-cbc -K $encrypted_8a88d1e58da1_key -iv $encrypted_8a88d1e58da1_iv -in gdrive-service-account.json.enc -out gdrive-service-account.json -d
+- openssl aes-256-cbc -K $encrypted_8a88d1e58da1_key -iv $encrypted_8a88d1e58da1_iv
+  -in gdrive-service-account.json.enc -out gdrive-service-account.json -d
 install:
 - "$TRAVIS_BUILD_DIR/ci-scripts/install_client.sh"
 - "$TRAVIS_BUILD_DIR/ci-scripts/install_coder.sh"
