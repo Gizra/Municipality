@@ -15,12 +15,12 @@ env:
 services:
 - docker
 before_install:
+- openssl aes-256-cbc -K $encrypted_9f8daefef5b9_key -iv $encrypted_9f8daefef5b9_iv
+  -in gdrive-service-account.json.enc -out gdrive-service-account.json
+  -d
 - composer self-update
 - export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 - sudo pip install docker-compose
-- openssl aes-256-cbc -K $encrypted_9f8daefef5b9_key -iv $encrypted_9f8daefef5b9_iv
-  -in gdrive-service-account.json.enc -out gdrive-service-account.json -d
-  -d
 install:
 - "$TRAVIS_BUILD_DIR/ci-scripts/install_client.sh"
 - "$TRAVIS_BUILD_DIR/ci-scripts/install_coder.sh"
