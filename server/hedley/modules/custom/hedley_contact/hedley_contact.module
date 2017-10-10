@@ -132,7 +132,7 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
   $range = $show_as_block ? 5 : 100;
 
   // Get contact nodes by group.
-  $nodes = hedley_municipality_get_nodes_by_current_user_type('contact', $range, $group, $promoted_only, $topic_tid, 'ASC');
+  $nodes = hedley_municipality_get_nodes_by_current_user_type('contact', $range, $group, $promoted_only, $topic_tid);
   if (!$nodes) {
     // No contacts found.
     return NULL;
@@ -209,6 +209,14 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
     });
   }
 
+  usort($contacts, 'hedley_contact_sort_by_last_name');
+  
   return $contacts;
+}
 
+function hedley_contact_sort_by_last_name($a, $b) {
+  if ($a['name'] == $b['name']) {
+    return 0;
+  }
+  return ($a['name'] < $b['name']) ? -1 : 1;
 }
