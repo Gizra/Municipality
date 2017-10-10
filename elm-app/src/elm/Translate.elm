@@ -19,6 +19,7 @@ type TranslationId
     | ContactsNotFound
     | DayTranslation Day
     | DayAndDate Date (Maybe Date)
+    | DateLabelTranslation
     | EditLinkText
     | EventRecurringWeekly
     | EventsNotFound
@@ -28,6 +29,7 @@ type TranslationId
     | MatchingResults
     | MoreDetailsText
     | PriceText
+    | PriceCurrencyText
     | ReceptionText
     | ShowAll
 
@@ -132,6 +134,12 @@ translate lang trans =
                         , hebrew = allDatesFormated ++ ", " ++ dayTranslated
                         }
 
+                DateLabelTranslation ->
+                    { arabic = "متى"
+                    , english = "When"
+                    , hebrew = "מתי"
+                    }
+
                 EditLinkText ->
                     { arabic = "تحرير"
                     , english = "Edit"
@@ -184,6 +192,12 @@ translate lang trans =
                     { arabic = "السعر"
                     , english = "Price"
                     , hebrew = "מחיר"
+                    }
+
+                PriceCurrencyText ->
+                    { arabic = "شيكل"
+                    , english = "NIS"
+                    , hebrew = "ש״ח"
                     }
 
                 ReceptionText ->

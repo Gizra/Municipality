@@ -1,6 +1,6 @@
-module Event.Utils exposing (filterEvents)
+module Events.Utils exposing (filterEvents)
 
-import Event.Model exposing (DictListEvent)
+import Events.Model exposing (DictListEvent)
 import DictList
 
 

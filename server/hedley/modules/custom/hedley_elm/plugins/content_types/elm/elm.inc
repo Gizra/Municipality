@@ -9,7 +9,10 @@ $plugin = [
   'title' => t('Elm app'),
   'category' => t('Hedley'),
   'hook theme' => 'hedley_elm_elm_content_type_theme',
-  'required context' => new ctools_context_optional(t('Topic'), 'taxonomy_term'),
+  'required context' => [
+    new ctools_context_optional(t('Topic'), 'taxonomy_term'),
+    new ctools_context_optional(t('Node'), 'node'),
+  ],
   'defaults' => [
     'page' => 'contact',
     'show_as_block' => FALSE,
@@ -28,11 +31,26 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
 
   // Get the topic ID if there's a topic context.
   $topic_tid = 0;
-  if (!empty($context->data) && isset($context->data->tid)) {
-    $topic_tid = $context->data->tid;
+  if (!empty($context[0]) && isset($context[0]->data->tid)) {
+    $topic_tid = $context[0]->data->tid;
   }
 
   $page = $conf['page'];
+
+  // Expected node pages.
+  $node_pages = [
+    'contact',
+    'event',
+  ];
+  $node_nid = 0;
+  if (in_array($page, $node_pages)) {
+    if (empty($context[1]) || !isset($context[1]->data->nid)) {
+      // Don't continue if we are in a node page and we don't have a node ID.
+      return FALSE;
+    }
+    $node_nid = $context[1]->data->nid;
+  }
+
   $show_as_block = (bool) $conf['show_as_block'];
   $promoted_only = (bool) $conf['promoted_only'];
 
@@ -42,12 +60,23 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   }
 
   $values = [];
+  $title = '';
   switch ($page) {
-    case 'contacts':
+    case 'contact':
       $values = hedley_contact_get_contacts_by_group($node, $language->language, $show_as_block, $promoted_only, $topic_tid);
       break;
 
+    case 'contacts':
+      $title = t('People who can help you');
+      $values = hedley_contact_get_contacts_by_group($node, $language->language, $show_as_block, $promoted_only, $topic_tid);
+      break;
+
+    case 'event':
+      $values = hedley_event_get_event_item(node_load($node_nid), $language->language);
+      break;
+
     case 'events':
+      $title = t('Upcoming events');
       $values = hedley_event_get_events_by_group($node, $language->language, $show_as_block, $promoted_only, $topic_tid);
       break;
   }
@@ -86,7 +115,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   // Inject the unique ID.
   $block->content = theme('hedley_elm_elm', [
     'show_as_block' => $show_as_block,
-    'title' => $page == 'events' ? t('Upcoming events') : t('People who can help you'),
+    'title' => $title,
     'app_id' => $app_id,
   ]);
 
@@ -103,7 +132,7 @@ function hedley_elm_elm_content_type_edit_form($form, &$form_state) {
     '#type' => 'select',
     '#title' => t('Page'),
     '#description' => t('The bundle of the displayed content.'),
-    '#options' => drupal_map_assoc(['contacts', 'events']),
+    '#options' => drupal_map_assoc(['contact', 'contacts', 'event', 'events']),
     '#default_value' => $conf['page'],
     '#required' => TRUE,
   ];
