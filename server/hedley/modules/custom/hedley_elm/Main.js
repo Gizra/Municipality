@@ -12341,11 +12341,8 @@ var _gizra$municipality$Utils_BootstrapGrid$renderBootstrapGrid = F2(
 					' col-sm-',
 					A2(
 						_elm_lang$core$Basics_ops['++'],
-						_elm_lang$core$Basics$toString((12 / (columnsInOneRow - 1)) | 0),
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							' col-xs-',
-							_elm_lang$core$Basics$toString((12 / (columnsInOneRow - 2)) | 0))))));
+						_elm_lang$core$Basics$toString((12 / (columnsInOneRow - ((columnsInOneRow / 2) | 0))) | 0),
+						' col-xs-12'))));
 		var listOfRows = A2(_gizra$municipality$Utils_BootstrapGrid$split, columnsInOneRow, colHtmlMsgList);
 		return A2(
 			_elm_lang$html$Html$div,
@@ -13246,25 +13243,27 @@ var _gizra$municipality$Contact_View$viewContacts = F4(
 					_1: {ctor: '[]'}
 				});
 		} else {
-			var _p12 = showAsBlock ? {ctor: '_Tuple3', _0: _elm_lang$html$Html$ul, _1: 'list list-primary list-borders', _2: _gizra$municipality$Contact_View$viewContactAsBlock} : {ctor: '_Tuple3', _0: _elm_lang$html$Html$div, _1: 'row', _2: _gizra$municipality$Contact_View$viewContact};
-			var wrappingElement = _p12._0;
-			var classes = _p12._1;
-			var viewFunction = _p12._2;
-			return A2(
-				_gizra$municipality$Utils_BootstrapGrid$renderBootstrapGrid,
-				4,
-				_Gizra$elm_dictlist$DictList$values(
-					A2(
-						_Gizra$elm_dictlist$DictList$map,
-						F2(
-							function (contactId, contact) {
-								return A3(
-									viewFunction,
-									baseUrl,
-									language,
-									{ctor: '_Tuple2', _0: contactId, _1: contact});
-							}),
-						filteredContacts)));
+			var viewFunction = showAsBlock ? _gizra$municipality$Contact_View$viewContactAsBlock : _gizra$municipality$Contact_View$viewContact;
+			var contactsHtmlList = _Gizra$elm_dictlist$DictList$values(
+				A2(
+					_Gizra$elm_dictlist$DictList$map,
+					F2(
+						function (contactId, contact) {
+							return A3(
+								viewFunction,
+								baseUrl,
+								language,
+								{ctor: '_Tuple2', _0: contactId, _1: contact});
+						}),
+					filteredContacts));
+			return showAsBlock ? A2(
+				_elm_lang$html$Html$ul,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('list list-primary list-borders'),
+					_1: {ctor: '[]'}
+				},
+				contactsHtmlList) : A2(_gizra$municipality$Utils_BootstrapGrid$renderBootstrapGrid, 3, contactsHtmlList);
 		}
 	});
 var _gizra$municipality$Contact_View$viewContactFilter = F2(

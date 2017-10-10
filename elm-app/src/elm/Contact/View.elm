@@ -78,19 +78,13 @@ viewContacts baseUrl language showAsBlock { contacts, filterString } =
             div [] [ text <| translate language ContactsNotFound ]
         else
             let
-                ( wrappingElement, classes, viewFunction ) =
+                viewFunction =
                     if showAsBlock then
-                        ( ul
-                        , "list list-primary list-borders"
-                        , viewContactAsBlock
-                        )
+                        viewContactAsBlock
                     else
-                        ( div
-                        , "row"
-                        , viewContact
-                        )
-            in
-                renderBootstrapGrid 4
+                        viewContact
+
+                contactsHtmlList =
                     (filteredContacts
                         |> DictList.map
                             (\contactId contact ->
@@ -101,6 +95,12 @@ viewContacts baseUrl language showAsBlock { contacts, filterString } =
                             )
                         |> DictList.values
                     )
+            in
+                if showAsBlock then
+                    ul [ class "list list-primary list-borders" ]
+                        contactsHtmlList
+                else
+                    renderBootstrapGrid 3 contactsHtmlList
 
 
 {-| View a single contact.

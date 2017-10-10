@@ -45,5 +45,25 @@ describe('Municipality contacts page', () => {
     browser.logout();
   });
 
+  it('should be able to see contact info icons', () => {
+    browser.url('/al-kasom/contacts?language=he');
+
+    // Mail icon
+    assert(browser.isVisible('.search-results:nth-child(1) .email-wrapper .fa-envelope'));
+
+    // Phone icon
+    assert(browser.isVisible('.search-results:nth-child(1) .phone-wrapper .fa-phone'));
+
+    // Fax icon
+    assert(browser.isVisible('.search-results:nth-child(1) .fax-wrapper .fa-fax'));
+  });
+
+  it('should not be able to see info icons when number is missing', () => {
+    browser.url('/al-kasom/contacts?language=he');
+
+    // Fax icon
+    assert(!browser.isVisible('.search-results:nth-child(3) .fax-wrapper .fa-fax'));
+  });
+
 });
 
