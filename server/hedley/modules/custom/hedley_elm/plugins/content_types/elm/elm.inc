@@ -132,7 +132,7 @@ function hedley_elm_elm_content_type_edit_form($form, &$form_state) {
     '#type' => 'select',
     '#title' => t('Page'),
     '#description' => t('The bundle of the displayed content.'),
-    '#options' => drupal_map_assoc(['contact', 'contacts', 'event', 'events']),
+    '#options' => drupal_map_assoc(['contacts', 'event', 'events']),
     '#default_value' => $conf['page'],
     '#required' => TRUE,
   ];
