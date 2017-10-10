@@ -11,19 +11,18 @@ env:
   - CODE_REVIEW=1 REVIEW_STANDARD="DrupalPractice"
   - SHELL_REVIEW=1
   global:
-  - secure: yYJ+dW1dUxpDtAaRwlWVEFKy27dwW/28Nu9VRjodssfsoz+mphoDDx2kRcQXwXUD39mWSoZx9LWzpi2X3ca9jiE/kdfZKPg7N9ysHmAQDjoOd1Ju+asx40udU4uwiPncJkZ9iH/Cm/Wu7YE9yp3oRPO/OAwCmFY40FfJ1weALELsBx5QMIIz5NvrYIuleuYdt+MkY9XLEXbWzrOACRjmRQH4Hys0XHQo1BCIX9Wc8kOPKMJhlw7IrVhiZMvEXCU7w8R48TfM5kyogjp197TUSjD/47iBF8V9FueRX6Pzj+Pe0mg4lX0WyHln+YnqaVAVXG6+0e564WI9lLmP3n204r1Aw0WiN8GcBjcEUSqhiQ4NXwrvdkeMwdiTft5fYVyXylKJB6CeWscNKGiUcnhAOvctqmpe6Q7Xm58H7itxO94jwUpTZas0+6jMoBiyJiFnPdkcDDrTBvdyDxZ1re49nttjlXrqNFB6Qhu25Cuy+poTgSAVZlY0J5IuBgn5/Eg0qBucRBo/5+Wy74yT4/MH0N3I3X1OyWC3+2nmi/qSbl8ZYJ4zvRihk7HgmZJxR/TWaeCuygUWkWFX05CvUjee+JV6m4hqaWtub8ULBGp4ty1J8w990rMpeOg+ZFZRCoSEEXKKQgKiEHTaQdx70qY1CvOYVcIP34oHjA465ZDEJow=
+  - secure: "KlxO3he7UwTLq3AQVomjvHzmCCUOlRNL/xU1ZHQvQQIs/arKQFrIF/kjvv1AYh28VfNtbk81Uz6+CdbaQlA3kV5XHgVq+5hMCfDbvBnZnJCFSLXVVYG42xk4Rp6hotoQwvquF0Rch6O8FHEMzaO/4CAPqGFVfmtZPecVwGMYoOq5/tJRq4YyxXYmIYPVSiYSUAuaGXpavDn+Dk7YMq0hHUAnGnBKmGY7MtZpPF0+5yAS7GgdvXTJAPDCqg1c98Qw2AyrgAIiTjjzYa8AjQGKPvzvtdsXfe46pVWoVCcnQZbewFtJNMpj5aSnoYzezhTIYTCPhSKmYBLFiPXcIyCd1ni7M6eusbs+0nye16Q9mGxWefYAnmB2Sd/Lt+SauFnKuX2m5KvYDNhL8hEmTqegfo4+zoBIj3l2qKCO4XON/oS8MtkoXZNJYjkVH7HHxMQztXsiBNkcK419NVtf5cyYhlHakSTHeKKg7lvHqU7AjizgiUlUSps0V4lAfRSp7NzHdYWQGMU6vm7qqypm/B/O+iabAIDrCswEo6mpB/0jYZ1m6EGWXC59p361P7pW+tPkYrMFXaVvVIKEMTwQNktRWMFOyVabX9pzz3qg8wRTQ9D52leMEbIOya4272eSCZhfTKWlIYpOt+4XGGzm1kU6KkGEbciBtiTi7y/AByRhMOE="
 services:
 - docker
 before_install:
+-  openssl aes-256-cbc -K $encrypted_8a88d1e58da1_key -iv $encrypted_8a88d1e58da1_iv -in gdrive-service-account.json.enc -out gdrive-service-account.json -d
 - composer self-update
 - export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 - sudo pip install docker-compose
-- openssl aes-256-cbc -K $encrypted_8a88d1e58da1_key -iv $encrypted_8a88d1e58da1_iv -in gdrive-service-account.json.enc -out gdrive-service-account.json -d
 install:
 - "$TRAVIS_BUILD_DIR/ci-scripts/install_client.sh"
 - "$TRAVIS_BUILD_DIR/ci-scripts/install_coder.sh"
 - "$TRAVIS_BUILD_DIR/ci-scripts/install_server.sh"
-- "$TRAVIS_BUILD_DIR/ci-scripts/install_shell.sh"
 before_script:
 - "$TRAVIS_BUILD_DIR/ci-scripts/prepare_client.sh"
 - sudo service postgresql stop
