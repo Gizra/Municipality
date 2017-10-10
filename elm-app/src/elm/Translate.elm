@@ -19,6 +19,7 @@ type TranslationId
     | ContactsNotFound
     | DayTranslation Day
     | DayAndDate Date (Maybe Date)
+    | DateLabelTranslation
     | EditLinkText
     | EventRecurringWeekly
     | EventsNotFound
@@ -131,6 +132,12 @@ translate lang trans =
                         , english = dayTranslated ++ ", " ++ allDatesFormated
                         , hebrew = allDatesFormated ++ ", " ++ dayTranslated
                         }
+
+                DateLabelTranslation ->
+                    { arabic = "متى"
+                    , english = "When"
+                    , hebrew = "מתי"
+                    }
 
                 EditLinkText ->
                     { arabic = "تحرير"

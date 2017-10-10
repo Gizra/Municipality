@@ -7,7 +7,7 @@ import Html exposing (..)
 import Html.Attributes exposing (alt, class, href, id, property, src, target)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (formatDateAndDayWithLabel, sectionDivider, showIf, showMaybe)
 
 
 view : BaseUrl -> Language -> Event -> Html Msg
@@ -44,7 +44,7 @@ view baseUrl language event =
                             [ i
                                 [ class "fa fa-calendar" ]
                                 []
-                            , text <| translate language (DayAndDate event.date event.endDate)
+                            , text <| formatDateAndDayWithLabel language event.date event.endDate
                             ]
                         , showIf event.recurringWeekly <|
                             div

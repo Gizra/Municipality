@@ -3,15 +3,17 @@ module Utils.Html
         ( colorToString
         , divider
         , emptyNode
+        , formatDateAndDayWithLabel
+        , formatReceptionDays
         , sectionDivider
         , showIf
         , showMaybe
-        , formatReceptionDays
         )
 
 import App.Types exposing (Language(..))
 import Contact.Model exposing (Color)
-import Date exposing (Day)
+import Date exposing (Date, Day, dayOfWeek)
+import Date.Format exposing (format)
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)
 import String exposing (toLower)
@@ -89,3 +91,38 @@ formatReceptionDays language days multipleDays =
             )
         )
             ++ ", "
+
+
+formatDateAndDayWithLabel : Language -> Date -> Maybe Date -> String
+formatDateAndDayWithLabel language date mEndDate =
+    let
+        labelTranslated =
+            translate language <| DateLabelTranslation
+
+        dayTranslated =
+            translate language <| DayTranslation (dayOfWeek date)
+
+        formater =
+            format "%d/%m/%Y, %H:%M"
+
+        compareFormater =
+            format "%d/%m/%Y"
+
+        dateFormated =
+            formater date
+
+        timeFormater =
+            format "%H:%M"
+
+        allDatesFormated =
+            Maybe.map
+                (\endDate ->
+                    if compareFormater date == compareFormater endDate then
+                        dateFormated ++ " - " ++ (timeFormater endDate)
+                    else
+                        dateFormated ++ " - " ++ (formater endDate)
+                )
+                mEndDate
+                |> Maybe.withDefault dateFormated
+    in
+        labelTranslated ++ ": " ++ dayTranslated ++ ", " ++ allDatesFormated
