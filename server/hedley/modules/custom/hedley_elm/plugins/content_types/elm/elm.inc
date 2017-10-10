@@ -32,7 +32,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   // Get the topic ID if there's a topic context.
   $topic_tid = 0;
   if (!empty($context[0]) && isset($context[0]->data->tid)) {
-    $topic_tid = $context->data->tid;
+    $topic_tid = $context[0]->data->tid;
   }
 
   $page = $conf['page'];
