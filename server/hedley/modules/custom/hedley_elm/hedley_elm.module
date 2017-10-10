@@ -8,9 +8,9 @@
 include_once 'hedley_elm.features.inc';
 
 // Define constants for elm page types.
-define('CONTACTS', 'contacts');
-define('EVENT', 'event');
-define('EVENTS', 'events');
+define('HEDLEY_ELM_CONTACTS', 'contacts');
+define('HEDLEY_ELM_EVENT', 'event');
+define('HEDLEY_ELM_EVENTS', 'events');
 
 /**
  * Implements hook_ctools_plugin_directory().
