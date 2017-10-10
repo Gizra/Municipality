@@ -7,10 +7,10 @@
 
 include_once 'hedley_elm.features.inc';
 
-/**
- * @file
- * Code for the Hedley Elm app module.
- */
+// Define constants for elm page types.
+define('CONTACTS', 'contacts');
+define('EVENT', 'event');
+define('EVENTS', 'events');
 
 /**
  * Implements hook_ctools_plugin_directory().
