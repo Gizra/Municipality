@@ -20,4 +20,23 @@ describe('Municipality news item page', () => {
     browser.waitForVisible('div=إدارة مجموعات تعلن: الفرصة الأخيرة لإغلاق ديون ضريبة الأملاك للسكان. عجل تسوية الديون الخاصة بك وتجنب العقوبات. يسري هذا العرض حتى -8.4.17.');
   });
 
+  it('should not show an expired news item after running cron', () => {
+    // Login as admin (to run cron).
+    browser.login('admin');
+    browser.url('/tuba-zangariyye/node/1?language=he');
+
+    // The entity is shown before running cron.
+    browser.waitForVisible('.news-box');
+    browser.waitForVisible('h3=Expired news entity');
+
+    // Run cron.
+    browser.url('/tuba-zangariyye/admin/reports/status/run-cron?language=he');
+    browser.waitForVisible('#admin-menu');
+
+    // Check that the expired news item is not visible now.
+    browser.url('/tuba-zangariyye/node/1?language=he');
+    browser.waitForVisible('.news-box');
+    assert(!browser.isVisible('h3=Expired news entity'));
+  });
+
 });
