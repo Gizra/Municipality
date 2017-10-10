@@ -83,7 +83,7 @@ view baseUrl language event =
                                         [ i
                                             [ class "fa fa-ils" ]
                                             []
-                                        , text <| translate language PriceText ++ ": " ++ ticketPrice
+                                        , text <| translate language PriceText ++ ": " ++ ticketPrice ++ " " ++ translate language PriceCurrencyText
                                         ]
                                 )
                                 event.ticketPrice

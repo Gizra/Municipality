@@ -12211,6 +12211,7 @@ var _gizra$municipality$Translate$TranslationSet = F3(
 	});
 var _gizra$municipality$Translate$ShowAll = {ctor: 'ShowAll'};
 var _gizra$municipality$Translate$ReceptionText = {ctor: 'ReceptionText'};
+var _gizra$municipality$Translate$PriceCurrencyText = {ctor: 'PriceCurrencyText'};
 var _gizra$municipality$Translate$PriceText = {ctor: 'PriceText'};
 var _gizra$municipality$Translate$MoreDetailsText = {ctor: 'MoreDetailsText'};
 var _gizra$municipality$Translate$MatchingResults = {ctor: 'MatchingResults'};
@@ -12332,6 +12333,8 @@ var _gizra$municipality$Translate$translate = F2(
 					return {arabic: 'لمزيد من التفاصيل', english: 'For more details', hebrew: 'לפרטים נוספים'};
 				case 'PriceText':
 					return {arabic: 'السعر', english: 'Price', hebrew: 'מחיר'};
+				case 'PriceCurrencyText':
+					return {arabic: 'شيكل', english: 'NIS', hebrew: 'ש״ח'};
 				case 'ReceptionText':
 					return {arabic: 'استقبال: ', english: 'Reception: ', hebrew: 'קבלת קהל: '};
 				default:
@@ -13830,7 +13833,16 @@ var _gizra$municipality$Event_View$view = F3(
 																							A2(
 																								_elm_lang$core$Basics_ops['++'],
 																								A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$PriceText),
-																								A2(_elm_lang$core$Basics_ops['++'], ': ', ticketPrice))),
+																								A2(
+																									_elm_lang$core$Basics_ops['++'],
+																									': ',
+																									A2(
+																										_elm_lang$core$Basics_ops['++'],
+																										ticketPrice,
+																										A2(
+																											_elm_lang$core$Basics_ops['++'],
+																											' ',
+																											A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$PriceCurrencyText)))))),
 																						_1: {ctor: '[]'}
 																					}
 																				});

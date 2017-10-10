@@ -29,6 +29,7 @@ type TranslationId
     | MatchingResults
     | MoreDetailsText
     | PriceText
+    | PriceCurrencyText
     | ReceptionText
     | ShowAll
 
@@ -191,6 +192,12 @@ translate lang trans =
                     { arabic = "السعر"
                     , english = "Price"
                     , hebrew = "מחיר"
+                    }
+
+                PriceCurrencyText ->
+                    { arabic = "شيكل"
+                    , english = "NIS"
+                    , hebrew = "ש״ח"
                     }
 
                 ReceptionText ->
