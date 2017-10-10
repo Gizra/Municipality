@@ -211,7 +211,10 @@ function hedley_topic_default_page_manager_handlers() {
     'override_title' => 0,
     'override_title_text' => '',
     'override_title_heading' => 'h2',
-    'context' => 'argument_term_1',
+    'context' => array(
+      0 => 'argument_term_1',
+      1 => 'empty',
+    ),
     'promoted_only' => 0,
   );
   $pane->cache = array();
@@ -236,7 +239,10 @@ function hedley_topic_default_page_manager_handlers() {
     'page' => 'contacts',
     'show_as_block' => 1,
     'promoted_only' => 0,
-    'context' => 'argument_term_1',
+    'context' => array(
+      0 => 'argument_term_1',
+      1 => 'empty',
+    ),
     'override_title' => 0,
     'override_title_text' => '',
     'override_title_heading' => 'h2',

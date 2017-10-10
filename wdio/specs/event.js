@@ -25,7 +25,7 @@ describe('Municipality event page', () => {
 
     // Event ticket price.
     assert(browser.isVisible('.ticket-price'));
-    assert.equal($('.ticket-price').getText(), 'מחיר: 23');
+    assert.equal($('.ticket-price').getText(), 'מחיר: 23 ש״ח');
 
     // Event image.
     assert(browser.isVisible('.img-thumbnail'));
