@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @file
+ * Class HedleyNewsGetNews.
+ */
+
+/**
+ * Class HedleyNewsGetNews.
+ */
+class HedleyNewsGetNews extends HedleyMunicipalityWebTestCase {
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'News expiration date',
+      'description' => 'Test that news returned from the general function match what is expected.',
+      'group' => 'Hedley',
+    );
+  }
+
+  /**
+   * Test that news returned doesn't contain expired news.
+   */
+  public function testGetNewsItems() {
+    //Time in the future.
+    $future_time = strtotime("+1 year");
+    //Time in the past.
+    $past_time = strtotime("-1 year");
+    // Create a municipality group.
+    $user1 = $this->drupalCreateUser();
+    $municipality_settings = [
+      'type' => 'municipality',
+      'uid' => $user1->uid,
+    ];
+    $municipality = $this->drupalCreateNode($municipality_settings);
+
+    // Create news.
+    $news_settings = [
+      'type' => 'news',
+      OG_AUDIENCE_FIELD => [
+        LANGUAGE_NONE => [
+          ['target_id' => $municipality->nid],
+        ],
+      ],
+      'uid' => $user1->uid,
+      'field_expiration_date' => [
+        LANGUAGE_NONE => [
+          ['value' => $future_time],
+        ],
+      ],
+    ];
+
+    // Create 2 current new items.
+    $news1 = $this->drupalCreateNode($news_settings);
+    $news2 = $this->drupalCreateNode($news_settings);
+
+    // Create an expired news item.
+    $news_settings['field_expiration_date'] = [
+      LANGUAGE_NONE => [
+        ['value' => $past_time],
+      ],
+    ];
+    $news3 = $this->drupalCreateNode($news_settings);
+
+    // List the expected node IDs that should be returned from the function.
+    $expected_news = [
+      $news2->nid,
+      $news1->nid,
+    ];
+
+    $returned_news = hedley_municipality_get_nodes('news');
+
+    $this->assertEqual($expected_news, array_keys($returned_news), 'Expected news are returned.');
+    $this->assertTrue(!in_array($news3->nid, array_keys($returned_news)), 'Expired news item is not returned.');
+  }
+
+}
