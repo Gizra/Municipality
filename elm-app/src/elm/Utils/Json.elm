@@ -39,10 +39,10 @@ decodeEmptyArrayAs default =
                     length =
                         List.length list
                 in
-                    if length == 0 then
-                        succeed default
-                    else
-                        fail <| "Expected an empty array, not an array with length: " ++ toString length
+                if length == 0 then
+                    succeed default
+                else
+                    fail <| "Expected an empty array, not an array with length: " ++ toString length
             )
 
 

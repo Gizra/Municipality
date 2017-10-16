@@ -11,7 +11,7 @@ import Expect
 import Html
 import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
-import Test.Html.Selector as Selector exposing (class, tag, text, attribute)
+import Test.Html.Selector as Selector exposing (attribute, class, tag, text)
 
 
 filterContactsTest : Test

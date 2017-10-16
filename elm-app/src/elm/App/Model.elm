@@ -1,10 +1,10 @@
 module App.Model
     exposing
-        ( emptyModel
+        ( BaseUrl
         , Flags
-        , Msg(..)
         , Model
-        , BaseUrl
+        , Msg(..)
+        , emptyModel
         )
 
 import App.Types exposing (Language(..), Page(..))

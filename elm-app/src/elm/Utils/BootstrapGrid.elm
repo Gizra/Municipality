@@ -3,9 +3,9 @@ module Utils.BootstrapGrid exposing (renderBootstrapGrid)
 {-| Splits a list into sub lists containing a given number of children.
 -}
 
-import List exposing (map, drop, take)
 import Html exposing (Html, div)
 import Html.Attributes exposing (class)
+import List exposing (drop, map, take)
 
 
 split : Int -> List a -> List (List a)
@@ -53,4 +53,4 @@ renderBootstrapGrid columnsInOneRow colHtmlMsgList =
                 ++ (toString <| 12 // (columnsInOneRow - (columnsInOneRow // 2)))
                 ++ " col-xs-12"
     in
-        div [] (map (renderRow columnClass) <| listOfRows)
+    div [] (map (renderRow columnClass) <| listOfRows)

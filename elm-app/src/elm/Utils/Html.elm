@@ -78,18 +78,17 @@ formatReceptionDays language days multipleDays =
                 Maybe.map identity (List.head <| List.reverse days)
                     |> Maybe.withDefault Date.Sat
         in
-            translate language (DayTranslation firstDay) ++ " - " ++ translate language (DayTranslation lastDay) ++ ", "
+        translate language (DayTranslation firstDay) ++ " - " ++ translate language (DayTranslation lastDay) ++ ", "
     else
         -- Joing the days together but go through them first and convert from a
         -- list of Day to list of String, add a comma at the end.
-        (String.join ", "
+        String.join ", "
             (List.map
                 (\day ->
                     translate language (DayTranslation day)
                 )
                 days
             )
-        )
             ++ ", "
 
 
@@ -118,11 +117,11 @@ formatDateAndDayWithLabel language date mEndDate =
             Maybe.map
                 (\endDate ->
                     if compareFormater date == compareFormater endDate then
-                        dateFormated ++ " - " ++ (timeFormater endDate)
+                        dateFormated ++ " - " ++ timeFormater endDate
                     else
-                        dateFormated ++ " - " ++ (formater endDate)
+                        dateFormated ++ " - " ++ formater endDate
                 )
                 mEndDate
                 |> Maybe.withDefault dateFormated
     in
-        labelTranslated ++ ": " ++ dayTranslated ++ ", " ++ allDatesFormated
+    labelTranslated ++ ": " ++ dayTranslated ++ ", " ++ allDatesFormated

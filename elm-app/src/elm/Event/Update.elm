@@ -20,7 +20,7 @@ update msg model =
                 _ =
                     Debug.log "HandleEvent" err
             in
-                model ! []
+            model ! []
 
 
 subscriptions : Sub Msg
