@@ -13524,7 +13524,11 @@ var _gizra$municipality$Contact_View$view = F4(
 	function (baseUrl, language, showAsBlock, model) {
 		return A2(
 			_elm_lang$html$Html$div,
-			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('container'),
+				_1: {ctor: '[]'}
+			},
 			{
 				ctor: '::',
 				_0: A2(
@@ -14600,7 +14604,11 @@ var _gizra$municipality$Events_View$view = F4(
 	function (baseUrl, language, showAsBlock, model) {
 		return A2(
 			_elm_lang$html$Html$div,
-			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('container'),
+				_1: {ctor: '[]'}
+			},
 			{
 				ctor: '::',
 				_0: A2(
