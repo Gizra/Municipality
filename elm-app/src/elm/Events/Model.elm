@@ -2,7 +2,7 @@ module Events.Model exposing (..)
 
 import Date exposing (Date, Day)
 import DictList exposing (DictList)
-import Event.Model exposing (EventId, Event)
+import Event.Model exposing (Event, EventId)
 
 
 type alias Model =

@@ -15,8 +15,15 @@ import Utils.Html exposing (colorToString, divider, formatReceptionDays, section
 
 view : BaseUrl -> Language -> Bool -> Model -> Html Msg
 view baseUrl language showAsBlock model =
+    let
+        containerClass =
+            if showAsBlock then
+                "block-container"
+            else
+                "container"
+    in
     div
-        [ class "container" ]
+        [ class containerClass ]
         [ showIf (not showAsBlock) <| viewContactsHeader language
         , showIf (not showAsBlock) <| viewContactFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]

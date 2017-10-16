@@ -13522,11 +13522,12 @@ var _gizra$municipality$Contact_View$viewContactsHeader = function (language) {
 };
 var _gizra$municipality$Contact_View$view = F4(
 	function (baseUrl, language, showAsBlock, model) {
+		var containerClass = showAsBlock ? 'block-container' : 'container';
 		return A2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('container'),
+				_0: _elm_lang$html$Html_Attributes$class(containerClass),
 				_1: {ctor: '[]'}
 			},
 			{
@@ -14602,11 +14603,12 @@ var _gizra$municipality$Events_View$viewEventsHeader = function (language) {
 };
 var _gizra$municipality$Events_View$view = F4(
 	function (baseUrl, language, showAsBlock, model) {
+		var containerClass = showAsBlock ? 'block-container' : 'container';
 		return A2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('container'),
+				_0: _elm_lang$html$Html_Attributes$class(containerClass),
 				_1: {ctor: '[]'}
 			},
 			{
