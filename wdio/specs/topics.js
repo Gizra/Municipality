@@ -80,13 +80,14 @@ describe('Municipality topics', () => {
     browser.waitForVisible('h2=People who can help you');
 
     const firstContactTitle = browser.getText('div.featured-box ul.list-primary > li:nth-child(1) p strong.name');
-    assert.equal('ויקטור סבן', firstContactTitle);
+    assert.equal('איאד סולימאן', firstContactTitle);
 
     const secondContactTitle = browser.getText('div.featured-box ul.list-primary > li:nth-child(2) p strong.name');
-    assert.equal('סמאהר סועאד', secondContactTitle);
+    assert.equal('ויקטור סבן', secondContactTitle);
 
     const thirdContactTitle = browser.getText('div.featured-box ul.list-primary > li:nth-child(3) p strong.name');
-    assert.equal('איאד סולימאן', thirdContactTitle);
+    assert.equal('סמאהר סועאד', thirdContactTitle);
+
   });
 
   it('should see default image for contacts without an image', () => {
