@@ -209,12 +209,15 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
     });
   }
 
-  usort($contacts, 'hedley_contact_sort_by_last_name');
+  usort($contacts, 'hedley_contact_sort_by_full_name');
   
   return $contacts;
 }
 
-function hedley_contact_sort_by_last_name($a, $b) {
+/**
+ * Helper function; Sort contacts by full name.
+ */
+function hedley_contact_sort_by_full_name($a, $b) {
   if ($a['name'] == $b['name']) {
     return 0;
   }
