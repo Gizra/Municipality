@@ -25,9 +25,9 @@ class HedleyNewsGetNews extends HedleyMunicipalityWebTestCase {
    * Test that news returned doesn't contain expired news.
    */
   public function testGetNewsItems() {
-    //Time in the future.
+    // Time in the future.
     $future_time = strtotime("+1 year");
-    //Time in the past.
+    // Time in the past.
     $past_time = strtotime("-1 year");
     // Create a municipality group.
     $user1 = $this->drupalCreateUser();
