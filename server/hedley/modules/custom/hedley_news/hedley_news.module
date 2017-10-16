@@ -15,35 +15,3 @@ function hedley_news_ctools_plugin_directory($module, $plugin) {
     return 'plugins/' . $plugin;
   }
 }
-
-/**
- * Implements hook_cron().
- */
-function hedley_news_cron() {
-  hedley_news_unpublish_expired_news_entities();
-}
-
-/**
- * Un-publish any expired news entities.
- */
-function hedley_news_unpublish_expired_news_entities() {
-  $now = time();
-
-  // The base query includes the published condition and a default range of 50.
-  $base_query = hedley_municipality_get_nodes_base_query('news');
-  $result = $base_query
-    ->fieldCondition('field_expiration_date', 'value', $now, '<')
-    ->execute();
-
-  if (empty($result['node'])) {
-    // Do nothing if there's no expired news entities.
-    return;
-  }
-
-  // Un-publish any expired news entities found.
-  foreach ($result['node'] as $result_node) {
-    $node = node_load($result_node->nid);
-    $node->status = NODE_NOT_PUBLISHED;
-    node_save($node);
-  }
-}
