@@ -89,14 +89,16 @@
   margin: 0;
 }
 
-#elm-app .thumbnail.search-results.contact-search-result {
-  min-height: 910px;
-}
-
 .content img {
   display: inline-block;
 }
 
 .post-author img {
   max-height: 120px;
+}
+
+@media (max-width: 991px) {
+  .thumbnail {
+    border: 1px solid #ddd;
+  }
 }

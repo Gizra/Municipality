@@ -35,6 +35,10 @@ of Html msg with columns and rows:
 
     renderBootstrapGrid 2 List (div [] [], div [] [])
 
+This will give classes for mobile and tablet, mobile will allways have one
+element per row and tablet will have half (or close to it with odd numbers) the
+number of elements given for desktop.
+
 -}
 renderBootstrapGrid : Int -> List (Html msg) -> Html msg
 renderBootstrapGrid columnsInOneRow colHtmlMsgList =
@@ -43,6 +47,10 @@ renderBootstrapGrid columnsInOneRow colHtmlMsgList =
             split columnsInOneRow colHtmlMsgList
 
         columnClass =
-            "col-md-" ++ (toString <| 12 // columnsInOneRow)
+            "col-md-"
+                ++ (toString <| 12 // columnsInOneRow)
+                ++ " col-sm-"
+                ++ (toString <| 12 // (columnsInOneRow - (columnsInOneRow // 2)))
+                ++ " col-xs-12"
     in
         div [] (map (renderRow columnClass) <| listOfRows)
