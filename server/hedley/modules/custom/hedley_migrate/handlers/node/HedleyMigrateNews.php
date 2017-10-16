@@ -27,11 +27,13 @@ class HedleyMigrateNews extends HedleyMigrateBase {
     'field_topics',
     'field_user_types',
     'field_image',
+    'field_expiration_date',
   ];
   protected $simpleMappings = [
     'title_field',
     'field_subtitle',
     'body',
+    'field_expiration_date',
   ];
   protected $simpleMultipleMappings = [
     'field_user_types',

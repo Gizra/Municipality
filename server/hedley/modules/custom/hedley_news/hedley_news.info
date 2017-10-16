@@ -49,3 +49,4 @@ features[variable][] = node_options_news
 features[variable][] = node_preview_news
 features[variable][] = node_submitted_news
 features[views_view][] = news
+files[] = tests/HedleyNewsGetNews.test
