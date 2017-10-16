@@ -21,7 +21,14 @@ import Utils.Html exposing (sectionDivider, showIf, showMaybe)
 
 view : BaseUrl -> Language -> Bool -> Model -> Html Msg
 view baseUrl language showAsBlock model =
-    div [ class "container" ]
+    let
+        containerClass =
+            if showAsBlock then
+                "block-container"
+            else
+                "container"
+    in
+    div [ class containerClass ]
         [ showIf (not showAsBlock) <| viewEventsHeader language
         , showIf (not showAsBlock) <| viewEventFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
