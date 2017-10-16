@@ -16,7 +16,7 @@ import Utils.Html exposing (colorToString, divider, formatReceptionDays, section
 view : BaseUrl -> Language -> Bool -> Model -> Html Msg
 view baseUrl language showAsBlock model =
     div
-        []
+        [ class "container" ]
         [ showIf (not showAsBlock) <| viewContactsHeader language
         , showIf (not showAsBlock) <| viewContactFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
@@ -74,33 +74,32 @@ viewContacts baseUrl language showAsBlock { contacts, filterString } =
         filteredContacts =
             filterContacts contacts filterString
     in
-        if DictList.isEmpty filteredContacts then
-            div [] [ text <| translate language ContactsNotFound ]
-        else
-            let
-                viewFunction =
-                    if showAsBlock then
-                        viewContactAsBlock
-                    else
-                        viewContact
-
-                contactsHtmlList =
-                    (filteredContacts
-                        |> DictList.map
-                            (\contactId contact ->
-                                viewFunction
-                                    baseUrl
-                                    language
-                                    ( contactId, contact )
-                            )
-                        |> DictList.values
-                    )
-            in
+    if DictList.isEmpty filteredContacts then
+        div [] [ text <| translate language ContactsNotFound ]
+    else
+        let
+            viewFunction =
                 if showAsBlock then
-                    ul [ class "list list-primary list-borders" ]
-                        contactsHtmlList
+                    viewContactAsBlock
                 else
-                    renderBootstrapGrid 3 contactsHtmlList
+                    viewContact
+
+            contactsHtmlList =
+                filteredContacts
+                    |> DictList.map
+                        (\contactId contact ->
+                            viewFunction
+                                baseUrl
+                                language
+                                ( contactId, contact )
+                        )
+                    |> DictList.values
+        in
+        if showAsBlock then
+            ul [ class "list list-primary list-borders" ]
+                contactsHtmlList
+        else
+            renderBootstrapGrid 3 contactsHtmlList
 
 
 {-| View a single contact.
