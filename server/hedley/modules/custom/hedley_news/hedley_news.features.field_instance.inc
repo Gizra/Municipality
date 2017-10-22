@@ -97,7 +97,7 @@ function hedley_news_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_expiration_date',
     'label' => 'Expiration date',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'default_value' => 'blank',
       'default_value2' => 'same',
