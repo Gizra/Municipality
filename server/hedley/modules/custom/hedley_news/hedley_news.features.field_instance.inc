@@ -97,7 +97,7 @@ function hedley_news_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_expiration_date',
     'label' => 'Expiration date',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'default_value' => 'blank',
       'default_value2' => 'same',
@@ -110,15 +110,15 @@ function hedley_news_field_default_field_instances() {
       'active' => 1,
       'module' => 'date',
       'settings' => array(
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'increment' => 30,
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '-0:+3',
       ),
-      'type' => 'date_text',
+      'type' => 'date_select',
       'weight' => 7,
     ),
   );
@@ -230,53 +230,6 @@ function hedley_news_field_default_field_instances() {
       ),
       'type' => 'image_image',
       'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance: 'node-news-field_subtitle'.
-  $field_instances['node-news-field_subtitle'] = array(
-    'bundle' => 'news',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
-      ),
-      'homepage_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_subtitle',
-    'label' => 'Subtitle',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 4,
     ),
   );
 
@@ -502,7 +455,6 @@ function hedley_news_field_default_field_instances() {
   t('File');
   t('Groups audience');
   t('Image');
-  t('Subtitle');
   t('Title');
   t('Topics');
   t('User types');

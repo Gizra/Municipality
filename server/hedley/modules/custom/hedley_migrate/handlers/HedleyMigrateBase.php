@@ -27,7 +27,6 @@ abstract class HedleyMigrateBase extends Migration {
     'field_tender_requirements',
     'field_tender_payment',
     'field_question',
-    'field_subtitle',
   ];
 
   /**

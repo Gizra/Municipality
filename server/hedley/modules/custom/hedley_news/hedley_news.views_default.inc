@@ -40,7 +40,6 @@ function hedley_news_views_default_views() {
     'og_group_ref' => 'og_group_ref',
     'field_image' => 'field_image',
     'field_user_types' => 'field_user_types',
-    'field_subtitle' => 'field_subtitle',
     'field_topics' => 'field_topics',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -86,13 +85,6 @@ function hedley_news_views_default_views() {
       'empty_column' => 0,
     ),
     'field_user_types' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_subtitle' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -156,10 +148,6 @@ function hedley_news_views_default_views() {
   $handler->display->display_options['fields']['field_user_types']['table'] = 'field_data_field_user_types';
   $handler->display->display_options['fields']['field_user_types']['field'] = 'field_user_types';
   $handler->display->display_options['fields']['field_user_types']['delta_offset'] = '0';
-  /* Field: Content: Subtitle */
-  $handler->display->display_options['fields']['field_subtitle']['id'] = 'field_subtitle';
-  $handler->display->display_options['fields']['field_subtitle']['table'] = 'field_data_field_subtitle';
-  $handler->display->display_options['fields']['field_subtitle']['field'] = 'field_subtitle';
   /* Field: Content: Topics */
   $handler->display->display_options['fields']['og_vocabulary']['id'] = 'og_vocabulary';
   $handler->display->display_options['fields']['og_vocabulary']['table'] = 'field_data_og_vocabulary';
@@ -238,7 +226,6 @@ function hedley_news_views_default_views() {
     t('Groups audience'),
     t('Image'),
     t('User types'),
-    t('Subtitle'),
     t('Topics'),
     t('Edit link'),
     t('Groups audience (og_group_ref)'),

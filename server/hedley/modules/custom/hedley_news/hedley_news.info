@@ -27,7 +27,6 @@ features[field_instance][] = node-news-body
 features[field_instance][] = node-news-field_expiration_date
 features[field_instance][] = node-news-field_file
 features[field_instance][] = node-news-field_image
-features[field_instance][] = node-news-field_subtitle
 features[field_instance][] = node-news-field_user_types
 features[field_instance][] = node-news-og_group_ref
 features[field_instance][] = node-news-og_vocabulary
