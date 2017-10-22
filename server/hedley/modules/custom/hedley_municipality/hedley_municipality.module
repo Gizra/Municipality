@@ -101,6 +101,11 @@ function hedley_municipality_get_nodes_add_filters_to_query(EntityFieldQuery $qu
     $query->fieldCondition('field_expiration_date', 'value', REQUEST_TIME, '>');
   }
 
+  // Filter upcoming events.
+  if ($bundle == 'event') {
+    $query->fieldCondition('field_date', 'value', REQUEST_TIME, '>');
+  }
+
   // Filter by current topic.
   if ($topic_tid) {
     $query->fieldCondition(OG_VOCAB_FIELD, 'target_id', $topic_tid);
