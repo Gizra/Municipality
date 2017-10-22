@@ -18,9 +18,6 @@ class HedleyMigrateNews extends HedleyMigrateBase {
     'title_field_ar',
     'title_field_en',
     'title_field_he',
-    'field_subtitle_ar',
-    'field_subtitle_en',
-    'field_subtitle_he',
     'body_ar',
     'body_en',
     'body_he',
@@ -31,7 +28,6 @@ class HedleyMigrateNews extends HedleyMigrateBase {
   ];
   protected $simpleMappings = [
     'title_field',
-    'field_subtitle',
     'body',
     'field_expiration_date',
   ];
