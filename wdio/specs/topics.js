@@ -70,10 +70,10 @@ describe('Municipality topics', () => {
     browser.waitForVisible('h2=Upcoming events');
 
     const firstEventDate = browser.getText('div.featured-box .col-md-6:nth-child(1) .caption > div span');
-    assert.equal('12/04/2017 14:00 - 17:00, רביעי', firstEventDate);
+    assert.equal('12/04/2019 14:00 - 17:00, רביעי', firstEventDate);
 
     const secondEventDate = browser.getText('div.featured-box .col-md-6:nth-child(2) .caption > div span');
-    assert.equal('29/03/2017 11:00 - 13:00, רביעי', secondEventDate);
+    assert.equal('29/03/2019 11:00 - 13:00, רביעי', secondEventDate);
   });
 
   it('should show all the relevant contacts for this topic', () => {
