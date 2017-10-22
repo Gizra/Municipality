@@ -196,7 +196,7 @@ event2 =
       , date = Date.fromTime 120000000000
       , endDate = Just (Date.fromTime 120000000100)
       , recurringWeekly = False
-      , ticketPrice = Just "120"
+      , ticketPrice = Just <| Price 120
       , location =
             Just
                 { title = "Test location"
@@ -216,7 +216,7 @@ event3 =
       , date = Date.fromTime 0
       , endDate = Just (Date.fromTime 120000000000)
       , recurringWeekly = True
-      , ticketPrice = Just "180"
+      , ticketPrice = Just <| Price 180
       , location =
             Just
                 { title = "Test location 2"
