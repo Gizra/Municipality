@@ -351,4 +351,15 @@ describe('Municipality homepage', () => {
 
     assert(!browser.isVisible('.news-box .testimonial:nth-child(1) .testimonial-author .testimonial-author-thumbnail'));
   });
+
+  it('should have two default buttons for Events and Contacts pages in the topics list', () => {
+    browser.url('/kiryat-malakhi?language=en');
+    browser.waitForVisible('h2=Topics in the site');
+
+    const contactsButton = browser.getText('.pane-topics-list p a:nth-child(1) button.btn-default');
+    assert.equal('Contacts', contactsButton);
+
+    const eventsButton = browser.getText('.pane-topics-list p a:nth-child(2) button.btn-primary');
+    assert.equal('Events', eventsButton);
+  });
 });
