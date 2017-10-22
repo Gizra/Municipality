@@ -14351,7 +14351,16 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 																					A2(
 																						_elm_lang$core$Basics_ops['++'],
 																						A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$PriceText),
-																						A2(_elm_lang$core$Basics_ops['++'], ': ', ticketPrice))),
+																						A2(
+																							_elm_lang$core$Basics_ops['++'],
+																							': ',
+																							A2(
+																								_elm_lang$core$Basics_ops['++'],
+																								ticketPrice,
+																								A2(
+																									_elm_lang$core$Basics_ops['++'],
+																									' ',
+																									A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$PriceCurrencyText)))))),
 																				_1: {ctor: '[]'}
 																			}
 																		});
