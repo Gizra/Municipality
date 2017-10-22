@@ -2,7 +2,7 @@ module Event.View exposing (view)
 
 import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
-import Event.Model exposing (Event, EventId, Model, Msg(..))
+import Event.Model exposing (Event, EventId, Model, Msg(..), Price)
 import Html exposing (..)
 import Html.Attributes exposing (alt, class, href, id, property, src, target)
 import Json.Encode exposing (string)
@@ -77,13 +77,13 @@ view baseUrl language event =
                         [ class "col-md-4" ]
                         [ showMaybe <|
                             Maybe.map
-                                (\ticketPrice ->
+                                (\(Event.Model.Price ticketPrice) ->
                                     div
                                         [ class "ticket-price" ]
                                         [ i
                                             [ class "fa fa-ils" ]
                                             []
-                                        , text <| translate language PriceText ++ ": " ++ ticketPrice ++ " " ++ translate language PriceCurrencyText
+                                        , text <| translate language PriceText ++ ": " ++ toString ticketPrice ++ " " ++ translate language PriceCurrencyText
                                         ]
                                 )
                                 event.ticketPrice

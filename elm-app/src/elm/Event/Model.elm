@@ -28,6 +28,10 @@ type Msg
     = HandleEvent (Result String Event)
 
 
+type Price
+    = Price Int
+
+
 type alias Name =
     String
 
@@ -49,7 +53,7 @@ type alias Event =
     , date : Date
     , endDate : Maybe Date
     , recurringWeekly : Bool
-    , ticketPrice : Maybe String
+    , ticketPrice : Maybe Price
     , location : Maybe Location
     , showEditLink : Bool
     }

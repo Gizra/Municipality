@@ -11431,6 +11431,9 @@ var _gizra$municipality$Event_Model$Event = F9(
 var _gizra$municipality$Event_Model$HandleEvent = function (a) {
 	return {ctor: 'HandleEvent', _0: a};
 };
+var _gizra$municipality$Event_Model$Price = function (a) {
+	return {ctor: 'Price', _0: a};
+};
 
 var _gizra$municipality$Events_Model$emptyModel = {events: _Gizra$elm_dictlist$DictList$empty, filterString: ''};
 var _gizra$municipality$Events_Model$Model = F2(
@@ -11488,6 +11491,33 @@ var _gizra$municipality$Utils_Json$decodeIntAsString = _elm_lang$core$Json_Decod
 		_1: {
 			ctor: '::',
 			_0: _elm_lang$core$Json_Decode$string,
+			_1: {ctor: '[]'}
+		}
+	});
+var _gizra$municipality$Utils_Json$resultToDecoder = function (res) {
+	var _p0 = res;
+	if (_p0.ctor === 'Ok') {
+		return _elm_lang$core$Json_Decode$succeed(_p0._0);
+	} else {
+		return _elm_lang$core$Json_Decode$fail(_p0._0);
+	}
+};
+var _gizra$municipality$Utils_Json$decodeInt = _elm_lang$core$Json_Decode$oneOf(
+	{
+		ctor: '::',
+		_0: _elm_lang$core$Json_Decode$int,
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$core$Json_Decode$map,
+				_elm_lang$core$Basics$floor,
+				A2(
+					_elm_lang$core$Json_Decode$andThen,
+					function (_p1) {
+						return _gizra$municipality$Utils_Json$resultToDecoder(
+							_elm_lang$core$String$toFloat(_p1));
+					},
+					_elm_lang$core$Json_Decode$string)),
 			_1: {ctor: '[]'}
 		}
 	});
@@ -11699,6 +11729,7 @@ var _gizra$municipality$Contact_Update$subscriptions = _gizra$municipality$Conta
 			A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Contact_Decoder$decodeContacts, _p2));
 	});
 
+var _gizra$municipality$Event_Decoder$decodePrice = A2(_elm_lang$core$Json_Decode$map, _gizra$municipality$Event_Model$Price, _gizra$municipality$Utils_Json$decodeInt);
 var _gizra$municipality$Event_Decoder$decodeLocation = A3(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 	'url',
@@ -11720,7 +11751,7 @@ var _gizra$municipality$Event_Decoder$decodeEvent = A3(
 		A4(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 			'ticket_price',
-			_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+			_elm_lang$core$Json_Decode$nullable(_gizra$municipality$Event_Decoder$decodePrice),
 			_elm_lang$core$Maybe$Nothing,
 			A3(
 				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
@@ -13844,7 +13875,8 @@ var _gizra$municipality$Event_View$view = F3(
 																_0: _gizra$municipality$Utils_Html$showMaybe(
 																	A2(
 																		_elm_lang$core$Maybe$map,
-																		function (ticketPrice) {
+																		function (_p0) {
+																			var _p1 = _p0;
 																			return A2(
 																				_elm_lang$html$Html$div,
 																				{
@@ -13873,7 +13905,7 @@ var _gizra$municipality$Event_View$view = F3(
 																									': ',
 																									A2(
 																										_elm_lang$core$Basics_ops['++'],
-																										ticketPrice,
+																										_elm_lang$core$Basics$toString(_p1._0),
 																										A2(
 																											_elm_lang$core$Basics_ops['++'],
 																											' ',
@@ -14028,8 +14060,8 @@ var _gizra$municipality$Events_Utils$filterEvents = F2(
 var _gizra$municipality$Events_View$viewEvent = F4(
 	function (baseUrl, language, _p0, showAsBlock) {
 		var _p1 = _p0;
-		var _p4 = _p1._0;
-		var _p3 = _p1._1;
+		var _p6 = _p1._0;
+		var _p5 = _p1._1;
 		var _p2 = showAsBlock ? {
 			ctor: '_Tuple2',
 			_0: A2(
@@ -14045,7 +14077,7 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 								'/node/',
 								A2(
 									_elm_lang$core$Basics_ops['++'],
-									_p4,
+									_p6,
 									A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query))))),
 					_1: {ctor: '[]'}
 				},
@@ -14060,7 +14092,7 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text(_p3.name),
+							_0: _elm_lang$html$Html$text(_p5.name),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
@@ -14077,13 +14109,13 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 				},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(_p3.name),
+					_0: _elm_lang$html$Html$text(_p5.name),
 					_1: {ctor: '[]'}
 				}),
 			_1: _elm_lang$core$Maybe$Just(
 				A2(
 					_gizra$municipality$Utils_Html$showIf,
-					_p3.showEditLink,
+					_p5.showEditLink,
 					A2(
 						_elm_lang$html$Html$a,
 						{
@@ -14100,7 +14132,7 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 											'/node/',
 											A2(
 												_elm_lang$core$Basics_ops['++'],
-												_p4,
+												_p6,
 												A2(
 													_elm_lang$core$Basics_ops['++'],
 													'/edit',
@@ -14152,7 +14184,7 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 													_0: _elm_lang$html$Html_Attributes$src(imageUrl),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$alt(_p3.name),
+														_0: _elm_lang$html$Html_Attributes$alt(_p5.name),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -14161,7 +14193,7 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 										_1: {ctor: '[]'}
 									});
 							},
-							_p3.imageUrl)),
+							_p5.imageUrl)),
 					_1: {
 						ctor: '::',
 						_0: A2(
@@ -14199,7 +14231,7 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 														},
 														{ctor: '[]'});
 												},
-												_p3.description))),
+												_p5.description))),
 									_1: {
 										ctor: '::',
 										_0: A2(_gizra$municipality$Utils_Html$showIf, !showAsBlock, _gizra$municipality$Utils_Html$sectionDivider),
@@ -14233,7 +14265,7 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 																	A2(
 																		_gizra$municipality$Translate$translate,
 																		language,
-																		A2(_gizra$municipality$Translate$DayAndDate, _p3.date, _p3.endDate))),
+																		A2(_gizra$municipality$Translate$DayAndDate, _p5.date, _p5.endDate))),
 																_1: {ctor: '[]'}
 															}
 														}),
@@ -14241,7 +14273,7 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 														ctor: '::',
 														_0: A2(
 															_gizra$municipality$Utils_Html$showIf,
-															_p3.recurringWeekly,
+															_p5.recurringWeekly,
 															A2(
 																_elm_lang$html$Html$div,
 																{
@@ -14318,7 +14350,7 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 																	_1: {ctor: '[]'}
 																});
 														},
-														_p3.location)),
+														_p5.location)),
 												_1: {
 													ctor: '::',
 													_0: A2(
@@ -14327,7 +14359,8 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 														_gizra$municipality$Utils_Html$showMaybe(
 															A2(
 																_elm_lang$core$Maybe$map,
-																function (ticketPrice) {
+																function (_p3) {
+																	var _p4 = _p3;
 																	return A2(
 																		_elm_lang$html$Html$div,
 																		{
@@ -14351,12 +14384,21 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 																					A2(
 																						_elm_lang$core$Basics_ops['++'],
 																						A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$PriceText),
-																						A2(_elm_lang$core$Basics_ops['++'], ': ', ticketPrice))),
+																						A2(
+																							_elm_lang$core$Basics_ops['++'],
+																							': ',
+																							A2(
+																								_elm_lang$core$Basics_ops['++'],
+																								_elm_lang$core$Basics$toString(_p4._0),
+																								A2(
+																									_elm_lang$core$Basics_ops['++'],
+																									' ',
+																									A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$PriceCurrencyText)))))),
 																				_1: {ctor: '[]'}
 																			}
 																		});
 																},
-																_p3.ticketPrice))),
+																_p5.ticketPrice))),
 													_1: {
 														ctor: '::',
 														_0: A2(_gizra$municipality$Utils_Html$showIf, !showAsBlock, _gizra$municipality$Utils_Html$sectionDivider),
@@ -14393,7 +14435,7 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 																									'/node/',
 																									A2(
 																										_elm_lang$core$Basics_ops['++'],
-																										_p4,
+																										_p6,
 																										A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query))))),
 																						_1: {ctor: '[]'}
 																					}
@@ -14433,9 +14475,9 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 			});
 	});
 var _gizra$municipality$Events_View$viewEvents = F4(
-	function (baseUrl, language, showAsBlock, _p5) {
-		var _p6 = _p5;
-		var filteredEvents = A2(_gizra$municipality$Events_Utils$filterEvents, _p6.events, _p6.filterString);
+	function (baseUrl, language, showAsBlock, _p7) {
+		var _p8 = _p7;
+		var filteredEvents = A2(_gizra$municipality$Events_Utils$filterEvents, _p8.events, _p8.filterString);
 		if (_Gizra$elm_dictlist$DictList$isEmpty(filteredEvents)) {
 			return A2(
 				_elm_lang$html$Html$div,

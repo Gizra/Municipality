@@ -201,13 +201,13 @@ viewEvent baseUrl language ( eventId, event ) showAsBlock =
             , showIf (not showAsBlock) <|
                 showMaybe <|
                     Maybe.map
-                        (\ticketPrice ->
+                        (\(Event.Model.Price ticketPrice) ->
                             div
                                 [ class "ticket-price" ]
                                 [ i
                                     [ class "fa fa-ils" ]
                                     []
-                                , text <| translate language PriceText ++ ": " ++ ticketPrice
+                                , text <| translate language PriceText ++ ": " ++ toString ticketPrice ++ " " ++ translate language PriceCurrencyText
                                 ]
                         )
                         event.ticketPrice

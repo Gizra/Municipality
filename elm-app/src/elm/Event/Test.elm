@@ -102,7 +102,7 @@ viewTest =
                 view baseUrl English event3
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "ticket-price" ]
-                    |> Query.has [ text "Price: 180" ]
+                    |> Query.has [ text "Price: 180 NIS" ]
         , test "Event with Location" <|
             \() ->
                 view baseUrl English event3
@@ -158,7 +158,7 @@ event2 =
     , date = Date.fromTime 120000000000
     , endDate = Just (Date.fromTime 120000000100)
     , recurringWeekly = False
-    , ticketPrice = Just "120"
+    , ticketPrice = Just <| Price 120
     , location =
         Just
             { title = "Test location"
@@ -176,7 +176,7 @@ event3 =
     , date = Date.fromTime 0
     , endDate = Just (Date.fromTime 120000000000)
     , recurringWeekly = True
-    , ticketPrice = Just "180"
+    , ticketPrice = Just <| Price 180
     , location =
         Just
             { title = "Test location 2"
