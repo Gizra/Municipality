@@ -32,12 +32,12 @@ function hedley_municipality_topics_list_content_type_render($subtype, $conf, $a
     [
       'label' => t('Contacts'),
       'link' => url('contacts'),
-      'color' => 'default',
+      'color' => HEDLEY_MUNICIPALITY_DEFAULT_COLOR,
     ],
     [
       'label' => t('Events'),
       'link' => url('events'),
-      'color' => 'primary',
+      'color' => HEDLEY_MUNICIPALITY_PRIMARY_COLOR,
     ],
   ];
   foreach ($terms as $term) {

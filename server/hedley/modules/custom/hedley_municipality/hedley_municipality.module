@@ -7,6 +7,17 @@
 
 include_once 'hedley_municipality.features.inc';
 
+// Define constants for theme colors.
+define('HEDLEY_MUNICIPALITY_DEFAULT_COLOR', 'default');
+define('HEDLEY_MUNICIPALITY_PRIMARY_COLOR', 'primary');
+define('HEDLEY_MUNICIPALITY_SECONDARY_COLOR', 'secondary');
+define('HEDLEY_MUNICIPALITY_TERTIANY_COLOR', 'tertiary');
+define('HEDLEY_MUNICIPALITY_QUANTERNARY_COLOR', 'quaternary');
+define('HEDLEY_MUNICIPALITY_SUCCESS_COLOR', 'success');
+define('HEDLEY_MUNICIPALITY_INFO_COLOR', 'info');
+define('HEDLEY_MUNICIPALITY_WARNING_COLOR', 'warning');
+define('HEDLEY_MUNICIPALITY_DANGER_COLOR', 'danger');
+
 /**
  * Implements hook_ctools_plugin_directory().
  */
