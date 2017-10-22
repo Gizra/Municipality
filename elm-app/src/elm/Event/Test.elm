@@ -102,7 +102,7 @@ viewTest =
                 view baseUrl English event3
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "ticket-price" ]
-                    |> Query.has [ text "Price: 180" ]
+                    |> Query.has [ text "Price: 180 NIS" ]
         , test "Event with Location" <|
             \() ->
                 view baseUrl English event3
