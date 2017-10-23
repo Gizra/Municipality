@@ -25,7 +25,8 @@ Drupal.behaviors.elm = {
         page: page,
         language : appSettings.language,
         showAsBlock : appSettings.showAsBlock,
-        baseUrl : appSettings.baseUrl
+        baseUrl : appSettings.baseUrl,
+        editorPermissions: appSettings.editorPermissions
       });
 
       // Inject the expected values to the right port based on the selected page.
