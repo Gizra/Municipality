@@ -5,6 +5,7 @@ module Utils.Html
         , emptyNode
         , formatDateAndDayWithLabel
         , formatReceptionDays
+        , formatRecurringEventDate
         , sectionDivider
         , showIf
         , showMaybe
@@ -123,5 +124,28 @@ formatDateAndDayWithLabel language date mEndDate =
                 )
                 mEndDate
                 |> Maybe.withDefault dateFormated
+    in
+    labelTranslated ++ ": " ++ dayTranslated ++ ", " ++ allDatesFormated
+
+
+formatRecurringEventDate : Language -> Date -> Maybe Date -> String
+formatRecurringEventDate language date mEndDate =
+    let
+        labelTranslated =
+            translate language <| DateLabelTranslation
+
+        dayTranslated =
+            translate language <| DayTranslation (dayOfWeek date)
+
+        timeFormater =
+            format "%H:%M"
+
+        allDatesFormated =
+            Maybe.map
+                (\endDate ->
+                    timeFormater date ++ " - " ++ timeFormater endDate
+                )
+                mEndDate
+                |> Maybe.withDefault (timeFormater date)
     in
     labelTranslated ++ ": " ++ dayTranslated ++ ", " ++ allDatesFormated
