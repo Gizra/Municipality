@@ -3,7 +3,7 @@ var assert = require('assert');
 describe('Municipality events page', () => {
   before(() => {
     browser.url('/tuba-zangariyye/events?language=he');
-  })
+  });
 
   it('should show all events for the current municipality', () => {
     browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
@@ -28,6 +28,17 @@ describe('Municipality events page', () => {
     // Make sure other events disappear when searching.
     assert(!browser.isVisible('h4=הצגת ילדים: שבת בבוקר'));
 
+  });
+
+  it('should not show add event link to anon users', () => {
+    assert(!browser.isVisible('button=Add new event'));
+  });
+
+  it('should show add event link to editors', () => {
+    browser.login('noam');
+    browser.url('/tuba-zangariyye/events?language=en');
+
+    browser.waitForVisible('button=Add new event');
   });
 
 });
