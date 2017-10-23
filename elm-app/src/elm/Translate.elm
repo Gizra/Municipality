@@ -14,7 +14,8 @@ type alias TranslationSet =
 
 
 type TranslationId
-    = AddNewEventText
+    = AddNewContactText
+    | AddNewEventText
     | ContactsHeaderText
     | EventsHeaderText
     | ContactsNotFound
@@ -40,6 +41,12 @@ translate lang trans =
     let
         translationSet =
             case trans of
+                AddNewContactText ->
+                    { arabic = "إضافة جهة اتصال"
+                    , english = "Add new contact"
+                    , hebrew = "הוספת איש קשר"
+                    }
+
                 AddNewEventText ->
                     { arabic = "إضافة حدث جديد"
                     , english = "Add new event"

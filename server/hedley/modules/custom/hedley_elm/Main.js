@@ -12268,6 +12268,8 @@ var _gizra$municipality$Translate$translate = F2(
 		var translationSet = function () {
 			var _p0 = trans;
 			switch (_p0.ctor) {
+				case 'AddNewContactText':
+					return {arabic: 'إضافة جهة اتصال', english: 'Add new contact', hebrew: 'הוספת איש קשר'};
 				case 'AddNewEventText':
 					return {arabic: 'إضافة حدث جديد', english: 'Add new event', hebrew: 'הוספת אירוע חדש'};
 				case 'ContactsHeaderText':
@@ -12395,6 +12397,7 @@ var _gizra$municipality$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
 var _gizra$municipality$Translate$EventsHeaderText = {ctor: 'EventsHeaderText'};
 var _gizra$municipality$Translate$ContactsHeaderText = {ctor: 'ContactsHeaderText'};
 var _gizra$municipality$Translate$AddNewEventText = {ctor: 'AddNewEventText'};
+var _gizra$municipality$Translate$AddNewContactText = {ctor: 'AddNewContactText'};
 
 var _gizra$municipality$Utils_BootstrapGrid$renderColumn = F2(
 	function (columnClass, column) {
@@ -13420,6 +13423,59 @@ var _gizra$municipality$Contact_View$viewContacts = F4(
 				contactsHtmlList) : A2(_gizra$municipality$Utils_BootstrapGrid$renderBootstrapGrid, 3, contactsHtmlList);
 		}
 	});
+var _gizra$municipality$Contact_View$viewAddnewContact = F2(
+	function (baseUrl, language) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('row add-new-contact'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('col-xs-12 align-right'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$href(
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										baseUrl.path,
+										A2(_elm_lang$core$Basics_ops['++'], '/node/add/contact?', baseUrl.query))),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn btn-primary mr-xs mb-sm'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(
+											A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$AddNewContactText)),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
 var _gizra$municipality$Contact_View$viewContactFilter = F2(
 	function (language, filterString) {
 		return A2(
@@ -13555,8 +13611,8 @@ var _gizra$municipality$Contact_View$viewContactsHeader = function (language) {
 			_1: {ctor: '[]'}
 		});
 };
-var _gizra$municipality$Contact_View$view = F4(
-	function (baseUrl, language, showAsBlock, model) {
+var _gizra$municipality$Contact_View$view = F5(
+	function (baseUrl, language, showAsBlock, editorPermissions, model) {
 		var containerClass = showAsBlock ? 'block-container' : 'container';
 		return A2(
 			_elm_lang$html$Html$div,
@@ -13597,34 +13653,41 @@ var _gizra$municipality$Contact_View$view = F4(
 								})),
 						_1: {
 							ctor: '::',
-							_0: A4(_gizra$municipality$Contact_View$viewContacts, baseUrl, language, showAsBlock, model),
+							_0: A2(
+								_gizra$municipality$Utils_Html$showIf,
+								(!showAsBlock) && editorPermissions,
+								A2(_gizra$municipality$Contact_View$viewAddnewContact, baseUrl, language)),
 							_1: {
 								ctor: '::',
-								_0: A2(
-									_gizra$municipality$Utils_Html$showIf,
-									showAsBlock,
-									A2(
-										_elm_lang$html$Html$a,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('btn btn-default btn-show-all'),
-											_1: {
+								_0: A4(_gizra$municipality$Contact_View$viewContacts, baseUrl, language, showAsBlock, model),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_gizra$municipality$Utils_Html$showIf,
+										showAsBlock,
+										A2(
+											_elm_lang$html$Html$a,
+											{
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$href(
-													A2(
-														_elm_lang$core$Basics_ops['++'],
-														baseUrl.path,
-														A2(_elm_lang$core$Basics_ops['++'], '/contacts?', baseUrl.query))),
+												_0: _elm_lang$html$Html_Attributes$class('btn btn-default btn-show-all'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$href(
+														A2(
+															_elm_lang$core$Basics_ops['++'],
+															baseUrl.path,
+															A2(_elm_lang$core$Basics_ops['++'], '/contacts?', baseUrl.query))),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ShowAll)),
 												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(
-												A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ShowAll)),
-											_1: {ctor: '[]'}
-										})),
-								_1: {ctor: '[]'}
+											})),
+									_1: {ctor: '[]'}
+								}
 							}
 						}
 					}
@@ -14796,7 +14859,7 @@ var _gizra$municipality$App_View$view = function (model) {
 					_0: A2(
 						_elm_lang$html$Html$map,
 						_gizra$municipality$App_Model$MsgPagesContact,
-						A4(_gizra$municipality$Contact_View$view, model.baseUrl, model.language, model.showAsBlock, model.pageContact)),
+						A5(_gizra$municipality$Contact_View$view, model.baseUrl, model.language, model.showAsBlock, model.editorPermissions, model.pageContact)),
 					_1: {ctor: '[]'}
 				});
 		case 'Event':
