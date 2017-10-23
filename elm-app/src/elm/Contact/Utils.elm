@@ -16,6 +16,20 @@ filterContacts contacts filterString =
         in
         DictList.filter
             (\_ contact ->
+                let
+                    jobTitle =
+                        Maybe.withDefault "" contact.jobTitle
+
+                    department =
+                        Maybe.withDefault "" contact.department
+
+                    topics =
+                        Maybe.withDefault [] contact.topics
+                in
                 stringMatch (String.toLower <| contact.name)
+                    || stringMatch (String.toLower <| department)
+                    || stringMatch (String.toLower <| jobTitle)
+                    -- One of the topics' name matches the searched string.
+                    || not (List.isEmpty <| List.filter (\topic -> stringMatch (String.toLower <| topic.name)) topics)
             )
             contacts
