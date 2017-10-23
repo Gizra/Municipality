@@ -56,10 +56,10 @@ describe('Municipality topics', () => {
     browser.waitForVisible('h2=Upcoming events');
 
     const firstEventTitle = browser.getText('div.featured-box .col-md-6:nth-child(1) h4.card-title');
-    assert.equal('סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה', firstEventTitle);
+    assert.equal('הצגת ילדים: שבת בבוקר', firstEventTitle);
 
     const secondEventTitle = browser.getText('div.featured-box .col-md-6:nth-child(2) h4.card-title');
-    assert.equal('הצגת ילדים: שבת בבוקר', secondEventTitle);
+    assert.equal('סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה', secondEventTitle);
   });
 
   it('should show event image if exists', () => {
@@ -70,10 +70,10 @@ describe('Municipality topics', () => {
     browser.waitForVisible('h2=Upcoming events');
 
     const firstEventDate = browser.getText('div.featured-box .col-md-6:nth-child(1) .caption > div span');
-    assert.equal('12/04/2017 14:00 - 17:00, רביעי', firstEventDate);
+    assert.equal('29/03/2019 11:00 - 13:00, שישי', firstEventDate);
 
     const secondEventDate = browser.getText('div.featured-box .col-md-6:nth-child(2) .caption > div span');
-    assert.equal('29/03/2017 11:00 - 13:00, רביעי', secondEventDate);
+    assert.equal('12/04/2019 14:00 - 17:00, שישי', secondEventDate);
   });
 
   it('should show all the relevant contacts for this topic', () => {
@@ -104,6 +104,12 @@ describe('Municipality topics', () => {
     browser.waitForVisible("h1=Culture");
     assert(!browser.isVisible('h2=Upcoming events'));
     assert(!browser.isVisible('a=People who can help you'));
+  });
+
+  it('should not show past events', () => {
+    browser.url('/kiryat-malakhi/taxonomy/term/19?language=he');
+    browser.waitForVisible('h2=Upcoming events');
+    assert(!browser.isVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה'));
   });
 
 });

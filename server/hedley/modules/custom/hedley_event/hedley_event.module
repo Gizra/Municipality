@@ -44,6 +44,9 @@ function hedley_event_get_events_by_group($group, $language_code, $show_as_block
     $events[] = $event;
   }
 
+  // Sort events by date ASC.
+  usort($events, 'hedley_event_sort_by_date');
+
   return $events;
 }
 
@@ -119,4 +122,14 @@ function hedley_event_get_event_item($event, $language_code, $image_style = 'lar
  */
 function hedley_event_timestamp_to_iso8601($timestamp) {
   return date('c', $timestamp);
+}
+
+/**
+ * Helper function; Sort events by date.
+ */
+function hedley_event_sort_by_date($a, $b) {
+  if ($a['date'] == $b['date']) {
+    return 0;
+  }
+  return ($a['date'] < $b['date']) ? -1 : 1;
 }
