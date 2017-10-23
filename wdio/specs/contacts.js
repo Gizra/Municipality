@@ -65,5 +65,18 @@ describe('Municipality contacts page', () => {
     assert(!browser.isVisible('.search-results:nth-child(3) .fax-wrapper .fa-fax'));
   });
 
+  it('should not show add contact link to anon users', () => {
+    browser.url('/al-kasom/contacts?language=en');
+
+    assert(!browser.isVisible('button=Add new contact'));
+  });
+
+  it('should show add contact link to editors', () => {
+    browser.login('liat');
+    browser.url('/al-kasom/contacts?language=en');
+
+    browser.waitForVisible('button=Add new contact');
+  });
+
 });
 
