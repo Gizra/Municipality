@@ -24,7 +24,6 @@ $plugin = [
  * Render callback.
  */
 function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
-  global $user;
   global $language;
   $block = new stdClass();
   $block->module = 'hedley_elm';
@@ -99,9 +98,6 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   // Imploding query for the app.
   $parsed_url['query'] = isset($parsed_url['query']) ? drupal_http_build_query($parsed_url['query']) : '';
 
-  // Get user roles to check if they have editor role.
-  $roles = $user->roles;
-
   // Add settings.
   $settings = [
     'elm' => [
@@ -111,7 +107,6 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
         'showAsBlock' => $show_as_block,
         'values' => $values,
         'baseUrl' => $parsed_url,
-        'editorPermissions' => in_array('administrator', $roles) || in_array('editor', $roles),
       ],
     ],
   ];

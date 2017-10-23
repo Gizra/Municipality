@@ -19,8 +19,8 @@ import Utils.BootstrapGrid exposing (renderBootstrapGrid)
 import Utils.Html exposing (sectionDivider, showIf, showMaybe)
 
 
-view : BaseUrl -> Language -> Bool -> Bool -> Model -> Html Msg
-view baseUrl language showAsBlock editorPermissions model =
+view : BaseUrl -> Language -> Bool -> Model -> Html Msg
+view baseUrl language showAsBlock model =
     let
         containerClass =
             if showAsBlock then
@@ -32,7 +32,6 @@ view baseUrl language showAsBlock editorPermissions model =
         [ showIf (not showAsBlock) <| viewEventsHeader language
         , showIf (not showAsBlock) <| viewEventFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
-        , showIf (not showAsBlock && editorPermissions) <| viewAddnewEvent baseUrl language
         , viewEvents baseUrl language showAsBlock model
         , showIf showAsBlock <|
             a
@@ -74,19 +73,6 @@ viewEventFilter language filterString =
                             []
                         ]
                     ]
-                ]
-            ]
-        ]
-
-
-viewAddnewEvent : BaseUrl -> Language -> Html Msg
-viewAddnewEvent baseUrl language =
-    div [ class "row add-new-event" ]
-        [ div [ class "col-xs-12 align-right" ]
-            [ a [ href <| baseUrl.path ++ "/node/add/event?" ++ baseUrl.query ]
-                [ button
-                    [ class "btn btn-primary mr-xs mb-sm" ]
-                    [ text <| translate language AddNewEventText ]
                 ]
             ]
         ]

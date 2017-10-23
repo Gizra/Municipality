@@ -46,11 +46,10 @@ init flags =
                     English
     in
     ( { emptyModel
-        | baseUrl = flags.baseUrl
-        , editorPermissions = flags.editorPermissions
+        | page = page
         , language = language
         , showAsBlock = flags.showAsBlock
-        , page = page
+        , baseUrl = flags.baseUrl
       }
     , Cmd.none
     )

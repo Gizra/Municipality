@@ -11449,7 +11449,6 @@ var _gizra$municipality$Events_Model$HandleEvents = function (a) {
 
 var _gizra$municipality$App_Model$emptyModel = {
 	baseUrl: {path: '', query: ''},
-	editorPermissions: false,
 	language: _gizra$municipality$App_Types$Hebrew,
 	page: _gizra$municipality$App_Types$NotFound,
 	pageContact: _gizra$municipality$Contact_Model$emptyModel,
@@ -11457,13 +11456,13 @@ var _gizra$municipality$App_Model$emptyModel = {
 	pageEvents: _gizra$municipality$Events_Model$emptyModel,
 	showAsBlock: false
 };
-var _gizra$municipality$App_Model$Flags = F5(
-	function (a, b, c, d, e) {
-		return {baseUrl: a, editorPermissions: b, language: c, page: d, showAsBlock: e};
+var _gizra$municipality$App_Model$Flags = F4(
+	function (a, b, c, d) {
+		return {page: a, language: b, showAsBlock: c, baseUrl: d};
 	});
-var _gizra$municipality$App_Model$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {baseUrl: a, editorPermissions: b, language: c, page: d, pageContact: e, pageEvent: f, pageEvents: g, showAsBlock: h};
+var _gizra$municipality$App_Model$Model = F7(
+	function (a, b, c, d, e, f, g) {
+		return {baseUrl: a, language: b, page: c, pageContact: d, pageEvent: e, pageEvents: f, showAsBlock: g};
 	});
 var _gizra$municipality$App_Model$BaseUrl = F2(
 	function (a, b) {
@@ -11939,7 +11938,7 @@ var _gizra$municipality$App_Update$init = function (flags) {
 		ctor: '_Tuple2',
 		_0: _elm_lang$core$Native_Utils.update(
 			_gizra$municipality$App_Model$emptyModel,
-			{baseUrl: flags.baseUrl, editorPermissions: flags.editorPermissions, language: language, showAsBlock: flags.showAsBlock, page: page}),
+			{page: page, language: language, showAsBlock: flags.showAsBlock, baseUrl: flags.baseUrl}),
 		_1: _elm_lang$core$Platform_Cmd$none
 	};
 };
@@ -12268,8 +12267,6 @@ var _gizra$municipality$Translate$translate = F2(
 		var translationSet = function () {
 			var _p0 = trans;
 			switch (_p0.ctor) {
-				case 'AddNewEventText':
-					return {arabic: 'إضافة حدث جديد', english: 'Add new event', hebrew: 'הוספת אירוע חדש'};
 				case 'ContactsHeaderText':
 					return {arabic: 'اتصالات وموظفي الشبكة', english: 'Contacts and network employees', hebrew: 'אנשי קשר ועובדי רשת'};
 				case 'EventsHeaderText':
@@ -12394,7 +12391,6 @@ var _gizra$municipality$Translate$translate = F2(
 var _gizra$municipality$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
 var _gizra$municipality$Translate$EventsHeaderText = {ctor: 'EventsHeaderText'};
 var _gizra$municipality$Translate$ContactsHeaderText = {ctor: 'ContactsHeaderText'};
-var _gizra$municipality$Translate$AddNewEventText = {ctor: 'AddNewEventText'};
 
 var _gizra$municipality$Utils_BootstrapGrid$renderColumn = F2(
 	function (columnClass, column) {
@@ -14512,59 +14508,6 @@ var _gizra$municipality$Events_View$viewEvents = F4(
 						filteredEvents)));
 		}
 	});
-var _gizra$municipality$Events_View$viewAddnewEvent = F2(
-	function (baseUrl, language) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('row add-new-event'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('col-xs-12 align-right'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$a,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$href(
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										baseUrl.path,
-										A2(_elm_lang$core$Basics_ops['++'], '/node/add/event?', baseUrl.query))),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('btn btn-primary mr-xs mb-sm'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text(
-											A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$AddNewEventText)),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	});
 var _gizra$municipality$Events_View$viewEventFilter = F2(
 	function (language, filterString) {
 		return A2(
@@ -14700,8 +14643,8 @@ var _gizra$municipality$Events_View$viewEventsHeader = function (language) {
 			_1: {ctor: '[]'}
 		});
 };
-var _gizra$municipality$Events_View$view = F5(
-	function (baseUrl, language, showAsBlock, editorPermissions, model) {
+var _gizra$municipality$Events_View$view = F4(
+	function (baseUrl, language, showAsBlock, model) {
 		var containerClass = showAsBlock ? 'block-container' : 'container';
 		return A2(
 			_elm_lang$html$Html$div,
@@ -14742,41 +14685,34 @@ var _gizra$municipality$Events_View$view = F5(
 								})),
 						_1: {
 							ctor: '::',
-							_0: A2(
-								_gizra$municipality$Utils_Html$showIf,
-								(!showAsBlock) && editorPermissions,
-								A2(_gizra$municipality$Events_View$viewAddnewEvent, baseUrl, language)),
+							_0: A4(_gizra$municipality$Events_View$viewEvents, baseUrl, language, showAsBlock, model),
 							_1: {
 								ctor: '::',
-								_0: A4(_gizra$municipality$Events_View$viewEvents, baseUrl, language, showAsBlock, model),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_gizra$municipality$Utils_Html$showIf,
-										showAsBlock,
-										A2(
-											_elm_lang$html$Html$a,
-											{
+								_0: A2(
+									_gizra$municipality$Utils_Html$showIf,
+									showAsBlock,
+									A2(
+										_elm_lang$html$Html$a,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('btn btn-default btn-show-all'),
+											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('btn btn-default btn-show-all'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$href(
-														A2(
-															_elm_lang$core$Basics_ops['++'],
-															baseUrl.path,
-															A2(_elm_lang$core$Basics_ops['++'], '/events?', baseUrl.query))),
-													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text(
-													A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ShowAll)),
+												_0: _elm_lang$html$Html_Attributes$href(
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														baseUrl.path,
+														A2(_elm_lang$core$Basics_ops['++'], '/events?', baseUrl.query))),
 												_1: {ctor: '[]'}
-											})),
-									_1: {ctor: '[]'}
-								}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(
+												A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ShowAll)),
+											_1: {ctor: '[]'}
+										})),
+								_1: {ctor: '[]'}
 							}
 						}
 					}
@@ -14820,7 +14756,7 @@ var _gizra$municipality$App_View$view = function (model) {
 					_0: A2(
 						_elm_lang$html$Html$map,
 						_gizra$municipality$App_Model$MsgPagesEvents,
-						A5(_gizra$municipality$Events_View$view, model.baseUrl, model.language, model.showAsBlock, model.editorPermissions, model.pageEvents)),
+						A4(_gizra$municipality$Events_View$view, model.baseUrl, model.language, model.showAsBlock, model.pageEvents)),
 					_1: {ctor: '[]'}
 				});
 		default:
@@ -14842,26 +14778,21 @@ var _gizra$municipality$Main$main = _elm_lang$html$Html$programWithFlags(
 		function (baseUrl) {
 			return A2(
 				_elm_lang$core$Json_Decode$andThen,
-				function (editorPermissions) {
+				function (language) {
 					return A2(
 						_elm_lang$core$Json_Decode$andThen,
-						function (language) {
+						function (page) {
 							return A2(
 								_elm_lang$core$Json_Decode$andThen,
-								function (page) {
-									return A2(
-										_elm_lang$core$Json_Decode$andThen,
-										function (showAsBlock) {
-											return _elm_lang$core$Json_Decode$succeed(
-												{baseUrl: baseUrl, editorPermissions: editorPermissions, language: language, page: page, showAsBlock: showAsBlock});
-										},
-										A2(_elm_lang$core$Json_Decode$field, 'showAsBlock', _elm_lang$core$Json_Decode$bool));
+								function (showAsBlock) {
+									return _elm_lang$core$Json_Decode$succeed(
+										{baseUrl: baseUrl, language: language, page: page, showAsBlock: showAsBlock});
 								},
-								A2(_elm_lang$core$Json_Decode$field, 'page', _elm_lang$core$Json_Decode$string));
+								A2(_elm_lang$core$Json_Decode$field, 'showAsBlock', _elm_lang$core$Json_Decode$bool));
 						},
-						A2(_elm_lang$core$Json_Decode$field, 'language', _elm_lang$core$Json_Decode$string));
+						A2(_elm_lang$core$Json_Decode$field, 'page', _elm_lang$core$Json_Decode$string));
 				},
-				A2(_elm_lang$core$Json_Decode$field, 'editorPermissions', _elm_lang$core$Json_Decode$bool));
+				A2(_elm_lang$core$Json_Decode$field, 'language', _elm_lang$core$Json_Decode$string));
 		},
 		A2(
 			_elm_lang$core$Json_Decode$field,
