@@ -11964,14 +11964,15 @@ var _gizra$municipality$Contact_Utils$filterContacts = F2(
 						return stringMatch(
 							_elm_lang$core$String$toLower(contact.name)) || (stringMatch(
 							_elm_lang$core$String$toLower(department)) || (stringMatch(
-							_elm_lang$core$String$toLower(jobTitle)) || (!_elm_lang$core$List$isEmpty(
-							A2(
-								_elm_lang$core$List$filter,
-								function (topic) {
+							_elm_lang$core$String$toLower(jobTitle)) || A3(
+							_elm_lang$core$List$foldl,
+							F2(
+								function (topic, match) {
 									return stringMatch(
 										_elm_lang$core$String$toLower(topic.name));
-								},
-								topics)))));
+								}),
+							false,
+							topics)));
 					}),
 				contacts);
 		}

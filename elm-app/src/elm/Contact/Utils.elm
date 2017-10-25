@@ -30,6 +30,6 @@ filterContacts contacts filterString =
                     || stringMatch (String.toLower <| department)
                     || stringMatch (String.toLower <| jobTitle)
                     -- One of the topics' name matches the searched string.
-                    || not (List.isEmpty <| List.filter (\topic -> stringMatch (String.toLower <| topic.name)) topics)
+                    || List.foldl (\topic match -> stringMatch (String.toLower <| topic.name)) False topics
             )
             contacts
