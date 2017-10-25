@@ -23,12 +23,27 @@ filterContactsTest =
         , test "should return no matching contacts if filter string is filled" <|
             \() ->
                 Expect.equal (filterContacts contacts "foo") DictList.empty
-        , test "should return no contacts if filter string has other names" <|
+        , test "should return all contacts if filter string has a letter which exist in all of the contacts" <|
             \() ->
-                Expect.equal (filterContacts contacts "a")
+                Expect.equal (filterContacts contacts "a") contacts
+        , test "should return second contact if filter string matches the contcat's job title" <|
+            \() ->
+                Expect.equal (filterContacts contacts "director")
                     (DictList.fromList
-                        [ contact1
-                        , contact2
+                        [ contact2 ]
+                    )
+        , test "should return third contact if filter string matches one of the contact's topics" <|
+            \() ->
+                Expect.equal (filterContacts contacts "garbage")
+                    (DictList.fromList
+                        [ contact3 ]
+                    )
+        , test "should return 2 contacts if filter string matches the contacts' department" <|
+            \() ->
+                Expect.equal (filterContacts contacts "Budget")
+                    (DictList.fromList
+                        [ contact2
+                        , contact3
                         ]
                     )
         ]
