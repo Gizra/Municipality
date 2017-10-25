@@ -216,6 +216,7 @@ describe('Municipality homepage', () => {
     browser.url('/tuba-zangariyye/node/1');
     browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
     browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
+    browser.waitForVisible('h4=الأداء: ايدان رايشل');
   });
 
   it('should show events for the municiality 2 with the default language: arabic and user type: residents', () => {
@@ -259,6 +260,7 @@ describe('Municipality homepage', () => {
     eventsButton.click();
     browser.waitForVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
     browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
+    browser.waitForVisible('h4=הופעה: עידן רייכל');
     checkSelectedUserType('residents', 'hebrew');
     checkSelectedLanguage('hebrew');
   });
@@ -269,6 +271,7 @@ describe('Municipality homepage', () => {
     eventsButton.click();
     browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
     browser.waitForVisible('h4=مسرحية للأطفال: صباح السبت');
+    browser.waitForVisible('h4=الأداء: ايدان رايشل');
     checkSelectedUserType('residents', 'arabic');
     checkSelectedLanguage('arabic');
   });
@@ -295,9 +298,9 @@ describe('Municipality homepage', () => {
     browser.url('/tuba-zangariyye');
     browser.waitForVisible('h2=Upcoming events');
 
-    // First event entity doesn't have an image and should get the default
+    // Second event entity doesn't have an image and should get the default
     // image.
-    assert(browser.isVisible('#elm-app .row div:nth-child(1) .card-img-top img'));
+    assert(browser.isVisible('#elm-app .row div:nth-child(2) .card-img-top img'));
   });
 
   it('should redirect user to the group view page', () => {

@@ -2,12 +2,13 @@ var assert = require('assert');
 
 describe('Municipality events page', () => {
   before(() => {
-    browser.url('/tuba-zangariyye/events?language=he');
+    browser.url('Sat');
   });
 
   it('should show all events for the current municipality', () => {
     browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
     browser.waitForVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+    browser.waitForVisible('h4=הופעה: עידן רייכל');
   });
 
   it('should find events using the search input', () => {
@@ -15,18 +16,21 @@ describe('Municipality events page', () => {
     input.setValue('ר');
     browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
     browser.waitForVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
+    browser.waitForVisible('h4=הופעה: עידן רייכל');
 
     browser.setValueSafe('#search-events','הצג');
     browser.waitForVisible('h4=הצגת ילדים: שבת בבוקר');
 
     // Make sure other events disappear when searching.
     assert(!browser.isVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה'));
+    assert(!browser.isVisible('h4=הופעה: עידן רייכל'));
 
     browser.setValueSafe('#search-events','סיור');
     browser.waitForVisible('h4=סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה');
 
     // Make sure other events disappear when searching.
     assert(!browser.isVisible('h4=הצגת ילדים: שבת בבוקר'));
+    assert(!browser.isVisible('h4=הופעה: עידן רייכל'));
 
   });
 
