@@ -106,8 +106,20 @@ viewEventTest =
                     |> Query.children [ tag "div" ]
                     |> Query.first
                     |> Expect.all
-                        [ Query.has [ text "When: Thu," ]
-                        , Query.has [ text "To: Sat," ]
+                        [ Query.has [ text "When: Thu, 01/01/1970" ]
+                        , Query.has [ text "To: Sat, 20/10/1973" ]
+                        ]
+        , test "Event with the different Date and different Time (recurring)" <|
+            \() ->
+                viewEvent baseUrl English event4 False
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "event-date" ]
+                    |> Query.children [ tag "div" ]
+                    |> Query.first
+                    |> Expect.all
+                        [ Query.has [ text "When: Thu" ]
+                        , Query.has [ text "To: Sat" ]
+                        , Query.hasNot [ text "01/01/1970" ]
                         ]
         , test "Event without Weekly Recurring" <|
             \() ->
@@ -144,7 +156,7 @@ viewEventTest =
                     |> Query.has [ attribute "innerHTML" "Afternoon event description" ]
         , test "Event with Weekly Recurring" <|
             \() ->
-                viewEvent baseUrl English event3 False
+                viewEvent baseUrl English event4 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "recurring-weekly" ]
                     |> Query.has [ text "Weekly event" ]
@@ -233,6 +245,26 @@ event2 =
 
 event3 : ( EventId, Event )
 event3 =
+    ( "300"
+    , { name = "Evening event"
+      , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
+      , description = Just "Evening event description"
+      , date = Date.fromTime 0
+      , endDate = Just (Date.fromTime 120000000000)
+      , recurringWeekly = False
+      , ticketPrice = Just <| Price 180
+      , location =
+            Just
+                { title = "Test location 2"
+                , url = "http://maps.google.com/test2"
+                }
+      , showEditLink = True
+      }
+    )
+
+
+event4 : ( EventId, Event )
+event4 =
     ( "300"
     , { name = "Evening event"
       , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
