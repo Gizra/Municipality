@@ -1,8 +1,8 @@
 port module App.Update
     exposing
         ( init
-        , update
         , subscriptions
+        , update
         )
 
 import App.Model exposing (..)
@@ -45,14 +45,15 @@ init flags =
                 _ ->
                     English
     in
-        ( { emptyModel
-            | page = page
-            , language = language
-            , showAsBlock = flags.showAsBlock
-            , baseUrl = flags.baseUrl
-          }
-        , Cmd.none
-        )
+    ( { emptyModel
+        | baseUrl = flags.baseUrl
+        , editorPermissions = flags.editorPermissions
+        , language = language
+        , showAsBlock = flags.showAsBlock
+        , page = page
+      }
+    , Cmd.none
+    )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -63,27 +64,27 @@ update msg model =
                 ( val, cmds ) =
                     Contact.Update.update subMsg model.pageContact
             in
-                ( { model | pageContact = val }
-                , Cmd.map MsgPagesContact cmds
-                )
+            ( { model | pageContact = val }
+            , Cmd.map MsgPagesContact cmds
+            )
 
         MsgPagesEvent subMsg ->
             let
                 ( val, cmds ) =
                     Event.Update.update subMsg model.pageEvent
             in
-                ( { model | pageEvent = val }
-                , Cmd.map MsgPagesEvent cmds
-                )
+            ( { model | pageEvent = val }
+            , Cmd.map MsgPagesEvent cmds
+            )
 
         MsgPagesEvents subMsg ->
             let
                 ( val, cmds ) =
                     Events.Update.update subMsg model.pageEvents
             in
-                ( { model | pageEvents = val }
-                , Cmd.map MsgPagesEvents cmds
-                )
+            ( { model | pageEvents = val }
+            , Cmd.map MsgPagesEvents cmds
+            )
 
 
 subscriptions : Model -> Sub Msg

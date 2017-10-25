@@ -13,13 +13,21 @@ import Utils.BootstrapGrid exposing (renderBootstrapGrid)
 import Utils.Html exposing (colorToString, divider, formatReceptionDays, sectionDivider, showIf, showMaybe)
 
 
-view : BaseUrl -> Language -> Bool -> Model -> Html Msg
-view baseUrl language showAsBlock model =
+view : BaseUrl -> Language -> Bool -> Bool -> Model -> Html Msg
+view baseUrl language showAsBlock editorPermissions model =
+    let
+        containerClass =
+            if showAsBlock then
+                "block-container"
+            else
+                "container"
+    in
     div
-        []
+        [ class containerClass ]
         [ showIf (not showAsBlock) <| viewContactsHeader language
         , showIf (not showAsBlock) <| viewContactFilter language model.filterString
         , showIf (not showAsBlock) <| div [ class "divider" ] [ text <| translate language MatchingResults ]
+        , showIf (not showAsBlock && editorPermissions) <| viewAddnewContact baseUrl language
         , viewContacts baseUrl language showAsBlock model
         , showIf showAsBlock <|
             a
@@ -66,6 +74,19 @@ viewContactFilter language filterString =
         ]
 
 
+viewAddnewContact : BaseUrl -> Language -> Html Msg
+viewAddnewContact baseUrl language =
+    div [ class "row add-new-contact" ]
+        [ div [ class "col-xs-12 align-right" ]
+            [ a [ href <| baseUrl.path ++ "/node/add/contact?" ++ baseUrl.query ]
+                [ button
+                    [ class "btn btn-primary mr-xs mb-sm" ]
+                    [ text <| translate language AddNewContactText ]
+                ]
+            ]
+        ]
+
+
 {-| View all contacts.
 -}
 viewContacts : BaseUrl -> Language -> Bool -> Model -> Html msg
@@ -74,33 +95,32 @@ viewContacts baseUrl language showAsBlock { contacts, filterString } =
         filteredContacts =
             filterContacts contacts filterString
     in
-        if DictList.isEmpty filteredContacts then
-            div [] [ text <| translate language ContactsNotFound ]
-        else
-            let
-                viewFunction =
-                    if showAsBlock then
-                        viewContactAsBlock
-                    else
-                        viewContact
-
-                contactsHtmlList =
-                    (filteredContacts
-                        |> DictList.map
-                            (\contactId contact ->
-                                viewFunction
-                                    baseUrl
-                                    language
-                                    ( contactId, contact )
-                            )
-                        |> DictList.values
-                    )
-            in
+    if DictList.isEmpty filteredContacts then
+        div [] [ text <| translate language ContactsNotFound ]
+    else
+        let
+            viewFunction =
                 if showAsBlock then
-                    ul [ class "list list-primary list-borders" ]
-                        contactsHtmlList
+                    viewContactAsBlock
                 else
-                    renderBootstrapGrid 3 contactsHtmlList
+                    viewContact
+
+            contactsHtmlList =
+                filteredContacts
+                    |> DictList.map
+                        (\contactId contact ->
+                            viewFunction
+                                baseUrl
+                                language
+                                ( contactId, contact )
+                        )
+                    |> DictList.values
+        in
+        if showAsBlock then
+            ul [ class "list list-primary list-borders" ]
+                contactsHtmlList
+        else
+            renderBootstrapGrid 3 contactsHtmlList
 
 
 {-| View a single contact.
@@ -227,7 +247,7 @@ viewContact baseUrl language ( contactId, contact ) =
         ]
 
 
-{-| View a single event that will appear in a block (i.e. with less information).
+{-| View a single contact that will appear in a block (i.e. with less information).
 -}
 viewContactAsBlock : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContactAsBlock baseUrl language ( contactId, contact ) =

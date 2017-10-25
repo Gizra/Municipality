@@ -14,8 +14,8 @@ filterContacts contacts filterString =
             stringMatch =
                 String.contains (String.toLower filterString)
         in
-            DictList.filter
-                (\_ contact ->
-                    stringMatch (String.toLower <| contact.name)
-                )
-                contacts
+        DictList.filter
+            (\_ contact ->
+                stringMatch (String.toLower <| contact.name)
+            )
+            contacts

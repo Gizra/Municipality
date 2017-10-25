@@ -4,14 +4,14 @@ import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
 import Contact.Model exposing (..)
 import Contact.Utils exposing (filterContacts)
-import Contact.View exposing (viewContact, viewContactAsBlock)
+import Contact.View exposing (view, viewContact, viewContactAsBlock)
 import Date
 import DictList
 import Expect
 import Html
 import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
-import Test.Html.Selector as Selector exposing (class, tag, text, attribute)
+import Test.Html.Selector as Selector exposing (attribute, class, tag, text)
 
 
 filterContactsTest : Test
@@ -31,6 +31,29 @@ filterContactsTest =
                         , contact2
                         ]
                     )
+        ]
+
+
+viewAddContactLinkTest : Test
+viewAddContactLinkTest =
+    describe "view add contact link"
+        [ test "should not see the add contacts link without permissions" <|
+            \() ->
+                view baseUrl English False False Contact.Model.emptyModel
+                    |> Query.fromHtml
+                    |> Query.hasNot [ Selector.class "add-new-contact" ]
+        , test "should not see the add contacts link in block" <|
+            \() ->
+                view baseUrl English True True Contact.Model.emptyModel
+                    |> Query.fromHtml
+                    |> Query.hasNot [ Selector.class "add-new-contact" ]
+        , test "should see the add contacts link with permissions" <|
+            \() ->
+                view baseUrl English False True Contact.Model.emptyModel
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "add-new-contact" ]
+                    |> Query.find [ Selector.tag "button" ]
+                    |> Query.has [ Selector.text "Add new contact" ]
         ]
 
 
@@ -140,6 +163,7 @@ all : Test
 all =
     describe "Contacts tests"
         [ filterContactsTest
+        , viewAddContactLinkTest
         , viewContactTest
         ]
 

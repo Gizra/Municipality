@@ -1,12 +1,12 @@
 module Utils.Test exposing (all)
 
-import Utils.BootstrapGrid exposing (..)
 import Expect
 import Html exposing (..)
 import Html.Attributes exposing (class)
 import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
 import Test.Html.Selector as Selector exposing (attribute, class, tag, text)
+import Utils.BootstrapGrid exposing (..)
 
 
 renderBootstrapGridTest : Test

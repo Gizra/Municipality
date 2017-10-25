@@ -7,6 +7,17 @@
 
 include_once 'hedley_municipality.features.inc';
 
+// Define constants for theme colors.
+define('HEDLEY_MUNICIPALITY_DEFAULT_COLOR', 'default');
+define('HEDLEY_MUNICIPALITY_PRIMARY_COLOR', 'primary');
+define('HEDLEY_MUNICIPALITY_SECONDARY_COLOR', 'secondary');
+define('HEDLEY_MUNICIPALITY_TERTIANY_COLOR', 'tertiary');
+define('HEDLEY_MUNICIPALITY_QUANTERNARY_COLOR', 'quaternary');
+define('HEDLEY_MUNICIPALITY_SUCCESS_COLOR', 'success');
+define('HEDLEY_MUNICIPALITY_INFO_COLOR', 'info');
+define('HEDLEY_MUNICIPALITY_WARNING_COLOR', 'warning');
+define('HEDLEY_MUNICIPALITY_DANGER_COLOR', 'danger');
+
 /**
  * Implements hook_ctools_plugin_directory().
  */
@@ -70,6 +81,8 @@ function hedley_municipality_get_nodes_base_query($bundle, $max_range = 50) {
  *
  * @param \EntityFieldQuery $query
  *   The base query.
+ * @param string $bundle
+ *   The wanted nodes bundle.
  * @param object|null $municipality_node
  *   Optional "Municipality" node to filter by.
  * @param bool $promoted_only
@@ -83,7 +96,7 @@ function hedley_municipality_get_nodes_base_query($bundle, $max_range = 50) {
  * @return \EntityFieldQuery
  *   The filtered query.
  */
-function hedley_municipality_get_nodes_add_filters_to_query(EntityFieldQuery $query, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
+function hedley_municipality_get_nodes_add_filters_to_query(EntityFieldQuery $query, $bundle, $municipality_node = NULL, $promoted_only = FALSE, $topic_tid = 0, $order_direction = 'DESC') {
   // Filter by municipality.
   if ($municipality_node) {
     $query->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $municipality_node->nid);
@@ -92,6 +105,16 @@ function hedley_municipality_get_nodes_add_filters_to_query(EntityFieldQuery $qu
   // Filter by promoted nodes.
   if ($promoted_only) {
     $query->propertyCondition('promote', NODE_PROMOTED);
+  }
+
+  // Filter expired news.
+  if ($bundle == 'news') {
+    $query->fieldCondition('field_expiration_date', 'value', REQUEST_TIME, '>');
+  }
+
+  // Filter past events.
+  if ($bundle == 'event') {
+    $query->fieldCondition('field_date', 'value', REQUEST_TIME, '>');
   }
 
   // Filter by current topic.
@@ -133,7 +156,7 @@ function hedley_municipality_get_nodes($bundle, $max_range = 50, $municipality_n
   $query = hedley_municipality_get_nodes_base_query($bundle, $max_range);
 
   // Add filters to the query.
-  $query = hedley_municipality_get_nodes_add_filters_to_query($query, $municipality_node, $promoted_only, $topic_tid, $order_direction);
+  $query = hedley_municipality_get_nodes_add_filters_to_query($query, $bundle, $municipality_node, $promoted_only, $topic_tid, $order_direction);
 
   $result = $query->execute();
 
@@ -172,7 +195,7 @@ function hedley_municipality_get_nodes_by_current_user_type($bundle, $max_range 
   $query = hedley_municipality_get_nodes_base_query($bundle, $max_range);
 
   // Add filters to the query.
-  $query = hedley_municipality_get_nodes_add_filters_to_query($query, $municipality_node, $promoted_only, $topic_tid, $order_direction);
+  $query = hedley_municipality_get_nodes_add_filters_to_query($query, $bundle, $municipality_node, $promoted_only, $topic_tid, $order_direction);
 
   // Filter by current user type.
   $query->fieldCondition('field_user_types', 'tid', hedley_terms_get_current_user_type_tid());

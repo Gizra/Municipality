@@ -27,7 +27,19 @@ function hedley_municipality_topics_list_content_type_render($subtype, $conf, $a
   $vocabulary = taxonomy_vocabulary_machine_name_load("topics_$municipality_node->nid");
   $terms = taxonomy_get_tree($vocabulary->vid);
 
-  $topics = [];
+  // Add two default buttons which leads to contacts & events pages.
+  $topics = [
+    [
+      'label' => t('Contacts'),
+      'link' => url('contacts'),
+      'color' => HEDLEY_MUNICIPALITY_DEFAULT_COLOR,
+    ],
+    [
+      'label' => t('Events'),
+      'link' => url('events'),
+      'color' => HEDLEY_MUNICIPALITY_PRIMARY_COLOR,
+    ],
+  ];
   foreach ($terms as $term) {
     $wrapper = entity_metadata_wrapper('taxonomy_term', $term->tid);
     $wrapper->language($language->language);

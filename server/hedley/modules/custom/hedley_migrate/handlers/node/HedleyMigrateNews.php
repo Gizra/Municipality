@@ -18,20 +18,18 @@ class HedleyMigrateNews extends HedleyMigrateBase {
     'title_field_ar',
     'title_field_en',
     'title_field_he',
-    'field_subtitle_ar',
-    'field_subtitle_en',
-    'field_subtitle_he',
     'body_ar',
     'body_en',
     'body_he',
     'field_topics',
     'field_user_types',
     'field_image',
+    'field_expiration_date',
   ];
   protected $simpleMappings = [
     'title_field',
-    'field_subtitle',
     'body',
+    'field_expiration_date',
   ];
   protected $simpleMultipleMappings = [
     'field_user_types',

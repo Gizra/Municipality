@@ -56,7 +56,6 @@ features[field_base][] = field_section_hardcopy_form
 features[field_base][] = field_section_icon
 features[field_base][] = field_section_title
 features[field_base][] = field_social_links
-features[field_base][] = field_subtitle
 features[field_base][] = field_tender_extension
 features[field_base][] = field_tender_payment
 features[field_base][] = field_tender_requirements

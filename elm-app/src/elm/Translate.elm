@@ -14,7 +14,9 @@ type alias TranslationSet =
 
 
 type TranslationId
-    = ContactsHeaderText
+    = AddNewContactText
+    | AddNewEventText
+    | ContactsHeaderText
     | EventsHeaderText
     | ContactsNotFound
     | DayTranslation Day
@@ -39,6 +41,18 @@ translate lang trans =
     let
         translationSet =
             case trans of
+                AddNewContactText ->
+                    { arabic = "إضافة جهة اتصال"
+                    , english = "Add new contact"
+                    , hebrew = "הוספת איש קשר"
+                    }
+
+                AddNewEventText ->
+                    { arabic = "إضافة حدث جديد"
+                    , english = "Add new event"
+                    , hebrew = "הוספת אירוע חדש"
+                    }
+
                 ContactsHeaderText ->
                     { arabic = "اتصالات وموظفي الشبكة"
                     , english = "Contacts and network employees"
@@ -122,17 +136,17 @@ translate lang trans =
                             Maybe.map
                                 (\endDate ->
                                     if compareFormater date == compareFormater endDate then
-                                        dateFormated ++ " - " ++ (timeFormater endDate)
+                                        dateFormated ++ " - " ++ timeFormater endDate
                                     else
-                                        dateFormated ++ " - " ++ (formater endDate)
+                                        dateFormated ++ " - " ++ formater endDate
                                 )
                                 mEndDate
                                 |> Maybe.withDefault dateFormated
                     in
-                        { arabic = allDatesFormated ++ ", " ++ dayTranslated
-                        , english = dayTranslated ++ ", " ++ allDatesFormated
-                        , hebrew = allDatesFormated ++ ", " ++ dayTranslated
-                        }
+                    { arabic = allDatesFormated ++ ", " ++ dayTranslated
+                    , english = dayTranslated ++ ", " ++ allDatesFormated
+                    , hebrew = allDatesFormated ++ ", " ++ dayTranslated
+                    }
 
                 DateLabelTranslation ->
                     { arabic = "متى"
@@ -212,12 +226,12 @@ translate lang trans =
                     , hebrew = "הצג הכל"
                     }
     in
-        case lang of
-            Arabic ->
-                .arabic translationSet
+    case lang of
+        Arabic ->
+            .arabic translationSet
 
-            English ->
-                .english translationSet
+        English ->
+            .english translationSet
 
-            Hebrew ->
-                .hebrew translationSet
+        Hebrew ->
+            .hebrew translationSet

@@ -8,7 +8,7 @@ import DictList
 import Event.Model exposing (..)
 import Events.Model exposing (..)
 import Events.Utils exposing (filterEvents)
-import Events.View exposing (viewEvent)
+import Events.View exposing (view, viewEvent)
 import Expect
 import Html
 import Html.Attributes exposing (class)
@@ -40,6 +40,29 @@ filterEventsTest =
                     (DictList.fromList
                         [ event3 ]
                     )
+        ]
+
+
+viewAddEventLinkTest : Test
+viewAddEventLinkTest =
+    describe "view add event link"
+        [ test "should not see the add events link without permissions" <|
+            \() ->
+                view baseUrl English False False Events.Model.emptyModel
+                    |> Query.fromHtml
+                    |> Query.hasNot [ Selector.class "add-new-event" ]
+        , test "should not see the add events link in block" <|
+            \() ->
+                view baseUrl English True True Events.Model.emptyModel
+                    |> Query.fromHtml
+                    |> Query.hasNot [ Selector.class "add-new-event" ]
+        , test "should see the add events link with permissions" <|
+            \() ->
+                view baseUrl English False True Events.Model.emptyModel
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "add-new-event" ]
+                    |> Query.find [ Selector.tag "button" ]
+                    |> Query.has [ Selector.text "Add new event" ]
         ]
 
 
@@ -130,7 +153,7 @@ viewEventTest =
                 viewEvent baseUrl English event3 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "ticket-price" ]
-                    |> Query.has [ text "Price: 180" ]
+                    |> Query.has [ text "Price: 180 NIS" ]
         , test "Event with Location" <|
             \() ->
                 viewEvent baseUrl English event3 False
@@ -156,6 +179,7 @@ all : Test
 all =
     describe "Events tests"
         [ filterEventsTest
+        , viewAddEventLinkTest
         , viewEventTest
         ]
 
@@ -196,7 +220,7 @@ event2 =
       , date = Date.fromTime 120000000000
       , endDate = Just (Date.fromTime 120000000100)
       , recurringWeekly = False
-      , ticketPrice = Just "120"
+      , ticketPrice = Just <| Price 120
       , location =
             Just
                 { title = "Test location"
@@ -216,7 +240,7 @@ event3 =
       , date = Date.fromTime 0
       , endDate = Just (Date.fromTime 120000000000)
       , recurringWeekly = True
-      , ticketPrice = Just "180"
+      , ticketPrice = Just <| Price 180
       , location =
             Just
                 { title = "Test location 2"

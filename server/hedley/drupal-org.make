@@ -16,7 +16,7 @@ projects[auto_entitylabel][subdir] = "contrib"
 projects[auto_entitylabel][version] = "1.4"
 
 projects[ckeditor][subdir] = "contrib"
-projects[ckeditor][version] = "1.17"
+projects[ckeditor][version] = "1.18"
 
 projects[coffee][subdir] = "contrib"
 projects[coffee][version] = "2.3"
@@ -47,13 +47,13 @@ projects[entitycache][subdir] = "contrib"
 projects[entitycache][version] = "1.2"
 
 projects[entityreference][subdir] = "contrib"
-projects[entityreference][version] = "1.4"
+projects[entityreference][version] = "1.5"
 
 projects[entity_translation][subdir] = "contrib"
-projects[entity_translation][version] = "1.0-beta6"
+projects[entity_translation][version] = "1.0-beta7"
 
 projects[entity_validator][subdir] = "contrib"
-projects[entity_validator][version] = "1.x"
+projects[entity_validator][version] = "1.2"
 
 projects[facetapi][subdir] = "contrib"
 projects[facetapi][version] = "1.5"
@@ -132,7 +132,7 @@ projects[variable][subdir] = "contrib"
 projects[variable][version] = "2.5"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.16"
+projects[views][version] = "3.18"
 
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.4"

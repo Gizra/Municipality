@@ -2,6 +2,7 @@ module Utils.Json
     exposing
         ( decodeDate
         , decodeEmptyArrayAs
+        , decodeInt
         , decodeIntAsString
         )
 
@@ -39,11 +40,33 @@ decodeEmptyArrayAs default =
                     length =
                         List.length list
                 in
-                    if length == 0 then
-                        succeed default
-                    else
-                        fail <| "Expected an empty array, not an array with length: " ++ toString length
+                if length == 0 then
+                    succeed default
+                else
+                    fail <| "Expected an empty array, not an array with length: " ++ toString length
             )
+
+
+resultToDecoder : Result String a -> Decoder a
+resultToDecoder res =
+    case res of
+        Ok x ->
+            Json.Decode.succeed x
+
+        Err err ->
+            Json.Decode.fail err
+
+
+{-| Cast String to Int.
+-}
+decodeInt : Decoder Int
+decodeInt =
+    oneOf
+        [ int
+        , string
+            |> andThen (resultToDecoder << String.toFloat)
+            |> map floor
+        ]
 
 
 decodeIntAsString : Decoder String

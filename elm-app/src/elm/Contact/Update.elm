@@ -20,7 +20,7 @@ update msg model =
                 _ =
                     Debug.log "HandleContacts" err
             in
-                model ! []
+            model ! []
 
         SetFilter filterString ->
             { model | filterString = filterString } ! []

@@ -1,10 +1,10 @@
 module App.Model
     exposing
-        ( emptyModel
+        ( BaseUrl
         , Flags
-        , Msg(..)
         , Model
-        , BaseUrl
+        , Msg(..)
+        , emptyModel
         )
 
 import App.Types exposing (Language(..), Page(..))
@@ -20,15 +20,17 @@ type Msg
 
 
 type alias Flags =
-    { page : String
+    { baseUrl : BaseUrl
+    , editorPermissions : Bool
     , language : String
+    , page : String
     , showAsBlock : Bool
-    , baseUrl : BaseUrl
     }
 
 
 type alias Model =
     { baseUrl : BaseUrl
+    , editorPermissions : Bool
     , language : Language
     , page : Page
     , pageContact : Contact.Model.Model
@@ -50,6 +52,7 @@ emptyModel =
         { path = ""
         , query = ""
         }
+    , editorPermissions = False
     , language = Hebrew
     , page = NotFound
     , pageContact = Contact.Model.emptyModel

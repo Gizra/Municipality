@@ -13,7 +13,7 @@ view model =
     case model.page of
         Contact ->
             div []
-                [ Html.map MsgPagesContact <| Contact.View.view model.baseUrl model.language model.showAsBlock model.pageContact
+                [ Html.map MsgPagesContact <| Contact.View.view model.baseUrl model.language model.showAsBlock model.editorPermissions model.pageContact
                 ]
 
         Event ->
@@ -23,7 +23,7 @@ view model =
 
         Events ->
             div []
-                [ Html.map MsgPagesEvents <| Events.View.view model.baseUrl model.language model.showAsBlock model.pageEvents
+                [ Html.map MsgPagesEvents <| Events.View.view model.baseUrl model.language model.showAsBlock model.editorPermissions model.pageEvents
                 ]
 
         NotFound ->

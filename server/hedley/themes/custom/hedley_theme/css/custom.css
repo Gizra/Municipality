@@ -97,6 +97,14 @@
   max-height: 120px;
 }
 
+.btn {
+  font-size: 14.2px;
+}
+
+.pane-topics-list a {
+  display: inline-block;
+}
+
 @media (max-width: 991px) {
   .thumbnail {
     border: 1px solid #ddd;
