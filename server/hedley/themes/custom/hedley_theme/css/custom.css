@@ -110,3 +110,11 @@
     border: 1px solid #ddd;
   }
 }
+
+#elm-app .thumbnail .caption {
+  padding: 9px 6px;
+}
+
+.event-date .different-end-date {
+  display: block;
+}

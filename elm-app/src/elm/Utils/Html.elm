@@ -3,9 +3,8 @@ module Utils.Html
         ( colorToString
         , divider
         , emptyNode
-        , formatDateAndDayWithLabel
+        , eventDateElement
         , formatReceptionDays
-        , formatRecurringEventDate
         , sectionDivider
         , showIf
         , showMaybe
@@ -15,7 +14,7 @@ import App.Types exposing (Language(..))
 import Contact.Model exposing (Color)
 import Date exposing (Date, Day, dayOfWeek)
 import Date.Format exposing (format)
-import Html exposing (Html, div, text)
+import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class)
 import String exposing (toLower)
 import Translate exposing (TranslationId(..), translate)
@@ -93,13 +92,19 @@ formatReceptionDays language days multipleDays =
             ++ ", "
 
 
-formatDateAndDayWithLabel : Language -> Date -> Maybe Date -> String
-formatDateAndDayWithLabel language date mEndDate =
+{-| Produces the event date element depending on the language and type of event.
+(i.e. recurring or not)
+-}
+eventDateElement : Language -> Date -> Maybe Date -> Bool -> Html msg
+eventDateElement language date mEndDate recurring =
     let
         labelTranslated =
             translate language <| DateLabelTranslation
 
-        dayTranslated =
+        untilLabelTranslated =
+            translate language <| UntilTranslation
+
+        beginDayTranslated =
             translate language <| DayTranslation (dayOfWeek date)
 
         formater =
@@ -114,38 +119,42 @@ formatDateAndDayWithLabel language date mEndDate =
         timeFormater =
             format "%H:%M"
 
-        allDatesFormated =
+        -- Date format depends on wether the event is "recurring" or not, if yes
+        -- then we don't diaply the date, only the name of the day and the time.
+        beginDateFormmated =
+            if recurring then
+                labelTranslated ++ ": " ++ beginDayTranslated ++ ", " ++ timeFormater date
+            else
+                labelTranslated ++ ": " ++ beginDayTranslated ++ ", " ++ dateFormated
+
+        datesElement =
             Maybe.map
                 (\endDate ->
+                    let
+                        endDayTranslated =
+                            translate language <| DayTranslation (dayOfWeek endDate)
+
+                        endDateFormmated =
+                            -- Same logic for "recurring" end date.
+                            if recurring then
+                                untilLabelTranslated ++ ": " ++ endDayTranslated ++ ", " ++ timeFormater endDate
+                            else
+                                untilLabelTranslated ++ ": " ++ endDayTranslated ++ ", " ++ formater endDate
+                    in
+                    -- Event ends on the same day and therefore we don't display
+                    -- the name of the ending day.
                     if compareFormater date == compareFormater endDate then
-                        dateFormated ++ " - " ++ timeFormater endDate
+                        span []
+                            [ span [ class "begin-date" ] [ text <| beginDateFormmated ++ " - " ]
+                            , span [ class "end-date" ] [ text <| timeFormater endDate ]
+                            ]
                     else
-                        dateFormated ++ " - " ++ formater endDate
+                        span []
+                            [ span [ class "begin-date" ] [ text <| beginDateFormmated ]
+                            , span [ class "different-end-date ml-lg" ] [ text endDateFormmated ]
+                            ]
                 )
                 mEndDate
-                |> Maybe.withDefault dateFormated
+                |> Maybe.withDefault (span [ class "begin-date" ] [ text beginDateFormmated ])
     in
-    labelTranslated ++ ": " ++ dayTranslated ++ ", " ++ allDatesFormated
-
-
-formatRecurringEventDate : Language -> Date -> Maybe Date -> String
-formatRecurringEventDate language date mEndDate =
-    let
-        labelTranslated =
-            translate language <| DateLabelTranslation
-
-        dayTranslated =
-            translate language <| DayTranslation (dayOfWeek date)
-
-        timeFormater =
-            format "%H:%M"
-
-        allDatesFormated =
-            Maybe.map
-                (\endDate ->
-                    timeFormater date ++ " - " ++ timeFormater endDate
-                )
-                mEndDate
-                |> Maybe.withDefault (timeFormater date)
-    in
-    labelTranslated ++ ": " ++ dayTranslated ++ ", " ++ allDatesFormated
+    datesElement

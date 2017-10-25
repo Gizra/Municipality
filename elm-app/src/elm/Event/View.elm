@@ -8,18 +8,11 @@ import Html exposing (..)
 import Html.Attributes exposing (alt, class, href, id, property, src, target)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (formatDateAndDayWithLabel, formatRecurringEventDate, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (eventDateElement, sectionDivider, showIf, showMaybe)
 
 
 view : BaseUrl -> Language -> Event -> Html Msg
 view baseUrl language event =
-    let
-        eventDate =
-            if event.recurringWeekly then
-                formatRecurringEventDate language event.date event.endDate
-            else
-                formatDateAndDayWithLabel language event.date event.endDate
-    in
     div [ class "event-page" ]
         [ div
             [ class "row text-center" ]
@@ -47,12 +40,12 @@ view baseUrl language event =
                     [ class "row text-center" ]
                     [ div
                         [ class "col-md-4 event-date" ]
-                        [ span
+                        [ div
                             []
                             [ i
                                 [ class "fa fa-calendar" ]
                                 []
-                            , text eventDate
+                            , eventDateElement language event.date event.endDate event.recurringWeekly
                             ]
                         , showIf event.recurringWeekly <|
                             div

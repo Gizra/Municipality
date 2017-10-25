@@ -16,7 +16,7 @@ import Html.Events exposing (onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
 import Utils.BootstrapGrid exposing (renderBootstrapGrid)
-import Utils.Html exposing (formatRecurringEventDate, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (eventDateElement, sectionDivider, showIf, showMaybe)
 
 
 view : BaseUrl -> Language -> Bool -> Bool -> Model -> Html Msg
@@ -148,12 +148,6 @@ viewEvent baseUrl language ( eventId, event ) showAsBlock =
                             ]
                             [ text <| translate language EditLinkText ]
                 )
-
-        eventDate =
-            if event.recurringWeekly then
-                formatRecurringEventDate language event.date event.endDate
-            else
-                translate language (DayAndDate event.date event.endDate)
     in
     div [ class "thumbnail search-results" ]
         [ showMaybe <| editEvent
@@ -187,13 +181,10 @@ viewEvent baseUrl language ( eventId, event ) showAsBlock =
             , showIf (not showAsBlock) <| sectionDivider
             , div
                 [ class "event-date" ]
-                [ span
+                [ i
+                    [ class "fa fa-calendar" ]
                     []
-                    [ i
-                        [ class "fa fa-calendar" ]
-                        []
-                    , text eventDate
-                    ]
+                , eventDateElement language event.date event.endDate event.recurringWeekly
                 , showIf event.recurringWeekly <|
                     div
                         [ class "recurring-weekly" ]
