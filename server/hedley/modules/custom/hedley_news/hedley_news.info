@@ -34,6 +34,7 @@ features[field_instance][] = node-news-title_field
 features[image][] = square_thumbnail
 features[node][] = news
 features[page_manager_handlers][] = node_view__panel_context_6b5b3bb6-5435-4f8c-9eba-50ff7c1ff8ed
+features[page_manager_pages][] = news
 features[variable][] = diff_enable_revisions_page_node_news
 features[variable][] = diff_show_preview_changes_node_news
 features[variable][] = diff_view_mode_preview_node_news
