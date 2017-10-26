@@ -38,11 +38,23 @@ describe('Municipality events page', () => {
     assert(!browser.isVisible('button=Add new event'));
   });
 
-  it('should show add event link to editors', () => {
+  it('should show "add event" link to group\'s editors', () => {
     browser.login('noam');
     browser.url('/tuba-zangariyye/events?language=en');
 
     browser.waitForVisible('button=Add new event');
+  });
+
+  it('should not show "add event" link to another group\'s editors', () => {
+    // Logged in with noam from before.
+    browser.url('/kiryat-malakhi/events?language=en');
+
+    assert(!browser.isVisible('button=Add new event'));
+  });
+
+  after(() => {
+    // Logout se we don't affect other tests.
+    browser.logout();
   });
 
 });

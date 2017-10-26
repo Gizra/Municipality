@@ -24,7 +24,6 @@ $plugin = [
  * Render callback.
  */
 function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
-  global $user;
   global $language;
   $block = new stdClass();
   $block->module = 'hedley_elm';
@@ -55,7 +54,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   $show_as_block = (bool) $conf['show_as_block'];
   $promoted_only = (bool) $conf['promoted_only'];
 
-  if (!$node = hedley_municipality_get_current_group()) {
+  if (!$group = hedley_municipality_get_current_group()) {
     // Don't display the elm app if not in the context of a municipality group.
     return FALSE;
   }
@@ -64,12 +63,12 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   $title = '';
   switch ($page) {
     case 'contact':
-      $values = hedley_contact_get_contacts_by_group($node, $language->language, $show_as_block, $promoted_only, $topic_tid);
+      $values = hedley_contact_get_contacts_by_group($group, $language->language, $show_as_block, $promoted_only, $topic_tid);
       break;
 
     case 'contacts':
       $title = t('People who can help you');
-      $values = hedley_contact_get_contacts_by_group($node, $language->language, $show_as_block, $promoted_only, $topic_tid);
+      $values = hedley_contact_get_contacts_by_group($group, $language->language, $show_as_block, $promoted_only, $topic_tid);
       break;
 
     case 'event':
@@ -78,7 +77,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
 
     case 'events':
       $title = t('Upcoming events');
-      $values = hedley_event_get_events_by_group($node, $language->language, $show_as_block, $promoted_only, $topic_tid);
+      $values = hedley_event_get_events_by_group($group, $language->language, $show_as_block, $promoted_only, $topic_tid);
       break;
   }
 
@@ -100,7 +99,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
   $parsed_url['query'] = isset($parsed_url['query']) ? drupal_http_build_query($parsed_url['query']) : '';
 
   // Get user roles to check if they have editor role.
-  $roles = $user->roles;
+  $roles = og_get_user_roles('node', $group->nid);
 
   // Add settings.
   $settings = [
@@ -111,7 +110,7 @@ function hedley_elm_elm_content_type_render($subtype, $conf, $args, $context) {
         'showAsBlock' => $show_as_block,
         'values' => $values,
         'baseUrl' => $parsed_url,
-        'editorPermissions' => in_array('administrator', $roles) || in_array('editor', $roles),
+        'editorPermissions' => in_array('editor', $roles),
       ],
     ],
   ];

@@ -71,11 +71,23 @@ describe('Municipality contacts page', () => {
     assert(!browser.isVisible('button=Add new contact'));
   });
 
-  it('should show add contact link to editors', () => {
+  it('should show "add contact" link to group\'s editors', () => {
     browser.login('liat');
-    browser.url('/al-kasom/contacts?language=en');
+    browser.url('/kiryat-malakhi/contacts?language=en');
 
     browser.waitForVisible('button=Add new contact');
+  });
+
+  it('should not show "add contact" link to another group\'s editors', () => {
+    // Logged in with noam from before.
+    browser.url('/al-kasom/contacts?language=en');
+
+    assert(!browser.isVisible('button=Add new contact'));
+  });
+
+  after(() => {
+    // Logout se we don't affect other tests.
+    browser.logout();
   });
 
 });
