@@ -114,7 +114,7 @@ function hedley_municipality_get_nodes_add_filters_to_query(EntityFieldQuery $qu
 
   // Filter past events.
   if ($bundle == 'event') {
-    $query->fieldCondition('field_date', 'value', REQUEST_TIME, '>');
+    $query->fieldCondition('field_date', 'value2', REQUEST_TIME, '>');
   }
 
   // Filter by current topic.

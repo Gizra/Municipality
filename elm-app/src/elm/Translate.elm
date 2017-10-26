@@ -20,7 +20,6 @@ type TranslationId
     | EventsHeaderText
     | ContactsNotFound
     | DayTranslation Day
-    | DayAndDate Date (Maybe Date)
     | DateLabelTranslation
     | EditLinkText
     | EventRecurringWeekly
@@ -34,6 +33,7 @@ type TranslationId
     | PriceCurrencyText
     | ReceptionText
     | ShowAll
+    | UntilTranslation
 
 
 translate : Language -> TranslationId -> String
@@ -115,39 +115,6 @@ translate lang trans =
                             , hebrew = "ראשון"
                             }
 
-                DayAndDate date mEndDate ->
-                    let
-                        dayTranslated =
-                            translate lang <| DayTranslation (dayOfWeek date)
-
-                        formater =
-                            format "%d/%m/%Y %H:%M"
-
-                        compareFormater =
-                            format "%d/%m/%Y"
-
-                        dateFormated =
-                            formater date
-
-                        timeFormater =
-                            format "%H:%M"
-
-                        allDatesFormated =
-                            Maybe.map
-                                (\endDate ->
-                                    if compareFormater date == compareFormater endDate then
-                                        dateFormated ++ " - " ++ timeFormater endDate
-                                    else
-                                        dateFormated ++ " - " ++ formater endDate
-                                )
-                                mEndDate
-                                |> Maybe.withDefault dateFormated
-                    in
-                    { arabic = allDatesFormated ++ ", " ++ dayTranslated
-                    , english = dayTranslated ++ ", " ++ allDatesFormated
-                    , hebrew = allDatesFormated ++ ", " ++ dayTranslated
-                    }
-
                 DateLabelTranslation ->
                     { arabic = "متى"
                     , english = "When"
@@ -224,6 +191,12 @@ translate lang trans =
                     { arabic = "عرض الكل"
                     , english = "Show all"
                     , hebrew = "הצג הכל"
+                    }
+
+                UntilTranslation ->
+                    { arabic = "حتى"
+                    , english = "To"
+                    , hebrew = "עד"
                     }
     in
     case lang of
