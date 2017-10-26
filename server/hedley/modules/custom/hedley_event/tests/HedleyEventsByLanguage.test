@@ -60,7 +60,8 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
       ],
       'field_date' => [
         LANGUAGE_NONE => [
-          [ 'value' => time(),
+          [
+            'value' => time(),
             'value2' => strtotime('+1 day'),
           ],
         ],
@@ -102,7 +103,8 @@ class HedleyEventsByLanguage extends HedleyMunicipalityWebTestCase {
     // Create an expired event group content (we are NOT expecting to see this).
     $event_settings['field_date'] = [
       LANGUAGE_NONE => [
-        [ 'value' => strtotime('-5 days'),
+        [
+          'value' => strtotime('-5 days'),
           'value2' => strtotime('-3 days'),
         ],
       ],
