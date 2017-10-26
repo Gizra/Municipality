@@ -6,11 +6,13 @@
  */
 ?>
 
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="center"><?php print t('News and Updates'); ?></h1>
+  </div>
+</div>
 <div class="featured-box featured-box-primary">
   <div class="box-content">
-    <div class="row">
-      <h2><?php print t('News and Updates'); ?></h2>
-    </div>
     <div class="row">
       <?php foreach ($news_items as $item): ?>
         <section class="call-to-action with-borders mb-xl">
