@@ -2,7 +2,7 @@ var assert = require('assert');
 
 describe('Municipality events page', () => {
   before(() => {
-    browser.url('Sat');
+    browser.url('/tuba-zangariyye/events?language=he');
   });
 
   it('should show all events for the current municipality', () => {
