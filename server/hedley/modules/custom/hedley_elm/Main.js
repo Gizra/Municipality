@@ -14117,8 +14117,20 @@ var _gizra$municipality$Events_Utils$filterEvents = F2(
 				_Gizra$elm_dictlist$DictList$filter,
 				F2(
 					function (_p0, event) {
+						var locationTitle = A2(
+							_elm_lang$core$Maybe$withDefault,
+							'',
+							A2(
+								_elm_lang$core$Maybe$map,
+								function (location) {
+									return location.title;
+								},
+								event.location));
+						var description = A2(_elm_lang$core$Maybe$withDefault, '', event.description);
 						return stringMatch(
-							_elm_lang$core$String$toLower(event.name));
+							_elm_lang$core$String$toLower(event.name)) || (stringMatch(
+							_elm_lang$core$String$toLower(description)) || stringMatch(
+							_elm_lang$core$String$toLower(locationTitle)));
 					}),
 				events);
 		}

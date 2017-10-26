@@ -23,20 +23,26 @@ filterEventsTest =
         [ test "should return all events if filter string is empty" <|
             \() ->
                 Expect.equal (filterEvents events "") events
-        , test "should return no matching events if filter string does not match any events' names" <|
+        , test "should return no matching events if filter string does not match any events' names/description/location" <|
             \() ->
                 Expect.equal (filterEvents events "foo") DictList.empty
-        , test "should return events that has name matching the filter" <|
+        , test "should return events that has description matching the filter" <|
             \() ->
-                Expect.equal (filterEvents events "o")
+                Expect.equal (filterEvents events "description")
                     (DictList.fromList
-                        [ event1
-                        , event2
+                        [ event2
+                        , event3
                         ]
                     )
-        , test "should return events that has name matching the filter" <|
+        , test "should return events that has names matching the filter" <|
             \() ->
                 Expect.equal (filterEvents events "evening")
+                    (DictList.fromList
+                        [ event3 ]
+                    )
+        , test "should return events that has location matching the filter" <|
+            \() ->
+                Expect.equal (filterEvents events "location 2")
                     (DictList.fromList
                         [ event3 ]
                     )
