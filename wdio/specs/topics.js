@@ -55,11 +55,14 @@ describe('Municipality topics', () => {
   it('should show all the relevant events for this topic', () => {
     browser.waitForVisible('h2=Upcoming events');
 
-    const firstEventTitle = browser.getText('div.featured-box .col-md-6:nth-child(1) h4.card-title');
+    const firstEventTitle = browser.getText('div.featured-box .block-container .row:nth-child(1) .col-md-6:nth-child(1) h4.card-title');
     assert.equal('הצגת ילדים: שבת בבוקר', firstEventTitle);
 
-    const secondEventTitle = browser.getText('div.featured-box .col-md-6:nth-child(2) h4.card-title');
+    const secondEventTitle = browser.getText('div.featured-box .block-container .row:nth-child(1) .col-md-6:nth-child(2) h4.card-title');
     assert.equal('סיור קבלנים: אספקה והתקנה של מערכות מיזוג האוויר לבניין העירייה', secondEventTitle);
+
+    const thirdEventTitle = browser.getText('div.featured-box .block-container .row:nth-child(2) .col-md-6:nth-child(1) h4.card-title');
+    assert.equal('הופעה: עידן רייכל', thirdEventTitle);
   });
 
   it('should show event image if exists', () => {
@@ -69,11 +72,14 @@ describe('Municipality topics', () => {
   it('should show the correct format for event\'s date', () => {
     browser.waitForVisible('h2=Upcoming events');
 
-    const firstEventDate = browser.getText('div.featured-box .col-md-6:nth-child(1) .caption > div span');
-    assert.equal('29/03/2019 11:00 - 13:00, שישי', firstEventDate);
+    const firstEventDate = browser.getText('div.featured-box .block-container .row:nth-child(1) .col-md-6:nth-child(1) .caption .event-date span span:nth-child(1)');
+    assert.equal('מתי: שישי, 11:00 -', firstEventDate);
 
-    const secondEventDate = browser.getText('div.featured-box .col-md-6:nth-child(2) .caption > div span');
-    assert.equal('12/04/2019 14:00 - 17:00, שישי', secondEventDate);
+    const secondEventDate = browser.getText('div.featured-box .block-container .row:nth-child(1) .col-md-6:nth-child(2) .caption .event-date span span:nth-child(1)');
+    assert.equal('מתי: שישי, 14:00 -', secondEventDate);
+
+    const thirdEventDate = browser.getText('div.featured-box .block-container .row:nth-child(2) .col-md-6:nth-child(1) .caption .event-date span span:nth-child(1)');
+    assert.equal('מתי: שבת, 20/04/2019, 18:00', thirdEventDate);
   });
 
   it('should show all the relevant contacts for this topic', () => {

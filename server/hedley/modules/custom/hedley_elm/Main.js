@@ -11955,8 +11955,24 @@ var _gizra$municipality$Contact_Utils$filterContacts = F2(
 				_Gizra$elm_dictlist$DictList$filter,
 				F2(
 					function (_p0, contact) {
+						var topics = A2(
+							_elm_lang$core$Maybe$withDefault,
+							{ctor: '[]'},
+							contact.topics);
+						var department = A2(_elm_lang$core$Maybe$withDefault, '', contact.department);
+						var jobTitle = A2(_elm_lang$core$Maybe$withDefault, '', contact.jobTitle);
 						return stringMatch(
-							_elm_lang$core$String$toLower(contact.name));
+							_elm_lang$core$String$toLower(contact.name)) || (stringMatch(
+							_elm_lang$core$String$toLower(department)) || (stringMatch(
+							_elm_lang$core$String$toLower(jobTitle)) || A3(
+							_elm_lang$core$List$foldl,
+							F2(
+								function (topic, match) {
+									return stringMatch(
+										_elm_lang$core$String$toLower(topic.name));
+								}),
+							false,
+							topics)));
 					}),
 				contacts);
 		}
@@ -12237,32 +12253,6 @@ var _mgold$elm_date_format$Date_Format$format = F2(
 	});
 var _mgold$elm_date_format$Date_Format$formatISO8601 = _mgold$elm_date_format$Date_Format$format('%Y-%m-%dT%H:%M:%SZ');
 
-var _gizra$municipality$Translate$TranslationSet = F3(
-	function (a, b, c) {
-		return {arabic: a, english: b, hebrew: c};
-	});
-var _gizra$municipality$Translate$ShowAll = {ctor: 'ShowAll'};
-var _gizra$municipality$Translate$ReceptionText = {ctor: 'ReceptionText'};
-var _gizra$municipality$Translate$PriceCurrencyText = {ctor: 'PriceCurrencyText'};
-var _gizra$municipality$Translate$PriceText = {ctor: 'PriceText'};
-var _gizra$municipality$Translate$MoreDetailsText = {ctor: 'MoreDetailsText'};
-var _gizra$municipality$Translate$MatchingResults = {ctor: 'MatchingResults'};
-var _gizra$municipality$Translate$LocationText = function (a) {
-	return {ctor: 'LocationText', _0: a};
-};
-var _gizra$municipality$Translate$FilterEventsPlaceholder = {ctor: 'FilterEventsPlaceholder'};
-var _gizra$municipality$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
-var _gizra$municipality$Translate$EventsNotFound = {ctor: 'EventsNotFound'};
-var _gizra$municipality$Translate$EventRecurringWeekly = {ctor: 'EventRecurringWeekly'};
-var _gizra$municipality$Translate$EditLinkText = {ctor: 'EditLinkText'};
-var _gizra$municipality$Translate$DateLabelTranslation = {ctor: 'DateLabelTranslation'};
-var _gizra$municipality$Translate$DayAndDate = F2(
-	function (a, b) {
-		return {ctor: 'DayAndDate', _0: a, _1: b};
-	});
-var _gizra$municipality$Translate$DayTranslation = function (a) {
-	return {ctor: 'DayTranslation', _0: a};
-};
 var _gizra$municipality$Translate$translate = F2(
 	function (lang, trans) {
 		var translationSet = function () {
@@ -12296,54 +12286,6 @@ var _gizra$municipality$Translate$translate = F2(
 						default:
 							return {arabic: 'الأحد', english: 'Sun', hebrew: 'ראשון'};
 					}
-				case 'DayAndDate':
-					var _p2 = _p0._0;
-					var timeFormater = _mgold$elm_date_format$Date_Format$format('%H:%M');
-					var compareFormater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y');
-					var formater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y %H:%M');
-					var dateFormated = formater(_p2);
-					var allDatesFormated = A2(
-						_elm_lang$core$Maybe$withDefault,
-						dateFormated,
-						A2(
-							_elm_lang$core$Maybe$map,
-							function (endDate) {
-								return _elm_lang$core$Native_Utils.eq(
-									compareFormater(_p2),
-									compareFormater(endDate)) ? A2(
-									_elm_lang$core$Basics_ops['++'],
-									dateFormated,
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										' - ',
-										timeFormater(endDate))) : A2(
-									_elm_lang$core$Basics_ops['++'],
-									dateFormated,
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										' - ',
-										formater(endDate)));
-							},
-							_p0._1));
-					var dayTranslated = A2(
-						_gizra$municipality$Translate$translate,
-						lang,
-						_gizra$municipality$Translate$DayTranslation(
-							_elm_lang$core$Date$dayOfWeek(_p2)));
-					return {
-						arabic: A2(
-							_elm_lang$core$Basics_ops['++'],
-							allDatesFormated,
-							A2(_elm_lang$core$Basics_ops['++'], ', ', dayTranslated)),
-						english: A2(
-							_elm_lang$core$Basics_ops['++'],
-							dayTranslated,
-							A2(_elm_lang$core$Basics_ops['++'], ', ', allDatesFormated)),
-						hebrew: A2(
-							_elm_lang$core$Basics_ops['++'],
-							allDatesFormated,
-							A2(_elm_lang$core$Basics_ops['++'], ', ', dayTranslated))
-					};
 				case 'DateLabelTranslation':
 					return {arabic: 'متى', english: 'When', hebrew: 'מתי'};
 				case 'EditLinkText':
@@ -12357,11 +12299,11 @@ var _gizra$municipality$Translate$translate = F2(
 				case 'FilterEventsPlaceholder':
 					return {arabic: 'ابحث عن الأحداث في ذوقك', english: 'Look for events to your liking', hebrew: 'חפשו אירועים לטעמכם'};
 				case 'LocationText':
-					var _p3 = _p0._0;
+					var _p2 = _p0._0;
 					return {
-						arabic: A2(_elm_lang$core$Basics_ops['++'], 'أين: ', _p3),
-						english: A2(_elm_lang$core$Basics_ops['++'], 'Where: ', _p3),
-						hebrew: A2(_elm_lang$core$Basics_ops['++'], 'איפה: ', _p3)
+						arabic: A2(_elm_lang$core$Basics_ops['++'], 'أين: ', _p2),
+						english: A2(_elm_lang$core$Basics_ops['++'], 'Where: ', _p2),
+						hebrew: A2(_elm_lang$core$Basics_ops['++'], 'איפה: ', _p2)
 					};
 				case 'MatchingResults':
 					return {arabic: 'نتائج البحث', english: 'Matching Results', hebrew: 'תוצאות מתאימות'};
@@ -12373,12 +12315,14 @@ var _gizra$municipality$Translate$translate = F2(
 					return {arabic: 'شيكل', english: 'NIS', hebrew: 'ש״ח'};
 				case 'ReceptionText':
 					return {arabic: 'استقبال: ', english: 'Reception: ', hebrew: 'קבלת קהל: '};
-				default:
+				case 'ShowAll':
 					return {arabic: 'عرض الكل', english: 'Show all', hebrew: 'הצג הכל'};
+				default:
+					return {arabic: 'حتى', english: 'To', hebrew: 'עד'};
 			}
 		}();
-		var _p4 = lang;
-		switch (_p4.ctor) {
+		var _p3 = lang;
+		switch (_p3.ctor) {
 			case 'Arabic':
 				return function (_) {
 					return _.arabic;
@@ -12393,6 +12337,29 @@ var _gizra$municipality$Translate$translate = F2(
 				}(translationSet);
 		}
 	});
+var _gizra$municipality$Translate$TranslationSet = F3(
+	function (a, b, c) {
+		return {arabic: a, english: b, hebrew: c};
+	});
+var _gizra$municipality$Translate$UntilTranslation = {ctor: 'UntilTranslation'};
+var _gizra$municipality$Translate$ShowAll = {ctor: 'ShowAll'};
+var _gizra$municipality$Translate$ReceptionText = {ctor: 'ReceptionText'};
+var _gizra$municipality$Translate$PriceCurrencyText = {ctor: 'PriceCurrencyText'};
+var _gizra$municipality$Translate$PriceText = {ctor: 'PriceText'};
+var _gizra$municipality$Translate$MoreDetailsText = {ctor: 'MoreDetailsText'};
+var _gizra$municipality$Translate$MatchingResults = {ctor: 'MatchingResults'};
+var _gizra$municipality$Translate$LocationText = function (a) {
+	return {ctor: 'LocationText', _0: a};
+};
+var _gizra$municipality$Translate$FilterEventsPlaceholder = {ctor: 'FilterEventsPlaceholder'};
+var _gizra$municipality$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
+var _gizra$municipality$Translate$EventsNotFound = {ctor: 'EventsNotFound'};
+var _gizra$municipality$Translate$EventRecurringWeekly = {ctor: 'EventRecurringWeekly'};
+var _gizra$municipality$Translate$EditLinkText = {ctor: 'EditLinkText'};
+var _gizra$municipality$Translate$DateLabelTranslation = {ctor: 'DateLabelTranslation'};
+var _gizra$municipality$Translate$DayTranslation = function (a) {
+	return {ctor: 'DayTranslation', _0: a};
+};
 var _gizra$municipality$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
 var _gizra$municipality$Translate$EventsHeaderText = {ctor: 'EventsHeaderText'};
 var _gizra$municipality$Translate$ContactsHeaderText = {ctor: 'ContactsHeaderText'};
@@ -12464,42 +12431,20 @@ var _gizra$municipality$Utils_BootstrapGrid$renderBootstrapGrid = F2(
 				listOfRows));
 	});
 
-var _gizra$municipality$Utils_Html$formatDateAndDayWithLabel = F3(
-	function (language, date, mEndDate) {
+var _gizra$municipality$Utils_Html$eventDateElement = F4(
+	function (language, date, mEndDate, recurring) {
 		var timeFormater = _mgold$elm_date_format$Date_Format$format('%H:%M');
 		var compareFormater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y');
 		var formater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y, %H:%M');
 		var dateFormated = formater(date);
-		var allDatesFormated = A2(
-			_elm_lang$core$Maybe$withDefault,
-			dateFormated,
-			A2(
-				_elm_lang$core$Maybe$map,
-				function (endDate) {
-					return _elm_lang$core$Native_Utils.eq(
-						compareFormater(date),
-						compareFormater(endDate)) ? A2(
-						_elm_lang$core$Basics_ops['++'],
-						dateFormated,
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							' - ',
-							timeFormater(endDate))) : A2(
-						_elm_lang$core$Basics_ops['++'],
-						dateFormated,
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							' - ',
-							formater(endDate)));
-				},
-				mEndDate));
-		var dayTranslated = A2(
+		var beginDayTranslated = A2(
 			_gizra$municipality$Translate$translate,
 			language,
 			_gizra$municipality$Translate$DayTranslation(
 				_elm_lang$core$Date$dayOfWeek(date)));
+		var untilLabelTranslated = A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$UntilTranslation);
 		var labelTranslated = A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$DateLabelTranslation);
-		return A2(
+		var beginDateFormmated = recurring ? A2(
 			_elm_lang$core$Basics_ops['++'],
 			labelTranslated,
 			A2(
@@ -12507,8 +12452,141 @@ var _gizra$municipality$Utils_Html$formatDateAndDayWithLabel = F3(
 				': ',
 				A2(
 					_elm_lang$core$Basics_ops['++'],
-					dayTranslated,
-					A2(_elm_lang$core$Basics_ops['++'], ', ', allDatesFormated))));
+					beginDayTranslated,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						', ',
+						timeFormater(date))))) : A2(
+			_elm_lang$core$Basics_ops['++'],
+			labelTranslated,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				': ',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					beginDayTranslated,
+					A2(_elm_lang$core$Basics_ops['++'], ', ', dateFormated))));
+		var datesElement = A2(
+			_elm_lang$core$Maybe$withDefault,
+			A2(
+				_elm_lang$html$Html$span,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('begin-date'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(beginDateFormmated),
+					_1: {ctor: '[]'}
+				}),
+			A2(
+				_elm_lang$core$Maybe$map,
+				function (endDate) {
+					var endDayTranslated = A2(
+						_gizra$municipality$Translate$translate,
+						language,
+						_gizra$municipality$Translate$DayTranslation(
+							_elm_lang$core$Date$dayOfWeek(endDate)));
+					var endDateFormmated = recurring ? A2(
+						_elm_lang$core$Basics_ops['++'],
+						untilLabelTranslated,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							': ',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								endDayTranslated,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									', ',
+									timeFormater(endDate))))) : A2(
+						_elm_lang$core$Basics_ops['++'],
+						untilLabelTranslated,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							': ',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								endDayTranslated,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									', ',
+									formater(endDate)))));
+					return _elm_lang$core$Native_Utils.eq(
+						compareFormater(date),
+						compareFormater(endDate)) ? A2(
+						_elm_lang$html$Html$span,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('begin-date'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(_elm_lang$core$Basics_ops['++'], beginDateFormmated, ' - ')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$span,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('end-date'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(
+											timeFormater(endDate)),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}) : A2(
+						_elm_lang$html$Html$span,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('begin-date'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(beginDateFormmated),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$span,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('different-end-date ml-lg'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(endDateFormmated),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						});
+				},
+				mEndDate));
+		return datesElement;
 	});
 var _gizra$municipality$Utils_Html$formatReceptionDays = F3(
 	function (language, days, multipleDays) {
@@ -13816,7 +13894,7 @@ var _gizra$municipality$Event_View$view = F3(
 													{
 														ctor: '::',
 														_0: A2(
-															_elm_lang$html$Html$span,
+															_elm_lang$html$Html$div,
 															{ctor: '[]'},
 															{
 																ctor: '::',
@@ -13830,8 +13908,7 @@ var _gizra$municipality$Event_View$view = F3(
 																	{ctor: '[]'}),
 																_1: {
 																	ctor: '::',
-																	_0: _elm_lang$html$Html$text(
-																		A3(_gizra$municipality$Utils_Html$formatDateAndDayWithLabel, language, event.date, event.endDate)),
+																	_0: A4(_gizra$municipality$Utils_Html$eventDateElement, language, event.date, event.endDate, event.recurringWeekly),
 																	_1: {ctor: '[]'}
 																}
 															}),
@@ -14326,58 +14403,47 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 												{
 													ctor: '::',
 													_0: A2(
-														_elm_lang$html$Html$span,
-														{ctor: '[]'},
+														_elm_lang$html$Html$i,
 														{
 															ctor: '::',
-															_0: A2(
-																_elm_lang$html$Html$i,
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('fa fa-calendar'),
-																	_1: {ctor: '[]'}
-																},
-																{ctor: '[]'}),
-															_1: {
-																ctor: '::',
-																_0: _elm_lang$html$Html$text(
-																	A2(
-																		_gizra$municipality$Translate$translate,
-																		language,
-																		A2(_gizra$municipality$Translate$DayAndDate, _p5.date, _p5.endDate))),
-																_1: {ctor: '[]'}
-															}
-														}),
+															_0: _elm_lang$html$Html_Attributes$class('fa fa-calendar'),
+															_1: {ctor: '[]'}
+														},
+														{ctor: '[]'}),
 													_1: {
 														ctor: '::',
-														_0: A2(
-															_gizra$municipality$Utils_Html$showIf,
-															_p5.recurringWeekly,
-															A2(
-																_elm_lang$html$Html$div,
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('recurring-weekly'),
-																	_1: {ctor: '[]'}
-																},
-																{
-																	ctor: '::',
-																	_0: A2(
-																		_elm_lang$html$Html$i,
-																		{
-																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$class('fa fa-refresh'),
-																			_1: {ctor: '[]'}
-																		},
-																		{ctor: '[]'}),
-																	_1: {
+														_0: A4(_gizra$municipality$Utils_Html$eventDateElement, language, _p5.date, _p5.endDate, _p5.recurringWeekly),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_gizra$municipality$Utils_Html$showIf,
+																_p5.recurringWeekly,
+																A2(
+																	_elm_lang$html$Html$div,
+																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html$text(
-																			A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EventRecurringWeekly)),
+																		_0: _elm_lang$html$Html_Attributes$class('recurring-weekly'),
 																		_1: {ctor: '[]'}
-																	}
-																})),
-														_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$i,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$class('fa fa-refresh'),
+																				_1: {ctor: '[]'}
+																			},
+																			{ctor: '[]'}),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text(
+																				A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EventRecurringWeekly)),
+																			_1: {ctor: '[]'}
+																		}
+																	})),
+															_1: {ctor: '[]'}
+														}
 													}
 												}),
 											_1: {

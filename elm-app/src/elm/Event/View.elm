@@ -2,12 +2,13 @@ module Event.View exposing (view)
 
 import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
+import Date exposing (dayOfWeek)
 import Event.Model exposing (Event, EventId, Model, Msg(..), Price)
 import Html exposing (..)
 import Html.Attributes exposing (alt, class, href, id, property, src, target)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
-import Utils.Html exposing (formatDateAndDayWithLabel, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (eventDateElement, sectionDivider, showIf, showMaybe)
 
 
 view : BaseUrl -> Language -> Event -> Html Msg
@@ -39,12 +40,12 @@ view baseUrl language event =
                     [ class "row text-center" ]
                     [ div
                         [ class "col-md-4 event-date" ]
-                        [ span
+                        [ div
                             []
                             [ i
                                 [ class "fa fa-calendar" ]
                                 []
-                            , text <| formatDateAndDayWithLabel language event.date event.endDate
+                            , eventDateElement language event.date event.endDate event.recurringWeekly
                             ]
                         , showIf event.recurringWeekly <|
                             div
