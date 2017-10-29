@@ -31,6 +31,26 @@ describe('Municipality contacts page', () => {
     assert(!browser.isVisible('h4=סלאח אבו האני'));
   });
 
+  it('should find contacts searching for department', () => {
+    const input = $('#search-contacts');
+    input.setValue('חינ');
+    browser.waitForVisible('h4=ניר שמואלי');
+    browser.waitForVisible('h4=סלאח אבו האני');
+
+    // Make sure other contacts disappear when searching.
+    assert(!browser.isVisible('h4=נסר בו סריחאן'));
+  });
+
+  it('should find contacts searching for job title', () => {
+    const input = $('#search-contacts');
+    input.setValue('תקצ');
+    browser.waitForVisible('h4=נסר בו סריחאן');
+
+    // Make sure other contacts disappear when searching.
+    assert(!browser.isVisible('h4=ניר שמואלי'));
+    assert(!browser.isVisible('h4=סלאח אבו האני'));
+  });
+
   it('should be able to edit contacts in editor\'s municipality', () => {
     browser.login('liat');
     browser.url('/kiryat-malakhi/contacts?language=he');

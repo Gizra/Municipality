@@ -11955,8 +11955,24 @@ var _gizra$municipality$Contact_Utils$filterContacts = F2(
 				_Gizra$elm_dictlist$DictList$filter,
 				F2(
 					function (_p0, contact) {
+						var topics = A2(
+							_elm_lang$core$Maybe$withDefault,
+							{ctor: '[]'},
+							contact.topics);
+						var department = A2(_elm_lang$core$Maybe$withDefault, '', contact.department);
+						var jobTitle = A2(_elm_lang$core$Maybe$withDefault, '', contact.jobTitle);
 						return stringMatch(
-							_elm_lang$core$String$toLower(contact.name));
+							_elm_lang$core$String$toLower(contact.name)) || (stringMatch(
+							_elm_lang$core$String$toLower(department)) || (stringMatch(
+							_elm_lang$core$String$toLower(jobTitle)) || A3(
+							_elm_lang$core$List$foldl,
+							F2(
+								function (topic, match) {
+									return stringMatch(
+										_elm_lang$core$String$toLower(topic.name));
+								}),
+							false,
+							topics)));
 					}),
 				contacts);
 		}
