@@ -2,6 +2,7 @@ module Events.Utils exposing (filterEvents)
 
 import DictList
 import Events.Model exposing (DictListEvent)
+import Maybe.Extra exposing (unwrap)
 
 
 filterEvents : DictListEvent -> String -> DictListEvent
@@ -17,15 +18,24 @@ filterEvents events filterString =
         DictList.filter
             (\_ event ->
                 let
-                    description =
-                        Maybe.withDefault "" event.description
-
-                    locationTitle =
-                        Maybe.map (\location -> location.title) event.location
-                            |> Maybe.withDefault ""
+                    maybeStrings =
+                        [ Just event.name
+                        , event.description
+                        , Maybe.map (\location -> location.title) event.location
+                        ]
                 in
-                stringMatch (String.toLower <| event.name)
-                    || stringMatch (String.toLower <| description)
-                    || stringMatch (String.toLower <| locationTitle)
+                List.foldl
+                    (\maybeString accum ->
+                        unwrap accum
+                            (\string ->
+                                if accum then
+                                    accum
+                                else
+                                    stringMatch (String.toLower string)
+                            )
+                            maybeString
+                    )
+                    False
+                    maybeStrings
             )
             events
