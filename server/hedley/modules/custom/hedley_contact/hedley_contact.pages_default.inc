@@ -65,7 +65,7 @@ function hedley_contact_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = '';
+  $display->title = 'Contacts';
   $display->uuid = '30b5c7e4-76f9-4618-9146-42850801e3a5';
   $display->storage_type = 'page_manager';
   $display->storage_id = 'page_contacts__panel';
