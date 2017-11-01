@@ -86,6 +86,9 @@ decodeColor =
                     "info" ->
                         succeed Info
 
+                    "default" ->
+                        succeed Default
+
                     _ ->
                         fail <| "Could not recognise color: " ++ color
             )

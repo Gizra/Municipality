@@ -247,7 +247,7 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
       'fax' => '03-0000000',
       'email' => 'foo@bar.com',
       'topics' => [
-        'color' => 'red',
+        'color' => 'danger',
       ],
       'reception_hours' => [
         [
@@ -300,7 +300,7 @@ class HedleyContactsByLanguage extends HedleyMunicipalityWebTestCase {
     $topic = $this->createTerm($vocabulary, $this->randomName(), $language);
 
     // Add a specific color to all the created topics here.
-    $topic->field_color[LANGUAGE_NONE][0]['value'] = 'red';
+    $topic->field_color[LANGUAGE_NONE][0]['value'] = 'danger';
     taxonomy_term_save($topic);
 
     return $topic;

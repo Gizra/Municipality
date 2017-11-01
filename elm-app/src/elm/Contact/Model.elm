@@ -31,6 +31,7 @@ type Color
     | Primary
     | Secondary
     | Info
+    | Default
 
 
 type alias Name =

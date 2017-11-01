@@ -179,7 +179,7 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
           'name' => $topic_wrapper->label(),
           // If the term doesn't have any color then default to white because
           // elm expects a color here.
-          'color' => $topic_wrapper->field_color->value() ? $topic_wrapper->field_color->value() : 'white',
+          'color' => $topic_wrapper->field_color->value() ? $topic_wrapper->field_color->value() : 'default',
         ];
       }
     }

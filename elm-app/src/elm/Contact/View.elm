@@ -164,7 +164,7 @@ viewContact baseUrl language ( contactId, contact ) =
                                         a [ href (baseUrl.path ++ "/taxonomy/term/" ++ topic.id ++ "?" ++ baseUrl.query), title topic.name ]
                                             [ button
                                                 [ type_ "button"
-                                                , class ("btn mr-xs btn-borders btn-primary btn-sm btn-" ++ colorToString topic.color)
+                                                , class ("btn mr-xs btn-borders btn-sm btn-" ++ colorToString topic.color)
                                                 ]
                                                 [ text topic.name ]
                                             ]
