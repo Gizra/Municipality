@@ -49,6 +49,46 @@ function hedley_action_node_presave($node) {
 }
 
 /**
+ * Implements hook_node_validate().
+ *
+ * Validate that one the fields "Link" or "Action section" have some kind of a
+ * value.
+ */
+function hedley_action_node_validate($node, $form, &$form_state) {
+  if ($node->type != 'action') {
+    return;
+  }
+
+  // Get fields values.
+  $field_link_values = $form_state['values']['field_link'];
+  $field_action_sections_values = $form_state['values']['field_action_sections'];
+
+  // Fields are empty by default.
+  $one_field_is_filled = FALSE;
+  foreach ($field_link_values as $field_link_value) {
+    // Check values in all languages.
+    $first_value = $field_link_value[0];
+    if ($first_value['title'] && $first_value['url']) {
+      $one_field_is_filled = TRUE;
+    }
+  }
+
+  foreach ($field_action_sections_values as $field_action_sections_value) {
+    // Check values in all languages.
+    $first_value = $field_action_sections_value[0];
+    if ($first_value['field_section_title'][LANGUAGE_NONE][0]['value']) {
+      $one_field_is_filled = TRUE;
+    }
+  }
+
+  if (!$one_field_is_filled) {
+    // Neither fields are filled, display a form error.
+    form_set_error('action_valid_data', t('At least one of the fields "Link" or "Action section" should have a valid value.'));
+  }
+
+}
+
+/**
  * Get the title of the action wrapped in a link.
  *
  * The link's logic is as follows:
