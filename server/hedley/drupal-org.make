@@ -70,6 +70,9 @@ projects[imce][version] = "1.11"
 projects[jquery_update][subdir] = "contrib"
 projects[jquery_update][version] = "2.7"
 
+projects[l10n_update][subdir] = "contrib"
+projects[l10n_update][version] = "2.2"
+
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "2.3"
 
