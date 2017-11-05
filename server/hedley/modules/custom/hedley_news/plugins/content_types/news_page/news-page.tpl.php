@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Topic news.
+ * News page.
  */
 ?>
 
