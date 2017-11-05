@@ -13,6 +13,14 @@ type alias TranslationSet =
     }
 
 
+type StringIdHttpError
+    = ErrorBadUrl
+    | ErrorBadPayload String
+    | ErrorBadStatus String
+    | ErrorNetworkError
+    | ErrorTimeout
+
+
 type TranslationId
     = AddNewContactText
     | AddNewEventText
@@ -26,6 +34,7 @@ type TranslationId
     | EventsNotFound
     | FilterContactsPlaceholder
     | FilterEventsPlaceholder
+    | HttpError StringIdHttpError
     | LocationText String
     | MatchingResults
     | MoreDetailsText
@@ -150,6 +159,23 @@ translate lang trans =
                     , english = "Look for events to your liking"
                     , hebrew = "חפשו אירועים לטעמכם"
                     }
+
+                HttpError stringId ->
+                    case stringId of
+                        ErrorBadUrl ->
+                            { english = "URL is not valid.", arabic = "رابط غير صالح.", hebrew = "כתובת שגוייה" }
+
+                        ErrorBadPayload message ->
+                            { english = "The server responded with data of an unexpected type: " ++ message, arabic = "استجاب الخادم مع بيانات من نوع غير متوقع: " ++ message, hebrew = "השרת שלח מידע בלתי צפוי: " ++ message }
+
+                        ErrorBadStatus err ->
+                            { english = "The server indicated the following error:\n\n" ++ err, arabic = "أشار الخادم إلى الخطأ التالي:\n\n", hebrew = "השרת שלך הודעת שגיאה:\n\n" ++ err }
+
+                        ErrorNetworkError ->
+                            { english = "There was a network error.", arabic = "حدث خطأ في الشبكة.", hebrew = "בעיית רשת" }
+
+                        ErrorTimeout ->
+                            { english = "The network request timed out.", arabic = "انتهت مهلة طلب الشبكة.", hebrew = "הקריאה לשרת ארכה זמן רב מדי" }
 
                 LocationText locationTitle ->
                     { arabic = "أين: " ++ locationTitle
