@@ -10743,6 +10743,185 @@ var _elm_community$json_extra$Json_Decode_Extra$andMap = _elm_lang$core$Json_Dec
 var _elm_community$json_extra$Json_Decode_Extra_ops = _elm_community$json_extra$Json_Decode_Extra_ops || {};
 _elm_community$json_extra$Json_Decode_Extra_ops['|:'] = _elm_lang$core$Basics$flip(_elm_community$json_extra$Json_Decode_Extra$andMap);
 
+var _elm_community$maybe_extra$Maybe_Extra$foldrValues = F2(
+	function (item, list) {
+		var _p0 = item;
+		if (_p0.ctor === 'Nothing') {
+			return list;
+		} else {
+			return {ctor: '::', _0: _p0._0, _1: list};
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$values = A2(
+	_elm_lang$core$List$foldr,
+	_elm_community$maybe_extra$Maybe_Extra$foldrValues,
+	{ctor: '[]'});
+var _elm_community$maybe_extra$Maybe_Extra$filter = F2(
+	function (f, m) {
+		var _p1 = A2(_elm_lang$core$Maybe$map, f, m);
+		if ((_p1.ctor === 'Just') && (_p1._0 === true)) {
+			return m;
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$traverseArray = function (f) {
+	var step = F2(
+		function (e, acc) {
+			var _p2 = f(e);
+			if (_p2.ctor === 'Nothing') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				return A2(
+					_elm_lang$core$Maybe$map,
+					_elm_lang$core$Array$push(_p2._0),
+					acc);
+			}
+		});
+	return A2(
+		_elm_lang$core$Array$foldl,
+		step,
+		_elm_lang$core$Maybe$Just(_elm_lang$core$Array$empty));
+};
+var _elm_community$maybe_extra$Maybe_Extra$combineArray = _elm_community$maybe_extra$Maybe_Extra$traverseArray(_elm_lang$core$Basics$identity);
+var _elm_community$maybe_extra$Maybe_Extra$traverse = function (f) {
+	var step = F2(
+		function (e, acc) {
+			var _p3 = f(e);
+			if (_p3.ctor === 'Nothing') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				return A2(
+					_elm_lang$core$Maybe$map,
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						})(_p3._0),
+					acc);
+			}
+		});
+	return A2(
+		_elm_lang$core$List$foldr,
+		step,
+		_elm_lang$core$Maybe$Just(
+			{ctor: '[]'}));
+};
+var _elm_community$maybe_extra$Maybe_Extra$combine = _elm_community$maybe_extra$Maybe_Extra$traverse(_elm_lang$core$Basics$identity);
+var _elm_community$maybe_extra$Maybe_Extra$maybeToArray = function (m) {
+	var _p4 = m;
+	if (_p4.ctor === 'Nothing') {
+		return _elm_lang$core$Array$empty;
+	} else {
+		return A2(_elm_lang$core$Array$repeat, 1, _p4._0);
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra$maybeToList = function (m) {
+	var _p5 = m;
+	if (_p5.ctor === 'Nothing') {
+		return {ctor: '[]'};
+	} else {
+		return {
+			ctor: '::',
+			_0: _p5._0,
+			_1: {ctor: '[]'}
+		};
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra$orElse = F2(
+	function (ma, mb) {
+		var _p6 = mb;
+		if (_p6.ctor === 'Nothing') {
+			return ma;
+		} else {
+			return mb;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$orElseLazy = F2(
+	function (fma, mb) {
+		var _p7 = mb;
+		if (_p7.ctor === 'Nothing') {
+			return fma(
+				{ctor: '_Tuple0'});
+		} else {
+			return mb;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$orLazy = F2(
+	function (ma, fmb) {
+		var _p8 = ma;
+		if (_p8.ctor === 'Nothing') {
+			return fmb(
+				{ctor: '_Tuple0'});
+		} else {
+			return ma;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$or = F2(
+	function (ma, mb) {
+		var _p9 = ma;
+		if (_p9.ctor === 'Nothing') {
+			return mb;
+		} else {
+			return ma;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$prev = _elm_lang$core$Maybe$map2(_elm_lang$core$Basics$always);
+var _elm_community$maybe_extra$Maybe_Extra$next = _elm_lang$core$Maybe$map2(
+	_elm_lang$core$Basics$flip(_elm_lang$core$Basics$always));
+var _elm_community$maybe_extra$Maybe_Extra$andMap = _elm_lang$core$Maybe$map2(
+	F2(
+		function (x, y) {
+			return y(x);
+		}));
+var _elm_community$maybe_extra$Maybe_Extra$unpack = F3(
+	function (d, f, m) {
+		var _p10 = m;
+		if (_p10.ctor === 'Nothing') {
+			return d(
+				{ctor: '_Tuple0'});
+		} else {
+			return f(_p10._0);
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$unwrap = F3(
+	function (d, f, m) {
+		var _p11 = m;
+		if (_p11.ctor === 'Nothing') {
+			return d;
+		} else {
+			return f(_p11._0);
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$isJust = function (m) {
+	var _p12 = m;
+	if (_p12.ctor === 'Nothing') {
+		return false;
+	} else {
+		return true;
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra$isNothing = function (m) {
+	var _p13 = m;
+	if (_p13.ctor === 'Nothing') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra$join = function (mx) {
+	var _p14 = mx;
+	if (_p14.ctor === 'Just') {
+		return _p14._0;
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra_ops = _elm_community$maybe_extra$Maybe_Extra_ops || {};
+_elm_community$maybe_extra$Maybe_Extra_ops['?'] = F2(
+	function (mx, x) {
+		return A2(_elm_lang$core$Maybe$withDefault, x, mx);
+	});
+
 //import Maybe, Native.List //
 
 var _elm_lang$core$Native_Regex = function() {
@@ -11345,6 +11524,367 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
+var _elm_lang$http$Native_Http = function() {
+
+
+// ENCODING AND DECODING
+
+function encodeUri(string)
+{
+	return encodeURIComponent(string);
+}
+
+function decodeUri(string)
+{
+	try
+	{
+		return _elm_lang$core$Maybe$Just(decodeURIComponent(string));
+	}
+	catch(e)
+	{
+		return _elm_lang$core$Maybe$Nothing;
+	}
+}
+
+
+// SEND REQUEST
+
+function toTask(request, maybeProgress)
+{
+	return _elm_lang$core$Native_Scheduler.nativeBinding(function(callback)
+	{
+		var xhr = new XMLHttpRequest();
+
+		configureProgress(xhr, maybeProgress);
+
+		xhr.addEventListener('error', function() {
+			callback(_elm_lang$core$Native_Scheduler.fail({ ctor: 'NetworkError' }));
+		});
+		xhr.addEventListener('timeout', function() {
+			callback(_elm_lang$core$Native_Scheduler.fail({ ctor: 'Timeout' }));
+		});
+		xhr.addEventListener('load', function() {
+			callback(handleResponse(xhr, request.expect.responseToResult));
+		});
+
+		try
+		{
+			xhr.open(request.method, request.url, true);
+		}
+		catch (e)
+		{
+			return callback(_elm_lang$core$Native_Scheduler.fail({ ctor: 'BadUrl', _0: request.url }));
+		}
+
+		configureRequest(xhr, request);
+		send(xhr, request.body);
+
+		return function() { xhr.abort(); };
+	});
+}
+
+function configureProgress(xhr, maybeProgress)
+{
+	if (maybeProgress.ctor === 'Nothing')
+	{
+		return;
+	}
+
+	xhr.addEventListener('progress', function(event) {
+		if (!event.lengthComputable)
+		{
+			return;
+		}
+		_elm_lang$core$Native_Scheduler.rawSpawn(maybeProgress._0({
+			bytes: event.loaded,
+			bytesExpected: event.total
+		}));
+	});
+}
+
+function configureRequest(xhr, request)
+{
+	function setHeader(pair)
+	{
+		xhr.setRequestHeader(pair._0, pair._1);
+	}
+
+	A2(_elm_lang$core$List$map, setHeader, request.headers);
+	xhr.responseType = request.expect.responseType;
+	xhr.withCredentials = request.withCredentials;
+
+	if (request.timeout.ctor === 'Just')
+	{
+		xhr.timeout = request.timeout._0;
+	}
+}
+
+function send(xhr, body)
+{
+	switch (body.ctor)
+	{
+		case 'EmptyBody':
+			xhr.send();
+			return;
+
+		case 'StringBody':
+			xhr.setRequestHeader('Content-Type', body._0);
+			xhr.send(body._1);
+			return;
+
+		case 'FormDataBody':
+			xhr.send(body._0);
+			return;
+	}
+}
+
+
+// RESPONSES
+
+function handleResponse(xhr, responseToResult)
+{
+	var response = toResponse(xhr);
+
+	if (xhr.status < 200 || 300 <= xhr.status)
+	{
+		response.body = xhr.responseText;
+		return _elm_lang$core$Native_Scheduler.fail({
+			ctor: 'BadStatus',
+			_0: response
+		});
+	}
+
+	var result = responseToResult(response);
+
+	if (result.ctor === 'Ok')
+	{
+		return _elm_lang$core$Native_Scheduler.succeed(result._0);
+	}
+	else
+	{
+		response.body = xhr.responseText;
+		return _elm_lang$core$Native_Scheduler.fail({
+			ctor: 'BadPayload',
+			_0: result._0,
+			_1: response
+		});
+	}
+}
+
+function toResponse(xhr)
+{
+	return {
+		status: { code: xhr.status, message: xhr.statusText },
+		headers: parseHeaders(xhr.getAllResponseHeaders()),
+		url: xhr.responseURL,
+		body: xhr.response
+	};
+}
+
+function parseHeaders(rawHeaders)
+{
+	var headers = _elm_lang$core$Dict$empty;
+
+	if (!rawHeaders)
+	{
+		return headers;
+	}
+
+	var headerPairs = rawHeaders.split('\u000d\u000a');
+	for (var i = headerPairs.length; i--; )
+	{
+		var headerPair = headerPairs[i];
+		var index = headerPair.indexOf('\u003a\u0020');
+		if (index > 0)
+		{
+			var key = headerPair.substring(0, index);
+			var value = headerPair.substring(index + 2);
+
+			headers = A3(_elm_lang$core$Dict$update, key, function(oldValue) {
+				if (oldValue.ctor === 'Just')
+				{
+					return _elm_lang$core$Maybe$Just(value + ', ' + oldValue._0);
+				}
+				return _elm_lang$core$Maybe$Just(value);
+			}, headers);
+		}
+	}
+
+	return headers;
+}
+
+
+// EXPECTORS
+
+function expectStringResponse(responseToResult)
+{
+	return {
+		responseType: 'text',
+		responseToResult: responseToResult
+	};
+}
+
+function mapExpect(func, expect)
+{
+	return {
+		responseType: expect.responseType,
+		responseToResult: function(response) {
+			var convertedResponse = expect.responseToResult(response);
+			return A2(_elm_lang$core$Result$map, func, convertedResponse);
+		}
+	};
+}
+
+
+// BODY
+
+function multipart(parts)
+{
+	var formData = new FormData();
+
+	while (parts.ctor !== '[]')
+	{
+		var part = parts._0;
+		formData.append(part._0, part._1);
+		parts = parts._1;
+	}
+
+	return { ctor: 'FormDataBody', _0: formData };
+}
+
+return {
+	toTask: F2(toTask),
+	expectStringResponse: expectStringResponse,
+	mapExpect: F2(mapExpect),
+	multipart: multipart,
+	encodeUri: encodeUri,
+	decodeUri: decodeUri
+};
+
+}();
+
+var _elm_lang$http$Http_Internal$map = F2(
+	function (func, request) {
+		return _elm_lang$core$Native_Utils.update(
+			request,
+			{
+				expect: A2(_elm_lang$http$Native_Http.mapExpect, func, request.expect)
+			});
+	});
+var _elm_lang$http$Http_Internal$RawRequest = F7(
+	function (a, b, c, d, e, f, g) {
+		return {method: a, headers: b, url: c, body: d, expect: e, timeout: f, withCredentials: g};
+	});
+var _elm_lang$http$Http_Internal$Request = function (a) {
+	return {ctor: 'Request', _0: a};
+};
+var _elm_lang$http$Http_Internal$Expect = {ctor: 'Expect'};
+var _elm_lang$http$Http_Internal$FormDataBody = {ctor: 'FormDataBody'};
+var _elm_lang$http$Http_Internal$StringBody = F2(
+	function (a, b) {
+		return {ctor: 'StringBody', _0: a, _1: b};
+	});
+var _elm_lang$http$Http_Internal$EmptyBody = {ctor: 'EmptyBody'};
+var _elm_lang$http$Http_Internal$Header = F2(
+	function (a, b) {
+		return {ctor: 'Header', _0: a, _1: b};
+	});
+
+var _elm_lang$http$Http$decodeUri = _elm_lang$http$Native_Http.decodeUri;
+var _elm_lang$http$Http$encodeUri = _elm_lang$http$Native_Http.encodeUri;
+var _elm_lang$http$Http$expectStringResponse = _elm_lang$http$Native_Http.expectStringResponse;
+var _elm_lang$http$Http$expectJson = function (decoder) {
+	return _elm_lang$http$Http$expectStringResponse(
+		function (response) {
+			return A2(_elm_lang$core$Json_Decode$decodeString, decoder, response.body);
+		});
+};
+var _elm_lang$http$Http$expectString = _elm_lang$http$Http$expectStringResponse(
+	function (response) {
+		return _elm_lang$core$Result$Ok(response.body);
+	});
+var _elm_lang$http$Http$multipartBody = _elm_lang$http$Native_Http.multipart;
+var _elm_lang$http$Http$stringBody = _elm_lang$http$Http_Internal$StringBody;
+var _elm_lang$http$Http$jsonBody = function (value) {
+	return A2(
+		_elm_lang$http$Http_Internal$StringBody,
+		'application/json',
+		A2(_elm_lang$core$Json_Encode$encode, 0, value));
+};
+var _elm_lang$http$Http$emptyBody = _elm_lang$http$Http_Internal$EmptyBody;
+var _elm_lang$http$Http$header = _elm_lang$http$Http_Internal$Header;
+var _elm_lang$http$Http$request = _elm_lang$http$Http_Internal$Request;
+var _elm_lang$http$Http$post = F3(
+	function (url, body, decoder) {
+		return _elm_lang$http$Http$request(
+			{
+				method: 'POST',
+				headers: {ctor: '[]'},
+				url: url,
+				body: body,
+				expect: _elm_lang$http$Http$expectJson(decoder),
+				timeout: _elm_lang$core$Maybe$Nothing,
+				withCredentials: false
+			});
+	});
+var _elm_lang$http$Http$get = F2(
+	function (url, decoder) {
+		return _elm_lang$http$Http$request(
+			{
+				method: 'GET',
+				headers: {ctor: '[]'},
+				url: url,
+				body: _elm_lang$http$Http$emptyBody,
+				expect: _elm_lang$http$Http$expectJson(decoder),
+				timeout: _elm_lang$core$Maybe$Nothing,
+				withCredentials: false
+			});
+	});
+var _elm_lang$http$Http$getString = function (url) {
+	return _elm_lang$http$Http$request(
+		{
+			method: 'GET',
+			headers: {ctor: '[]'},
+			url: url,
+			body: _elm_lang$http$Http$emptyBody,
+			expect: _elm_lang$http$Http$expectString,
+			timeout: _elm_lang$core$Maybe$Nothing,
+			withCredentials: false
+		});
+};
+var _elm_lang$http$Http$toTask = function (_p0) {
+	var _p1 = _p0;
+	return A2(_elm_lang$http$Native_Http.toTask, _p1._0, _elm_lang$core$Maybe$Nothing);
+};
+var _elm_lang$http$Http$send = F2(
+	function (resultToMessage, request) {
+		return A2(
+			_elm_lang$core$Task$attempt,
+			resultToMessage,
+			_elm_lang$http$Http$toTask(request));
+	});
+var _elm_lang$http$Http$Response = F4(
+	function (a, b, c, d) {
+		return {url: a, status: b, headers: c, body: d};
+	});
+var _elm_lang$http$Http$BadPayload = F2(
+	function (a, b) {
+		return {ctor: 'BadPayload', _0: a, _1: b};
+	});
+var _elm_lang$http$Http$BadStatus = function (a) {
+	return {ctor: 'BadStatus', _0: a};
+};
+var _elm_lang$http$Http$NetworkError = {ctor: 'NetworkError'};
+var _elm_lang$http$Http$Timeout = {ctor: 'Timeout'};
+var _elm_lang$http$Http$BadUrl = function (a) {
+	return {ctor: 'BadUrl', _0: a};
+};
+var _elm_lang$http$Http$StringPart = F2(
+	function (a, b) {
+		return {ctor: 'StringPart', _0: a, _1: b};
+	});
+var _elm_lang$http$Http$stringPart = _elm_lang$http$Http$StringPart;
+
 var _gizra$municipality$App_Types$NotFound = {ctor: 'NotFound'};
 var _gizra$municipality$App_Types$Events = {ctor: 'Events'};
 var _gizra$municipality$App_Types$Event = {ctor: 'Event'};
@@ -11395,6 +11935,7 @@ var _gizra$municipality$Contact_Model$SetFilter = function (a) {
 var _gizra$municipality$Contact_Model$HandleContacts = function (a) {
 	return {ctor: 'HandleContacts', _0: a};
 };
+var _gizra$municipality$Contact_Model$Default = {ctor: 'Default'};
 var _gizra$municipality$Contact_Model$Info = {ctor: 'Info'};
 var _gizra$municipality$Contact_Model$Secondary = {ctor: 'Secondary'};
 var _gizra$municipality$Contact_Model$Primary = {ctor: 'Primary'};
@@ -11403,6 +11944,17 @@ var _gizra$municipality$Contact_Model$Success = {ctor: 'Success'};
 var _gizra$municipality$Contact_Model$Quaternary = {ctor: 'Quaternary'};
 var _gizra$municipality$Contact_Model$Warning = {ctor: 'Warning'};
 var _gizra$municipality$Contact_Model$Danger = {ctor: 'Danger'};
+
+var _gizra$municipality$Error_Model$Error = F3(
+	function (a, b, c) {
+		return {module_: a, location: b, error: c};
+	});
+var _gizra$municipality$Error_Model$Plain = function (a) {
+	return {ctor: 'Plain', _0: a};
+};
+var _gizra$municipality$Error_Model$Http = function (a) {
+	return {ctor: 'Http', _0: a};
+};
 
 var _gizra$municipality$Event_Model$emptyModel = {
 	event: {
@@ -11450,6 +12002,7 @@ var _gizra$municipality$Events_Model$HandleEvents = function (a) {
 var _gizra$municipality$App_Model$emptyModel = {
 	baseUrl: {path: '', query: ''},
 	editorPermissions: false,
+	errors: {ctor: '[]'},
 	language: _gizra$municipality$App_Types$Hebrew,
 	page: _gizra$municipality$App_Types$NotFound,
 	pageContact: _gizra$municipality$Contact_Model$emptyModel,
@@ -11461,9 +12014,9 @@ var _gizra$municipality$App_Model$Flags = F5(
 	function (a, b, c, d, e) {
 		return {baseUrl: a, editorPermissions: b, language: c, page: d, showAsBlock: e};
 	});
-var _gizra$municipality$App_Model$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {baseUrl: a, editorPermissions: b, language: c, page: d, pageContact: e, pageEvent: f, pageEvents: g, showAsBlock: h};
+var _gizra$municipality$App_Model$Model = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {baseUrl: a, editorPermissions: b, errors: c, language: d, page: e, pageContact: f, pageEvent: g, pageEvents: h, showAsBlock: i};
 	});
 var _gizra$municipality$App_Model$BaseUrl = F2(
 	function (a, b) {
@@ -11478,6 +12031,1016 @@ var _gizra$municipality$App_Model$MsgPagesEvent = function (a) {
 var _gizra$municipality$App_Model$MsgPagesContact = function (a) {
 	return {ctor: 'MsgPagesContact', _0: a};
 };
+
+var _lukewestby$elm_http_builder$HttpBuilder$replace = F2(
+	function (old, $new) {
+		return function (_p0) {
+			return A2(
+				_elm_lang$core$String$join,
+				$new,
+				A2(_elm_lang$core$String$split, old, _p0));
+		};
+	});
+var _lukewestby$elm_http_builder$HttpBuilder$queryEscape = function (_p1) {
+	return A3(
+		_lukewestby$elm_http_builder$HttpBuilder$replace,
+		'%20',
+		'+',
+		_elm_lang$http$Http$encodeUri(_p1));
+};
+var _lukewestby$elm_http_builder$HttpBuilder$queryPair = function (_p2) {
+	var _p3 = _p2;
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_lukewestby$elm_http_builder$HttpBuilder$queryEscape(_p3._0),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'=',
+			_lukewestby$elm_http_builder$HttpBuilder$queryEscape(_p3._1)));
+};
+var _lukewestby$elm_http_builder$HttpBuilder$joinUrlEncoded = function (args) {
+	return A2(
+		_elm_lang$core$String$join,
+		'&',
+		A2(_elm_lang$core$List$map, _lukewestby$elm_http_builder$HttpBuilder$queryPair, args));
+};
+var _lukewestby$elm_http_builder$HttpBuilder$toRequest = function (builder) {
+	var encodedParams = _lukewestby$elm_http_builder$HttpBuilder$joinUrlEncoded(builder.queryParams);
+	var fullUrl = _elm_lang$core$String$isEmpty(encodedParams) ? builder.url : A2(
+		_elm_lang$core$Basics_ops['++'],
+		builder.url,
+		A2(_elm_lang$core$Basics_ops['++'], '?', encodedParams));
+	return _elm_lang$http$Http$request(
+		{method: builder.method, url: fullUrl, headers: builder.headers, body: builder.body, expect: builder.expect, timeout: builder.timeout, withCredentials: builder.withCredentials});
+};
+var _lukewestby$elm_http_builder$HttpBuilder$toTaskPlain = function (builder) {
+	return _elm_lang$http$Http$toTask(
+		_lukewestby$elm_http_builder$HttpBuilder$toRequest(builder));
+};
+var _lukewestby$elm_http_builder$HttpBuilder$withCacheBuster = F2(
+	function (paramName, builder) {
+		return _elm_lang$core$Native_Utils.update(
+			builder,
+			{
+				cacheBuster: _elm_lang$core$Maybe$Just(paramName)
+			});
+	});
+var _lukewestby$elm_http_builder$HttpBuilder$withQueryParams = F2(
+	function (queryParams, builder) {
+		return _elm_lang$core$Native_Utils.update(
+			builder,
+			{
+				queryParams: A2(_elm_lang$core$Basics_ops['++'], builder.queryParams, queryParams)
+			});
+	});
+var _lukewestby$elm_http_builder$HttpBuilder$toTaskWithCacheBuster = F2(
+	function (paramName, builder) {
+		var request = function (timestamp) {
+			return _lukewestby$elm_http_builder$HttpBuilder$toTaskPlain(
+				A2(
+					_lukewestby$elm_http_builder$HttpBuilder$withQueryParams,
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: paramName,
+							_1: _elm_lang$core$Basics$toString(timestamp)
+						},
+						_1: {ctor: '[]'}
+					},
+					builder));
+		};
+		return A2(_elm_lang$core$Task$andThen, request, _elm_lang$core$Time$now);
+	});
+var _lukewestby$elm_http_builder$HttpBuilder$toTask = function (builder) {
+	var _p4 = builder.cacheBuster;
+	if (_p4.ctor === 'Just') {
+		return A2(_lukewestby$elm_http_builder$HttpBuilder$toTaskWithCacheBuster, _p4._0, builder);
+	} else {
+		return _lukewestby$elm_http_builder$HttpBuilder$toTaskPlain(builder);
+	}
+};
+var _lukewestby$elm_http_builder$HttpBuilder$send = F2(
+	function (tagger, builder) {
+		return A2(
+			_elm_lang$core$Task$attempt,
+			tagger,
+			_lukewestby$elm_http_builder$HttpBuilder$toTask(builder));
+	});
+var _lukewestby$elm_http_builder$HttpBuilder$withExpect = F2(
+	function (expect, builder) {
+		return _elm_lang$core$Native_Utils.update(
+			builder,
+			{expect: expect});
+	});
+var _lukewestby$elm_http_builder$HttpBuilder$withCredentials = function (builder) {
+	return _elm_lang$core$Native_Utils.update(
+		builder,
+		{withCredentials: true});
+};
+var _lukewestby$elm_http_builder$HttpBuilder$withTimeout = F2(
+	function (timeout, builder) {
+		return _elm_lang$core$Native_Utils.update(
+			builder,
+			{
+				timeout: _elm_lang$core$Maybe$Just(timeout)
+			});
+	});
+var _lukewestby$elm_http_builder$HttpBuilder$withBody = F2(
+	function (body, builder) {
+		return _elm_lang$core$Native_Utils.update(
+			builder,
+			{body: body});
+	});
+var _lukewestby$elm_http_builder$HttpBuilder$withStringBody = F2(
+	function (contentType, value) {
+		return _lukewestby$elm_http_builder$HttpBuilder$withBody(
+			A2(_elm_lang$http$Http$stringBody, contentType, value));
+	});
+var _lukewestby$elm_http_builder$HttpBuilder$withUrlEncodedBody = function (_p5) {
+	return A2(
+		_lukewestby$elm_http_builder$HttpBuilder$withStringBody,
+		'application/x-www-form-urlencoded',
+		_lukewestby$elm_http_builder$HttpBuilder$joinUrlEncoded(_p5));
+};
+var _lukewestby$elm_http_builder$HttpBuilder$withJsonBody = function (value) {
+	return _lukewestby$elm_http_builder$HttpBuilder$withBody(
+		_elm_lang$http$Http$jsonBody(value));
+};
+var _lukewestby$elm_http_builder$HttpBuilder$withMultipartStringBody = function (partPairs) {
+	return _lukewestby$elm_http_builder$HttpBuilder$withBody(
+		_elm_lang$http$Http$multipartBody(
+			A2(
+				_elm_lang$core$List$map,
+				_elm_lang$core$Basics$uncurry(_elm_lang$http$Http$stringPart),
+				partPairs)));
+};
+var _lukewestby$elm_http_builder$HttpBuilder$withHeaders = F2(
+	function (headerPairs, builder) {
+		return _elm_lang$core$Native_Utils.update(
+			builder,
+			{
+				headers: A2(
+					_elm_lang$core$Basics_ops['++'],
+					A2(
+						_elm_lang$core$List$map,
+						_elm_lang$core$Basics$uncurry(_elm_lang$http$Http$header),
+						headerPairs),
+					builder.headers)
+			});
+	});
+var _lukewestby$elm_http_builder$HttpBuilder$withHeader = F3(
+	function (key, value, builder) {
+		return _elm_lang$core$Native_Utils.update(
+			builder,
+			{
+				headers: {
+					ctor: '::',
+					_0: A2(_elm_lang$http$Http$header, key, value),
+					_1: builder.headers
+				}
+			});
+	});
+var _lukewestby$elm_http_builder$HttpBuilder$requestWithMethodAndUrl = F2(
+	function (method, url) {
+		return {
+			method: method,
+			url: url,
+			headers: {ctor: '[]'},
+			body: _elm_lang$http$Http$emptyBody,
+			expect: _elm_lang$http$Http$expectStringResponse(
+				function (_p6) {
+					return _elm_lang$core$Result$Ok(
+						{ctor: '_Tuple0'});
+				}),
+			timeout: _elm_lang$core$Maybe$Nothing,
+			withCredentials: false,
+			queryParams: {ctor: '[]'},
+			cacheBuster: _elm_lang$core$Maybe$Nothing
+		};
+	});
+var _lukewestby$elm_http_builder$HttpBuilder$get = _lukewestby$elm_http_builder$HttpBuilder$requestWithMethodAndUrl('GET');
+var _lukewestby$elm_http_builder$HttpBuilder$post = _lukewestby$elm_http_builder$HttpBuilder$requestWithMethodAndUrl('POST');
+var _lukewestby$elm_http_builder$HttpBuilder$put = _lukewestby$elm_http_builder$HttpBuilder$requestWithMethodAndUrl('PUT');
+var _lukewestby$elm_http_builder$HttpBuilder$patch = _lukewestby$elm_http_builder$HttpBuilder$requestWithMethodAndUrl('PATCH');
+var _lukewestby$elm_http_builder$HttpBuilder$delete = _lukewestby$elm_http_builder$HttpBuilder$requestWithMethodAndUrl('DELETE');
+var _lukewestby$elm_http_builder$HttpBuilder$options = _lukewestby$elm_http_builder$HttpBuilder$requestWithMethodAndUrl('OPTIONS');
+var _lukewestby$elm_http_builder$HttpBuilder$trace = _lukewestby$elm_http_builder$HttpBuilder$requestWithMethodAndUrl('TRACE');
+var _lukewestby$elm_http_builder$HttpBuilder$head = _lukewestby$elm_http_builder$HttpBuilder$requestWithMethodAndUrl('HEAD');
+var _lukewestby$elm_http_builder$HttpBuilder$RequestBuilder = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {method: a, headers: b, url: c, body: d, expect: e, timeout: f, withCredentials: g, queryParams: h, cacheBuster: i};
+	});
+
+var _krisajenkins$remotedata$RemoteData$isNotAsked = function (data) {
+	var _p0 = data;
+	if (_p0.ctor === 'NotAsked') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _krisajenkins$remotedata$RemoteData$isLoading = function (data) {
+	var _p1 = data;
+	if (_p1.ctor === 'Loading') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _krisajenkins$remotedata$RemoteData$isFailure = function (data) {
+	var _p2 = data;
+	if (_p2.ctor === 'Failure') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _krisajenkins$remotedata$RemoteData$isSuccess = function (data) {
+	var _p3 = data;
+	if (_p3.ctor === 'Success') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _krisajenkins$remotedata$RemoteData$withDefault = F2(
+	function ($default, data) {
+		var _p4 = data;
+		if (_p4.ctor === 'Success') {
+			return _p4._0;
+		} else {
+			return $default;
+		}
+	});
+var _krisajenkins$remotedata$RemoteData$Success = function (a) {
+	return {ctor: 'Success', _0: a};
+};
+var _krisajenkins$remotedata$RemoteData$succeed = _krisajenkins$remotedata$RemoteData$Success;
+var _krisajenkins$remotedata$RemoteData$prism = {
+	reverseGet: _krisajenkins$remotedata$RemoteData$Success,
+	getOption: function (data) {
+		var _p5 = data;
+		if (_p5.ctor === 'Success') {
+			return _elm_lang$core$Maybe$Just(_p5._0);
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	}
+};
+var _krisajenkins$remotedata$RemoteData$Failure = function (a) {
+	return {ctor: 'Failure', _0: a};
+};
+var _krisajenkins$remotedata$RemoteData$fromResult = function (result) {
+	var _p6 = result;
+	if (_p6.ctor === 'Err') {
+		return _krisajenkins$remotedata$RemoteData$Failure(_p6._0);
+	} else {
+		return _krisajenkins$remotedata$RemoteData$Success(_p6._0);
+	}
+};
+var _krisajenkins$remotedata$RemoteData$asCmd = _elm_lang$core$Task$attempt(_krisajenkins$remotedata$RemoteData$fromResult);
+var _krisajenkins$remotedata$RemoteData$sendRequest = _elm_lang$http$Http$send(_krisajenkins$remotedata$RemoteData$fromResult);
+var _krisajenkins$remotedata$RemoteData$fromTask = function (_p7) {
+	return A2(
+		_elm_lang$core$Task$onError,
+		function (_p8) {
+			return _elm_lang$core$Task$succeed(
+				_krisajenkins$remotedata$RemoteData$Failure(_p8));
+		},
+		A2(_elm_lang$core$Task$map, _krisajenkins$remotedata$RemoteData$Success, _p7));
+};
+var _krisajenkins$remotedata$RemoteData$Loading = {ctor: 'Loading'};
+var _krisajenkins$remotedata$RemoteData$NotAsked = {ctor: 'NotAsked'};
+var _krisajenkins$remotedata$RemoteData$map = F2(
+	function (f, data) {
+		var _p9 = data;
+		switch (_p9.ctor) {
+			case 'Success':
+				return _krisajenkins$remotedata$RemoteData$Success(
+					f(_p9._0));
+			case 'Loading':
+				return _krisajenkins$remotedata$RemoteData$Loading;
+			case 'NotAsked':
+				return _krisajenkins$remotedata$RemoteData$NotAsked;
+			default:
+				return _krisajenkins$remotedata$RemoteData$Failure(_p9._0);
+		}
+	});
+var _krisajenkins$remotedata$RemoteData$toMaybe = function (_p10) {
+	return A2(
+		_krisajenkins$remotedata$RemoteData$withDefault,
+		_elm_lang$core$Maybe$Nothing,
+		A2(_krisajenkins$remotedata$RemoteData$map, _elm_lang$core$Maybe$Just, _p10));
+};
+var _krisajenkins$remotedata$RemoteData$mapError = F2(
+	function (f, data) {
+		var _p11 = data;
+		switch (_p11.ctor) {
+			case 'Success':
+				return _krisajenkins$remotedata$RemoteData$Success(_p11._0);
+			case 'Failure':
+				return _krisajenkins$remotedata$RemoteData$Failure(
+					f(_p11._0));
+			case 'Loading':
+				return _krisajenkins$remotedata$RemoteData$Loading;
+			default:
+				return _krisajenkins$remotedata$RemoteData$NotAsked;
+		}
+	});
+var _krisajenkins$remotedata$RemoteData$mapBoth = F2(
+	function (successFn, errorFn) {
+		return function (_p12) {
+			return A2(
+				_krisajenkins$remotedata$RemoteData$mapError,
+				errorFn,
+				A2(_krisajenkins$remotedata$RemoteData$map, successFn, _p12));
+		};
+	});
+var _krisajenkins$remotedata$RemoteData$andThen = F2(
+	function (f, data) {
+		var _p13 = data;
+		switch (_p13.ctor) {
+			case 'Success':
+				return f(_p13._0);
+			case 'Failure':
+				return _krisajenkins$remotedata$RemoteData$Failure(_p13._0);
+			case 'NotAsked':
+				return _krisajenkins$remotedata$RemoteData$NotAsked;
+			default:
+				return _krisajenkins$remotedata$RemoteData$Loading;
+		}
+	});
+var _krisajenkins$remotedata$RemoteData$andMap = F2(
+	function (wrappedValue, wrappedFunction) {
+		var _p14 = wrappedFunction;
+		switch (_p14.ctor) {
+			case 'Success':
+				return A2(_krisajenkins$remotedata$RemoteData$map, _p14._0, wrappedValue);
+			case 'Failure':
+				return _krisajenkins$remotedata$RemoteData$Failure(_p14._0);
+			case 'Loading':
+				return _krisajenkins$remotedata$RemoteData$Loading;
+			default:
+				return _krisajenkins$remotedata$RemoteData$NotAsked;
+		}
+	});
+var _krisajenkins$remotedata$RemoteData$map2 = F3(
+	function (f, a, b) {
+		return A2(
+			_krisajenkins$remotedata$RemoteData$andMap,
+			b,
+			A2(_krisajenkins$remotedata$RemoteData$map, f, a));
+	});
+var _krisajenkins$remotedata$RemoteData$map3 = F4(
+	function (f, a, b, c) {
+		return A2(
+			_krisajenkins$remotedata$RemoteData$andMap,
+			c,
+			A2(
+				_krisajenkins$remotedata$RemoteData$andMap,
+				b,
+				A2(_krisajenkins$remotedata$RemoteData$map, f, a)));
+	});
+var _krisajenkins$remotedata$RemoteData$append = F2(
+	function (a, b) {
+		return A2(
+			_krisajenkins$remotedata$RemoteData$andMap,
+			b,
+			A2(
+				_krisajenkins$remotedata$RemoteData$map,
+				F2(
+					function (v0, v1) {
+						return {ctor: '_Tuple2', _0: v0, _1: v1};
+					}),
+				a));
+	});
+var _krisajenkins$remotedata$RemoteData$update = F2(
+	function (f, remoteData) {
+		var _p15 = remoteData;
+		switch (_p15.ctor) {
+			case 'Success':
+				var _p16 = f(_p15._0);
+				var first = _p16._0;
+				var second = _p16._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _krisajenkins$remotedata$RemoteData$Success(first),
+					_1: second
+				};
+			case 'NotAsked':
+				return {ctor: '_Tuple2', _0: _krisajenkins$remotedata$RemoteData$NotAsked, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'Loading':
+				return {ctor: '_Tuple2', _0: _krisajenkins$remotedata$RemoteData$Loading, _1: _elm_lang$core$Platform_Cmd$none};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _krisajenkins$remotedata$RemoteData$Failure(_p15._0),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+
+var _mgold$elm_date_format$Date_Local$french = {
+	date: {
+		months: {jan: 'Janvier', feb: 'Février', mar: 'Mars', apr: 'Avril', may: 'Mai', jun: 'Juin', jul: 'Juillet', aug: 'Août', sep: 'Septembre', oct: 'Octobre', nov: 'Novembre', dec: 'Décembre'},
+		monthsAbbrev: {jan: 'Jan', feb: 'Fév', mar: 'Mar', apr: 'Avr', may: 'Mai', jun: 'Jui', jul: 'Jul', aug: 'Aoû', sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Déc'},
+		wdays: {mon: 'Lundi', tue: 'Mardi', wed: 'Mercredi', thu: 'Jeudi', fri: 'Vendredi', sat: 'Samedi', sun: 'Dimanche'},
+		wdaysAbbrev: {mon: 'Lun', tue: 'Mar', wed: 'Mer', thu: 'Jeu', fri: 'Ven', sat: 'Sam', sun: 'Dim'},
+		defaultFormat: _elm_lang$core$Maybe$Nothing
+	},
+	time: {am: 'am', pm: 'pm', defaultFormat: _elm_lang$core$Maybe$Nothing},
+	timeZones: _elm_lang$core$Maybe$Nothing,
+	defaultFormat: _elm_lang$core$Maybe$Nothing
+};
+var _mgold$elm_date_format$Date_Local$international = {
+	date: {
+		months: {jan: 'January', feb: 'February', mar: 'March', apr: 'April', may: 'May', jun: 'June', jul: 'July', aug: 'August', sep: 'September', oct: 'October', nov: 'November', dec: 'December'},
+		monthsAbbrev: {jan: 'Jan', feb: 'Feb', mar: 'Mar', apr: 'Apr', may: 'May', jun: 'Jun', jul: 'Jul', aug: 'Aug', sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Dec'},
+		wdays: {mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday'},
+		wdaysAbbrev: {mon: 'Mon', tue: 'Tue', wed: 'Wed', thu: 'Thu', fri: 'Fri', sat: 'Sat', sun: 'Sun'},
+		defaultFormat: _elm_lang$core$Maybe$Nothing
+	},
+	time: {am: 'am', pm: 'pm', defaultFormat: _elm_lang$core$Maybe$Nothing},
+	timeZones: _elm_lang$core$Maybe$Nothing,
+	defaultFormat: _elm_lang$core$Maybe$Nothing
+};
+var _mgold$elm_date_format$Date_Local$Local = F4(
+	function (a, b, c, d) {
+		return {date: a, time: b, timeZones: c, defaultFormat: d};
+	});
+var _mgold$elm_date_format$Date_Local$Months = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return {jan: a, feb: b, mar: c, apr: d, may: e, jun: f, jul: g, aug: h, sep: i, oct: j, nov: k, dec: l};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _mgold$elm_date_format$Date_Local$WeekDays = F7(
+	function (a, b, c, d, e, f, g) {
+		return {mon: a, tue: b, wed: c, thu: d, fri: e, sat: f, sun: g};
+	});
+
+var _mgold$elm_date_format$Date_Format$padWith = function (padding) {
+	var padder = function () {
+		var _p0 = padding;
+		switch (_p0.ctor) {
+			case 'NoPadding':
+				return _elm_lang$core$Basics$identity;
+			case 'Zero':
+				return A2(
+					_elm_lang$core$String$padLeft,
+					2,
+					_elm_lang$core$Native_Utils.chr('0'));
+			default:
+				return A2(
+					_elm_lang$core$String$padLeft,
+					2,
+					_elm_lang$core$Native_Utils.chr(' '));
+		}
+	}();
+	return function (_p1) {
+		return padder(
+			_elm_lang$core$Basics$toString(_p1));
+	};
+};
+var _mgold$elm_date_format$Date_Format$zero2twelve = function (n) {
+	return _elm_lang$core$Native_Utils.eq(n, 0) ? 12 : n;
+};
+var _mgold$elm_date_format$Date_Format$mod12 = function (h) {
+	return A2(_elm_lang$core$Basics_ops['%'], h, 12);
+};
+var _mgold$elm_date_format$Date_Format$dayOfWeekToWord = F2(
+	function (loc, dow) {
+		var _p2 = dow;
+		switch (_p2.ctor) {
+			case 'Mon':
+				return loc.mon;
+			case 'Tue':
+				return loc.tue;
+			case 'Wed':
+				return loc.wed;
+			case 'Thu':
+				return loc.thu;
+			case 'Fri':
+				return loc.fri;
+			case 'Sat':
+				return loc.sat;
+			default:
+				return loc.sun;
+		}
+	});
+var _mgold$elm_date_format$Date_Format$monthToWord = F2(
+	function (loc, m) {
+		var _p3 = m;
+		switch (_p3.ctor) {
+			case 'Jan':
+				return loc.jan;
+			case 'Feb':
+				return loc.feb;
+			case 'Mar':
+				return loc.mar;
+			case 'Apr':
+				return loc.apr;
+			case 'May':
+				return loc.may;
+			case 'Jun':
+				return loc.jun;
+			case 'Jul':
+				return loc.jul;
+			case 'Aug':
+				return loc.aug;
+			case 'Sep':
+				return loc.sep;
+			case 'Oct':
+				return loc.oct;
+			case 'Nov':
+				return loc.nov;
+			default:
+				return loc.dec;
+		}
+	});
+var _mgold$elm_date_format$Date_Format$monthToInt = function (m) {
+	var _p4 = m;
+	switch (_p4.ctor) {
+		case 'Jan':
+			return 1;
+		case 'Feb':
+			return 2;
+		case 'Mar':
+			return 3;
+		case 'Apr':
+			return 4;
+		case 'May':
+			return 5;
+		case 'Jun':
+			return 6;
+		case 'Jul':
+			return 7;
+		case 'Aug':
+			return 8;
+		case 'Sep':
+			return 9;
+		case 'Oct':
+			return 10;
+		case 'Nov':
+			return 11;
+		default:
+			return 12;
+	}
+};
+var _mgold$elm_date_format$Date_Format$re = _elm_lang$core$Regex$regex('%(_|-|0)?(%|Y|y|m|B|b|d|e|a|A|H|k|I|l|p|P|M|S)');
+var _mgold$elm_date_format$Date_Format$Zero = {ctor: 'Zero'};
+var _mgold$elm_date_format$Date_Format$Space = {ctor: 'Space'};
+var _mgold$elm_date_format$Date_Format$NoPadding = {ctor: 'NoPadding'};
+var _mgold$elm_date_format$Date_Format$formatToken = F3(
+	function (loc, d, m) {
+		var _p5 = function () {
+			var _p6 = m.submatches;
+			_v4_4:
+			do {
+				if (_p6.ctor === '::') {
+					if (_p6._0.ctor === 'Just') {
+						if (((_p6._1.ctor === '::') && (_p6._1._0.ctor === 'Just')) && (_p6._1._1.ctor === '[]')) {
+							switch (_p6._0._0) {
+								case '-':
+									return {
+										ctor: '_Tuple2',
+										_0: _elm_lang$core$Maybe$Just(_mgold$elm_date_format$Date_Format$NoPadding),
+										_1: _p6._1._0._0
+									};
+								case '_':
+									return {
+										ctor: '_Tuple2',
+										_0: _elm_lang$core$Maybe$Just(_mgold$elm_date_format$Date_Format$Space),
+										_1: _p6._1._0._0
+									};
+								case '0':
+									return {
+										ctor: '_Tuple2',
+										_0: _elm_lang$core$Maybe$Just(_mgold$elm_date_format$Date_Format$Zero),
+										_1: _p6._1._0._0
+									};
+								default:
+									break _v4_4;
+							}
+						} else {
+							break _v4_4;
+						}
+					} else {
+						if (((_p6._1.ctor === '::') && (_p6._1._0.ctor === 'Just')) && (_p6._1._1.ctor === '[]')) {
+							return {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: _p6._1._0._0};
+						} else {
+							break _v4_4;
+						}
+					}
+				} else {
+					break _v4_4;
+				}
+			} while(false);
+			return {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: ' '};
+		}();
+		var padding = _p5._0;
+		var symbol = _p5._1;
+		var _p7 = symbol;
+		switch (_p7) {
+			case '%':
+				return '%';
+			case 'Y':
+				return _elm_lang$core$Basics$toString(
+					_elm_lang$core$Date$year(d));
+			case 'y':
+				return A2(
+					_elm_lang$core$String$right,
+					2,
+					_elm_lang$core$Basics$toString(
+						_elm_lang$core$Date$year(d)));
+			case 'm':
+				return A2(
+					_mgold$elm_date_format$Date_Format$padWith,
+					A2(_elm_lang$core$Maybe$withDefault, _mgold$elm_date_format$Date_Format$Zero, padding),
+					_mgold$elm_date_format$Date_Format$monthToInt(
+						_elm_lang$core$Date$month(d)));
+			case 'B':
+				return A2(
+					_mgold$elm_date_format$Date_Format$monthToWord,
+					loc.date.months,
+					_elm_lang$core$Date$month(d));
+			case 'b':
+				return A2(
+					_mgold$elm_date_format$Date_Format$monthToWord,
+					loc.date.monthsAbbrev,
+					_elm_lang$core$Date$month(d));
+			case 'd':
+				return A2(
+					_mgold$elm_date_format$Date_Format$padWith,
+					A2(_elm_lang$core$Maybe$withDefault, _mgold$elm_date_format$Date_Format$Zero, padding),
+					_elm_lang$core$Date$day(d));
+			case 'e':
+				return A2(
+					_mgold$elm_date_format$Date_Format$padWith,
+					A2(_elm_lang$core$Maybe$withDefault, _mgold$elm_date_format$Date_Format$Space, padding),
+					_elm_lang$core$Date$day(d));
+			case 'a':
+				return A2(
+					_mgold$elm_date_format$Date_Format$dayOfWeekToWord,
+					loc.date.wdaysAbbrev,
+					_elm_lang$core$Date$dayOfWeek(d));
+			case 'A':
+				return A2(
+					_mgold$elm_date_format$Date_Format$dayOfWeekToWord,
+					loc.date.wdays,
+					_elm_lang$core$Date$dayOfWeek(d));
+			case 'H':
+				return A2(
+					_mgold$elm_date_format$Date_Format$padWith,
+					A2(_elm_lang$core$Maybe$withDefault, _mgold$elm_date_format$Date_Format$Zero, padding),
+					_elm_lang$core$Date$hour(d));
+			case 'k':
+				return A2(
+					_mgold$elm_date_format$Date_Format$padWith,
+					A2(_elm_lang$core$Maybe$withDefault, _mgold$elm_date_format$Date_Format$Space, padding),
+					_elm_lang$core$Date$hour(d));
+			case 'I':
+				return A2(
+					_mgold$elm_date_format$Date_Format$padWith,
+					A2(_elm_lang$core$Maybe$withDefault, _mgold$elm_date_format$Date_Format$Zero, padding),
+					_mgold$elm_date_format$Date_Format$zero2twelve(
+						_mgold$elm_date_format$Date_Format$mod12(
+							_elm_lang$core$Date$hour(d))));
+			case 'l':
+				return A2(
+					_mgold$elm_date_format$Date_Format$padWith,
+					A2(_elm_lang$core$Maybe$withDefault, _mgold$elm_date_format$Date_Format$Space, padding),
+					_mgold$elm_date_format$Date_Format$zero2twelve(
+						_mgold$elm_date_format$Date_Format$mod12(
+							_elm_lang$core$Date$hour(d))));
+			case 'p':
+				return (_elm_lang$core$Native_Utils.cmp(
+					_elm_lang$core$Date$hour(d),
+					12) < 0) ? _elm_lang$core$String$toUpper(loc.time.am) : _elm_lang$core$String$toUpper(loc.time.pm);
+			case 'P':
+				return (_elm_lang$core$Native_Utils.cmp(
+					_elm_lang$core$Date$hour(d),
+					12) < 0) ? loc.time.am : loc.time.pm;
+			case 'M':
+				return A2(
+					_mgold$elm_date_format$Date_Format$padWith,
+					A2(_elm_lang$core$Maybe$withDefault, _mgold$elm_date_format$Date_Format$Zero, padding),
+					_elm_lang$core$Date$minute(d));
+			case 'S':
+				return A2(
+					_mgold$elm_date_format$Date_Format$padWith,
+					A2(_elm_lang$core$Maybe$withDefault, _mgold$elm_date_format$Date_Format$Zero, padding),
+					_elm_lang$core$Date$second(d));
+			default:
+				return '';
+		}
+	});
+var _mgold$elm_date_format$Date_Format$localFormat = F3(
+	function (loc, s, d) {
+		return A4(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$All,
+			_mgold$elm_date_format$Date_Format$re,
+			A2(_mgold$elm_date_format$Date_Format$formatToken, loc, d),
+			s);
+	});
+var _mgold$elm_date_format$Date_Format$format = F2(
+	function (s, d) {
+		return A3(_mgold$elm_date_format$Date_Format$localFormat, _mgold$elm_date_format$Date_Local$international, s, d);
+	});
+var _mgold$elm_date_format$Date_Format$formatISO8601 = _mgold$elm_date_format$Date_Format$format('%Y-%m-%dT%H:%M:%SZ');
+
+var _gizra$municipality$Translate$translate = F2(
+	function (lang, trans) {
+		var translationSet = function () {
+			var _p0 = trans;
+			switch (_p0.ctor) {
+				case 'AddNewContactText':
+					return {arabic: 'إضافة جهة اتصال', english: 'Add new contact', hebrew: 'הוספת איש קשר'};
+				case 'AddNewEventText':
+					return {arabic: 'إضافة حدث جديد', english: 'Add new event', hebrew: 'הוספת אירוע חדש'};
+				case 'ContactsHeaderText':
+					return {arabic: 'اتصالات وموظفي الشبكة', english: 'Contacts and network employees', hebrew: 'אנשי קשר ועובדי רשת'};
+				case 'EventsHeaderText':
+					return {arabic: 'الفعاليات', english: 'Events', hebrew: 'אירועים'};
+				case 'ContactsNotFound':
+					return {arabic: 'لم يتم العثور على جهات اتصال', english: 'No contacts found', hebrew: 'לא נמצאו אנשי קשר מתאימים'};
+				case 'DayTranslation':
+					var _p1 = _p0._0;
+					switch (_p1.ctor) {
+						case 'Mon':
+							return {arabic: 'الإثنين', english: 'Mon', hebrew: 'שני'};
+						case 'Tue':
+							return {arabic: 'الثلاثاء', english: 'Tue', hebrew: 'שלישי'};
+						case 'Wed':
+							return {arabic: 'الأربعاء', english: 'Wed', hebrew: 'רביעי'};
+						case 'Thu':
+							return {arabic: 'الخميس', english: 'Thu', hebrew: 'חמישי'};
+						case 'Fri':
+							return {arabic: 'الجمعة', english: 'Fri', hebrew: 'שישי'};
+						case 'Sat':
+							return {arabic: 'السبت', english: 'Sat', hebrew: 'שבת'};
+						default:
+							return {arabic: 'الأحد', english: 'Sun', hebrew: 'ראשון'};
+					}
+				case 'DateLabelTranslation':
+					return {arabic: 'متى', english: 'When', hebrew: 'מתי'};
+				case 'EditLinkText':
+					return {arabic: 'تحرير', english: 'Edit', hebrew: 'עריכה'};
+				case 'EventRecurringWeekly':
+					return {arabic: 'حدث اسبوعي', english: 'Weekly event', hebrew: 'אירוע שבועי'};
+				case 'EventsNotFound':
+					return {arabic: 'لم يتم العثور على أية أحداث', english: 'No events found', hebrew: 'לא נמצאו אירועים מתאימים'};
+				case 'FilterContactsPlaceholder':
+					return {arabic: 'ابحث عن اسم، موضوع أو فئة', english: 'Filter contacts', hebrew: 'חפשו שם, נושא או מחלקה'};
+				case 'FilterEventsPlaceholder':
+					return {arabic: 'ابحث عن الأحداث في ذوقك', english: 'Look for events to your liking', hebrew: 'חפשו אירועים לטעמכם'};
+				case 'HttpError':
+					var _p2 = _p0._0;
+					switch (_p2.ctor) {
+						case 'ErrorBadUrl':
+							return {english: 'URL is not valid.', arabic: 'رابط غير صالح.', hebrew: 'כתובת שגוייה'};
+						case 'ErrorBadPayload':
+							var _p3 = _p2._0;
+							return {
+								english: A2(_elm_lang$core$Basics_ops['++'], 'The server responded with data of an unexpected type: ', _p3),
+								arabic: A2(_elm_lang$core$Basics_ops['++'], 'استجاب الخادم مع بيانات من نوع غير متوقع: ', _p3),
+								hebrew: A2(_elm_lang$core$Basics_ops['++'], 'השרת שלח מידע בלתי צפוי: ', _p3)
+							};
+						case 'ErrorBadStatus':
+							var _p4 = _p2._0;
+							return {
+								english: A2(_elm_lang$core$Basics_ops['++'], 'The server indicated the following error:\n\n', _p4),
+								arabic: 'أشار الخادم إلى الخطأ التالي:\n\n',
+								hebrew: A2(_elm_lang$core$Basics_ops['++'], 'השרת שלך הודעת שגיאה:\n\n', _p4)
+							};
+						case 'ErrorNetworkError':
+							return {english: 'There was a network error.', arabic: 'حدث خطأ في الشبكة.', hebrew: 'בעיית רשת'};
+						default:
+							return {english: 'The network request timed out.', arabic: 'انتهت مهلة طلب الشبكة.', hebrew: 'הקריאה לשרת ארכה זמן רב מדי'};
+					}
+				case 'LocationText':
+					var _p5 = _p0._0;
+					return {
+						arabic: A2(_elm_lang$core$Basics_ops['++'], 'أين: ', _p5),
+						english: A2(_elm_lang$core$Basics_ops['++'], 'Where: ', _p5),
+						hebrew: A2(_elm_lang$core$Basics_ops['++'], 'איפה: ', _p5)
+					};
+				case 'MatchingResults':
+					return {arabic: 'نتائج البحث', english: 'Matching Results', hebrew: 'תוצאות מתאימות'};
+				case 'MoreDetailsText':
+					return {arabic: 'لمزيد من التفاصيل', english: 'For more details', hebrew: 'לפרטים נוספים'};
+				case 'PriceText':
+					return {arabic: 'السعر', english: 'Price', hebrew: 'מחיר'};
+				case 'PriceCurrencyText':
+					return {arabic: 'شيكل', english: 'NIS', hebrew: 'ש״ח'};
+				case 'ReceptionText':
+					return {arabic: 'استقبال: ', english: 'Reception: ', hebrew: 'קבלת קהל: '};
+				case 'ShowAll':
+					return {arabic: 'عرض الكل', english: 'Show all', hebrew: 'הצג הכל'};
+				default:
+					return {arabic: 'حتى', english: 'To', hebrew: 'עד'};
+			}
+		}();
+		var _p6 = lang;
+		switch (_p6.ctor) {
+			case 'Arabic':
+				return function (_) {
+					return _.arabic;
+				}(translationSet);
+			case 'English':
+				return function (_) {
+					return _.english;
+				}(translationSet);
+			default:
+				return function (_) {
+					return _.hebrew;
+				}(translationSet);
+		}
+	});
+var _gizra$municipality$Translate$TranslationSet = F3(
+	function (a, b, c) {
+		return {arabic: a, english: b, hebrew: c};
+	});
+var _gizra$municipality$Translate$ErrorTimeout = {ctor: 'ErrorTimeout'};
+var _gizra$municipality$Translate$ErrorNetworkError = {ctor: 'ErrorNetworkError'};
+var _gizra$municipality$Translate$ErrorBadStatus = function (a) {
+	return {ctor: 'ErrorBadStatus', _0: a};
+};
+var _gizra$municipality$Translate$ErrorBadPayload = function (a) {
+	return {ctor: 'ErrorBadPayload', _0: a};
+};
+var _gizra$municipality$Translate$ErrorBadUrl = {ctor: 'ErrorBadUrl'};
+var _gizra$municipality$Translate$UntilTranslation = {ctor: 'UntilTranslation'};
+var _gizra$municipality$Translate$ShowAll = {ctor: 'ShowAll'};
+var _gizra$municipality$Translate$ReceptionText = {ctor: 'ReceptionText'};
+var _gizra$municipality$Translate$PriceCurrencyText = {ctor: 'PriceCurrencyText'};
+var _gizra$municipality$Translate$PriceText = {ctor: 'PriceText'};
+var _gizra$municipality$Translate$MoreDetailsText = {ctor: 'MoreDetailsText'};
+var _gizra$municipality$Translate$MatchingResults = {ctor: 'MatchingResults'};
+var _gizra$municipality$Translate$LocationText = function (a) {
+	return {ctor: 'LocationText', _0: a};
+};
+var _gizra$municipality$Translate$HttpError = function (a) {
+	return {ctor: 'HttpError', _0: a};
+};
+var _gizra$municipality$Translate$FilterEventsPlaceholder = {ctor: 'FilterEventsPlaceholder'};
+var _gizra$municipality$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
+var _gizra$municipality$Translate$EventsNotFound = {ctor: 'EventsNotFound'};
+var _gizra$municipality$Translate$EventRecurringWeekly = {ctor: 'EventRecurringWeekly'};
+var _gizra$municipality$Translate$EditLinkText = {ctor: 'EditLinkText'};
+var _gizra$municipality$Translate$DateLabelTranslation = {ctor: 'DateLabelTranslation'};
+var _gizra$municipality$Translate$DayTranslation = function (a) {
+	return {ctor: 'DayTranslation', _0: a};
+};
+var _gizra$municipality$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
+var _gizra$municipality$Translate$EventsHeaderText = {ctor: 'EventsHeaderText'};
+var _gizra$municipality$Translate$ContactsHeaderText = {ctor: 'ContactsHeaderText'};
+var _gizra$municipality$Translate$AddNewEventText = {ctor: 'AddNewEventText'};
+var _gizra$municipality$Translate$AddNewContactText = {ctor: 'AddNewContactText'};
+
+var _gizra$municipality$Utils_WebData$getError = function (remoteData) {
+	var _p0 = remoteData;
+	if (_p0.ctor === 'Failure') {
+		return _elm_lang$core$Maybe$Just(_p0._0);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _gizra$municipality$Utils_WebData$sendWithHandler = F3(
+	function (decoder, tagger, builder) {
+		return A2(
+			_lukewestby$elm_http_builder$HttpBuilder$send,
+			tagger,
+			A2(
+				_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+				_elm_lang$http$Http$expectJson(decoder),
+				builder));
+	});
+var _gizra$municipality$Utils_WebData$whenSuccess = F3(
+	function (remoteData, $default, func) {
+		var _p1 = remoteData;
+		if (_p1.ctor === 'Success') {
+			return func(_p1._0);
+		} else {
+			return $default;
+		}
+	});
+var _gizra$municipality$Utils_WebData$errorString = F2(
+	function (language, error) {
+		var _p2 = error;
+		switch (_p2.ctor) {
+			case 'BadUrl':
+				return A2(
+					_gizra$municipality$Translate$translate,
+					language,
+					_gizra$municipality$Translate$HttpError(_gizra$municipality$Translate$ErrorBadUrl));
+			case 'BadPayload':
+				return A2(
+					_gizra$municipality$Translate$translate,
+					language,
+					_gizra$municipality$Translate$HttpError(
+						_gizra$municipality$Translate$ErrorBadPayload(_p2._0)));
+			case 'NetworkError':
+				return A2(
+					_gizra$municipality$Translate$translate,
+					language,
+					_gizra$municipality$Translate$HttpError(_gizra$municipality$Translate$ErrorNetworkError));
+			case 'Timeout':
+				return A2(
+					_gizra$municipality$Translate$translate,
+					language,
+					_gizra$municipality$Translate$HttpError(_gizra$municipality$Translate$ErrorTimeout));
+			default:
+				return A2(
+					_gizra$municipality$Translate$translate,
+					language,
+					_gizra$municipality$Translate$HttpError(
+						_gizra$municipality$Translate$ErrorBadStatus(_p2._0.status.message)));
+		}
+	});
+var _gizra$municipality$Utils_WebData$viewError = F2(
+	function (language, error) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					A2(_gizra$municipality$Utils_WebData$errorString, language, error)),
+				_1: {ctor: '[]'}
+			});
+	});
+
+var _gizra$municipality$Error_Utils$plainError = F3(
+	function (module_, location, error) {
+		return _elm_lang$core$Maybe$Just(
+			A3(
+				_gizra$municipality$Error_Model$Error,
+				module_,
+				location,
+				_gizra$municipality$Error_Model$Plain(error)));
+	});
+var _gizra$municipality$Error_Utils$httpError = F3(
+	function (module_, location, error) {
+		return _elm_lang$core$Maybe$Just(
+			A3(
+				_gizra$municipality$Error_Model$Error,
+				module_,
+				location,
+				_gizra$municipality$Error_Model$Http(error)));
+	});
+var _gizra$municipality$Error_Utils$noError = _elm_lang$core$Maybe$Nothing;
+var _gizra$municipality$Error_Utils$debugLog = function (error) {
+	var id = A2(
+		_elm_lang$core$Basics_ops['++'],
+		error.module_,
+		A2(_elm_lang$core$Basics_ops['++'], '.', error.location));
+	var message = function () {
+		var _p0 = error.error;
+		if (_p0.ctor === 'Http') {
+			return A2(_gizra$municipality$Utils_WebData$errorString, _gizra$municipality$App_Types$English, _p0._0);
+		} else {
+			return _p0._0;
+		}
+	}();
+	return A2(_elm_lang$core$Debug$log, id, message);
+};
+
+var _gizra$municipality$App_Utils$handleErrors = F2(
+	function (maybeError, model) {
+		var errors = A3(
+			_elm_community$maybe_extra$Maybe_Extra$unwrap,
+			model.errors,
+			function (error) {
+				var _p0 = _gizra$municipality$Error_Utils$debugLog(error);
+				return {ctor: '::', _0: error, _1: model.errors};
+			},
+			maybeError);
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{errors: errors});
+	});
 
 var _gizra$municipality$Utils_Json$decodeIntAsString = _elm_lang$core$Json_Decode$oneOf(
 	{
@@ -11594,6 +13157,8 @@ var _gizra$municipality$Contact_Decoder$decodeColor = A2(
 				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Secondary);
 			case 'info':
 				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Info);
+			case 'default':
+				return _elm_lang$core$Json_Decode$succeed(_gizra$municipality$Contact_Model$Default);
 			default:
 				return _elm_lang$core$Json_Decode$fail(
 					A2(_elm_lang$core$Basics_ops['++'], 'Could not recognise color: ', color));
@@ -11701,33 +13266,38 @@ var _gizra$municipality$Contact_Update$update = F2(
 		var _p0 = msg;
 		if (_p0.ctor === 'HandleContacts') {
 			if (_p0._0.ctor === 'Ok') {
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
+				return {
+					ctor: '_Tuple3',
+					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{contacts: _p0._0._0}),
-					{ctor: '[]'});
+					_1: _elm_lang$core$Platform_Cmd$none,
+					_2: _gizra$municipality$Error_Utils$noError
+				};
 			} else {
-				var _p1 = A2(_elm_lang$core$Debug$log, 'HandleContacts', _p0._0._0);
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
-					{ctor: '[]'});
+				return {
+					ctor: '_Tuple3',
+					_0: model,
+					_1: _elm_lang$core$Platform_Cmd$none,
+					_2: A3(_gizra$municipality$Error_Utils$plainError, 'Contact.Update', 'HandleContacts', _p0._0._0)
+				};
 			}
 		} else {
-			return A2(
-				_elm_lang$core$Platform_Cmd_ops['!'],
-				_elm_lang$core$Native_Utils.update(
+			return {
+				ctor: '_Tuple3',
+				_0: _elm_lang$core$Native_Utils.update(
 					model,
 					{filterString: _p0._0}),
-				{ctor: '[]'});
+				_1: _elm_lang$core$Platform_Cmd$none,
+				_2: _gizra$municipality$Error_Utils$noError
+			};
 		}
 	});
 var _gizra$municipality$Contact_Update$contacts = _elm_lang$core$Native_Platform.incomingPort('contacts', _elm_lang$core$Json_Decode$value);
 var _gizra$municipality$Contact_Update$subscriptions = _gizra$municipality$Contact_Update$contacts(
-	function (_p2) {
+	function (_p1) {
 		return _gizra$municipality$Contact_Model$HandleContacts(
-			A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Contact_Decoder$decodeContacts, _p2));
+			A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Contact_Decoder$decodeContacts, _p1));
 	});
 
 var _gizra$municipality$Event_Decoder$decodePrice = A2(_elm_lang$core$Json_Decode$map, _gizra$municipality$Event_Model$Price, _gizra$municipality$Utils_Json$decodeInt);
@@ -11787,25 +13357,28 @@ var _gizra$municipality$Event_Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
 		if (_p0._0.ctor === 'Ok') {
-			return A2(
-				_elm_lang$core$Platform_Cmd_ops['!'],
-				_elm_lang$core$Native_Utils.update(
+			return {
+				ctor: '_Tuple3',
+				_0: _elm_lang$core$Native_Utils.update(
 					model,
 					{event: _p0._0._0}),
-				{ctor: '[]'});
+				_1: _elm_lang$core$Platform_Cmd$none,
+				_2: _gizra$municipality$Error_Utils$noError
+			};
 		} else {
-			var _p1 = A2(_elm_lang$core$Debug$log, 'HandleEvent', _p0._0._0);
-			return A2(
-				_elm_lang$core$Platform_Cmd_ops['!'],
-				model,
-				{ctor: '[]'});
+			return {
+				ctor: '_Tuple3',
+				_0: model,
+				_1: _elm_lang$core$Platform_Cmd$none,
+				_2: A3(_gizra$municipality$Error_Utils$plainError, 'Event.Update', 'HandleEvent', _p0._0._0)
+			};
 		}
 	});
 var _gizra$municipality$Event_Update$event = _elm_lang$core$Native_Platform.incomingPort('event', _elm_lang$core$Json_Decode$value);
 var _gizra$municipality$Event_Update$subscriptions = _gizra$municipality$Event_Update$event(
-	function (_p2) {
+	function (_p1) {
 		return _gizra$municipality$Event_Model$HandleEvent(
-			A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Event_Decoder$decodeEvent, _p2));
+			A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Event_Decoder$decodeEvent, _p1));
 	});
 
 var _gizra$municipality$Events_Decoder$decodeEvents = _elm_lang$core$Json_Decode$oneOf(
@@ -11827,33 +13400,38 @@ var _gizra$municipality$Events_Update$update = F2(
 		var _p0 = msg;
 		if (_p0.ctor === 'HandleEvents') {
 			if (_p0._0.ctor === 'Ok') {
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
+				return {
+					ctor: '_Tuple3',
+					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{events: _p0._0._0}),
-					{ctor: '[]'});
+					_1: _elm_lang$core$Platform_Cmd$none,
+					_2: _gizra$municipality$Error_Utils$noError
+				};
 			} else {
-				var _p1 = A2(_elm_lang$core$Debug$log, 'HandleEvents', _p0._0._0);
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
-					{ctor: '[]'});
+				return {
+					ctor: '_Tuple3',
+					_0: model,
+					_1: _elm_lang$core$Platform_Cmd$none,
+					_2: A3(_gizra$municipality$Error_Utils$plainError, 'Events.Update', 'HandleEvents', _p0._0._0)
+				};
 			}
 		} else {
-			return A2(
-				_elm_lang$core$Platform_Cmd_ops['!'],
-				_elm_lang$core$Native_Utils.update(
+			return {
+				ctor: '_Tuple3',
+				_0: _elm_lang$core$Native_Utils.update(
 					model,
 					{filterString: _p0._0}),
-				{ctor: '[]'});
+				_1: _elm_lang$core$Platform_Cmd$none,
+				_2: _gizra$municipality$Error_Utils$noError
+			};
 		}
 	});
 var _gizra$municipality$Events_Update$events = _elm_lang$core$Native_Platform.incomingPort('events', _elm_lang$core$Json_Decode$value);
 var _gizra$municipality$Events_Update$subscriptions = _gizra$municipality$Events_Update$events(
-	function (_p2) {
+	function (_p1) {
 		return _gizra$municipality$Events_Model$HandleEvents(
-			A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Events_Decoder$decodeEvents, _p2));
+			A2(_elm_lang$core$Json_Decode$decodeValue, _gizra$municipality$Events_Decoder$decodeEvents, _p1));
 	});
 
 var _gizra$municipality$App_Update$subscriptions = function (model) {
@@ -11877,10 +13455,12 @@ var _gizra$municipality$App_Update$update = F2(
 				var _p2 = A2(_gizra$municipality$Contact_Update$update, _p1._0, model.pageContact);
 				var val = _p2._0;
 				var cmds = _p2._1;
+				var maybeError = _p2._2;
+				var modelUpdatedWithError = A2(_gizra$municipality$App_Utils$handleErrors, maybeError, model);
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
-						model,
+						modelUpdatedWithError,
 						{pageContact: val}),
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _gizra$municipality$App_Model$MsgPagesContact, cmds)
 				};
@@ -11888,10 +13468,12 @@ var _gizra$municipality$App_Update$update = F2(
 				var _p3 = A2(_gizra$municipality$Event_Update$update, _p1._0, model.pageEvent);
 				var val = _p3._0;
 				var cmds = _p3._1;
+				var maybeError = _p3._2;
+				var modelUpdatedWithError = A2(_gizra$municipality$App_Utils$handleErrors, maybeError, model);
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
-						model,
+						modelUpdatedWithError,
 						{pageEvent: val}),
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _gizra$municipality$App_Model$MsgPagesEvent, cmds)
 				};
@@ -11899,10 +13481,12 @@ var _gizra$municipality$App_Update$update = F2(
 				var _p4 = A2(_gizra$municipality$Events_Update$update, _p1._0, model.pageEvents);
 				var val = _p4._0;
 				var cmds = _p4._1;
+				var maybeError = _p4._2;
+				var modelUpdatedWithError = A2(_gizra$municipality$App_Utils$handleErrors, maybeError, model);
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
-						model,
+						modelUpdatedWithError,
 						{pageEvents: val}),
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _gizra$municipality$App_Model$MsgPagesEvents, cmds)
 				};
@@ -11955,449 +13539,50 @@ var _gizra$municipality$Contact_Utils$filterContacts = F2(
 				_Gizra$elm_dictlist$DictList$filter,
 				F2(
 					function (_p0, contact) {
-						return stringMatch(
-							_elm_lang$core$String$toLower(contact.name));
+						var topics = A2(
+							_elm_lang$core$Maybe$withDefault,
+							{ctor: '[]'},
+							contact.topics);
+						var maybeStrings = {
+							ctor: '::',
+							_0: _elm_lang$core$Maybe$Just(contact.name),
+							_1: {
+								ctor: '::',
+								_0: contact.jobTitle,
+								_1: {
+									ctor: '::',
+									_0: contact.department,
+									_1: {ctor: '[]'}
+								}
+							}
+						};
+						return A3(
+							_elm_lang$core$List$foldl,
+							F2(
+								function (maybeString, accum) {
+									return A3(
+										_elm_community$maybe_extra$Maybe_Extra$unwrap,
+										accum,
+										function (string) {
+											return accum ? accum : stringMatch(
+												_elm_lang$core$String$toLower(string));
+										},
+										maybeString);
+								}),
+							false,
+							maybeStrings) || A3(
+							_elm_lang$core$List$foldl,
+							F2(
+								function (topic, match) {
+									return stringMatch(
+										_elm_lang$core$String$toLower(topic.name));
+								}),
+							false,
+							topics);
 					}),
 				contacts);
 		}
 	});
-
-var _mgold$elm_date_format$Date_Local$french = {
-	date: {
-		months: {jan: 'Janvier', feb: 'Février', mar: 'Mars', apr: 'Avril', may: 'Mai', jun: 'Juin', jul: 'Juillet', aug: 'Août', sep: 'Septembre', oct: 'Octobre', nov: 'Novembre', dec: 'Décembre'},
-		monthsAbbrev: {jan: 'Jan', feb: 'Fév', mar: 'Mar', apr: 'Avr', may: 'Mai', jun: 'Jui', jul: 'Jul', aug: 'Aoû', sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Déc'},
-		wdays: {mon: 'Lundi', tue: 'Mardi', wed: 'Mercredi', thu: 'Jeudi', fri: 'Vendredi', sat: 'Samedi', sun: 'Dimanche'},
-		wdaysAbbrev: {mon: 'Lun', tue: 'Mar', wed: 'Mer', thu: 'Jeu', fri: 'Ven', sat: 'Sam', sun: 'Dim'},
-		defaultFormat: _elm_lang$core$Maybe$Nothing
-	},
-	time: {am: 'am', pm: 'pm', defaultFormat: _elm_lang$core$Maybe$Nothing},
-	timeZones: _elm_lang$core$Maybe$Nothing,
-	defaultFormat: _elm_lang$core$Maybe$Nothing
-};
-var _mgold$elm_date_format$Date_Local$international = {
-	date: {
-		months: {jan: 'January', feb: 'February', mar: 'March', apr: 'April', may: 'May', jun: 'June', jul: 'July', aug: 'August', sep: 'September', oct: 'October', nov: 'November', dec: 'December'},
-		monthsAbbrev: {jan: 'Jan', feb: 'Feb', mar: 'Mar', apr: 'Apr', may: 'May', jun: 'Jun', jul: 'Jul', aug: 'Aug', sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Dec'},
-		wdays: {mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday'},
-		wdaysAbbrev: {mon: 'Mon', tue: 'Tue', wed: 'Wed', thu: 'Thu', fri: 'Fri', sat: 'Sat', sun: 'Sun'},
-		defaultFormat: _elm_lang$core$Maybe$Nothing
-	},
-	time: {am: 'am', pm: 'pm', defaultFormat: _elm_lang$core$Maybe$Nothing},
-	timeZones: _elm_lang$core$Maybe$Nothing,
-	defaultFormat: _elm_lang$core$Maybe$Nothing
-};
-var _mgold$elm_date_format$Date_Local$Local = F4(
-	function (a, b, c, d) {
-		return {date: a, time: b, timeZones: c, defaultFormat: d};
-	});
-var _mgold$elm_date_format$Date_Local$Months = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return {jan: a, feb: b, mar: c, apr: d, may: e, jun: f, jul: g, aug: h, sep: i, oct: j, nov: k, dec: l};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
-var _mgold$elm_date_format$Date_Local$WeekDays = F7(
-	function (a, b, c, d, e, f, g) {
-		return {mon: a, tue: b, wed: c, thu: d, fri: e, sat: f, sun: g};
-	});
-
-var _mgold$elm_date_format$Date_Format$padWith = function (c) {
-	return function (_p0) {
-		return A3(
-			_elm_lang$core$String$padLeft,
-			2,
-			c,
-			_elm_lang$core$Basics$toString(_p0));
-	};
-};
-var _mgold$elm_date_format$Date_Format$zero2twelve = function (n) {
-	return _elm_lang$core$Native_Utils.eq(n, 0) ? 12 : n;
-};
-var _mgold$elm_date_format$Date_Format$mod12 = function (h) {
-	return A2(_elm_lang$core$Basics_ops['%'], h, 12);
-};
-var _mgold$elm_date_format$Date_Format$dayOfWeekToWord = F2(
-	function (loc, dow) {
-		var _p1 = dow;
-		switch (_p1.ctor) {
-			case 'Mon':
-				return loc.mon;
-			case 'Tue':
-				return loc.tue;
-			case 'Wed':
-				return loc.wed;
-			case 'Thu':
-				return loc.thu;
-			case 'Fri':
-				return loc.fri;
-			case 'Sat':
-				return loc.sat;
-			default:
-				return loc.sun;
-		}
-	});
-var _mgold$elm_date_format$Date_Format$monthToWord = F2(
-	function (loc, m) {
-		var _p2 = m;
-		switch (_p2.ctor) {
-			case 'Jan':
-				return loc.jan;
-			case 'Feb':
-				return loc.feb;
-			case 'Mar':
-				return loc.mar;
-			case 'Apr':
-				return loc.apr;
-			case 'May':
-				return loc.may;
-			case 'Jun':
-				return loc.jun;
-			case 'Jul':
-				return loc.jul;
-			case 'Aug':
-				return loc.aug;
-			case 'Sep':
-				return loc.sep;
-			case 'Oct':
-				return loc.oct;
-			case 'Nov':
-				return loc.nov;
-			default:
-				return loc.dec;
-		}
-	});
-var _mgold$elm_date_format$Date_Format$monthToInt = function (m) {
-	var _p3 = m;
-	switch (_p3.ctor) {
-		case 'Jan':
-			return 1;
-		case 'Feb':
-			return 2;
-		case 'Mar':
-			return 3;
-		case 'Apr':
-			return 4;
-		case 'May':
-			return 5;
-		case 'Jun':
-			return 6;
-		case 'Jul':
-			return 7;
-		case 'Aug':
-			return 8;
-		case 'Sep':
-			return 9;
-		case 'Oct':
-			return 10;
-		case 'Nov':
-			return 11;
-		default:
-			return 12;
-	}
-};
-var _mgold$elm_date_format$Date_Format$formatToken = F3(
-	function (loc, d, m) {
-		var symbol = function () {
-			var _p4 = m.submatches;
-			if (((_p4.ctor === '::') && (_p4._0.ctor === 'Just')) && (_p4._1.ctor === '[]')) {
-				return _p4._0._0;
-			} else {
-				return ' ';
-			}
-		}();
-		var _p5 = symbol;
-		switch (_p5) {
-			case '%':
-				return '%';
-			case 'Y':
-				return _elm_lang$core$Basics$toString(
-					_elm_lang$core$Date$year(d));
-			case 'y':
-				return A2(
-					_elm_lang$core$String$right,
-					2,
-					_elm_lang$core$Basics$toString(
-						_elm_lang$core$Date$year(d)));
-			case 'm':
-				return A3(
-					_elm_lang$core$String$padLeft,
-					2,
-					_elm_lang$core$Native_Utils.chr('0'),
-					_elm_lang$core$Basics$toString(
-						_mgold$elm_date_format$Date_Format$monthToInt(
-							_elm_lang$core$Date$month(d))));
-			case 'B':
-				return A2(
-					_mgold$elm_date_format$Date_Format$monthToWord,
-					loc.date.months,
-					_elm_lang$core$Date$month(d));
-			case 'b':
-				return A2(
-					_mgold$elm_date_format$Date_Format$monthToWord,
-					loc.date.monthsAbbrev,
-					_elm_lang$core$Date$month(d));
-			case 'd':
-				return A2(
-					_mgold$elm_date_format$Date_Format$padWith,
-					_elm_lang$core$Native_Utils.chr('0'),
-					_elm_lang$core$Date$day(d));
-			case 'e':
-				return A2(
-					_mgold$elm_date_format$Date_Format$padWith,
-					_elm_lang$core$Native_Utils.chr(' '),
-					_elm_lang$core$Date$day(d));
-			case 'a':
-				return A2(
-					_mgold$elm_date_format$Date_Format$dayOfWeekToWord,
-					loc.date.wdaysAbbrev,
-					_elm_lang$core$Date$dayOfWeek(d));
-			case 'A':
-				return A2(
-					_mgold$elm_date_format$Date_Format$dayOfWeekToWord,
-					loc.date.wdays,
-					_elm_lang$core$Date$dayOfWeek(d));
-			case 'H':
-				return A2(
-					_mgold$elm_date_format$Date_Format$padWith,
-					_elm_lang$core$Native_Utils.chr('0'),
-					_elm_lang$core$Date$hour(d));
-			case 'k':
-				return A2(
-					_mgold$elm_date_format$Date_Format$padWith,
-					_elm_lang$core$Native_Utils.chr(' '),
-					_elm_lang$core$Date$hour(d));
-			case 'I':
-				return A2(
-					_mgold$elm_date_format$Date_Format$padWith,
-					_elm_lang$core$Native_Utils.chr('0'),
-					_mgold$elm_date_format$Date_Format$zero2twelve(
-						_mgold$elm_date_format$Date_Format$mod12(
-							_elm_lang$core$Date$hour(d))));
-			case 'l':
-				return A2(
-					_mgold$elm_date_format$Date_Format$padWith,
-					_elm_lang$core$Native_Utils.chr(' '),
-					_mgold$elm_date_format$Date_Format$zero2twelve(
-						_mgold$elm_date_format$Date_Format$mod12(
-							_elm_lang$core$Date$hour(d))));
-			case 'p':
-				return (_elm_lang$core$Native_Utils.cmp(
-					_elm_lang$core$Date$hour(d),
-					12) < 0) ? _elm_lang$core$String$toUpper(loc.time.am) : _elm_lang$core$String$toUpper(loc.time.pm);
-			case 'P':
-				return (_elm_lang$core$Native_Utils.cmp(
-					_elm_lang$core$Date$hour(d),
-					12) < 0) ? loc.time.am : loc.time.pm;
-			case 'M':
-				return A2(
-					_mgold$elm_date_format$Date_Format$padWith,
-					_elm_lang$core$Native_Utils.chr('0'),
-					_elm_lang$core$Date$minute(d));
-			case 'S':
-				return A2(
-					_mgold$elm_date_format$Date_Format$padWith,
-					_elm_lang$core$Native_Utils.chr('0'),
-					_elm_lang$core$Date$second(d));
-			default:
-				return '';
-		}
-	});
-var _mgold$elm_date_format$Date_Format$re = _elm_lang$core$Regex$regex('%(%|Y|y|m|B|b|d|e|a|A|H|k|I|l|p|P|M|S)');
-var _mgold$elm_date_format$Date_Format$localFormat = F3(
-	function (loc, s, d) {
-		return A4(
-			_elm_lang$core$Regex$replace,
-			_elm_lang$core$Regex$All,
-			_mgold$elm_date_format$Date_Format$re,
-			A2(_mgold$elm_date_format$Date_Format$formatToken, loc, d),
-			s);
-	});
-var _mgold$elm_date_format$Date_Format$format = F2(
-	function (s, d) {
-		return A3(_mgold$elm_date_format$Date_Format$localFormat, _mgold$elm_date_format$Date_Local$international, s, d);
-	});
-var _mgold$elm_date_format$Date_Format$formatISO8601 = _mgold$elm_date_format$Date_Format$format('%Y-%m-%dT%H:%M:%SZ');
-
-var _gizra$municipality$Translate$TranslationSet = F3(
-	function (a, b, c) {
-		return {arabic: a, english: b, hebrew: c};
-	});
-var _gizra$municipality$Translate$ShowAll = {ctor: 'ShowAll'};
-var _gizra$municipality$Translate$ReceptionText = {ctor: 'ReceptionText'};
-var _gizra$municipality$Translate$PriceCurrencyText = {ctor: 'PriceCurrencyText'};
-var _gizra$municipality$Translate$PriceText = {ctor: 'PriceText'};
-var _gizra$municipality$Translate$MoreDetailsText = {ctor: 'MoreDetailsText'};
-var _gizra$municipality$Translate$MatchingResults = {ctor: 'MatchingResults'};
-var _gizra$municipality$Translate$LocationText = function (a) {
-	return {ctor: 'LocationText', _0: a};
-};
-var _gizra$municipality$Translate$FilterEventsPlaceholder = {ctor: 'FilterEventsPlaceholder'};
-var _gizra$municipality$Translate$FilterContactsPlaceholder = {ctor: 'FilterContactsPlaceholder'};
-var _gizra$municipality$Translate$EventsNotFound = {ctor: 'EventsNotFound'};
-var _gizra$municipality$Translate$EventRecurringWeekly = {ctor: 'EventRecurringWeekly'};
-var _gizra$municipality$Translate$EditLinkText = {ctor: 'EditLinkText'};
-var _gizra$municipality$Translate$DateLabelTranslation = {ctor: 'DateLabelTranslation'};
-var _gizra$municipality$Translate$DayAndDate = F2(
-	function (a, b) {
-		return {ctor: 'DayAndDate', _0: a, _1: b};
-	});
-var _gizra$municipality$Translate$DayTranslation = function (a) {
-	return {ctor: 'DayTranslation', _0: a};
-};
-var _gizra$municipality$Translate$translate = F2(
-	function (lang, trans) {
-		var translationSet = function () {
-			var _p0 = trans;
-			switch (_p0.ctor) {
-				case 'AddNewContactText':
-					return {arabic: 'إضافة جهة اتصال', english: 'Add new contact', hebrew: 'הוספת איש קשר'};
-				case 'AddNewEventText':
-					return {arabic: 'إضافة حدث جديد', english: 'Add new event', hebrew: 'הוספת אירוע חדש'};
-				case 'ContactsHeaderText':
-					return {arabic: 'اتصالات وموظفي الشبكة', english: 'Contacts and network employees', hebrew: 'אנשי קשר ועובדי רשת'};
-				case 'EventsHeaderText':
-					return {arabic: 'الفعاليات', english: 'Events', hebrew: 'אירועים'};
-				case 'ContactsNotFound':
-					return {arabic: 'لم يتم العثور على جهات اتصال', english: 'No contacts found', hebrew: 'לא נמצאו אנשי קשר מתאימים'};
-				case 'DayTranslation':
-					var _p1 = _p0._0;
-					switch (_p1.ctor) {
-						case 'Mon':
-							return {arabic: 'الإثنين', english: 'Mon', hebrew: 'שני'};
-						case 'Tue':
-							return {arabic: 'الثلاثاء', english: 'Tue', hebrew: 'שלישי'};
-						case 'Wed':
-							return {arabic: 'الأربعاء', english: 'Wed', hebrew: 'רביעי'};
-						case 'Thu':
-							return {arabic: 'الخميس', english: 'Thu', hebrew: 'חמישי'};
-						case 'Fri':
-							return {arabic: 'الجمعة', english: 'Fri', hebrew: 'שישי'};
-						case 'Sat':
-							return {arabic: 'السبت', english: 'Sat', hebrew: 'שבת'};
-						default:
-							return {arabic: 'الأحد', english: 'Sun', hebrew: 'ראשון'};
-					}
-				case 'DayAndDate':
-					var _p2 = _p0._0;
-					var timeFormater = _mgold$elm_date_format$Date_Format$format('%H:%M');
-					var compareFormater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y');
-					var formater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y %H:%M');
-					var dateFormated = formater(_p2);
-					var allDatesFormated = A2(
-						_elm_lang$core$Maybe$withDefault,
-						dateFormated,
-						A2(
-							_elm_lang$core$Maybe$map,
-							function (endDate) {
-								return _elm_lang$core$Native_Utils.eq(
-									compareFormater(_p2),
-									compareFormater(endDate)) ? A2(
-									_elm_lang$core$Basics_ops['++'],
-									dateFormated,
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										' - ',
-										timeFormater(endDate))) : A2(
-									_elm_lang$core$Basics_ops['++'],
-									dateFormated,
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										' - ',
-										formater(endDate)));
-							},
-							_p0._1));
-					var dayTranslated = A2(
-						_gizra$municipality$Translate$translate,
-						lang,
-						_gizra$municipality$Translate$DayTranslation(
-							_elm_lang$core$Date$dayOfWeek(_p2)));
-					return {
-						arabic: A2(
-							_elm_lang$core$Basics_ops['++'],
-							allDatesFormated,
-							A2(_elm_lang$core$Basics_ops['++'], ', ', dayTranslated)),
-						english: A2(
-							_elm_lang$core$Basics_ops['++'],
-							dayTranslated,
-							A2(_elm_lang$core$Basics_ops['++'], ', ', allDatesFormated)),
-						hebrew: A2(
-							_elm_lang$core$Basics_ops['++'],
-							allDatesFormated,
-							A2(_elm_lang$core$Basics_ops['++'], ', ', dayTranslated))
-					};
-				case 'DateLabelTranslation':
-					return {arabic: 'متى', english: 'When', hebrew: 'מתי'};
-				case 'EditLinkText':
-					return {arabic: 'تحرير', english: 'Edit', hebrew: 'עריכה'};
-				case 'EventRecurringWeekly':
-					return {arabic: 'حدث اسبوعي', english: 'Weekly event', hebrew: 'אירוע שבועי'};
-				case 'EventsNotFound':
-					return {arabic: 'لم يتم العثور على أية أحداث', english: 'No events found', hebrew: 'לא נמצאו אירועים מתאימים'};
-				case 'FilterContactsPlaceholder':
-					return {arabic: 'ابحث عن اسم، موضوع أو فئة', english: 'Filter contacts', hebrew: 'חפשו שם, נושא או מחלקה'};
-				case 'FilterEventsPlaceholder':
-					return {arabic: 'ابحث عن الأحداث في ذوقك', english: 'Look for events to your liking', hebrew: 'חפשו אירועים לטעמכם'};
-				case 'LocationText':
-					var _p3 = _p0._0;
-					return {
-						arabic: A2(_elm_lang$core$Basics_ops['++'], 'أين: ', _p3),
-						english: A2(_elm_lang$core$Basics_ops['++'], 'Where: ', _p3),
-						hebrew: A2(_elm_lang$core$Basics_ops['++'], 'איפה: ', _p3)
-					};
-				case 'MatchingResults':
-					return {arabic: 'نتائج البحث', english: 'Matching Results', hebrew: 'תוצאות מתאימות'};
-				case 'MoreDetailsText':
-					return {arabic: 'لمزيد من التفاصيل', english: 'For more details', hebrew: 'לפרטים נוספים'};
-				case 'PriceText':
-					return {arabic: 'السعر', english: 'Price', hebrew: 'מחיר'};
-				case 'PriceCurrencyText':
-					return {arabic: 'شيكل', english: 'NIS', hebrew: 'ש״ח'};
-				case 'ReceptionText':
-					return {arabic: 'استقبال: ', english: 'Reception: ', hebrew: 'קבלת קהל: '};
-				default:
-					return {arabic: 'عرض الكل', english: 'Show all', hebrew: 'הצג הכל'};
-			}
-		}();
-		var _p4 = lang;
-		switch (_p4.ctor) {
-			case 'Arabic':
-				return function (_) {
-					return _.arabic;
-				}(translationSet);
-			case 'English':
-				return function (_) {
-					return _.english;
-				}(translationSet);
-			default:
-				return function (_) {
-					return _.hebrew;
-				}(translationSet);
-		}
-	});
-var _gizra$municipality$Translate$ContactsNotFound = {ctor: 'ContactsNotFound'};
-var _gizra$municipality$Translate$EventsHeaderText = {ctor: 'EventsHeaderText'};
-var _gizra$municipality$Translate$ContactsHeaderText = {ctor: 'ContactsHeaderText'};
-var _gizra$municipality$Translate$AddNewEventText = {ctor: 'AddNewEventText'};
-var _gizra$municipality$Translate$AddNewContactText = {ctor: 'AddNewContactText'};
 
 var _gizra$municipality$Utils_BootstrapGrid$renderColumn = F2(
 	function (columnClass, column) {
@@ -12464,42 +13649,20 @@ var _gizra$municipality$Utils_BootstrapGrid$renderBootstrapGrid = F2(
 				listOfRows));
 	});
 
-var _gizra$municipality$Utils_Html$formatDateAndDayWithLabel = F3(
-	function (language, date, mEndDate) {
+var _gizra$municipality$Utils_Html$eventDateElement = F4(
+	function (language, date, mEndDate, recurring) {
 		var timeFormater = _mgold$elm_date_format$Date_Format$format('%H:%M');
 		var compareFormater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y');
 		var formater = _mgold$elm_date_format$Date_Format$format('%d/%m/%Y, %H:%M');
 		var dateFormated = formater(date);
-		var allDatesFormated = A2(
-			_elm_lang$core$Maybe$withDefault,
-			dateFormated,
-			A2(
-				_elm_lang$core$Maybe$map,
-				function (endDate) {
-					return _elm_lang$core$Native_Utils.eq(
-						compareFormater(date),
-						compareFormater(endDate)) ? A2(
-						_elm_lang$core$Basics_ops['++'],
-						dateFormated,
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							' - ',
-							timeFormater(endDate))) : A2(
-						_elm_lang$core$Basics_ops['++'],
-						dateFormated,
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							' - ',
-							formater(endDate)));
-				},
-				mEndDate));
-		var dayTranslated = A2(
+		var beginDayTranslated = A2(
 			_gizra$municipality$Translate$translate,
 			language,
 			_gizra$municipality$Translate$DayTranslation(
 				_elm_lang$core$Date$dayOfWeek(date)));
+		var untilLabelTranslated = A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$UntilTranslation);
 		var labelTranslated = A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$DateLabelTranslation);
-		return A2(
+		var beginDateFormmated = recurring ? A2(
 			_elm_lang$core$Basics_ops['++'],
 			labelTranslated,
 			A2(
@@ -12507,8 +13670,141 @@ var _gizra$municipality$Utils_Html$formatDateAndDayWithLabel = F3(
 				': ',
 				A2(
 					_elm_lang$core$Basics_ops['++'],
-					dayTranslated,
-					A2(_elm_lang$core$Basics_ops['++'], ', ', allDatesFormated))));
+					beginDayTranslated,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						', ',
+						timeFormater(date))))) : A2(
+			_elm_lang$core$Basics_ops['++'],
+			labelTranslated,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				': ',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					beginDayTranslated,
+					A2(_elm_lang$core$Basics_ops['++'], ', ', dateFormated))));
+		var datesElement = A2(
+			_elm_lang$core$Maybe$withDefault,
+			A2(
+				_elm_lang$html$Html$span,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('begin-date'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(beginDateFormmated),
+					_1: {ctor: '[]'}
+				}),
+			A2(
+				_elm_lang$core$Maybe$map,
+				function (endDate) {
+					var endDayTranslated = A2(
+						_gizra$municipality$Translate$translate,
+						language,
+						_gizra$municipality$Translate$DayTranslation(
+							_elm_lang$core$Date$dayOfWeek(endDate)));
+					var endDateFormmated = recurring ? A2(
+						_elm_lang$core$Basics_ops['++'],
+						untilLabelTranslated,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							': ',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								endDayTranslated,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									', ',
+									timeFormater(endDate))))) : A2(
+						_elm_lang$core$Basics_ops['++'],
+						untilLabelTranslated,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							': ',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								endDayTranslated,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									', ',
+									formater(endDate)))));
+					return _elm_lang$core$Native_Utils.eq(
+						compareFormater(date),
+						compareFormater(endDate)) ? A2(
+						_elm_lang$html$Html$span,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('begin-date'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(_elm_lang$core$Basics_ops['++'], beginDateFormmated, ' - ')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$span,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('end-date'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(
+											timeFormater(endDate)),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}) : A2(
+						_elm_lang$html$Html$span,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('begin-date'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(beginDateFormmated),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$span,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('different-end-date ml-lg'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(endDateFormmated),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						});
+				},
+				mEndDate));
+		return datesElement;
 	});
 var _gizra$municipality$Utils_Html$formatReceptionDays = F3(
 	function (language, days, multipleDays) {
@@ -13080,7 +14376,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																									_0: _elm_lang$html$Html_Attributes$class(
 																										A2(
 																											_elm_lang$core$Basics_ops['++'],
-																											'btn mr-xs btn-borders btn-primary btn-sm btn-',
+																											'btn mr-xs btn-borders btn-sm btn-',
 																											_gizra$municipality$Utils_Html$colorToString(topic.color))),
 																									_1: {ctor: '[]'}
 																								}
@@ -13695,6 +14991,67 @@ var _gizra$municipality$Contact_View$view = F5(
 			});
 	});
 
+var _gizra$municipality$Error_View$viewError = F2(
+	function (language, error) {
+		var prefix = _elm_lang$html$Html$text(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				error.module_,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'.',
+					A2(_elm_lang$core$Basics_ops['++'], error.location, ': '))));
+		var _p0 = error.error;
+		if (_p0.ctor === 'Http') {
+			return A2(
+				_elm_lang$html$Html$li,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: prefix,
+					_1: {
+						ctor: '::',
+						_0: A2(_gizra$municipality$Utils_WebData$viewError, language, _p0._0),
+						_1: {ctor: '[]'}
+					}
+				});
+		} else {
+			return A2(
+				_elm_lang$html$Html$li,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: prefix,
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(_p0._0),
+						_1: {ctor: '[]'}
+					}
+				});
+		}
+	});
+var _gizra$municipality$Error_View$view = F2(
+	function (language, errors) {
+		return _elm_lang$core$List$isEmpty(errors) ? _gizra$municipality$Utils_Html$emptyNode : A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('alert alert-danger fade in alert-dismissable debug-errors'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$ul,
+					{ctor: '[]'},
+					A2(
+						_elm_lang$core$List$map,
+						_gizra$municipality$Error_View$viewError(language),
+						errors)),
+				_1: {ctor: '[]'}
+			});
+	});
+
 var _gizra$municipality$Event_View$view = F3(
 	function (baseUrl, language, event) {
 		return A2(
@@ -13816,7 +15173,7 @@ var _gizra$municipality$Event_View$view = F3(
 													{
 														ctor: '::',
 														_0: A2(
-															_elm_lang$html$Html$span,
+															_elm_lang$html$Html$div,
 															{ctor: '[]'},
 															{
 																ctor: '::',
@@ -13830,8 +15187,7 @@ var _gizra$municipality$Event_View$view = F3(
 																	{ctor: '[]'}),
 																_1: {
 																	ctor: '::',
-																	_0: _elm_lang$html$Html$text(
-																		A3(_gizra$municipality$Utils_Html$formatDateAndDayWithLabel, language, event.date, event.endDate)),
+																	_0: A4(_gizra$municipality$Utils_Html$eventDateElement, language, event.date, event.endDate, event.recurringWeekly),
 																	_1: {ctor: '[]'}
 																}
 															}),
@@ -14117,8 +15473,39 @@ var _gizra$municipality$Events_Utils$filterEvents = F2(
 				_Gizra$elm_dictlist$DictList$filter,
 				F2(
 					function (_p0, event) {
-						return stringMatch(
-							_elm_lang$core$String$toLower(event.name));
+						var maybeStrings = {
+							ctor: '::',
+							_0: _elm_lang$core$Maybe$Just(event.name),
+							_1: {
+								ctor: '::',
+								_0: event.description,
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$core$Maybe$map,
+										function (location) {
+											return location.title;
+										},
+										event.location),
+									_1: {ctor: '[]'}
+								}
+							}
+						};
+						return A3(
+							_elm_lang$core$List$foldl,
+							F2(
+								function (maybeString, accum) {
+									return A3(
+										_elm_community$maybe_extra$Maybe_Extra$unwrap,
+										accum,
+										function (string) {
+											return accum ? accum : stringMatch(
+												_elm_lang$core$String$toLower(string));
+										},
+										maybeString);
+								}),
+							false,
+							maybeStrings);
 					}),
 				events);
 		}
@@ -14314,58 +15701,47 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 												{
 													ctor: '::',
 													_0: A2(
-														_elm_lang$html$Html$span,
-														{ctor: '[]'},
+														_elm_lang$html$Html$i,
 														{
 															ctor: '::',
-															_0: A2(
-																_elm_lang$html$Html$i,
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('fa fa-calendar'),
-																	_1: {ctor: '[]'}
-																},
-																{ctor: '[]'}),
-															_1: {
-																ctor: '::',
-																_0: _elm_lang$html$Html$text(
-																	A2(
-																		_gizra$municipality$Translate$translate,
-																		language,
-																		A2(_gizra$municipality$Translate$DayAndDate, _p5.date, _p5.endDate))),
-																_1: {ctor: '[]'}
-															}
-														}),
+															_0: _elm_lang$html$Html_Attributes$class('fa fa-calendar'),
+															_1: {ctor: '[]'}
+														},
+														{ctor: '[]'}),
 													_1: {
 														ctor: '::',
-														_0: A2(
-															_gizra$municipality$Utils_Html$showIf,
-															_p5.recurringWeekly,
-															A2(
-																_elm_lang$html$Html$div,
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('recurring-weekly'),
-																	_1: {ctor: '[]'}
-																},
-																{
-																	ctor: '::',
-																	_0: A2(
-																		_elm_lang$html$Html$i,
-																		{
-																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$class('fa fa-refresh'),
-																			_1: {ctor: '[]'}
-																		},
-																		{ctor: '[]'}),
-																	_1: {
+														_0: A4(_gizra$municipality$Utils_Html$eventDateElement, language, _p5.date, _p5.endDate, _p5.recurringWeekly),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_gizra$municipality$Utils_Html$showIf,
+																_p5.recurringWeekly,
+																A2(
+																	_elm_lang$html$Html$div,
+																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html$text(
-																			A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EventRecurringWeekly)),
+																		_0: _elm_lang$html$Html_Attributes$class('recurring-weekly'),
 																		_1: {ctor: '[]'}
-																	}
-																})),
-														_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$i,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$class('fa fa-refresh'),
+																				_1: {ctor: '[]'}
+																			},
+																			{ctor: '[]'}),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text(
+																				A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EventRecurringWeekly)),
+																			_1: {ctor: '[]'}
+																		}
+																	})),
+															_1: {ctor: '[]'}
+														}
 													}
 												}),
 											_1: {
@@ -14848,6 +16224,7 @@ var _gizra$municipality$Events_View$view = F5(
 	});
 
 var _gizra$municipality$App_View$view = function (model) {
+	var errorElement = A2(_gizra$municipality$Error_View$view, model.language, model.errors);
 	var _p0 = model.page;
 	switch (_p0.ctor) {
 		case 'Contact':
@@ -14856,11 +16233,15 @@ var _gizra$municipality$App_View$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$map,
-						_gizra$municipality$App_Model$MsgPagesContact,
-						A5(_gizra$municipality$Contact_View$view, model.baseUrl, model.language, model.showAsBlock, model.editorPermissions, model.pageContact)),
-					_1: {ctor: '[]'}
+					_0: errorElement,
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$map,
+							_gizra$municipality$App_Model$MsgPagesContact,
+							A5(_gizra$municipality$Contact_View$view, model.baseUrl, model.language, model.showAsBlock, model.editorPermissions, model.pageContact)),
+						_1: {ctor: '[]'}
+					}
 				});
 		case 'Event':
 			return A2(
@@ -14868,11 +16249,15 @@ var _gizra$municipality$App_View$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$map,
-						_gizra$municipality$App_Model$MsgPagesEvent,
-						A3(_gizra$municipality$Event_View$view, model.baseUrl, model.language, model.pageEvent.event)),
-					_1: {ctor: '[]'}
+					_0: errorElement,
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$map,
+							_gizra$municipality$App_Model$MsgPagesEvent,
+							A3(_gizra$municipality$Event_View$view, model.baseUrl, model.language, model.pageEvent.event)),
+						_1: {ctor: '[]'}
+					}
 				});
 		case 'Events':
 			return A2(
@@ -14880,11 +16265,15 @@ var _gizra$municipality$App_View$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$map,
-						_gizra$municipality$App_Model$MsgPagesEvents,
-						A5(_gizra$municipality$Events_View$view, model.baseUrl, model.language, model.showAsBlock, model.editorPermissions, model.pageEvents)),
-					_1: {ctor: '[]'}
+					_0: errorElement,
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$map,
+							_gizra$municipality$App_Model$MsgPagesEvents,
+							A5(_gizra$municipality$Events_View$view, model.baseUrl, model.language, model.showAsBlock, model.editorPermissions, model.pageEvents)),
+						_1: {ctor: '[]'}
+					}
 				});
 		default:
 			return A2(

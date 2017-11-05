@@ -23,20 +23,26 @@ filterEventsTest =
         [ test "should return all events if filter string is empty" <|
             \() ->
                 Expect.equal (filterEvents events "") events
-        , test "should return no matching events if filter string does not match any events' names" <|
+        , test "should return no matching events if filter string does not match any events' names/description/location" <|
             \() ->
                 Expect.equal (filterEvents events "foo") DictList.empty
-        , test "should return events that has name matching the filter" <|
+        , test "should return events that has description matching the filter" <|
             \() ->
-                Expect.equal (filterEvents events "o")
+                Expect.equal (filterEvents events "description")
                     (DictList.fromList
-                        [ event1
-                        , event2
+                        [ event2
+                        , event3
                         ]
                     )
-        , test "should return events that has name matching the filter" <|
+        , test "should return events that has names matching the filter" <|
             \() ->
                 Expect.equal (filterEvents events "evening")
+                    (DictList.fromList
+                        [ event3 ]
+                    )
+        , test "should return events that has location matching the filter" <|
+            \() ->
+                Expect.equal (filterEvents events "location 2")
                     (DictList.fromList
                         [ event3 ]
                     )
@@ -84,7 +90,7 @@ viewEventTest =
                 viewEvent baseUrl English event1 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "event-date" ]
-                    |> Query.children [ tag "span" ]
+                    |> Query.children [ tag "div" ]
                     |> Query.first
                     |> Query.has [ text "Thu, 01/01/1970" ]
         , test "Event with the same Date and different Time" <|
@@ -92,22 +98,34 @@ viewEventTest =
                 viewEvent baseUrl English event2 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "event-date" ]
-                    |> Query.children [ tag "span" ]
+                    |> Query.children [ tag "div" ]
                     |> Query.first
                     |> Expect.all
                         [ Query.has [ text "Sat, 20/10/1973" ]
-                        , Query.hasNot [ text "- 20/10/1973" ]
+                        , Query.hasNot [ text "To: 20/10/1973" ]
                         ]
         , test "Event with the different Date and different Time" <|
             \() ->
                 viewEvent baseUrl English event3 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "event-date" ]
-                    |> Query.children [ tag "span" ]
+                    |> Query.children [ tag "div" ]
                     |> Query.first
                     |> Expect.all
-                        [ Query.has [ text "Thu, 01/01/1970" ]
-                        , Query.has [ text "- 20/10/1973" ]
+                        [ Query.has [ text "When: Thu, 01/01/1970" ]
+                        , Query.has [ text "To: Sat, 20/10/1973" ]
+                        ]
+        , test "Event with the different Date and different Time (recurring)" <|
+            \() ->
+                viewEvent baseUrl English event4 False
+                    |> Query.fromHtml
+                    |> Query.find [ Selector.class "event-date" ]
+                    |> Query.children [ tag "div" ]
+                    |> Query.first
+                    |> Expect.all
+                        [ Query.has [ text "When: Thu" ]
+                        , Query.has [ text "To: Sat" ]
+                        , Query.hasNot [ text "01/01/1970" ]
                         ]
         , test "Event without Weekly Recurring" <|
             \() ->
@@ -144,7 +162,7 @@ viewEventTest =
                     |> Query.has [ attribute "innerHTML" "Afternoon event description" ]
         , test "Event with Weekly Recurring" <|
             \() ->
-                viewEvent baseUrl English event3 False
+                viewEvent baseUrl English event4 False
                     |> Query.fromHtml
                     |> Query.find [ Selector.class "recurring-weekly" ]
                     |> Query.has [ text "Weekly event" ]
@@ -233,6 +251,26 @@ event2 =
 
 event3 : ( EventId, Event )
 event3 =
+    ( "300"
+    , { name = "Evening event"
+      , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"
+      , description = Just "Evening event description"
+      , date = Date.fromTime 0
+      , endDate = Just (Date.fromTime 120000000000)
+      , recurringWeekly = False
+      , ticketPrice = Just <| Price 180
+      , location =
+            Just
+                { title = "Test location 2"
+                , url = "http://maps.google.com/test2"
+                }
+      , showEditLink = True
+      }
+    )
+
+
+event4 : ( EventId, Event )
+event4 =
     ( "300"
     , { name = "Evening event"
       , imageUrl = Just "https://placeholdit.imgix.net/~text?w=350&h=150"

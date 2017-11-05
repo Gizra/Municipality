@@ -159,10 +159,11 @@ function hedley_event_default_page_manager_pages() {
     'style_settings' => array(
       'default' => NULL,
       'middle' => NULL,
+      'main_content' => NULL,
     ),
   );
   $display->cache = array();
-  $display->title = '';
+  $display->title = 'Events';
   $display->uuid = 'a6678f2a-211c-406d-80d4-cd5753f9767d';
   $display->storage_type = 'page_manager';
   $display->storage_id = 'page_events__panel';

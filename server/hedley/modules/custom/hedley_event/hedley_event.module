@@ -47,6 +47,9 @@ function hedley_event_get_events_by_group($group, $language_code, $show_as_block
   // Sort events by date ASC.
   usort($events, 'hedley_event_sort_by_date');
 
+  // Put the recurring events first.
+  usort($events, 'hedley_event_sort_recurring_first');
+
   return $events;
 }
 
@@ -132,4 +135,14 @@ function hedley_event_sort_by_date($a, $b) {
     return 0;
   }
   return ($a['date'] < $b['date']) ? -1 : 1;
+}
+
+/**
+ * Helper function; Sort events by recurring first.
+ */
+function hedley_event_sort_recurring_first($a, $b) {
+  if ($a['recurring_weekly'] == $b['recurring_weekly']) {
+    return 0;
+  }
+  return ($a['recurring_weekly'] > $b['recurring_weekly']) ? -1 : 1;
 }

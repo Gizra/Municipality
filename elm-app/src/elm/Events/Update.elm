@@ -4,26 +4,34 @@ port module Events.Update
         , update
         )
 
+import Error.Model exposing (Error)
+import Error.Utils exposing (noError, plainError)
 import Events.Decoder exposing (decodeEvents)
 import Events.Model exposing (Model, Msg(..))
+import Http
 import Json.Decode exposing (Value, decodeValue)
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> ( Model, Cmd Msg, Maybe Error )
 update msg model =
     case msg of
         HandleEvents (Ok values) ->
-            { model | events = values } ! []
+            ( { model | events = values }
+            , Cmd.none
+            , noError
+            )
 
-        HandleEvents (Err err) ->
-            let
-                _ =
-                    Debug.log "HandleEvents" err
-            in
-            model ! []
+        HandleEvents (Err error) ->
+            ( model
+            , Cmd.none
+            , plainError "Events.Update" "HandleEvents" error
+            )
 
         SetFilter filterString ->
-            { model | filterString = filterString } ! []
+            ( { model | filterString = filterString }
+            , Cmd.none
+            , noError
+            )
 
 
 subscriptions : Sub Msg

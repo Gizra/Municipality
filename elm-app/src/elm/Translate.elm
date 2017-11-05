@@ -13,6 +13,14 @@ type alias TranslationSet =
     }
 
 
+type StringIdHttpError
+    = ErrorBadUrl
+    | ErrorBadPayload String
+    | ErrorBadStatus String
+    | ErrorNetworkError
+    | ErrorTimeout
+
+
 type TranslationId
     = AddNewContactText
     | AddNewEventText
@@ -20,13 +28,13 @@ type TranslationId
     | EventsHeaderText
     | ContactsNotFound
     | DayTranslation Day
-    | DayAndDate Date (Maybe Date)
     | DateLabelTranslation
     | EditLinkText
     | EventRecurringWeekly
     | EventsNotFound
     | FilterContactsPlaceholder
     | FilterEventsPlaceholder
+    | HttpError StringIdHttpError
     | LocationText String
     | MatchingResults
     | MoreDetailsText
@@ -34,6 +42,7 @@ type TranslationId
     | PriceCurrencyText
     | ReceptionText
     | ShowAll
+    | UntilTranslation
 
 
 translate : Language -> TranslationId -> String
@@ -115,39 +124,6 @@ translate lang trans =
                             , hebrew = "ראשון"
                             }
 
-                DayAndDate date mEndDate ->
-                    let
-                        dayTranslated =
-                            translate lang <| DayTranslation (dayOfWeek date)
-
-                        formater =
-                            format "%d/%m/%Y %H:%M"
-
-                        compareFormater =
-                            format "%d/%m/%Y"
-
-                        dateFormated =
-                            formater date
-
-                        timeFormater =
-                            format "%H:%M"
-
-                        allDatesFormated =
-                            Maybe.map
-                                (\endDate ->
-                                    if compareFormater date == compareFormater endDate then
-                                        dateFormated ++ " - " ++ timeFormater endDate
-                                    else
-                                        dateFormated ++ " - " ++ formater endDate
-                                )
-                                mEndDate
-                                |> Maybe.withDefault dateFormated
-                    in
-                    { arabic = allDatesFormated ++ ", " ++ dayTranslated
-                    , english = dayTranslated ++ ", " ++ allDatesFormated
-                    , hebrew = allDatesFormated ++ ", " ++ dayTranslated
-                    }
-
                 DateLabelTranslation ->
                     { arabic = "متى"
                     , english = "When"
@@ -183,6 +159,23 @@ translate lang trans =
                     , english = "Look for events to your liking"
                     , hebrew = "חפשו אירועים לטעמכם"
                     }
+
+                HttpError stringId ->
+                    case stringId of
+                        ErrorBadUrl ->
+                            { english = "URL is not valid.", arabic = "رابط غير صالح.", hebrew = "כתובת שגוייה" }
+
+                        ErrorBadPayload message ->
+                            { english = "The server responded with data of an unexpected type: " ++ message, arabic = "استجاب الخادم مع بيانات من نوع غير متوقع: " ++ message, hebrew = "השרת שלח מידע בלתי צפוי: " ++ message }
+
+                        ErrorBadStatus err ->
+                            { english = "The server indicated the following error:\n\n" ++ err, arabic = "أشار الخادم إلى الخطأ التالي:\n\n", hebrew = "השרת שלך הודעת שגיאה:\n\n" ++ err }
+
+                        ErrorNetworkError ->
+                            { english = "There was a network error.", arabic = "حدث خطأ في الشبكة.", hebrew = "בעיית רשת" }
+
+                        ErrorTimeout ->
+                            { english = "The network request timed out.", arabic = "انتهت مهلة طلب الشبكة.", hebrew = "הקריאה לשרת ארכה זמן רב מדי" }
 
                 LocationText locationTitle ->
                     { arabic = "أين: " ++ locationTitle
@@ -224,6 +217,12 @@ translate lang trans =
                     { arabic = "عرض الكل"
                     , english = "Show all"
                     , hebrew = "הצג הכל"
+                    }
+
+                UntilTranslation ->
+                    { arabic = "حتى"
+                    , english = "To"
+                    , hebrew = "עד"
                     }
     in
     case lang of

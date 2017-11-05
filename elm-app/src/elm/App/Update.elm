@@ -7,6 +7,7 @@ port module App.Update
 
 import App.Model exposing (..)
 import App.Types exposing (Language(..), Page(..))
+import App.Utils exposing (handleErrors)
 import Contact.Update
 import Event.Update
 import Events.Update
@@ -61,28 +62,37 @@ update msg model =
     case msg of
         MsgPagesContact subMsg ->
             let
-                ( val, cmds ) =
+                ( val, cmds, maybeError ) =
                     Contact.Update.update subMsg model.pageContact
+
+                modelUpdatedWithError =
+                    handleErrors maybeError model
             in
-            ( { model | pageContact = val }
+            ( { modelUpdatedWithError | pageContact = val }
             , Cmd.map MsgPagesContact cmds
             )
 
         MsgPagesEvent subMsg ->
             let
-                ( val, cmds ) =
+                ( val, cmds, maybeError ) =
                     Event.Update.update subMsg model.pageEvent
+
+                modelUpdatedWithError =
+                    handleErrors maybeError model
             in
-            ( { model | pageEvent = val }
+            ( { modelUpdatedWithError | pageEvent = val }
             , Cmd.map MsgPagesEvent cmds
             )
 
         MsgPagesEvents subMsg ->
             let
-                ( val, cmds ) =
+                ( val, cmds, maybeError ) =
                     Events.Update.update subMsg model.pageEvents
+
+                modelUpdatedWithError =
+                    handleErrors maybeError model
             in
-            ( { model | pageEvents = val }
+            ( { modelUpdatedWithError | pageEvents = val }
             , Cmd.map MsgPagesEvents cmds
             )
 

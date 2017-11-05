@@ -9,6 +9,7 @@ module App.Model
 
 import App.Types exposing (Language(..), Page(..))
 import Contact.Model exposing (Model, Msg)
+import Error.Model exposing (Error)
 import Event.Model exposing (Model, Msg)
 import Events.Model
 
@@ -31,6 +32,7 @@ type alias Flags =
 type alias Model =
     { baseUrl : BaseUrl
     , editorPermissions : Bool
+    , errors : List Error
     , language : Language
     , page : Page
     , pageContact : Contact.Model.Model
@@ -53,6 +55,7 @@ emptyModel =
         , query = ""
         }
     , editorPermissions = False
+    , errors = []
     , language = Hebrew
     , page = NotFound
     , pageContact = Contact.Model.emptyModel
