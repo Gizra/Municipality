@@ -180,7 +180,7 @@ viewEvent baseUrl language ( eventId, event ) showAsBlock =
                         event.description
             , showIf (not showAsBlock) <| sectionDivider
             , div
-                [ class "event-date" ]
+                [ class "event-date mb-xs" ]
                 [ i
                     [ class "fa fa-calendar" ]
                     []

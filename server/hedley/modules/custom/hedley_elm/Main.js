@@ -15175,14 +15175,18 @@ var _gizra$municipality$Event_View$view = F3(
 													_elm_lang$html$Html$div,
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('col-md-4 event-date'),
+														_0: _elm_lang$html$Html_Attributes$class('col-md-4'),
 														_1: {ctor: '[]'}
 													},
 													{
 														ctor: '::',
 														_0: A2(
 															_elm_lang$html$Html$div,
-															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class('event-date mb-xs'),
+																_1: {ctor: '[]'}
+															},
 															{
 																ctor: '::',
 																_0: A2(
@@ -15703,7 +15707,7 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 												_elm_lang$html$Html$div,
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('event-date'),
+													_0: _elm_lang$html$Html_Attributes$class('event-date mb-xs'),
 													_1: {ctor: '[]'}
 												},
 												{

@@ -125,6 +125,10 @@
   flex-direction: row;
 }
 
+.different-end-date {
+  align-self: flex-start;
+}
+
 .event-date .flex-rows span:nth-child(2) {
   margin: 0 4px;
 }
@@ -132,4 +136,13 @@
 .event-date .flex-cols {
   display: flex;
   flex-direction: column;
+}
+
+.recurring-weekly {
+  display: flex;
+}
+
+.recurring-weekly .fa,
+.event-date .fa {
+  line-height: 22px;
 }
