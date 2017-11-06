@@ -185,15 +185,15 @@ viewEvent baseUrl language ( eventId, event ) showAsBlock =
                     [ class "fa fa-calendar" ]
                     []
                 , eventDateElement language event.date event.endDate event.recurringWeekly
-                , showIf event.recurringWeekly <|
-                    div
-                        [ class "recurring-weekly" ]
-                        [ i
-                            [ class "fa fa-refresh" ]
-                            []
-                        , text <| translate language EventRecurringWeekly
-                        ]
                 ]
+            , showIf event.recurringWeekly <|
+                div
+                    [ class "recurring-weekly" ]
+                    [ i
+                        [ class "fa fa-refresh" ]
+                        []
+                    , text <| translate language EventRecurringWeekly
+                    ]
             , showMaybe <|
                 Maybe.map
                     (\location ->

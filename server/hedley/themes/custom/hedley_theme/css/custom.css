@@ -115,6 +115,21 @@
   padding: 9px 6px;
 }
 
-.event-date .different-end-date {
-  display: block;
+.event-date {
+  display: flex;
+  flex-direction: row;
+}
+
+.event-date .flex-rows {
+  display: flex;
+  flex-direction: row;
+}
+
+.event-date .flex-rows span:nth-child(2) {
+  margin: 0 4px;
+}
+
+.event-date .flex-cols {
+  display: flex;
+  flex-direction: column;
 }
