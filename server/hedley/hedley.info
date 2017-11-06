@@ -55,6 +55,8 @@ dependencies[] = title
 dependencies[] = token
 dependencies[] = views
 dependencies[] = views_bulk_operations
+; We can't add this module locally because it's causing SimpleTest to stall.
+;dependencies[] = l10n_update
 
 ; Hedley
 ; The field bases should be installed first.
