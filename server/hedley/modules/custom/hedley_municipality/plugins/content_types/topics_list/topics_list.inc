@@ -56,8 +56,6 @@ function hedley_municipality_topics_list_content_type_render($subtype, $conf, $a
     ];
   }
 
-  dpm($municipality_node);
-
   // Get user roles to check if they have editor role.
   $roles = og_get_user_roles('node', $municipality_node->nid);
   $add_term_path = "group/node/$municipality_node->nid/admin/taxonomy/$vocabulary->machine_name/add";
