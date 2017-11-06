@@ -129,7 +129,7 @@ viewContact : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContact baseUrl language ( contactId, contact ) =
     div
         [ class "thumbnail search-results contact-search-result" ]
-        [ showIf contact.edit <|
+        [ showIf contact.showEditLink <|
             a
                 [ class "btn btn-xs btn-primary pull-right btn-edit"
                 , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
@@ -253,7 +253,13 @@ viewContactAsBlock : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContactAsBlock baseUrl language ( contactId, contact ) =
     li
         [ class "post-author clearfix" ]
-        [ showMaybe <|
+        [ showIf contact.showEditLink <|
+            a
+                [ class "btn btn-xs btn-primary pull-right btn-edit"
+                , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
+                ]
+                [ text <| translate language EditLinkText ]
+        , showMaybe <|
             Maybe.map
                 (\imageUrl ->
                     div

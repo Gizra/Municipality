@@ -126,31 +126,26 @@ viewEvents baseUrl language showAsBlock { events, filterString } =
 viewEvent : BaseUrl -> Language -> ( EventId, Event ) -> Bool -> Html msg
 viewEvent baseUrl language ( eventId, event ) showAsBlock =
     let
-        ( titleElement, editEvent ) =
+        titleElement =
             if showAsBlock then
-                ( a
+                a
                     [ href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
                     [ h4
                         [ class "card-title" ]
                         [ text event.name ]
                     ]
-                , Nothing
-                )
             else
-                ( h4
+                h4
                     [ class "card-title" ]
                     [ text event.name ]
-                , Just <|
-                    showIf event.showEditLink <|
-                        a
-                            [ class "btn btn-xs btn-primary pull-right btn-edit"
-                            , href (baseUrl.path ++ "/node/" ++ eventId ++ "/edit" ++ "?" ++ baseUrl.query)
-                            ]
-                            [ text <| translate language EditLinkText ]
-                )
     in
     div [ class "thumbnail search-results" ]
-        [ showMaybe <| editEvent
+        [ showIf event.showEditLink <|
+            a
+                [ class "btn btn-xs btn-primary pull-right btn-edit"
+                , href (baseUrl.path ++ "/node/" ++ eventId ++ "/edit" ++ "?" ++ baseUrl.query)
+                ]
+                [ text <| translate language EditLinkText ]
         , showMaybe <|
             Maybe.map
                 (\imageUrl ->

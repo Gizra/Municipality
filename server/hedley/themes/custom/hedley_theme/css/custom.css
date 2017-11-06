@@ -111,6 +111,23 @@
   }
 }
 
+.thumb-info {
+  background-color: transparent;
+  border: 0 none;
+  padding: 0;
+  position: relative;
+}
+
+.pane-content .thumb-info .thumb-info-action-icon {
+  background: none transparent;
+  border: 0 none;
+  padding: 0;
+  height: auto;
+  line-height: initial;
+  position: absolute;
+  top: 0;
+}
+
 #elm-app .thumbnail .caption {
   padding: 9px 6px;
 }

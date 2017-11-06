@@ -23,7 +23,7 @@ $plugin = [
  * Render callback.
  */
 function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $context) {
-  global $language;
+  global $language, $user;
 
   $municipality_node = !empty($context[0]->data->nid) ? $context[0]->data : hedley_municipality_get_current_group();
   $topic_tid = !empty($context[1]->data->tid) ? $context[1]->data->tid : 0;
@@ -55,6 +55,7 @@ function hedley_faq_faqs_accordion_content_type_render($subtype, $conf, $args, $
     $faqs[] = [
       'question' => $wrapper->field_question->value(),
       'answer' => !empty($answer) ? $answer['value'] : '',
+      'edit_url' => og_node_access($node, 'update', $user) == NODE_ACCESS_ALLOW ? url("node/$node->nid/edit", ['absolute' => TRUE]) : '',
     ];
   }
 

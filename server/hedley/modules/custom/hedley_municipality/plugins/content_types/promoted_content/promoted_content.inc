@@ -24,7 +24,7 @@ $plugin = [
  * Render callback.
  */
 function hedley_municipality_promoted_content_content_type_render($subtype, $conf, $args, $context) {
-  global $language;
+  global $user, $language;
 
   if (empty($context->data->nid)) {
     return NULL;
@@ -51,6 +51,7 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
       case 'action':
         $items[] = [
           'title' => hedley_action_get_action_title_link($wrapper),
+          'edit_url' => og_node_access($node, 'update', $user) == NODE_ACCESS_ALLOW ? url("node/$node->nid/edit", ['absolute' => TRUE]) : '',
         ];
 
         break;
@@ -61,6 +62,7 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
         $items[] = [
           'title' => l($wrapper->label(), url('node/' . $wrapper->getIdentifier(), ['absolute' => TRUE])),
           'image_url' => !empty($image) ? image_style_url('square_thumbnail', $image['uri']) : NULL,
+          'edit_url' => og_node_access($node, 'update', $user) == NODE_ACCESS_ALLOW ? url("node/$node->nid/edit", ['absolute' => TRUE]) : '',
         ];
 
         break;

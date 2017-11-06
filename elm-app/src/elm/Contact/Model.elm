@@ -67,7 +67,7 @@ type alias Contact =
     , email : Maybe String
     , address : Maybe String
     , receptionTimes : Maybe (List ReceptionTimes)
-    , edit : Bool
+    , showEditLink : Bool
     }
 
 
