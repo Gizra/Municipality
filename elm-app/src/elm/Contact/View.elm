@@ -128,13 +128,17 @@ viewContacts baseUrl language showAsBlock { contacts, filterString } =
 viewContact : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContact baseUrl language ( contactId, contact ) =
     div
-        [ class "thumbnail search-results contact-search-result" ]
+        [ class "thumb-info thumbnail search-results contact-search-result" ]
         [ showIf contact.showEditLink <|
-            a
-                [ class "btn btn-xs btn-primary pull-right btn-edit"
-                , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
+            span [ class "thumb-info-action" ]
+                [ span [ class "thumb-info-action-icon" ]
+                    [ a
+                        [ class "btn btn-xs btn-primary pull-right btn-edit"
+                        , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
+                        ]
+                        [ text <| translate language EditLinkText ]
+                    ]
                 ]
-                [ text <| translate language EditLinkText ]
         , showMaybe <|
             Maybe.map
                 (\imageUrl ->
@@ -252,13 +256,17 @@ viewContact baseUrl language ( contactId, contact ) =
 viewContactAsBlock : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContactAsBlock baseUrl language ( contactId, contact ) =
     li
-        [ class "post-author clearfix" ]
+        [ class "thumb-info post-author clearfix" ]
         [ showIf contact.showEditLink <|
-            a
-                [ class "btn btn-xs btn-primary pull-right btn-edit"
-                , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
+            span [ class "thumb-info-action" ]
+                [ span [ class "thumb-info-action-icon" ]
+                    [ a
+                        [ class "btn btn-xs btn-primary pull-right btn-edit"
+                        , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
+                        ]
+                        [ text <| translate language EditLinkText ]
+                    ]
                 ]
-                [ text <| translate language EditLinkText ]
         , showMaybe <|
             Maybe.map
                 (\imageUrl ->

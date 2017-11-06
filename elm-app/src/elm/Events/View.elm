@@ -139,13 +139,17 @@ viewEvent baseUrl language ( eventId, event ) showAsBlock =
                     [ class "card-title" ]
                     [ text event.name ]
     in
-    div [ class "thumbnail search-results" ]
+    div [ class "thumb-info thumbnail search-results" ]
         [ showIf event.showEditLink <|
-            a
-                [ class "btn btn-xs btn-primary pull-right btn-edit"
-                , href (baseUrl.path ++ "/node/" ++ eventId ++ "/edit" ++ "?" ++ baseUrl.query)
+            span [ class "thumb-info-action" ]
+                [ span [ class "thumb-info-action-icon" ]
+                    [ a
+                        [ class "btn btn-xs btn-primary pull-right btn-edit"
+                        , href (baseUrl.path ++ "/node/" ++ eventId ++ "/edit" ++ "?" ++ baseUrl.query)
+                        ]
+                        [ text <| translate language EditLinkText ]
+                    ]
                 ]
-                [ text <| translate language EditLinkText ]
         , showMaybe <|
             Maybe.map
                 (\imageUrl ->
