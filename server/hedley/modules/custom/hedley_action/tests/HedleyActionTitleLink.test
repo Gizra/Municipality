@@ -55,7 +55,10 @@ class HedleyActionTitleLink extends HedleyMunicipalityWebTestCase {
       ],
       'field_link' => [
         LANGUAGE_NONE => [
-          ['url' => 'https://example.com'],
+          [
+            'title' => 'Test link',
+            'url' => 'https://example.com',
+          ],
         ],
       ],
       // Add the created group as the parent group for this entity.
