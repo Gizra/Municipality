@@ -16,7 +16,7 @@ import Html.Events exposing (onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
 import Utils.BootstrapGrid exposing (renderBootstrapGrid)
-import Utils.Html exposing (eventDateElement, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (editLinkElement, eventDateElement, sectionDivider, showIf, showMaybe)
 
 
 view : BaseUrl -> Language -> Bool -> Bool -> Model -> Html Msg
@@ -126,31 +126,21 @@ viewEvents baseUrl language showAsBlock { events, filterString } =
 viewEvent : BaseUrl -> Language -> ( EventId, Event ) -> Bool -> Html msg
 viewEvent baseUrl language ( eventId, event ) showAsBlock =
     let
-        ( titleElement, editEvent ) =
+        titleElement =
             if showAsBlock then
-                ( a
+                a
                     [ href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
                     [ h4
                         [ class "card-title" ]
                         [ text event.name ]
                     ]
-                , Nothing
-                )
             else
-                ( h4
+                h4
                     [ class "card-title" ]
                     [ text event.name ]
-                , Just <|
-                    showIf event.showEditLink <|
-                        a
-                            [ class "btn btn-xs btn-primary pull-right btn-edit"
-                            , href (baseUrl.path ++ "/node/" ++ eventId ++ "/edit" ++ "?" ++ baseUrl.query)
-                            ]
-                            [ text <| translate language EditLinkText ]
-                )
     in
-    div [ class "thumbnail search-results" ]
-        [ showMaybe <| editEvent
+    div [ class "thumb-info thumbnail search-results" ]
+        [ showIf event.showEditLink <| editLinkElement baseUrl language eventId
         , showMaybe <|
             Maybe.map
                 (\imageUrl ->

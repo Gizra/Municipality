@@ -40,4 +40,26 @@ describe('Municipality news item page', () => {
     assert.equal(secondNewsItemTitle, 'מבצע סגירת חובות ארנונה לעסקים');
   });
 
+  it('should be able to edit news in editor\'s Municipality', () => {
+    browser.login('liat');
+    browser.url('/kiryat-malakhi/news?language=he');
+    browser.waitForVisible('h1=News and Updates');
+    browser.moveToObject('.call-to-action:nth-child(1)');
+
+    assert(browser.isVisible('.call-to-action:nth-child(1) a.btn-edit'));
+  });
+
+  it('should not be able to edit news in another municipality', () => {
+    browser.url('/tuba-zangariyye/news?language=he');
+    browser.waitForVisible('h1=News and Updates');
+    browser.moveToObject('.call-to-action:nth-child(1)');
+
+    assert(!browser.isVisible('.call-to-action:nth-child(1) a.btn-edit'));
+  });
+
+  after(() => {
+    // Logout se we don't affect other tests.
+    browser.logout();
+  });
+
 });

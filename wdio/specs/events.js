@@ -50,6 +50,24 @@ describe('Municipality events page', () => {
     browser.url('/kiryat-malakhi/events?language=en');
 
     assert(!browser.isVisible('button=Add new event'));
+    browser.logout();
+  });
+
+  it('should be able to edit events in editor\'s municipality', () => {
+    browser.login('liat');
+    browser.url('/kiryat-malakhi/events?language=he');
+    browser.waitForVisible('h1=אירועים');
+    browser.moveToObject('.search-results:nth-child(1)');
+
+    assert(browser.isVisible('.search-results:nth-child(1) a.btn-edit'));
+  });
+
+  it('should not be able to edit events in another municipality', () => {
+    browser.url('/tuba-zangariyye/events?language=he');
+    browser.waitForVisible('h1=אירועים');
+    browser.moveToObject('.search-results:nth-child(1)');
+
+    assert(!browser.isVisible('.search-results:nth-child(1) a.btn-edit'));
   });
 
   after(() => {

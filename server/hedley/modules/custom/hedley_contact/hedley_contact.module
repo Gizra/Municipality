@@ -199,7 +199,7 @@ function hedley_contact_get_contacts_by_group($group, $language_code, $show_as_b
       'job_title' => $wrapper->field_job_title->value() ? check_plain($wrapper->field_job_title->value()) : NULL,
       'topics' => $topics_array,
       'reception_hours' => $reception_hours ? $reception_hours : NULL,
-      'edit' => og_node_access($node, 'update', $user) == 'allow' ? TRUE : FALSE,
+      'showEditLink' => og_node_access($node, 'update', $user) == NODE_ACCESS_ALLOW,
     ];
 
     // Remove empty values (elm expects the correct value or nothing), unless

@@ -56,9 +56,14 @@ function hedley_municipality_topics_list_content_type_render($subtype, $conf, $a
     ];
   }
 
+  // Get user roles to check if they have editor role.
+  $roles = og_get_user_roles('node', $municipality_node->nid);
+  $add_term_path = "group/node/$municipality_node->nid/admin/taxonomy/$vocabulary->machine_name/add";
+
   $variables = [
     'title' => t('Topics in the site'),
     'topics' => $topics,
+    'add_term_url' => in_array('editor', $roles) ? url($add_term_path, ['absolute' => TRUE]) : '',
   ];
 
   $block = new stdClass();
@@ -85,6 +90,7 @@ function hedley_municipality_topics_list_content_type_theme(&$theme, $plugin) {
     'variables' => [
       'title' => NULL,
       'topics' => NULL,
+      'add_term_url' => NULL,
     ],
     'path' => $plugin['path'],
     'template' => 'topics-list',

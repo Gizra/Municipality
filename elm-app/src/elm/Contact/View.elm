@@ -10,7 +10,7 @@ import Html.Attributes exposing (alt, class, href, id, placeholder, src, target,
 import Html.Events exposing (onInput)
 import Translate exposing (TranslationId(..), translate)
 import Utils.BootstrapGrid exposing (renderBootstrapGrid)
-import Utils.Html exposing (colorToString, divider, formatReceptionDays, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (colorToString, divider, editLinkElement, formatReceptionDays, sectionDivider, showIf, showMaybe)
 
 
 view : BaseUrl -> Language -> Bool -> Bool -> Model -> Html Msg
@@ -128,13 +128,8 @@ viewContacts baseUrl language showAsBlock { contacts, filterString } =
 viewContact : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContact baseUrl language ( contactId, contact ) =
     div
-        [ class "thumbnail search-results contact-search-result" ]
-        [ showIf contact.edit <|
-            a
-                [ class "btn btn-xs btn-primary pull-right btn-edit"
-                , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
-                ]
-                [ text <| translate language EditLinkText ]
+        [ class "thumb-info thumbnail search-results contact-search-result" ]
+        [ showIf contact.showEditLink <| editLinkElement baseUrl language contactId
         , showMaybe <|
             Maybe.map
                 (\imageUrl ->
@@ -252,8 +247,9 @@ viewContact baseUrl language ( contactId, contact ) =
 viewContactAsBlock : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContactAsBlock baseUrl language ( contactId, contact ) =
     li
-        [ class "post-author clearfix" ]
-        [ showMaybe <|
+        [ class "thumb-info post-author clearfix" ]
+        [ showIf contact.showEditLink <| editLinkElement baseUrl language contactId
+        , showMaybe <|
             Maybe.map
                 (\imageUrl ->
                     div
