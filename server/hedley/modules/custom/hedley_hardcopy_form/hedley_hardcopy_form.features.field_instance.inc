@@ -99,7 +99,7 @@ function hedley_hardcopy_form_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -165,7 +165,7 @@ function hedley_hardcopy_form_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -216,7 +216,7 @@ function hedley_hardcopy_form_field_default_field_instances() {
       'module' => 'og_vocab',
       'settings' => array(),
       'type' => 'og_vocab_complex',
-      'weight' => 1,
+      'weight' => 3,
     ),
   );
 
