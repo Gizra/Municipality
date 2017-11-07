@@ -104,6 +104,9 @@ describe('Municipality topics', () => {
     assert(browser.isVisible('.post-author:nth-child(1) .img-thumbnail img'));
   });
 
+  it('should show the contact\'s "show all" button', () => {
+    browser.waitForVisible('a=כל אנשי הקשר');
+  });
 
   it('Should not show the "Events" and "Contacts" boxes when they are empty', () => {
     browser.url('/al-kasom/taxonomy/term/18?language=en');
