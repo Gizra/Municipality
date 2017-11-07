@@ -16,7 +16,7 @@
       <h3 class="header"><?php print $item['title']; ?></h3>
       <?php if ($item['edit_url']): ?>
       <span class="thumb-info-action">
-        <span class="thumb-info-action-icon"><a href="<?php print $item['edit_url']; ?>" class="btn btn-3d btn-primary btn-xs"><?php print t('Edit'); ?></a></span>
+        <span class="thumb-info-action-icon"><a href="<?php print $item['edit_url']; ?>" class="btn btn-primary btn-xs btn-edit"><?php print t('Edit'); ?></a></span>
       </span>
       <?php endif; ?>
     </div>

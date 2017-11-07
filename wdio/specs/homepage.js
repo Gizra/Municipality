@@ -365,4 +365,20 @@ describe('Municipality homepage', () => {
     const eventsButton = browser.getText('.pane-topics-list p a:nth-child(2) button.btn-primary');
     assert.equal('Events', eventsButton);
   });
+
+  it('should not see "add a new topic" as Municipality\'s editor.', () => {
+    browser.login('noam');
+    browser.url('/tuba-zangariyye/node/1?language=en');
+    browser.waitForVisible('h2=Topics in the site');
+
+    assert(browser.isVisible('a=Add a new topic'));
+    browser.logout();
+  });
+
+  it('should not see "add a new topic" as anon user', () => {
+    browser.url('/tuba-zangariyye/node/1?language=en');
+    browser.waitForVisible('h2=Topics in the site');
+
+    assert(!browser.isVisible('a=Add a new topic'));
+  });
 });
