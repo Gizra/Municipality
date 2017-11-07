@@ -62,7 +62,7 @@ describe('Municipality homepage', () => {
 
     // Assert the page have the expected title.
     const showAllLink = browser.getText('div#elm-app a.btn-show-all');
-    assert.equal('הצג הכל', showAllLink);
+    assert.equal('כל האירועים', showAllLink);
   });
 
   it('should show user types labels in the selected language: hebrew', () => {

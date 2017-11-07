@@ -37,7 +37,7 @@ view baseUrl language showAsBlock editorPermissions model =
         , showIf showAsBlock <|
             a
                 [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/events?" ++ baseUrl.query) ]
-                [ text <| translate language ShowAll ]
+                [ text <| translate language ShowAllEvents ]
         ]
 
 

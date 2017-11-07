@@ -12856,8 +12856,10 @@ var _gizra$municipality$Translate$translate = F2(
 					return {arabic: 'شيكل', english: 'NIS', hebrew: 'ש״ח'};
 				case 'ReceptionText':
 					return {arabic: 'استقبال: ', english: 'Reception: ', hebrew: 'קבלת קהל: '};
-				case 'ShowAll':
-					return {arabic: 'عرض الكل', english: 'Show all', hebrew: 'הצג הכל'};
+				case 'ShowAllContacts':
+					return {arabic: 'جميع جهات الاتصال', english: 'All contacts', hebrew: 'כל אנשי הקשר'};
+				case 'ShowAllEvents':
+					return {arabic: 'كل الأحداث', english: 'All Events', hebrew: 'כל האירועים'};
 				default:
 					return {arabic: 'حتى', english: 'To', hebrew: 'עד'};
 			}
@@ -12892,7 +12894,8 @@ var _gizra$municipality$Translate$ErrorBadPayload = function (a) {
 };
 var _gizra$municipality$Translate$ErrorBadUrl = {ctor: 'ErrorBadUrl'};
 var _gizra$municipality$Translate$UntilTranslation = {ctor: 'UntilTranslation'};
-var _gizra$municipality$Translate$ShowAll = {ctor: 'ShowAll'};
+var _gizra$municipality$Translate$ShowAllEvents = {ctor: 'ShowAllEvents'};
+var _gizra$municipality$Translate$ShowAllContacts = {ctor: 'ShowAllContacts'};
 var _gizra$municipality$Translate$ReceptionText = {ctor: 'ReceptionText'};
 var _gizra$municipality$Translate$PriceCurrencyText = {ctor: 'PriceCurrencyText'};
 var _gizra$municipality$Translate$PriceText = {ctor: 'PriceText'};
@@ -15021,7 +15024,7 @@ var _gizra$municipality$Contact_View$view = F5(
 											{
 												ctor: '::',
 												_0: _elm_lang$html$Html$text(
-													A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ShowAll)),
+													A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ShowAllContacts)),
 												_1: {ctor: '[]'}
 											})),
 									_1: {ctor: '[]'}
@@ -16217,7 +16220,7 @@ var _gizra$municipality$Events_View$view = F5(
 											{
 												ctor: '::',
 												_0: _elm_lang$html$Html$text(
-													A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ShowAll)),
+													A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$ShowAllEvents)),
 												_1: {ctor: '[]'}
 											})),
 									_1: {ctor: '[]'}

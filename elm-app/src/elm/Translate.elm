@@ -41,7 +41,8 @@ type TranslationId
     | PriceText
     | PriceCurrencyText
     | ReceptionText
-    | ShowAll
+    | ShowAllContacts
+    | ShowAllEvents
     | UntilTranslation
 
 
@@ -213,10 +214,16 @@ translate lang trans =
                     , hebrew = "קבלת קהל: "
                     }
 
-                ShowAll ->
-                    { arabic = "عرض الكل"
-                    , english = "Show all"
-                    , hebrew = "הצג הכל"
+                ShowAllContacts ->
+                    { arabic = "جميع جهات الاتصال"
+                    , english = "All contacts"
+                    , hebrew = "כל אנשי הקשר"
+                    }
+
+                ShowAllEvents ->
+                    { arabic = "كل الأحداث"
+                    , english = "All Events"
+                    , hebrew = "כל האירועים"
                     }
 
                 UntilTranslation ->
