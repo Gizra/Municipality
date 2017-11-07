@@ -170,20 +170,20 @@ viewEvent baseUrl language ( eventId, event ) showAsBlock =
                         event.description
             , showIf (not showAsBlock) <| sectionDivider
             , div
-                [ class "event-date" ]
+                [ class "event-date mb-xs" ]
                 [ i
                     [ class "fa fa-calendar" ]
                     []
                 , eventDateElement language event.date event.endDate event.recurringWeekly
-                , showIf event.recurringWeekly <|
-                    div
-                        [ class "recurring-weekly" ]
-                        [ i
-                            [ class "fa fa-refresh" ]
-                            []
-                        , text <| translate language EventRecurringWeekly
-                        ]
                 ]
+            , showIf event.recurringWeekly <|
+                div
+                    [ class "recurring-weekly" ]
+                    [ i
+                        [ class "fa fa-refresh" ]
+                        []
+                    , text <| translate language EventRecurringWeekly
+                    ]
             , showMaybe <|
                 Maybe.map
                     (\location ->
