@@ -13649,6 +13649,61 @@ var _gizra$municipality$Utils_BootstrapGrid$renderBootstrapGrid = F2(
 				listOfRows));
 	});
 
+var _gizra$municipality$Utils_Html$editLinkElement = F3(
+	function (baseUrl, language, itemId) {
+		return A2(
+			_elm_lang$html$Html$span,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('thumb-info-action'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$span,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('thumb-info-action-icon'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('btn btn-xs btn-primary pull-right btn-edit'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$href(
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											baseUrl.path,
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												'/node/',
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													itemId,
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														'/edit',
+														A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query)))))),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(
+									A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EditLinkText)),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
 var _gizra$municipality$Utils_Html$eventDateElement = F4(
 	function (language, date, mEndDate, recurring) {
 		var timeFormater = _mgold$elm_date_format$Date_Format$format('%H:%M');
@@ -13902,58 +13957,7 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 				_0: A2(
 					_gizra$municipality$Utils_Html$showIf,
 					_p4.showEditLink,
-					A2(
-						_elm_lang$html$Html$span,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('thumb-info-action'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$span,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('thumb-info-action-icon'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$a,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('btn btn-xs btn-primary pull-right btn-edit'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$href(
-													A2(
-														_elm_lang$core$Basics_ops['++'],
-														baseUrl.path,
-														A2(
-															_elm_lang$core$Basics_ops['++'],
-															'/node/',
-															A2(
-																_elm_lang$core$Basics_ops['++'],
-																_p5,
-																A2(
-																	_elm_lang$core$Basics_ops['++'],
-																	'/edit',
-																	A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query)))))),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(
-												A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EditLinkText)),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						})),
+					A3(_gizra$municipality$Utils_Html$editLinkElement, baseUrl, language, _p5)),
 				_1: {
 					ctor: '::',
 					_0: _gizra$municipality$Utils_Html$showMaybe(
@@ -14279,58 +14283,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 				_0: A2(
 					_gizra$municipality$Utils_Html$showIf,
 					_p10.showEditLink,
-					A2(
-						_elm_lang$html$Html$span,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('thumb-info-action'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$span,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('thumb-info-action-icon'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$a,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('btn btn-xs btn-primary pull-right btn-edit'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$href(
-													A2(
-														_elm_lang$core$Basics_ops['++'],
-														baseUrl.path,
-														A2(
-															_elm_lang$core$Basics_ops['++'],
-															'/node/',
-															A2(
-																_elm_lang$core$Basics_ops['++'],
-																_p7._0,
-																A2(
-																	_elm_lang$core$Basics_ops['++'],
-																	'/edit',
-																	A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query)))))),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(
-												A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EditLinkText)),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						})),
+					A3(_gizra$municipality$Utils_Html$editLinkElement, baseUrl, language, _p7._0)),
 				_1: {
 					ctor: '::',
 					_0: _gizra$municipality$Utils_Html$showMaybe(
@@ -15653,58 +15606,7 @@ var _gizra$municipality$Events_View$viewEvent = F4(
 				_0: A2(
 					_gizra$municipality$Utils_Html$showIf,
 					_p4.showEditLink,
-					A2(
-						_elm_lang$html$Html$span,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('thumb-info-action'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$span,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('thumb-info-action-icon'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$a,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('btn btn-xs btn-primary pull-right btn-edit'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$href(
-													A2(
-														_elm_lang$core$Basics_ops['++'],
-														baseUrl.path,
-														A2(
-															_elm_lang$core$Basics_ops['++'],
-															'/node/',
-															A2(
-																_elm_lang$core$Basics_ops['++'],
-																_p5,
-																A2(
-																	_elm_lang$core$Basics_ops['++'],
-																	'/edit',
-																	A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query)))))),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(
-												A2(_gizra$municipality$Translate$translate, language, _gizra$municipality$Translate$EditLinkText)),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						})),
+					A3(_gizra$municipality$Utils_Html$editLinkElement, baseUrl, language, _p5)),
 				_1: {
 					ctor: '::',
 					_0: _gizra$municipality$Utils_Html$showMaybe(

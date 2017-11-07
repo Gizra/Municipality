@@ -10,7 +10,7 @@ import Html.Attributes exposing (alt, class, href, id, placeholder, src, target,
 import Html.Events exposing (onInput)
 import Translate exposing (TranslationId(..), translate)
 import Utils.BootstrapGrid exposing (renderBootstrapGrid)
-import Utils.Html exposing (colorToString, divider, formatReceptionDays, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (colorToString, divider, editLinkElement, formatReceptionDays, sectionDivider, showIf, showMaybe)
 
 
 view : BaseUrl -> Language -> Bool -> Bool -> Model -> Html Msg
@@ -129,16 +129,7 @@ viewContact : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContact baseUrl language ( contactId, contact ) =
     div
         [ class "thumb-info thumbnail search-results contact-search-result" ]
-        [ showIf contact.showEditLink <|
-            span [ class "thumb-info-action" ]
-                [ span [ class "thumb-info-action-icon" ]
-                    [ a
-                        [ class "btn btn-xs btn-primary pull-right btn-edit"
-                        , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
-                        ]
-                        [ text <| translate language EditLinkText ]
-                    ]
-                ]
+        [ showIf contact.showEditLink <| editLinkElement baseUrl language contactId
         , showMaybe <|
             Maybe.map
                 (\imageUrl ->
@@ -257,16 +248,7 @@ viewContactAsBlock : BaseUrl -> Language -> ( ContactId, Contact ) -> Html msg
 viewContactAsBlock baseUrl language ( contactId, contact ) =
     li
         [ class "thumb-info post-author clearfix" ]
-        [ showIf contact.showEditLink <|
-            span [ class "thumb-info-action" ]
-                [ span [ class "thumb-info-action-icon" ]
-                    [ a
-                        [ class "btn btn-xs btn-primary pull-right btn-edit"
-                        , href (baseUrl.path ++ "/node/" ++ contactId ++ "/edit" ++ "?" ++ baseUrl.query)
-                        ]
-                        [ text <| translate language EditLinkText ]
-                    ]
-                ]
+        [ showIf contact.showEditLink <| editLinkElement baseUrl language contactId
         , showMaybe <|
             Maybe.map
                 (\imageUrl ->

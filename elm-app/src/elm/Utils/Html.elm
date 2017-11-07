@@ -2,6 +2,7 @@ module Utils.Html
     exposing
         ( colorToString
         , divider
+        , editLinkElement
         , emptyNode
         , eventDateElement
         , formatReceptionDays
@@ -10,12 +11,13 @@ module Utils.Html
         , showMaybe
         )
 
+import App.Model exposing (BaseUrl)
 import App.Types exposing (Language(..))
 import Contact.Model exposing (Color)
 import Date exposing (Date, Day, dayOfWeek)
 import Date.Format exposing (format)
-import Html exposing (Html, div, span, text)
-import Html.Attributes exposing (class)
+import Html exposing (Html, a, div, span, text)
+import Html.Attributes exposing (class, href)
 import String exposing (toLower)
 import Translate exposing (TranslationId(..), translate)
 
@@ -158,3 +160,18 @@ eventDateElement language date mEndDate recurring =
                 |> Maybe.withDefault (span [ class "begin-date" ] [ text beginDateFormmated ])
     in
     datesElement
+
+
+{-| Produces an edit element for an item for content editors.
+-}
+editLinkElement : BaseUrl -> Language -> String -> Html msg
+editLinkElement baseUrl language itemId =
+    span [ class "thumb-info-action" ]
+        [ span [ class "thumb-info-action-icon" ]
+            [ a
+                [ class "btn btn-xs btn-primary pull-right btn-edit"
+                , href (baseUrl.path ++ "/node/" ++ itemId ++ "/edit" ++ "?" ++ baseUrl.query)
+                ]
+                [ text <| translate language EditLinkText ]
+            ]
+        ]

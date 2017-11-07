@@ -16,7 +16,7 @@ import Html.Events exposing (onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
 import Utils.BootstrapGrid exposing (renderBootstrapGrid)
-import Utils.Html exposing (eventDateElement, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (editLinkElement, eventDateElement, sectionDivider, showIf, showMaybe)
 
 
 view : BaseUrl -> Language -> Bool -> Bool -> Model -> Html Msg
@@ -140,16 +140,7 @@ viewEvent baseUrl language ( eventId, event ) showAsBlock =
                     [ text event.name ]
     in
     div [ class "thumb-info thumbnail search-results" ]
-        [ showIf event.showEditLink <|
-            span [ class "thumb-info-action" ]
-                [ span [ class "thumb-info-action-icon" ]
-                    [ a
-                        [ class "btn btn-xs btn-primary pull-right btn-edit"
-                        , href (baseUrl.path ++ "/node/" ++ eventId ++ "/edit" ++ "?" ++ baseUrl.query)
-                        ]
-                        [ text <| translate language EditLinkText ]
-                    ]
-                ]
+        [ showIf event.showEditLink <| editLinkElement baseUrl language eventId
         , showMaybe <|
             Maybe.map
                 (\imageUrl ->
