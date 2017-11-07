@@ -144,14 +144,14 @@ eventDateElement language date mEndDate recurring =
                     -- Event ends on the same day and therefore we don't display
                     -- the name of the ending day.
                     if compareFormater date == compareFormater endDate then
-                        span []
+                        span [ class "flex-rows" ]
                             [ span [ class "begin-date" ] [ text <| beginDateFormmated ++ " - " ]
                             , span [ class "end-date" ] [ text <| timeFormater endDate ]
                             ]
                     else
-                        span []
+                        span [ class "flex-cols" ]
                             [ span [ class "begin-date" ] [ text <| beginDateFormmated ]
-                            , span [ class "different-end-date ml-lg" ] [ text endDateFormmated ]
+                            , span [ class "different-end-date" ] [ text endDateFormmated ]
                             ]
                 )
                 mEndDate
