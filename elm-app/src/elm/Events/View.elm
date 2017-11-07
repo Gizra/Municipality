@@ -16,7 +16,7 @@ import Html.Events exposing (onInput)
 import Json.Encode exposing (string)
 import Translate exposing (TranslationId(..), translate)
 import Utils.BootstrapGrid exposing (renderBootstrapGrid)
-import Utils.Html exposing (eventDateElement, sectionDivider, showIf, showMaybe)
+import Utils.Html exposing (editLinkElement, eventDateElement, sectionDivider, showIf, showMaybe)
 
 
 view : BaseUrl -> Language -> Bool -> Bool -> Model -> Html Msg
@@ -37,7 +37,7 @@ view baseUrl language showAsBlock editorPermissions model =
         , showIf showAsBlock <|
             a
                 [ class "btn btn-default btn-show-all", href (baseUrl.path ++ "/events?" ++ baseUrl.query) ]
-                [ text <| translate language ShowAll ]
+                [ text <| translate language ShowAllEvents ]
         ]
 
 
@@ -126,31 +126,21 @@ viewEvents baseUrl language showAsBlock { events, filterString } =
 viewEvent : BaseUrl -> Language -> ( EventId, Event ) -> Bool -> Html msg
 viewEvent baseUrl language ( eventId, event ) showAsBlock =
     let
-        ( titleElement, editEvent ) =
+        titleElement =
             if showAsBlock then
-                ( a
+                a
                     [ href (baseUrl.path ++ "/node/" ++ eventId ++ "?" ++ baseUrl.query) ]
                     [ h4
                         [ class "card-title" ]
                         [ text event.name ]
                     ]
-                , Nothing
-                )
             else
-                ( h4
+                h4
                     [ class "card-title" ]
                     [ text event.name ]
-                , Just <|
-                    showIf event.showEditLink <|
-                        a
-                            [ class "btn btn-xs btn-primary pull-right btn-edit"
-                            , href (baseUrl.path ++ "/node/" ++ eventId ++ "/edit" ++ "?" ++ baseUrl.query)
-                            ]
-                            [ text <| translate language EditLinkText ]
-                )
     in
-    div [ class "thumbnail search-results" ]
-        [ showMaybe <| editEvent
+    div [ class "thumb-info thumbnail search-results" ]
+        [ showIf event.showEditLink <| editLinkElement baseUrl language eventId
         , showMaybe <|
             Maybe.map
                 (\imageUrl ->
@@ -180,20 +170,20 @@ viewEvent baseUrl language ( eventId, event ) showAsBlock =
                         event.description
             , showIf (not showAsBlock) <| sectionDivider
             , div
-                [ class "event-date" ]
+                [ class "event-date mb-xs" ]
                 [ i
                     [ class "fa fa-calendar" ]
                     []
                 , eventDateElement language event.date event.endDate event.recurringWeekly
-                , showIf event.recurringWeekly <|
-                    div
-                        [ class "recurring-weekly" ]
-                        [ i
-                            [ class "fa fa-refresh" ]
-                            []
-                        , text <| translate language EventRecurringWeekly
-                        ]
                 ]
+            , showIf event.recurringWeekly <|
+                div
+                    [ class "recurring-weekly" ]
+                    [ i
+                        [ class "fa fa-refresh" ]
+                        []
+                    , text <| translate language EventRecurringWeekly
+                    ]
             , showMaybe <|
                 Maybe.map
                     (\location ->

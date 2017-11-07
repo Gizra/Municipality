@@ -207,7 +207,7 @@ contact1 =
       , email = Nothing
       , address = Nothing
       , receptionTimes = Nothing
-      , edit = False
+      , showEditLink = False
       }
     )
 
@@ -245,7 +245,7 @@ contact2 =
                   , multipleDays = False
                   }
                 ]
-      , edit = False
+      , showEditLink = False
       }
     )
 
@@ -279,7 +279,7 @@ contact3 =
                   , multipleDays = True
                   }
                 ]
-      , edit = True
+      , showEditLink = True
       }
     )
 

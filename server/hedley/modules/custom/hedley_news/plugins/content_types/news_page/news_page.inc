@@ -17,7 +17,7 @@ $plugin = [
  * Render callback.
  */
 function hedley_news_news_page_content_type_render($subtype, $conf, $args, $context) {
-  global $language;
+  global $language, $user;
 
   if (!$municipality_node = hedley_municipality_get_current_group()) {
     // Don't display news without municipality context.
@@ -48,6 +48,7 @@ function hedley_news_news_page_content_type_render($subtype, $conf, $args, $cont
       'title' => $wrapper->label(),
       // Add a read more link when the news has a body.
       'read_more' => $wrapper->body->value() ? l(t('Read more'), 'node/' . $node->nid, ['attributes' => ['class' => 'btn btn-lg btn-primary']]) : '',
+      'edit_url' => og_node_access($node, 'update', $user) == NODE_ACCESS_ALLOW ? url("node/$node->nid/edit", ['absolute' => TRUE]) : '',
     ];
   }
 

@@ -53,7 +53,7 @@ function hedley_faq_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -100,7 +100,7 @@ function hedley_faq_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -210,7 +210,7 @@ function hedley_faq_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 5,
+      'weight' => 1,
     ),
   );
 
@@ -261,7 +261,7 @@ function hedley_faq_field_default_field_instances() {
       'module' => 'og_vocab',
       'settings' => array(),
       'type' => 'og_vocab_complex',
-      'weight' => 1,
+      'weight' => 3,
     ),
   );
 

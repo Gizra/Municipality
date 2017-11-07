@@ -33,7 +33,7 @@ decodeContact =
         |> optional "email" (nullable string) Nothing
         |> optional "address" (nullable string) Nothing
         |> optional "reception_hours" (nullable decodeReceptionTimes) Nothing
-        |> required "edit" bool
+        |> required "showEditLink" bool
 
 
 decodeTopic : Decoder (List Topic)

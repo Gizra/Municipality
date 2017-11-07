@@ -21,5 +21,12 @@
         </button>
       </a>
     <?php endforeach; ?>
+    <?php if ($add_term_url): ?>
+      <a href="<?php print $add_term_url; ?>" title="<?php print t('Add a new topic'); ?>" class="pull-right">
+        <button class="btn btn-primary btn-xs mb-sm">
+          <?php print t('Add a new topic'); ?>
+        </button>
+      </a>
+    <?php endif; ?>
   </p>
 </div>

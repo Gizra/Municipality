@@ -2,6 +2,7 @@ const assert = require('assert');
 
 describe('Municipality homepage', () => {
   before(() => {
+    browser.login('noam');
     browser.url('/tuba-zangariyye/node/1?language=he');
   });
 
@@ -61,7 +62,7 @@ describe('Municipality homepage', () => {
 
     // Assert the page have the expected title.
     const showAllLink = browser.getText('div#elm-app a.btn-show-all');
-    assert.equal('הצג הכל', showAllLink);
+    assert.equal('כל האירועים', showAllLink);
   });
 
   it('should show user types labels in the selected language: hebrew', () => {
@@ -249,7 +250,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show only events for businesses user type in arabic', () => {
-    browser.url('/tuba-zangariyye/?user_type=businesses&language=arabic');
+    browser.url('/tuba-zangariyye/?user_type=businesses&language=ar');
     browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
     assert(!browser.isVisible('h4=مسرحية للأطفال: صباح السبت'));
   });
@@ -319,9 +320,6 @@ describe('Municipality homepage', () => {
     const fbClass = browser.getAttribute('ul.social-icons li:nth-child(1)', 'class');
     assert.equal('social-icons-facebook', fbClass);
 
-    // Login as a content editor.
-    browser.login('noam');
-
     // Save the municipality and expect to see the same class.
     browser.url('/tuba-zangariyye/node/1/edit');
     browser.click('#edit-submit');
@@ -364,5 +362,23 @@ describe('Municipality homepage', () => {
 
     const eventsButton = browser.getText('.pane-topics-list p a:nth-child(2) button.btn-primary');
     assert.equal('Events', eventsButton);
+  });
+
+  it('should not see "add a new topic" as Municipality\'s editor.', () => {
+    browser.url('/tuba-zangariyye/node/1?language=en');
+    browser.waitForVisible('h2=Topics in the site');
+
+    assert(browser.isVisible('a=Add a new topic'));
+  });
+
+  it('should not see "add a new topic" as a normal user', () => {
+    browser.url('/kiryat-malakhi/node/4?language=en');
+    browser.waitForVisible('h2=Topics in the site');
+
+    assert(!browser.isVisible('a=Add a new topic'));
+  });
+
+  after(() => {
+    browser.logout();
   });
 });

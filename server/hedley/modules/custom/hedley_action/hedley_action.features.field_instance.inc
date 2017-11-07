@@ -304,7 +304,7 @@ function hedley_action_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -421,7 +421,7 @@ function hedley_action_field_default_field_instances() {
       'module' => 'og_vocab',
       'settings' => array(),
       'type' => 'og_vocab_complex',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 

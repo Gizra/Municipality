@@ -91,10 +91,12 @@
 
 .content img {
   display: inline-block;
+  width: auto;
 }
 
 .post-author img {
   max-height: 120px;
+  width: auto;
 }
 
 .btn {
@@ -111,10 +113,65 @@
   }
 }
 
+.thumb-info {
+  position: relative;
+}
+
+.list.list-borders li {
+  border-top: 0 none;
+  border-left: 0 none;
+  border-right: 0 none;
+  background: inherit;
+  border-radius: 0;
+}
+
+.homepage-teaser.action {
+  border: 0 none;
+  background: inherit;
+}
+
+.pane-content .thumb-info .thumb-info-action-icon {
+  background: none transparent;
+  border: 0 none;
+  padding: 0;
+  height: auto;
+  line-height: initial;
+  position: absolute;
+  top: 0;
+}
+
 #elm-app .thumbnail .caption {
   padding: 9px 6px;
 }
 
-.event-date .different-end-date {
-  display: block;
+.event-date {
+  display: flex;
+  flex-direction: row;
+}
+
+.event-date .flex-rows {
+  display: flex;
+  flex-direction: row;
+}
+
+.different-end-date {
+  align-self: flex-start;
+}
+
+.event-date .flex-rows span:nth-child(2) {
+  margin: 0 4px;
+}
+
+.event-date .flex-cols {
+  display: flex;
+  flex-direction: column;
+}
+
+.recurring-weekly {
+  display: flex;
+}
+
+.recurring-weekly .fa,
+.event-date .fa {
+  line-height: 22px;
 }

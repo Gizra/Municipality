@@ -38,10 +38,9 @@ view baseUrl language event =
                 [ class "col-xs-12" ]
                 [ div
                     [ class "row text-center" ]
-                    [ div
-                        [ class "col-md-4 event-date" ]
+                    [ div [ class "col-md-4" ]
                         [ div
-                            []
+                            [ class "event-date mb-xs" ]
                             [ i
                                 [ class "fa fa-calendar" ]
                                 []
