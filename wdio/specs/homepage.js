@@ -2,6 +2,7 @@ const assert = require('assert');
 
 describe('Municipality homepage', () => {
   before(() => {
+    browser.login('noam');
     browser.url('/tuba-zangariyye/node/1?language=he');
   });
 
@@ -249,7 +250,7 @@ describe('Municipality homepage', () => {
   });
 
   it('should show only events for businesses user type in arabic', () => {
-    browser.url('/tuba-zangariyye/?user_type=businesses&language=arabic');
+    browser.url('/tuba-zangariyye/?user_type=businesses&language=ar');
     browser.waitForVisible('h4=المقاولون الجولة: توريد وتركيب أنظمة تكييف الهواء في قاعة المدينة');
     assert(!browser.isVisible('h4=مسرحية للأطفال: صباح السبت'));
   });
@@ -319,9 +320,6 @@ describe('Municipality homepage', () => {
     const fbClass = browser.getAttribute('ul.social-icons li:nth-child(1)', 'class');
     assert.equal('social-icons-facebook', fbClass);
 
-    // Login as a content editor.
-    browser.login('noam');
-
     // Save the municipality and expect to see the same class.
     browser.url('/tuba-zangariyye/node/1/edit');
     browser.click('#edit-submit');
@@ -367,18 +365,20 @@ describe('Municipality homepage', () => {
   });
 
   it('should not see "add a new topic" as Municipality\'s editor.', () => {
-    browser.login('noam');
     browser.url('/tuba-zangariyye/node/1?language=en');
     browser.waitForVisible('h2=Topics in the site');
 
     assert(browser.isVisible('a=Add a new topic'));
-    browser.logout();
   });
 
-  it('should not see "add a new topic" as anon user', () => {
-    browser.url('/tuba-zangariyye/node/1?language=en');
+  it('should not see "add a new topic" as a normal user', () => {
+    browser.url('/kiryat-malakhi/node/4?language=en');
     browser.waitForVisible('h2=Topics in the site');
 
     assert(!browser.isVisible('a=Add a new topic'));
+  });
+
+  after(() => {
+    browser.logout();
   });
 });
