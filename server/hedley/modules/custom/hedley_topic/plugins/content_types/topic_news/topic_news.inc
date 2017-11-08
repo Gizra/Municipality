@@ -52,7 +52,7 @@ function hedley_topic_topic_news_content_type_render($subtype, $conf, $args, $co
     $news_items[] = [
       'title' => $wrapper->label(),
       // Add a read more link when the news has a body.
-      'read_more' => $wrapper->body->value() ? l(t('Read more'), 'node/' . $node->nid, ['attributes' => ['class' => 'btn btn-lg btn-primary']]) : '',
+      'read_more' => $wrapper->body->value() ? l(t('Read more'), 'node/' . $node->nid, ['attributes' => ['class' => 'btn btn-lg btn-quaternary']]) : '',
       'edit_url' => og_node_access($node, 'update', $user) == NODE_ACCESS_ALLOW ? url("node/$node->nid/edit", ['absolute' => TRUE]) : '',
     ];
   }

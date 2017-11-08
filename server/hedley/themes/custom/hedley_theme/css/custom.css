@@ -1,6 +1,26 @@
 /*=======================================================================
 *** PORTO_SUB CUSTOM STYLE SHEET***
 ========================================================================*/
+a {
+  color: #383f48;
+}
+
+a:hover {
+  color: #383f48;
+}
+
+a:focus {
+  color: #383f48;
+}
+
+a:active {
+  color: #383f48;
+}
+
+.panel-group .panel-heading a {
+  color: #383f48;
+}
+
 .sticky-header-active .admin-menu .header-body {
   margin-top: 29px;
 }

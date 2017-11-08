@@ -4,9 +4,6 @@ core = 7.x
 base theme = porto
 engine = phptemplate
 
-; Call style sheets.
-stylesheets[all][] = css/custom.css
-
 ; Define theme block regions.
 regions[header_top] = Header Top
 regions[header_search] = Header Search

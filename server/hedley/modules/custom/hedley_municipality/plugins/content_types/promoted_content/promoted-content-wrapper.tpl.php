@@ -5,7 +5,7 @@
  * Promoted content template.
  */
 ?>
-<div class="<?php print $items_class; ?> featured-box featured-box-primary">
+<div class="<?php print $items_class; ?> featured-box featured-box-quaternary">
   <div class="box-content">
     <div class="row">
       <h2><?php print $title; ?></h2>
