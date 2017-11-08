@@ -258,14 +258,11 @@ viewContactAsBlock baseUrl language ( contactId, contact ) =
                 (\imageUrl ->
                     div
                         [ class "img-thumbnail" ]
-                        [ a
-                            [ href (baseUrl.path ++ "/node/" ++ contactId ++ "?" ++ baseUrl.query) ]
-                            [ img
-                                [ src imageUrl
-                                , alt contact.name
-                                ]
-                                []
+                        [ img
+                            [ src imageUrl
+                            , alt contact.name
                             ]
+                            []
                         ]
                 )
                 contact.imageUrl
