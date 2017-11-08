@@ -17,6 +17,10 @@ a:active {
   color: #383f48;
 }
 
+body {
+  color: #666;
+}
+
 .panel-group .panel-heading a {
   color: #383f48;
 }
