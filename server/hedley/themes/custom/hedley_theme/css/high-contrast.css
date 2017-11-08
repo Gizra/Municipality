@@ -42,3 +42,10 @@ body.municipality-is-accessible input[type="submit"]:hover, body.municipality-is
 body.municipality-is-accessible button:hover {
   text-decoration: underline !important;
 }
+/*Municipality specific overrides*/
+body.municipality-is-accessible img.img-responsive {
+  background-color: white !important;
+}
+body.municipality-is-accessible a {
+  display: inline-block;
+}
