@@ -427,7 +427,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
    * @Then I should see the :header header
    */
   public function iShouldSeeTheMunicipalityHeader($header) {
-    $sitename = $this->getSession()->getPage()->find('css', 'header#header .container #site-name > h1')->getText();
+    $sitename = $this->getSession()->getPage()->find('css', 'header#header .container #site-name a h1')->getText();
 
     // Check if the site name is "Municipality".
     if ($sitename != $header) {
