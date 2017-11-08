@@ -14010,7 +14010,7 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 														_0: _elm_lang$html$Html_Attributes$src(imageUrl),
 														_1: {
 															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$alt(''),
+															_0: _elm_lang$html$Html_Attributes$alt(_p4.name),
 															_1: {ctor: '[]'}
 														}
 													},
@@ -14318,7 +14318,11 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 												_1: {
 													ctor: '::',
 													_0: _elm_lang$html$Html_Attributes$src(imageUrl),
-													_1: {ctor: '[]'}
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$alt(_p10.name),
+														_1: {ctor: '[]'}
+													}
 												}
 											},
 											{ctor: '[]'}),

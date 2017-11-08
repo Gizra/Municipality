@@ -61,6 +61,7 @@ function hedley_municipality_promoted_content_content_type_render($subtype, $con
 
         $items[] = [
           'title' => l($wrapper->label(), url('node/' . $wrapper->getIdentifier(), ['absolute' => TRUE])),
+          'image_alt' => filter_xss($wrapper->label()),
           'image_url' => !empty($image) ? image_style_url('square_thumbnail', $image['uri']) : NULL,
           'edit_url' => og_node_access($node, 'update', $user) == NODE_ACCESS_ALLOW ? url("node/$node->nid/edit", ['absolute' => TRUE]) : '',
         ];
