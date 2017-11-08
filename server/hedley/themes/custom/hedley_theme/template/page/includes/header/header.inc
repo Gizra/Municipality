@@ -48,6 +48,11 @@
 
             <nav class="header-nav-top">
               <ul class="nav nav-pills">
+                <li>
+                  <a class="municipality-accessible" href="javascript://">
+                    <i class="fa fa-adjust" aria-hidden="true"></i>
+                  </a>
+                </li>
                 <?php if (isset($accessibility_url)): ?>
                   <li>
                     <a href="<?php print $accessibility_url; ?>">
