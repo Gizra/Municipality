@@ -382,7 +382,7 @@ class FeatureContext extends DrupalContext implements SnippetAcceptingContext {
     $page = $this->getSession()->getPage();
 
     // Check the title of the page.
-    $title_element = $page->find('css', 'header#header .container #site-name > h1');
+    $title_element = $page->find('css', 'header#header .container #site-name a h1');
     if ($title_element === null) {
       throw new \Exception('The title element is missing.');
     }
