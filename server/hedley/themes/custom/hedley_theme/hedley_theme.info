@@ -77,7 +77,7 @@ settings[header_layout] = h_default
 settings[footer_layout] = f_advanced
 settings[footer_color] = quaternary
 settings[page_header_option] = ph_default
-settings[page_header_color_option] = page-header-primary
+settings[page_header_color_option] = page-header-quaternary
 
 ; Fontsize accessblity.
 scripts[] = js/font-size-controls.js

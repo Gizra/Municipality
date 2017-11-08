@@ -21,7 +21,7 @@
               <?php if ($site_name): ?>
                 <?php if ($title): ?>
                   <div id="site-name"<?php if ($disable_site_name) { print ' class="hidden"'; } ?>>
-                    <h1 class="text-primary"><?php print $site_name; ?></h1>
+                    <h1 class="heading-dark"><?php print $site_name; ?></h1>
                   </div>
                 <?php else: ?>
                   <h1 id="site-name"<?php if ($disable_site_name) { print ' class="hidden"'; } ?>>
