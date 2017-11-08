@@ -35,6 +35,8 @@ function hedley_theme_panels_default_style_render_region($variables) {
  * Preprocess page.
  */
 function hedley_theme_preprocess_page(&$variables) {
+  drupal_add_css(drupal_get_path('theme', 'hedley_theme') .'/css/custom.css', ['group' => CSS_THEME, 'weight' => 100]);
+
   // Add the language switch links.
   $variables['language_switch_links'] = hedley_i18n_language_switch_links();
 

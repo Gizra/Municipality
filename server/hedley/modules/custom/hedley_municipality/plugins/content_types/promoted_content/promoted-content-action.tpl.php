@@ -13,7 +13,7 @@
     </div>
     <?php if ($item['edit_url']): ?>
       <span class="thumb-info-action">
-        <span class="thumb-info-action-icon"><a href="<?php print $item['edit_url']; ?>" class="btn btn-xs btn-primary btn-edit"><?php print t('Edit'); ?></a></span>
+        <span class="thumb-info-action-icon"><a href="<?php print $item['edit_url']; ?>" class="btn btn-xs btn-quaternary btn-edit"><?php print t('Edit'); ?></a></span>
       </span>
     <?php endif; ?>
   </div>

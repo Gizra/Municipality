@@ -5,7 +5,7 @@
  * Elm template for blocks.
  */
 if ($show_as_block) : ?>
-  <div class="featured-box featured-box-primary">
+  <div class="featured-box featured-box-quaternary">
     <div class="box-content">
       <div class="row">
         <h2><?php print $title; ?></h2>

@@ -5,7 +5,7 @@
  * FAQs accordion template.
  */
 ?>
-<div class="featured-box featured-box-primary">
+<div class="featured-box featured-box-quaternary">
   <div class="box-content">
     <h2><?php print t('Frequently asked questions'); ?></h2>
     <div class="panel-group" id="accordion">
@@ -25,7 +25,7 @@
         </div>
         <?php if ($faq['edit_url']): ?>
           <span class="thumb-info-action">
-            <span class="thumb-info-action-icon"><a href="<?php print $faq['edit_url']; ?>" class="btn btn-primary btn-xs btn-edit"><?php print t('Edit'); ?></a></span>
+            <span class="thumb-info-action-icon"><a href="<?php print $faq['edit_url']; ?>" class="btn btn-quaternary btn-xs btn-edit"><?php print t('Edit'); ?></a></span>
           </span>
         <?php endif; ?>
       </div>

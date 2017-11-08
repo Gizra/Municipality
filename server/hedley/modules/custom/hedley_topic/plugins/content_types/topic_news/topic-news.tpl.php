@@ -6,7 +6,7 @@
  */
 ?>
 
-<div class="featured-box featured-box-primary">
+<div class="featured-box featured-box-quaternary">
   <div class="box-content">
     <div class="row">
       <h2><?php print t('News regarding @topic', ['@topic' => $title]); ?></h2>
@@ -22,7 +22,7 @@
           </div>
           <?php if ($item['edit_url']): ?>
             <span class="thumb-info-action">
-              <span class="thumb-info-action-icon"><a href="<?php print $item['edit_url']; ?>" class="btn btn-primary btn-xs btn-edit"><?php print t('Edit'); ?></a></span>
+              <span class="thumb-info-action-icon"><a href="<?php print $item['edit_url']; ?>" class="btn btn-quaternary btn-xs btn-edit"><?php print t('Edit'); ?></a></span>
             </span>
           <?php endif; ?>
         </section>
