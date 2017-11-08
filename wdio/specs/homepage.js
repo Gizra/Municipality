@@ -45,11 +45,20 @@ describe('Municipality homepage', () => {
     browser.waitForVisible('h3=' + item);
   };
 
+  it('should show the correct name of the municipality in the logo\'s alt', () => {
+    const muniLogo = 'header#header .container .header-logo a img';
+    browser.waitForVisible(muniLogo);
+
+    // Assert the logo have the expected alt.
+    const muniLogoTitle = $(muniLogo).getAttribute('alt');
+    assert.equal('טובא-זנגריה', muniLogoTitle);
+  });
+
   it('should show the correct name of the municipality', () => {
-    browser.waitForVisible('header#header .container #site-name > h1');
+    browser.waitForVisible('header#header .container #site-name a h1');
 
     // Assert the page have the expected title.
-    const muniTitle = browser.getText('header#header .container #site-name > h1');
+    const muniTitle = browser.getText('header#header .container #site-name a h1');
     assert.equal('טובא-זנגריה', muniTitle);
   });
 
