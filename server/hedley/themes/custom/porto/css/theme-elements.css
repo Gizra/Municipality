@@ -907,7 +907,6 @@ textarea {
 select {
 	border: 1px solid #E5E7E9;
 	border-radius: 6px;
-	outline: none;
 }
 
 .label {
@@ -2985,11 +2984,6 @@ h6 .inverted {
 
 .line-height-xl {
 	line-height: 32px !important;
-}
-
-/* Outline */
-.outline-none {
-	outline: 0 !important;
 }
 
 /* Text Decoration */

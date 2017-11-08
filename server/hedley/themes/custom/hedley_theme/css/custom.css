@@ -1,6 +1,10 @@
 /*=======================================================================
 *** PORTO_SUB CUSTOM STYLE SHEET***
 ========================================================================*/
+a:focus, a:hover {
+  text-decoration: underline;
+}
+
 .sticky-header-active .admin-menu .header-body {
   margin-top: 29px;
 }

@@ -16,10 +16,6 @@ body {
 	margin: 0;
 }
 
-body a {
-	outline: none !important;
-}
-
 li {
 	line-height: 24px;
 }
@@ -887,7 +883,6 @@ html.sticky-header-active #header .header-body {
 	}
 
 	#header .header-btn-collapse-nav {
-		outline: 0;
 		display: block;
 	}
 
