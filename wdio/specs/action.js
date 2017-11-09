@@ -21,11 +21,15 @@ describe('Municipality action page', () => {
 
   it('should not be able to add action without a link or a section', () => {
     // Go to the add new action page.
-    browser.url('/node/add/action?language=en');
+    browser.url('/tuba-zangariyye/node/add/action?language=en');
     browser.waitForVisible('label=Title');
 
     const titleInput = $('#edit-title-field-en-0-value');
     titleInput.setValue('Test');
+
+    // Check user type (required value).
+    const businessUserType = $('#edit-field-user-types-und input:nth-child(1)');
+    businessUserType.click();
 
     // Click the save button.
     $('#edit-submit').click();
@@ -36,11 +40,15 @@ describe('Municipality action page', () => {
 
   it('should be able to add action with a link', () => {
     // Go to the add new action page.
-    browser.url('/node/add/action?language=en');
+    browser.url('/tuba-zangariyye/node/add/action?language=en');
     browser.waitForVisible('label=Title');
 
     const titleInput = $('#edit-title-field-en-0-value');
     titleInput.setValue('Test action');
+
+    // Check user type (required value).
+    const businessUserType = $('#edit-field-user-types-und input:nth-child(1)');
+    businessUserType.click();
 
     const linkInput = $('#edit-field-link-und-0-title');
     linkInput.setValue('Test link');
