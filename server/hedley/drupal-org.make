@@ -119,6 +119,9 @@ projects[search_api][version] = "1.12"
 projects[search_api_solr][subdir] = "contrib"
 projects[search_api_solr][version] = "1.5"
 
+projects[skipto][subdir] = "contrib"
+projects[skipto][version] = "1.1"
+
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 
@@ -146,3 +149,8 @@ projects[migrate][version] = "2.8"
 
 projects[migrate_extras][subdir] = "development"
 projects[migrate_extras][version] = "2.5"
+
+; Libraries
+libraries[skipto_git][type] = "libraries"
+libraries[skipto_git][download][type] = "get"
+libraries[skipto_git][download][url] = "https://github.com/paypal/skipto/archive/v2.0.0.zip"

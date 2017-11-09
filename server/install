@@ -131,6 +131,9 @@ delete_www_content
 # Run the build script (drush make + extra's).
 drupal_make
 
+# Copy needed file to the root of the "skipTo" library.
+install_skipto_library
+
 # Symlink extra modules (if any).
 symlink_externals
 
