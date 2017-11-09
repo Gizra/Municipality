@@ -1,13 +1,6 @@
 /*=======================================================================
 *** PORTO_SUB CUSTOM STYLE SHEET***
 ========================================================================*/
-#skipToMenu a.dropMenu-toggle,
-#skipToMenu a.dropMenu-toggle:focus {
-  background: white;
-  border-top: 2px solid #0088cc;
-  border-radius: 5px;
-}
-
 .sticky-header-active .admin-menu .header-body {
   margin-top: 29px;
 }
