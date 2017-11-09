@@ -319,6 +319,19 @@ function drupal_login {
 }
 
 ##
+# Install SkipTo accessibility library.
+##
+function install_skipto_library {
+  echo -e "${LBLUE}> Copy SkipTo library JS file to the root of the library and cleaning not needed files.${RESTORE}"
+  cd "$ROOT"/hedley/libraries/
+  mkdir skipto
+  cp skipto_git/src/drupal/skipTo/js/SkipTo.min.js skipto/SkipTo.min.js
+  rm -rf skipto_git
+
+  cd "$ROOT"
+}
+
+##
 # Symlink external folders into www folder.
 #
 # This will use the SYMLINKS array from the config.sh file and create
