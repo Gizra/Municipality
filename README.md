@@ -10,7 +10,7 @@
 
 * #### [Elm app documentation](https://github.com/Gizra/Municipality/blob/master/elm-app/README.md)
 
-* #### [Live site](http://live-municipality.pantheonsite.io/)
+* #### [Live site](http://live-municipality.pantheonsite.io/). Whereismymuni
 
 * #### [Test site](http://test-municipality.pantheonsite.io/)
 
