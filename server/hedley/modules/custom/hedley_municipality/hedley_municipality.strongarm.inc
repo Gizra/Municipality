@@ -100,6 +100,31 @@ function hedley_municipality_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_context_negotiation_group_context';
+  $strongarm->value = array(
+    'og_purl' => array(),
+    'url' => array(),
+    'node' => array(),
+  );
+  $export['og_context_negotiation_group_context'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_context_providers_weight_group_context';
+  $strongarm->value = array(
+    'url' => '-9',
+    'node' => '-8',
+    'user-view' => '-7',
+    'user-edit' => '-6',
+    'comment' => '-5',
+    'og_purl' => '-10',
+  );
+  $export['og_context_providers_weight_group_context'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'purl_method_og_purl|node';
   $strongarm->value = 'path';
   $export['purl_method_og_purl|node'] = $strongarm;

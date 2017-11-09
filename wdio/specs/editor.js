@@ -1,12 +1,12 @@
 const assert = require('assert');
 
-describe('edit page', () => {
+describe('add/edit content for editors', () => {
+  before(() => {
+    browser.login('noam');
+    browser.url('/tuba-zangariyye/node/1/edit?language=he');
+  });
 
   it('should be able to use ajax on the edit page', () => {
-    browser.login('noam');
-
-    browser.url('/tuba-zangariyye/node/1/edit?language=he');
-
     browser.waitForVisible('#edit-purl-value');
 
     // Click on "Add another item" button (Social links).
@@ -34,5 +34,27 @@ describe('edit page', () => {
         });
       });
     });
+  });
+
+  it('should see an error message when adding content outside the group context', () => {
+    browser.url('/node/add/action?language=en');
+
+    browser.waitForVisible('label=Title');
+    // Assert there's an error messages.
+    assert(browser.isVisible('.alert-danger'));
+  });
+
+  it('should not see the group audience field when adding content with group context', () => {
+    browser.url('/tuba-zangariyye/node/add/action?language=en');
+
+    browser.waitForVisible('label=Title');
+    // Assert there's no error messages.
+    assert(!browser.isVisible('.alert-danger'));
+    // Assert audience field is not visible.
+    assert(!browser.isVisible('label=Groups audience'));
+  });
+
+  after(() => {
+    browser.logout();
   });
 });
