@@ -218,8 +218,8 @@ describe('Municipality homepage', () => {
 
   it('should show topics list for the current municipality', () => {
     browser.url('/tuba-zangariyye/node/1?user_type=residents&language=he');
-    browser.waitForVisible('button=איסוף אשפה');
-    browser.waitForVisible('button=גני ילדים');
+    browser.waitForVisible('a=איסוף אשפה');
+    browser.waitForVisible('a=גני ילדים');
   });
 
   it('should show events for the municiality 1 with the default language: arabic and user type: residents', () => {
@@ -366,10 +366,10 @@ describe('Municipality homepage', () => {
     browser.url('/kiryat-malakhi?language=en');
     browser.waitForVisible('h2=Topics in the site');
 
-    const contactsButton = browser.getText('.pane-topics-list p a:nth-child(1) button.btn-default');
+    const contactsButton = browser.getText('.pane-topics-list p a:nth-child(1)');
     assert.equal('Contacts', contactsButton);
 
-    const eventsButton = browser.getText('.pane-topics-list p a:nth-child(2) button.btn-primary');
+    const eventsButton = browser.getText('.pane-topics-list p a:nth-child(2)');
     assert.equal('Events', eventsButton);
   });
 
