@@ -134,7 +134,11 @@ viewContact baseUrl language ( contactId, contact ) =
             Maybe.map
                 (\imageUrl ->
                     div [ class "card-img-top center" ]
-                        [ img [ class "img-responsive", src imageUrl ]
+                        [ img
+                            [ class "img-responsive"
+                            , src imageUrl
+                            , alt contact.name
+                            ]
                             []
                         ]
                 )
@@ -254,12 +258,11 @@ viewContactAsBlock baseUrl language ( contactId, contact ) =
                 (\imageUrl ->
                     div
                         [ class "img-thumbnail" ]
-                        [ a
-                            [ href (baseUrl.path ++ "/node/" ++ contactId ++ "?" ++ baseUrl.query) ]
-                            [ img
-                                [ src imageUrl, alt "" ]
-                                []
+                        [ img
+                            [ src imageUrl
+                            , alt contact.name
                             ]
+                            []
                         ]
                 )
                 contact.imageUrl

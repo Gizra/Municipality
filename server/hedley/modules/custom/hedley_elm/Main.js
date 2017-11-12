@@ -13954,7 +13954,6 @@ var _gizra$municipality$Utils_Html$showMaybe = _elm_lang$core$Maybe$withDefault(
 var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 	function (baseUrl, language, _p0) {
 		var _p1 = _p0;
-		var _p5 = _p1._0;
 		var _p4 = _p1._1;
 		return A2(
 			_elm_lang$html$Html$li,
@@ -13968,7 +13967,7 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 				_0: A2(
 					_gizra$municipality$Utils_Html$showIf,
 					_p4.showEditLink,
-					A3(_gizra$municipality$Utils_Html$editLinkElement, baseUrl, language, _p5)),
+					A3(_gizra$municipality$Utils_Html$editLinkElement, baseUrl, language, _p1._0)),
 				_1: {
 					ctor: '::',
 					_0: _gizra$municipality$Utils_Html$showMaybe(
@@ -13985,38 +13984,17 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 									{
 										ctor: '::',
 										_0: A2(
-											_elm_lang$html$Html$a,
+											_elm_lang$html$Html$img,
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$href(
-													A2(
-														_elm_lang$core$Basics_ops['++'],
-														baseUrl.path,
-														A2(
-															_elm_lang$core$Basics_ops['++'],
-															'/node/',
-															A2(
-																_elm_lang$core$Basics_ops['++'],
-																_p5,
-																A2(_elm_lang$core$Basics_ops['++'], '?', baseUrl.query))))),
-												_1: {ctor: '[]'}
+												_0: _elm_lang$html$Html_Attributes$src(imageUrl),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$alt(_p4.name),
+													_1: {ctor: '[]'}
+												}
 											},
-											{
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$img,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$src(imageUrl),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$alt(''),
-															_1: {ctor: '[]'}
-														}
-													},
-													{ctor: '[]'}),
-												_1: {ctor: '[]'}
-											}),
+											{ctor: '[]'}),
 										_1: {ctor: '[]'}
 									});
 							},
@@ -14279,9 +14257,9 @@ var _gizra$municipality$Contact_View$viewContactAsBlock = F3(
 			});
 	});
 var _gizra$municipality$Contact_View$viewContact = F3(
-	function (baseUrl, language, _p6) {
-		var _p7 = _p6;
-		var _p10 = _p7._1;
+	function (baseUrl, language, _p5) {
+		var _p6 = _p5;
+		var _p9 = _p6._1;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -14293,8 +14271,8 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 				ctor: '::',
 				_0: A2(
 					_gizra$municipality$Utils_Html$showIf,
-					_p10.showEditLink,
-					A3(_gizra$municipality$Utils_Html$editLinkElement, baseUrl, language, _p7._0)),
+					_p9.showEditLink,
+					A3(_gizra$municipality$Utils_Html$editLinkElement, baseUrl, language, _p6._0)),
 				_1: {
 					ctor: '::',
 					_0: _gizra$municipality$Utils_Html$showMaybe(
@@ -14318,14 +14296,18 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 												_1: {
 													ctor: '::',
 													_0: _elm_lang$html$Html_Attributes$src(imageUrl),
-													_1: {ctor: '[]'}
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$alt(_p9.name),
+														_1: {ctor: '[]'}
+													}
 												}
 											},
 											{ctor: '[]'}),
 										_1: {ctor: '[]'}
 									});
 							},
-							_p10.imageUrl)),
+							_p9.imageUrl)),
 					_1: {
 						ctor: '::',
 						_0: A2(
@@ -14346,7 +14328,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 									},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text(_p10.name),
+										_0: _elm_lang$html$Html$text(_p9.name),
 										_1: {ctor: '[]'}
 									}),
 								_1: {
@@ -14357,7 +14339,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 										{
 											ctor: '::',
 											_0: _gizra$municipality$Utils_Html$showMaybe(
-												A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p10.department)),
+												A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p9.department)),
 											_1: {ctor: '[]'}
 										}),
 									_1: {
@@ -14368,7 +14350,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 											{
 												ctor: '::',
 												_0: _gizra$municipality$Utils_Html$showMaybe(
-													A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p10.jobTitle)),
+													A2(_elm_lang$core$Maybe$map, _elm_lang$html$Html$text, _p9.jobTitle)),
 												_1: {
 													ctor: '::',
 													_0: _gizra$municipality$Utils_Html$divider,
@@ -14436,7 +14418,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																			},
 																			topics));
 																},
-																_p10.topics)),
+																_p9.topics)),
 														_1: {
 															ctor: '::',
 															_0: _gizra$municipality$Utils_Html$sectionDivider,
@@ -14495,7 +14477,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																							}
 																						});
 																				},
-																				_p10.email)),
+																				_p9.email)),
 																		_1: {
 																			ctor: '::',
 																			_0: _gizra$municipality$Utils_Html$showMaybe(
@@ -14538,7 +14520,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																								}
 																							});
 																					},
-																					_p10.phone)),
+																					_p9.phone)),
 																			_1: {
 																				ctor: '::',
 																				_0: _gizra$municipality$Utils_Html$showMaybe(
@@ -14576,7 +14558,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																									}
 																								});
 																						},
-																						_p10.fax)),
+																						_p9.fax)),
 																				_1: {
 																					ctor: '::',
 																					_0: A2(
@@ -14604,7 +14586,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																													_1: {ctor: '[]'}
 																												});
 																										},
-																										_p10.address)),
+																										_p9.address)),
 																								_1: {ctor: '[]'}
 																							}
 																						}),
@@ -14642,8 +14624,8 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																																	{ctor: '[]'},
 																																	A2(
 																																		_elm_lang$core$List$map,
-																																		function (_p8) {
-																																			var _p9 = _p8;
+																																		function (_p7) {
+																																			var _p8 = _p7;
 																																			return A2(
 																																				_elm_lang$html$Html$div,
 																																				{
@@ -14673,7 +14655,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																																							{
 																																								ctor: '::',
 																																								_0: _elm_lang$html$Html$text(
-																																									A3(_gizra$municipality$Utils_Html$formatReceptionDays, language, _p9.days, _p9.multipleDays)),
+																																									A3(_gizra$municipality$Utils_Html$formatReceptionDays, language, _p8.days, _p8.multipleDays)),
 																																								_1: {ctor: '[]'}
 																																							}),
 																																						_1: {
@@ -14687,7 +14669,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																																								},
 																																								{
 																																									ctor: '::',
-																																									_0: _elm_lang$html$Html$text(_p9.hours),
+																																									_0: _elm_lang$html$Html$text(_p8.hours),
 																																									_1: {ctor: '[]'}
 																																								}),
 																																							_1: {ctor: '[]'}
@@ -14700,7 +14682,7 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 																															}
 																														});
 																												},
-																												_p10.receptionTimes)),
+																												_p9.receptionTimes)),
 																										_1: {ctor: '[]'}
 																									}),
 																								_1: {ctor: '[]'}
@@ -14727,9 +14709,9 @@ var _gizra$municipality$Contact_View$viewContact = F3(
 			});
 	});
 var _gizra$municipality$Contact_View$viewContacts = F4(
-	function (baseUrl, language, showAsBlock, _p11) {
-		var _p12 = _p11;
-		var filteredContacts = A2(_gizra$municipality$Contact_Utils$filterContacts, _p12.contacts, _p12.filterString);
+	function (baseUrl, language, showAsBlock, _p10) {
+		var _p11 = _p10;
+		var filteredContacts = A2(_gizra$municipality$Contact_Utils$filterContacts, _p11.contacts, _p11.filterString);
 		if (_Gizra$elm_dictlist$DictList$isEmpty(filteredContacts)) {
 			return A2(
 				_elm_lang$html$Html$div,
