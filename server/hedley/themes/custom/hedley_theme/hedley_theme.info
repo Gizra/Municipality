@@ -82,3 +82,7 @@ settings[page_header_color_option] = page-header-primary
 ; Fontsize accessblity.
 scripts[] = js/font-size-controls.js
 stylesheets[all][] = css/font-size.css
+
+; High contrast accessblity.
+scripts[] = js/high-contrast.js
+stylesheets[all][] = css/high-contrast.css

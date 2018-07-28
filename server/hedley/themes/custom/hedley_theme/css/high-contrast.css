@@ -1,0 +1,51 @@
+body.municipality-is-accessible * {
+  background-color: black !important;
+  color: yellow !important;
+  text-shadow: none !important;
+}
+body.municipality-is-accessible a {
+  background-color: black !important;
+  color: yellow !important;
+  text-decoration: underline !important;
+  font-weight: bold !important;
+}
+body.municipality-is-accessible a * {
+  background-color: black !important;
+  color: yellow !important;
+  text-decoration: underline !important;
+}
+body.municipality-is-accessible a:hover {
+  background-color: yellow !important;
+  color: black !important;
+  text-decoration: none !important;
+}
+body.municipality-is-accessible a:hover * {
+  background-color: yellow !important;
+  color: black !important;
+  text-decoration: none !important;
+}
+body.municipality-is-accessible input {
+  background-color: white !important;
+  color: black !important;
+}
+body.municipality-is-accessible input[type="submit"], body.municipality-is-accessible input[type="button"] {
+  background-color: yellow !important;
+  color: black !important;
+}
+body.municipality-is-accessible button {
+  background-color: yellow !important;
+  color: black !important;
+}
+body.municipality-is-accessible input[type="submit"]:hover, body.municipality-is-accessible input[type="button"]:hover {
+  text-decoration: underline !important;
+}
+body.municipality-is-accessible button:hover {
+  text-decoration: underline !important;
+}
+/*Municipality specific overrides*/
+body.municipality-is-accessible img.img-responsive {
+  background-color: white !important;
+}
+body.municipality-is-accessible a {
+  display: inline-block;
+}
